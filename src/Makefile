@@ -180,9 +180,9 @@ SPRNG_LIB = lfg
 # SPRNG_FLAG=
 #
 
-SPRNG_FLAG = -DINCSPRNG
-SPRNGDIR   = sprng
-SPRNGLIB   = $(SPRNGDIR)/lib/lib$(SPRNG_LIB).a
+#SPRNG_FLAG = -DINCSPRNG
+#SPRNGDIR   = sprng
+#SPRNGLIB   = $(SPRNGDIR)/lib/lib$(SPRNG_LIB).a
 
 # ----------------------------------------------------------------------
 # D. DEFINITIONS FOR SPECIFIC OPERATING SYSTEM AND COMPILER IN USE
@@ -1333,7 +1333,10 @@ MODELCONTAINER = neurospaces/neurospaceslib.o
 
 BASECODE =	sim/simlib.o sys/utillib.o $(INTERP) par/parlib.o $(MODELCONTAINER)
 
-OBJLIBS =	buffer/buflib.o \
+
+
+
+XOBJLIBS =	buffer/buflib.o \
 		segment/seglib.o \
 		hh/hhlib.o \
 		device/devlib.o \
@@ -1357,21 +1360,26 @@ XODUS 	=	$(XODUSLIB)/_xo/xolib.o \
 		$(XODUSLIB)/Widg/libWidg.a \
 		$(XODUSLIB)/Xo/libXo.a
 
-EXTRALIBS =  	$(SPRNGLIB) $(TERMCAP)
+EXTRALIBS =     $(TERMCAP)
 
-SUBDIR =        sys ss sim $(SPRNGDIR) shell newconn $(OLDCONNDIR) \
+XSUBDIR =        sys ss sim $(SPRNGDIR) shell newconn $(OLDCONNDIR) \
 		buffer concen device hh hines olf out segment \
                 tools user param pore convert $(DISKIODIR) \
                 $(KINETICSDIR) Xodus par
+
+SUBDIR = 	sys ss shell par neurospaces
+
 
 NXSUBDIR =	sys ss shell sim $(SPRNGDIR) newconn oldconn \
 		buffer concen device hh hines olf out segment \
                 tools user param pore convert $(DISKIODIR) \
 		$(KINETICSDIR) par
 
-MINSUBDIR =	sys ss shell sim $(SPRNGDIR) par neurospaces
+MINSUBDIR =	sys ss shell sim par neurospaces
 
-LIBLIST =	output \
+LIBLIST = neurospaces
+
+XLIBLIST =	output \
 		hh \
 		devices \
 		buffer \
@@ -1491,6 +1499,7 @@ cleandist: clean
 
 clean:
 	@make -f $(MF) MF="$(MF)" DISKIOSUBDIR="$(DISKIOSUBDIR)" SUBDIR="$(SUBDIR)"  SPRNG_LIB="$(SPRNG_LIB)" clean
+	-(rm -f  liblist nxliblist minliblist)
 
 rcsclean:
 	@make -f $(MF) MF="$(MF)" SUBDIR="$(SUBDIR)"  rcsclean

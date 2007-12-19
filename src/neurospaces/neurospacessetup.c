@@ -22,13 +22,13 @@
 /* #include "neurospaces/modules/serialcell.h" */
 /* #include "neurospaces/modules/serialsegment.h" */
 
-#include "../hines/hines_defs.h"
-#include "../hines/hines_struct.h"
+/* #include "../hines/hines_defs.h" */
+/* #include "../hines/hines_struct.h" */
 /* #include "../hines/hines_neurospaces.h" */
 
-#include "../newconn/newconn_struct.h"
+/* #include "../newconn/newconn_struct.h" */
 
-#include "../olf/olf_defs.h"
+/* #include "../olf/olf_defs.h" */
 
 
 /* //v number of solverinstances created so far */

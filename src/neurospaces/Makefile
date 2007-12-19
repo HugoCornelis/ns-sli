@@ -72,7 +72,7 @@ $(LIBRARY_NAME)_l@.c: $(LIBRARY_NAME)_g@.c $(LIBRARY_NAME)_d@.c ../sys/code_lib 
 # 	-(touch neurospaceslibs)
 
 clean:
-	@-(for subdir in $(NEUROSPACESDIRS); do echo cd $$subdir; cd $$subdir; make clean; done)
+	#@-(for subdir in $(NEUROSPACESDIRS); do echo cd $$subdir; cd $$subdir; make clean; done)
 	-(rm -rf *.a *.o *@.[ch] neurospaceslibs) 
 
 #################################

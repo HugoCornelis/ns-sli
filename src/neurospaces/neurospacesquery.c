@@ -7,7 +7,7 @@
 #include "neurospaces/querymachine.h"
 #include "neurospaces/solverinfo.h"
 
-#include "../hines/hines_struct.h"
+/* #include "../hines/hines_struct.h"  */
 /* #include "../hines/hines_neurospaces.h" */
 
 

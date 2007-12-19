@@ -31,8 +31,8 @@ nxdefault:
 mindefault:
 	@echo "This is not the top level makefile"
 
-genesis: libs $(GENESIS) $(XODUS)
-	$(CC) $(CFLAGS) $(LDFLAGS) $(GENESIS) $(XODUS) $(XLIBS) $(LLIBS) -o genesis
+genesis: libs $(GENESIS)
+	$(CC) $(CFLAGS) $(LDFLAGS) $(GENESIS) $(LLIBS) -o genesis
 	@echo "Full GENESIS Compiled -- All Done"
 
 nxgenesis: nxlibs $(NXGENESIS)
