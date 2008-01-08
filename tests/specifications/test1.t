@@ -9,14 +9,14 @@ my $test
        command_definitions => [
 			       {
 				arguments => [
-					      "$::config->{core_directory}/tests/library/test1.g",
+					      "$::config->{core_directory}/tests/scripts/test1.g",
 					     ],
 				command => 'src/genesis',
 				command_tests => [
 						  {
 						   description => "Can we load a simple file into ns-genesis?",
 						   read => 'ACTIVE CLOCKS',
-						   timeout => 15,
+						   timeout => 2,
 						   write => undef,
 						  },
 						 ],

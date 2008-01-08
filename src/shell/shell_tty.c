@@ -1,6 +1,7 @@
 static char rcsid[] =
     "$Id: shell_tty.c,v 1.6 2005/10/24 06:31:22 svitak Exp $";
 
+
 /*
 ** $Log: shell_tty.c,v $
 ** Revision 1.6  2005/10/24 06:31:22  svitak
@@ -131,7 +132,7 @@ static char rcsid[] =
 #include <sys/ioctl.h>
 #endif
 
-#ifdef Linux
+#ifdef LINUX
 #include <sys/ioctl.h>
 #endif
 
@@ -165,6 +166,8 @@ struct termio old_tty_stdin, old_tty_stdout, new_tty_stdin, new_tty_stdout;
 struct sgttyb old_tty_stdin, old_tty_stdout, new_tty_stdin, new_tty_stdout;
 #endif /* TERMIO */
 static char area[1024];
+
+#include <termio.h>
 
 /*
 ** terminal capabilities
