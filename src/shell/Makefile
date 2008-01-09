@@ -58,23 +58,6 @@ am_libshell_a_OBJECTS = shell_argv.$(OBJEXT) shell_batch.$(OBJEXT) \
 	shell_status.$(OBJEXT) shell_string.$(OBJEXT) \
 	shell_sys.$(OBJEXT) shell_tty.$(OBJEXT) shell_g@.$(OBJEXT)
 libshell_a_OBJECTS = $(am_libshell_a_OBJECTS)
-libshellcodeg_a_AR = $(AR) $(ARFLAGS)
-libshellcodeg_a_LIBADD =
-am_libshellcodeg_a_OBJECTS = shell_argv.$(OBJEXT) \
-	shell_batch.$(OBJEXT) shell_convert.$(OBJEXT) \
-	shell_char.$(OBJEXT) shell_debug.$(OBJEXT) \
-	shell_edit.$(OBJEXT) shell_env.$(OBJEXT) shell_error.$(OBJEXT) \
-	shell_esc.$(OBJEXT) shell_exec.$(OBJEXT) shell_func.$(OBJEXT) \
-	shell_hash.$(OBJEXT) shell_history.$(OBJEXT) \
-	shell_info.$(OBJEXT) shell_io.$(OBJEXT) shell_job.$(OBJEXT) \
-	shell_lib.$(OBJEXT) shell_load.$(OBJEXT) shell_log.$(OBJEXT) \
-	shell_misc.$(OBJEXT) shell_numeric.$(OBJEXT) \
-	shell_ops.$(OBJEXT) shell_prompt.$(OBJEXT) \
-	shell_script.$(OBJEXT) shell_setup.$(OBJEXT) \
-	shell_sh.$(OBJEXT) shell_status.$(OBJEXT) \
-	shell_string.$(OBJEXT) shell_sys.$(OBJEXT) shell_tty.$(OBJEXT) \
-	null_startup.$(OBJEXT)
-libshellcodeg_a_OBJECTS = $(am_libshellcodeg_a_OBJECTS)
 DEFAULT_INCLUDES = -I. -I$(top_builddir)/src
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -82,8 +65,8 @@ COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 CCLD = $(CC)
 LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
-SOURCES = $(libshell_a_SOURCES) $(libshellcodeg_a_SOURCES)
-DIST_SOURCES = $(libshell_a_SOURCES) $(libshellcodeg_a_SOURCES)
+SOURCES = $(libshell_a_SOURCES)
+DIST_SOURCES = $(libshell_a_SOURCES)
 ETAGS = etags
 CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
@@ -174,13 +157,18 @@ sysconfdir = ${prefix}/etc
 target_alias = 
 top_builddir = ../..
 top_srcdir = ../..
-sysdir = $(top_srcdir)/src/sys
-ssdir = $(top_srcdir)/src/ss
+utildir = $(top_srcdir)/src/util
+scriptdir = $(top_srcdir)/src/script
 shelldir = $(top_srcdir)/src/shell
 simdir = $(top_srcdir)/src/sim
-INCLUDES = -I$(sysdir) -I$(ssdir) -I$(shelldir) -I$(simdir) -I$(top_srcdir)/src
-noinst_LIBRARIES = libshellcodeg.a libshell.a
+c2genesis = $(top_srcdir)/src/c2genesis/c2genesis
+INCLUDES = -I$(utildir) -I$(shelldir) -I$(simdir) -I$(scriptdir) -I$(top_srcdir)/src
+noinst_LIBRARIES = libshell.a
 AM_CFLAGS = -DBSD -DLinux -DNEW -DNLIST_BUG -DTERMIO -DDONT_USE_SIGIO
+BUILT_SOURCES = \
+	shell_g@.c \
+	shell_g@.h
+
 libshell_a_SOURCES = \
 	shell_argv.c \
 	shell_batch.c \
@@ -214,40 +202,12 @@ libshell_a_SOURCES = \
 	shell_tty.c \
 	shell_g@.c 
 
-libshellcodeg_a_SOURCES = \
-	shell_argv.c \
-	shell_batch.c \
-	shell_convert.c \
-	shell_char.c \
-	shell_debug.c \
-	shell_edit.c \
-	shell_env.c \
-	shell_error.c \
-	shell_esc.c \
-	shell_exec.c \
-	shell_func.c \
-	shell_hash.c \
-	shell_history.c \
-	shell_info.c \
-	shell_io.c \
-	shell_job.c \
-	shell_lib.c \
-	shell_load.c \
-	shell_log.c \
-	shell_misc.c \
-	shell_numeric.c \
-	shell_ops.c \
-	shell_prompt.c \
-	shell_script.c \
-	shell_setup.c \
-	shell_sh.c \
-	shell_status.c \
-	shell_string.c \
-	shell_sys.c \
-	shell_tty.c \
-	null_startup.c
+CLEANFILES = \
+	shell_g@.c \
+	shell_g@.h
 
-all: all-am
+all: $(BUILT_SOURCES)
+	$(MAKE) $(AM_MAKEFLAGS) all-am
 
 .SUFFIXES:
 .SUFFIXES: .c .o .obj
@@ -260,9 +220,9 @@ $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu  src/shell/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign  src/shell/Makefile'; \
 	cd $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu  src/shell/Makefile
+	  $(AUTOMAKE) --foreign  src/shell/Makefile
 .PRECIOUS: Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
@@ -287,10 +247,6 @@ libshell.a: $(libshell_a_OBJECTS) $(libshell_a_DEPENDENCIES)
 	-rm -f libshell.a
 	$(libshell_a_AR) libshell.a $(libshell_a_OBJECTS) $(libshell_a_LIBADD)
 	$(RANLIB) libshell.a
-libshellcodeg.a: $(libshellcodeg_a_OBJECTS) $(libshellcodeg_a_DEPENDENCIES) 
-	-rm -f libshellcodeg.a
-	$(libshellcodeg_a_AR) libshellcodeg.a $(libshellcodeg_a_OBJECTS) $(libshellcodeg_a_LIBADD)
-	$(RANLIB) libshellcodeg.a
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -298,7 +254,6 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-include ./$(DEPDIR)/null_startup.Po
 include ./$(DEPDIR)/shell_argv.Po
 include ./$(DEPDIR)/shell_batch.Po
 include ./$(DEPDIR)/shell_char.Po
@@ -420,10 +375,12 @@ distdir: $(DISTFILES)
 	  fi; \
 	done
 check-am: all-am
-check: check-am
+check: $(BUILT_SOURCES)
+	$(MAKE) $(AM_MAKEFLAGS) check-am
 all-am: Makefile $(LIBRARIES)
 installdirs:
-install: install-am
+install: $(BUILT_SOURCES)
+	$(MAKE) $(AM_MAKEFLAGS) install-am
 install-exec: install-exec-am
 install-data: install-data-am
 uninstall: uninstall-am
@@ -440,6 +397,7 @@ install-strip:
 mostlyclean-generic:
 
 clean-generic:
+	-test -z "$(CLEANFILES)" || rm -f $(CLEANFILES)
 
 distclean-generic:
 	-test -z "$(CONFIG_CLEAN_FILES)" || rm -f $(CONFIG_CLEAN_FILES)
@@ -447,6 +405,7 @@ distclean-generic:
 maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
 	@echo "it deletes files that may require special tools to rebuild."
+	-test -z "$(BUILT_SOURCES)" || rm -f $(BUILT_SOURCES)
 clean: clean-am
 
 clean-am: clean-generic clean-noinstLIBRARIES mostlyclean-am
@@ -519,6 +478,9 @@ uninstall-am:
 	mostlyclean-generic pdf pdf-am ps ps-am tags uninstall \
 	uninstall-am
 
+
+shell_g@.c:
+	$(c2genesis) shelllib.g shell_ext.h shell -novar
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:

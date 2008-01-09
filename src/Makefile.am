@@ -1,6 +1,1 @@
-SUBDIRS = util ss shell sys
-
-
-
-
-
+SUBDIRS = sys util script c2genesis shell neurospaces

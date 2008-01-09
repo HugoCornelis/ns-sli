@@ -50,8 +50,8 @@ static char rcsid[] = "$Id: shell_argv.c,v 1.5 2005/07/07 19:03:42 svitak Exp $"
 /* mds3 changes */
 #include "system_deps.h"
 #include "shell_func_ext.h"
-#include "ss/parse.h"
-#include "ss/ss_func_ext.h"
+#include "parse.h"
+#include "ss_func_ext.h"
 
 #define ARGV_RESIZE 10
 #define ALPHA	1

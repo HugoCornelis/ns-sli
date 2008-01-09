@@ -20,9 +20,12 @@ AC_CONFIG_HEADER(src/config.h)
 
 AC_OUTPUT(Makefile \
 	src/Makefile \
+	src/util/Makefile \
+	src/c2genesis/Makefile \
 	src/sys/Makefile \
-	src/ss/Makefile \
+	src/script/Makefile \
 	src/shell/Makefile \
+	src/neurospaces/Makefile \
 	src/par/Makefile
 )
 

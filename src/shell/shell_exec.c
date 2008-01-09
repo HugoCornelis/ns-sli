@@ -55,7 +55,7 @@ static char rcsid[] = "$Id: shell_exec.c,v 1.4 2006/01/09 16:25:56 svitak Exp $"
 #include <unistd.h>
 #include "shell_ext.h"
 #include "result.h"
-#include "ss/ss_func_ext.h"
+#include "ss_func_ext.h"
 
 
 static int bGCTrace = FALSE;

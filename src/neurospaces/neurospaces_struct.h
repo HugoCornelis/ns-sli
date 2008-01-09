@@ -12,21 +12,21 @@ struct neurospaces_type
 {
     ELEMENT_TYPE
 
-    //m globals from reading description file
+ /*    //m globals from reading description file */
 
     struct Neurospaces *pneuro;
 
-    //m should projection query be caching ?
+/*     //m should projection query be caching ? */
 
     int bCaching;
 
-    //m projections to be queried during reset
+/*     //m projections to be queried during reset */
 
-//    struct ProjectionQuery *ppq;
+/* //    struct ProjectionQuery *ppq; */
 
 #define MAX_NUM_OF_PROJECTIONS		20
 
-//    struct symtab_Projection * ppproj[MAX_NUM_OF_PROJECTIONS];
+/* //    struct symtab_Projection * ppproj[MAX_NUM_OF_PROJECTIONS]; */
 
     struct PidinStack * pppistProjections[MAX_NUM_OF_PROJECTIONS];
 

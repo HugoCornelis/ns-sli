@@ -301,7 +301,7 @@ on `(hostname || uname -n) 2>/dev/null | sed 1q`
 "
 
 # Files that config.status was made for.
-config_files=" Makefile src/Makefile src/sys/Makefile src/ss/Makefile src/shell/Makefile src/par/Makefile"
+config_files=" Makefile src/Makefile src/util/Makefile src/c2genesis/Makefile src/sys/Makefile src/script/Makefile src/shell/Makefile src/neurospaces/Makefile src/par/Makefile"
 config_headers=" src/config.h"
 config_commands=" depfiles"
 
@@ -439,9 +439,12 @@ do
     "src/config.h") CONFIG_HEADERS="$CONFIG_HEADERS src/config.h" ;;
     "Makefile") CONFIG_FILES="$CONFIG_FILES Makefile" ;;
     "src/Makefile") CONFIG_FILES="$CONFIG_FILES src/Makefile" ;;
+    "src/util/Makefile") CONFIG_FILES="$CONFIG_FILES src/util/Makefile" ;;
+    "src/c2genesis/Makefile") CONFIG_FILES="$CONFIG_FILES src/c2genesis/Makefile" ;;
     "src/sys/Makefile") CONFIG_FILES="$CONFIG_FILES src/sys/Makefile" ;;
-    "src/ss/Makefile") CONFIG_FILES="$CONFIG_FILES src/ss/Makefile" ;;
+    "src/script/Makefile") CONFIG_FILES="$CONFIG_FILES src/script/Makefile" ;;
     "src/shell/Makefile") CONFIG_FILES="$CONFIG_FILES src/shell/Makefile" ;;
+    "src/neurospaces/Makefile") CONFIG_FILES="$CONFIG_FILES src/neurospaces/Makefile" ;;
     "src/par/Makefile") CONFIG_FILES="$CONFIG_FILES src/par/Makefile" ;;
 
   *) { { echo "$as_me:$LINENO: error: invalid argument: $ac_config_target" >&5

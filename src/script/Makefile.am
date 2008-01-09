@@ -1,0 +1,29 @@
+sysdir = $(top_srcdir)/src/sys
+scriptdir = $(top_srcdir)/src/script
+shelldir = $(top_srcdir)/src/shell
+utildir = $(top_srcdir)/src/util
+
+
+INCLUDES = -I$(sysdir) -I$(scriptdir) -I$(shelldir) -I$(utildir) -I.
+
+noinst_LIBRARIES = libscript.a
+
+BUILT_SOURCES = \
+	syntax.c \
+	syntax.h 
+
+CLEANFILES = \
+	syntax.c \
+	syntax.h 
+
+AM_LFLAGS = -l
+AM_YFLAGS = -dv
+
+libscript_a_SOURCES = \
+	eval.c \
+	parse.c \
+	strsave.c \
+	symtab.c \
+	yyless.c \
+	syntax.y 
+

@@ -1,9 +1,8 @@
-
 sysdir = $(top_srcdir)/src/sys
-ssdir = $(top_srcdir)/src/ss
+scriptdir = $(top_srcdir)/src/script
 shelldir = $(top_srcdir)/src/shell
 
-INCLUDES = -I$(sysdir) -I$(ssdir) -I$(shelldir)
+INCLUDES = -I$(sysdir) -I$(scriptdir) -I$(shelldir)
 
 noinst_LIBRARIES = libutil.a
 
