@@ -1,0 +1,13 @@
+Makefile\.in$
+Makefile$
+configure$
+.*\@\.[ch]
+ylwrap
+.*\.output$
+config.guess
+config.sub
+depcomp
+install-sh
+missing
+stamp-h1
+

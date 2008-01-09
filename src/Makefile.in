@@ -141,7 +141,7 @@ sysconfdir = @sysconfdir@
 target_alias = @target_alias@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-SUBDIRS = ss shell sys
+SUBDIRS = util ss shell sys
 all: config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-recursive
 

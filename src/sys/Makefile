@@ -47,11 +47,8 @@ AR = ar
 ARFLAGS = cru
 libutil_a_AR = $(AR) $(ARFLAGS)
 libutil_a_LIBADD =
-am_libutil_a_OBJECTS = getopt.$(OBJEXT) hash.$(OBJEXT) jump.$(OBJEXT) \
-	popen.$(OBJEXT) proc.$(OBJEXT) rstats.$(OBJEXT) \
-	signal.$(OBJEXT) system.$(OBJEXT) system_deps.$(OBJEXT) \
-	segv.$(OBJEXT)
-libutil_a_OBJECTS = $(am_libutil_a_OBJECTS)
+libutil_a_SOURCES = libutil.c
+libutil_a_OBJECTS = libutil.$(OBJEXT)
 PROGRAMS = $(noinst_PROGRAMS)
 am_code_func_OBJECTS = code_func.$(OBJEXT)
 code_func_OBJECTS = $(am_code_func_OBJECTS)
@@ -72,9 +69,9 @@ COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 CCLD = $(CC)
 LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
-SOURCES = $(libutil_a_SOURCES) $(code_func_SOURCES) code_g.c \
-	$(code_lib_SOURCES) $(code_sym_SOURCES)
-DIST_SOURCES = $(libutil_a_SOURCES) $(code_func_SOURCES) code_g.c \
+SOURCES = libutil.c $(code_func_SOURCES) code_g.c $(code_lib_SOURCES) \
+	$(code_sym_SOURCES)
+DIST_SOURCES = libutil.c $(code_func_SOURCES) code_g.c \
 	$(code_lib_SOURCES) $(code_sym_SOURCES)
 ETAGS = etags
 CTAGS = ctags
@@ -174,18 +171,6 @@ code_lib_SOURCES = code_lib.c
 code_func_SOURCES = code_func.c
 code_sym_SOURCES = code_sym.c
 noinst_LIBRARIES = libutil.a
-libutil_a_SOURCES = \
-	getopt.c \
-	hash.c \
-	jump.c \
-	popen.c \
-	proc.c \
-	rstats.c \
-	signal.c \
-	system.c \
-	system_deps.c \
-	segv.c 
-
 code_g_LDADD = \
 	-lfl \
 	-L/usr/local/lib/neurospacesread \
@@ -263,16 +248,7 @@ include ./$(DEPDIR)/code_func.Po
 include ./$(DEPDIR)/code_g.Po
 include ./$(DEPDIR)/code_lib.Po
 include ./$(DEPDIR)/code_sym.Po
-include ./$(DEPDIR)/getopt.Po
-include ./$(DEPDIR)/hash.Po
-include ./$(DEPDIR)/jump.Po
-include ./$(DEPDIR)/popen.Po
-include ./$(DEPDIR)/proc.Po
-include ./$(DEPDIR)/rstats.Po
-include ./$(DEPDIR)/segv.Po
-include ./$(DEPDIR)/signal.Po
-include ./$(DEPDIR)/system.Po
-include ./$(DEPDIR)/system_deps.Po
+include ./$(DEPDIR)/libutil.Po
 
 .c.o:
 	$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<

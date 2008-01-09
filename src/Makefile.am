@@ -1,4 +1,4 @@
-SUBDIRS = ss shell sys
+SUBDIRS = util ss shell sys
 
 
 

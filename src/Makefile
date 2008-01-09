@@ -141,7 +141,7 @@ sysconfdir = ${prefix}/etc
 target_alias = 
 top_builddir = ..
 top_srcdir = ..
-SUBDIRS = ss shell sys
+SUBDIRS = util ss shell sys
 all: config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-recursive
 
