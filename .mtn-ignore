@@ -10,4 +10,9 @@ depcomp
 install-sh
 missing
 stamp-h1
-
+^installed
+src/nsgenesis
+src/c2genesis/c2genesis$
+src/c2genesis/makefunc$
+src/c2genesis/makelib$
+src/c2genesis/makestructs$

@@ -180,14 +180,9 @@ int	GENOPT_NoX = 0;
 void DisplayHeader()
 {
 printf("==========================================================================\n");
-printf("                               G E N E S I S\n");
-printf("                           Release Version: %s\n\n", VERSIONSTR);
-printf("\n");
-printf("GENESIS is made available under the GNU General Public License,\n");
-printf("GNU Library General Public License, or by the originating institution \n");
-printf("with the permission of the authors.\n");
-printf("\n");
-printf("Type \"help\" for help with GENESIS.\n");
+printf("               Neurospaces Genesis Scripting Interface\n");
+printf("                          Based off of GENESIS %s\n\n", VERSIONSTR);
+printf("Type \"help\" for help.\n");
 printf("==========================================================================\n\n");
 }
 

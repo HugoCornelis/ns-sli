@@ -11,7 +11,7 @@ makelib = $(c2genesisdir)/makelib
 
 INCLUDES = -I$(utildir) -I$(shelldir) -I$(simdir) -I$(scriptdir) -I/usr/local/neurospaces/instrumentor 
 
-AM_CFLAGS = -DPRE_PROTO_TRAVERSAL
+AM_CPPFLAGS = -DPRE_PROTO_TRAVERSAL
 
 noinst_LIBRARIES = libneurospaces.a
 
@@ -25,11 +25,12 @@ CLEANFILES = \
 	neurospaces_d@.c \
 	neurospaces_g@.c \
 	neurospaces_g@.h \
-	neurospaces_l@.c
+	neurospaces_l@.c \
+	tmp_neurospaces_struct.h
 
 neurospaces_d@.c:
-	cpp -P neurospaces_struct.h /tmp/neurospaces_struct.h -I../script -I../util -I../sim -I../shell -DPRE_PROTO_TRAVERSAL
-	$(makestructs) /tmp/neurospaces_neurospaces_struct.h neurospaces -I neurospaces_ext.h -NI -o neurospaces_d@.c
+	cpp -P neurospaces_struct.h tmp_neurospaces_struct.h -I../script -I../util -I../sim -I../shell
+	$(makestructs) tmp_neurospaces_struct.h neurospaces -I neurospaces_ext.h -NI -o neurospaces_d@.c
 
 neurospaces_g@.c:
 	$(c2genesis) neurospaceslib.g neurospaces_ext.h neurospaces

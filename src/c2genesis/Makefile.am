@@ -7,7 +7,7 @@ INCLUDES = -I$(utildir) -I$(shelldir) -I$(simdir) -I$(scriptdir) -I$(top_srcdir)
 
 noinst_LIBRARIES = libshellc2genesis.a
 
-noinst_PROGRAMS = c2genesis makestructs makelib
+noinst_PROGRAMS = c2genesis makestructs makelib makefunc
 
 AM_CFLAGS = -DBSD -DLinux -DNEW -DNLIST_BUG -DTERMIO -DDONT_USE_SIGIO
 
@@ -59,3 +59,5 @@ c2genesis_LDADD = \
 makestructs_SOURCES = makestructs.c
 
 makelib_SOURCES = makelib.c
+
+makefunc_SOURCES = makefunc.c

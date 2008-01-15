@@ -1,10 +1,8 @@
 SUBDIRS = src
+EXTRA_DIST = tests
 
-TOPDIR=$(PWD)
-TESTDIR=$(TOPDIR)/tests
-
-	.PHONY : test
+TESTS = $(top_srcdir)/tests/run
 
 
-test:
-	tests/run
+
+

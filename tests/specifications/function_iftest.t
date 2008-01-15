@@ -1,0 +1,35 @@
+#!/usr/bin/perl -w
+#
+
+use strict;
+
+
+my $test
+    = {
+       command_definitions => [
+			       {
+				arguments => [
+					      "$::config->{core_directory}/tests/scripts/basic-g/function_iftest.g",
+					     ],
+				command => 'src/nsgenesis',
+				command_tests => [
+						  {
+						   description => "Creates a simple genesis function",
+						   read => 'zero
+negative
+positive
+',
+						   write => undef,
+						  },
+						 ],
+				description => "simple script",
+			       },
+			      ],
+       description => "simple function with ifelse control structures in it",
+       name => 'function_iftest.t'
+      };
+
+
+return $test;
+
+

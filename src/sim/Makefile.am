@@ -1,9 +1,43 @@
-TOPDIR =../../ 
+shelldir = $(top_srcdir)/src/shell
+scriptdir = $(top_srcdir)/src/script
+utildir = $(top_srcdir)/src/util
+pardir = $(top_srcdir)/src/par
+
+c2genesisdir = $(top_srcdir)/src/c2genesis
+c2genesis = $(c2genesisdir)/c2genesis
+makestructs = $(c2genesisdir)/makestructs
+makefunc = $(c2genesisdir)/makefunc
 
 
-bin_PROGRAMS=ns-genesis
+INCLUDES = -I$(utildir) -I$(shelldir) -I$(scriptdir) -I$(pardir) -I$(top_srcdir)
 
-ns_genesis_SOURCES= \
+
+BUILT_SOURCES = \
+	basic_d@.c \
+	basic_f@.c \
+	basic_g@.c 
+
+CLEANFILES = \
+	basic_d@.c \
+	basic_f@.c \
+	basic_g@.c \
+	tmp_sim_struct.h
+
+
+noinst_LIBRARIES = libsim.a
+
+basic_d@.c:
+	cpp -P -I$(scriptdir) -I$(shelldir) -I$(pardir) sim_struct.h > tmp_sim_struct.h
+	$(makestructs) tmp_sim_struct.h basic -I sim_ext.h -NI -o basic_d@.c
+	rm tmp_sim_struct.h
+
+basic_g@.c:
+	$(c2genesis) simlib.g sim_ext.h basic
+ 
+basic_f@.c:
+	$(makefunc) simfuncs basic > basic_f@.c
+
+libsim_a_SOURCES= \
 		sim_access.c \
 		sim_action.c \
 		sim_address.c \
@@ -69,4 +103,20 @@ ns_genesis_SOURCES= \
 		sim_valid.c \
 		sim_value.c \
 		sim_quit.c \
-		nsim_wildcard.c
+		nsim_wildcard.c \
+	basic_d@.c \
+	basic_f@.c \
+	basic_g@.c
+
+
+nsgenesis_LDADD = \
+	$(shelldir)/libshell.a \
+	$(utildir)/libutil.a \
+	$(scriptdir)/libscript.a \
+	-L/usr/local/lib/neurospacesread -lneurospacesread \
+	-L/usr/local/lib/neurospaces/algorithms/symbol -lsymbol_algorithms \
+	-lfl \
+	-lreadline \
+	-lhistory \
+	-lm \
+	-lncurses

@@ -1,0 +1,34 @@
+SUBDIRS = src
+EXTRA_DIST = tests
+
+#TESTS = $(top_srcdir)/tests/run
+
+
+
+
+# dist-hook:
+# 	cp $(srcdir)/abstract.txt $(distdir)
+# 	cp $(srcdir)/license.txt $(distdir)
+# 	cp -a $(srcdir)/docs $(distdir)
+# 	$(srcdir)/install-sh -d $(distdir)/tests
+# 	$(srcdir)/install-sh -d $(distdir)/tests/html
+# 	$(srcdir)/install-sh -d $(distdir)/tests/html/algorithms
+# 	$(srcdir)/install-sh -d $(distdir)/tests/html/code
+# 	$(srcdir)/install-sh -d $(distdir)/tests/html/specifications
+# 	$(srcdir)/install-sh -d $(distdir)/tests/html/specifications/algorithms
+# 	$(srcdir)/install-sh -d $(distdir)/tests/html/specifications/code
+# 	cp -dp $(srcdir)/tests/{run,run.ptkdb,command_extractor,command_extractor.ptkdb,tests_2_html,tests_2_html.ptkdb,tests.config} $(distdir)/tests
+# 	cp -a $(srcdir)/tests.config $(distdir)
+#	cp -a $(srcdir)/perl $(distdir)
+# 	cp -a $(srcdir)/hierarchy $(distdir)
+# 	rm -fr $(distdir)/hierarchy/output
+# 	cd $(srcdir) && prcs diff -k neurospaces.prj `prcs 2>/dev/null execute --not ".*\(directory\|symlink\)" neurospaces.prj | grep -v "neurospaces\.prj" | grep -v "purkinjespine" `
+# # $Format: "	( cd $(distdir)/tests && chmod -R u+w . && ./tests_2_html --header '<img src=\"ns-main-logo-dark2-notext-32x32.jpg\" alt=\"Main Neurospaces logo\"> $ProjectHeader$<hr>' --introduction introduction.html )" $
+# 	( cd $(distdir)/tests && chmod -R u+w . && ./tests_2_html --header '<img src="ns-main-logo-dark2-notext-32x32.jpg" alt="Main Neurospaces logo"> neurospaces 0.1629 Mon, 22 Oct 2007 15:08:38 -0500 hugo<hr>' --introduction introduction.html )
+
+# #! this one breaks the distcheck, because automake makes dist dirs read-only
+# #	cd $(distdir)/tests && ./tests_2_html
+
+# #	find $(srcdir)/hierarchy -type f -regex '.*[^~]$$' -exec cp {} $(distdir) \;
+
+

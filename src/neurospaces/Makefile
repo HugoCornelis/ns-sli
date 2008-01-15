@@ -71,6 +71,7 @@ AWK = gawk
 CC = gcc
 CCDEPMODE = depmode=gcc3
 CFLAGS = -g -O2
+CPP = gcc -E
 CPPFLAGS = 
 CYGPATH_W = echo
 DEFS = -DHAVE_CONFIG_H
@@ -158,7 +159,7 @@ c2genesis = $(c2genesisdir)/c2genesis
 makestructs = $(c2genesisdir)/makestructs
 makelib = $(c2genesisdir)/makelib
 INCLUDES = -I$(utildir) -I$(shelldir) -I$(simdir) -I$(scriptdir) -I/usr/local/neurospaces/instrumentor 
-AM_CFLAGS = -DPRE_PROTO_TRAVERSAL
+AM_CPPFLAGS = -DPRE_PROTO_TRAVERSAL
 noinst_LIBRARIES = libneurospaces.a
 BUILT_SOURCES = \
 	neurospaces_d@.c \
@@ -170,7 +171,8 @@ CLEANFILES = \
 	neurospaces_d@.c \
 	neurospaces_g@.c \
 	neurospaces_g@.h \
-	neurospaces_l@.c
+	neurospaces_l@.c \
+	tmp_neurospaces_struct.h
 
 libneurospaces_a_SOURCES = \
 	neurospacesread.c \
@@ -196,9 +198,9 @@ $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign  src/neurospaces/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu  src/neurospaces/Makefile'; \
 	cd $(top_srcdir) && \
-	  $(AUTOMAKE) --foreign  src/neurospaces/Makefile
+	  $(AUTOMAKE) --gnu  src/neurospaces/Makefile
 .PRECIOUS: Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
@@ -433,8 +435,8 @@ uninstall-am:
 
 
 neurospaces_d@.c:
-	cpp -P neurospaces_struct.h /tmp/neurospaces_struct.h -I../script -I../util -I../sim -I../shell -DPRE_PROTO_TRAVERSAL
-	$(makestructs) /tmp/neurospaces_neurospaces_struct.h neurospaces -I neurospaces_ext.h -NI -o neurospaces_d@.c
+	cpp -P neurospaces_struct.h tmp_neurospaces_struct.h -I../script -I../util -I../sim -I../shell
+	$(makestructs) tmp_neurospaces_struct.h neurospaces -I neurospaces_ext.h -NI -o neurospaces_d@.c
 
 neurospaces_g@.c:
 	$(c2genesis) neurospaceslib.g neurospaces_ext.h neurospaces
