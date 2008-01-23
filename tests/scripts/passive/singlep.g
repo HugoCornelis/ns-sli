@@ -1,5 +1,7 @@
 //genesis
 
+le -t
+
 create compartment c
 
 setfield c \

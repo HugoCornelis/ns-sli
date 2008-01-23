@@ -256,7 +256,7 @@ int	envarg;
 char	*ptr;
 char	*FieldHashFind();
 char	*FieldHashFindAndCopy();
-
+ 
     if(argc < 5){
 	printf("usage: %s name data function class\n", argv[0]);
 	printf("\t[-author text]\n");
@@ -523,13 +523,17 @@ else
 
 /*
 ** preload the object table with some basic objects
+*
+*
 */
 void BasicObjects()
 {
 GenesisObject	object;
 Element*	defaults;
 /* char*		ptr; */
+    
 
+/***This part inserts the generic "neutral" obeject into the genesis object table  ***/
     BZERO(&object,sizeof(GenesisObject));
     /*
     ** make an empty object
@@ -550,7 +554,15 @@ Element*	defaults;
 
     defaults = (Element *) Create(object.name,"proto",NULL,NULL,0);
     defaults->object->defaults = defaults;
+
 }
+
+
+
+
+
+
+
 
 void do_list_objects()
 {

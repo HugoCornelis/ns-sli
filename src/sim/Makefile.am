@@ -2,6 +2,7 @@ shelldir = $(top_srcdir)/src/shell
 scriptdir = $(top_srcdir)/src/script
 utildir = $(top_srcdir)/src/util
 pardir = $(top_srcdir)/src/par
+hierarchy = /usr/local/neurospaces/instrumentor
 
 c2genesisdir = $(top_srcdir)/src/c2genesis
 c2genesis = $(c2genesisdir)/c2genesis
@@ -9,8 +10,13 @@ makestructs = $(c2genesisdir)/makestructs
 makefunc = $(c2genesisdir)/makefunc
 
 
-INCLUDES = -I$(utildir) -I$(shelldir) -I$(scriptdir) -I$(pardir) -I$(top_srcdir)
-
+INCLUDES = \
+	-I$(utildir) \
+	-I$(shelldir) \
+	-I$(scriptdir) \
+	-I$(pardir) \
+	-I$(top_srcdir) \
+	-I$(hierarchy)
 
 BUILT_SOURCES = \
 	basic_d@.c \
@@ -36,6 +42,8 @@ basic_g@.c:
  
 basic_f@.c:
 	$(makefunc) simfuncs basic > basic_f@.c
+
+AM_CFLAGS = -DPRE_PROTO_TRAVERSAL
 
 libsim_a_SOURCES= \
 		sim_access.c \
@@ -104,6 +112,7 @@ libsim_a_SOURCES= \
 		sim_value.c \
 		sim_quit.c \
 		nsim_wildcard.c \
+	sim_neurospaceselement.c \
 	basic_d@.c \
 	basic_f@.c \
 	basic_g@.c

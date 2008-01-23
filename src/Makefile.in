@@ -168,7 +168,7 @@ simdir = $(top_srcdir)/src/sim
 pardir = $(top_srcdir)/src/par
 nsdir = $(top_srcdir)/src/neurospaces
 nsgenesis_SOURCES = \
-	loadlib.c
+	loadlib.c 
 
 nsgenesis_LDADD = \
 	$(shelldir)/shell_lib.o \

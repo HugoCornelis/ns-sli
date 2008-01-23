@@ -83,6 +83,13 @@ static char rcsid[] = "$Id: sim_create.c,v 1.2 2005/06/27 19:00:58 svitak Exp $"
 #include "sim_ext.h"
 
 
+/** prototypes for static helper functions **/
+static int CreateElementForObject(GenesisObject *object, Element *element);
+
+
+/**
+ *
+ **/
 int CreateAction(newelm, defelm, action)
 
 Element*	newelm;
@@ -154,6 +161,16 @@ Action*		action;
 }	/* CreateAction */
 
 
+
+
+/****************************************************************
+ *
+ * creates a genesis object and adds it to the global symbol table
+ * in genesis. Thisis the function which must sync with neurospaces
+ * and heccer when parsing genesis scripts. 
+ *
+ *
+ ****************************************************************/
 Element *Create(object_name,name,parent,action,index)
 char	*object_name;
 char 	*name;
@@ -161,65 +178,69 @@ Element	*parent;
 Action	*action;
 int	index;
 {
-Element 	*element;
-GenesisObject 	*object;
-int		size;
+    Element 	*element;
+    GenesisObject 	*object;
+    int		size;
+
+
+    /*
+     *
+     */
+     if(!strcmp(object_name,"compartment")){ 
+       
+
+       CreateNeurospacesElement(name,parent,action,index);
+     }    
 
     /*
     ** find the object type in the object table
     */
     if((object = GetObject(object_name)) != NULL){
-	/*
-	** create an element using the object information
-	*/
-	if (object->defaults != NULL)
-	  {
-	    Element 	*child;
+      
+      if(CreateElementForObject(object,element) == -1) 
+ 	return NULL; 
 
-	    if((element = CopyElementTree(object->defaults)) == NULL){
-		printf("could not make a copy of defaults\n");
-		return NULL;
-	    }
+    
+      
+      if((size = object->size) > 0){
 
-	    /*
-	    ** go through each child and make it a component of the
-	    ** root element of the object.
-	    */
-	    child = element->child;
-	    while (child != NULL)
-	      {
-		child->componentof = element;
-		child = child->next;
-	      }
+	element = (Element *)calloc(1,size);
 
-	    /*
-	    ** copy the msgs between elements
-	    */
-	    CopyMsgs(object->defaults,element);
-	  }
-	else
-	    if((size = object->size) > 0){
-		element = (Element *)calloc(1,size);
-	    } else {
-		Error();
-		printf("zero sized object '%s'\n", object_name);
-		return(NULL);
-	    }
+      } else {
+
+	Error();
+	printf("zero sized object '%s'\n", object_name);
+	return(NULL);
+
+      }
+
+
     } else {
+
 	Error();
 	printf("could not find object '%s'\n", object_name);
 	return(NULL);
+
     }
+
+
     element->object  = object;
+
+
     /*
     ** name the element
     */
     if(!Name(element,name)){
+
 	Error();
 	printf("could not assign element name.\n");
 	return(NULL);
+
     }
+
     element->index = index;
+
+
     /*
     ** and attach it to the parent
     */
@@ -234,9 +255,72 @@ int		size;
 	return(NULL);
       }
 
+   
     return(element);
 }
 
+
+
+/**
+ * Create an element for an object using the object information.  
+ * 
+ * 
+ * helper function for Create.
+ *  
+ * return -1 on error
+ * return 1 on success
+ * return 0 if nothing was done.
+ **/
+static int CreateElementForObject(GenesisObject *object, Element *element){
+  
+  Element 	*child;
+  
+  /*
+  ** create an element using the object information
+  */
+  if (object->defaults == NULL)
+    return 0;
+  
+
+  /* printf("objectname = %s\n",object->name); */
+/*   printf("\tobjecttype = %s\n",object->type); */
+  
+  if((element = CopyElementTree(object->defaults)) == NULL){
+     printf("could not make a copy of defaults\n");
+     return -1;
+  }
+
+  /*
+  ** go through each child and make it a component of the
+  ** root element of the object.
+  */
+  child = element->child;
+  while (child != NULL)
+  {
+     child->componentof = element;
+     child = child->next;
+  }
+
+  /*
+  ** copy the msgs between elements
+  */
+  CopyMsgs(object->defaults,element);
+  
+  return 1;
+
+}
+
+
+
+
+
+
+/*
+ *   Function creates a Genesis Object: 
+ *      Allocates memory for the new object and if
+ *      a create action is present, calls the function
+ *      using the appropriate action.
+ */
 char *CreateObject(object,action)
 GenesisObject 	*object;
 Action	*action;
@@ -247,33 +331,54 @@ Action		defaction;
 PFI		function;
 
     if(object == NULL) return(NULL);
+
     /*
     ** create an element using the object information
     */
     if((size = object->size) > 0){
+
 	instance = (char *)calloc(1,size);
+
     } else {
+
 	Error();
 	printf("zero sized object'%s'\n", object->name);
 	return(NULL);
+
     }
+
+
     /*
     ** check to see if the  object has a create action
     */
     if ((function = GetActionFunc(object,CREATE,NULL,NULL))) {
+
+
 	/*
 	** if it does then call the function with the action
 	*/
 	if(action){
+
 	    function(instance,action);
+
 	} else {
+
 	    defaction.type = CREATE;
 	    defaction.name = "CREATE";
 	    function(instance,&defaction);
+
 	}
+
+
     }
+
+
     return(instance);
 }
+
+
+
+
 
 void do_create(argc,argv)
 int	argc;
@@ -359,6 +464,7 @@ int                   i,j = 0;
     action.name = "CREATE";
 	action.data = (char *)parent_element;
     if ((new_element = Create(type,name,parent_element,&action,index))) {
+        
 	/* add the new element to the element hash table */
 	ElementHashPutTree(new_element);
 
@@ -372,4 +478,7 @@ int                   i,j = 0;
 
     OK();
 }
+
+
+
 

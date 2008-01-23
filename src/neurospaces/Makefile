@@ -44,11 +44,9 @@ AR = ar
 ARFLAGS = cru
 libneurospaces_a_AR = $(AR) $(ARFLAGS)
 libneurospaces_a_LIBADD =
-am_libneurospaces_a_OBJECTS = neurospacesread.$(OBJEXT) \
-	neurospacesmodel.$(OBJEXT) neurospacesquery.$(OBJEXT) \
-	neurospacessetup.$(OBJEXT) neurospacessupport.$(OBJEXT) \
-	neurospaces_d@.$(OBJEXT) neurospaces_g@.$(OBJEXT) \
-	neurospaces_l@.$(OBJEXT)
+am_libneurospaces_a_OBJECTS = neurospacesmodel.$(OBJEXT) \
+	neurospacesquery.$(OBJEXT) neurospaces_d@.$(OBJEXT) \
+	neurospaces_g@.$(OBJEXT) neurospaces_l@.$(OBJEXT)
 libneurospaces_a_OBJECTS = $(am_libneurospaces_a_OBJECTS)
 DEFAULT_INCLUDES = -I. -I$(top_builddir)/src
 depcomp = $(SHELL) $(top_srcdir)/depcomp
@@ -175,11 +173,8 @@ CLEANFILES = \
 	tmp_neurospaces_struct.h
 
 libneurospaces_a_SOURCES = \
-	neurospacesread.c \
 	neurospacesmodel.c \
 	neurospacesquery.c \
-	neurospacessetup.c \
-	neurospacessupport.c \
 	neurospaces_d@.c \
 	neurospaces_g@.c \
 	neurospaces_l@.c
@@ -237,9 +232,6 @@ include ./$(DEPDIR)/neurospaces_g@.Po
 include ./$(DEPDIR)/neurospaces_l@.Po
 include ./$(DEPDIR)/neurospacesmodel.Po
 include ./$(DEPDIR)/neurospacesquery.Po
-include ./$(DEPDIR)/neurospacesread.Po
-include ./$(DEPDIR)/neurospacessetup.Po
-include ./$(DEPDIR)/neurospacessupport.Po
 
 .c.o:
 	$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<

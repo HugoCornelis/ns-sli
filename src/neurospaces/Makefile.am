@@ -39,14 +39,9 @@ neurospaces_l@.c:
 	$(makelib) neurospaces -o neurospaces_l@.c
 
 
-
-
 libneurospaces_a_SOURCES = \
-	neurospacesread.c \
 	neurospacesmodel.c \
 	neurospacesquery.c \
-	neurospacessetup.c \
-	neurospacessupport.c \
 	neurospaces_d@.c \
 	neurospaces_g@.c \
 	neurospaces_l@.c

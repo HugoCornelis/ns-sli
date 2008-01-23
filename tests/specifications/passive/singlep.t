@@ -14,8 +14,8 @@ my $test
 				command => 'src/nsgenesis',
 				command_tests => [
 						  {
-						   description => "Is nsgenesis startup ok ?",
-						   read => 'neurospaces',
+						   description => "Is nsgenesis startup ok, is the initial model container created ?",
+						   read => 'neurospaces\t\t{neurospaces}',
 						   write => undef,
 						  },
 						  {
