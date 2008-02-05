@@ -104,6 +104,7 @@ Element		*element;
 	return 0;
       }
 
+
     if((element = GetElement(optargv[1])) == NULL){
 	Error();
 	printf("cannot find element '%s'\n", optargv[1]);
@@ -111,7 +112,6 @@ Element		*element;
     }
     Enable(element);
     OK();
-    return(1);
 }
 
 int do_disable(argc,argv)

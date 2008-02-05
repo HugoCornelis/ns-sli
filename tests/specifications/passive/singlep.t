@@ -18,7 +18,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Is nsgenesis startup ok, is the initial model container created ?",
-						   read => 'model_container\t\t{neurospaces}',
+						   read => 'model_container {neurospaces}',
 						   write => undef,
 						  },
 						  {
@@ -54,6 +54,8 @@ my $test
 					       sub
 					       {
 						 $ENV{NEUROSPACES_MODELS} = $previous_library;
+
+						 '';
 					       },
 					      },
 			       },

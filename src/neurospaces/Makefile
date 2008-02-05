@@ -45,8 +45,9 @@ ARFLAGS = cru
 libneurospaces_a_AR = $(AR) $(ARFLAGS)
 libneurospaces_a_LIBADD =
 am_libneurospaces_a_OBJECTS = neurospacesmodel.$(OBJEXT) \
-	neurospacesquery.$(OBJEXT) neurospaces_d@.$(OBJEXT) \
-	neurospaces_g@.$(OBJEXT) neurospaces_l@.$(OBJEXT)
+	neurospacesquery.$(OBJEXT) neurospacesfield.$(OBJEXT) \
+	neurospaces_d@.$(OBJEXT) neurospaces_g@.$(OBJEXT) \
+	neurospaces_l@.$(OBJEXT)
 libneurospaces_a_OBJECTS = $(am_libneurospaces_a_OBJECTS)
 DEFAULT_INCLUDES = -I. -I$(top_builddir)/src
 depcomp = $(SHELL) $(top_srcdir)/depcomp
@@ -68,7 +69,7 @@ AUTOMAKE = ${SHELL} /home/Abominous/neurospaces_project/ns-genesis-SLI/missing -
 AWK = gawk
 CC = gcc
 CCDEPMODE = depmode=gcc3
-CFLAGS = -g -O2
+CFLAGS = -O0 -g
 CPP = gcc -E
 CPPFLAGS = 
 CYGPATH_W = echo
@@ -175,6 +176,7 @@ CLEANFILES = \
 libneurospaces_a_SOURCES = \
 	neurospacesmodel.c \
 	neurospacesquery.c \
+	neurospacesfield.c \
 	neurospaces_d@.c \
 	neurospaces_g@.c \
 	neurospaces_l@.c
@@ -230,6 +232,7 @@ distclean-compile:
 include ./$(DEPDIR)/neurospaces_d@.Po
 include ./$(DEPDIR)/neurospaces_g@.Po
 include ./$(DEPDIR)/neurospaces_l@.Po
+include ./$(DEPDIR)/neurospacesfield.Po
 include ./$(DEPDIR)/neurospacesmodel.Po
 include ./$(DEPDIR)/neurospacesquery.Po
 

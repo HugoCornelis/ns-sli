@@ -23,21 +23,21 @@ call model_container NEUROSPACES_QUERY
 
 // step 10
 
-// showfield c Vm
+ showfield c Vm
 
 // step 10
 
-// showfield c Vm
+ showfield c Vm
 
 // step 10
 
-// showfield c Vm
+ showfield c Vm
 
 // step 10
 
-// showfield c Vm
+ showfield c Vm
 
 // step 10
 
-// showfield c Vm
+ showfield c Vm
 

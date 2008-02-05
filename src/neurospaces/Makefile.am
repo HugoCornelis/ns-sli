@@ -42,6 +42,7 @@ neurospaces_l@.c:
 libneurospaces_a_SOURCES = \
 	neurospacesmodel.c \
 	neurospacesquery.c \
+	neurospacesfield.c \
 	neurospaces_d@.c \
 	neurospaces_g@.c \
 	neurospaces_l@.c

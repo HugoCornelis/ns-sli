@@ -73,9 +73,14 @@ static char rcsid[] = "$Id: sim_set.c,v 1.2 2005/06/27 19:01:09 svitak Exp $";
 */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <ctype.h>
 #include "shell_func_ext.h"
 #include "sim_ext.h"
+
+#include "neurospaces/biocomp.h"
+#include "neurospaces/function.h"
+#include "neurospaces/parameters.h"
 
 
 /*
@@ -202,8 +207,41 @@ int		empty_ok = 0;
     } else {
 	pathname = ".";
     }
+    
+    //t
+    //t -building an element list for NS assuming
+    //t there are no errors.
+    //t -We assume that there are no wildcards in the
+    //t pathname and that the pathname exists in 
+    //t the model container.
+    //t -We have to figure out from the pathname, if it's 
+    //t referencing the model or other things. 
+    //t (this model in the model container)
+    //t
+    
+    //t to be replaced with wildcard expansion in the model container
 
-    if((list = WildcardGetElement(pathname,0)) == NULL){
+    ElementList *elist = CreateElementList(1);
+
+    Element *compartment = (Element *)PidinStackParse(pathname);
+
+    elist->element[0] = compartment;
+ 
+
+    elist->flags[0] = ELIST_FLAG_NEUROSPACES;
+
+    elist->nelements = 1;
+
+    list = elist;
+
+    //t to be restored, wildcard expansion on periphery
+
+/*     list = WildcardGetElement(pathname,0); */
+
+    //t merge wildcard expansion in model container and wildcard
+    //t expansion of periphery
+
+    if(list == NULL){
 	InvalidPath(optargv[0],pathname);
 	free(action.argv);
 	return(0);
@@ -249,6 +287,82 @@ int		empty_ok = 0;
 	** loop over all the elements in the list
 	*/
 	for(i=0;i<list->nelements;i++){
+
+	  if (list->flags[i] == ELIST_FLAG_NEUROSPACES)
+	    {
+	      struct PidinStack *ppist = (struct PidinStack *)list->element[i];
+
+	      struct symtab_HSolveListElement *phsle
+		= PidinStackLookupTopSymbol(ppist);
+
+	      if (phsle)
+		{
+		  //t allocate parameter
+		  //t set parameter value
+		  //t use the FIXED function
+		  //t link parameter list to phsle
+                  
+
+
+		  
+		  //t generates a parameter from the numerical value
+/* 		  struct symtab_Parameters *ppar */
+/* 		    =  ParameterNewFromNumber(pcParameter, dValue); */
+		  /* SymbolAssignParameters(phsle,ppar); */
+
+/* 		  ParameterSetType(ppar,TYPE_PARA_NUMBER); */
+
+		 
+
+		  
+
+		  struct symtab_Parameters *pparScale = 
+		     ParameterNewFromNumber("scale",1.0);
+
+
+
+		  double dValue = atof(value);
+		  struct symtab_Parameters *pparValue =
+		     ParameterNewFromNumber("value",dValue);
+
+
+		  pparScale->pparFirst = pparScale;
+		  pparScale->pparNext = pparValue;
+
+		  pparValue->pparFirst = pparScale;
+		  pparValue->pparNext = NULL;
+		  
+		  struct symtab_Function *pfun = FunctionCalloc();
+		  FunctionSetName(pfun,"FIXED");
+		  FunctionAssignParameters(pfun,pparScale);
+
+
+
+		  struct symtab_Parameters *pparTop =
+		    ParameterCalloc();
+
+
+		  char *pcParameter = strdup(field);
+		  ParameterSetName(pparTop,pcParameter);
+		  ParameterSetType(pparTop,TYPE_PARA_FUNCTION);
+		  
+
+
+		  pparTop->uValue.pfun = pfun;
+		  pparTop->pparFirst = pparTop;
+
+		  BioComponentChangeParameter(
+		       (struct symtab_BioComponent *)phsle,
+		       pparTop);
+
+		}
+	      else
+		{
+		  printf("Warning: cannot find elements in the model container\n");
+		}
+	      continue;
+		  
+	    }
 		ActionList*	actionList;
 		int		prot;
 	    /*
@@ -402,6 +516,8 @@ int		prot;
     if(element == NULL || field == NULL || value == NULL){
 	return(0);
     } 
+
+    NeurospacesSetField(element,field,value);
 
     if (element == ActiveElement && ActiveObject != NULL)
       {

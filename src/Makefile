@@ -80,7 +80,7 @@ AUTOMAKE = ${SHELL} /home/Abominous/neurospaces_project/ns-genesis-SLI/missing -
 AWK = gawk
 CC = gcc
 CCDEPMODE = depmode=gcc3
-CFLAGS = -g -O2
+CFLAGS = -O0 -g
 CPP = gcc -E
 CPPFLAGS = 
 CYGPATH_W = echo

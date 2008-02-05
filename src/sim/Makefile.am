@@ -112,7 +112,8 @@ libsim_a_SOURCES= \
 		sim_value.c \
 		sim_quit.c \
 		nsim_wildcard.c \
-	sim_neurospaceselement.c \
+	sim_nscompartment.c \
+	sim_nssetfield.c \
 	basic_d@.c \
 	basic_f@.c \
 	basic_g@.c

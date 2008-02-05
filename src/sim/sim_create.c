@@ -188,59 +188,66 @@ int	index;
      */
      if(!strcmp(object_name,"compartment")){ 
        
-
-       CreateNeurospacesElement(name,parent,action,index);
+       if( CreateNeurospacesElement(name,parent,action,index) == 1 ){
+	 return (Element*)-1;
+       }
      }    
 
     /*
     ** find the object type in the object table
     */
     if((object = GetObject(object_name)) != NULL){
-      
-      if(CreateElementForObject(object,element) == -1) 
- 	return NULL; 
+	/*
+	** create an element using the object information
+	*/
+	if (object->defaults != NULL)
+	  {
+	    Element 	*child;
 
-    
-      
-      if((size = object->size) > 0){
+	    if((element = CopyElementTree(object->defaults)) == NULL){
+		printf("could not make a copy of defaults\n");
+		return NULL;
+	    }
 
-	element = (Element *)calloc(1,size);
+	    /*
+	    ** go through each child and make it a component of the
+	    ** root element of the object.
+	    */
+	    child = element->child;
+	    while (child != NULL)
+	      {
+		child->componentof = element;
+		child = child->next;
+	      }
 
-      } else {
-
-	Error();
-	printf("zero sized object '%s'\n", object_name);
-	return(NULL);
-
-      }
-
-
+	    /*
+	    ** copy the msgs between elements
+	    */
+	    CopyMsgs(object->defaults,element);
+	  }
+	else
+	    if((size = object->size) > 0){
+		element = (Element *)calloc(1,size);
+	    } else {
+		Error();
+		printf("zero sized object '%s'\n", object_name);
+		return(NULL);
+	    }
     } else {
-
 	Error();
 	printf("could not find object '%s'\n", object_name);
 	return(NULL);
-
     }
-
-
     element->object  = object;
-
-
     /*
     ** name the element
     */
     if(!Name(element,name)){
-
 	Error();
 	printf("could not assign element name.\n");
 	return(NULL);
-
     }
-
     element->index = index;
-
-
     /*
     ** and attach it to the parent
     */
@@ -255,7 +262,6 @@ int	index;
 	return(NULL);
       }
 
-   
     return(element);
 }
 
@@ -464,11 +470,20 @@ int                   i,j = 0;
     action.name = "CREATE";
 	action.data = (char *)parent_element;
     if ((new_element = Create(type,name,parent_element,&action,index))) {
-        
+      
+      /*
+       * here check if create created a nscompartment
+       * return if it did.
+       */
+      if( (int)new_element == -1){
+	return;
+      }
+
 	/* add the new element to the element hash table */
 	ElementHashPutTree(new_element);
 
 	SetRecentElement(new_element);
+
     } else {
 	printf("unable to create '%s'\n",name);
 	return;

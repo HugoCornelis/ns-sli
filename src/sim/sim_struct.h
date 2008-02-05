@@ -328,10 +328,19 @@ struct projection_parm_type {
 /*
 ** the element list is a means of grouping elements together
 */
+
+//t
+//t  made a change to this section for the purpose of passing 
+//t  information to the Neurospaces BC layer.
+//t
+
+#define ELIST_FLAG_NEUROSPACES 1
+
 typedef struct element_list_type {
     int 					size;
     int 					nelements;
     Element		 			**element;
+    int                                        *flags;
 } ElementList;
 
 struct info_type {

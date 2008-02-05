@@ -134,17 +134,26 @@ ElementList 	*list;
 int 		expansion_size;
 {
 
+  
     if(list != NULL){
+
+      list->size += expansion_size;
+
 	/*
 	** allocate the new element pointer array
 	*/
 	if(list->element){
 	    list->element  = (Element **)
-	    realloc(list->element,
-	    sizeof(Element *)*(list->size += expansion_size));
+	       realloc(list->element,
+	    sizeof(Element *)* list->size);
+	    
+            list->flags = realloc(list->flags,sizeof(int) * list->size);
+
 	} else {
 	    list->element  = (Element **)
-	    calloc(1, sizeof(Element *)*(list->size += expansion_size));
+	       calloc(1, sizeof(Element *)* list->size);
+
+            list->flags = calloc(1,sizeof(int) * list->size);
 	}
     }
 }
