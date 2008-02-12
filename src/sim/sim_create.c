@@ -188,7 +188,7 @@ int	index;
      */
      if(!strcmp(object_name,"compartment")){ 
        
-       if( CreateNeurospacesElement(name,parent,action,index) == 1 ){
+       if( CreateNeurospacesCompartment(name,parent,action,index) == 1 ){
 	 return (Element*)-1;
        }
      }    

@@ -44,10 +44,12 @@ AR = ar
 ARFLAGS = cru
 libneurospaces_a_AR = $(AR) $(ARFLAGS)
 libneurospaces_a_LIBADD =
-am_libneurospaces_a_OBJECTS = neurospacesmodel.$(OBJEXT) \
-	neurospacesquery.$(OBJEXT) neurospacesfield.$(OBJEXT) \
-	neurospaces_d@.$(OBJEXT) neurospaces_g@.$(OBJEXT) \
-	neurospaces_l@.$(OBJEXT)
+am_libneurospaces_a_OBJECTS = neurospacesreset.$(OBJEXT) \
+	neurospacesmodel.$(OBJEXT) neurospacesquery.$(OBJEXT) \
+	neurospacesfield.$(OBJEXT) nsintegrator.$(OBJEXT) \
+	nscompartment.$(OBJEXT) nssetfield.$(OBJEXT) \
+	heccerinit.$(OBJEXT) neurospaces_d@.$(OBJEXT) \
+	neurospaces_g@.$(OBJEXT) neurospaces_l@.$(OBJEXT)
 libneurospaces_a_OBJECTS = $(am_libneurospaces_a_OBJECTS)
 DEFAULT_INCLUDES = -I. -I$(top_builddir)/src
 depcomp = $(SHELL) $(top_srcdir)/depcomp
@@ -174,9 +176,14 @@ CLEANFILES = \
 	tmp_neurospaces_struct.h
 
 libneurospaces_a_SOURCES = \
+	neurospacesreset.c \
 	neurospacesmodel.c \
 	neurospacesquery.c \
 	neurospacesfield.c \
+	nsintegrator.c \
+	nscompartment.c \
+	nssetfield.c \
+	heccerinit.c \
 	neurospaces_d@.c \
 	neurospaces_g@.c \
 	neurospaces_l@.c
@@ -229,12 +236,17 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+include ./$(DEPDIR)/heccerinit.Po
 include ./$(DEPDIR)/neurospaces_d@.Po
 include ./$(DEPDIR)/neurospaces_g@.Po
 include ./$(DEPDIR)/neurospaces_l@.Po
 include ./$(DEPDIR)/neurospacesfield.Po
 include ./$(DEPDIR)/neurospacesmodel.Po
 include ./$(DEPDIR)/neurospacesquery.Po
+include ./$(DEPDIR)/neurospacesreset.Po
+include ./$(DEPDIR)/nscompartment.Po
+include ./$(DEPDIR)/nsintegrator.Po
+include ./$(DEPDIR)/nssetfield.Po
 
 .c.o:
 	$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<

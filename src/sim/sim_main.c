@@ -165,6 +165,10 @@ static char rcsid[] = "$Id: sim_main.c,v 1.6 2005/10/16 20:48:35 svitak Exp $";
 #include "system_deps.h"
 #include "par_ext.h"
 
+//t Including out Neurospaces Headers.
+#include "neurospaces/nsintegrator.h"
+
+
 /* Modified Feb 1992 by Upi Bhalla: added silent flag to command line */
 
 char	**global_envp;
@@ -397,6 +401,28 @@ char simrc_name[256];
     if(catch){
 	SetSignals();
     }
+
+
+
+
+
+    /********************************************************************
+     * This initializes our Neurospaces model container 
+     * for use with GENESIS.
+     ********************************************************************/
+    if( NSGenesisInitialize() < 0 ){
+
+      fprintf(stderr,"Error Initializing Neurospaces model container!\n");
+      return (0);
+    }
+    else
+      fprintf(stdout,"Neurospaces model container loaded!\n\n");
+    /**********************************************************************/
+
+
+
+
+
 
     /*
     ** try reading from the startup file

@@ -149,6 +149,7 @@ int			i;
 
 void do_reset()
 {
+  printf("ZOMGWTFBBQ!!\n");
     SimReset(); 
 }
 

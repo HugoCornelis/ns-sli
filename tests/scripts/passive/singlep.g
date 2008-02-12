@@ -15,9 +15,6 @@ setfield c \
    initVm 0 \ 
    Eleak -0.80 
 
-call model_container NEUROSPACES_QUERY
-
-
 
 // reset
 
@@ -41,3 +38,5 @@ call model_container NEUROSPACES_QUERY
 
  showfield c Vm
 
+
+call model_container NEUROSPACES_QUERY

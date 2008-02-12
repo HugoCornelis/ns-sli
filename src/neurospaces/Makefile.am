@@ -40,9 +40,17 @@ neurospaces_l@.c:
 
 
 libneurospaces_a_SOURCES = \
+	neurospacesreset.c \
 	neurospacesmodel.c \
 	neurospacesquery.c \
 	neurospacesfield.c \
+	nsintegrator.c \
+	nscompartment.c \
+	nssetfield.c \
+	heccerinit.c \
 	neurospaces_d@.c \
 	neurospaces_g@.c \
 	neurospaces_l@.c
+
+
+

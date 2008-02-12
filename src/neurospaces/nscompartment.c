@@ -12,6 +12,8 @@
 #include "neurospaces/neurospaces_ext.h"
 #include "neurospaces/nsintegrator.h"
 
+
+//t external declaration of the global integrator
 extern struct neurospaces_integrator *pNeurospacesIntegrator;
 
 
@@ -22,7 +24,7 @@ extern struct neurospaces_integrator *pNeurospacesIntegrator;
  *
  *
  ***********************************************/
-int CreateNeurospacesElement(char* name, Element* pelParent, Action* action,int index){
+int CreateNeurospacesCompartment(char* name, Element* pelParent, Action* action,int index){
 
    struct symtab_Segment* psegment = NULL;
    char* pathname = NULL;

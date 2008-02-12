@@ -2,6 +2,7 @@ shelldir = $(top_srcdir)/src/shell
 scriptdir = $(top_srcdir)/src/script
 utildir = $(top_srcdir)/src/util
 pardir = $(top_srcdir)/src/par
+nsdir = $(top_srcdir)/src/neurospaces
 hierarchy = /usr/local/neurospaces/instrumentor
 
 c2genesisdir = $(top_srcdir)/src/c2genesis
@@ -16,6 +17,7 @@ INCLUDES = \
 	-I$(scriptdir) \
 	-I$(pardir) \
 	-I$(top_srcdir) \
+	-I$(nsdir)	\
 	-I$(hierarchy)
 
 BUILT_SOURCES = \
@@ -112,21 +114,9 @@ libsim_a_SOURCES= \
 		sim_value.c \
 		sim_quit.c \
 		nsim_wildcard.c \
-	sim_nscompartment.c \
-	sim_nssetfield.c \
 	basic_d@.c \
 	basic_f@.c \
 	basic_g@.c
 
 
-nsgenesis_LDADD = \
-	$(shelldir)/libshell.a \
-	$(utildir)/libutil.a \
-	$(scriptdir)/libscript.a \
-	-L/usr/local/lib/neurospacesread -lneurospacesread \
-	-L/usr/local/lib/neurospaces/algorithms/symbol -lsymbol_algorithms \
-	-lfl \
-	-lreadline \
-	-lhistory \
-	-lm \
-	-lncurses
+
