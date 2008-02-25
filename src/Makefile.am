@@ -8,6 +8,8 @@ pardir = $(top_srcdir)/src/par
 nsdir = $(top_srcdir)/src/neurospaces
 
 
+AM_CLAGS=-DPLAINTERM
+
 bin_PROGRAMS = nsgenesis
 
 

@@ -179,16 +179,7 @@ Element *RootElement()
 
 void StartupElements()
 {
-Element *element;
-
-    /*
-    ** setup the root element
-    */
-    root_element = Create("neutral","Root",NULL,NULL,0);
-    Enable(root_element);
-    SetWorkingElement(root_element);
-    SetRecentElement(root_element);
-    SetRecentConnection(NULL);
+  Element *element;
 
     /*
     ** set up the prototype element on the root
@@ -261,6 +252,45 @@ extern void AddCommandCallback();
     BasicObjects();
 
     ElementHashInit();
+
+    //! moved from StartupElements()
+
+    {
+      //! moved from BasicObjects()
+
+      Element * defaults = (Element *) Create("neutral", "proto",NULL,NULL,0);
+      defaults->object->defaults = defaults;
+
+      /*
+      ** setup the root element
+      */
+      root_element = Create("neutral","Root",NULL,NULL,0);
+      Enable(root_element);
+      SetWorkingElement(root_element);
+      SetRecentElement(root_element);
+      SetRecentConnection(NULL);
+    }
+
+    {
+      /********************************************************************
+       * This initializes our Neurospaces model container 
+       * for use with GENESIS.
+       ********************************************************************/
+
+      LIBRARY_neurospaces();
+
+      if( NSGenesisInitialize() < 0 ){
+
+	fprintf(stderr,"Error Initializing Neurospaces model container!\n");
+	return;
+      }
+      else
+	fprintf(stdout,"Neurospaces model container loaded!\n\n");
+      /**********************************************************************/
+
+
+    }
+
     StartupElements();
 
     /*

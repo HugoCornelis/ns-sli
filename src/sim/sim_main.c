@@ -386,6 +386,12 @@ char simrc_name[256];
 	if (chdir(execdir) == -1)
 	    perror("-execdir");
 
+
+
+
+
+
+
     /*
     ** initialization for the base simulator
     */
@@ -403,21 +409,6 @@ char simrc_name[256];
     }
 
 
-
-
-
-    /********************************************************************
-     * This initializes our Neurospaces model container 
-     * for use with GENESIS.
-     ********************************************************************/
-    if( NSGenesisInitialize() < 0 ){
-
-      fprintf(stderr,"Error Initializing Neurospaces model container!\n");
-      return (0);
-    }
-    else
-      fprintf(stdout,"Neurospaces model container loaded!\n\n");
-    /**********************************************************************/
 
 
 

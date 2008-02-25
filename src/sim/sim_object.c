@@ -552,8 +552,8 @@ Element*	defaults;
     AddDefaultFieldList(&object);
     AddObject(&object);
 
-    defaults = (Element *) Create(object.name,"proto",NULL,NULL,0);
-    defaults->object->defaults = defaults;
+/*     defaults = (Element *) Create(object.name,"proto",NULL,NULL,0); */
+/*     defaults->object->defaults = defaults; */
 
 }
 

@@ -7,7 +7,7 @@
 //t  A global datamember which unifies the Genesis to Neurospaces
 //t  bridge.
 //t 
-struct neurospaces_integrator *pNeurospacesIntegrator = 0;
+struct neurospaces_integrator *pNeurospacesIntegrator = NULL;
 
 
 
@@ -53,19 +53,43 @@ int NSGenesisInitialize(){
    }
 
 
-   //t Now instantiate the heccer instances.
-   //t
-   pNeurospacesIntegrator->pheccer = 
-     (struct pheccer *)calloc(1,sizeof(struct Heccer));
 
-   if( !pNeurospacesIntegrator->pheccer ){
+   //t
+   //t create array for storing the neurospaces sumbol table.
+   //t
+   pNeurospacesIntegrator->iNumSyms = 0; //initial number of symbols is zero
+
+   pNeurospacesIntegrator->ppSymbols = 
+     (struct neurospaces_symbol**)calloc(MAX_NSSYMBOLS,sizeof(struct neurospaces_symbol*));
+
+
+   if( !pNeurospacesIntegrator->ppSymbols ){
+
+     fprintf(stderr,"Error initializing Neurospaces Symbol table\n");
+     return -1;
+
+   }
+
+
+ 
+   //t
+   //t Initializes the Heccer stuff: array + index.
+   //t The heccer array is just an array or pointers
+   //t to heccer objects.
+   //t
+   pNeurospacesIntegrator->iHeccers = 0;
+
+   pNeurospacesIntegrator->ppHeccer = 
+     (struct Heccer**)calloc(MAX_HECCERS,sizeof(struct Heccer*));
+
+
+   if( !pNeurospacesIntegrator->ppHeccer ){
 
      fprintf(stderr,"Error initializing Heccer\n");
      return -1;
-   }
-  
-   pNeurospacesIntegrator->iHeccers = 0;
 
+   }
+   
    return 1;
 
 }

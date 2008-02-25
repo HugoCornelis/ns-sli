@@ -47,7 +47,10 @@ libneurospaces_a_SOURCES = \
 	nsintegrator.c \
 	nscompartment.c \
 	nssetfield.c \
-	heccerinit.c \
+	nscreate.c \
+	nssymboltable.c \
+	heccercreate.c \
+	heccerreset.c \
 	neurospaces_d@.c \
 	neurospaces_g@.c \
 	neurospaces_l@.c

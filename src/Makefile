@@ -80,7 +80,7 @@ AUTOMAKE = ${SHELL} /home/Abominous/neurospaces_project/ns-genesis-SLI/missing -
 AWK = gawk
 CC = gcc
 CCDEPMODE = depmode=gcc3
-CFLAGS = -O0 -g
+CFLAGS = -g -O2
 CPP = gcc -E
 CPPFLAGS = 
 CYGPATH_W = echo
@@ -167,6 +167,7 @@ shelldir = $(top_srcdir)/src/shell
 simdir = $(top_srcdir)/src/sim
 pardir = $(top_srcdir)/src/par
 nsdir = $(top_srcdir)/src/neurospaces
+AM_CLAGS = -DPLAINTERM
 nsgenesis_SOURCES = \
 	loadlib.c 
 

@@ -147,11 +147,17 @@ int			i;
     }
 }
 
+
+
 void do_reset()
 {
-  printf("ZOMGWTFBBQ!!\n");
+  //  printf("ZOMGBBQ!!\n");
+
+  
     SimReset(); 
 }
+
+
 
 void do_reset_simstate()
 { 

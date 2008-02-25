@@ -2,6 +2,7 @@
 #include "shell_func_ext.h"
 #include "sim_ext.h"
 
+#include "neurospaces/function.h"
 #include "neurospaces/neurospaces_ext.h"
 #include "neurospaces/pidinstack.h"
 
@@ -13,6 +14,8 @@
 //t set parameter value
 //t use the FIXED function
 //t link parameter list to phsle
+//t
+//t
 int NeurospacesSetField(Element	*element, char *field, char *value){
 
    double dValue = atof(value);

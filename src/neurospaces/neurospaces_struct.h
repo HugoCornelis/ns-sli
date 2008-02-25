@@ -5,6 +5,7 @@
 
 
 #include "struct_defs.h"
+//#include "nsintegrator.h"
 
 /* neurospaces model description */
 
@@ -15,6 +16,10 @@ struct neurospaces_type
     //m globals from reading description file
 
     struct Neurospaces *pneuro;
+
+
+    // pointer to global NS integrator
+  //    struct neurospaces_integrator * pgNeurospacesIntegrator;
 
     //m should projection query be caching ?
 
@@ -31,6 +36,8 @@ struct neurospaces_type
     struct PidinStack * pppistProjections[MAX_NUM_OF_PROJECTIONS];
 
     int iProjections;
+  
+
 };
 
 

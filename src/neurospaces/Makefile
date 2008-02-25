@@ -48,8 +48,10 @@ am_libneurospaces_a_OBJECTS = neurospacesreset.$(OBJEXT) \
 	neurospacesmodel.$(OBJEXT) neurospacesquery.$(OBJEXT) \
 	neurospacesfield.$(OBJEXT) nsintegrator.$(OBJEXT) \
 	nscompartment.$(OBJEXT) nssetfield.$(OBJEXT) \
-	heccerinit.$(OBJEXT) neurospaces_d@.$(OBJEXT) \
-	neurospaces_g@.$(OBJEXT) neurospaces_l@.$(OBJEXT)
+	nscreate.$(OBJEXT) nssymboltable.$(OBJEXT) \
+	heccercreate.$(OBJEXT) heccerreset.$(OBJEXT) \
+	neurospaces_d@.$(OBJEXT) neurospaces_g@.$(OBJEXT) \
+	neurospaces_l@.$(OBJEXT)
 libneurospaces_a_OBJECTS = $(am_libneurospaces_a_OBJECTS)
 DEFAULT_INCLUDES = -I. -I$(top_builddir)/src
 depcomp = $(SHELL) $(top_srcdir)/depcomp
@@ -71,7 +73,7 @@ AUTOMAKE = ${SHELL} /home/Abominous/neurospaces_project/ns-genesis-SLI/missing -
 AWK = gawk
 CC = gcc
 CCDEPMODE = depmode=gcc3
-CFLAGS = -O0 -g
+CFLAGS = -g -O2
 CPP = gcc -E
 CPPFLAGS = 
 CYGPATH_W = echo
@@ -183,7 +185,10 @@ libneurospaces_a_SOURCES = \
 	nsintegrator.c \
 	nscompartment.c \
 	nssetfield.c \
-	heccerinit.c \
+	nscreate.c \
+	nssymboltable.c \
+	heccercreate.c \
+	heccerreset.c \
 	neurospaces_d@.c \
 	neurospaces_g@.c \
 	neurospaces_l@.c
@@ -236,7 +241,8 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-include ./$(DEPDIR)/heccerinit.Po
+include ./$(DEPDIR)/heccercreate.Po
+include ./$(DEPDIR)/heccerreset.Po
 include ./$(DEPDIR)/neurospaces_d@.Po
 include ./$(DEPDIR)/neurospaces_g@.Po
 include ./$(DEPDIR)/neurospaces_l@.Po
@@ -245,8 +251,10 @@ include ./$(DEPDIR)/neurospacesmodel.Po
 include ./$(DEPDIR)/neurospacesquery.Po
 include ./$(DEPDIR)/neurospacesreset.Po
 include ./$(DEPDIR)/nscompartment.Po
+include ./$(DEPDIR)/nscreate.Po
 include ./$(DEPDIR)/nsintegrator.Po
 include ./$(DEPDIR)/nssetfield.Po
+include ./$(DEPDIR)/nssymboltable.Po
 
 .c.o:
 	$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<

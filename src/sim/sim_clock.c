@@ -142,7 +142,7 @@ double val;
 	printf("SetClock: bad clock number %d\n", n);
 	return;
       }
-
+    
     clock_value[n] = val;
     CheckClocksSet();
 }

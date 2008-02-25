@@ -81,7 +81,7 @@ static char rcsid[] = "$Id: sim_create.c,v 1.2 2005/06/27 19:00:58 svitak Exp $"
 #include <stdio.h>
 #include "shell_func_ext.h"
 #include "sim_ext.h"
-
+#include "nsintegrator.h"
 
 /** prototypes for static helper functions **/
 static int CreateElementForObject(GenesisObject *object, Element *element);
@@ -186,12 +186,24 @@ int	index;
     /*
      *
      */
-     if(!strcmp(object_name,"compartment")){ 
+     if(strcmp(object_name, "compartment") == 0){ 
        
-       if( CreateNeurospacesCompartment(name,parent,action,index) == 1 ){
+       //if( CreateNeurospacesCompartment(name,parent,action,index) == 1 ){
+       if( NeurospacesCreate(name,parent,NSINTEGRATOR_COMPARTMENT) == 1 ){
 	 return (Element*)-1;
        }
-     }    
+
+
+     }
+     else if(strcmp(object_name, "neutral") == 0){ 
+
+        if( NeurospacesCreate(name,parent,NSINTEGRATOR_NEUTRAL) != 1){ 
+ 	 fprintf(stderr,"Error creating neutral object %s\n",name); 
+ 	 //return NULL; 
+        } 
+
+	
+      } 
 
     /*
     ** find the object type in the object table
