@@ -181,6 +181,8 @@ nsgenesis_LDADD = \
 	$(nsdir)/libneurospaces.a \
 	-L/usr/local/lib/neurospacesread -lneurospacesread \
 	-L/usr/local/lib/neurospaces/algorithms/symbol -lsymbol_algorithms \
+	-L/usr/local/lib/heccer -lheccer \
+	-L/usr/local/lib/heccer -lhneurospaces \
 	-lfl \
 	-lreadline \
 	-lhistory \
@@ -568,6 +570,14 @@ uninstall-am: uninstall-binPROGRAMS
 	mostlyclean-generic pdf pdf-am ps ps-am tags tags-recursive \
 	uninstall uninstall-am uninstall-binPROGRAMS
 
+
+liblist: Makefile
+	@echo "# liblist - This file is generated automatically." > liblist
+	@echo "#           DO NOT EDIT.  Edit Makefile instead." >> liblist
+	@echo neurospaces nsintegrator | tr ' ' '\012' >> liblist
+
+loadlib.c: liblist
+	$(srcdir)/libsh < liblist > loadlib.c
 
 move:
 	mv nsgenesis $(top_srcdir)

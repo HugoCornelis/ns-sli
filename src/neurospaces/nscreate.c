@@ -1,3 +1,13 @@
+//------------------------------------------------------------------
+/*!
+ *  \file nscreate.c
+ *  \author Mando Rodriguez
+ *
+ *  This file contains the implementation for creating objects in
+ *  the Neurospaces Model Container via the GENESIS scripting 
+ *  language.
+*/
+//-------------------------------------------------------------------
 #include <stdio.h>
 #include "shell_func_ext.h"
 #include "sim_ext.h"
@@ -13,15 +23,16 @@
 #include "neurospaces/nsintegrator.h"
 
 
+
 //t external declaration of the global integrator
 extern struct neurospaces_integrator *pNeurospacesIntegrator;
 
 
 
-/**************************************************************************************
+/**************************************************************************
  *
  *   NeurospacesCreate: A generic function which allocates 
- **************************************************************************************/
+ **************************************************************************/
 
 int NeurospacesCreate( char* name,  Element* pelParent, int iChild){
 
@@ -42,7 +53,6 @@ int NeurospacesCreate( char* name,  Element* pelParent, int iChild){
        return 1;
      }
 
-/*    struct neurospaces_type *pelNeurospaces = pNeurospacesIntegrator->pelNeurospaces; */
 
    switch(iChild){
 
@@ -52,7 +62,7 @@ int NeurospacesCreate( char* name,  Element* pelParent, int iChild){
      break;
 
    case NSINTEGRATOR_NEUTRAL:
-     phsleChild = (struct symtab_HSolveListElement*)GroupCalloc();
+     phsleChild = (struct symtab_HSolveListElement*)CellCalloc();
      break;
    }
  
@@ -97,9 +107,11 @@ int NeurospacesCreate( char* name,  Element* pelParent, int iChild){
 
 
    NeurospacesAddSymbol(pcChild, iChild);
-   NeurospacesPrintSymbols();
+   //NeurospacesPrintSymbols();
 
    SymbolRecalcAllSerials(phsleParent, ppistParent);    
+
+
    return 1;
 
 }

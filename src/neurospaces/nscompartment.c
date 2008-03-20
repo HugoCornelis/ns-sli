@@ -1,3 +1,13 @@
+//------------------------------------------------------------------
+/*!
+ *  \file nscompartment.c
+ *  \author Mando Rodriguez
+ *
+ *  This file contains the implementation for creating compartments
+ *  and other data members in the Neurospaces Model Container via
+ *  direct calls to the Neurospaces API.
+*/
+//-------------------------------------------------------------------
 #include <stdio.h>
 #include "shell_func_ext.h"
 #include "sim_ext.h"

@@ -1,20 +1,44 @@
+//------------------------------------------------------------------
+/*!
+ *  \file nsintegrator.c
+ *  \author Mando Rodriguez
+ *
+ *  This file contains the implementation for the initialization of
+ *  the Neurospaces to GENESIS bridge. 
+*/
+//-------------------------------------------------------------------
 #include "nsintegrator.h"
 #include <stdlib.h>
 
 
 
-//t
-//t  A global datamember which unifies the Genesis to Neurospaces
-//t  bridge.
-//t 
+
+//-------------------------------------------------------------------
+/*!
+ *  \var struct neurospaces_integrator *pNeurospacesIntegrator
+ *
+ *  A global datamember which unifies the Genesis to Neurospaces
+ *  bridge.
+ */
+//-------------------------------------------------------------------
 struct neurospaces_integrator *pNeurospacesIntegrator = NULL;
 
 
 
-//t  Function initializes the Neurospaces data
-//t  members for use in GENESIS.
-//t
-//t
+
+
+
+
+
+//------------------------------------------------------------------
+/*!
+ *   \fn int NSGenesisInitialize()
+ *   \return -1 on error, 1 on success.
+ *   \sa neurospaces_integrator
+ *
+ *   Initializes the pNeurospacesIntegrator.
+ */
+//------------------------------------------------------------------
 int NSGenesisInitialize(){
    
 
@@ -53,6 +77,17 @@ int NSGenesisInitialize(){
    }
 
 
+   //t 
+   //t Now we cache the root context for easier referencing.
+   //t
+   pNeurospacesIntegrator->ppistCachedRoot =  PidinStackParse("/");
+
+   pNeurospacesIntegrator->phsleCachedRoot =  
+     PidinStackLookupTopSymbol(pNeurospacesIntegrator->ppistCachedRoot);
+
+
+
+
 
    //t
    //t create array for storing the neurospaces sumbol table.
@@ -69,6 +104,7 @@ int NSGenesisInitialize(){
      return -1;
 
    }
+
 
 
  
@@ -89,6 +125,7 @@ int NSGenesisInitialize(){
      return -1;
 
    }
+    
    
    return 1;
 

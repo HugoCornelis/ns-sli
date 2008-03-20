@@ -47,11 +47,14 @@ libneurospaces_a_LIBADD =
 am_libneurospaces_a_OBJECTS = neurospacesreset.$(OBJEXT) \
 	neurospacesmodel.$(OBJEXT) neurospacesquery.$(OBJEXT) \
 	neurospacesfield.$(OBJEXT) nsintegrator.$(OBJEXT) \
-	nscompartment.$(OBJEXT) nssetfield.$(OBJEXT) \
-	nscreate.$(OBJEXT) nssymboltable.$(OBJEXT) \
-	heccercreate.$(OBJEXT) heccerreset.$(OBJEXT) \
+	nscompartment.$(OBJEXT) nssetelement.$(OBJEXT) \
+	nssetfield.$(OBJEXT) nscreate.$(OBJEXT) \
+	nssymboltable.$(OBJEXT) heccercreate.$(OBJEXT) \
+	heccerreset.$(OBJEXT) heccerstep.$(OBJEXT) \
 	neurospaces_d@.$(OBJEXT) neurospaces_g@.$(OBJEXT) \
-	neurospaces_l@.$(OBJEXT)
+	neurospaces_l@.$(OBJEXT) nsintegrator_d@.$(OBJEXT) \
+	nsintegrator_g@.$(OBJEXT) nsintegrator_l@.$(OBJEXT) \
+	nsintegratoractor.$(OBJEXT)
 libneurospaces_a_OBJECTS = $(am_libneurospaces_a_OBJECTS)
 DEFAULT_INCLUDES = -I. -I$(top_builddir)/src
 depcomp = $(SHELL) $(top_srcdir)/depcomp
@@ -168,14 +171,23 @@ BUILT_SOURCES = \
 	neurospaces_d@.c \
 	neurospaces_g@.c \
 	neurospaces_g@.h \
-	neurospaces_l@.c
+	neurospaces_l@.c \
+	nsintegrator_d@.c \
+	nsintegrator_g@.c \
+	nsintegrator_g@.h \
+	nsintegrator_l@.c
 
 CLEANFILES = \
 	neurospaces_d@.c \
 	neurospaces_g@.c \
 	neurospaces_g@.h \
 	neurospaces_l@.c \
-	tmp_neurospaces_struct.h
+	tmp_neurospaces_struct.h \
+	nsintegrator_d@.c \
+	nsintegrator_g@.c \
+	nsintegrator_g@.h \
+	nsintegrator_l@.c \
+	tmp_nsintegrator_struct.h
 
 libneurospaces_a_SOURCES = \
 	neurospacesreset.c \
@@ -184,14 +196,20 @@ libneurospaces_a_SOURCES = \
 	neurospacesfield.c \
 	nsintegrator.c \
 	nscompartment.c \
+	nssetelement.c \
 	nssetfield.c \
 	nscreate.c \
 	nssymboltable.c \
 	heccercreate.c \
 	heccerreset.c \
+	heccerstep.c \
 	neurospaces_d@.c \
 	neurospaces_g@.c \
-	neurospaces_l@.c
+	neurospaces_l@.c \
+	nsintegrator_d@.c \
+	nsintegrator_g@.c \
+	nsintegrator_l@.c \
+	nsintegratoractor.c
 
 all: $(BUILT_SOURCES)
 	$(MAKE) $(AM_MAKEFLAGS) all-am
@@ -243,6 +261,7 @@ distclean-compile:
 
 include ./$(DEPDIR)/heccercreate.Po
 include ./$(DEPDIR)/heccerreset.Po
+include ./$(DEPDIR)/heccerstep.Po
 include ./$(DEPDIR)/neurospaces_d@.Po
 include ./$(DEPDIR)/neurospaces_g@.Po
 include ./$(DEPDIR)/neurospaces_l@.Po
@@ -253,6 +272,11 @@ include ./$(DEPDIR)/neurospacesreset.Po
 include ./$(DEPDIR)/nscompartment.Po
 include ./$(DEPDIR)/nscreate.Po
 include ./$(DEPDIR)/nsintegrator.Po
+include ./$(DEPDIR)/nsintegrator_d@.Po
+include ./$(DEPDIR)/nsintegrator_g@.Po
+include ./$(DEPDIR)/nsintegrator_l@.Po
+include ./$(DEPDIR)/nsintegratoractor.Po
+include ./$(DEPDIR)/nssetelement.Po
 include ./$(DEPDIR)/nssetfield.Po
 include ./$(DEPDIR)/nssymboltable.Po
 
@@ -458,6 +482,16 @@ neurospaces_g@.c:
 
 neurospaces_l@.c:
 	$(makelib) neurospaces -o neurospaces_l@.c
+
+nsintegrator_d@.c:
+	cpp -P nsintegrator_struct.h tmp_nsintegrator_struct.h -I../script -I../util -I../sim -I../shell -I/usr/local/neurospaces/instrumentor -DPRE_PROTO_TRAVERSAL
+	$(makestructs) tmp_nsintegrator_struct.h nsintegrator_type -I nsintegrator.h -NI -o nsintegrator_d@.c
+
+nsintegrator_g@.c:
+	$(c2genesis) nsintegratorlib.g nsintegrator.h nsintegrator
+
+nsintegrator_l@.c:
+	$(makelib) nsintegrator -o nsintegrator_l@.c
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:

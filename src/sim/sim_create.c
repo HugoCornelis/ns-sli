@@ -199,7 +199,7 @@ int	index;
 
         if( NeurospacesCreate(name,parent,NSINTEGRATOR_NEUTRAL) != 1){ 
  	 fprintf(stderr,"Error creating neutral object %s\n",name); 
- 	 //return NULL; 
+ 	 // now have the code continue to make a genesis neutral object.
         } 
 
 	
@@ -274,6 +274,7 @@ int	index;
 	return(NULL);
       }
 
+    NeurospacesMapGenel(element);
     return(element);
 }
 

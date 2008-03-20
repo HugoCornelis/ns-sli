@@ -5,7 +5,7 @@
 
 
 #include "struct_defs.h"
-//#include "nsintegrator.h"
+
 
 /* neurospaces model description */
 

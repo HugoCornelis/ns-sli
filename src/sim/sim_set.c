@@ -206,13 +206,17 @@ int		empty_ok = 0;
 	nxtarg++;
     } else {
 	pathname = ".";
+
+
+
+
+
     }
     
     //t
-    //t -building an element list for NS assuming
-    //t there are no errors.
-    //t -We assume that there are no wildcards in the
-    //t pathname and that the pathname exists in 
+    //t -building an element list for NS assuming there are no errors.
+    //t -We assume that there are no wildcards in the pathname 
+    //t and that the pathname exists in 
     //t the model container.
     //t -We have to figure out from the pathname, if it's 
     //t referencing the model or other things. 
@@ -221,6 +225,7 @@ int		empty_ok = 0;
     
     //t to be replaced with wildcard expansion in the model container
 
+    //hack ---------------insert neurospaces support ---------------------
     ElementList *elist = CreateElementList(1);
 
     Element *compartment = (Element *)PidinStackParse(pathname);
@@ -240,6 +245,12 @@ int		empty_ok = 0;
 
     //t merge wildcard expansion in model container and wildcard
     //t expansion of periphery
+
+    //hack ----------------end insert ------------------------------------
+
+
+
+
 
     if(list == NULL){
 	InvalidPath(optargv[0],pathname);
@@ -288,6 +299,8 @@ int		empty_ok = 0;
 	*/
 	for(i=0;i<list->nelements;i++){
 
+	  //hack --- insert neurospaces support ----------------------------------
+
 	  if (list->flags[i] == ELIST_FLAG_NEUROSPACES)
 	    {
 	      struct PidinStack *ppist = (struct PidinStack *)list->element[i];
@@ -297,64 +310,9 @@ int		empty_ok = 0;
 
 	      if (phsle)
 		{
-		  //t allocate parameter
-		  //t set parameter value
-		  //t use the FIXED function
-		  //t link parameter list to phsle
-                  
-
-
-		  
-		  //t generates a parameter from the numerical value
-/* 		  struct symtab_Parameters *ppar */
-/* 		    =  ParameterNewFromNumber(pcParameter, dValue); */
-		  /* SymbolAssignParameters(phsle,ppar); */
-
-/* 		  ParameterSetType(ppar,TYPE_PARA_NUMBER); */
-
+		 		  
+		  NeurospacesSetField(phsle,field, value);
 		 
-
-		  
-
-		  struct symtab_Parameters *pparScale = 
-		     ParameterNewFromNumber("scale",1.0);
-
-
-
-		  double dValue = atof(value);
-		  struct symtab_Parameters *pparValue =
-		     ParameterNewFromNumber("value",dValue);
-
-
-		  pparScale->pparFirst = pparScale;
-		  pparScale->pparNext = pparValue;
-
-		  pparValue->pparFirst = pparScale;
-		  pparValue->pparNext = NULL;
-		  
-		  struct symtab_Function *pfun = FunctionCalloc();
-		  FunctionSetName(pfun,"FIXED");
-		  FunctionAssignParameters(pfun,pparScale);
-
-
-
-		  struct symtab_Parameters *pparTop =
-		    ParameterCalloc();
-
-
-		  char *pcParameter = strdup(field);
-		  ParameterSetName(pparTop,pcParameter);
-		  ParameterSetType(pparTop,TYPE_PARA_FUNCTION);
-		  
-
-
-		  pparTop->uValue.pfun = pfun;
-		  pparTop->pparFirst = pparTop;
-
-		  BioComponentChangeParameter(
-		       (struct symtab_BioComponent *)phsle,
-		       pparTop);
-
 		}
 	      else
 		{
@@ -363,6 +321,10 @@ int		empty_ok = 0;
 	      continue;
 		  
 	    }
+
+	  //hack ----- end insert -----------------------------------------------
+
+
 		ActionList*	actionList;
 		int		prot;
 	    /*
@@ -517,7 +479,7 @@ int		prot;
 	return(0);
     } 
 
-    NeurospacesSetField(element,field,value);
+    NeurospacesSetElement(element,field,value);
 
     if (element == ActiveElement && ActiveObject != NULL)
       {

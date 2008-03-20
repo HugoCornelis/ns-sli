@@ -1,5 +1,13 @@
+//------------------------------------------------------------------
+/*!
+ *  \file heccercreate.c
+ *  \author Mando Rodriguez
+ *
+ *  This file contains the implementation for creating a Heccer 
+ *  instance directly with the Heccer API.
+*/
+//-------------------------------------------------------------------
 #include "heccer/heccer.h"
-
 #include "neurospaces_defs.h"
 #include "neurospaces_ext.h"
 #include "neurospaces_struct.h"
@@ -9,11 +17,21 @@
 
 extern struct neurospaces_integrator *pNeurospacesIntegrator;
 
-/*******************************************
- * Function creates a new heccer object and
- * initializes it to the Id given in parameter idin.
+
+
+
+//------------------------------------------------------------------
+/*!
+ *  \fn int HeccerCreate(char* idin)
+ *  \return -1 on error, 1 on success.
+ *  \param idin A char array holding the name for the Heccer to create.
+ *  \sa neurospaces_integrator
  *
- *******************************************/
+ *  Creates a Heccer instace and stores is in the global Heccer
+ *  array in pNeurospacesIntegrator.
+ *
+ */
+//------------------------------------------------------------------
 int HeccerCreate(char* pcContext){
 
   char *pcHeccer =  strdup(pcContext);
@@ -23,12 +41,14 @@ int HeccerCreate(char* pcContext){
     return -1;
   }
 
-  struct Heccer *pheccer = HeccerNew(pcHeccer,NULL,NULL,NULL);
+  struct Heccer *pheccer = HeccerNew(pcContext,NULL,NULL,NULL);
 
   if(!pheccer){
     fprintf(stderr,"Error allocating Heccer for Context %s\n",pcContext);
     return -1;
   }
+
+ 
 
   struct Neurospaces *pneuro = 
      pNeurospacesIntegrator->pelNeurospaces->pneuro;
@@ -45,7 +65,8 @@ int HeccerCreate(char* pcContext){
   //t add this heccer to the global list
   //t come up with a function for adding later
   //t 
-  pNeurospacesIntegrator->ppHeccer[pNeurospacesIntegrator->iHeccers++] = pheccer;
+  pNeurospacesIntegrator->ppHeccer[pNeurospacesIntegrator->iHeccers++] = 
+    pheccer;
   
   return 1;
 

@@ -46,6 +46,12 @@ static char rcsid[] = "$Id: sim_reset.c,v 1.2 2005/06/27 19:01:09 svitak Exp $";
 #include "shell_func_ext.h"
 #include "sim_ext.h"
 
+#include <nsintegrator.h>
+
+
+extern struct neurospaces_integrator *pNeurospacesIntegrator;
+
+
 void SimReset()
 {
 PFI			func;
@@ -151,10 +157,17 @@ int			i;
 
 void do_reset()
 {
-  //  printf("ZOMGBBQ!!\n");
+     
+  //t
+  //t  Recalc all the serials before performing a reset.
+  //t
+  SymbolRecalcAllSerials(pNeurospacesIntegrator->phsleCachedRoot, 
+                         pNeurospacesIntegrator->ppistCachedRoot);
 
-  
-    SimReset(); 
+
+  //t here we perform our heccer reset
+  HeccerReset();
+    //SimReset(); 
 }
 
 

@@ -19,14 +19,24 @@ BUILT_SOURCES = \
 	neurospaces_d@.c \
 	neurospaces_g@.c \
 	neurospaces_g@.h \
-	neurospaces_l@.c
+	neurospaces_l@.c \
+	nsintegrator_d@.c \
+	nsintegrator_g@.c \
+	nsintegrator_g@.h \
+	nsintegrator_l@.c
 
 CLEANFILES = \
 	neurospaces_d@.c \
 	neurospaces_g@.c \
 	neurospaces_g@.h \
 	neurospaces_l@.c \
-	tmp_neurospaces_struct.h
+	tmp_neurospaces_struct.h \
+	nsintegrator_d@.c \
+	nsintegrator_g@.c \
+	nsintegrator_g@.h \
+	nsintegrator_l@.c \
+	tmp_nsintegrator_struct.h
+
 
 neurospaces_d@.c:
 	cpp -P neurospaces_struct.h tmp_neurospaces_struct.h -I../script -I../util -I../sim -I../shell
@@ -34,9 +44,23 @@ neurospaces_d@.c:
 
 neurospaces_g@.c:
 	$(c2genesis) neurospaceslib.g neurospaces_ext.h neurospaces
- 
+
 neurospaces_l@.c:
 	$(makelib) neurospaces -o neurospaces_l@.c
+
+
+
+nsintegrator_d@.c:
+	cpp -P nsintegrator_struct.h tmp_nsintegrator_struct.h -I../script -I../util -I../sim -I../shell -I/usr/local/neurospaces/instrumentor -DPRE_PROTO_TRAVERSAL
+	$(makestructs) tmp_nsintegrator_struct.h nsintegrator_type -I nsintegrator.h -NI -o nsintegrator_d@.c
+
+nsintegrator_g@.c:
+	$(c2genesis) nsintegratorlib.g nsintegrator.h nsintegrator
+ 
+nsintegrator_l@.c:
+	$(makelib) nsintegrator -o nsintegrator_l@.c
+
+
 
 
 libneurospaces_a_SOURCES = \
@@ -46,14 +70,18 @@ libneurospaces_a_SOURCES = \
 	neurospacesfield.c \
 	nsintegrator.c \
 	nscompartment.c \
+	nssetelement.c \
 	nssetfield.c \
 	nscreate.c \
 	nssymboltable.c \
 	heccercreate.c \
 	heccerreset.c \
+	heccerstep.c \
 	neurospaces_d@.c \
 	neurospaces_g@.c \
-	neurospaces_l@.c
-
-
+	neurospaces_l@.c \
+	nsintegrator_d@.c \
+	nsintegrator_g@.c \
+	nsintegrator_l@.c \
+	nsintegratoractor.c
 
