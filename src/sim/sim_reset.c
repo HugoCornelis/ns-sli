@@ -49,9 +49,6 @@ static char rcsid[] = "$Id: sim_reset.c,v 1.2 2005/06/27 19:01:09 svitak Exp $";
 #include <nsintegrator.h>
 
 
-extern struct neurospaces_integrator *pNeurospacesIntegrator;
-
-
 void SimReset()
 {
 PFI			func;
@@ -158,11 +155,18 @@ int			i;
 void do_reset()
 {
      
-  //t
-  //t  Recalc all the serials before performing a reset.
-  //t
-  SymbolRecalcAllSerials(pNeurospacesIntegrator->phsleCachedRoot, 
-                         pNeurospacesIntegrator->ppistCachedRoot);
+  //i
+  //i Recalc all the serials before performing a reset.
+  //i
+
+  struct nsintegrator_type *pelnsintegrator
+    = (struct nsintegrator_type *)GetElement("/neurospaces_integrator");
+
+  struct neurospaces_integrator *pnsintegrator
+    = pelnsintegrator->pnsintegrator;
+
+  SymbolRecalcAllSerials(pnsintegrator->phsleCachedRoot, 
+                         pnsintegrator->ppistCachedRoot);
 
 
   //t here we perform our heccer reset

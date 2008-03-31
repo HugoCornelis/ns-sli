@@ -5,15 +5,13 @@
  *  
  *  This file contains the function implementations for performing
  *  a step on a Heccer instance stored in the global integrator
- *  (pNeurospacesIntegrator). 
+ *  (pelnsintegrator). 
 */
 //-------------------------------------------------------------------
 #include "nsintegrator.h"
 #include "heccer/heccer.h"
 
 
-//t external declaration of the integrator.
-extern struct neurospaces_integrator *pNeurospacesIntegrator;
 
 
 
@@ -22,27 +20,34 @@ extern struct neurospaces_integrator *pNeurospacesIntegrator;
  *   \fn void HeccerReset()
  *   
  *   Performs a reset on all instances of Heccer in the global
- *   array ppHeccer located in pNeurospacesIntegrator. This is done
- *   by calling the HeccerHecc function.
+ *   array ppheccer located in pelnsintegrator. This is done
+ *   by calling the HeccerHecc() function.
  */
 //-------------------------------------------------------------------
 void HeccerStep(int iMode, double dDuration, int iSteps, int iVerbose){
 
  
-  if(!pNeurospacesIntegrator->ppHeccer){
+  struct nsintegrator_type *pelnsintegrator
+    = (struct nsintegrator_type *)GetElement("/neurospaces_integrator");
 
-    fprintf(stderr,"Heccer array not allocated, exiting\n");
+  struct neurospaces_integrator *pnsintegrator
+    = pelnsintegrator->pnsintegrator;
+
+  if(!pnsintegrator->ppheccer){
+
+    fprintf(stderr,"ppheccer[] array not allocated, exiting\n");
     exit(0);
 
   }
 
   //i get our heccer array and number from out global integrator.
   //i
-  struct Heccer **ppheccer = pNeurospacesIntegrator->ppHeccer;
-  int iheccers = pNeurospacesIntegrator->iHeccers;
+
+  struct Heccer **ppheccer = pnsintegrator->ppheccer;
+  int iHeccers = pnsintegrator->iHeccers;
   
   
-  if(iheccers == 0){
+  if(iHeccers == 0){
     
     fprintf(stdout,"No heccer instances allocated\n");
     return;
@@ -52,7 +57,7 @@ void HeccerStep(int iMode, double dDuration, int iSteps, int iVerbose){
 
 
   int i;
-  for(i = 0; i < iheccers; i++){
+  for(i = 0; i < iHeccers; i++){
 
 
     //t

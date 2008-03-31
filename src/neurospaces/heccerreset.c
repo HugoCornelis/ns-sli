@@ -5,7 +5,7 @@
  *  
  *  This file contains the function implementations for performing
  *  a RESET via direct calls to Heccer via the global integrator
- *  (pNeurospacesIntegrator). 
+ *  (pelnsintegrator). 
 */
 //-------------------------------------------------------------------
 #include "nsintegrator.h"
@@ -13,8 +13,6 @@
 
 
 
-//t external declaration of the integrator.
-extern struct neurospaces_integrator *pNeurospacesIntegrator;
 
 
 
@@ -60,10 +58,16 @@ void HeccerReset(){
   //t
   HeccerCreate("hardcoded_neutral");
   
+  struct nsintegrator_type *pelnsintegrator
+    = (struct nsintegrator_type *)GetElement("/neurospaces_integrator");
+
+  struct neurospaces_integrator *pnsintegrator
+    = pelnsintegrator->pnsintegrator;
+
   //t the first Heccer will be the only one we're concerned with now.  
-  struct Heccer * pHcn = pNeurospacesIntegrator->ppHeccer[0];
+  struct Heccer * pheccer = pnsintegrator->ppheccer[0];
   
-  singleHeccerStatus(pHcn);
+  singleHeccerStatus(pheccer);
 
   
 }

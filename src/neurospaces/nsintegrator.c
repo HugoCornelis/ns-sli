@@ -13,22 +13,6 @@
 
 
 
-//-------------------------------------------------------------------
-/*!
- *  \var struct neurospaces_integrator *pNeurospacesIntegrator
- *
- *  A global datamember which unifies the Genesis to Neurospaces
- *  bridge.
- */
-//-------------------------------------------------------------------
-struct neurospaces_integrator *pNeurospacesIntegrator = NULL;
-
-
-
-
-
-
-
 
 //------------------------------------------------------------------
 /*!
@@ -36,14 +20,14 @@ struct neurospaces_integrator *pNeurospacesIntegrator = NULL;
  *   \return -1 on error, 1 on success.
  *   \sa neurospaces_integrator
  *
- *   Initializes the pNeurospacesIntegrator.
+ *   Initializes the pnsintegrator.
  */
 //------------------------------------------------------------------
 int NSGenesisInitialize(){
    
 
-   pNeurospacesIntegrator = 
-      (struct neurospaces_integrator*)calloc(1,sizeof(struct neurospaces_integrator));
+  struct neurospaces_integrator *pnsintegrator = 
+      (struct neurospaces_integrator *)calloc(1,sizeof(struct neurospaces_integrator));
        
    char	*argvar[5];
    argvar[0] = "c_do_create";
@@ -51,8 +35,8 @@ int NSGenesisInitialize(){
    argvar[2] = "/model_container";
    do_create(3,argvar);
 
-   pNeurospacesIntegrator->pelNeurospaces = 
-      (struct Element*)GetElement("/model_container");
+   pnsintegrator->pelNeurospaces = 
+      (struct neurospaces_type *)GetElement("/model_container");
     
        
    char *ppvArgs[] =
@@ -65,10 +49,10 @@ int NSGenesisInitialize(){
 
    //t set NEUROSPACES_MODELS variable to point to where the model can be found  
 
-   pNeurospacesIntegrator->pelNeurospaces->pneuro = 
+   pnsintegrator->pelNeurospaces->pneuro = 
        NeurospacesNewFromCmdLine(2, &ppvArgs[0]);
 
-   if (!pNeurospacesIntegrator->pelNeurospaces->pneuro)
+   if (!pnsintegrator->pelNeurospaces->pneuro)
    {
        fprintf(stderr,
           "Error initializing neurospaces model container\n");
@@ -77,13 +61,14 @@ int NSGenesisInitialize(){
    }
 
 
+
    //t 
    //t Now we cache the root context for easier referencing.
    //t
-   pNeurospacesIntegrator->ppistCachedRoot =  PidinStackParse("/");
+   pnsintegrator->ppistCachedRoot =  PidinStackParse("/");
 
-   pNeurospacesIntegrator->phsleCachedRoot =  
-     PidinStackLookupTopSymbol(pNeurospacesIntegrator->ppistCachedRoot);
+   pnsintegrator->phsleCachedRoot =  
+     PidinStackLookupTopSymbol(pnsintegrator->ppistCachedRoot);
 
 
 
@@ -92,13 +77,13 @@ int NSGenesisInitialize(){
    //t
    //t create array for storing the neurospaces sumbol table.
    //t
-   pNeurospacesIntegrator->iNumSyms = 0; //initial number of symbols is zero
+   pnsintegrator->iNumSyms = 0; //initial number of symbols is zero
 
-   pNeurospacesIntegrator->ppSymbols = 
+   pnsintegrator->ppSymbols = 
      (struct neurospaces_symbol**)calloc(MAX_NSSYMBOLS,sizeof(struct neurospaces_symbol*));
 
 
-   if( !pNeurospacesIntegrator->ppSymbols ){
+   if( !pnsintegrator->ppSymbols ){
 
      fprintf(stderr,"Error initializing Neurospaces Symbol table\n");
      return -1;
@@ -113,13 +98,13 @@ int NSGenesisInitialize(){
    //t The heccer array is just an array or pointers
    //t to heccer objects.
    //t
-   pNeurospacesIntegrator->iHeccers = 0;
+   pnsintegrator->iHeccers = 0;
 
-   pNeurospacesIntegrator->ppHeccer = 
+   pnsintegrator->ppheccer = 
      (struct Heccer**)calloc(MAX_HECCERS,sizeof(struct Heccer*));
 
 
-   if( !pNeurospacesIntegrator->ppHeccer ){
+   if( !pnsintegrator->ppheccer ){
 
      fprintf(stderr,"Error initializing Heccer\n");
      return -1;
@@ -127,6 +112,18 @@ int NSGenesisInitialize(){
    }
     
    
+/*    char	*argvar2[5]; */
+/*    argvar2[0] = "c_do_create"; */
+/*    argvar2[1] = "nsintegrator"; */
+/*    argvar2[2] = "/neurospaces_integrator"; */
+/*    do_create(3,argvar2); */
+
+/*    struct nsintegrator_type *pelnsintegrator =  */
+/*       (struct Element*)GetElement("/neurospaces_integrator"); */
+
+
+/*    pelnsintegrator->pnsintegrator = pnsintegrators; */
+
    return 1;
 
 }

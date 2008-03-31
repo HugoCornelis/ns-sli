@@ -23,8 +23,6 @@
 #include "neurospaces/nsintegrator.h"
 
 
-//t external declaration of the global integrator
-extern struct neurospaces_integrator *pNeurospacesIntegrator;
 
 
 /************************************************
@@ -36,14 +34,21 @@ extern struct neurospaces_integrator *pNeurospacesIntegrator;
  ***********************************************/
 int CreateNeurospacesCompartment(char* name, Element* pelParent, Action* action,int index){
 
-   struct symtab_Segment* psegment = NULL;
-   char* pathname = NULL;
-   struct PidinStack* ppist = NULL;
-   struct symtab_HSolveListElement* phsle = NULL;
-   struct symtab_IdentifierIndex* pidin;
-   struct neurospaces_type *pelNeurospaces = pNeurospacesIntegrator->pelNeurospaces;
+  struct symtab_Segment* psegment = NULL;
+  char* pathname = NULL;
+  struct PidinStack* ppist = NULL;
+  struct symtab_HSolveListElement* phsle = NULL;
+  struct symtab_IdentifierIndex* pidin;
 
-   psegment = SegmentCalloc();
+  struct nsintegrator_type *pelnsintegrator
+    = (struct nsintegrator_type *)GetElement("/neurospaces_integrator");
+
+  struct neurospaces_integrator *pnsintegrator
+    = pelnsintegrator->pnsintegrator;
+
+  struct neurospaces_type *pelNeurospaces = pnsintegrator->pelNeurospaces;
+
+  psegment = SegmentCalloc();
    
 
    if( !psegment ){

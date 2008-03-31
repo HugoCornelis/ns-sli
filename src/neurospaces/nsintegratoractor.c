@@ -1,14 +1,4 @@
 
-#include "neurospaces_defs.h"
-#include "neurospaces_ext.h"
-#include "neurospaces_struct.h"
-
-#include "neurospacesquery.h"
-#include "neurospacessetup.h"
-
-#include "neurospaces/neurospaces.h"
-#include "neurospaces/solvermapper.h"
-
 #include "nsintegrator.h"
 
 

@@ -9,8 +9,11 @@
  */
 //---------------------------------------------------------------
 
+
+
 #ifndef NSINTEGRATOR_STRUCT_H
 #define NSINTEGRATOR_STRUCT_H
+
 
 
 #include "struct_defs.h"
@@ -25,6 +28,7 @@
 //----------------------------------------------------------------
 struct nsintegrator_type {
 
+ 
   ELEMENT_TYPE
 
   struct neurospaces_integrator *pnsintegrator;

@@ -17,10 +17,6 @@
 #include "nsintegrator.h"
 
 
-//i
-//i enternal declared in nsintegrator.c
-//i
-extern struct neurospaces_integrator *pNeurospacesIntegrator;
 
 
 
@@ -32,7 +28,7 @@ extern struct neurospaces_integrator *pNeurospacesIntegrator;
  *  \return -1 on error, 1 on success
  *  \param pcname A char array with the name to look up for mapping.
  *  \param type The type for the Neurospaces symbol.
- *  \sa neurospaces_symbol, pNeurospacesIntegrator 
+ *  \sa neurospaces_symbol, pelnsintegrator.
  *
  *  Function maps a neurospaces_smybol in the global integrator
  *  to a like-named entry in the GENESIS symbol table.This allows 
@@ -44,7 +40,13 @@ int NeurospacesAddSymbol(char *pcname, int type){
 
   struct neurospaces_symbol *pSymbol;
 
-  if( pNeurospacesIntegrator->iNumSyms > MAX_NSSYMBOLS ){
+  struct nsintegrator_type *pelnsintegrator
+    = (struct nsintegrator_type *)GetElement("/neurospaces_integrator");
+
+  struct neurospaces_integrator *pnsintegrator
+    = pelnsintegrator->pnsintegrator;
+
+  if( pnsintegrator->iNumSyms > MAX_NSSYMBOLS ){
     
     //todo
     //todo make this realloc when the symtab gets full
@@ -70,7 +72,7 @@ int NeurospacesAddSymbol(char *pcname, int type){
   //t place the allocated symbol with pointer to the neurospaces members
   //t into the global symbol table and increment the number of symbols.
   //t
-  pNeurospacesIntegrator->ppSymbols[pNeurospacesIntegrator->iNumSyms++] = 
+  pnsintegrator->ppSymbols[pnsintegrator->iNumSyms++] = 
     pSymbol;
 
 
@@ -97,13 +99,19 @@ struct neurospaces_symbol * NeurospacesGetSymbol(char *pcname){
 
   int i;
 
-  if(!pNeurospacesIntegrator)
+  struct nsintegrator_type *pelnsintegrator
+    = (struct nsintegrator_type *)GetElement("/neurospaces_integrator");
+
+  struct neurospaces_integrator *pnsintegrator
+    = pelnsintegrator->pnsintegrator;
+
+  if(!pnsintegrator)
     return NULL;
 
-  if( !pNeurospacesIntegrator->ppSymbols)
+  if( !pnsintegrator->ppSymbols)
     return NULL;
 
-  struct neurospaces_symbol **symbols = pNeurospacesIntegrator->ppSymbols;
+  struct neurospaces_symbol **symbols = pnsintegrator->ppSymbols;
 
 
   for(i=0;i<MAX_NSSYMBOLS;i++){
@@ -127,7 +135,7 @@ struct neurospaces_symbol * NeurospacesGetSymbol(char *pcname){
 //----------------------------------------------------------------------------
 /*!
  * \fn void NeurospacesPrintSymbols()
- * \sa ppSymbols, pNeurospacesIntegrator
+ * \sa ppSymbols, pelnsintegrator
  * 
  *  Prints out all symbols names in the symbol table in the Neurospaces 
  *  Integrator.
@@ -137,12 +145,18 @@ void NeurospacesPrintSymbols(){
 
   int i;
 
-  if(!pNeurospacesIntegrator)
+  struct nsintegrator_type *pelnsintegrator
+    = (struct nsintegrator_type *)GetElement("/neurospaces_integrator");
+
+  struct neurospaces_integrator *pnsintegrator
+    = pelnsintegrator->pnsintegrator;
+
+  if(!pnsintegrator)
     return;
 
-  struct neurospaces_symbol **symbols = pNeurospacesIntegrator->ppSymbols;
+  struct neurospaces_symbol **symbols = pnsintegrator->ppSymbols;
   
-  for(i=0;i<pNeurospacesIntegrator->iNumSyms;i++){
+  for(i=0;i<pnsintegrator->iNumSyms;i++){
 
     fprintf(stdout,"Symbolname:%s at index [%i]\n",symbols[i]->pcPathname,i);
 

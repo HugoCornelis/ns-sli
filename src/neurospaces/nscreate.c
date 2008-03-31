@@ -24,10 +24,6 @@
 
 
 
-//t external declaration of the global integrator
-extern struct neurospaces_integrator *pNeurospacesIntegrator;
-
-
 
 /**************************************************************************
  *

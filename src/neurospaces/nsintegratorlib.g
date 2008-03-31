@@ -2,7 +2,7 @@
 
 
 
-object	 neurospaces_integrator  neurospaces_integrator  NeurospacesIntegratorActor	device	\
+object	 neurospaces_integrator  nsintegrator_type  NeurospacesIntegratorActor	device	\
 	-author 	"Captain Falcon" 				\
 	-actions	CREATE RESET PROCESS 	\
 	-description	"Neurospaces interface"

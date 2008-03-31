@@ -15,7 +15,6 @@
 
 #include <stdio.h>
 
-extern struct neurospaces_integrator *pNeurospacesIntegrator;
 
 
 
@@ -28,7 +27,7 @@ extern struct neurospaces_integrator *pNeurospacesIntegrator;
  *  \sa neurospaces_integrator
  *
  *  Creates a Heccer instace and stores is in the global Heccer
- *  array in pNeurospacesIntegrator.
+ *  array in pelnsintegrator.
  *
  */
 //------------------------------------------------------------------
@@ -49,9 +48,15 @@ int HeccerCreate(char* pcContext){
   }
 
  
+  struct nsintegrator_type *pelnsintegrator
+    = (struct nsintegrator_type *)GetElement("/neurospaces_integrator");
+
+  struct neurospaces_integrator *pnsintegrator
+    = pelnsintegrator->pnsintegrator;
+
 
   struct Neurospaces *pneuro = 
-     pNeurospacesIntegrator->pelNeurospaces->pneuro;
+     pnsintegrator->pelNeurospaces->pneuro;
 
   HeccerConstruct(pheccer,(void *)pneuro,pcContext);
 
@@ -65,7 +70,7 @@ int HeccerCreate(char* pcContext){
   //t add this heccer to the global list
   //t come up with a function for adding later
   //t 
-  pNeurospacesIntegrator->ppHeccer[pNeurospacesIntegrator->iHeccers++] = 
+  pnsintegrator->ppheccer[pnsintegrator->iHeccers++] = 
     pheccer;
   
   return 1;

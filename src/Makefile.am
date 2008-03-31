@@ -10,11 +10,21 @@ nsdir = $(top_srcdir)/src/neurospaces
 
 AM_CLAGS=-DPLAINTERM
 
+BUILT_SOURCES = \
+	loadlib.c \
+	liblist
+
+CLEANFILES = \
+	loadlib.c \
+	liblist
+
 bin_PROGRAMS = nsgenesis
 
 
 nsgenesis_SOURCES = \
 	loadlib.c 
+
+
 
 nsgenesis_LDADD = \
 	$(shelldir)/shell_lib.o \

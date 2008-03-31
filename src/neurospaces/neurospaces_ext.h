@@ -2,6 +2,8 @@
 
 /* included here to resolve GenesisObject symbols */
 
+extern char *CopyString();
+
 #include "sim_ext.h"
 
 #include "neurospaces/neurospaces.h"

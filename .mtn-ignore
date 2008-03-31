@@ -16,3 +16,4 @@ src/c2genesis/c2genesis$
 src/c2genesis/makefunc$
 src/c2genesis/makelib$
 src/c2genesis/makestructs$
+^docs/html

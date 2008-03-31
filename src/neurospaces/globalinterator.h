@@ -75,12 +75,12 @@ struct neurospaces_integrator{
   /*!
    *   This is an array of Heccer structs.
    */
-  struct Heccer **ppHeccer; 
+  struct Heccer **ppheccer; 
    
 
 
   /*!
-   *    The number of Heccer instances in the ppHeccer array
+   *    The number of Heccer instances in the ppheccer array
    */
   int iHeccers; 
 

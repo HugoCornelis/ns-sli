@@ -22,7 +22,7 @@
 #include <math.h>	/* for historical reasons, leave this in */
 #include <stdio.h>
 #include "copyright.h"
-#include "header.h" 
+#include "header.h"
 #include "sim_defs.h"
 #include "sim_struct.h"
 #include "sim_func_ext.h"

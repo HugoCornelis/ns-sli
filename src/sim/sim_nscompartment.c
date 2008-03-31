@@ -12,8 +12,6 @@
 #include "neurospaces/neurospaces_ext.h"
 #include "neurospaces/nsintegrator.h"
 
-extern struct neurospaces_integrator *pNeurospacesIntegrator;
-
 
 /************************************************
  *
@@ -29,7 +27,14 @@ int CreateNeurospacesElement(char* name, Element* pelParent, Action* action,int 
    struct PidinStack* ppist = NULL;
    struct symtab_HSolveListElement* phsle = NULL;
    struct symtab_IdentifierIndex* pidin;
-   struct neurospaces_type *pelNeurospaces = pNeurospacesIntegrator->pelNeurospaces;
+
+  struct nsintegrator_type *pelnsintegrator
+    = (struct nsintegrator_type *)GetElement("/neurospaces_integrator");
+
+  struct neurospaces_integrator *pnsintegrator
+    = pelnsintegrator->pnsintegrator;
+
+   struct neurospaces_type *pelNeurospaces = pnsintegrator->pelNeurospaces;
 
    psegment = SegmentCalloc();
    
