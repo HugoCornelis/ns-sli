@@ -102,7 +102,7 @@ int NeurospacesCreate( char* name,  Element* pelParent, int iChild){
    
 
 
-   NeurospacesAddSymbol(pcChild, iChild);
+   //   NeurospacesAddSymbol(pcChild, iChild);
    //NeurospacesPrintSymbols();
 
    SymbolRecalcAllSerials(phsleParent, ppistParent);    

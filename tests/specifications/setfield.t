@@ -4,29 +4,56 @@
 use strict;
 
 
+my $previous_library;
+
+
 my $test
     = {
        command_definitions => [
 			       {
 				arguments => [
-					      "$::config->{core_directory}/tests/scripts/basic-g/setfield.g",
-					     ],
+				 "$::config->{core_directory}/tests/scripts/basic-g/setfield.g",
+					],
 				command => 'src/nsgenesis',
-				command_tests => [
-						  {
-						   description => "Sets fields to an object in genesis.",
-						   read => '[ /n ]
+                                command_tests => [
+                                                  {
+                                                   description => "Sets fields to an object in genesis.",
+                                                   read => '[ /n ]
 x                    = 444
 y                    = 0
 z                    = 0
 ',
-						   write => undef,
-						  },
+                                                   write => undef,
+                                                  },
+
+						
+
 						 ],
-				description => "Tests genesis control structures",
+				description => "Tests Genesis control Structures.",
+				preparation => {
+						description => "Setting the environment entry to point to a model library",
+						preparer =>
+						sub
+						{
+						  $previous_library = $ENV{NEUROSPACES_MODELS};
+
+						  $ENV{NEUROSPACES_MODELS} = $::config->{core_directory} . '/src';
+						},
+					       },
+				reparation => {
+					       description => "Removing the environment entry to point to a model library",
+					       reparer =>
+					       sub
+					       {
+						 $ENV{NEUROSPACES_MODELS} = $previous_library;
+
+						 '';
+					       },
+					      },
 			       },
 			      ],
-       name => 'setfield.t',
+       description => "",
+       name => 'setfield.t'
       };
 
 

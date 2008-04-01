@@ -1,3 +1,4 @@
+
 SUBDIRS = util script c2genesis shell neurospaces par sim
 
 utildir = $(top_srcdir)/src/util
@@ -20,11 +21,8 @@ CLEANFILES = \
 
 bin_PROGRAMS = nsgenesis
 
-
 nsgenesis_SOURCES = \
 	loadlib.c 
-
-
 
 nsgenesis_LDADD = \
 	$(shelldir)/shell_lib.o \

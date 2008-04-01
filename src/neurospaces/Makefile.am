@@ -54,21 +54,18 @@ nsintegrator_d@.c:
 	cpp -P nsintegrator_struct.h tmp_nsintegrator_struct.h -I../script -I../util -I../sim -I../shell -I/usr/local/neurospaces/instrumentor -DPRE_PROTO_TRAVERSAL
 	$(makestructs) tmp_nsintegrator_struct.h nsintegrator -I nsintegrator.h -NI -o nsintegrator_d@.c
 
+
 nsintegrator_g@.c:
-	$(c2genesis) nsintegratorlib.g nsintegrator_ext.h nsintegrator
+	$(c2genesis) nsintegratorlib.g nsintegrator.h nsintegrator
 
 nsintegrator_l@.c:
 	$(makelib) nsintegrator -o nsintegrator_l@.c
-
-
-
 
 libneurospaces_a_SOURCES = \
 	neurospacesmodel.c \
 	neurospacesquery.c \
 	neurospacesfield.c \
 	nsintegrator.c \
-	nscompartment.c \
 	nssetelement.c \
 	nssetfield.c \
 	nscreate.c \

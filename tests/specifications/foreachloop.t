@@ -4,32 +4,54 @@
 use strict;
 
 
+my $previous_library;
+
+
 my $test
     = {
        command_definitions => [
 			       {
 				arguments => [
-					      "$::config->{core_directory}/tests/scripts/basic-g/foreachloop.g",
-					     ],
+				  "$::config->{core_directory}/tests/scripts/basic-g/foreachloop.g",
+					],
 				command => 'src/nsgenesis',
 				command_tests => [
 						  {
-						   description => "Perform a simple genesis foreach loop with three elements.",
+						   description =>  "Does the foreach loop work?",
 						   read => 'one
 two
-three
-',
+three',
 						   write => undef,
 						  },
+						
+
 						 ],
-				description => "simple script",
+				description => "Does a simple foreach loop work?",
+				preparation => {
+						description => "Setting the environment entry to point to a model library",
+						preparer =>
+						sub
+						{
+						  $previous_library = $ENV{NEUROSPACES_MODELS};
+
+						  $ENV{NEUROSPACES_MODELS} = $::config->{core_directory} . '/src';
+						},
+					       },
+				reparation => {
+					       description => "Removing the environment entry to point to a model library",
+					       reparer =>
+					       sub
+					       {
+						 $ENV{NEUROSPACES_MODELS} = $previous_library;
+
+						 '';
+					       },
+					      },
 			       },
 			      ],
-       description => "for each loop, three elements",
-       name => 'foreachloop.t',
+       description => "",
+       name => 'foreachloop.t'
       };
 
 
 return $test;
-
-

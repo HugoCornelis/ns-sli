@@ -112,17 +112,25 @@ int NSGenesisInitialize(){
    }
     
    
-/*    char	*argvar2[5]; */
-/*    argvar2[0] = "c_do_create"; */
-/*    argvar2[1] = "nsintegrator"; */
-/*    argvar2[2] = "/neurospaces_integrator"; */
-/*    do_create(3,argvar2); */
+     char	*argvar2[5];  
+     argvar2[0] = "c_do_create";  
+     argvar2[1] = "nsintegrator";  
+     argvar2[2] = "/neurospaces_integrator";  
+     do_create(3,argvar2);  
 
-/*    struct nsintegrator_type *pelnsintegrator =  */
-/*       (struct Element*)GetElement("/neurospaces_integrator"); */
+     struct nsintegrator_type *pelnsintegrator =   
+        (struct nsintegrator_type*)GetElement("/neurospaces_integrator");  
+
+     if(!pelnsintegrator){ 
+      
+       fprintf(stderr, 
+ 	      "Unable to create Neurospaces Integrator Object\n"); 
+      
+       exit(1); 
+     } 
 
 
-/*    pelnsintegrator->pnsintegrator = pnsintegrators; */
+   pelnsintegrator->pnsintegrator = pnsintegrator; 
 
    return 1;
 

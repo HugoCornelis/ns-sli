@@ -78,7 +78,14 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle, char *field, cha
 
   struct symtab_Parameters *pparTop = ParameterCalloc();
   
-  char *pcParameter = mapParameter(field);
+
+  char *pcParameter = NULL;
+  if(instanceof_segment(phsle))
+    pcParameter = mapParameter(field);
+  else
+    pcParameter = strdup(field);
+
+
   ParameterSetName(pparTop,pcParameter);
   ParameterSetType(pparTop,TYPE_PARA_FUNCTION);
 		  
@@ -144,7 +151,7 @@ static char * mapParameter(const char *pcfield){
 
   } else{
 
-    fprintf(stdout,"Unrecognized Compartment field: %s\n",pcresult);
+    //fprintf(stdout,"Unrecognized Compartment field: %s\n",pcresult);
     pcresult = strdup(pcfield);
 
   }

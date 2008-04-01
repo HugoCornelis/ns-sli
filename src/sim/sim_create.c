@@ -166,7 +166,7 @@ Action*		action;
 /****************************************************************
  *
  * creates a genesis object and adds it to the global symbol table
- * in genesis. Thisis the function which must sync with neurospaces
+ * in genesis. This is the function which must sync with neurospaces
  * and heccer when parsing genesis scripts. 
  *
  *
@@ -188,11 +188,9 @@ int	index;
      */
      if(strcmp(object_name, "compartment") == 0){ 
        
-       //if( CreateNeurospacesCompartment(name,parent,action,index) == 1 ){
        if( NeurospacesCreate(name,parent,NSINTEGRATOR_COMPARTMENT) == 1 ){
 	 return (Element*)-1;
        }
-
 
      }
      else if(strcmp(object_name, "neutral") == 0){ 
@@ -274,7 +272,7 @@ int	index;
 	return(NULL);
       }
 
-    NeurospacesMapGenel(element);
+    //NeurospacesMapGenel(element);
     return(element);
 }
 

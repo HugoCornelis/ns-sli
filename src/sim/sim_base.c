@@ -277,15 +277,17 @@ extern void AddCommandCallback();
        * for use with GENESIS.
        ********************************************************************/
 
-      LIBRARY_neurospaces();
+       LIBRARY_neurospaces(); 
 
-      if( NSGenesisInitialize() < 0 ){
+       LIBRARY_nsintegrator(); 
 
-	fprintf(stderr,"Error Initializing Neurospaces model container!\n");
-	return;
-      }
-      else
-	fprintf(stdout,"Neurospaces model container loaded!\n\n");
+       if( NSGenesisInitialize() < 0 ){ 
+
+ 	fprintf(stderr,"Error Initializing Neurospaces model container!\n"); 
+ 	return; 
+       } 
+       else 
+ 	fprintf(stdout,"Neurospaces model container loaded!\n\n");
       /**********************************************************************/
 
 

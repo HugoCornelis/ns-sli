@@ -299,7 +299,7 @@ int		empty_ok = 0;
 	*/
 	for(i=0;i<list->nelements;i++){
 
-	  //hack --- insert neurospaces support ----------------------------------
+	  //hack --- insert neurospaces support -------------------------
 
 	  if (list->flags[i] == ELIST_FLAG_NEUROSPACES)
 	    {
