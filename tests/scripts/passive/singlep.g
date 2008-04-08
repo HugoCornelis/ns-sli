@@ -7,12 +7,12 @@ create compartment c
 le -t
 
 setfield c \ 
-   CM 1 \ 
-   RM 2.5 \ 
-   RA 1 \ 
+   CM 4.57537e-11 \ 
+   RM 3.58441e+08 \ 
+   RA 360502 \ 
    len 1 \ 
    dia 1 \ 
-   initVm 0 \ 
+   initVm -0.068 \ 
    Eleak -0.80 
 
 

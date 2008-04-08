@@ -28,11 +28,12 @@
 //----------------------------------------------------------------
 struct nsintegrator_type {
 
+
  
   ELEMENT_TYPE
 
-  struct neurospaces_integrator *pnsintegrator;
 
+  struct neurospaces_integrator *pnsintegrator;
 
   
 };

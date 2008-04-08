@@ -24,7 +24,7 @@
  *   by calling the HeccerHecc() function.
  */
 //-------------------------------------------------------------------
-void HeccerStep(int iMode, double dDuration, int iSteps, int iVerbose){
+void HeccerStep(int iMode, double dSimulationTime, int iSteps, int iVerbose){
 
  
   struct nsintegrator_type *pelnsintegrator
@@ -35,7 +35,7 @@ void HeccerStep(int iMode, double dDuration, int iSteps, int iVerbose){
 
   if(!pnsintegrator->ppheccer){
 
-    fprintf(stderr,"ppheccer[] array not allocated, exiting\n");
+    fprintf(stderr,"Heccer table no initialized, exiting\n");
     exit(0);
 
   }
@@ -59,17 +59,12 @@ void HeccerStep(int iMode, double dDuration, int iSteps, int iVerbose){
   int i;
   for(i = 0; i < iHeccers; i++){
 
-
-    //t
-    //t perform a stem via duration
-    //t
-    printf("\n\n-------------------------------------------------------");
-    printf("\tPerforming step with duration %f\n",dDuration);
-    HeccerHeccs(ppheccer[i],dDuration);
-    singleHeccerStatus(ppheccer[i]); //t print the status for now, we'll remove it later.
-
-
-
+    HeccerHeccs(ppheccer[i], 
+	     ppheccer[i]->dTime + ppheccer[i]->dStep);
+    
+    fprintf("Heccer Instance (%s): ",ppheccer[i]->pcName);
+    fprintf(stdout,"time = %f ; step = %d          ",
+	    dSimulationTime,  ppheccer[i]->dTime);
   }
 
   return;

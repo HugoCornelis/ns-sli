@@ -156,6 +156,10 @@ shelldir = $(top_srcdir)/src/shell
 simdir = $(top_srcdir)/src/sim
 pardir = $(top_srcdir)/src/par
 nsdir = $(top_srcdir)/src/neurospaces
+EXTRA_DIST = \
+	libsh \
+	empty_model.ndf
+
 AM_CLAGS = -DPLAINTERM
 BUILT_SOURCES = \
 	loadlib.c \

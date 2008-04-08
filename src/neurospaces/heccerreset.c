@@ -47,8 +47,14 @@ static void singleHeccerReset(struct Heccer *pheccer);
 
 
 
-
-
+//-----------------------------------------------------------------------
+/*!
+ *   \fn void HeccerReset()
+ *   
+ *   Performs a reset on all heccer objects stored in the 
+ *   neurospaces_integrator
+ */
+//-----------------------------------------------------------------------
 void HeccerReset(){
   
   //t
@@ -64,14 +70,15 @@ void HeccerReset(){
   struct neurospaces_integrator *pnsintegrator
     = pelnsintegrator->pnsintegrator;
 
+
+
   //t the first Heccer will be the only one we're concerned with now.  
   struct Heccer * pheccer = pnsintegrator->ppheccer[0];
   
-  singleHeccerStatus(pheccer);
+  singleHeccerReset(pheccer);
 
   
 }
-
 
 
 
@@ -81,14 +88,8 @@ static void singleHeccerReset(struct Heccer *pheccer){
   if(!pheccer)
     return;
   
-  fprintf(stdout,"Heccer Instance (%s):\n",pheccer->pcName);
-  fprintf(stdout,"\tStatus: %d\n",pheccer->iStatus);
-
-  HeccerDumpV(pheccer);
-
-  fprintf(stdout,"(dTime) has been set to 0.0\n");
-  pheccer->dTime = 0.0;
-
+  HeccerHeccs(pheccer, 
+	      pheccer->dTime + pheccer->dStep);
 
 }
 

@@ -61,6 +61,18 @@ nsintegrator_g@.c:
 nsintegrator_l@.c:
 	$(makelib) nsintegrator -o nsintegrator_l@.c
 
+
+noinst_HEADERS = \
+	neurospaces_defs.h \
+	neurospaces_ext.h  \
+	neurospacesquery.h \
+	neurospacessetup.h \
+	neurospaces_struct.h \
+	neurospacessupport.h \
+	nsintegrator.h \
+	nsintegrator_struct.h 
+
+
 libneurospaces_a_SOURCES = \
 	neurospacesmodel.c \
 	neurospacesquery.c \

@@ -6,6 +6,15 @@ INCLUDES = -I$(sysdir) -I$(scriptdir) -I$(shelldir)
 
 noinst_LIBRARIES = libutil.a
 
+
+noinst_HEADERS = \
+	copyright.h \
+	hash.h \
+	header.h \
+	printoptusage.h \
+	profile.h \
+	system_deps.h
+
 libutil_a_SOURCES = \
 	getopt.c \
 	hash.c \

@@ -1,5 +1,9 @@
 //genesis
 
+
+newclass genesis3
+
+
 /*********************************************************************
 
 ** neurospaces related functionality
@@ -26,8 +30,10 @@ addaction	NEUROSPACES_SETUP	20003
 //==========================================================================
 
 
-object	neurospaces	neurospaces_type  NeuroSpacesActor	device	\
+object	neurospaces	neurospaces_type  NeuroSpacesActor	genesis3	\
 	-author 	"Hugo Cornelis" 				\
 	-actions	CREATE RESET NEUROSPACES_READ NEUROSPACES_QUERY	\
 		NEUROSPACES_SETUP					\
 	-description	"Neurospaces interface"
+
+

@@ -11,6 +11,7 @@ noinst_PROGRAMS = c2genesis makestructs makelib makefunc
 
 AM_CFLAGS = -DBSD -DLinux -DNEW -DNLIST_BUG -DTERMIO -DDONT_USE_SIGIO
 
+
 libshellc2genesis_a_SOURCES = \
 	$(shelldir)/shell_argv.c \
 	$(shelldir)/shell_batch.c \

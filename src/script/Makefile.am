@@ -19,6 +19,15 @@ CLEANFILES = \
 AM_LFLAGS = -l
 AM_YFLAGS = -dv
 
+
+noinst_HEADERS = \
+	parse.h \
+	printoptusage.h \
+	result.h \
+	ss_func_ext.h \
+	symtab.h \
+	syntax.h
+
 libscript_a_SOURCES = \
 	eval.c \
 	parse.c \
@@ -26,4 +35,7 @@ libscript_a_SOURCES = \
 	symtab.c \
 	yyless.c \
 	syntax.y 
+
+
+
 

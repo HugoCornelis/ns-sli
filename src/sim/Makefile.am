@@ -116,7 +116,15 @@ libsim_a_SOURCES= \
 		nsim_wildcard.c \
 	basic_d@.c \
 	basic_f@.c \
-	basic_g@.c
+	basic_g@.c \
+	basic_g@.h \
+ 	sim_defs.h \
+	sim_ext.h  \
+	sim_func_ext.h \
+	sim.h \
+	sim_struct.h \
+	sim_version.h \
+	struct_defs.h
 
 
 

@@ -248,23 +248,16 @@ int		status;
       }
 
 
-    //hack --------------------------------------------------------------
+   
 
- 
-    HeccerStep(mode,simulation_time,duration,nsteps,verbose);
-
-
-    //hack --------------------------------------------------------------
-
-
-/*     ActivateStep(mode,simulation_time,duration,nsteps,verbose); */
-/*     if(!bg){ */
-/* 	/\* */
-/* 	** do the simulation on the spot */
-/* 	*\/ */
-/* 	while(job != -1){ */
-/* 	    ExecuteJobs(); */
-/* 	} */
-/*     } */
+     ActivateStep(mode,simulation_time,duration,nsteps,verbose); 
+     if(!bg){ 
+ 	
+ 	/** do the simulation on the spot */
+       
+ 	while(job != -1){ 
+ 	    ExecuteJobs(); 
+ 	} 
+     } 
     return(1);
 }

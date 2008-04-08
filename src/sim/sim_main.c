@@ -228,7 +228,7 @@ char simrc_name[256];
     InitPar(&argc, &argv, &envp);
 
     nxtarg = 0;
-    use_simrc = 0;
+    use_simrc = 1;
 	strcpy(simrc_name,".simrc");
     global_envp = envp;
     pname = NULL;
@@ -318,7 +318,7 @@ char simrc_name[256];
     ** It'll be read below after initialization.
     */
     
-    use_simrc = 0;
+   
     pfile = NULL;
     if(use_simrc){
 	/*

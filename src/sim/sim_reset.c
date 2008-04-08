@@ -153,25 +153,9 @@ int			i;
 
 
 void do_reset()
-{
-     
-  //i
-  //i Recalc all the serials before performing a reset.
-  //i
+{     
 
-  struct nsintegrator_type *pelnsintegrator
-    = (struct nsintegrator_type *)GetElement("/neurospaces_integrator");
-
-  struct neurospaces_integrator *pnsintegrator
-    = pelnsintegrator->pnsintegrator;
-
-  SymbolRecalcAllSerials(pnsintegrator->phsleCachedRoot, 
-                         pnsintegrator->ppistCachedRoot);
-
-
-  //t here we perform our heccer reset
-  HeccerReset();
-    //SimReset(); 
+  SimReset(); 
 }
 
 
