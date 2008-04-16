@@ -11,6 +11,20 @@
 #include "nsintegrator_g@.h"
 
 
+extern int iNSIntegratorVerbose;
+
+
+//------------------------------------------------------------------
+/*
+ *  
+ */
+extern short			nactive_clocks;
+extern short			clock_set[NCLOCKS];
+extern short			clock_active[NCLOCKS];
+extern double			clock_value[NCLOCKS];
+//------------------------------------------------------------------
+
+
 
 
 
@@ -53,10 +67,17 @@ int NeurospacesIntegratorActor(struct nsintegrator_type *pnsintegrator_type,
 
     case CREATE:
       {
-	printf("LOL WUT\n");
+   
 	break;
       }
 
+
+
+    case CHECK:
+      {
+	//t check all heccer clocks: within limits ?
+	break;
+      }
 
 
 
@@ -68,12 +89,10 @@ int NeurospacesIntegratorActor(struct nsintegrator_type *pnsintegrator_type,
        ************************************/
     case NSINTEGRATOR_DUMP:
       {
+	int iSelection = 1;
 
-	struct Heccer **ppheccer = pnsintegrator->ppheccer;
-	printf("Dumping Heccer status:\n");
-	for(i=0;i<pnsintegrator->iHeccers;i++)
-	  HeccerDumpV(ppheccer[i]);
-	
+	nsintegrator_dump(pnsintegrator_type, iSelection);
+
 	break;
       }
 
@@ -89,10 +108,26 @@ int NeurospacesIntegratorActor(struct nsintegrator_type *pnsintegrator_type,
       {
 
 	struct Heccer **ppheccer = pnsintegrator->ppheccer;
-	printf("BLARG\n");
-	for(i=0;i<pnsintegrator->iHeccers;i++)
+
+	for(i=0;i<pnsintegrator->iHeccers;i++){
+
+
 	  HeccerHeccs(ppheccer[i], 
 		      ppheccer[i]->dTime + ppheccer[i]->dStep);
+
+	  if (iNSIntegratorVerbose == 1)
+	    {
+	      fprintf(stdout,"%s: time = %f ; step = %d          \n",
+		      ppheccer[i]->pcName,
+		      ppheccer[i]->dTime,
+		      ppheccer[i]->dStep);
+	    }
+
+	  if (iNSIntegratorVerbose == 2)
+	    {
+	      nsintegrator_dump(pnsintegrator_type, 1);
+	    }
+	}
 	
 	break;
       }
@@ -108,14 +143,13 @@ int NeurospacesIntegratorActor(struct nsintegrator_type *pnsintegrator_type,
     case RESET:
       {
 
-	printf("Performing a reset on all Heccers\n");
-	  SymbolRecalcAllSerials(pnsintegrator->phsleCachedRoot, 
+	SymbolRecalcAllSerials(pnsintegrator->phsleCachedRoot, 
                          pnsintegrator->ppistCachedRoot);
 
 	  
-	  HeccerReset();
+        HeccerReset();
 
-	  break;
+	break;
       }
 
 

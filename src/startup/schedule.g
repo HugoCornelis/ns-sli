@@ -15,6 +15,7 @@ addtask	Simulate /##[CLASS=buffer]	-action INIT
 addtask	Simulate /##[CLASS=segment]	-action INIT
 addtask	Simulate /##[CLASS=device]	-action INIT
 
+addtask Simulate /##[CLASS=genesis3]    -action PROCESS
 addtask	Simulate /##[CLASS=buffer]	-action PROCESS
 addtask	Simulate /##[CLASS=projection]	-action PROCESS
 addtask	Simulate /##[CLASS=spiking]	-action PROCESS
@@ -30,3 +31,6 @@ addtask	Simulate /##[CLASS=device]	-action PROCESS
 addtask	Simulate /##[CLASS=output]	-action PROCESS
 
 resched
+
+echo "rescheduling done"
+

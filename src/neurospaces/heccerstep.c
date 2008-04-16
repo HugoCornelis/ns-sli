@@ -17,11 +17,7 @@
 
 //-------------------------------------------------------------------
 /*!
- *   \fn void HeccerReset()
- *   
- *   Performs a reset on all instances of Heccer in the global
- *   array ppheccer located in pelnsintegrator. This is done
- *   by calling the HeccerHecc() function.
+
  */
 //-------------------------------------------------------------------
 void HeccerStep(int iMode, double dSimulationTime, int iSteps, int iVerbose){

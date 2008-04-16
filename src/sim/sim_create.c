@@ -182,7 +182,7 @@ int	index;
     GenesisObject 	*object;
     int		size;
 
-
+    //hack------------------------------------------------------------------------
     /*
      *
      */
@@ -202,6 +202,9 @@ int	index;
 
 	
       } 
+
+     //hack------------------------------------------------------------------
+
 
     /*
     ** find the object type in the object table
@@ -479,9 +482,13 @@ int                   i,j = 0;
     action.argc = argc - 1;
     action.type = CREATE;
     action.name = "CREATE";
-	action.data = (char *)parent_element;
+    action.data = (char *)parent_element;
+
+
     if ((new_element = Create(type,name,parent_element,&action,index))) {
       
+
+      //hack----------------------------------------------------------
       /*
        * here check if create created a nscompartment
        * return if it did.
@@ -489,6 +496,8 @@ int                   i,j = 0;
       if( (int)new_element == -1){
 	return;
       }
+      //hack----------------------------------------------------------
+
 
 	/* add the new element to the element hash table */
 	ElementHashPutTree(new_element);

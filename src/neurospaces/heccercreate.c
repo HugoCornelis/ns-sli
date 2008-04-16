@@ -17,6 +17,18 @@
 
 
 
+//------------------------------------------------------------------
+/*
+ *  Externals in sim_clock.c
+ */
+extern short			nactive_clocks;
+extern short			clock_set[NCLOCKS];
+extern short			clock_active[NCLOCKS];
+extern double			clock_value[NCLOCKS];
+//------------------------------------------------------------------
+
+
+
 
 
 //------------------------------------------------------------------
@@ -47,6 +59,9 @@ int HeccerCreate(char* pcContext){
     return -1;
   }
 
+
+  pheccer->dStep = clock_value[0];
+  
  
   struct nsintegrator_type *pelnsintegrator
     = (struct nsintegrator_type *)GetElement("/neurospaces_integrator");
@@ -57,6 +72,9 @@ int HeccerCreate(char* pcContext){
 
   struct Neurospaces *pneuro = 
      pnsintegrator->pelNeurospaces->pneuro;
+
+  
+
 
   HeccerConstruct(pheccer,(void *)pneuro,pcContext);
 

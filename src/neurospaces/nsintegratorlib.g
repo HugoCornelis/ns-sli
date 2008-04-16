@@ -20,8 +20,11 @@ addaction	 NSINTEGRATOR_DUMP	20101
 
 
 object	 nsintegrator  nsintegrator_type  NeurospacesIntegratorActor	genesis3 \
-	-author 	"Captain Falcon" 	\
-	-actions	PROCESS RESET CREATE NSINTEGRATOR_DUMP 	\
+	-author 	"Mando Rodriguez" 	\
+	-actions	PROCESS RESET CHECK CREATE NSINTEGRATOR_DUMP 	\
 	-description	"Neurospaces Integration"
 					
+
+addfunc		set_nsintegrator_verbose_level			do_set_nsintegrator_verbose_level		int
+
 

@@ -12,7 +12,15 @@
 #include "heccer/heccer.h"
 
 
-
+//------------------------------------------------------------------
+/*
+ *  
+ */
+extern short			nactive_clocks;
+extern short			clock_set[NCLOCKS];
+extern short			clock_active[NCLOCKS];
+extern double			clock_value[NCLOCKS];
+//------------------------------------------------------------------
 
 
 
@@ -71,8 +79,7 @@ void HeccerReset(){
     = pelnsintegrator->pnsintegrator;
 
 
-
-  //t the first Heccer will be the only one we're concerned with now.  
+  //t The first Heccer will be the only one we're concerned with now.  
   struct Heccer * pheccer = pnsintegrator->ppheccer[0];
   
   singleHeccerReset(pheccer);
@@ -87,10 +94,10 @@ static void singleHeccerReset(struct Heccer *pheccer){
 
   if(!pheccer)
     return;
-  
-  HeccerHeccs(pheccer, 
-	      pheccer->dTime + pheccer->dStep);
+ 
 
+  pheccer->dTime = 0.0;
+  pheccer->dStep = clock_value[0]; //when reset this is set to clock zero.
 }
 
 

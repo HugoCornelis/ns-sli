@@ -12,7 +12,7 @@ my $test
        command_definitions => [
 			       {
 				arguments => [
-					      "$::config->{core_directory}/tests/scripts/passive/singlep.g",
+					      "$::config->{core_directory}/tests/scripts/parameters.g",
 					     ],
 				command => 'src/nsgenesis',
 				command_tests => [

@@ -17,7 +17,7 @@ my $test
 				command => 'src/nsgenesis',
                                 command_tests => [
                                                   {
-                                                   description => "Sets fields to an object in genesis.",
+                                                   description => "Sets fields of an element in genesis.",
                                                    read => '[ /n ]
 x                    = 444
 y                    = 0
@@ -29,7 +29,7 @@ z                    = 0
 						
 
 						 ],
-				description => "Tests Genesis control Structures.",
+				description => "set fields of an element",
 				preparation => {
 						description => "Setting the environment entry to point to a model library",
 						preparer =>
@@ -52,7 +52,7 @@ z                    = 0
 					      },
 			       },
 			      ],
-       description => "",
+       description => "setfield testing",
        name => 'setfield.t'
       };
 

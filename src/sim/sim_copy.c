@@ -269,6 +269,12 @@ Element	*orig_ptr,*copy_ptr;
     return 1;
 }
 
+
+//-------------------------------------------------------------------------------
+/*
+ * Function has been modified to copy neurospaces ojects in the GENESIS SLI.
+ */
+//-------------------------------------------------------------------------------
 void do_copy(argc,argv)
 int		argc;
 char		**argv;
@@ -356,6 +362,8 @@ int		do_autoindex;
     ** copy it
     */
     for(i=0;i<repeat;i++){
+
+      
 	if((new_element = CopyElementTree(src_element)) == NULL){
 	    printf("could not copy %s to %s\n",src,dst);
 	    break;
