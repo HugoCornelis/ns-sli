@@ -120,6 +120,10 @@ static char rcsid[] = "$Id: sim_copy.c,v 1.2 2005/06/27 19:00:58 svitak Exp $";
 #include "sim_ext.h"
 #include "shell_func_ext.h"
 
+//-- added for the neurospaces calls --
+#include "neurospaces/neurospaces_ext.h"
+
+
 /*
 ** routines for copying individual components
 */
@@ -320,6 +324,38 @@ int		do_autoindex;
     dst = optargv[2];
     new_name = NULL;
 
+
+
+    //i
+    //i Here is code to perform a copy on objects in the model 
+    //i in the model container. First a check is done to find 
+    //i a particular objects name in the Pidin stack, if so then 
+    //i then we create the alias and return, otherwise continue with
+    //i the genesis code.
+    //i
+
+    //hack---------------------------------------------------------
+
+    struct PidinStack *ppistSrc = PidinStackParse(src);
+
+
+    if(ppistSrc){
+
+      
+      if( NSCopy(ppistSrc,dst) == 0){
+
+	Error();
+	printf("Can't perform copy on '%s'\n", dst);
+	return;
+      }
+
+      PidinStackFree(ppistSrc);
+
+      return;
+    }
+
+    //hack---------------------------------------------------------
+
     if((src_element = GetElement(src)) == NULL){
 	Error();
 	printf("could not find src element '%s'\n",src);
@@ -363,7 +399,13 @@ int		do_autoindex;
     */
     for(i=0;i<repeat;i++){
 
+      //hack-------------------------------------------------------
       
+
+
+      //hack-------------------------------------------------------
+
+
 	if((new_element = CopyElementTree(src_element)) == NULL){
 	    printf("could not copy %s to %s\n",src,dst);
 	    break;

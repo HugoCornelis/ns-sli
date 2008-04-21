@@ -216,15 +216,17 @@ int		empty_ok = 0;
     //t
     //t -building an element list for NS assuming there are no errors.
     //t -We assume that there are no wildcards in the pathname 
-    //t and that the pathname exists in 
-    //t the model container.
+    //t     and that the pathname exists in the model container.
     //t -We have to figure out from the pathname, if it's 
-    //t referencing the model or other things. 
-    //t (this model in the model container)
+    //t     referencing the model or other things. 
+    //t     (this model in the model container)
     //t
-    
+    //t
     //t to be replaced with wildcard expansion in the model container
-
+    //t
+    //t see also: src/neurospaces/nssetfield.c
+    //t uses the same routing method as setfield (sim_set.c)
+    //t
     //hack ---------------insert neurospaces support ---------------------
     ElementList *elist = CreateElementList(1);
 

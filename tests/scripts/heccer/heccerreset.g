@@ -1,5 +1,6 @@
 //genesis
 
+
 create neutral hardcoded_neutral
 
 create compartment /hardcoded_neutral/c
@@ -18,6 +19,6 @@ setfield /hardcoded_neutral/c \
 
 reset
 
-
+call neurospaces_integrator NSINTEGRATOR_DUMP
 
 
