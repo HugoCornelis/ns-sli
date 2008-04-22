@@ -76,26 +76,7 @@ my $test
 						 ],
 				description => "script performs a reset on a compartment",
 
-				preparation => {
-						description => "Setting the environment entry to point to a model library",
-						preparer =>
-						sub
-						{
-						  $previous_library = $ENV{NEUROSPACES_MODELS};
 
-						  $ENV{NEUROSPACES_MODELS} = $::config->{core_directory} . '/src';
-						},
-					       },
-				reparation => {
-					       description => "Removing the environment entry to point to a model library",
-					       reparer =>
-					       sub
-					       {
-						 $ENV{NEUROSPACES_MODELS} = $previous_library;
-
-						 '';
-					       },
-					      },
 			       },
 			      ],
        description => "create a neutral object with a compartment as a child, check if ",

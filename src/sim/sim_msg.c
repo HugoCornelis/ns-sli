@@ -2236,6 +2236,10 @@ short		slot_type;
 
     slot = 0;
     nxtarg = 3;
+
+
+    
+
     /*
     ** get the message specification information from the argument list
     */

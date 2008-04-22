@@ -494,6 +494,7 @@ int                   i,j = 0;
        * return if it did.
        */
       if( (int)new_element == -1){
+	OK();
 	return;
       }
       //hack----------------------------------------------------------

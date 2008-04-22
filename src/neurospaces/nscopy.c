@@ -39,8 +39,6 @@ int NSCopy(const struct PidinStack *ppistSrc, char *pcDst){
 
 
   struct symtab_HSolveListElement *phsleDst = NULL;
-  struct symtab_IdentifierIndex* pidinDst;
-
 
 
   struct symtab_HSolveListElement * phsleSrc  = 
@@ -51,38 +49,60 @@ int NSCopy(const struct PidinStack *ppistSrc, char *pcDst){
 
     char pc[1000];
 
+    
     PidinStackString(ppistSrc, pc, sizeof(pc));
     fprintf(stderr, "Cannot find %s\n", pc);
     return 0;
+
   }
 
+  //t copy /h/c /h/d
+  //t ce /h ; cp c d
 
-  char *pcDstname = strdup(pcDst);
-  pidinDst = IdinNewFromChars(pcDstname);
+  //t copy /h/c /i/d
 
-  
+
+  struct PidinStack *ppistDst = PidinStackParse(pcDst);
+
+
+  struct symtab_IdentifierIndex *pidinDst = PidinStackPop(ppistDst);
+
   if(!pidinDst){
 
-    fprintf(stderr,"Could not create pidin %s\n",pcDstname);
+    fprintf(stderr,"Could not create pidin %s\n",pcDst);
     return 0;
 
   }
 
+
+  if (PidinStackIsRooted(ppistDst))
+    {
+      //t nothing ?
+    }
+  else
+    {
+      PidinStackPushCompact(ppistDst,pidinDst);
+    }
+  
    
+/*   char *pcDstname = strdup(pcDst); */
+/*   pidinDst = IdinNewFromChars(pcDstname); */
+
+
+
   phsleDst = SymbolCreateAlias(phsleSrc,pidinDst);
  
-  PidinStackPop(ppistSrc);
-
 
   //t
   //t Will only copy to the parent of the Src.
   //t
-  struct symtab_HSolveListElement *phsleSrcParent = 
-    PidinStackLookupTopSymbol(ppistSrc);
+  struct symtab_HSolveListElement *phsleDstParent = 
+    PidinStackLookupTopSymbol(ppistDst);
 
 
-  SymbolAddChild(phsleSrcParent,phsleDst);
+  SymbolAddChild(phsleDstParent,phsleDst);
 
+  PidinStackFree(ppistDst);
 
   return 1;
 }
