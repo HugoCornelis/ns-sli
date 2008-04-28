@@ -2220,6 +2220,19 @@ short		slot_type;
     dst_path = optargv[2];
     typename = optargv[3];
 
+    
+    //hack
+    //hack  Here we route to our model contaner for
+    //hack  doing message passing. 
+    //hack
+    if(NSmsg(src_path,dst_path,typename)==1){
+
+      OK();
+      return 1;
+
+    }
+
+
     src_list = WildcardGetElement(src_path,0);
     if(src_list->nelements == 0){
 	InvalidPath(optargv[0],src_path);
