@@ -86,7 +86,7 @@ int NeurospacesAddSymbol(char *pcname, int type){
 
 //-----------------------------------------------------------------
 /*!
- *  \fn struct neurospaces_symbol * NeurospacesGetSymbol(char *name);
+ *  \fn struct neurospaces_symbol * NSgetsymbol(char *name);
  *  \return A pointer to a neurospaces_symbol data struct,NULL if not found.
  *  \param pcname A char array with the symbol name you want to look up.
  *  \sa neurospaces_symbol
@@ -95,7 +95,7 @@ int NeurospacesAddSymbol(char *pcname, int type){
  *  pcname. 
  */
 //-----------------------------------------------------------------
-struct neurospaces_symbol * NeurospacesGetSymbol(char *pcname){
+struct neurospaces_symbol * NSgetsymbol(char *pcname){
 
   int i;
 
@@ -141,7 +141,7 @@ struct neurospaces_symbol * NeurospacesGetSymbol(char *pcname){
  *  Integrator.
  */
 //-----------------------------------------------------------------------------
-void NeurospacesPrintSymbols(){
+void NSprintsymbols(){
 
   int i;
 

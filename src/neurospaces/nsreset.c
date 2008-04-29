@@ -63,14 +63,8 @@ static void singleHeccerReset(struct Heccer *pheccer);
  *   neurospaces_integrator
  */
 //-----------------------------------------------------------------------
-void HeccerReset(){
-  
-  //t
-  //t Create a heccer instance and tag it with "hardcoded_neutral"
-  //t which is the same id we give the genesis object all of the 
-  //t current objects will be clocked to.
-  //t
-  HeccerCreate("hardcoded_neutral");
+void HeccerReset(){  
+
   
   struct nsintegrator_type *pelnsintegrator
     = (struct nsintegrator_type *)GetElement("/neurospaces_integrator");
@@ -81,9 +75,20 @@ void HeccerReset(){
 
   //t The first Heccer will be the only one we're concerned with now.  
   struct Heccer * pheccer = pnsintegrator->ppheccer[0];
-  
-  singleHeccerReset(pheccer);
 
+
+  if(!pheccer){
+
+  //t
+  //t Create a heccer instance and tag it with "hardcoded_neutral"
+  //t which is the same id we give the genesis object all of the 
+  //t current objects will be clocked to.
+  //t
+    HeccerCreate("hardcoded_neutral");
+
+  }
+  else
+    singleHeccerReset(pheccer);
   
 }
 

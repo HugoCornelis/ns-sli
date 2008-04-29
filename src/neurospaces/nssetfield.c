@@ -121,38 +121,42 @@ static char * mapParameter(const char *pcfield){
   //t
   //t not sure about needing to do a string dup. 
   //t
-  if(!strcmp(pcfield,"CM")){
+  if(!strcmp(pcfield,"Cm")){
 
-    pcresult = strdup("CM");
+    pcresult = "CM";
 
-  } else if(!strcmp(pcfield,"RM")){
+  } else if(!strcmp(pcfield,"Rm")){
 
-    pcresult = strdup("RM");
+    pcresult = "RM";
 
-  } else if(!strcmp(pcfield,"RA")){
+  } else if(!strcmp(pcfield,"Ra")){
 
-    pcresult = strdup("RA");
+    pcresult = "RA";
 
   } else if(!strcmp(pcfield,"initVm")){
 
-    pcresult = strdup("Vm_init");
+    pcresult = "Vm_init";
   
   } else if(!strcmp(pcfield,"Eleak")){
 
-    pcresult = strdup("ELEAK");
+    pcresult = "ELEAK";
 
   } else if(!strcmp(pcfield,"dia")){
 
-    pcresult = strdup("DIA");
+    pcresult = "DIA";
 
   } else if(!strcmp(pcfield,"len")){
 
-    pcresult = strdup("LEN");
+    pcresult = "LEN";
+
+  } else if(!strcmp(pcfield,"inject")){
+
+    pcresult = "INJECT";
 
   } else{
 
     //fprintf(stdout,"Unrecognized Compartment field: %s\n",pcresult);
-    pcresult = strdup(pcfield);
+    pcresult = pcfield;
 
   }
 

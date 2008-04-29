@@ -128,5 +128,7 @@ int NSmsg(const char *pcSrcpath, const char *pcDstpath, const char *pcTypename){
       return 1;
     }
 
+
+
   return 0;
 }

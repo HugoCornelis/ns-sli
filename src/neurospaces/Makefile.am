@@ -86,7 +86,7 @@ libneurospaces_a_SOURCES = \
 	nssymboltable.c \
 	nsintegratorverbose.c \
 	heccercreate.c \
-	heccerreset.c \
+	nsreset.c \
 	heccerstep.c \
 	neurospaces_d@.c \
 	neurospaces_g@.c \
