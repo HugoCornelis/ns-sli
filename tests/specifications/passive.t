@@ -19,9 +19,103 @@ local $/;
 
 my $previous_library;
 
+my $printinfo_output = "    Name, index (hardcoded_neutral,-1)
+    Type (T_sym_cell)
+    cell  Name, index (hardcoded_neutral,-1)
+    cell  {-- begin HIER sections ---
+        Name, index (c1,-1)
+        Type (T_sym_segment)
+        segmenName, index (c1,-1)
+            PARA  Name (RM)
+            PARA  Type (TYPE_PARA_FUNCTION), Value(FIXED)
+                FUNC  Name (FIXED)
+                    PARA  Name (scale)
+                    PARA  Type (TYPE_PARA_NUMBER), Value(1.000000e+00)
+                    PARA  Name (value)
+                    PARA  Type (TYPE_PARA_NUMBER), Value(3.584410e+08)
+            PARA  Name (RA)
+            PARA  Type (TYPE_PARA_FUNCTION), Value(FIXED)
+                FUNC  Name (FIXED)
+                    PARA  Name (scale)
+                    PARA  Type (TYPE_PARA_NUMBER), Value(1.000000e+00)
+                    PARA  Name (value)
+                    PARA  Type (TYPE_PARA_NUMBER), Value(3.605020e+05)
+            PARA  Name (Vm_init)
+            PARA  Type (TYPE_PARA_FUNCTION), Value(FIXED)
+                FUNC  Name (FIXED)
+                    PARA  Name (scale)
+                    PARA  Type (TYPE_PARA_NUMBER), Value(1.000000e+00)
+                    PARA  Name (value)
+                    PARA  Type (TYPE_PARA_NUMBER), Value(-6.800000e-02)
+            PARA  Name (ELEAK)
+            PARA  Type (TYPE_PARA_FUNCTION), Value(FIXED)
+                FUNC  Name (FIXED)
+                    PARA  Name (scale)
+                    PARA  Type (TYPE_PARA_NUMBER), Value(1.000000e+00)
+                    PARA  Name (value)
+                    PARA  Type (TYPE_PARA_NUMBER), Value(-8.000000e-02)
+            PARA  Name (CM)
+            PARA  Type (TYPE_PARA_FUNCTION), Value(FIXED)
+                FUNC  Name (FIXED)
+                    PARA  Name (scale)
+                    PARA  Type (TYPE_PARA_NUMBER), Value(1.000000e+00)
+                    PARA  Name (value)
+                    PARA  Type (TYPE_PARA_NUMBER), Value(4.575370e-11)
+        segmen{-- begin HIER sections ---
+        segmen}--  end  HIER sections ---
+        Name, index (c2,-1)
+        Type (T_sym_segment)
+        segmenName, index (c2,-1)
+            PARA  Name (PARENT)
+            PARA  Type (TYPE_PARA_SYMBOLIC), Value : ../c1
+        segmen{-- begin HIER sections ---
+        segmen}--  end  HIER sections ---
+            segmenName, index (c1,-1)
+                PARA  Name (RM)
+                PARA  Type (TYPE_PARA_FUNCTION), Value(FIXED)
+                    FUNC  Name (FIXED)
+                        PARA  Name (scale)
+                        PARA  Type (TYPE_PARA_NUMBER), Value(1.000000e+00)
+                        PARA  Name (value)
+                        PARA  Type (TYPE_PARA_NUMBER), Value(3.584410e+08)
+                PARA  Name (RA)
+                PARA  Type (TYPE_PARA_FUNCTION), Value(FIXED)
+                    FUNC  Name (FIXED)
+                        PARA  Name (scale)
+                        PARA  Type (TYPE_PARA_NUMBER), Value(1.000000e+00)
+                        PARA  Name (value)
+                        PARA  Type (TYPE_PARA_NUMBER), Value(3.605020e+05)
+                PARA  Name (Vm_init)
+                PARA  Type (TYPE_PARA_FUNCTION), Value(FIXED)
+                    FUNC  Name (FIXED)
+                        PARA  Name (scale)
+                        PARA  Type (TYPE_PARA_NUMBER), Value(1.000000e+00)
+                        PARA  Name (value)
+                        PARA  Type (TYPE_PARA_NUMBER), Value(-6.800000e-02)
+                PARA  Name (ELEAK)
+                PARA  Type (TYPE_PARA_FUNCTION), Value(FIXED)
+                    FUNC  Name (FIXED)
+                        PARA  Name (scale)
+                        PARA  Type (TYPE_PARA_NUMBER), Value(1.000000e+00)
+                        PARA  Name (value)
+                        PARA  Type (TYPE_PARA_NUMBER), Value(-8.000000e-02)
+                PARA  Name (CM)
+                PARA  Type (TYPE_PARA_FUNCTION), Value(FIXED)
+                    FUNC  Name (FIXED)
+                        PARA  Name (scale)
+                        PARA  Type (TYPE_PARA_NUMBER), Value(1.000000e+00)
+                        PARA  Name (value)
+                        PARA  Type (TYPE_PARA_NUMBER), Value(4.575370e-11)
+            segmen{-- begin HIER sections ---
+            segmen}--  end  HIER sections ---
+    cell  }--  end  HIER sections ---
+";
+
 my $test
     = {
        command_definitions => [
+
+
 			       {
 				arguments => [
 					      "$::config->{core_directory}/tests/scripts/passive/singlep.g",
@@ -37,89 +131,137 @@ my $test
 						 ],
 				description => "single passive compartment.",
 			       },
+
+
+
+
+
+
 			       {
 				arguments => [
+					      "$::config->{core_directory}/tests/scripts/passive/double.g",
 					     ],
-				command => 'tests/code/doublep',
+				command => 'src/nsgenesis',
 				command_tests => [
 						  {
 						   description => "Are two passive compartments solved correctly ?",
-						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/doublep.txt`),
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/doublep.txt | perl -pe 's/unnamed test/hardcoded_neutral/g'`),
 						   timeout => 5,
 						   write => undef,
+						  },
+						  {
+						   description => "Are AXIAL and RAXIAL messages between compartments mapped correctly ?",
+						   read => $printinfo_output,
+						   write => 'printinfo /hardcoded_neutral',
 						  },
 						 ],
 				description => "doublet passive compartment.",
-				disabled => 1,
 			       },
+
+
+
+
+
+
+
+
 			       {
 				arguments => [
+					      "$::config->{core_directory}/tests/scripts/heccer/triple.g",
 					     ],
-				command => 'tests/code/triplep',
+				command => 'src/nsgenesis',
 				command_tests => [
 						  {
 						   description => "Are three passive compartments solved correctly ?",
-						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/triplep.txt`),
-						   timeout => 5,
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/triplep.txt | perl -pe 's/unnamed test/hardcoded_neutral/g'`),
+						   timeout => 18,
 						   write => undef,
 						  },
+
 						 ],
 				description => "triplet passive compartment.",
-				disabled => 1,
+				
 			       },
+
+
+
+
+
+
 			       {
 				arguments => [
+					      "$::config->{core_directory}/tests/scripts/heccer/fork3p.g",
 					     ],
-				command => 'tests/code/fork3p',
+				command => 'src/nsgenesis',
 				command_tests => [
 						  {
 						   description => "Is a fork of three passive compartments solved correctly ?",
-						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/fork3p.txt`),
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/fork3p.txt | perl -pe 's/unnamed test/hardcoded_neutral/g'`),
 						   timeout => 5,
 						   write => undef,
 						  },
 						 ],
 				description => "fork of three passive compartments.",
-				disabled => 1,
 			       },
+
+
+
+
+
+
 			       {
 				arguments => [
-					     ],
-				command => 'tests/code/fork4p1',
+					      "$::config->{core_directory}/tests/scripts/heccer/fork4p1.g",
+					      ],
+				command => 'src/nsgenesis',
 				command_tests => [
 						  {
 						   description => "Is a fork of four passive compartments solved correctly, first alternative ?",
-						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/fork4p1.txt`),
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/fork4p1.txt | perl -pe 's/unnamed test/hardcoded_neutral/g'`),
 						   timeout => 8,
 						   write => undef,
 						  },
 						 ],
 				description => "fork of four passive compartments, first alternative.",
-				disabled => 1,
+				
 			       },
+
+
+
+
+
+
+
 			       {
 				arguments => [
+					      "$::config->{core_directory}/tests/scripts/heccer/fork4p2.g",
 					     ],
-				command => 'tests/code/fork4p2',
+				command => 'src/nsgenesis',
 				command_tests => [
 						  {
 						   description => "Is a fork of four passive compartments solved correctly, second alternative ?",
-						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/fork4p2.txt`),
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/fork4p2.txt  | perl -pe 's/unnamed test/hardcoded_neutral/g'`),
 						   timeout => 8,
 						   write => undef,
 						  },
 						 ],
 				description => "fork of four passive compartments, second alternative.",
-				disabled => 1,
+			     
 			       },
+
+
+
+
+
 			       {
 				arguments => [
+					      "$::config->{core_directory}/tests/scripts/heccer/fork4p3.g",
 					     ],
-				command => 'tests/code/fork4p3',
+				command => 'src/nsgenesis',
 				command_tests => [
 						  {
 						   description => "Is a fork of four passive compartments solved correctly, third alternative ?",
-						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/fork4p3.txt`),
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/fork4p3.txt`),
 						   timeout => 8,
 						   write => undef,
 						  },
@@ -127,6 +269,13 @@ my $test
 				description => "fork of four passive compartments, third alternative.",
 				disabled => 1,
 			       },
+
+
+
+
+
+
+
 			       {
 				arguments => [
 					     ],
@@ -134,7 +283,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Are two passive compartments with injected current solved correctly ?",
-						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/c1c2p1.txt`),
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/c1c2p1.txt`),
 						   timeout => 5,
 						   write => undef,
 						  },
@@ -149,7 +298,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Are two passive compartments with asymetric properties and injected current solved correctly ?",
-						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/c1c2p2.txt`),
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/c1c2p2.txt`),
 						   timeout => 5,
 						   write => undef,
 						  },
@@ -159,12 +308,14 @@ my $test
 			       },
 			       {
 				arguments => [
+
 					     ],
+
 				command => 'tests/code/tensizesp',
 				command_tests => [
 						  {
 						   description => "Are ten passive compartments with different properties and injected current solved correctly ?",
-						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/tensizesp.txt`),
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/tensizesp.txt`),
 						   timeout => 18,
 						   write => undef,
 						  },

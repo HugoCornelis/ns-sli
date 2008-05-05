@@ -6,7 +6,7 @@ create compartment /hardcoded_neutral/c1
 
 setfield /hardcoded_neutral/c1 \
         Cm 4.57537e-11 \
-        Em -0.08 \
+        Eleak -0.08 \
         initVm -0.068 \
         Ra 360502 \
         Rm 3.58441e8
@@ -29,3 +29,5 @@ addmsg /hardcoded_neutral/c2 /hardcoded_neutral/c1 RAXIAL Ra Vm
 reset
 
 call model_container NEUROSPACES_QUERY
+
+

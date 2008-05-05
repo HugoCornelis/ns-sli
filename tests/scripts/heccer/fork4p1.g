@@ -1,45 +1,93 @@
 setclock 0 2e-5
-create compartment c1
-setfield c1 \
+
+create neutral hardcoded_neutral
+create compartment /hardcoded_neutral/c1
+
+setfield /hardcoded_neutral/c1 \
 	Cm 4.57537e-11 \
-	Em -0.08 \
+	Eleak -0.08 \
 	initVm -0.068 \
 	Ra 360502 \
 	Rm 3.58441e8
-copy c1 c2
-copy c2 c3
-copy c3 c4
 
-addmsg c1 c2 AXIAL Vm
-addmsg c2 c1 RAXIAL Ra Vm
 
-addmsg c2 c3 AXIAL Vm
-addmsg c3 c2 RAXIAL Ra Vm
+copy /hardcoded_neutral/c1 /hardcoded_neutral/c2
+copy /hardcoded_neutral/c2 /hardcoded_neutral/c3
+copy /hardcoded_neutral/c3 /hardcoded_neutral/c4
 
-addmsg c1 c4 AXIAL Vm
-addmsg c3 c1 RAXIAL Ra Vm
+addmsg /hardcoded_neutral/c1 /hardcoded_neutral/c2 AXIAL Vm
+addmsg /hardcoded_neutral/c2 /hardcoded_neutral/c1 RAXIAL Ra Vm
 
-create hsolve h
-setmethod h 11
-setfield h \
-	chanmode 4 \
-	path /c1,/c2,/c3,/c4
-call h SETUP
+addmsg /hardcoded_neutral/c2 /hardcoded_neutral/c3 AXIAL Vm
+addmsg /hardcoded_neutral/c3 /hardcoded_neutral/c2 RAXIAL Ra Vm
+
+addmsg /hardcoded_neutral/c1 /hardcoded_neutral/c4 AXIAL Vm
+addmsg /hardcoded_neutral/c3 /hardcoded_neutral/c1 RAXIAL Ra Vm
+
+
+
+silent 1
+
 reset
 
-function showfields
+set_nsintegrator_verbose_level 2
 
-	showfield h \
-		results[0] \
-		results[1] \
-		results[2] \
-		results[3] \
-		results[4] \
-		results[5] \
-		results[6] \
-		results[7] \
-		vm[0] \
-		vm[1] \
-		vm[2] \
-		vm[3]
-end
+echo Initiated
+
+call neurospaces_integrator NSINTEGRATOR_DUMP
+
+echo -------
+echo Iteration 0
+
+step 1
+
+echo -------
+echo Iteration 1
+
+step 1
+
+echo -------
+echo Iteration 2
+
+step 1
+
+echo -------
+echo Iteration 3
+
+step 1
+
+echo -------
+echo Iteration 4
+
+step 1
+
+echo -------
+echo Iteration 5
+
+step 1
+
+echo -------
+echo Iteration 6
+
+step 1
+
+echo -------
+echo Iteration 7
+
+step 1
+
+echo -------
+echo Iteration 8
+
+step 1
+
+echo -------
+echo Iteration 9
+
+step 1
+
+
+exit
+
+
+

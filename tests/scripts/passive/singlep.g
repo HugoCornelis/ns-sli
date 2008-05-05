@@ -97,4 +97,3 @@ step 1
 // showfield c Vm
 
 
-// call model_container NEUROSPACES_QUERY

@@ -17,6 +17,18 @@ BUILT_SOURCES = \
 shell_g@.c:
 	$(c2genesis) shelllib.g shell_ext.h shell -novar
 
+
+noinst_HEADERS = \
+	iofunc.h \
+	NULLArgv.h \
+	shell_defs.h \
+	shell_ext.h \
+	shell_func_ext.h \
+	shell.h \
+	shell_struct.h
+
+
+
 libshell_a_SOURCES =	\
 	shell_argv.c \
 	shell_batch.c \

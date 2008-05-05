@@ -153,6 +153,10 @@ static char * mapParameter(const char *pcfield){
 
     pcresult = "INJECT";
 
+  } else if(!strcmp(pcfield,"Em")){ 
+    
+    pcresult = "ELEAK";
+
   } else{
 
     //fprintf(stdout,"Unrecognized Compartment field: %s\n",pcresult);

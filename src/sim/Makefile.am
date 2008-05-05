@@ -47,6 +47,17 @@ basic_f@.c:
 
 AM_CFLAGS = -DPRE_PROTO_TRAVERSAL
 
+
+noinst_HEADERS = \
+	sim_defs.h \
+	sim_ext.h \
+	sim_func_ext.h \
+	sim.h \
+	sim_struct.h \
+	sim_version.h \
+	struct_defs.h 
+
+
 libsim_a_SOURCES= \
 		sim_access.c \
 		sim_action.c \
