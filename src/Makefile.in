@@ -180,7 +180,7 @@ nsgenesis_LDADD = \
 	$(scriptdir)/libscript.a \
 	$(pardir)/libpar.a \
 	$(nsdir)/libneurospaces.a \
-	-L/usr/local/lib/neurospacesread -lneurospacesread \
+	-L/usr/local/lib/model-container -lneurospacesread \
 	-L/usr/local/lib/neurospaces/algorithms/symbol -lsymbol_algorithms \
 	-L/usr/local/lib/heccer -lheccer \
 	-L/usr/local/lib/heccer -lhneurospaces \

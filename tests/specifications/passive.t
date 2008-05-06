@@ -27,36 +27,36 @@ my $printinfo_output = "    Name, index (hardcoded_neutral,-1)
         Type (T_sym_segment)
         segmenName, index (c1,-1)
             PARA  Name (RM)
-            PARA  Type (TYPE_PARA_FUNCTION), Value(FIXED)
-                FUNC  Name (FIXED)
+            PARA  Type (TYPE_PARA_FUNCTION), Value(GENESIS2)
+                FUNC  Name (GENESIS2)
                     PARA  Name (scale)
                     PARA  Type (TYPE_PARA_NUMBER), Value(1.000000e+00)
                     PARA  Name (value)
                     PARA  Type (TYPE_PARA_NUMBER), Value(3.584410e+08)
             PARA  Name (RA)
-            PARA  Type (TYPE_PARA_FUNCTION), Value(FIXED)
-                FUNC  Name (FIXED)
+            PARA  Type (TYPE_PARA_FUNCTION), Value(GENESIS2)
+                FUNC  Name (GENESIS2)
                     PARA  Name (scale)
                     PARA  Type (TYPE_PARA_NUMBER), Value(1.000000e+00)
                     PARA  Name (value)
                     PARA  Type (TYPE_PARA_NUMBER), Value(3.605020e+05)
             PARA  Name (Vm_init)
-            PARA  Type (TYPE_PARA_FUNCTION), Value(FIXED)
-                FUNC  Name (FIXED)
+            PARA  Type (TYPE_PARA_FUNCTION), Value(GENESIS2)
+                FUNC  Name (GENESIS2)
                     PARA  Name (scale)
                     PARA  Type (TYPE_PARA_NUMBER), Value(1.000000e+00)
                     PARA  Name (value)
                     PARA  Type (TYPE_PARA_NUMBER), Value(-6.800000e-02)
             PARA  Name (ELEAK)
-            PARA  Type (TYPE_PARA_FUNCTION), Value(FIXED)
-                FUNC  Name (FIXED)
+            PARA  Type (TYPE_PARA_FUNCTION), Value(GENESIS2)
+                FUNC  Name (GENESIS2)
                     PARA  Name (scale)
                     PARA  Type (TYPE_PARA_NUMBER), Value(1.000000e+00)
                     PARA  Name (value)
                     PARA  Type (TYPE_PARA_NUMBER), Value(-8.000000e-02)
             PARA  Name (CM)
-            PARA  Type (TYPE_PARA_FUNCTION), Value(FIXED)
-                FUNC  Name (FIXED)
+            PARA  Type (TYPE_PARA_FUNCTION), Value(GENESIS2)
+                FUNC  Name (GENESIS2)
                     PARA  Name (scale)
                     PARA  Type (TYPE_PARA_NUMBER), Value(1.000000e+00)
                     PARA  Name (value)
@@ -72,36 +72,36 @@ my $printinfo_output = "    Name, index (hardcoded_neutral,-1)
         segmen}--  end  HIER sections ---
             segmenName, index (c1,-1)
                 PARA  Name (RM)
-                PARA  Type (TYPE_PARA_FUNCTION), Value(FIXED)
-                    FUNC  Name (FIXED)
+                PARA  Type (TYPE_PARA_FUNCTION), Value(GENESIS2)
+                    FUNC  Name (GENESIS2)
                         PARA  Name (scale)
                         PARA  Type (TYPE_PARA_NUMBER), Value(1.000000e+00)
                         PARA  Name (value)
                         PARA  Type (TYPE_PARA_NUMBER), Value(3.584410e+08)
                 PARA  Name (RA)
-                PARA  Type (TYPE_PARA_FUNCTION), Value(FIXED)
-                    FUNC  Name (FIXED)
+                PARA  Type (TYPE_PARA_FUNCTION), Value(GENESIS2)
+                    FUNC  Name (GENESIS2)
                         PARA  Name (scale)
                         PARA  Type (TYPE_PARA_NUMBER), Value(1.000000e+00)
                         PARA  Name (value)
                         PARA  Type (TYPE_PARA_NUMBER), Value(3.605020e+05)
                 PARA  Name (Vm_init)
-                PARA  Type (TYPE_PARA_FUNCTION), Value(FIXED)
-                    FUNC  Name (FIXED)
+                PARA  Type (TYPE_PARA_FUNCTION), Value(GENESIS2)
+                    FUNC  Name (GENESIS2)
                         PARA  Name (scale)
                         PARA  Type (TYPE_PARA_NUMBER), Value(1.000000e+00)
                         PARA  Name (value)
                         PARA  Type (TYPE_PARA_NUMBER), Value(-6.800000e-02)
                 PARA  Name (ELEAK)
-                PARA  Type (TYPE_PARA_FUNCTION), Value(FIXED)
-                    FUNC  Name (FIXED)
+                PARA  Type (TYPE_PARA_FUNCTION), Value(GENESIS2)
+                    FUNC  Name (GENESIS2)
                         PARA  Name (scale)
                         PARA  Type (TYPE_PARA_NUMBER), Value(1.000000e+00)
                         PARA  Name (value)
                         PARA  Type (TYPE_PARA_NUMBER), Value(-8.000000e-02)
                 PARA  Name (CM)
-                PARA  Type (TYPE_PARA_FUNCTION), Value(FIXED)
-                    FUNC  Name (FIXED)
+                PARA  Type (TYPE_PARA_FUNCTION), Value(GENESIS2)
+                    FUNC  Name (GENESIS2)
                         PARA  Name (scale)
                         PARA  Type (TYPE_PARA_NUMBER), Value(1.000000e+00)
                         PARA  Name (value)
@@ -261,13 +261,13 @@ my $test
 				command_tests => [
 						  {
 						   description => "Is a fork of four passive compartments solved correctly, third alternative ?",
-						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/fork4p3.txt`),
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/fork4p3.txt | perl -pe 's/unnamed test/hardcoded_neutral/g'`),
 						   timeout => 8,
 						   write => undef,
 						  },
 						 ],
 				description => "fork of four passive compartments, third alternative.",
-				disabled => 1,
+			
 			       },
 
 
@@ -278,51 +278,67 @@ my $test
 
 			       {
 				arguments => [
+					      "$::config->{core_directory}/tests/scripts/heccer/c1c2p1.g",
 					     ],
-				command => 'tests/code/c1c2p1',
+				command => 'src/nsgenesis',
 				command_tests => [
 						  {
 						   description => "Are two passive compartments with injected current solved correctly ?",
-						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/c1c2p1.txt`),
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/c1c2p1.txt | perl -pe 's/unnamed test/hardcoded_neutral/g'`),
 						   timeout => 5,
 						   write => undef,
 						  },
 						 ],
 				description => "two passive compartments with injected current",
-				disabled => 1,
+		
+				
 			       },
+
+
+
+
+
+
 			       {
 				arguments => [
+					      "$::config->{core_directory}/tests/scripts/heccer/c1c2p2.g",
 					     ],
-				command => 'tests/code/c1c2p2',
+				command => 'src/nsgenesis',
 				command_tests => [
 						  {
 						   description => "Are two passive compartments with asymetric properties and injected current solved correctly ?",
-						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/c1c2p2.txt`),
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/c1c2p2.txt  | perl -pe 's/unnamed test/hardcoded_neutral/g'`),
 						   timeout => 5,
 						   write => undef,
 						  },
 						 ],
 				description => "two passive compartments with asymetric properties and injected current",
-				disabled => 1,
+				
+			     disabled => 0,
 			       },
+
+
+
+
+
+
+
 			       {
 				arguments => [
-
+					      "$::config->{core_directory}/tests/scripts/heccer/tensizesp.g",
 					     ],
-
-				command => 'tests/code/tensizesp',
+				command => 'src/nsgenesis',
 				command_tests => [
 						  {
 						   description => "Are ten passive compartments with different properties and injected current solved correctly ?",
-						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/tensizesp.txt`),
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/tensizesp.txt  | perl -pe 's/unnamed test/hardcoded_neutral/g'`),
 						   timeout => 18,
 						   write => undef,
 						  },
 						 ],
 				description => "ten passive compartments with different properties and injected current",
-				disabled => 1,
-
+			   
+		       disabled => 0,
 
 
 
@@ -331,29 +347,7 @@ my $test
 
 			      ],
 				
-				preparation => {
-						description => "Setting the environment entry to point to a model library",
-						preparer =>
-						sub
-						{
-						  $previous_library = $ENV{NEUROSPACES_MODELS};
-
-						  $ENV{NEUROSPACES_MODELS} = $::config->{core_directory} . '/src';
-						},
-					       },
-				reparation => {
-					       description => "Removing the environment entry to point to a model library",
-					       reparer =>
-					       sub
-					       {
-						 $ENV{NEUROSPACES_MODELS} = $previous_library;
-
-						 '';
-					       },
-					      },
-
-
-
+       comment => 'See comments in the tester scripts for todos related to parameter caches in the model container',
        description => "passive model testing",
 
 

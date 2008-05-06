@@ -72,7 +72,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle, char *field, cha
 
 	  
   struct symtab_Function *pfun = FunctionCalloc();
-  FunctionSetName(pfun,"FIXED");
+  FunctionSetName(pfun,"GENESIS2");
   FunctionAssignParameters(pfun,pparScale);
 
 
