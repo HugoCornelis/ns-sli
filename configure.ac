@@ -26,6 +26,7 @@ AC_OUTPUT(Makefile \
 	src/shell/Makefile \
 	src/neurospaces/Makefile \
 	src/par/Makefile \
-	src/sim/Makefile
+	src/sim/Makefile \
+	src/olf/Makefile
 )
 

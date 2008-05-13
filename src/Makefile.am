@@ -1,5 +1,5 @@
 
-SUBDIRS = util script c2genesis shell neurospaces par sim
+SUBDIRS = util script c2genesis shell neurospaces olf par sim 
 
 utildir = $(top_srcdir)/src/util
 scriptdir = $(top_srcdir)/src/script
@@ -7,6 +7,7 @@ shelldir = $(top_srcdir)/src/shell
 simdir = $(top_srcdir)/src/sim
 pardir = $(top_srcdir)/src/par
 nsdir = $(top_srcdir)/src/neurospaces
+olfdir = $(top_srcdir)/src/olf
 
 EXTRA_DIST = \
 	libsh \
@@ -35,6 +36,7 @@ nsgenesis_LDADD = \
 	$(scriptdir)/libscript.a \
 	$(pardir)/libpar.a \
 	$(nsdir)/libneurospaces.a \
+	$(olfdir)/libolf.a \
 	-L/usr/local/lib/model-container -lneurospacesread \
 	-L/usr/local/lib/neurospaces/algorithms/symbol -lsymbol_algorithms \
 	-L/usr/local/lib/heccer -lheccer \
@@ -48,7 +50,7 @@ nsgenesis_LDADD = \
 liblist: Makefile
 	@echo "# liblist - This file is generated automatically." > liblist
 	@echo "#           DO NOT EDIT.  Edit Makefile instead." >> liblist
-	@echo neurospaces nsintegrator | tr ' ' '\012' >> liblist
+	@echo neurospaces nsintegrator olf | tr ' ' '\012' >> liblist
 
 loadlib.c: liblist
 	$(srcdir)/libsh < liblist > loadlib.c

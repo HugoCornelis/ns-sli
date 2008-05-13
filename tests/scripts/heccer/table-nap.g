@@ -1,13 +1,20 @@
 setclock 0 2e-5
-create compartment c
-setfield c \
+
+create neutral hardcoded_neutral
+create compartment /hardcoded_neutral/c
+
+setfield /hardcoded_neutral/c \
 	Cm 4.57537e-11 \
 	Em -0.08 \
 	initVm -0.068 \
 	Ra 360502 \
 	Rm 3.58441e8
-create tabchannel c/nap
-setfield c/nap \
+
+
+create tabchannel /hardcoded_neutral/c/nap
+
+
+setfield /hardcoded_neutral/c/nap \
 	Ek 0.045 \
 	Gbar 0.0002092393115 \
 	Ik 0.0 \
@@ -19,7 +26,9 @@ setfield c/nap \
 //     make_chan Purk_NaP {ENa} {GNa} 3 200.0e3 0.0 1.0 -0.018 -16.0e-3  \
 //         25.00e3 0.0 1.0 0.058 8.0e-3 0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0  \
 //         0.0 0.0 0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
-setupalpha c/nap \
+
+
+setupalpha /hardcoded_neutral/c/nap \
 	X \
 	200.0e3 \
 	0.0 \
@@ -33,31 +42,74 @@ setupalpha c/nap \
 	8.0e-3 \
 	-size 50 \
 	-range -0.1 0.05
-addmsg c c/nap VOLTAGE Vm
-addmsg c/nap c CHANNEL Gk Ek
-create hsolve h
-setmethod h 11
-setfield h \
-	calcmode 0 \
-	chanmode 4 \
-	path /c
-call h SETUP
+
+
+addmsg /hardcoded_neutral/c /hardcoded_neutral/c/nap VOLTAGE Vm
+addmsg /hardcoded_neutral/c/nap /hardcoded_neutral/c CHANNEL Gk Ek
+
+
+
+silent 1
+
 reset
 
-function showfields
+set_nsintegrator_verbose_level 2
 
-	showfield h \
-		chip[4] \
-		chip[5] \
-		givals[3] \
-		givals[4] \
-		results[0] \
-		results[1] \
-		vm[0]
-end
+echo Initiated
 
-function showtables
+call neurospaces_integrator NSINTEGRATOR_DUMP
 
-	showfield c/nap *
-end
+echo -------
+echo Iteration 0
 
+step 1
+
+echo -------
+echo Iteration 1
+
+step 1
+
+echo -------
+echo Iteration 2
+
+step 1
+
+echo -------
+echo Iteration 3
+
+step 1
+
+echo -------
+echo Iteration 4
+
+step 1
+
+echo -------
+echo Iteration 5
+
+step 1
+
+echo -------
+echo Iteration 6
+
+step 1
+
+echo -------
+echo Iteration 7
+
+step 1
+
+echo -------
+echo Iteration 8
+
+step 1
+
+echo -------
+echo Iteration 9
+
+step 1
+
+
+//call model_container NEUROSPACES_QUERY
+
+exit

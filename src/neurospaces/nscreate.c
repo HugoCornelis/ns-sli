@@ -23,6 +23,10 @@
 #include "neurospaces/nsintegrator.h"
 
 
+//-- prototype for setting up a basic tabchannel object --
+static struct symtab_HSolveListElement * GenChannelCalloc();
+
+
 
 
 /**************************************************************************
@@ -60,8 +64,16 @@ int NeurospacesCreate( char* name,  Element* pelParent, int iChild){
    case NSINTEGRATOR_NEUTRAL:
      phsleChild = (struct symtab_HSolveListElement*)CellCalloc();
      break;
+
+   case NSINTEGRATOR_TABCHANNEL:
+     phsleChild = (struct symtab_HSolveListElement*)GenChannelCalloc();
+     break;
+
+
    }
  
+
+   
    
 
    if( !phsleChild ){
@@ -101,10 +113,6 @@ int NeurospacesCreate( char* name,  Element* pelParent, int iChild){
    SymbolAddChild(phsleParent,phsleChild);
    
 
-
-   //   NeurospacesAddSymbol(pcChild, iChild);
-   //NeurospacesPrintSymbols();
-
    SymbolRecalcAllSerials(phsleParent, ppistParent);    
 
 
@@ -114,7 +122,71 @@ int NeurospacesCreate( char* name,  Element* pelParent, int iChild){
 
 
 
+//--------------------------------------------------------------------
+/*!
+ *  \fun static struct symtab_HSolveListElement * GenChannelCalloc()
+ *  \return A pointer to a newly allocated Tab channel object.
+ *
+ *  
+ */
+//--------------------------------------------------------------------
+static struct symtab_HSolveListElement * GenChannelCalloc(){
 
 
+  struct symtab_HSolveListElement *phsleTabChannel = 
+    (struct symtab_HSolveListElement*)ChannelCalloc();
+
+
+
+  //-
+  //- Allocate an HH gate and set its parent to phsleTabChannel.
+  //-
+  struct symtab_IdentifierIndex* pidinTabChannel;
+
+  struct symtab_HHGate *pgathh = HHGateCalloc();
+  
+  SymbolAddChild(phsleTabChannel,pgathh);
+
+
+
+  
+  //-
+  //- Need to add a name for the forward and backward gates.
+  //- "Forward" and "Backward" respectively, then make these
+  //- the children of the HH Gate pgathh.
+  //-
+  struct symtab_GateKinetic *pgatkForward = GateKineticCalloc();
+
+  if(!pgatkForward)
+    return NULL;
+
+  struct symtab_IdentifierIndex * pidinForward;
+
+  pidinForward = IdinNewFromChars("Forward");
+
+  SymbolSetName(pgatkForward, pidinForward); 
+
+  SymbolAddChild(pgathh,pgatkForward);
+
+
+
+
+  struct symtab_GateKinetic *pgatkBackward = GateKineticCalloc();
+
+  if(!pgatkBackward)
+    return NULL;
+
+
+  struct symtab_IdentifierIndex * pidinBackward;
+
+  pidinBackward = IdinNewFromChars("Backward");
+
+  SymbolSetName(pgatkBackward,pidinBackward);
+
+  SymbolAddChild(pgathh,pgatkBackward);
+
+
+  return phsleTabChannel;
+}
 
 

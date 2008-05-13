@@ -189,20 +189,43 @@ int	index;
      if(strcmp(object_name, "compartment") == 0){ 
        
        if( NeurospacesCreate(name,parent,NSINTEGRATOR_COMPARTMENT) == 1 ){
+
+
 	 return (Element*)-1;
+
+
        }
 
      }
      else if(strcmp(object_name, "neutral") == 0){ 
 
+
         if( NeurospacesCreate(name,parent,NSINTEGRATOR_NEUTRAL) != 1){ 
+
+
  	 fprintf(stderr,"Error creating neutral object %s\n",name); 
- 	 // now have the code continue to make a genesis neutral object.
+ 	 // code continues on to make a genesis neutral object.
+
+	 
         } 
 
 	
       } 
+     else if(strcmp(object_name, "tabchannel") == 0){
 
+
+        if( NeurospacesCreate(name,parent,NSINTEGRATOR_TABCHANNEL) != 1){ 
+
+
+	  fprintf(stderr,"Error creating tabchannel %s\n",name); 
+	  
+
+        } 
+	else
+	  return (Element*)-1;
+
+
+     }
      //hack------------------------------------------------------------------
 
 
@@ -446,12 +469,35 @@ int                   i,j = 0;
     if ((ptr = strchr(name,'['))) {
 	*ptr = '\0';
     }
-    if((parent_element = (Element *)GetElement(parent_name)) == NULL){
+
+
+
+    //hack ----------------------------------------------------------
+    int iParentFound = 0;
+
+    if (strcmp(type, "tabchannel") == 0
+	|| strcmp(type, "compartment") == 0)
+      {
+	
+      }
+    else
+      {
+	parent_element = (Element *)GetElement(parent_name);
+
+	iParentFound = (parent_name == NULL);
+      }
+
+    if(iParentFound){
 	Error();
 	printf("cannot find '%s'\n",parent_name);
 	printf("unable to create '%s'\n",name);
 	return;
     }
+    //hack -------------------------------------------------------------
+
+
+
+
     /* here we check for autoindex */
     if (argc > 3) {
 	for(j = 3; j < argc; j++) {
