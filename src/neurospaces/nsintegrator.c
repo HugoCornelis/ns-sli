@@ -38,6 +38,13 @@ int NSGenesisInitialize(){
    pnsintegrator->pelNeurospaces = 
       (struct neurospaces_type *)GetElement("/model_container");
     
+
+   if(pnsintegrator->pelNeurospaces == NULL){
+
+     printf("Could not create Model Container\n");
+     exit(1);
+
+   }
        
    char *ppvArgs[] =
    {

@@ -23,9 +23,12 @@
 #include "neurospaces/nsintegrator.h"
 
 
-//-- prototype for setting up a basic tabchannel object --
-static struct symtab_HSolveListElement * GenChannelCalloc();
+#define FORWARD 1
+#define BACKWARD -1
 
+//-- prototypes for setting up a basic channel object --
+static struct symtab_HSolveListElement * GenChannelCalloc();
+static struct symtab_GateKinetic *CreateGateKinetic(int iDirection);
 
 
 
@@ -123,6 +126,114 @@ int NeurospacesCreate( char* name,  Element* pelParent, int iChild){
 
 
 //--------------------------------------------------------------------
+
+//--------------------------------------------------------------------
+int NSCreate( char* name,  char* pcParent, char* pcType){
+
+   struct symtab_HSolveListElement *phsleChild = NULL;
+   struct PidinStack* ppistParent = NULL;
+   struct symtab_HSolveListElement* phsleParent = NULL;
+   struct symtab_IdentifierIndex* pidinChild;
+   int iResult;
+
+   //- if there is no parent given
+
+   if (!pcParent || !strcmp(pcParent,""))
+     {
+       //- assume we are creating a root element on initialization.
+
+       //! normally genesis creates an element without parent for default values,
+       //! and a second element without parent for the root element
+
+       return 1;
+     }
+
+
+   if(!strcmp("compartment",pcType)){
+
+     phsleChild = (struct symtab_HSolveListElement*)SegmentCalloc();
+
+     iResult = NSINTEGRATOR_COMPARTMENT;
+
+   }
+   else if(!strcmp("tabchannel",pcType)){
+
+     phsleChild = (struct symtab_HSolveListElement*)GenChannelCalloc();
+
+     iResult = NSINTEGRATOR_TABCHANNEL;
+   }
+   else{
+
+     phsleChild = (struct symtab_HSolveListElement*)CellCalloc();
+
+     iResult = NSINTEGRATOR_NEUTRAL;
+
+   }
+   
+   
+
+   if( !phsleChild ){
+
+     fprintf(stderr,"Error allocating phsleChild for:%s\n",name);
+     return -1;
+
+   }
+
+
+   char *pcChild = strdup(name);
+   pidinChild = IdinNewFromChars(pcChild);
+   SymbolSetName(phsleChild, pidinChild); 
+   
+
+   //!
+   //! Retrieves the parent pathname from
+   //! the argument or from an Element in the GENESIS
+   //! namespace.
+   //! needed in cases where model container objects
+   //! are rooted in neutral objects that also reside in the GENESIS
+   //! namespace.
+   //! ex: /neutral/compartment
+   //!
+
+   if(!strcmp(pcParent,"."))
+     ppistParent = PidinStackParse("/");
+   else
+     ppistParent = PidinStackParse(pcParent);
+  
+
+   if( !ppistParent ){
+
+     fprintf(stderr,"Error creating symbol: %s\n", name);
+     return -1;
+   
+   }
+  
+   phsleParent = PidinStackLookupTopSymbol(ppistParent);  
+   
+   if( !phsleParent ){ 
+
+      fprintf(stderr,"Error:Symbol parent path (%s) not found\n",pcParent); 
+      return -1; 
+   
+   } 
+     
+   SymbolAddChild(phsleParent,phsleChild);
+   
+
+   SymbolRecalcAllSerials(phsleParent, ppistParent);    
+
+
+   return iResult;
+
+}
+
+
+
+
+
+
+
+//--------------------------------------------------------------------
 /*!
  *  \fun static struct symtab_HSolveListElement * GenChannelCalloc()
  *  \return A pointer to a newly allocated Tab channel object.
@@ -133,60 +244,95 @@ int NeurospacesCreate( char* name,  Element* pelParent, int iChild){
 static struct symtab_HSolveListElement * GenChannelCalloc(){
 
 
-  struct symtab_HSolveListElement *phsleTabChannel = 
+  struct symtab_HSolveListElement *phsleChannel = 
     (struct symtab_HSolveListElement*)ChannelCalloc();
 
 
+  struct symtab_IdentifierIndex *pidinChannel;
 
-  //-
-  //- Allocate an HH gate and set its parent to phsleTabChannel.
-  //-
-  struct symtab_IdentifierIndex* pidinTabChannel;
+  pidinChannel =  IdinNewFromChars("Channel");
+  
+  SymbolSetName(phsleChannel,pidinChannel);
 
+
+
+  //!
+  //! Allocate an HH gate and set its parent to phsleTabChannel.
+  //!
   struct symtab_HHGate *pgathh = HHGateCalloc();
   
-  SymbolAddChild(phsleTabChannel,pgathh);
+  struct symtab_IdentifierIndex *pidinHHGate = IdinNewFromChars("HHGate");
+
+  SymbolSetName(pgathh,pidinHHGate);
+
+  SymbolAddChild(phsleChannel,pgathh);
 
 
 
   
-  //-
-  //- Need to add a name for the forward and backward gates.
-  //- "Forward" and "Backward" respectively, then make these
-  //- the children of the HH Gate pgathh.
-  //-
-  struct symtab_GateKinetic *pgatkForward = GateKineticCalloc();
+  //!
+  //! Need to add a name for the forward and backward gates.
+  //! "Forward" and "Backward" respectively, then make these
+  //! the children of the HH Gate pgathh.
+  //!
+  struct symtab_GateKinetic *pgatkForward = CreateGateKinetic(FORWARD);
 
   if(!pgatkForward)
     return NULL;
 
-  struct symtab_IdentifierIndex * pidinForward;
-
-  pidinForward = IdinNewFromChars("Forward");
-
-  SymbolSetName(pgatkForward, pidinForward); 
-
   SymbolAddChild(pgathh,pgatkForward);
+  
 
 
-
-
-  struct symtab_GateKinetic *pgatkBackward = GateKineticCalloc();
+  struct symtab_GateKinetic *pgatkBackward = CreateGateKinetic(BACKWARD);
 
   if(!pgatkBackward)
     return NULL;
 
-
-  struct symtab_IdentifierIndex * pidinBackward;
-
-  pidinBackward = IdinNewFromChars("Backward");
-
-  SymbolSetName(pgatkBackward,pidinBackward);
-
   SymbolAddChild(pgathh,pgatkBackward);
 
 
-  return phsleTabChannel;
+
+  return phsleChannel;
 }
 
 
+
+
+
+
+//------------------------------------------------------------------
+/*
+ *
+ */
+//------------------------------------------------------------------
+static struct symtab_GateKinetic *CreateGateKinetic(int iDirection){
+
+
+  struct symtab_GateKinetic *pgatk;
+
+
+  struct symtab_IdentifierIndex *pidinDirection;
+
+  
+  if(iDirection > 0)
+    pidinDirection = IdinNewFromChars("forward");
+  else
+    pidinDirection = IdinNewFromChars("backward");
+
+
+  if(!pidinDirection)
+    return NULL;
+
+
+  pgatk = GateKineticCalloc();
+
+  if(!pgatk)
+    return NULL;
+
+
+  SymbolSetName(pgatk,pidinDirection);
+
+  return pgatk;
+
+}

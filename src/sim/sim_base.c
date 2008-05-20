@@ -184,12 +184,12 @@ void StartupElements()
     /*
     ** set up the prototype element on the root
     */
-    element = Create("neutral","proto",root_element,NULL,0);
+  element = Create("neutral","proto",root_element,"/",NULL,0,1);
     Block(element);
     /*
     ** set up the output element on the root
     */
-    Create("neutral","output",root_element,NULL,0);
+    Create("neutral","output",root_element,"/",NULL,0,1);
 
     SetClock(0,1.0);
 }

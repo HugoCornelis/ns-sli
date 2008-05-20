@@ -21,9 +21,9 @@
 //i These are constant definitions for the neurospaces
 //i to genesis integrator functions.
 //i
-#define NSINTEGRATOR_COMPARTMENT 0
-#define NSINTEGRATOR_NEUTRAL 1
-#define NSINTEGRATOR_TABCHANNEL 2
+#define NSINTEGRATOR_COMPARTMENT 10
+#define NSINTEGRATOR_NEUTRAL 20
+#define NSINTEGRATOR_TABCHANNEL 30
 
 
 

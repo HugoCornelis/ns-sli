@@ -45,7 +45,15 @@ static char * mapParameter(const char *pcfield);
 int NeurospacesSetField(struct symtab_HSolveListElement *phsle, char *field, char *value){
 
  
-  if(!phsle)
+  //!
+  //! -The parameter fields "Ik" and "Gk" are solved variables in 
+  //!  Heccer so they don't need a parameter to be set at all, thus they
+  //!  are ignored completely.
+  //!
+  if(!phsle || 
+     !strcmp(field,"") ||
+     !strcmp(field,"Ik") || 
+     !strcmp(field,"Gk") )
     return 0;
   
 
@@ -123,46 +131,88 @@ static char * mapParameter(const char *pcfield){
   //t
   if(!strcmp(pcfield,"Cm")){
 
+    //!
+    //! maps to a compartment
+    //!
     pcresult = "CM";
 
   } else if(!strcmp(pcfield,"Rm")){
 
+    //!
+    //! maps to compartment
+    //!
     pcresult = "RM";
 
   } else if(!strcmp(pcfield,"Ra")){
 
+    //!
+    //! maps to compartment
+    //!
     pcresult = "RA";
 
   } else if(!strcmp(pcfield,"initVm")){
 
+    //!
+    //! maps to compartment
+    //!
     pcresult = "Vm_init";
   
   } else if(!strcmp(pcfield,"Eleak")){
 
+    //!
+    //! maps to compartment
+    //!
     pcresult = "ELEAK";
 
   } else if(!strcmp(pcfield,"dia")){
 
+    //!
+    //! maps to compartment
+    //!
     pcresult = "DIA";
 
   } else if(!strcmp(pcfield,"len")){
 
+    //!
+    //! maps to compartment
+    //!
     pcresult = "LEN";
 
   } else if(!strcmp(pcfield,"inject")){
 
+    //!
+    //! maps to compartment
+    //!
     pcresult = "INJECT";
 
   } else if(!strcmp(pcfield,"Em")){ 
     
+    //!
+    //! maps to compartment
+    //!
     pcresult = "ELEAK";
 
-  } else{
+  } else if(!strcmp(pcfield,"Ek")){
+
+    //!
+    //! maps to a channel
+    //!
+    pcresult = "Erev";
+
+  } else if(!strcmp(pcfield,"Gbar")){
+
+    //!
+    //! maps to a channel
+    //!
+    pcresult = "G_MAX";
+
+  }else{
 
     //fprintf(stdout,"Unrecognized Compartment field: %s\n",pcresult);
     pcresult = pcfield;
 
   }
+
 
   return pcresult;
 }

@@ -83,8 +83,7 @@ static char rcsid[] = "$Id: sim_create.c,v 1.2 2005/06/27 19:00:58 svitak Exp $"
 #include "sim_ext.h"
 #include "nsintegrator.h"
 
-/** prototypes for static helper functions **/
-static int CreateElementForObject(GenesisObject *object, Element *element);
+
 
 
 /**
@@ -171,62 +170,44 @@ Action*		action;
  *
  *
  ****************************************************************/
-Element *Create(object_name,name,parent,action,index)
+Element *Create(object_name,name,parent,pcParent,action,index,iInModelContainer)
 char	*object_name;
 char 	*name;
 Element	*parent;
+char    *pcParent;
 Action	*action;
 int	index;
+int iInModelContainer;
 {
     Element 	*element;
     GenesisObject 	*object;
     int		size;
 
     //hack-------------------------------------------------------------------
-    /*
-     *
-     */
-     if(strcmp(object_name, "compartment") == 0){ 
-       
-       if( NeurospacesCreate(name,parent,NSINTEGRATOR_COMPARTMENT) == 1 ){
+    
+    
+    if(iInModelContainer)
+      {
 
+	int iModelContainerResult = NSCreate(name,pcParent,object_name);
 
-	 return (Element*)-1;
+	if(iModelContainerResult == -1){
 
+	  return NULL;
 
        }
 
-     }
-     else if(strcmp(object_name, "neutral") == 0){ 
+	if(iModelContainerResult == NSINTEGRATOR_COMPARTMENT ||
+	   iModelContainerResult == NSINTEGRATOR_TABCHANNEL ){
 
-
-        if( NeurospacesCreate(name,parent,NSINTEGRATOR_NEUTRAL) != 1){ 
-
-
- 	 fprintf(stderr,"Error creating neutral object %s\n",name); 
- 	 // code continues on to make a genesis neutral object.
-
-	 
-        } 
-
-	
-      } 
-     else if(strcmp(object_name, "tabchannel") == 0){
-
-
-        if( NeurospacesCreate(name,parent,NSINTEGRATOR_TABCHANNEL) != 1){ 
-
-
-	  fprintf(stderr,"Error creating tabchannel %s\n",name); 
-	  
-
-        } 
-	else
 	  return (Element*)-1;
 
+	}
 
-     }
-     //hack------------------------------------------------------------------
+	
+      }
+
+    //hack------------------------------------------------------------------
 
 
     /*
@@ -303,55 +284,6 @@ int	index;
 }
 
 
-
-/**
- * Create an element for an object using the object information.  
- * 
- * 
- * helper function for Create.
- *  
- * return -1 on error
- * return 1 on success
- * return 0 if nothing was done.
- **/
-static int CreateElementForObject(GenesisObject *object, Element *element){
-  
-  Element 	*child;
-  
-  /*
-  ** create an element using the object information
-  */
-  if (object->defaults == NULL)
-    return 0;
-  
-
-  /* printf("objectname = %s\n",object->name); */
-/*   printf("\tobjecttype = %s\n",object->type); */
-  
-  if((element = CopyElementTree(object->defaults)) == NULL){
-     printf("could not make a copy of defaults\n");
-     return -1;
-  }
-
-  /*
-  ** go through each child and make it a component of the
-  ** root element of the object.
-  */
-  child = element->child;
-  while (child != NULL)
-  {
-     child->componentof = element;
-     child = child->next;
-  }
-
-  /*
-  ** copy the msgs between elements
-  */
-  CopyMsgs(object->defaults,element);
-  
-  return 1;
-
-}
 
 
 
@@ -472,56 +404,76 @@ int                   i,j = 0;
 
 
 
-    //hack ----------------------------------------------------------
-    int iParentFound = 0;
+    int iInModelContainer = 0;
 
-    if (strcmp(type, "tabchannel") == 0
-	|| strcmp(type, "compartment") == 0)
-      {
-	
-      }
-    else
-      {
-	parent_element = (Element *)GetElement(parent_name);
+    if(strcmp("neutral",type) == 0 ||
+       strcmp("tabchannel",type) == 0 ||
+       strcmp("compartment",type) == 0)
+      iInModelContainer = 1;
 
-	iParentFound = (parent_name == NULL);
-      }
+    //-
+    //- here is the check for the parent element.
+    //-   if it is not present in GENESIS then check the type
+    //-   If the type is a type meant for the model container then 
+    //-   we flag it with boolean to say it's in the model container.
+    //-   
+    //- If it is not a model container type, and not present then 
+    //- we let genesis bail out with an error.
+    //-
+    parent_element = (Element *)GetElement(parent_name);
+    
+    if(parent_element == NULL){
 
-    if(iParentFound){
+      if(iInModelContainer == 0){
 	Error();
 	printf("cannot find '%s'\n",parent_name);
 	printf("unable to create '%s'\n",name);
 	return;
+      }
+      
     }
-    //hack -------------------------------------------------------------
 
 
 
+ 
+    //!
+    //!
+    //! We must execute this logic that deals with creating
+    //! an Element name for the Element being constructed.
+    //! 
+    //! - For the moment this only works if we are creating elements
+    //!   in the GENESIS namepsace.
+    //!  
+    //!
+    if(iInModelContainer == 0){
 
-    /* here we check for autoindex */
-    if (argc > 3) {
+      /* here we check for autoindex */
+      if (argc > 3) {
 	for(j = 3; j < argc; j++) {
-	    if (strcmp(argv[j],"-autoindex") == 0) {
-		autoindex = 1;
-		break;
-	    }
+	  if (strcmp(argv[j],"-autoindex") == 0) {
+	    autoindex = 1;
+	    break;
+	  }
 	}
-    }
-    if (autoindex) {
+      }
+      if (autoindex) {
 	targv = (char **)calloc(argc-1,sizeof(char *));
 	index = FindFreeIndex(parent_element,name);
 	argc--;
 	for(i = 0; i < argc; i++) {
-	    if (i < j) {
-		    targv[i] = argv[i];
-	    } else {
-		    targv[i] = argv[i+1];
-	    }
+	  if (i < j) {
+	    targv[i] = argv[i];
+	  } else {
+	    targv[i] = argv[i+1];
+	  }
 	}
 	action.argv = targv + 1;
-    } else {
+      } else {
 	action.argv = argv + 1;
-    }
+      }
+
+    }  
+
     /*
     ** create the element
     */
@@ -530,8 +482,11 @@ int                   i,j = 0;
     action.name = "CREATE";
     action.data = (char *)parent_element;
 
+    
 
-    if ((new_element = Create(type,name,parent_element,&action,index))) {
+
+
+    if ((new_element = Create(type,name,parent_element,parent_name,&action,index,iInModelContainer))) {
       
 
       //hack----------------------------------------------------------
