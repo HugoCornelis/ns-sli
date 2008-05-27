@@ -261,7 +261,8 @@ static struct symtab_HSolveListElement * GenChannelCalloc(){
   //!
   struct symtab_HHGate *pgathh = HHGateCalloc();
   
-  struct symtab_IdentifierIndex *pidinHHGate = IdinNewFromChars("HHGate");
+  struct symtab_IdentifierIndex *pidinHHGate = 
+    IdinNewFromChars("HH_activation");
 
   SymbolSetName(pgathh,pidinHHGate);
 
@@ -294,6 +295,8 @@ static struct symtab_HSolveListElement * GenChannelCalloc(){
 
 
   return phsleChannel;
+
+
 }
 
 

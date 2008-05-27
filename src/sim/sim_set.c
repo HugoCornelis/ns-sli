@@ -313,7 +313,7 @@ int		empty_ok = 0;
 	      if (phsle)
 		{
 		 		  
-		  NeurospacesSetField(phsle,field, value);
+		  NeurospacesSetField(phsle,ppist,field, value);
 		 
 		}
 	      else

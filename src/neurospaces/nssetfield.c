@@ -15,8 +15,10 @@
 #include "neurospaces/pidinstack.h"
 
 
-//------------------ static function declaration -------------------
+//------------------ static function declarations ------------------
 static char * mapParameter(const char *pcfield);
+static int setParameter(struct symtab_HSolveListElement *phsle,
+			char *pcField, char *pcValue);
 //------------------------------------------------------------------
 
 
@@ -28,6 +30,7 @@ static char * mapParameter(const char *pcfield);
  *  \fn int NeurospacesSetField(struct symtab_HSolveListElement *phsle,char *field,char *value)
  *  \return 0 on error, 1 on success.
  *  \param phsle A pointer to an Hsolve list element.
+ *  \param ppist A Pidin stack for searching for child objects.
  *  \param field A field value to 
  *  \param value The value to place in the field given in the previous argument.
  *
@@ -42,8 +45,10 @@ static char * mapParameter(const char *pcfield);
  *  5. Generate a parameter from the numerical value.
 */
 //------------------------------------------------------------------
-int NeurospacesSetField(struct symtab_HSolveListElement *phsle, char *field, char *value){
+int NeurospacesSetField(struct symtab_HSolveListElement *phsle, 
+			struct PidinStack *ppist,char *field, char *value){
 
+ 
  
   //!
   //! -The parameter fields "Ik" and "Gk" are solved variables in 
@@ -51,17 +56,88 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle, char *field, cha
   //!  are ignored completely.
   //!
   if(!phsle || 
-     !strcmp(field,"") ||
      !strcmp(field,"Ik") || 
      !strcmp(field,"Gk") )
     return 0;
   
 
+
+
+
+  //-
+  //- Check the type on the phsle object passed. For certain types
+  //- we must add parameters to the child objects rather than the object
+  //- itself.
+  //-
+  if (phsle->iType ==  8){
+
+
+
+    //-
+    //- Parameter Xpower is set in the HH gate object, which
+    //- is set as a child to the phsle object in the model container.
+    //- 
+    //-    Channel -> 
+    //-               HH_gate -parameter-> Xpower
+    //-
+    //- is the order we must traverse the stack to get to the object.. 
+    //-
+    if (strcmp(field, "Xpower") == 0){
+
+      
+      //char *pcHHgate = strcat(,"/HH_activation");
+
+      struct symtab_HSolveListElement *phsleGate = 
+	PidinStackGetPhsle(ppist,"/hardcoded_neutral/c/nap/HH_activation");
+
+      if(!phsleGate)
+	return 0;
+
+      return setParameter(phsle,field,value);
+
+
+    }     
+    else if (strcmp(field, "Ypower") == 0){
+
+
+      struct symtab_HSolveListElement *phsleGate
+	    =   PidinStackGetPhsle(ppist,"/hardcoded_neutral/c/nap/HH_activation");
+
+      if(!phsleGate)
+	return 0;
+
+      return setParameter(phsle,field,value);
+
+
+    }
+
+
+  }
+
+
+  return setParameter(phsle,field,value);
+
+}
+
+
+
+
+
+
+//----------------------------------------------------------------------------
+/*!
+ *
+ *
+ */
+//----------------------------------------------------------------------------
+static int setParameter(struct symtab_HSolveListElement *phsle,
+			char *pcField, char *pcValue){
+
   struct symtab_Parameters *pparScale = ParameterNewFromNumber("scale",1.0);
 
 
 
-  double dValue = atof(value);
+  double dValue = atof(pcValue);
   struct symtab_Parameters *pparValue = ParameterNewFromNumber("value",dValue);
 
 
@@ -88,10 +164,8 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle, char *field, cha
   
 
   char *pcParameter = NULL;
-  if(instanceof_segment(phsle))
-    pcParameter = mapParameter(field);
-  else
-    pcParameter = strdup(field);
+  pcParameter = mapParameter(pcField);
+  
 
 
   ParameterSetName(pparTop,pcParameter);
@@ -107,8 +181,8 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle, char *field, cha
   
   return 1;
 
-}
 
+}
 
 
 

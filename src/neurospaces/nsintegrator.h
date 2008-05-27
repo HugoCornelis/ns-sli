@@ -190,7 +190,10 @@ int NeurospacesAddSymbol(char *pcname,int type);
 struct neurospaces_symbol * NeurospacesGetSymbol(char *pcname);
 
 
-
+//  --Defined in nscomm.c --
+struct symtab_HSolveListElement * PidinStackGetPhsle(struct PidinStack *ppist, 
+							  char *pcName);
+int PidinStackPushString(struct PidinStack *ppist,char *pcName);
 
 
 
