@@ -10,15 +10,14 @@
 #include "shell_func_ext.h"
 #include "sim_ext.h"
 
+#include "nsintegrator.h"
 #include "neurospaces/function.h"
 #include "neurospaces/neurospaces_ext.h"
 #include "neurospaces/pidinstack.h"
 
 
 //------------------ static function declarations ------------------
-static char * mapParameter(const char *pcfield);
-static int setParameter(struct symtab_HSolveListElement *phsle,
-			char *pcField, char *pcValue);
+static char * mapParameter(char *pcfield);
 //------------------------------------------------------------------
 
 
@@ -46,10 +45,12 @@ static int setParameter(struct symtab_HSolveListElement *phsle,
 */
 //------------------------------------------------------------------
 int NeurospacesSetField(struct symtab_HSolveListElement *phsle, 
-			struct PidinStack *ppist,char *field, char *value){
+			struct PidinStack *ppist,
+			char *pcPathname, char *field, char *value){
 
  
- 
+
+
   //!
   //! -The parameter fields "Ik" and "Gk" are solved variables in 
   //!  Heccer so they don't need a parameter to be set at all, thus they
@@ -69,7 +70,8 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
   //- we must add parameters to the child objects rather than the object
   //- itself.
   //-
-  if (phsle->iType ==  8){
+  //  if (phsle->iType == TYPE_CHANNEL_TABLEFILE){
+  if (instanceof_channel(phsle)){
 
 
 
@@ -85,37 +87,46 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
     if (strcmp(field, "Xpower") == 0){
 
       
-      //char *pcHHgate = strcat(,"/HH_activation");
+      struct PidinStack *ppistGate = PidinStackDuplicate(ppist);
+
+      //-
+      //- Allocate a new string copy so that it can
+      //- be modified to get to child objects
+      //-
 
       struct symtab_HSolveListElement *phsleGate = 
-	PidinStackGetPhsle(ppist,"/hardcoded_neutral/c/nap/HH_activation");
+	  PidinStackPushStringAndLookup(ppistGate,"HH_activation");
+    
+      PidinStackFree(ppistGate);
 
       if(!phsleGate)
 	return 0;
 
-      return setParameter(phsle,field,value);
-
-
-    }     
-    else if (strcmp(field, "Ypower") == 0){
-
-
-      struct symtab_HSolveListElement *phsleGate
-	    =   PidinStackGetPhsle(ppist,"/hardcoded_neutral/c/nap/HH_activation");
-
-      if(!phsleGate)
-	return 0;
-
-      return setParameter(phsle,field,value);
+      return setParameter(phsleGate,field,value,SETPARA_GENESIS2);
 
 
     }
+    else if (strcmp(field, "Ypower") == 0){
 
 
+
+/*       struct symtab_HSolveListElement *phsleGate =  */
+/* 	PidinStackPushStringAndLookup(ppist,"HH_inactivation"); */
+
+
+/*       if(!phsleGate) */
+/* 	return 0; */
+
+/*       return setParameter(phsleGate,field,value,SETPARA_GENESIS2); */
+
+
+   
+      return 1;
+    }
+    else if(strcmp(field,"Zpower") == 0){ return 1; }
   }
 
-
-  return setParameter(phsle,field,value);
+  return setParameter(phsle,field,value,SETPARA_GENESIS2);
 
 }
 
@@ -130,50 +141,76 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
  *
  */
 //----------------------------------------------------------------------------
-static int setParameter(struct symtab_HSolveListElement *phsle,
-			char *pcField, char *pcValue){
+int setParameter(struct symtab_HSolveListElement *phsle,
+		 char *pcField, char *pcValue,int iFlag){
 
-  struct symtab_Parameters *pparScale = ParameterNewFromNumber("scale",1.0);
-
-
-
-  double dValue = atof(pcValue);
-  struct symtab_Parameters *pparValue = ParameterNewFromNumber("value",dValue);
-
-
-  //i 
-  //i The neurospaces data struct parameters are in a linked
-  //i list and must be connected otherwise the parameter lookup will fail.
-  //i
-  pparScale->pparFirst = pparScale;
-  pparScale->pparNext = pparValue;
-
-  pparValue->pparFirst = pparScale;
-  pparValue->pparNext = NULL;
-	
-
-
-
-	  
-  struct symtab_Function *pfun = FunctionCalloc();
-  FunctionSetName(pfun,"GENESIS2");
-  FunctionAssignParameters(pfun,pparScale);
-
-
+ 
+       
   struct symtab_Parameters *pparTop = ParameterCalloc();
   
+
+  if(!pparTop)
+    return 0;
+
 
   char *pcParameter = NULL;
   pcParameter = mapParameter(pcField);
   
 
-
   ParameterSetName(pparTop,pcParameter);
-  ParameterSetType(pparTop,TYPE_PARA_FUNCTION);
-		  
 
 
-  pparTop->uValue.pfun = pfun;
+  //-
+  //- check for the GENESIS2 flag, if on then
+  //- we mut allocate and set a GEN2 function parameter.
+  //-
+  if( iFlag == SETPARA_GENESIS2 )
+  {
+	  
+    struct symtab_Parameters *pparScale = 
+      ParameterNewFromNumber("scale",1.0);
+
+
+    double dValue = atof(pcValue);
+    struct symtab_Parameters *pparValue = 
+      ParameterNewFromNumber("value",dValue);
+
+
+    //i 
+    //i The neurospaces data struct parameters are in a linked
+    //i list and must be connected otherwise the parameter lookup will fail.
+    //i
+    pparScale->pparFirst = pparScale;
+    pparScale->pparNext = pparValue;
+
+    pparValue->pparFirst = pparScale;
+    pparValue->pparNext = NULL;
+
+    
+    struct symtab_Function *pfun = FunctionCalloc();
+
+    FunctionSetName(pfun,"GENESIS2");
+    FunctionAssignParameters(pfun,pparScale);
+
+
+    //-
+    //- Here we assign the scaling function to the parameter pparTop 
+    //-
+    pparTop->uValue.pfun = pfun;
+
+    ParameterSetType(pparTop,TYPE_PARA_FUNCTION);
+
+  } 
+  else
+  {
+
+    pparTop->uValue.pcString = pcValue;
+    ParameterSetType(pparTop,TYPE_PARA_STRING);
+
+  }
+
+
+ 
   pparTop->pparFirst = pparTop;
 
 
@@ -196,7 +233,7 @@ static int setParameter(struct symtab_HSolveListElement *phsle,
  *   value.
  */
 //----------------------------------------------------------------------------
-static char * mapParameter(const char *pcfield){
+static char * mapParameter(char *pcfield){
 
   char *pcresult;
 
@@ -280,7 +317,18 @@ static char * mapParameter(const char *pcfield){
     //!
     pcresult = "G_MAX";
 
-  }else{
+  } else if(!strcmp(pcfield,"Xpower") ||
+	    !strcmp(pcfield,"Ypower") ||
+	    !strcmp(pcfield,"Zpower") )
+    {
+
+    //!
+    //! maps to the power parameter in channels.
+    //!
+    pcresult = "POWER";
+
+  }
+  else{
 
     //fprintf(stdout,"Unrecognized Compartment field: %s\n",pcresult);
     pcresult = pcfield;

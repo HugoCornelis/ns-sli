@@ -248,6 +248,9 @@ static struct symtab_HSolveListElement * GenChannelCalloc(){
     (struct symtab_HSolveListElement*)ChannelCalloc();
 
 
+  setParameter(phsleChannel,"CHANNEL_TYPE","ChannelAct",0);
+  
+
   struct symtab_IdentifierIndex *pidinChannel;
 
   pidinChannel =  IdinNewFromChars("Channel");
@@ -261,12 +264,14 @@ static struct symtab_HSolveListElement * GenChannelCalloc(){
   //!
   struct symtab_HHGate *pgathh = HHGateCalloc();
   
+  setParameter(pgathh,"state_init","0.7612305421",SETPARA_GENESIS2);
+
   struct symtab_IdentifierIndex *pidinHHGate = 
     IdinNewFromChars("HH_activation");
 
-  SymbolSetName(pgathh,pidinHHGate);
+  SymbolSetName(&pgathh->bio.ioh.iol.hsle,pidinHHGate);
 
-  SymbolAddChild(phsleChannel,pgathh);
+  SymbolAddChild(phsleChannel,&pgathh->bio.ioh.iol.hsle);
 
 
 
@@ -281,7 +286,8 @@ static struct symtab_HSolveListElement * GenChannelCalloc(){
   if(!pgatkForward)
     return NULL;
 
-  SymbolAddChild(pgathh,pgatkForward);
+  SymbolAddChild(&pgathh->bio.ioh.iol.hsle,
+		 &pgatkForward->bio.ioh.iol.hsle);
   
 
 
@@ -290,7 +296,8 @@ static struct symtab_HSolveListElement * GenChannelCalloc(){
   if(!pgatkBackward)
     return NULL;
 
-  SymbolAddChild(pgathh,pgatkBackward);
+  SymbolAddChild(&pgathh->bio.ioh.iol.hsle,
+		 &pgatkBackward->bio.ioh.iol.hsle);
 
 
 
@@ -334,7 +341,7 @@ static struct symtab_GateKinetic *CreateGateKinetic(int iDirection){
     return NULL;
 
 
-  SymbolSetName(pgatk,pidinDirection);
+  SymbolSetName(&pgatk->bio.ioh.iol.hsle,pidinDirection);
 
   return pgatk;
 

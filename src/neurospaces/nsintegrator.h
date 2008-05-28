@@ -27,9 +27,20 @@
 
 
 
+//!
+//! Used in nsetfield.c
+//! These are flags for passing to setParameter that
+//! allow using different functions of the model container
+//! to be called. 
+//!
+#define SETPARA_GENESIS2 ((int)0x1 << 0)
+
 
 #define MAX_HECCERS 100
 #define MAX_NSSYMBOLS 200
+
+
+
 
 
 
@@ -190,10 +201,9 @@ int NeurospacesAddSymbol(char *pcname,int type);
 struct neurospaces_symbol * NeurospacesGetSymbol(char *pcname);
 
 
-//  --Defined in nscomm.c --
-struct symtab_HSolveListElement * PidinStackGetPhsle(struct PidinStack *ppist, 
-							  char *pcName);
-int PidinStackPushString(struct PidinStack *ppist,char *pcName);
+//- -- Defined in nssetfield.c --
+int setParameter(struct symtab_HSolveListElement *phsle,
+		 char *pcField, char *pcValue,int iFlag);
 
 
 

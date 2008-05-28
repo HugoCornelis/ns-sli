@@ -44,8 +44,8 @@ setupalpha /hardcoded_neutral/c/nap \
 	-range -0.1 0.05
 
 
-addmsg /hardcoded_neutral/c /hardcoded_neutral/c/nap VOLTAGE Vm
-addmsg /hardcoded_neutral/c/nap /hardcoded_neutral/c CHANNEL Gk Ek
+//addmsg /hardcoded_neutral/c /hardcoded_neutral/c/nap VOLTAGE Vm
+//addmsg /hardcoded_neutral/c/nap /hardcoded_neutral/c CHANNEL Gk Ek
 
 
 

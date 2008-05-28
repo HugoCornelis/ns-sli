@@ -58,7 +58,7 @@ void HeccerStep(int iMode, double dSimulationTime, int iSteps, int iVerbose){
     HeccerHeccs(ppheccer[i], 
 	     ppheccer[i]->dTime + ppheccer[i]->dStep);
     
-    fprintf("Heccer Instance (%s): ",ppheccer[i]->pcName);
+    fprintf(stdout,"Heccer Instance (%s): ",ppheccer[i]->pcName);
     fprintf(stdout,"time = %f ; step = %d          ",
 	    dSimulationTime,  ppheccer[i]->dTime);
   }

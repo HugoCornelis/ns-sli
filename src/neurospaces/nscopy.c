@@ -35,7 +35,7 @@
  *   name pcDstname.
  */
 //-------------------------------------------------------------------
-int NSCopy(const struct PidinStack *ppistSrc, char *pcDst){
+int NSCopy(struct PidinStack *ppistSrc, char *pcDst){
 
 
   struct symtab_HSolveListElement *phsleDst = NULL;
