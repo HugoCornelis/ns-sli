@@ -126,8 +126,20 @@ int NSmsg(const char *pcSrcpath, const char *pcDstpath, const char *pcTypename){
          (struct symtab_BioComponent *)phsleDst, ppar);
 
       return 1;
-    }
 
+
+  }
+  else if (strcmp(pcTypename, "VOLTAGE") == 0){
+
+    return 1;
+
+  }
+  else if(strcmp(pcTypename,"CHANNEL") == 0){
+
+
+    return 1;
+
+  }
 
 
   return 0;

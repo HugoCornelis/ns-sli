@@ -113,7 +113,7 @@ int NSGenesisInitialize(){
 
    if( !pnsintegrator->ppheccer ){
 
-     fprintf(stderr,"Error initializing Heccer\n");
+     fprintf(stderr,"Error initializing Heccer storage\n");
      return -1;
 
    }
@@ -136,6 +136,44 @@ int NSGenesisInitialize(){
        exit(1); 
      } 
 
+
+    //------------------------------------------------------------
+   //-
+   //- Create a global heccer with default options.
+   //- 
+
+   struct Heccer *pheccer = HeccerNew("Options_Only",NULL,NULL,NULL);
+
+   if(!pheccer){
+
+      fprintf(stderr,
+            "Error allocating Heccer for Context %s\n",
+            "Options_Only");
+     return -1;
+
+   }
+
+   
+/*    pheccer->dStep = 0.0; */
+
+/*    pheccer->dIntervalStart = HECCER_INTERVAL_DEFAULT_START; */
+
+/*    phecccer->dIntervalEnd = HECCER_INTERVAL_DEFAULT_END; */
+
+/*    pheccer->dBasalActivatorStart =  */
+/*      HECCER_INTERVAL_BASAL_ACTIVATOR_DEFAULT_START; */
+
+/*    pheccer->dBasalActivatorEnd =  */
+/*      HECCER_INTERVAL_BASAL_ACTIVATOR_DEFAULT_END; */
+
+/*    pheccer->iIntervalEntries = HECCER_INTERVAL_DEFAULT_ENTRIES;	 */
+
+
+/*    pheccer->iSmallTableSize = HECCER_INTERPOL_INTERVAL_DEFAULT_ENTRIES; */
+
+
+   pnsintegrator->pheccerOptions = pheccer;
+   //---------------------------------------------------
 
    pelnsintegrator->pnsintegrator = pnsintegrator; 
 

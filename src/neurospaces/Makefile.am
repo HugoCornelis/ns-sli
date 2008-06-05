@@ -2,6 +2,7 @@ shelldir = $(top_srcdir)/src/shell
 simdir = $(top_srcdir)/src/sim
 scriptdir = $(top_srcdir)/src/script
 utildir = $(top_srcdir)/src/util
+olfdir = $(top_srcdir)/src/olf
 
 c2genesisdir = $(top_srcdir)/src/c2genesis
 c2genesis = $(c2genesisdir)/c2genesis
@@ -9,7 +10,7 @@ makestructs = $(c2genesisdir)/makestructs
 makelib = $(c2genesisdir)/makelib
 
 
-INCLUDES = -I$(utildir) -I$(shelldir) -I$(simdir) -I$(scriptdir) -I/usr/local/neurospaces/instrumentor 
+INCLUDES = -I$(utildir) -I$(shelldir) -I$(simdir) -I$(scriptdir) -I$(olfdir) -I/usr/local/neurospaces/instrumentor 
 
 AM_CPPFLAGS = -DPRE_PROTO_TRAVERSAL
 
@@ -83,6 +84,8 @@ libneurospaces_a_SOURCES = \
 	nscreate.c \
 	nscopy.c \
 	nsmsg.c \
+	nscomm.c \
+	nssetup.c \
 	nssymboltable.c \
 	nsintegratorverbose.c \
 	heccercreate.c \

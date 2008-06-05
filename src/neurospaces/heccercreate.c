@@ -45,12 +45,6 @@ extern double			clock_value[NCLOCKS];
 //------------------------------------------------------------------
 int HeccerCreate(char* pcContext){
 
-  char *pcHeccer =  strdup(pcContext);
-
-  if(!pcHeccer){
-    fprintf(stderr,"Error allocating pcHeccer (%s)\n",pcContext);
-    return -1;
-  }
 
   struct Heccer *pheccer = HeccerNew(pcContext,NULL,NULL,NULL);
 
@@ -73,9 +67,14 @@ int HeccerCreate(char* pcContext){
   struct Neurospaces *pneuro = 
      pnsintegrator->pelNeurospaces->pneuro;
 
+
+  //-
+  //- Here we copy over the heccer options parsed from
+  //- a setup if present.
+  //-
+  pheccer->ho = pnsintegrator->pheccerOptions->ho;
+
   
-
-
   HeccerConstruct(pheccer,(void *)pneuro,pcContext);
 
   HeccerCompileP1(pheccer);

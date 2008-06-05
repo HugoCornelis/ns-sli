@@ -33,7 +33,8 @@
 //! allow using different functions of the model container
 //! to be called. 
 //!
-#define SETPARA_GENESIS2 ((int)0x1 << 0)
+#define SETPARA_GENESIS2 2
+#define SETPARA_NUM 3
 
 
 #define MAX_HECCERS 100
@@ -105,9 +106,8 @@ struct neurospaces_integrator {
   /*!
    *  A pointer to a Heccer representation in the GENESIS SLI.
    */
-  struct neurospaces_type *pelHeccer; 
-  
-
+  //struct neurospaces_type *pelHeccer; 
+  struct Heccer *pheccerOptions;
 
 
   /*!
@@ -201,11 +201,13 @@ int NeurospacesAddSymbol(char *pcname,int type);
 struct neurospaces_symbol * NeurospacesGetSymbol(char *pcname);
 
 
-//- -- Defined in nssetfield.c --
+//- -- Defined in nscomm.c --
 int setParameter(struct symtab_HSolveListElement *phsle,
 		 char *pcField, char *pcValue,int iFlag);
 
 
-
+//- -- Defined in nssetup.c --
+int NSSetupAlpha( char *pcName, char *pcField, char **pcArgs, 
+		  int iArgc);
 
 #endif

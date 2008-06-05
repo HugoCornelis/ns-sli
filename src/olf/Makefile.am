@@ -2,6 +2,8 @@ shelldir = $(top_srcdir)/src/shell
 simdir = $(top_srcdir)/src/sim
 scriptdir = $(top_srcdir)/src/script
 utildir = $(top_srcdir)/src/util
+nsdir = $(top_srcdir)/src/neurospaces
+hierarchy = /usr/local/neurospaces/instrumentor
 
 c2genesisdir = $(top_srcdir)/src/c2genesis
 c2genesis = $(c2genesisdir)/c2genesis
@@ -9,7 +11,7 @@ makestructs = $(c2genesisdir)/makestructs
 makelib = $(c2genesisdir)/makelib
 
 
-INCLUDES = -I$(utildir) -I$(shelldir) -I$(simdir) -I$(scriptdir) -I/usr/local/neurospaces/instrumentor 
+INCLUDES = -I$(utildir) -I$(shelldir) -I$(simdir) -I$(scriptdir) -I$(nsdir) -I$(hierarchy)  -I/usr/local/neurospaces/instrumentor 
 
 AM_CPPFLAGS = -DPRE_PROTO_TRAVERSAL
 
@@ -42,24 +44,11 @@ olf_l@.c: olflib.g
 
 noinst_HEADERS = \
 	olf_defs.h \
-	olf_ext.h \
-	olf_struct.h
+	olf_ext.h 
 
 
 libolf_a_SOURCES = \
-	dd_syn.c \
-	disk_in.c \
-	interp2d.c \
-	new_interp.c \
-	receptor2.c \
-	receptor.c \
-	tab2channel.c \
-	tabchannel.c \
-	tabcurrent.c \
-	tabfiles.c \
-	tabgate.c \
-	table2d.c \
-	table.c \
+	olfsli.c \
 	olf_d@.c \
 	olf_g@.c \
 	olf_l@.c 

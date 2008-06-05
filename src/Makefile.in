@@ -52,8 +52,8 @@ am_nsgenesis_OBJECTS = loadlib.$(OBJEXT)
 nsgenesis_OBJECTS = $(am_nsgenesis_OBJECTS)
 nsgenesis_DEPENDENCIES = $(shelldir)/shell_lib.o $(simdir)/libsim.a \
 	$(shelldir)/libshell.a $(utildir)/libutil.a \
-	$(scriptdir)/libscript.a $(pardir)/libpar.a \
-	$(nsdir)/libneurospaces.a $(olfdir)/libolf.a
+	$(scriptdir)/libscript.a $(pardir)/libpar.a $(olfdir)/libolf.a \
+	$(nsdir)/libneurospaces.a
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I.
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -180,8 +180,8 @@ nsgenesis_LDADD = \
 	$(utildir)/libutil.a \
 	$(scriptdir)/libscript.a \
 	$(pardir)/libpar.a \
-	$(nsdir)/libneurospaces.a \
 	$(olfdir)/libolf.a \
+	$(nsdir)/libneurospaces.a \
 	-L/usr/local/lib/model-container -lneurospacesread \
 	-L/usr/local/lib/neurospaces/algorithms/symbol -lsymbol_algorithms \
 	-L/usr/local/lib/heccer -lheccer \

@@ -16,7 +16,7 @@ create tabchannel /hardcoded_neutral/c/nap
 
 setfield /hardcoded_neutral/c/nap \
 	Ek 0.045 \
-	Gbar 0.0002092393115 \
+	Gbar 2.78986e-08 \
 	Ik 0.0 \
 	Gk 0.0 \
 	Xpower 3.0 \
@@ -44,8 +44,8 @@ setupalpha /hardcoded_neutral/c/nap \
 	-range -0.1 0.05
 
 
-//addmsg /hardcoded_neutral/c /hardcoded_neutral/c/nap VOLTAGE Vm
-//addmsg /hardcoded_neutral/c/nap /hardcoded_neutral/c CHANNEL Gk Ek
+addmsg /hardcoded_neutral/c /hardcoded_neutral/c/nap VOLTAGE Vm
+addmsg /hardcoded_neutral/c/nap /hardcoded_neutral/c CHANNEL Gk Ek
 
 
 
@@ -64,52 +64,6 @@ echo Iteration 0
 
 step 1
 
-echo -------
-echo Iteration 1
-
-step 1
-
-echo -------
-echo Iteration 2
-
-step 1
-
-echo -------
-echo Iteration 3
-
-step 1
-
-echo -------
-echo Iteration 4
-
-step 1
-
-echo -------
-echo Iteration 5
-
-step 1
-
-echo -------
-echo Iteration 6
-
-step 1
-
-echo -------
-echo Iteration 7
-
-step 1
-
-echo -------
-echo Iteration 8
-
-step 1
-
-echo -------
-echo Iteration 9
-
-step 1
-
 
 //call model_container NEUROSPACES_QUERY
 
-exit

@@ -35,8 +35,8 @@ nsgenesis_LDADD = \
 	$(utildir)/libutil.a \
 	$(scriptdir)/libscript.a \
 	$(pardir)/libpar.a \
-	$(nsdir)/libneurospaces.a \
 	$(olfdir)/libolf.a \
+	$(nsdir)/libneurospaces.a \
 	-L/usr/local/lib/model-container -lneurospacesread \
 	-L/usr/local/lib/neurospaces/algorithms/symbol -lsymbol_algorithms \
 	-L/usr/local/lib/heccer -lheccer \
