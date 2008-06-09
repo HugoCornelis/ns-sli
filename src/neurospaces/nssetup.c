@@ -60,7 +60,7 @@ int NSSetupAlpha( char *pcName, char *pcField, char **pcArgs,
     //-    HH_AB_Factor_Flag - is not present in the double array, 
     //-                        it's allocated seperately.
     //-    HH_AB_Add  -  is at index 2
-    //-    HH_AB_Offset - is at index 3
+    //-    HH_AB_Offset_E - is at index 3
     //-    HH_AB_Tau - is at index 4
     //-
     setParameter(phsleForward,"HH_AB_Scale",pcArgs[0],SETPARA_NUM);
@@ -95,7 +95,7 @@ int NSSetupAlpha( char *pcName, char *pcField, char **pcArgs,
     //-    HH_AB_Factor_Flag - is not present in the double array, 
     //-                        it's allocated seperately.
     //-    HH_AB_Add  -  is at index 7
-    //-    HH_AB_Offset - is at index 8
+    //-    HH_AB_Offset_E - is at index 8
     //-    HH_AB_Tau - is at index 9
     //-
     setParameter(phsleBackward,"HH_AB_Scale",pcArgs[5],SETPARA_NUM);

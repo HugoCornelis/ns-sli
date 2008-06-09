@@ -248,7 +248,7 @@ static struct symtab_HSolveListElement * GenChannelCalloc(){
     (struct symtab_HSolveListElement*)ChannelCalloc();
 
 
-  setParameter(phsleChannel,"CHANNEL_TYPE","ChannelAct",0);
+  //  setParameter(phsleChannel,"CHANNEL_TYPE","ChannelAct",0);
   
 
   struct symtab_IdentifierIndex *pidinChannel;
