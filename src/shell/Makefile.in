@@ -166,13 +166,12 @@ BUILT_SOURCES = \
 	shell_g@.h
 
 noinst_HEADERS = \
-	iofunc.h    \
-	NULLArgv.h  \
-	shell_defs.h  \
- 	shell_ext.h   \
-	shell_func_ext.h  \
-	shell_g@.h   \
-	shell.h   \
+	iofunc.h \
+	NULLArgv.h \
+	shell_defs.h \
+	shell_ext.h \
+	shell_func_ext.h \
+	shell.h \
 	shell_struct.h
 
 libshell_a_SOURCES = \

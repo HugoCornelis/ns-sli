@@ -1,9 +1,17 @@
-AC_INIT(src/sim/sim_main.c)
 
-PACKAGE=ns-genesis-SLI
-VERSION=0.1
 
-AM_INIT_AUTOMAKE($PACKAGE,$VERSION)
+# $Format: "AC_INIT(${package}, ${label}, ${email})"$
+AC_INIT(ns-genesis-SLI, network-2, hugo.cornelis@gmail.com)
+
+
+
+AC_CONFIG_SRCDIR(src)
+AC_CONFIG_HEADER(src/config.h)
+
+
+
+# $Format: "AM_INIT_AUTOMAKE(${package}, ${label})"$
+AM_INIT_AUTOMAKE(ns-genesis-SLI, network-2)
 
 
 AC_PROG_CC
@@ -13,9 +21,6 @@ AC_PROG_RANLIB
 AC_PROG_CPP
 
 
-AC_CONFIG_SRCDIR(src)
-
-AC_CONFIG_HEADER(src/config.h)
 
 
 AC_OUTPUT(Makefile \

@@ -16,3 +16,5 @@ src/c2genesis/makelib$
 src/c2genesis/makestructs$
 ^docs/html
 dox.tag
+^html
+^tests/html

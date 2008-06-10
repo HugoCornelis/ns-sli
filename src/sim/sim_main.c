@@ -183,9 +183,16 @@ int	GENOPT_NoX = 0;
 
 void DisplayHeader()
 {
+
+
+    // $Format: "    static char *pcVersion=\"${package}-${label}\";"$
+    static char *pcVersion="ns-genesis-SLI-network-2";
+
+
 printf("==========================================================================\n");
 printf("               Neurospaces Genesis Scripting Interface\n");
 printf("                          Based off of GENESIS %s\n\n", VERSIONSTR);
+printf("                        This is version %s\n",pcVersion);
 printf("Type \"help\" for help.\n");
 printf("==========================================================================\n\n");
 }

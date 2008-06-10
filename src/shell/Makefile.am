@@ -62,15 +62,6 @@ libshell_a_SOURCES =	\
 	shell_tty.c \
 	shell_g@.c  
 
-noinst_HEADERS = \
-	iofunc.h    \
-	NULLArgv.h  \
-	shell_defs.h  \
- 	shell_ext.h   \
-	shell_func_ext.h  \
-	shell_g@.h   \
-	shell.h   \
-	shell_struct.h
 
 
 
