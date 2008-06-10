@@ -61,14 +61,15 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
   //- we must add parameters to the child objects rather than the object
   //- itself.
   //-
-  //  if (phsle->iType == TYPE_CHANNEL_TABLEFILE){
   if (instanceof_channel(phsle)){
 
 
-
     //-
-    //- Parameter Xpower is set in the HH gate object, which
-    //- is set as a child to the phsle object in the model container.
+    //- The HHGate is only allocated when we see an Xpower value 
+    //- Greater than zero. 
+    //- 
+    //- Parameter Xpower is set in the HH gate object, which is
+    //- nexted in the Channel.
     //- 
     //-    Channel -> 
     //-               HH_gate -parameter-> Xpower
@@ -77,18 +78,19 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
     //-
     if (strcmp(field, "Xpower") == 0){
 
-      
-      struct PidinStack *ppistGate = PidinStackDuplicate(ppist);
+
+     //- if zero, no need to create a gate.
+      double dNumber = strtod(value,NULL);
+
+      if(dNumber == 0.0)
+	return 1;
 
       //-
-      //- Allocate a new string copy so that it can
-      //- be modified to get to child objects
-      //-
-
+      //- we create our HH gate. Function creates
+      //- the gate, ssets it as a child to phsle,
+      //- and returns a pointer to the gate.
       struct symtab_HSolveListElement *phsleGate = 
-	  PidinStackPushStringAndLookup(ppistGate,"HH_activation");
-    
-      PidinStackFree(ppistGate);
+	CreateHHGate(phsle, "HH_activation");
 
       if(!phsleGate)
 	return 0;
@@ -101,20 +103,25 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 
 
 
-/*       struct symtab_HSolveListElement *phsleGate =  */
-/* 	PidinStackPushStringAndLookup(ppist,"HH_inactivation"); */
+     //- if zero, no need to create a gate.
+      double dNumber = strtod(value,NULL);
 
+      if(dNumber == 0.0)
+	return 1;
+      
 
-/*       if(!phsleGate) */
-/* 	return 0; */
+      struct symtab_HSolveListElement *phsleGate = 
+	CreateHHGate(phsle, "HH_deactivation");
 
-/*       return setParameter(phsleGate,field,value,SETPARA_GENESIS2); */
+      if(!phsleGate)
+	return 0;
 
+      return setParameter(phsleGate,field,value,SETPARA_GENESIS2);
 
-   
-      return 1;
     }
     else if(strcmp(field,"Zpower") == 0){ return 1; }
+
+
   }
 
   return setParameter(phsle,field,value,SETPARA_GENESIS2);

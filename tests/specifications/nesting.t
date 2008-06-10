@@ -14,17 +14,8 @@ my $printinfo_output = "/hardcoded_neutral
 /hardcoded_neutral/c1/c2/c3/c4/c5
 /hardcoded_neutral/c1/c2/c3/c4/c5/c6
 /hardcoded_neutral/c1/c2/c3/nap3
-/hardcoded_neutral/c1/c2/c3/nap3/HHGate
-/hardcoded_neutral/c1/c2/c3/nap3/HHGate/forward
-/hardcoded_neutral/c1/c2/c3/nap3/HHGate/backward
 /hardcoded_neutral/c1/c2/nap2
-/hardcoded_neutral/c1/c2/nap2/HHGate
-/hardcoded_neutral/c1/c2/nap2/HHGate/forward
-/hardcoded_neutral/c1/c2/nap2/HHGate/backward
-/hardcoded_neutral/c1/nap
-/hardcoded_neutral/c1/nap/HHGate
-/hardcoded_neutral/c1/nap/HHGate/forward
-/hardcoded_neutral/c1/nap/HHGate/backward";
+/hardcoded_neutral/c1/nap";
 
 
 
