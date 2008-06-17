@@ -111,7 +111,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
       
 
       struct symtab_HSolveListElement *phsleGate = 
-	CreateHHGate(phsle, "HH_deactivation");
+	CreateHHGate(phsle, "HH_inactivation");
 
       if(!phsleGate)
 	return 0;

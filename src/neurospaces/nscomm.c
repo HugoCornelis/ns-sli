@@ -25,6 +25,87 @@ static char * mapParameter(char *pcfield);
 
 
 
+
+
+//---------------------------------------------------------------------------
+/*
+ *
+ */
+//---------------------------------------------------------------------------
+struct GateState{
+
+  char *pcName;
+  char *pcValue;
+
+};
+
+
+int setStateInit(struct PidinStack *ppist){
+
+
+  struct GateState GateStateTableInitializers[] =
+  {
+    {"nap", "0.7612305421"},
+    {"naf/HH_inactivation", "0.26397776926502026"},
+    {"naf/HH_activation","0.007840644937141521"},
+    {NULL, NULL},
+  };
+
+
+  
+  char pc[200];
+  bzero((void*)pc,200);
+
+  PidinStackString(ppist, pc, sizeof(pc));
+      
+  int i;
+  int iNameLen;
+  int iContextLen  = strlen(pc);
+  char *pcTail;
+  struct symtab_HSolveListElement *phsle;
+
+  for (i = 0 ; GateStateTableInitializers[i].pcName != NULL; i++)
+  {
+    
+    
+    iNameLen = strlen(GateStateTableInitializers[i].pcName);
+
+    if(iNameLen >= iContextLen)
+      return 0;
+
+    pcTail = &pc[iContextLen - iNameLen];
+
+
+    if(!strcmp(GateStateTableInitializers[i].pcName,pcTail)){
+
+      phsle = PidinStackLookupTopSymbol(ppist);
+
+      if(!phsle)
+	return 0;
+
+      setParameter(phsle, "state_init",
+		   GateStateTableInitializers[i].pcValue,
+		   SETPARA_GENESIS2);
+
+      return 1;
+
+    }
+ 
+
+    
+  }
+
+
+  return 1;
+
+}
+//---------------------------------------------------------------------------
+
+
+
+
+
+
 //----------------------------------------------------------------------------
 /*!
  *  \fun int setParameter(struct symtab_HSolveListElement *phsle,

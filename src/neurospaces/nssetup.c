@@ -9,7 +9,7 @@
 #include <stdio.h>
 #include "shell_func_ext.h"
 #include "sim_ext.h"
-
+#include <string.h>
 #include "nsintegrator.h"
 
 #include "neurospaces/function.h"
@@ -28,6 +28,8 @@ int NSSetupAlpha( char *pcName, char *pcField, char **pcArgs,
   struct symtab_HSolveListElement *phsle;
   int i;
 
+
+
   if(!strcmp(pcField,"X") )
   {
 
@@ -37,14 +39,18 @@ int NSSetupAlpha( char *pcName, char *pcField, char **pcArgs,
 
 
 
-
     //- First we fetch the forward gate
     struct PidinStack *ppistForward = PidinStackDuplicate(ppist);
 
     PidinStackPushString(ppistForward,"HH_activation");
 
+
+    //- Here we set the state_init parameter. 
+    setStateInit(ppistForward);
+  
+
     struct symtab_HSolveListElement *phsleForward = 
-	  PidinStackPushStringAndLookup(ppistForward,"forward");
+	  PidinStackPushStringAndLookup(ppistForward,"A");
     
     PidinStackFree(ppistForward);
 
@@ -78,7 +84,7 @@ int NSSetupAlpha( char *pcName, char *pcField, char **pcArgs,
     PidinStackPushString(ppistBackward,"HH_activation");
 
     struct symtab_HSolveListElement *phsleBackward =
-      PidinStackPushStringAndLookup(ppistBackward,"backward");
+      PidinStackPushStringAndLookup(ppistBackward,"B");
 
 
     PidinStackFree(ppistBackward);
@@ -134,16 +140,19 @@ int NSSetupAlpha( char *pcName, char *pcField, char **pcArgs,
     //- get a contect for the element we're looking for
     struct PidinStack *ppist  = PidinStackParse(pcName);
 
-
-
-
+ 
     //- First we fetch the forward gate
     struct PidinStack *ppistForward = PidinStackDuplicate(ppist);
 
-    PidinStackPushString(ppistForward,"HH_activation");
+    PidinStackPushString(ppistForward,"HH_inactivation");
+
+
+    //- Here we set the state_init parameter. 
+    setStateInit(ppistForward);
+  
 
     struct symtab_HSolveListElement *phsleForward = 
-	  PidinStackPushStringAndLookup(ppistForward,"forward");
+	  PidinStackPushStringAndLookup(ppistForward,"A");
     
     PidinStackFree(ppistForward);
 
@@ -174,10 +183,10 @@ int NSSetupAlpha( char *pcName, char *pcField, char **pcArgs,
     //- Now fetch the backward gate.
     struct PidinStack *ppistBackward = PidinStackDuplicate(ppist);
 
-    PidinStackPushString(ppistBackward,"HH_deactivation");
+    PidinStackPushString(ppistBackward,"HH_inactivation");
 
     struct symtab_HSolveListElement *phsleBackward =
-      PidinStackPushStringAndLookup(ppistBackward,"backward");
+      PidinStackPushStringAndLookup(ppistBackward,"B");
 
 
     PidinStackFree(ppistBackward);

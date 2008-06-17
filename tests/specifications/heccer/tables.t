@@ -14,6 +14,9 @@ my $test
        command_definitions => [
 
 
+
+
+
 			       {
 				arguments => [
 					         "$::config->{core_directory}/tests/scripts/heccer/table-nap.g",
@@ -30,6 +33,28 @@ my $test
 				description => "Persistent sodium gate tabulation",
 				#numerical_compare => 'small arithmetic due to double to float conversions and vice versa',
 			       },
+
+
+
+			       {
+				arguments => [
+
+					      "$::config->{core_directory}/tests/scripts/heccer/table-naf.g",
+					     ],
+				command => 'src/nsgenesis',
+				command_tests => [
+						  {
+						   description => "Are gates tabulated correctly, simple sodium gates ?",
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/table-nap.txt | perl -pe 's/unnamed test/hardcoded_neutral/g'`),
+						   timeout => 5,
+						   write => undef,
+						  },
+						 ],
+				description => "Simple sodium gate tabulation",
+			       },
+
+
+
 			      ],
        description => "Gate tabulation",
        name => 'tables.t',

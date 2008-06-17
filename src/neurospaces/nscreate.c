@@ -159,15 +159,11 @@ static struct symtab_HSolveListElement * GenChannelCalloc(){
     (struct symtab_HSolveListElement*)ChannelCalloc();
 
 
-  setParameter(phsleChannel,"CHANNEL_TYPE","ChannelAct",0);
+  //setParameter(phsleChannel,"CHANNEL_TYPE","ChannelAct",0);
   
 
   struct symtab_IdentifierIndex *pidinChannel;
 
-
-
-
- 
 
   return phsleChannel;
 
@@ -184,7 +180,7 @@ static struct symtab_HSolveListElement * GenChannelCalloc(){
 /*!
  *  \fn int CreateHHGate(struct symtab_HSolveListElement phsleChannel, 
 		 char *pcName)
- *  \param phsleChannel
+ *  \param phsleChannel Pointer to the Channel to attach gates.
  *  \param pcName
  *
  */
@@ -204,11 +200,13 @@ struct symtab_HSolveListElement * CreateHHGate(
     return NULL;
 
 
-  setParameter(pgathh,"state_init","0.7612305421",SETPARA_GENESIS2);
+
 
 
   struct symtab_IdentifierIndex *pidinHHGate = 
     IdinNewFromChars(pcName);
+
+
 
   if(!pidinHHGate)
     return NULL;
@@ -220,12 +218,12 @@ struct symtab_HSolveListElement * CreateHHGate(
 
   
   //!
-  //! Need to add a name for the forward and backward gates.
-  //! "Forward" and "Backward" respectively, then make these
+  //! Need to add a name for the forward and backward gate kinetics.
+  //! "forward" and "backward" respectively, then make these
   //! the children of the HH Gate pgathh.
   //!
   struct symtab_GateKinetic *pgatkForward = 
-    CreateGateKinetic("forward");
+    CreateGateKinetic("A");
 
   if(!pgatkForward)
     return NULL;
@@ -236,7 +234,7 @@ struct symtab_HSolveListElement * CreateHHGate(
 
 
   struct symtab_GateKinetic *pgatkBackward = 
-    CreateGateKinetic("backward");
+    CreateGateKinetic("B");
 
   if(!pgatkBackward)
     return NULL;
@@ -254,7 +252,7 @@ struct symtab_HSolveListElement * CreateHHGate(
 
 //------------------------------------------------------------------
 /*
- *
+ * \fun static struct symtab_GateKinetic *CreateGateKinetic(char *pcDirection)
  */
 //------------------------------------------------------------------
 static struct symtab_GateKinetic *CreateGateKinetic(char *pcDirection){

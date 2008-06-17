@@ -56,6 +56,8 @@ int NSCopy(struct PidinStack *ppistSrc, char *pcDst){
 
   }
 
+
+
   //t copy /h/c /h/d
   //t ce /h ; cp c d
 

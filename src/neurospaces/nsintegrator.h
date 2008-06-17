@@ -194,8 +194,6 @@ int HeccerCreate(char* idin);
 void singleHeccerStatus(struct Heccer *pheccer);
 
 
-
-
 //i -- Defined in nssymboltable.c --
 int NeurospacesAddSymbol(char *pcname,int type);
 struct neurospaces_symbol * NeurospacesGetSymbol(char *pcname);
