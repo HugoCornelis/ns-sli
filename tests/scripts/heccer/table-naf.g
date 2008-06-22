@@ -55,8 +55,8 @@ setupalpha /hardcoded_neutral/c/naf \
 	-size 50 \
 	-range -0.1 0.05
 
-addmsg c c/naf VOLTAGE Vm
-addmsg c/naf c CHANNEL Gk Ek
+addmsg /hardcoded_neutral/c /hardcoded_neutral/c/naf VOLTAGE Vm
+addmsg /hardcoded_neutral/c/naf /hardcoded_neutral/c CHANNEL Gk Ek
 
 
 

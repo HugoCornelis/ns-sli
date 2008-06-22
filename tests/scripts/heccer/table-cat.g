@@ -1,13 +1,20 @@
 setclock 0 2e-5
-create compartment c
-setfield c \
+
+create neutral hardcoded_neutral 
+
+create compartment /hardcoded_neutral/c
+
+setfield /hardcoded_neutral/c \
 	Cm 5.755329373e-12 \
 	Em -0.08 \
 	initVm -0.068 \
 	Ra 772813.4375 \
 	Rm 8.548598272e9
-create tabchannel c/cat
-setfield c/cat \
+
+create tabchannel /hardcoded_neutral/c/cat
+
+
+setfield /hardcoded_neutral/c/cat \
 	Ek 0.14702148735523224 \
 	Gbar 1.7546722963501793e-09 \
 	Ik 0.0 \
@@ -15,7 +22,9 @@ setfield c/cat \
 	Xpower 1.0 \
 	Ypower 1.0 \
 	Zpower 0.0
-setupalpha c/cat \
+
+
+setupalpha /hardcoded_neutral/c/cat \
 	X \
 	2.6e3 \
 	0.0 \
@@ -29,7 +38,9 @@ setupalpha c/cat \
 	4e-3 \
 	-size 50 \
 	-range -0.1 0.05
-setupalpha c/cat \
+
+
+setupalpha /hardcoded_neutral/c/cat \
 	Y \
 	0.0025e3 \
 	0.0 \
@@ -43,31 +54,27 @@ setupalpha c/cat \
 	-10.0e-3 \
 	-size 50 \
 	-range -0.1 0.05
-addmsg c c/cat VOLTAGE Vm
-addmsg c/cat c CHANNEL Gk Ek
-create hsolve h
-setmethod h 11
-setfield h \
-	calcmode 0 \
-	chanmode 4 \
-	path /c
-call h SETUP
+
+addmsg /hardcoded_neutral/c /hardcoded_neutral/c VOLTAGE Vm
+addmsg /hardcoded_neutral/c/cat /hardcoded_neutral/c CHANNEL Gk Ek
+
+
+
+silent 1
+
 reset
 
-function showfields
+set_nsintegrator_verbose_level 2
 
-	showfield h \
-		chip[4] \
-		chip[5] \
-		givals[3] \
-		givals[4] \
-		results[0] \
-		results[1] \
-		vm[0]
-end
+echo Initiated
 
-function showtables
+call neurospaces_integrator NSINTEGRATOR_DUMP
 
-	showfield c/cat *
-end
+echo -------
+echo Iteration 0
+
+step 1
+
+
+
 

@@ -36,6 +36,12 @@ my $test
 
 
 
+
+
+
+
+
+
 			       {
 				arguments => [
 
@@ -45,13 +51,100 @@ my $test
 				command_tests => [
 						  {
 						   description => "Are gates tabulated correctly, simple sodium gates ?",
-						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/table-nap.txt | perl -pe 's/unnamed test/hardcoded_neutral/g'`),
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/table-naf.txt | perl -pe 's/unnamed test/hardcoded_neutral/g'`),
 						   timeout => 5,
 						   write => undef,
 						  },
 						 ],
 				description => "Simple sodium gate tabulation",
 			       },
+
+
+
+
+
+
+
+
+			       {
+				arguments => [
+
+					      "$::config->{core_directory}/tests/scripts/heccer/table-cat.g",
+					     ],
+				command => 'src/nsgenesis',
+				command_tests => [
+						  {
+						  description => "Are gates tabulated correctly, calcium t-type gates ?",
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/table-cat.txt | perl -pe 's/unnamed test/hardcoded_neutral/g'`),
+						   timeout => 5,
+						   write => undef,
+						  },
+						 ],
+				description => "Calcium t-type gate tabulation",
+			       },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			       {
+				arguments => [
+
+					      "$::config->{core_directory}/tests/scripts/heccer/table-cap.g",
+					     ],
+				command => 'src/nsgenesis',
+				command_tests => [
+						  {
+						  description => "Are gates tabulated correctly, p type calcium gates ?",
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/table-cap.txt | perl -pe 's/unnamed test/hardcoded_neutral/g'`),
+						   timeout => 5,
+						   write => undef,
+						  },
+						 ],
+				description => "p type calcium gate tabulation",
+			       },
+
+
+
+
+
+
+
+
+
+
+			       {
+				arguments => [
+
+					      "$::config->{core_directory}/tests/scripts/heccer/table-ka.g",
+					     ],
+				command => 'src/nsgenesis',
+				command_tests => [
+						  {
+						   description => "Are gates tabulated correctly, simple potassium gates ?",
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/table-ka.txt | perl -pe 's/unnamed test/hardcoded_neutral/g'`),
+						   timeout => 5,
+						   write => undef,
+						  },
+						 ],
+					description => "Simple potassium gate tabulation",
+			       },
+
+
+
+
+
+
+
 
 
 
