@@ -10,6 +10,20 @@
 addfunc	setupalpha SetupAlpha
 
 
+
+
+
+
+addaction TABCREATE 200
+addaction TABFILL 201
+addaction TABDELETE 202
+addaction TABSAVE 203
+addaction TABREAD 204
+addaction TAB2FIELDS 207
+addaction TABOP 208
+
+
+
 // Values for the fill modes for the tables
 int	B_SPLINE_FILL = 0
 int	C_SPLINE_FILL = 1
@@ -41,6 +55,9 @@ int INSTANTZ = 4
 //==========================================================================
 //	name		data            function	class	
 //==========================================================================
-
+object	tabchannel		tab_channel_type TabChannel	segment channel \
+	-author ""
+	-actions TABCREATE
+	-description "A tabchannel function that interfaces with neurospaces"
 
 

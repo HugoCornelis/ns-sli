@@ -106,11 +106,14 @@ my $test
 						  {
 						  description => "Are gates tabulated correctly, p type calcium gates ?",
 						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/table-cap.txt | perl -pe 's/unnamed test/hardcoded_neutral/g'`),
+						   numerical_compare => 'small arithmetic due to double to float conversions and vice versa',
 						   timeout => 5,
 						   write => undef,
 						  },
 						 ],
 				description => "p type calcium gate tabulation",
+
+
 			       },
 
 
@@ -132,11 +135,16 @@ my $test
 						  {
 						   description => "Are gates tabulated correctly, simple potassium gates ?",
 						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/table-ka.txt | perl -pe 's/unnamed test/hardcoded_neutral/g'`),
+
+						   numerical_compare => 'small arithmetic due to double to float conversions and vice versa',
 						   timeout => 5,
 						   write => undef,
 						  },
 						 ],
 					description => "Simple potassium gate tabulation",
+
+
+
 			       },
 
 

@@ -5,11 +5,11 @@ create neutral hardcoded_neutral
 create compartment /hardcoded_neutral/c
 
 setfield /hardcoded_neutral/c \
-	Cm 4.57537e-11 \
+	Cm 5.75533e-12 \
 	Em -0.08 \
-	initVm -0.028 \
-	Ra 360502 \
-	Rm 3.58441e8
+	initVm -0.068 \
+	Ra 772813 \
+	Rm 8.5486e+09
 
 
 

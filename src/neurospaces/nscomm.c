@@ -48,7 +48,7 @@ struct GateState GateStateTableInitializers[] =
   {"naf/HH_activation","0.007840644937141521"},
   {"cap/HH_inactivation", "0.9868968318"},
   {"cap/HH_activation","0.001391094927"},
-  {"cat/HH_inactivation", "0.9868968318"},
+  {"cat/HH_inactivation", "0.082602128127539254"},
   {"cat/HH_activation", "0.038918706451336625"},
   {"ka/HH_inactivation", "0.74950117078384793"},
   {"ka/HH_activation", "0.083244059218135213"},

@@ -18,3 +18,4 @@ src/c2genesis/makestructs$
 dox.tag
 ^html
 ^tests/html
+out

@@ -151,6 +151,8 @@ int	i;
     action->argc = optargc-3;
     action->argv = optargv+3;
     action->passback = NULL;
+
+    //- stick some lookup code for the model container here
     list = WildcardGetElement(optargv[1],1);
     if(list->nelements <= 0){
 	Error();

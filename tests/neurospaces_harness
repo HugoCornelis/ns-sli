@@ -53,9 +53,7 @@ BEGIN
     {
 	$core_directory = "$ENV{srcdir}/$config->{core_directory}";
 
-	#t breaks for distcheck: runs './../tests/run' in _build
-
-# 	$core_directory = $config->{core_directory};
+	$core_directory = $config->{core_directory};
 
     }
 
@@ -99,6 +97,8 @@ BEGIN
 }
 
 
+my $loaded_mail_sender = eval "require Mail::Sender";
+
 use Data::Comparator qw(data_comparator);
 use Data::Transformator;
 
@@ -109,43 +109,100 @@ use Getopt::Long;
 use YAML;
 
 
+my $option_email = defined $ENV{NEUROSPACES_HARNESS_OPTION_EMAIL} ? $ENV{NEUROSPACES_HARNESS_OPTION_EMAIL} : 0 ;
 my $option_flattenout;
 my $option_help;
 my $option_numerical_compare = $config->{numerical_compare} || 0;
 my $option_random_order;
 my $option_regex_selector = ".*";
+my $option_report_disabled;
 my $option_timeout_multiplier = 1;
+my $option_timings;
 my $option_verbose;
 
-$config->{model_library} = "/tmp/neurospaces/test/models";
-
-if (defined ($config->{model_library}))
-{
-    # copy the model library
-
-    `rm -fr "$config->{model_library}"`;
-    `mkdir -p "$config->{model_library}"`;
-
-    `cp -R ${core_directory}library/* "$config->{model_library}"`;
-
-    # automake distcheck makes the model library readonly (as so its copy), make it writable again
-
-    `chmod -R +w "$config->{model_library}"`;
-
-    # tell neurospaces where to find the model library of test models
-
-    $ENV{NEUROSPACES_MODELS} = $config->{model_library};
-    $ENV{NEUROSPACES_USER_MODELS} = '';
-    $ENV{NEUROSPACES_PROJECT_MODELS} = '';
-    $ENV{NEUROSPACES_SYSTEM_MODELS} = '';
-}
 
 print "Executable is $0,\n";
 print "core_directory is $core_directory\n";
 
-if (defined ($config->{model_library}))
+my $environment_settings = $config->{environment_settings};
+
+foreach my $environment_setting_name (keys %$environment_settings)
 {
-    print "Your models will be searched for in the directory $ENV{NEUROSPACES_MODELS}\n\n";
+    my $environment_setting = $environment_settings->{$environment_setting_name};
+
+    # if simply setting values in the environment
+
+    if (!ref $environment_setting)
+    {
+	# set the value in the environment
+
+	$ENV{$environment_setting_name} = $environment_setting;
+    }
+
+    # if additional initialization required
+
+    elsif (ref $environment_setting eq 'HASH')
+    {
+	# get environment_setting value
+
+	my $value = $environment_setting->{value};
+
+	# set the value in the environment
+
+	$ENV{$environment_setting_name} = $value;
+
+	# give feedback
+
+	my $description = $environment_setting->{description};
+
+	$description =~ s/%value/$value/g;
+
+	print $description;
+
+	# loop over shell commands for initialization
+
+	my $shell_commands = $environment_setting->{initialization}->{shell};
+
+	foreach my $shell_command (@$shell_commands)
+	{
+	    # replace value
+
+	    $shell_command =~ s/%value/$value/g;
+
+	    # execute command
+
+	    print "$0: executing ($shell_command)\n";
+
+	    system $shell_command;
+	}
+    }
+    else
+    {
+	die "$0: illegal environment_settings, was processing $environment_setting";
+    }
+
+#     # copy the model library
+
+#     `rm -fr "$config->{model_library}"`;
+#     `mkdir -p "$config->{model_library}"`;
+
+#     `cp -R ${core_directory}library/* "$config->{model_library}"`;
+
+#     # automake distcheck makes the model library readonly (as so its copy), make it writable again
+
+#     `chmod -R +w "$config->{model_library}"`;
+
+#     # tell neurospaces where to find the model library of test models
+
+#     $ENV{NEUROSPACES_NMC_MODELS} = $config->{model_library};
+#     $ENV{NEUROSPACES_USER_MODELS} = '';
+#     $ENV{NEUROSPACES_PROJECT_MODELS} = '';
+#     $ENV{NEUROSPACES_SYSTEM_MODELS} = '';
+}
+
+if (defined ($config->{environment}))
+{
+    print "Your models will be searched for in the directory $ENV{NEUROSPACES_NMC_MODELS}\n\n";
 }
 
 
@@ -167,6 +224,17 @@ my $test_report
 		 },
        target => {
 		  OS => $^O,
+		  system => {
+			     libc => (join '', `ls -l /lib/libc-* && ls -l /usr/lib/libc-*`),
+			     uname => (join '', `uname -a`),
+			    },
+		  packages => {
+			       bison => (join '', `bison --version`),
+			       flex => (join '', `flex --version`),
+			       gcc => (join '', `gcc 2>&1 --version && gcc 2>&1 -v`),
+			       perl => (join '', `perl 2>&1 -v && perl 2>&1 -V`),
+			       swig => (join '', `swig 2>&1 -version`),
+			      },
 		 },
       };
 
@@ -262,7 +330,35 @@ sub main
 
     foreach my $module_definition (@$test_modules)
     {
+	if (!defined $module_definition->{name})
+	{
+	    $module_definition->{name} = 'unnamed';
+
+	    report_error_add
+		(
+		 {
+		  description => 'unnamed module',
+		  error => 'unnamed module',
+		  module_name => 'unnamed module',
+		 },
+		);
+	}
+
 	my $module_name = $module_definition->{name};
+
+	if (!defined $module_definition->{description})
+	{
+	    $module_definition->{description} = $module_definition->{name};
+
+	    report_error_add
+		(
+		 {
+		  description => 'no module description',
+		  error => 'no module description',
+		  module_name => $module_name,
+		 },
+		);
+	}
 
 	if ($module_definition->{disabled})
 	{
@@ -275,6 +371,19 @@ Total of $test_report->{global}->{test_count} tests (encountered $error_count er
 	}
 
 	report_message(2, 1, "Running tests of module $module_definition->{description}");
+
+	my $preparation = $module_definition->{preparation};
+
+	my $module_preparation_result;
+
+	if ($preparation)
+	  {
+	    print "*** Preparing Module $module_name ($preparation->{description})\n";
+
+	    my $preparer = $preparation->{preparer};
+
+	    $module_preparation_result = &$preparer();
+	  }
 
 	# loop over commands for this module
 
@@ -454,6 +563,8 @@ Total of $test_report->{global}->{test_count} tests (encountered $error_count er
 		    $before_match,
 		    $after_match);
 
+		my $time_elapsed;
+
 		if (ref $command eq 'CODE')
 		{
 		    $error
@@ -496,7 +607,11 @@ Total of $test_report->{global}->{test_count} tests (encountered $error_count er
 				    ? 4 * $option_timeout_multiplier
 					: 2 * $option_timeout_multiplier;
 
+		    use Time::HiRes qw(gettimeofday tv_interval);
+
 		    # write
+
+		    my $time_start = [ gettimeofday(), ];
 
 		    if (defined $write)
 		    {
@@ -513,6 +628,8 @@ Total of $test_report->{global}->{test_count} tests (encountered $error_count er
 
 			$read = substitute_variables($read);
 
+			# if literal text expected
+
 			if (!ref $read)
 			{
 			    ($matched_pattern_position,
@@ -523,9 +640,9 @@ Total of $test_report->{global}->{test_count} tests (encountered $error_count er
 				= $exp->expect($timeout, $read, );
 			}
 
-			#! only array supported for now.
+			# if array, means regex match
 
-			else
+			elsif (ref $read eq 'ARRAY')
 			{
 			    ($matched_pattern_position,
 			     $error,
@@ -535,14 +652,60 @@ Total of $test_report->{global}->{test_count} tests (encountered $error_count er
 				= $exp->expect($timeout, @$read, );
 			}
 
+			# else, hash, one of several alternatives expected
+
+			else
+			{
+			    # compose the alternatives regex
+
+			    my $alternatives = $read->{alternatives};
+
+			    my $expected = '(' . (join '|', map { quotemeta } @$alternatives) . ')';
+
+			    # read from the application
+
+			    ($matched_pattern_position,
+			     $error,
+			     $successfully_matching_string,
+			     $before_match,
+			     $after_match)
+				= $exp->expect($timeout, "-re", $expected, );
+# 				= $exp->expect($timeout, "ThIs TeXt ShOuLd NeVeR oCcUr", );
+
+# 			    # loop over expected alternatives
+
+# 			    my $alternatives = $read->{alternatives};
+
+# 			    foreach my $alternative (@$alternatives)
+# 			    {
+# 				if ($before_match =~ /$alternative/)
+# 				{
+# 				    last;
+# 				}
+# 			    }
+			}
+
+			$time_elapsed = tv_interval($time_start);
+
+			# fill in the elapsed time in the report
+
+			if ($option_timings)
+			{
+			    $test_report->{timings}->{$module_name}->{$description} = $time_elapsed;
+			}
+
 			# if things don't match
 
 			if ($error)
 			{
 			    # if allowed to compare numerically
 
-			    if (!$command_test->{string_only}
-			        && $option_numerical_compare)
+			    if ((!$command_test->{string_only}
+				 && $option_numerical_compare)
+
+				# or forced to compare numerically
+
+				|| $command_test->{numerical_compare})
 			    {
 				# compare numerically
 
@@ -634,6 +797,36 @@ Total of $test_report->{global}->{test_count} tests (encountered $error_count er
 	    $previous_side_effects ||= $command_definition->{side_effects} || 0;
 	}
 
+	my $reparation = $module_definition->{reparation};
+
+	if ($reparation)
+	  {
+	    print "*** Reparing Module $module_name ($reparation->{description})\n";
+
+	    my $reparer = $reparation->{reparer};
+
+	    my $reparation_error = &$reparer($module_preparation_result);
+
+	    # process errors
+
+	    if ($reparation_error)
+	      {
+		my $description = $reparation_error;
+
+		my $module_definition_description = $module_definition->{description};
+
+		report_error_add
+		  (
+		   {
+		    description => $description,
+		    error => $reparation_error,
+		    module_name => $module_name,
+		    subdescription => $module_definition_description,
+		   },
+		  );
+	      }
+	  }
+
 	# if library checksum mismatch
 
 	if (defined ($config->{model_library}))
@@ -691,23 +884,34 @@ sub read_cmd_line
     my $result
 	= GetOptions
 	    (
+	     "email" => \$option_email,
 	     "flattenout" => \$option_flattenout,
 	     "help!" => \$option_help,
 	     "numerical-compare!" => \$option_numerical_compare,
 	     "randomize-order=s" => \$option_random_order,
 	     "regex-selector=s" => \$option_regex_selector,
+	     "report-disabled" => \$option_report_disabled,
 	     "timeout-multiplier=s" => \$option_timeout_multiplier,
+	     "timings!" => \$option_timings,
 	     "v|verbose+" => \$option_verbose,
 	    );
 
+    if (!$result)
+    {
+	die "$0: Error in option processing";
+    }
+
     $test_report->{options}
 	= {
+	   email => $option_email,
 	   flattenout => $option_flattenout,
 	   help => $option_help,
 	   numerical_compare => $option_numerical_compare,
 	   random_order => $option_random_order,
 	   regex_selector => $option_regex_selector,
+	   report_disabled => $option_report_disabled,
 	   timeout_multiplier => $option_timeout_multiplier,
+	   timings => $option_timings,
 	   verbose => $option_verbose,
 	  };
 
@@ -718,6 +922,7 @@ sub read_cmd_line
 $0: test definition executor
 
 options :
+    email              allow to send emails, the default is taken from \$ENV{NEUROSPACES_HARNESS_OPTION_EMAIL}.
     flattenout         flattenout the test definitions before testing,
                        this experimental feature might increase test performance,
                        by recycling test definitions.
@@ -725,7 +930,9 @@ options :
     numerical-compare  attempt to compare numbers numerically when string differences are found (default enabled).
     randomize-order    randomize the order of the tests before executing them (require List::Util to be installed).
     regex-selector     defines a regex to run specific tests.
+    report-disabled    include information of disabled tests in the test report.
     timeout-multiplier multiply all timeout values with this constant.
+    timings            add timing information about the tests to the report.
     verbose            set verbosity level.
 ";
 
@@ -757,14 +964,14 @@ sub report_error_add
 
     if ($subdescription)
     {
-	$test_report->{modules}->{$module_name}->{$error_count}->{$subdescription}->{description} = $description;
+	$test_report->{errors}->{modules}->{$module_name}->{$error_count}->{$subdescription}->{description} = $description;
     }
     else
     {
-	$test_report->{modules}->{$module_name}->{$error_count}->{description} = $description;
+	$test_report->{errors}->{modules}->{$module_name}->{$error_count}->{description} = $description;
     }
 
-    $test_report->{modules}->{$module_name}->{$error_count}->{error} = $error;
+    $test_report->{errors}->{modules}->{$module_name}->{$error_count}->{error} = $error;
 
     if (defined $message)
     {
@@ -773,7 +980,7 @@ sub report_error_add
 	#! running in verbose mode seems, allows to track regex
 	#! problems ... I think.
 
-	$test_report->{modules}->{$module_name}->{$error_count}->{$subdescription}->{report} = $message;
+	$test_report->{errors}->{modules}->{$module_name}->{$error_count}->{$subdescription}->{report} = $message;
     }
 
     if (defined $expected
@@ -812,7 +1019,135 @@ sub report_exit
 
     # yaml out the test report
 
-    print "\n" . Dump($test_report);
+    my $report_text
+	= "\n"
+	    . Dump(
+		   {
+		    description => $test_report->{description},
+		    ($option_report_disabled ? (disabled => $test_report->{disabled}) : ()),
+		    errors => $test_report->{errors},
+		    global => $test_report->{global},
+		    ($error_count ? (target => $test_report->{target}) : ()),
+		   },
+		  );
+
+    print($report_text);
+
+    # if email enabled by the options
+
+    if ($option_email)
+    {
+	# check for a default route
+
+	#! from perl/basic.t
+
+	my $no_default_route = (`/sbin/route` =~ /default/ ? '' : 'no default route to the internet found');
+
+	if (!$no_default_route)
+	{
+	    # ask use if sending an email is ok
+
+	    my $default_answer_prompt = $error_count ? "Y/n" : "y/N";
+
+	    print "\n--\n  These tests generated $error_count error(s)";
+	    print ( $error_count ? "  Because errors were found, you should really consider sending an email to inform the developer of this software package\n" : "" );
+	    print "\n  Ok to send an email to hugo.cornelis\@gmail.com for this test report,\n  this email will not reveal your identity to the recipient ?  [$default_answer_prompt]";
+
+	    my $answer = readline(*STDIN);
+
+	    # send an email if ok
+
+	    if ($answer =~ /^y/)
+	    {
+		#t perhaps should consider Mail::Builder, don't know
+
+		if ($loaded_mail_sender)
+		{
+		    my $sender
+			= Mail::Sender->new
+			    (
+			     {
+# 			      smtp => 'googlemail.l.google.com',
+			      smtp => 'mta1.uthscsa.edu',
+			      from => 'hugo.cornelis@gmail.com',
+			     },
+			    );
+
+		    print
+			"Sending ... should not take more than 30 seconds
+";
+
+		    my $message
+			= (
+			   "neurospaces_harness test report\n"
+			   . "Generated on " . `date` . "\n"
+			   . "\n========\n"
+			   . Dump($test_report)
+			   . "\n========\n"
+			  );
+
+		    $sender->MailMsg
+			(
+			 {
+			  to => 'cornelis@uthscsa.edu',
+			  subject => '[neurospaces_harness] test report',
+			  msg => $message,
+			 },
+			);
+
+		    # 	    $sender->Attach
+		    # 		(
+		    # 		 {
+		    # 		  description => 'test_report',
+		    # 		 },
+		    # 		);
+
+		    $sender->Close();
+
+		    if ($sender->{error})
+		    {
+			print
+			    "*** Error: $sender->{error}
+Email was not sent.
+";
+		    }
+		    else
+		    {
+			print
+			    "Email was sent.
+";
+		    }
+		}
+		else
+		{
+		    print
+			"*** Error: Cannot load the perl module Mail::Sender, contact your sysadmin to install this perl module.
+(use the shell command \"sudo perl -MCPAN -e 'install Mail::Sender'\")
+Email was not sent.
+";
+		}
+	    }
+	    else
+	    {
+		print
+		    "Email was not sent.
+";
+	    }
+	}
+	else
+	{
+	    print
+		"*** Warning: No default route to the internet found.
+Email was not sent.
+";
+	}
+    }
+    else
+    {
+	print
+	    "No email sent.
+";
+    }
 
     # if there were errors
 
@@ -822,7 +1157,9 @@ sub report_exit
 
 	$exit_code ||= 1;
 
-	print "$0: exit_code $exit_code\n";
+	print "$0: $error_count error(s)\n";
+
+	print "$0: exit_code $exit_code\n\n";
 
 	exit $exit_code;
     }
@@ -832,6 +1169,8 @@ sub report_exit
     else
     {
 	# exit, possibly success
+
+	print "$0: $error_count error(s)\n\n";
 
 	exit $exit_code;
     }
@@ -879,7 +1218,7 @@ sub numerical_compare
 
     my $result = $current_diffs;
 
-    print "*** Comparing numerical differences ($command_test->{description})\n";
+    print "*** Checking numerical values ($command_test->{description})\n";
 
     push @{$test_report->{numerical_compare}}, $command_test->{description};
 
@@ -1210,7 +1549,7 @@ sub model_library_sha
 
     use File::Find::Rule;
 
-    my $files = [ File::Find::Rule->file()->in( $ENV{NEUROSPACES_MODELS} ), ];
+    my $files = [ File::Find::Rule->file()->in( $ENV{NEUROSPACES_NMC_MODELS} ), ];
 
     my $shas
 	= [

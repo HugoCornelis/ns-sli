@@ -51,7 +51,8 @@ ARFLAGS = cru
 libolf_a_AR = $(AR) $(ARFLAGS)
 libolf_a_LIBADD =
 am_libolf_a_OBJECTS = olfsli.$(OBJEXT) olf_d@.$(OBJEXT) \
-	olf_g@.$(OBJEXT) olf_l@.$(OBJEXT)
+	olf_g@.$(OBJEXT) olf_l@.$(OBJEXT) tabfiles.$(OBJEXT) \
+	tabchannel.$(OBJEXT)
 libolf_a_OBJECTS = $(am_libolf_a_OBJECTS)
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I$(top_builddir)/src
 depcomp = $(SHELL) $(top_srcdir)/depcomp
@@ -176,7 +177,9 @@ libolf_a_SOURCES = \
 	olfsli.c \
 	olf_d@.c \
 	olf_g@.c \
-	olf_l@.c 
+	olf_l@.c \
+	tabfiles.c \
+	tabchannel.c
 
 all: $(BUILT_SOURCES)
 	$(MAKE) $(AM_MAKEFLAGS) all-am
@@ -230,6 +233,8 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/olf_g@.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/olf_l@.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/olfsli.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tabchannel.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tabfiles.Po@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	if $(COMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" -c -o $@ $<; \
