@@ -68,6 +68,9 @@ void SetupGeneric(int argc,char **argv,int mode)
 	
       if(mode == SETUP_ALPHA)
 	iResult = NSSetupAlpha(argv[1],argv[2],args,optargc);
+      else if(mode == SETUP_TAU)
+	iResult = NSSetupTau(argv[1],argv[2],args,optargc);
+
 
       return iResult;
 

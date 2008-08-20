@@ -51,7 +51,5 @@ libolf_a_SOURCES = \
 	olfsli.c \
 	olf_d@.c \
 	olf_g@.c \
-	olf_l@.c \
-	tabfiles.c \
-	tabchannel.c
+	olf_l@.c 
 

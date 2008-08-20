@@ -85,12 +85,15 @@ libneurospaces_a_SOURCES = \
 	nscopy.c \
 	nsmsg.c \
 	nscomm.c \
+	nstabcreate.c \
+	nscall.c \
 	nssetup.c \
+	nstweak.c \
 	nssymboltable.c \
 	nsintegratorverbose.c \
 	heccercreate.c \
 	nsreset.c \
-	heccerstep.c \
+	nslookup.c \
 	neurospaces_d@.c \
 	neurospaces_g@.c \
 	neurospaces_l@.c \

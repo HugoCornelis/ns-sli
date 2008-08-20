@@ -50,16 +50,22 @@ struct GateState GateStateTableInitializers[] =
   {"cap/HH_activation","0.001391094927"},
   {"cat/HH_inactivation", "0.082602128127539254"},
   {"cat/HH_activation", "0.038918706451336625"},
-  {"ka/HH_inactivation", "0.74950117078384793"},
-  {"ka/HH_activation", "0.083244059218135213"},
+
+  // {"ka/HH_inactivation", "0.74950117078384793"},
+  //  {"ka/HH_activation", "0.083244059218135213"},
+
+  {"ka/HH_inactivation", "0.7474853827"},
+  {"ka/HH_activation", "0.08371356085"},
+
+  {"kc/HH_activation","0.063531859768213905"},
+  {"kc/HH_concentration","0.0099009900989999993"},
+  {"h1/HH_activation","0.03540844397"},
   {NULL, NULL},
 };
 
 
 
 int setStateInit(struct PidinStack *ppist){
-
-
 
   
   char pc[200];
@@ -108,7 +114,7 @@ int setStateInit(struct PidinStack *ppist){
   return 1;
 
 }
-//---------------------------------------------------------------------------
+//- end setStateInit -------------------------------------------------------------------
 
 
 
@@ -320,15 +326,15 @@ static char * mapParameter(char *pcfield){
     {
 
     //!
-    //! maps to the power parameter in channels.
+    //! maps to the power parameter in gates.
     //!
     pcresult = "POWER";
 
-  }
-  else{
+    } 
+    else{
 
     //fprintf(stdout,"Unrecognized Compartment field: %s\n",pcresult);
-    pcresult = pcfield;
+    pcresult = strdup(pcfield);
 
   }
 

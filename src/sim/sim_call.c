@@ -143,16 +143,32 @@ int	i;
 	return NULL;
       }
 
-    if((action = GetAction(optargv[2])) == NULL){
-	Error();
-	printf("%s : could not find action '%s'.\n",argv[0],argv[2]);
-	return(NULL);
+
+    //hack -------------------------------------------------------
+    if (nsCallCheck(optargv[2]))
+    {
+
+
+      NSCall(argc,argv);
+      
+      return NULL;
+
+
     }
+    //hack -------------------------------------------------------
+
+    if((action = GetAction(optargv[2])) == NULL){
+      Error();
+      printf("%s : could not find action '%s'.\n",argv[0],argv[2]);
+      return(NULL);
+    }
+
     action->argc = optargc-3;
     action->argv = optargv+3;
     action->passback = NULL;
 
-    //- stick some lookup code for the model container here
+
+
     list = WildcardGetElement(optargv[1],1);
     if(list->nelements <= 0){
 	Error();

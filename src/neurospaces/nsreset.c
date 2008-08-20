@@ -57,13 +57,13 @@ static void singleHeccerReset(struct Heccer *pheccer);
 
 //-----------------------------------------------------------------------
 /*!
- *   \fn void HeccerReset()
+ *   \fn void NSReset()
  *   
  *   Performs a reset on all heccer objects stored in the 
  *   neurospaces_integrator
  */
 //-----------------------------------------------------------------------
-void HeccerReset(){  
+void NSReset(){  
 
   
   struct nsintegrator_type *pelnsintegrator
@@ -103,6 +103,7 @@ static void singleHeccerReset(struct Heccer *pheccer){
 
   pheccer->dTime = 0.0;
   pheccer->dStep = clock_value[0]; //when reset this is set to clock zero.
+
 }
 
 

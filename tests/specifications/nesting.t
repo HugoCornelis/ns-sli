@@ -27,6 +27,10 @@ my $printinfo_output = "/hardcoded_neutral
 my $test
     = {
        command_definitions => [
+
+
+
+
 			       {
 				arguments => [
 					         "$::config->{core_directory}/tests/scripts/nesting.g",
@@ -48,6 +52,9 @@ my $test
 
 
 			       },
+
+
+
 			      ],
        description => "create a nesting of several compartments.",
        name => 'nesting.t'

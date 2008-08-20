@@ -1,6 +1,4 @@
-setclock 0 2e-05
-
-//setclock 0 1e-6
+setclock 0 1e-6
 
 create neutral hardcoded_neutral
 
@@ -17,7 +15,7 @@ create tabchannel /hardcoded_neutral/c2/kc
 
 
 setfield /hardcoded_neutral/c2/kc \
-	Ek -0.085 \
+	Ek 85 \
 	Gbar 2.80747571e-07 \
 	Ik 0.0 \
 	Gk 0.0 \
@@ -98,16 +96,16 @@ silent 1
 
 reset
 
-set_nsintegrator_verbose_level 2
+//set_nsintegrator_verbose_level 2
 
-echo Initiated
+//echo Initiated
 
-call neurospaces_integrator NSINTEGRATOR_DUMP
+//call neurospaces_integrator NSINTEGRATOR_DUMP
 
-echo -------
-echo Iteration 0
+//echo -------
+//echo Iteration 0
 
-step 1
+//step 1
 
 
 

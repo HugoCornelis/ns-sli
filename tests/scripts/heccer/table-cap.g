@@ -15,17 +15,18 @@ setfield /hardcoded_neutral/c \
 
 create tabchannel /hardcoded_neutral/c/cap
 
-
+//	Ek 0.1375262439 \
+//	Gbar 1.394928884e-08 \
 
 setfield /hardcoded_neutral/c/cap \
-	Ek 0.1375262439 \
-	Gbar 1.394928884e-08 \
+	Ek 0.147021  \
+	Gbar 1.57921e-08 \
 	Ik 0.0 \
 	Gk 0.0 \
 	Xpower 1.0 \
 	Ypower 1.0 \
-	Zpower 0.0
-
+	Zpower 0.0 \
+	X_init 0.001391094927
 
 setupalpha /hardcoded_neutral/c/cap \
 	X \

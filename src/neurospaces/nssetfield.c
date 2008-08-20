@@ -118,8 +118,255 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 
       return setParameter(phsleGate,field,value,SETPARA_GENESIS2);
 
+
+
+
+
+
     }
-    else if(strcmp(field,"Zpower") == 0){ return 1; }
+    else if(strcmp(field,"Zpower") == 0){ 
+
+
+
+     //- if zero, no need to create a gate.
+      double dNumber = strtod(value,NULL);
+
+      if(dNumber == 0.0)
+	return 1;
+      
+
+      struct symtab_HSolveListElement *phsleGate = 
+	CreateConcGate(phsle, "HH_concentration");
+
+      if(!phsleGate)
+	return 0;
+
+
+      return setParameter(phsleGate,field,value,SETPARA_GENESIS2);
+
+
+      return 1; 
+
+
+    }
+    else if( strncmp(field,"Z_A->table",10) == 0 ){
+
+      //-
+      //- We're checking the field to see if it begins with 'Z'
+      //- which indicates a concentration table.
+      //-
+      //- Then we check to see if we need to add the table to the
+      //- A or B gate.
+      //-
+
+
+      //- fetch the forward gate
+      struct PidinStack *ppistA = PidinStackDuplicate(ppist);
+
+
+      //- we must look up the concentration gate
+      PidinStackPushString(ppistA,"HH_concentration");
+  
+
+      struct symtab_HSolveListElement *phsleA = 
+	PidinStackPushStringAndLookup(ppistA,"A");
+    
+      PidinStackFree(ppistA);
+
+      if(!phsleA){
+        fprintf(stdout,
+      	  "Could not find forward gate kinetic for %s\n",
+       	  pcPathname);
+        return 0;
+      }
+
+      setParameter(phsleA,&field[5],value,SETPARA_NUM);
+
+      return 1;
+
+
+
+
+
+
+    }
+    else if( strncmp(field,"Z_B->table",10) == 0 ){
+
+
+
+    
+	struct PidinStack *ppistB = PidinStackDuplicate(ppist);
+
+
+       
+	PidinStackPushString(ppistB,"HH_concentration");
+  
+
+	struct symtab_HSolveListElement *phsleB = 
+	  PidinStackPushStringAndLookup(ppistB,"B");
+    
+	PidinStackFree(ppistB);
+
+	if(!phsleB){
+	  fprintf(stdout,
+		  "Could not find forward gate kinetic for %s\n",
+		  pcPathname);
+	  return 0;
+	}
+
+	setParameter(phsleB,&field[5],value,SETPARA_NUM);
+
+
+	return 1;
+
+
+    }
+    else if( strncmp(field,"X_B->table",10) == 0 ){
+
+
+
+      
+	struct PidinStack *ppistB = PidinStackDuplicate(ppist);
+
+
+	
+	PidinStackPushString(ppistB,"HH_activation");
+  
+
+	struct symtab_HSolveListElement *phsleB = 
+	  PidinStackPushStringAndLookup(ppistB,"B");
+    
+	PidinStackFree(ppistB);
+
+	if(!phsleB){
+	  fprintf(stdout,
+		  "Could not find backward gate kinetic for %s\n",
+		  pcPathname);
+	  return 0;
+	}
+
+	setParameter(phsleB,&field[5],value,SETPARA_NUM);
+
+
+	return 1;
+
+
+    }
+    else if( strncmp(field,"X_A->table",10) == 0 ){
+
+
+
+      
+	struct PidinStack *ppistA = PidinStackDuplicate(ppist);
+
+
+	
+	PidinStackPushString(ppistA,"HH_activation");
+  
+
+	struct symtab_HSolveListElement *phsleA = 
+	  PidinStackPushStringAndLookup(ppistA,"A");
+    
+	PidinStackFree(ppistA);
+
+	if(!phsleA){
+	  fprintf(stdout,
+		  "Could not find forward gate kinetic for %s\n",
+		  pcPathname);
+	  return 0;
+	}
+
+	setParameter(phsleA,&field[5],value,SETPARA_NUM);
+
+
+	return 1;
+
+   }
+    else if(!strcmp(field,"X_init"))
+    {
+
+
+     //- Return is it's just zero, not sure if this is right
+      double dNumber = strtod(value,NULL);
+
+      if(dNumber == 0.0)
+	return 1;
+
+      //!
+      //! A bit dangerous since I'm not making sure that HH_activation
+      //! has been created first. Will safty check it later.
+      //!
+      struct PidinStack *ppistCopy = PidinStackDuplicate(ppist);
+
+      struct symtab_HSolveListElement *phsleGate = 
+	PidinStackPushStringAndLookup(ppistCopy,"HH_activation");
+   
+      PidinStackFree(ppistCopy);
+
+
+      if(!phsleGate)
+	return 0;
+
+      return setParameter(phsleGate,"state_init",value,SETPARA_GENESIS2);
+
+    }
+    else if(!strcmp(field,"Y_init"))
+    {
+
+
+     //- Return is it's just zero, not sure if this is right
+      double dNumber = strtod(value,NULL);
+
+      if(dNumber == 0.0)
+	return 1;
+
+      //!
+      //! A bit dangerous since I'm not making sure that HH_activation
+      //! has been created first. Will safty check it later.
+      //!
+      struct PidinStack *ppistCopy = PidinStackDuplicate(ppist);
+
+      struct symtab_HSolveListElement *phsleGate = 
+	PidinStackPushStringAndLookup(ppistCopy,"HH_inactivation");
+   
+      PidinStackFree(ppistCopy);
+
+
+      if(!phsleGate)
+	return 0;
+
+      return setParameter(phsleGate,"state_init",value,SETPARA_GENESIS2);
+
+    }
+    else if(!strcmp(field,"Z_init"))
+    {
+
+
+     //- Return is it's just zero, not sure if this is right
+      double dNumber = strtod(value,NULL);
+
+      if(dNumber == 0.0)
+	return 1;
+
+      //!
+      //! A bit dangerous since I'm not making sure that HH_activation
+      //! has been created first. Will safty check it later.
+      //!
+      struct PidinStack *ppistCopy = PidinStackDuplicate(ppist);
+
+      struct symtab_HSolveListElement *phsleGate = 
+	PidinStackPushStringAndLookup(ppistCopy,"HH_concentration");
+   
+      PidinStackFree(ppistCopy);
+
+
+      if(!phsleGate)
+	return 0;
+
+      return setParameter(phsleGate,"state_init",value,SETPARA_GENESIS2);
+
+    }
+
 
 
   }

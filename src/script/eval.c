@@ -2444,7 +2444,10 @@ ParseNode*	pn;
 	switch (r.r_type)
 	  {
 
+	  
+
 	  case STR:
+	    bzero((void*)&r,sizeof(Result));	    
 	    if (r.r.r_str != NULL)
 		free(r.r.r_str);
 	    break;

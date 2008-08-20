@@ -145,7 +145,7 @@ Result  *rp,*SymtabLook();
 extern Symtab GlobalSymbols;
 
     if(debug > 1){
-	ActionHeader("tabchannel",channel,action);
+      //ActionHeader("tabchannel",channel,action);
     }
 
     SELECT_ACTION(action){

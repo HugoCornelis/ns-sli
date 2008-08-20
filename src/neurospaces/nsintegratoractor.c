@@ -147,7 +147,7 @@ int NeurospacesIntegratorActor(struct nsintegrator_type *pnsintegrator_type,
                          pnsintegrator->ppistCachedRoot);
 
 	  
-        HeccerReset();
+        NSReset();
 
 	break;
       }

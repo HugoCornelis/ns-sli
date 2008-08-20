@@ -17,10 +17,12 @@
 #include "neurospaces/symbols.h"  
 #include "neurospaces/symboltable.h"  
 #include "neurospaces/pidinstack.h"
+#include "neurospaces/concentrationgatekinetic.h"
 
 //t includes from our nsgenesis library
 #include "neurospaces/neurospaces_ext.h"
 #include "neurospaces/nsintegrator.h"
+
 
 
 
@@ -30,7 +32,7 @@ static struct symtab_GateKinetic *CreateGateKinetic(char *pcDirection);
 struct symtab_HSolveListElement * CreateHHGate(
 		 struct symtab_HSolveListElement *phsleChannel, 
 		 char *pcName);
-
+static struct symtab_ConcentrationGateKinetic *CreateConcGateKinetic(char *pcDirection);
 
 
 
@@ -250,6 +252,80 @@ struct symtab_HSolveListElement * CreateHHGate(
 
 
 
+
+//------------------------------------------------------------------
+/*!
+ *  \fn int CreateConcGate(struct symtab_HSolveListElement phsleChannel, 
+		 char *pcName)
+ *  \param phsleChannel Pointer to the Channel to attach gates.
+ *  \param pcName
+ *
+ */
+//------------------------------------------------------------------
+struct symtab_HSolveListElement * CreateConcGate(
+		 struct symtab_HSolveListElement *phsleChannel, 
+		 char *pcName){
+
+
+  //!
+  //! Allocate an HH gate and set its parent to phsleTabChannel.
+  //!
+  struct symtab_HHGate *pgathh = HHGateCalloc();
+
+
+  if(!pgathh)
+    return NULL;
+
+
+
+  struct symtab_IdentifierIndex *pidinHHGate = 
+    IdinNewFromChars(pcName);
+
+
+
+  if(!pidinHHGate)
+    return NULL;
+
+
+  SymbolSetName(&pgathh->bio.ioh.iol.hsle,pidinHHGate);
+
+  SymbolAddChild(phsleChannel,&pgathh->bio.ioh.iol.hsle);
+
+  
+  //!
+  //! Need to add a name for the forward and backward gate kinetics.
+  //! "forward" and "backward" respectively, then make these
+  //! the children of the HH Gate pgathh.
+  //!
+  struct symtab_ConcentrationGateKinetic *pconcgatkForward = 
+    CreateConcGateKinetic("A");
+
+  if(!pconcgatkForward)
+    return NULL;
+
+  SymbolAddChild(&pgathh->bio.ioh.iol.hsle,
+		 &pconcgatkForward->bio.ioh.iol.hsle);
+  
+
+
+  struct symtab_ConcentrationGateKinetic *pconcgatkBackward = 
+    CreateConcGateKinetic("B");
+
+  if(!pconcgatkBackward)
+    return NULL;
+
+  SymbolAddChild(&pgathh->bio.ioh.iol.hsle,
+		 &pconcgatkBackward->bio.ioh.iol.hsle);
+
+
+  return (struct symtab_HSolveListElement *)pgathh;
+
+}
+
+
+
+
+
 //------------------------------------------------------------------
 /*
  * \fun static struct symtab_GateKinetic *CreateGateKinetic(char *pcDirection)
@@ -281,5 +357,43 @@ static struct symtab_GateKinetic *CreateGateKinetic(char *pcDirection){
   SymbolSetName(&pgatk->bio.ioh.iol.hsle,pidinDirection);
 
   return pgatk;
+
+}
+
+
+
+
+
+//------------------------------------------------------------------
+/*
+ * \fun static struct symtab_GateKinetic *CreateConcGateKinetic(char *pcDirection)
+ */
+//------------------------------------------------------------------
+static struct symtab_ConcentrationGateKinetic *CreateConcGateKinetic(char *pcDirection){
+
+
+  struct symtab_ConcentrationGateKinetic *pconcgatk;
+
+
+  struct symtab_IdentifierIndex *pidinDirection;
+
+  
+ 
+  pidinDirection = IdinNewFromChars(pcDirection);
+
+
+  if(!pidinDirection)
+    return NULL;
+
+
+  pconcgatk =  ConcentrationGateKineticCalloc();
+
+  if(!pconcgatk)
+    return NULL;
+
+
+  SymbolSetName(&pconcgatk->bio.ioh.iol.hsle,pidinDirection);
+
+  return pconcgatk;
 
 }

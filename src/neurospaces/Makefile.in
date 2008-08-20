@@ -54,9 +54,10 @@ am_libneurospaces_a_OBJECTS = neurospacesmodel.$(OBJEXT) \
 	neurospacesquery.$(OBJEXT) neurospacesfield.$(OBJEXT) \
 	nsintegrator.$(OBJEXT) nssetelement.$(OBJEXT) \
 	nssetfield.$(OBJEXT) nscreate.$(OBJEXT) nscopy.$(OBJEXT) \
-	nsmsg.$(OBJEXT) nscomm.$(OBJEXT) nssetup.$(OBJEXT) \
+	nsmsg.$(OBJEXT) nscomm.$(OBJEXT) nstabcreate.$(OBJEXT) \
+	nscall.$(OBJEXT) nssetup.$(OBJEXT) nstweak.$(OBJEXT) \
 	nssymboltable.$(OBJEXT) nsintegratorverbose.$(OBJEXT) \
-	heccercreate.$(OBJEXT) nsreset.$(OBJEXT) heccerstep.$(OBJEXT) \
+	heccercreate.$(OBJEXT) nsreset.$(OBJEXT) nslookup.$(OBJEXT) \
 	neurospaces_d@.$(OBJEXT) neurospaces_g@.$(OBJEXT) \
 	neurospaces_l@.$(OBJEXT) nsintegrator_d@.$(OBJEXT) \
 	nsintegrator_g@.$(OBJEXT) nsintegrator_l@.$(OBJEXT) \
@@ -206,12 +207,15 @@ libneurospaces_a_SOURCES = \
 	nscopy.c \
 	nsmsg.c \
 	nscomm.c \
+	nstabcreate.c \
+	nscall.c \
 	nssetup.c \
+	nstweak.c \
 	nssymboltable.c \
 	nsintegratorverbose.c \
 	heccercreate.c \
 	nsreset.c \
-	heccerstep.c \
+	nslookup.c \
 	neurospaces_d@.c \
 	neurospaces_g@.c \
 	neurospaces_l@.c \
@@ -269,13 +273,13 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/heccercreate.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/heccerstep.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/neurospaces_d@.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/neurospaces_g@.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/neurospaces_l@.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/neurospacesfield.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/neurospacesmodel.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/neurospacesquery.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nscall.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nscomm.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nscopy.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nscreate.Po@am__quote@
@@ -285,12 +289,15 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nsintegrator_l@.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nsintegratoractor.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nsintegratorverbose.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nslookup.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nsmsg.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nsreset.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nssetelement.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nssetfield.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nssetup.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nssymboltable.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nstabcreate.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nstweak.Po@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	if $(COMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" -c -o $@ $<; \

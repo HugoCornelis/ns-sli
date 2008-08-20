@@ -42,8 +42,7 @@
 
 
 
-
-
+#define MODELCONTAINER_ROOT "/hardcoded_neutral"
 
 
 
@@ -207,5 +206,9 @@ int setParameter(struct symtab_HSolveListElement *phsle,
 //- -- Defined in nssetup.c --
 int NSSetupAlpha( char *pcName, char *pcField, char **pcArgs, 
 		  int iArgc);
+
+
+
+//- -- Defined in nscall.c --
 
 #endif

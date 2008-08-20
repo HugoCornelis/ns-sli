@@ -153,24 +153,24 @@ int NSGenesisInitialize(){
 
    }
 
-   
-/*    pheccer->dStep = 0.0; */
 
-/*    pheccer->dIntervalStart = HECCER_INTERVAL_DEFAULT_START; */
+/*    pheccer->dStep = HECCER_DEFAULT_TIME_STEP;  */
 
-/*    phecccer->dIntervalEnd = HECCER_INTERVAL_DEFAULT_END; */
+/*    pheccer->ho.dIntervalStart = HECCER_DEFAULT_INTERVAL_START;  */
 
-/*    pheccer->dBasalActivatorStart =  */
-/*      HECCER_INTERVAL_BASAL_ACTIVATOR_DEFAULT_START; */
+/*    pheccer->ho.dIntervalEnd = HECCER_DEFAULT_INTERVAL_END;  */
 
-/*    pheccer->dBasalActivatorEnd =  */
-/*      HECCER_INTERVAL_BASAL_ACTIVATOR_DEFAULT_END; */
+/*    pheccer->ho.dConcentrationGateStart = HECCER_DEFAULT_INTERVAL_END; */
 
-/*    pheccer->iIntervalEntries = HECCER_INTERVAL_DEFAULT_ENTRIES;	 */
+/*    pheccer->ho.dConcentrationGateEnd =  FLT_MAX;  */
+
+/*    pheccer->ho.iIntervalEntries = HECCER_DEFAULT_INTERVAL_ENTRIES;	  */
+
+/*    pheccer->ho.iSmallTableSize = HECCER_DEFAULT_INTERPOL_INTERVAL_ENTRIES; */
 
 
-/*    pheccer->iSmallTableSize = HECCER_INTERPOL_INTERVAL_DEFAULT_ENTRIES; */
-
+   //! Default values are already set for the object when allocated
+   //! The defaults are defined in "heccer/heccer.h"
 
    pnsintegrator->pheccerOptions = pheccer;
    //---------------------------------------------------
@@ -179,4 +179,7 @@ int NSGenesisInitialize(){
 
    return 1;
 
+  
+
 }
+
