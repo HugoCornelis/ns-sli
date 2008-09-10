@@ -18,7 +18,9 @@ setfield /hardcoded_neutral/c/kdr \
 	Gk 0.0 \
 	Xpower 2.0 \
 	Ypower 1.0 \
-	Zpower 0.0
+	Zpower 0.0 \
+	X_init 0.0045016011008226975 \
+	Y_init 0.99997858779733162
 
 float x
 float dx
@@ -51,7 +53,7 @@ int tab_xdivs = 20; int tab_xfills = 50
 	    end
 	    tweaktau /hardcoded_neutral/c/kdr X
 	    setfield /hardcoded_neutral/c/kdr X_A->calc_mode 0 X_B->calc_mode 0
-	    call /hardcoded_neutral/c/kdr TABFILL X {tab_xfills + 1} 0
+	    call /hardcoded_neutral/c/kdr TABFILL X {tab_xfills} 0
 
 
 	    call /hardcoded_neutral/c/kdr TABCREATE Y {tab_xdivs} {tab_xmin}  \
@@ -71,7 +73,10 @@ int tab_xdivs = 20; int tab_xfills = 50
 	    end
 	    tweaktau /hardcoded_neutral/c/kdr Y
 	    setfield /hardcoded_neutral/c/kdr Y_A->calc_mode 0 Y_B->calc_mode 0
-	    call /hardcoded_neutral/c/kdr TABFILL Y {tab_xfills + 1} 0
+	    //call /hardcoded_neutral/c/kdr TABFILL Y {tab_xfills + 1} 0
+
+	    call /hardcoded_neutral/c/kdr TABFILL Y {tab_xfills} 0
+
 
 addmsg /hardcoded_neutral/c /hardcoded_neutral/c/kdr VOLTAGE Vm
 addmsg /hardcoded_neutral/c/kdr /hardcoded_neutral/c CHANNEL Gk Ek
@@ -96,3 +101,4 @@ step 1
 
 
 
+call model_container NEUROSPACES_QUERY

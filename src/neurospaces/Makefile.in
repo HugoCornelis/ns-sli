@@ -56,12 +56,12 @@ am_libneurospaces_a_OBJECTS = neurospacesmodel.$(OBJEXT) \
 	nssetfield.$(OBJEXT) nscreate.$(OBJEXT) nscopy.$(OBJEXT) \
 	nsmsg.$(OBJEXT) nscomm.$(OBJEXT) nstabcreate.$(OBJEXT) \
 	nscall.$(OBJEXT) nssetup.$(OBJEXT) nstweak.$(OBJEXT) \
-	nssymboltable.$(OBJEXT) nsintegratorverbose.$(OBJEXT) \
-	heccercreate.$(OBJEXT) nsreset.$(OBJEXT) nslookup.$(OBJEXT) \
-	neurospaces_d@.$(OBJEXT) neurospaces_g@.$(OBJEXT) \
-	neurospaces_l@.$(OBJEXT) nsintegrator_d@.$(OBJEXT) \
-	nsintegrator_g@.$(OBJEXT) nsintegrator_l@.$(OBJEXT) \
-	nsintegratoractor.$(OBJEXT)
+	nstabfill.$(OBJEXT) nssymboltable.$(OBJEXT) \
+	nsintegratorverbose.$(OBJEXT) heccercreate.$(OBJEXT) \
+	nsreset.$(OBJEXT) nslookup.$(OBJEXT) neurospaces_d@.$(OBJEXT) \
+	neurospaces_g@.$(OBJEXT) neurospaces_l@.$(OBJEXT) \
+	nsintegrator_d@.$(OBJEXT) nsintegrator_g@.$(OBJEXT) \
+	nsintegrator_l@.$(OBJEXT) nsintegratoractor.$(OBJEXT)
 libneurospaces_a_OBJECTS = $(am_libneurospaces_a_OBJECTS)
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I$(top_builddir)/src
 depcomp = $(SHELL) $(top_srcdir)/depcomp
@@ -211,6 +211,7 @@ libneurospaces_a_SOURCES = \
 	nscall.c \
 	nssetup.c \
 	nstweak.c \
+	nstabfill.c \
 	nssymboltable.c \
 	nsintegratorverbose.c \
 	heccercreate.c \
@@ -297,6 +298,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nssetup.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nssymboltable.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nstabcreate.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nstabfill.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nstweak.Po@am__quote@
 
 .c.o:

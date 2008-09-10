@@ -4,9 +4,6 @@ ylwrap
 .*\.output$
 config.guess
 config.sub
-depcomp
-install-sh
-missing
 stamp-h1
 ^installed
 src/nsgenesis

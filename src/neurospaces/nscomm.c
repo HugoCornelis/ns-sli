@@ -218,7 +218,49 @@ int setParameter(struct symtab_HSolveListElement *phsle,
 }
 
 
+//-------------------------------------------------------------
+/*!
+ *  \fun int setParameterNumber((struct symtab_HSolveListElement *phsle,
+		 char *pcField, double dNumber)
+ *
+ *   Function to to set a number without the overhead of 
+ *   reconverting it back into a string for setParameter().
+ *   
+ */
+//-------------------------------------------------------------
+int setParameterNumber(struct symtab_HSolveListElement *phsle,
+		 char *pcField, double dNumber)
+{
 
+
+      
+  struct symtab_Parameters *pparTop = ParameterCalloc();
+  
+
+  if(!pparTop)
+    return 0;
+
+
+  char *pcParameter = NULL;
+  pcParameter = mapParameter(pcField);
+  
+
+  ParameterSetName(pparTop,pcParameter);
+		       
+
+  pparTop->uValue.dNumber = dNumber;
+  ParameterSetType(pparTop,TYPE_PARA_NUMBER);
+
+
+  pparTop->pparFirst = pparTop;
+
+
+  BioComponentChangeParameter((struct symtab_BioComponent *)phsle,pparTop);
+  
+  return 1;
+
+
+}
 
 
 
@@ -341,3 +383,185 @@ static char * mapParameter(char *pcfield){
 
   return pcresult;
 }
+
+
+
+//-----------------------------------------------------------------
+/*!
+ *
+ */
+//-----------------------------------------------------------------
+struct symtab_HSolveListElement * lookupGateKinetic(char *pcName, char *pcField, char *pcAorB)
+{
+
+  struct symtab_HSolveListElement *phsle = NULL;
+
+
+  struct PidinStack *ppist  = PidinStackParse(pcName);
+
+
+
+  struct PidinStack *ppistCopy = PidinStackDuplicate(ppist);
+
+  
+  
+  if(!strcmp(pcField,"X") || !strcmp(pcField,"Xpower"))
+  {
+
+    PidinStackPushString(ppistCopy,"HH_activation");
+
+
+  }
+  else if(!strcmp(pcField,"Y") || !strcmp(pcField,"Ypower"))
+  {
+
+    PidinStackPushString(ppistCopy,"HH_inactivation");
+    
+
+  }
+  else if(!strcmp(pcField,"Z") || !strcmp(pcField,"Zpower"))
+  {
+
+    PidinStackPushString(ppistCopy,"HH_concentration");
+    
+
+  }
+  else
+  {
+
+    PidinStackFree(ppist);
+    PidinStackFree(ppistCopy);
+    return NULL;
+
+  }
+
+
+  if(!strcmp(pcAorB,"A") || !strcmp(pcAorB,"B"))
+  {
+
+    phsle = PidinStackPushStringAndLookup(ppistCopy,pcAorB);
+
+  }
+  else
+  {
+
+    phsle = PidinStackLookupTopSymbol(ppistCopy);
+
+  }
+
+
+
+  PidinStackFree(ppistCopy);
+  
+  return phsle;
+
+
+}
+
+
+
+//------------------------------------------------------------------
+/*!
+ *
+ */
+//------------------------------------------------------------------
+struct symtab_HSolveListElement * lookupGate(char *pcName, char *pcField)
+{
+
+
+  struct symtab_HSolveListElement *phsle = NULL;
+
+
+  struct PidinStack *ppist  = PidinStackParse(pcName);
+
+
+
+  struct PidinStack *ppistCopy = PidinStackDuplicate(ppist);
+
+  
+  
+  if(!strcmp(pcField,"X") || !strcmp(pcField,"Xpower"))
+  {
+
+    phsle = PidinStackPushStringAndLookup(ppistCopy,"HH_activation");
+
+
+  }
+  else if(!strcmp(pcField,"Y") || !strcmp(pcField,"Ypower"))
+  {
+
+    phsle = PidinStackPushStringAndLookup(ppistCopy,"HH_inactivation");
+    
+
+  }
+  else if(!strcmp(pcField,"Z") || !strcmp(pcField,"Zpower"))
+  {
+
+    phsle = PidinStackPushStringAndLookup(ppistCopy,"HH_concentration");
+    
+
+  }
+
+
+  PidinStackFree(ppistCopy);
+  
+  return phsle;
+
+
+}
+
+
+
+
+//-----------------------------------------------------------------
+/*!
+ *
+ */
+//-----------------------------------------------------------------
+ struct PidinStack * getGateContext(char *pcName, char *pcField, char *pcAorB)
+{
+
+
+
+  struct PidinStack *ppist  = PidinStackParse(pcName);
+
+
+  if(!ppist)
+    return NULL;
+  
+  
+  if(!strcmp(pcField,"X") || !strcmp(pcField,"Xpower"))
+  {
+
+    PidinStackPushString(ppist,"HH_activation");
+
+
+  }
+  else if(!strcmp(pcField,"Y") || !strcmp(pcField,"Ypower"))
+  {
+
+    PidinStackPushString(ppist,"HH_inactivation");
+    
+
+  }
+  else if(!strcmp(pcField,"Z") || !strcmp(pcField,"Zpower"))
+  {
+
+    PidinStackPushString(ppist,"HH_concentration");
+    
+
+  }
+
+
+  if(!strcmp(pcAorB,"A") || !strcmp(pcAorB,"B"))
+  {
+
+    PidinStackPushString(ppist,pcAorB);
+
+  }
+
+  return ppist;
+
+
+}
+

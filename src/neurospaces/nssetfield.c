@@ -281,7 +281,72 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 
 	return 1;
 
+    }
+
+    else if( strncmp(field,"Y_B->table",10) == 0 ){
+
+
+
+      
+	struct PidinStack *ppistB = PidinStackDuplicate(ppist);
+
+
+	
+	PidinStackPushString(ppistB,"HH_inactivation");
+  
+
+	struct symtab_HSolveListElement *phsleB = 
+	  PidinStackPushStringAndLookup(ppistB,"B");
+    
+	PidinStackFree(ppistB);
+
+	if(!phsleB){
+	  fprintf(stdout,
+		  "Could not find backward gate kinetic for %s\n",
+		  pcPathname);
+	  return 0;
+	}
+
+	setParameter(phsleB,&field[5],value,SETPARA_NUM);
+
+
+	return 1;
+
+
+    }
+    else if( strncmp(field,"Y_A->table",10) == 0 ){
+
+
+
+      
+	struct PidinStack *ppistA = PidinStackDuplicate(ppist);
+
+
+	
+	PidinStackPushString(ppistA,"HH_inactivation");
+  
+
+	struct symtab_HSolveListElement *phsleA = 
+	  PidinStackPushStringAndLookup(ppistA,"A");
+    
+	PidinStackFree(ppistA);
+
+	if(!phsleA){
+	  fprintf(stdout,
+		  "Could not find forward gate kinetic for %s\n",
+		  pcPathname);
+	  return 0;
+	}
+
+	setParameter(phsleA,&field[5],value,SETPARA_NUM);
+
+
+	return 1;
+
    }
+
+
+
     else if(!strcmp(field,"X_init"))
     {
 

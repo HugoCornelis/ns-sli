@@ -31,6 +31,23 @@ void SetupTau(argc,argv)
 }
 
 
+void TweakAlpha(argc,argv)
+	int argc;
+	char	**argv;
+{
+	tweak_tab_values(argc,argv,SETUP_ALPHA);
+}
+
+void TweakTau(argc,argv)
+	int argc;
+	char	**argv;
+{
+	tweak_tab_values(argc,argv,SETUP_TAU);
+}
+
+
+
+
 void SetupGeneric(int argc,char **argv,int mode)
 {
 	char *args[15];	
@@ -73,5 +90,41 @@ void SetupGeneric(int argc,char **argv,int mode)
 
 
       return iResult;
+
+}
+
+
+
+/*!
+ *
+ */
+void tweak_tab_values(argc,argv,mode)
+	int argc;
+	char	**argv;
+	int		mode;
+{
+	
+	
+	initopt(argc, argv, "channel-element table");
+	if (G_getopt(argc, argv) != 0)
+	{
+		printoptusage(argc, argv);
+		return;
+	}
+
+	
+	if (mode==SETUP_ALPHA) 
+	{
+
+
+
+	} 
+	else if (mode==SETUP_TAU) 
+	{
+
+	  NSTweakTau(argv[1],argv[2]);
+
+	}
+
 
 }

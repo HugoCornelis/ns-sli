@@ -22,3 +22,5 @@ html-upload: html-upload-prepare
 
 
 
+doxygen:
+	doxygen dox.cfg

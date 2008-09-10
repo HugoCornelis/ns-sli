@@ -89,6 +89,7 @@ libneurospaces_a_SOURCES = \
 	nscall.c \
 	nssetup.c \
 	nstweak.c \
+	nstabfill.c \
 	nssymboltable.c \
 	nsintegratorverbose.c \
 	heccercreate.c \

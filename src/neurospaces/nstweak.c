@@ -1,6 +1,6 @@
 //------------------------------------------------------------------
 /*!
- *  \file nssetup.c
+ *  \file nstweak.c
  *  \author Mando Rodriguez
  *
  *
@@ -12,6 +12,8 @@
 #include <string.h>
 #include "nsintegrator.h"
 
+
+
 #include "neurospaces/function.h"
 #include "neurospaces/neurospaces_ext.h"
 #include "neurospaces/pidinstack.h"
@@ -20,101 +22,97 @@
 
 
 
+//-------------------------------------------------------------------
+/*!
+ *  \func int NSTweakTau(char *pcName, char *pcField)
+ *
+ *  Performs a manipulation for tau to transform it into an AB 
+ *  representation. 
+ *
+ *  Basis for this is the heccer function HeccerChannelSteadyStateSteppedTauTabulate
+ *  in table.c
+ *
+ */
+//-------------------------------------------------------------------
+int NSTweakTau(char *pcName, char *pcField){
+
+  
+  struct symtab_HSolveListElement *phsle, *phslegtkA, *phslegtkB;
+
+  phsle = lookupGate(pcName,pcField);
+
+  phslegtkA = lookupGateKinetic(pcName,pcField,"A");
+  phslegtkB = lookupGateKinetic(pcName,pcField,"B");
 
 
-/* Convert a sparsely filled table to tabchannel/tabgate format
-** starting from alpha-beta or tau-minf values. Optionally
-** do the TABFILL, but this is not yet implemented */
-void tweak_tab_values(argc,argv,mode)
-	int argc;
-	char	**argv;
-	int		mode;
-{
-/* 	Element	*elm; */
-/* 	Interpol	*A,*B; */
-/* 	float temp,temp2; */
-/* 	int i; */
-/* 	int	tab_gate_flag=0; */
-/* 	Interpol *create_interpol(); */
+  if(!phslegtkA || !phslegtkB)
+  {
 
-/* 	A=B=NULL; */
+    printf("Element '%s' not found\n",pcName);
+    return 0;
 
-/* 	initopt(argc, argv, "channel-element table"); */
-/* 	if (G_getopt(argc, argv) != 0) */
-/* 	  { */
-/* 		printoptusage(argc, argv); */
-/* 		return; */
-/* 	  } */
+  }
 
-/* 	elm = GetElement(optargv[1]); */
-/* 	if (!elm) { */
-/* 		printf("Element '%s' not found\n",optargv[1]); */
-/* 		return; */
-/* 	} */
-/* 	if (strcmp(elm->object->name,"tabgate")==0) { */
-/* 		A=((struct tab_gate_type *)elm)->alpha; */
-/* 		B=((struct tab_gate_type *)elm)->beta; */
-/* 		tab_gate_flag=1; */
-/* 	} */
-/* 	if (strcmp(elm->object->name,"tabchannel")==0) { */
-/* 		if (strcmp(optargv[2],"X")==0) { */
-/* 			A=((struct tab_channel_type *)elm)->X_A; */
-/* 			B=((struct tab_channel_type *)elm)->X_B; */
-/* 		} else if (strcmp(optargv[2],"Y")==0) { */
-/* 			A=((struct tab_channel_type *)elm)->Y_A; */
-/* 			B=((struct tab_channel_type *)elm)->Y_B; */
-/* 		} else if (strcmp(optargv[2],"Z")==0) { */
-/* 			A=((struct tab_channel_type *)elm)->Z_A; */
-/* 			B=((struct tab_channel_type *)elm)->Z_B; */
-/* 		} else { */
-/* 			printf("Gate type %s not known in %s \n",optargv[2],optargv[0]); */
-/* 			return; */
-/* 		} */
-/* 	} */
-/* 	if (!A || !B) { */
-/* 		printf("Error: Element %s should be a tabgate or tabchannel\n", */
-/* 			optargv[1]); */
-/* 		return; */
-/* 	} */
-/* 	if (mode==SETUP_ALPHA) { */
+  //!
+  //! Here at the start we set the HH_Format parameter on the 
+  //! gate to indicate the procedure has started. 
+  //!
+  setParameter(phsle,"HH_Format","steadystate-tau",SETPARA_STRING);
 
 
-/* 		for(i=0;i<=A->xdivs;i++) */
-/* 			B->table[i]+=A->table[i]; */
+  //!
+  //! Fetch the global heccer options data member to get the number
+  //! of enries.
+  struct nsintegrator_type *pelnsintegrator
+      = (struct nsintegrator_type *)GetElement("/neurospaces_integrator");
+
+  struct Heccer *pheccerOptions = 
+      pelnsintegrator->pnsintegrator->pheccerOptions;
+  
+
+  int iNumTabEntries = pheccerOptions->ho.iIntervalEntries;
 
 
-/* 	} else if (mode==SETUP_TAU) { */
+  int i;
+  double dAlpha, dBeta;
+  double dTableAval, dTableBval;
+  char pcTable[50];
 
 
-/* 		for(i=0;i<=A->xdivs;i++) { */
-/* 			temp=A->table[i]; */
-/* 			temp2=B->table[i]; */
+  struct PidinStack *ppistA = getGateContext(pcName,pcField,"A");
 
-/* 			/* */
-/* 			** per discussion with Mike Vanier */
-/* 			*/ 
-/* 			if (fabs(temp) < SING_TINY) { */
-/* 			    if (temp < 0.0) */
-/* 				temp = -SING_TINY; */
-/* 			    else */
-/* 				temp = SING_TINY; */
-/* 			} */
-
-/* 			A->table[i]=temp2/temp; */
-/* 			B->table[i]=1.0/temp; */
-/* 		} */
-/* 	} */
-}
+  struct PidinStack *ppistB = getGateContext(pcName,pcField,"B");
 
 
+  for(i=0;i<iNumTabEntries;i++)
+  {
+      sprintf(&pcTable[0], "table[%i]", i);
 
-void TweakAlpha(int argc,char **argv)
-{
-  return;
-}
+      dAlpha  = SymbolParameterResolveValue(phslegtkA, ppistA, pcTable);
 
-void TweakTau(int argc,char **argv)
-{
-  int x = 0;
-  return;
+      dBeta  = SymbolParameterResolveValue(phslegtkB, ppistB, pcTable);
+
+
+      if (fabs(dAlpha) < 1e-17)
+      {
+	if (dAlpha < 0.0)
+	{
+	  dAlpha = -1e-17;
+	}
+	else
+	{
+	  dAlpha = 1e-17;
+	}
+      }      
+
+      dTableAval = dBeta / dAlpha;
+      dTableBval = 1.0 / dAlpha;
+
+      setParameterNumber(phslegtkA, pcTable, dTableAval);
+      setParameterNumber(phslegtkB, pcTable, dTableBval);
+  }
+
+
+  return 1;
+
 }

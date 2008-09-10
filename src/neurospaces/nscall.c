@@ -34,7 +34,8 @@ int NSCall(int argc, char **argv){
 
 
 
-  if(!strcmp(argv[2],"TABCREATE")){
+  if(!strcmp(argv[2],"TABCREATE"))
+  {
 
     if (argc < 4) {
       printf("usage : %s field xdivs xmin xmax\n","tabcreate");
@@ -56,6 +57,36 @@ int NSCall(int argc, char **argv){
 
 
   }//=end TABCREATE case
+  else if(!strcmp(argv[2],"TABFILL"))
+  {
+
+    if (argc != 6) 
+    {
+      printf("usage : %s field xdivs fill_mode\n","tabfill");
+      return(0);
+    }
+
+    if(strcmp("0",argv[5]))
+    {
+      printf("Invalid fill_mode, must be '0'\n");
+      return 0;
+      
+    }
+
+
+
+    if(NSTabFill(argv[1], argv[3], argv[4]))
+    {
+      OK();
+      return ;
+    }
+    else
+
+      printf("Error filling table for %s %s\n",argv[1],argv[3]);
+      return 0;
+
+  }
+
 
 
 

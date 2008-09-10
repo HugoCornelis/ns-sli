@@ -35,7 +35,7 @@
 //!
 #define SETPARA_GENESIS2 2
 #define SETPARA_NUM 3
-
+#define SETPARA_STRING 4
 
 #define MAX_HECCERS 100
 #define MAX_NSSYMBOLS 200

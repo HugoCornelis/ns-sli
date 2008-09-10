@@ -9,7 +9,7 @@
 // Functions for filling tabchannels and gates with HH-curves
 addfunc	setupalpha SetupAlpha
 addfunc tweaktau TweakTau
-
+addfunc tweakalpha TweakAlpha
 
 
 

@@ -78,7 +78,7 @@ int tab_xfills = 49
     call /hardcoded_neutral/c2/kc TABCREATE Z {cdivs} {cmin} {cmax}
 
 
-    for (i = 0; i <= (cdivs); i = i + 1)
+    for (i = 0; i < (cdivs); i = i + 1)
 	    float zinf = 1/(1 + (4.0e-3/c))
 	    setfield /hardcoded_neutral/c2/kc Z_A->table[{i}] {zinf/ztau}
 	    setfield /hardcoded_neutral/c2/kc Z_B->table[{i}] {1/ztau}

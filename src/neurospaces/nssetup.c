@@ -441,13 +441,3 @@ int NSSetupTau( char *pcName, char *pcField, char **pcArgs,
 
 
 
-
-void TweakAlpha(int argc,char **argv)
-{
-  return;
-}
-
-void TweakTau(int argc,char **argv)
-{
-  return;
-}
