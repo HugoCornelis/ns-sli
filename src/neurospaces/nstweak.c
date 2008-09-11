@@ -60,19 +60,6 @@ int NSTweakTau(char *pcName, char *pcField){
   setParameter(phsle,"HH_Format","steadystate-tau",SETPARA_STRING);
 
 
-  //!
-  //! Fetch the global heccer options data member to get the number
-  //! of enries.
-  struct nsintegrator_type *pelnsintegrator
-      = (struct nsintegrator_type *)GetElement("/neurospaces_integrator");
-
-  struct Heccer *pheccerOptions = 
-      pelnsintegrator->pnsintegrator->pheccerOptions;
-  
-
-  int iNumTabEntries = pheccerOptions->ho.iIntervalEntries;
-
-
   int i;
   double dAlpha, dBeta;
   double dTableAval, dTableBval;
@@ -82,6 +69,31 @@ int NSTweakTau(char *pcName, char *pcField){
   struct PidinStack *ppistA = getGateContext(pcName,pcField,"A");
 
   struct PidinStack *ppistB = getGateContext(pcName,pcField,"B");
+
+
+  //!!
+  //!! There is a '- 1' following a call to getting the number of table entries because 
+  //!! of a glitch in the model container which causes it to return the number of entries+1.
+  //!!
+  int iNumTabEntriesA = 
+    (int)SymbolParameterResolveValue(phslegtkA, ppistA,"HH_NUMBER_OF_TABLE_ENTRIES");
+
+  
+  int iNumTabEntriesB = 
+    (int)SymbolParameterResolveValue(phslegtkB, ppistB,"HH_NUMBER_OF_TABLE_ENTRIES");
+
+
+  if( iNumTabEntriesA != iNumTabEntriesB )
+  {
+
+    printf(
+	   "Error: Gate kinetic A and B for gate \'%s\' have a different number of table entries.\n",
+	   pcName);
+    return 0;
+
+  }
+
+  int iNumTabEntries = iNumTabEntriesA;
 
 
   for(i=0;i<iNumTabEntries;i++)
@@ -111,6 +123,7 @@ int NSTweakTau(char *pcName, char *pcField){
       setParameterNumber(phslegtkA, pcTable, dTableAval);
       setParameterNumber(phslegtkB, pcTable, dTableBval);
   }
+
 
 
   return 1;

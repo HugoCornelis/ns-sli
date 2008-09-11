@@ -42,14 +42,40 @@ int NSTabFill(char *pcName, char *pcField, char *pcNumTabEntries)
 
 
 
-  struct nsintegrator_type *pelnsintegrator
-      = (struct nsintegrator_type *)GetElement("/neurospaces_integrator");
-
-  struct Heccer *pheccerOptions = 
-      pelnsintegrator->pnsintegrator->pheccerOptions;
 
 
-  int iCurrentNumEntries = pheccerOptions->ho.iIntervalEntries;
+
+
+
+
+  struct PidinStack * ppistA = getGateContext(pcName,pcField,"A");
+
+  struct PidinStack * ppistB = getGateContext(pcName,pcField,"B");
+
+  //!!
+  //!! There is a '- 1' following a call to getting the number of table entries because 
+  //!! of a glitch in the model container which causes it to return the number of entries+1.
+  //!!
+  int iNumTabEntriesA = 
+    (int)SymbolParameterResolveValue(phslegtkA, ppistA,"HH_NUMBER_OF_TABLE_ENTRIES");
+
+  
+  int iNumTabEntriesB = 
+    (int)SymbolParameterResolveValue(phslegtkB, ppistB,"HH_NUMBER_OF_TABLE_ENTRIES");
+
+
+  if( iNumTabEntriesA != iNumTabEntriesB )
+  {
+
+    printf(
+	   "Error: Gate kinetic A and B for gate \'%s\' have a different number of table entries.\n",
+	   pcName);
+    return 0;
+
+  }
+
+
+  int iCurrentNumEntries = iNumTabEntriesA;
 
  
   double *ppdSourcesA = (double*)calloc(iCurrentNumEntries,sizeof(double));
@@ -58,9 +84,6 @@ int NSTabFill(char *pcName, char *pcField, char *pcNumTabEntries)
   
   char pcTable[50];
 
-  struct PidinStack * ppistA = getGateContext(pcName,pcField,"A");
-
-  struct PidinStack * ppistB = getGateContext(pcName,pcField,"B");
 
   double *ppdSources[] =
     {
@@ -77,8 +100,13 @@ int NSTabFill(char *pcName, char *pcField, char *pcNumTabEntries)
     };
 
 
+  struct nsintegrator_type *pelnsintegrator 
+       = (struct nsintegrator_type *)GetElement("/neurospaces_integrator"); 
 
-  
+  struct Heccer *pheccerOptions =  
+       pelnsintegrator->pnsintegrator->pheccerOptions; 
+
+  int iSourceSize = pheccerOptions->ho.iSmallTableSize;
   int iDestinationSize = atoi(pcNumTabEntries);
 
     
@@ -92,14 +120,14 @@ int NSTabFill(char *pcName, char *pcField, char *pcNumTabEntries)
 
 
   for(j=0;j<iCurrentNumEntries;j++)
-    {
-      sprintf(&pcTable[0], "table[%i]", j);
+  {
+    sprintf(&pcTable[0], "table[%i]", j);
 
-      pdSourcesA[j]  = SymbolParameterResolveValue(phslegtkA, ppistA, pcTable);
+    pdSourcesA[j]  = SymbolParameterResolveValue(phslegtkA, ppistA, pcTable);
 
-      pdSourcesB[j]  = SymbolParameterResolveValue(phslegtkB, ppistB, pcTable);
+    pdSourcesB[j]  = SymbolParameterResolveValue(phslegtkB, ppistB, pcTable);
 
-    }
+  }
 
 
 
@@ -111,7 +139,7 @@ int NSTabFill(char *pcName, char *pcField, char *pcNumTabEntries)
   double *pdDestinationsA = ppdDestinations[0];
   double *pdDestinationsB = ppdDestinations[1];
 
-  HeccerTableInterpolate(ppdSources,ppdDestinations,iCurrentNumEntries,iDestinationSize);
+  HeccerTableInterpolate(ppdSources,ppdDestinations,iSourceSize,iDestinationSize);
     
 
  
@@ -129,16 +157,23 @@ int NSTabFill(char *pcName, char *pcField, char *pcNumTabEntries)
 
   }
 
+  //!
+  //! Must update the number of table entries in the model container
+  //! for each gate. If it's not updated then not all values will 
+  //! be properly caculated.
+  //!
+  setParameterNumber(phslegtkA, "HH_NUMBER_OF_TABLE_ENTRIES", (double)iDestinationSize);
+  setParameterNumber(phslegtkB, "HH_NUMBER_OF_TABLE_ENTRIES", (double)iDestinationSize);
+
 
 
   //!
-  //! The destination size here becomes the new table size.
+  //! The destination size here becomes the new table size since the table
+  //! has been interpolated to a new size.
   //!
+
   pheccerOptions->ho.iIntervalEntries = iDestinationSize;
  
-
-    //  free(ppdSourcesA);
-    //free(ppdDestinationsA);
 
   return 1;
 

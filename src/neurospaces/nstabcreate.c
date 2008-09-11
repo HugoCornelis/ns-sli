@@ -93,7 +93,7 @@ int NSTabCreate(int argc, char **argv){
   else{
 
     pheccerOptions->ho.iIntervalEntries = iXdivs;
-
+    pheccerOptions->ho.iSmallTableSize = iXdivs;
   }
 
 
