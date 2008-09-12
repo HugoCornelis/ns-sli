@@ -49,10 +49,14 @@ int NSGenesisInitialize(){
    char *ppvArgs[] =
    {
       "genesis-neurospaces-bridge",
-      "empty_model.ndf",
+      //NULL,
+          "/usr/local/neurospaces/models/library/utilities/empty_model.ndf",
+            "empty_model.ndf",
       NULL,
       NULL,
    };
+
+   
 
    //t set NEUROSPACES_MODELS variable to point to where the model can be found  
 

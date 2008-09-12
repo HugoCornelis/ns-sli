@@ -22,9 +22,9 @@ setfield /hardcoded_neutral/c/ka \
 	Gk 0.0 \
 	Xpower 4.0 \
 	Ypower 1.0 \
-	Zpower 0.0
-
-
+	Zpower 0.0 \
+	X_init 0.083244059218135213 \
+	Y_init 0.74950117078384793
 
 
 setupalpha /hardcoded_neutral/c/ka \

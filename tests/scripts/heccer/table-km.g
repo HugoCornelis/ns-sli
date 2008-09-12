@@ -18,7 +18,8 @@ setfield /hardcoded_neutral/c/km \
 	Gk 0.0 \
 	Xpower 1.0 \
 	Ypower 0.0 \
-	Zpower 0.0
+	Zpower 0.0 \
+	X_init 0.03540844397
 
 float x
 float dx

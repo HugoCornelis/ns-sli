@@ -39,13 +39,6 @@ my $test
 
 
 
-						  {
-						  
-						   description => "Is Z_A->table[1] set ?",
-						   read => '60.1562',
-						   write => 'printparameter /hardcoded_neutral/c2/kc/HH_concentration/A table[1]',
-						  
-						  },
 
 
 

@@ -19,8 +19,10 @@ setfield /hardcoded_neutral/c/kdr \
 	Xpower 2.0 \
 	Ypower 1.0 \
 	Zpower 0.0 \
-	X_init 0.0045016011008226975 \
+	X_init  0.00359944 \
 	Y_init 0.99997858779733162
+
+//	X_init 0.0045016011008226975 \
 
 float x
 float dx
@@ -95,10 +97,11 @@ echo Initiated
 call neurospaces_integrator NSINTEGRATOR_DUMP
 
 echo -------
+
 echo Iteration 0
 
 step 1
+ 
 
 
-
-call model_container NEUROSPACES_QUERY
+//call model_container NEUROSPACES_QUERY
