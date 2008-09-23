@@ -152,7 +152,7 @@ my $test
 
 
 
-{
+			       {
 				arguments => [
 
 					       "$::config->{core_directory}/tests/scripts/heccer/table-km.g",
@@ -161,7 +161,9 @@ my $test
 				command => 'src/nsgenesis',
 				command_tests => [
 						  {
+						   numerical_compare => 1,
 						   description => "Are gates tabulated correctly, muscarinic potassium gates (table-km.g) ?",
+						  
 						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/table-km.txt | perl -pe 's/unnamed test/hardcoded_neutral/g'`),
 						   timeout => 5,
 						   write => undef,
@@ -175,7 +177,7 @@ my $test
 
 
 
-  {
+			       {
 				arguments => [
 
 					        "$::config->{core_directory}/tests/scripts/heccer/table-kh.g",
@@ -184,7 +186,9 @@ my $test
 				command => 'src/nsgenesis',
 				command_tests => [
 						  {
+						   numerical_compare => 1,
 						   description => "Are gates tabulated correctly, anomalous rectifier potassium gates (table-kh.g) ?",
+						   
 						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/table-kh.txt | perl -pe 's/unnamed test/hardcoded_neutral/g'`),
 						   timeout => 5,
 						   write => undef,
@@ -192,6 +196,33 @@ my $test
 						 ],
 				description => "Anomalous rectifier potassium gate tabulation",
 			       },
+
+
+
+
+
+
+
+
+
+			       {
+				arguments => [
+
+					      "$::config->{core_directory}/tests/scripts/heccer/table-k2.g",
+					     ],
+				command => 'src/nsgenesis',
+				command_tests => [
+						  {
+						   description => "Are gates tabulated correctly, K2 potassium gates ?",
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/table-k2.txt | perl -pe 's/unnamed test/hardcoded_neutral/g'`),
+						   timeout => 5,
+						   write => undef,
+						  },
+						 ],
+				description => "K2 potassium gate tabulation",
+			       },
+			
+
 
 
 			      ],

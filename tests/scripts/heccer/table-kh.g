@@ -23,7 +23,7 @@ setfield /hardcoded_neutral/c/h1 \
 	Xpower 1.0 \
 	Ypower 0.0 \
 	Zpower 0.0 \
-	X_init 0.03540844397
+	X_init 0.0240463
 
 
 create tabchannel /hardcoded_neutral/c/h2
@@ -35,7 +35,7 @@ setfield /hardcoded_neutral/c/h2 \
 	Xpower 1.0 \
 	Ypower 0.0 \
 	Zpower 0.0 \
-	X_init 0.03540844397
+	X_init 0.0961851
 
 
 float x
@@ -61,8 +61,8 @@ int tab_xdivs = 20; int tab_xfills = 50
 		    float y1 = {0.8*y}
 		    float y2 = {0.2*y}
 
-echo {i} {dx} {y1}
-echo {i} {dx} {y2}
+//echo {i} {dx} {y1}
+//echo {i} {dx} {y2}
 
 		    setfield /hardcoded_neutral/c/h1 X_B->table[{i}] {0.8*y}
 		    setfield /hardcoded_neutral/c/h2 X_B->table[{i}] {0.2*y}
@@ -71,11 +71,11 @@ echo {i} {dx} {y2}
 
 	    tweaktau /hardcoded_neutral/c/h1 X
 	    setfield /hardcoded_neutral/c/h1 X_A->calc_mode 0 X_B->calc_mode 0
-	    call /hardcoded_neutral/c/h1 TABFILL X {tab_xfills + 1} 0
+	    call /hardcoded_neutral/c/h1 TABFILL X {tab_xfills} 0
 
 	    tweaktau /hardcoded_neutral/c/h2 X
 	    setfield /hardcoded_neutral/c/h2 X_A->calc_mode 0 X_B->calc_mode 0
-	    call /hardcoded_neutral/c/h2 TABFILL X {tab_xfills + 1} 0
+	    call /hardcoded_neutral/c/h2 TABFILL X {tab_xfills} 0
 
 addmsg /hardcoded_neutral/c /hardcoded_neutral/c/h1 VOLTAGE Vm
 addmsg /hardcoded_neutral/c/h1 /hardcoded_neutral/c CHANNEL Gk Ek

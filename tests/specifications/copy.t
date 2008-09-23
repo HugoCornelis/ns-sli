@@ -16,17 +16,10 @@ my $test
 					     ],
 				command => 'src/nsgenesis',
 				command_tests => [
-						  {
-						   description => "Can we copy a compartment in the model container?",
-						   read => '/proto
-/output
-/hardcoded_neutral
-/hardcoded_neutral/c
-/hardcoded_neutral/o',
-						   write => 'expand /**',
-						  },
 						  
 
+
+	       
 
 						  {
 						   description => "Is parameter CM set correctly?",
@@ -54,6 +47,8 @@ my $test
 						   read => 'value = 3.58441e+08',
 						   write => 'printparameter /hardcoded_neutral/o RM',
 						  },
+
+
 
 
 

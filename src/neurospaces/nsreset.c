@@ -84,7 +84,7 @@ void NSReset(){
   //t which is the same id we give the genesis object all of the 
   //t current objects will be clocked to.
   //t
-    HeccerCreate("hardcoded_neutral");
+    HeccerCreate(MODELCONTAINER_ROOT);
 
   }
   else

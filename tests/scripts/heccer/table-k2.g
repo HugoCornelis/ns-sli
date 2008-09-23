@@ -1,4 +1,4 @@
-setclock 0 1e-6
+setclock 0 2e-5
 
 create compartment hardcoded_neutral
 
@@ -14,8 +14,8 @@ setfield /hardcoded_neutral/c2 \
 create tabchannel /hardcoded_neutral/c2/k2
 
 setfield /hardcoded_neutral/c2/k2 \
-	Ek 85 \
-	Gbar 2.80747571e-07 \
+	Ek -0.085 \
+	Gbar 1.36865e-09 \
 	Ik 0.0 \
 	Gk 0.0 \
 	Xpower 1.0 \
@@ -69,10 +69,11 @@ int tab_xfills = 49
     float c = cmin
     float dc = cdivs
     float dc = (cmax - cmin)/cdivs
+    echo {"dc is " @ {dc}}
     float ztau = 0.010
     call /hardcoded_neutral/c2/k2 TABCREATE Z {cdivs} {cmin} {cmax}
     int i
-    for (i = 0; i <= (cdivs); i = i + 1)
+    for (i = 0; i <= (cdivs-1); i = i + 1)
 	    float zinf = 1/(1 + (0.2e-3/c))
 	    setfield /hardcoded_neutral/c2/k2 Z_A->table[{i}] {zinf/ztau}
 	    setfield /hardcoded_neutral/c2/k2 Z_B->table[{i}] {1/ztau}

@@ -565,3 +565,47 @@ struct symtab_HSolveListElement * lookupGate(char *pcName, char *pcField)
 
 }
 
+
+
+
+
+//---------------------------------------------------------------
+/*!
+ *
+ */
+//---------------------------------------------------------------
+int hasChild(struct symtab_HSolveListElement *phsle, char *pcChild)
+{
+
+  IOHContainer *piohcChildren = NULL;
+  struct symtab_HSolveListElement *phsleChild = NULL;
+  int i = 0;
+
+
+  piohcChildren = SymbolGetChildren((struct symtab_IOHierarchy *)phsle);
+
+
+  if(!piohcChildren)
+  {
+    return 0;
+  }
+  else
+  {
+
+    phsleChild = IOHContainerIterate(piohcChildren);
+
+  }
+
+  for(i = 0; SymbolIterateValid(phsleChild);i++)
+  {
+
+
+    char pc[100];
+
+    //  IdinFullName(SymbolGetPidin(phsleChild,pc);
+
+    
+  }
+
+
+}

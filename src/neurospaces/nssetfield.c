@@ -53,9 +53,6 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
     return 0;
   
 
-
-
-
   //-
   //- Check the type on the phsle object passed. For certain types
   //- we must add parameters to the child objects rather than the object
@@ -79,6 +76,24 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
     if (strcmp(field, "Xpower") == 0){
 
 
+
+      struct symtab_HSolveListElement *phsleGate = 
+        lookupGate(pcPathname,"Xpower"); 
+
+
+      if(phsleGate) 
+      { 
+
+        double dPower = SymbolParameterResolveValue(phsleGate, ppist, "POWER"); 
+
+        printf("Warning: Field \"Xpower\" for '%s' has already been set to %i.\n",  
+ 	      pcPathname,(int)dPower);  
+
+        return 1; 
+      }
+
+
+
      //- if zero, no need to create a gate.
       double dNumber = strtod(value,NULL);
 
@@ -89,7 +104,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
       //- we create our HH gate. Function creates
       //- the gate, ssets it as a child to phsle,
       //- and returns a pointer to the gate.
-      struct symtab_HSolveListElement *phsleGate = 
+      phsleGate = 
 	CreateHHGate(phsle, "HH_activation");
 
       if(!phsleGate)
@@ -103,6 +118,21 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 
 
 
+    struct symtab_HSolveListElement *phsleGate = 
+        lookupGate(pcPathname,"Ypower"); 
+
+
+      if(phsleGate) 
+      { 
+
+        double dPower = SymbolParameterResolveValue(phsleGate, ppist, "POWER"); 
+
+        printf("Warning: Field \"Ypower\" for '%s' has already been set to %i.\n",  
+ 	      pcPathname,(int)dPower);  
+
+        return 1; 
+      } 
+
      //- if zero, no need to create a gate.
       double dNumber = strtod(value,NULL);
 
@@ -110,7 +140,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 	return 1;
       
 
-      struct symtab_HSolveListElement *phsleGate = 
+      phsleGate = 
 	CreateHHGate(phsle, "HH_inactivation");
 
       if(!phsleGate)
@@ -119,13 +149,24 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
       return setParameter(phsleGate,field,value,SETPARA_GENESIS2);
 
 
-
-
-
-
     }
     else if(strcmp(field,"Zpower") == 0){ 
 
+
+    struct symtab_HSolveListElement *phsleGate = 
+        lookupGate(pcPathname,"Zpower"); 
+
+
+      if(phsleGate) 
+      { 
+
+        double dPower = SymbolParameterResolveValue(phsleGate, ppist, "POWER"); 
+
+        printf("Warning: Field \"Zpower\" for '%s' has already been set to %i.\n",  
+ 	      pcPathname,(int)dPower);  
+
+        return 1; 
+      } 
 
 
      //- if zero, no need to create a gate.
@@ -135,9 +176,11 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 	return 1;
       
 
-      struct symtab_HSolveListElement *phsleGate = 
-	CreateConcGate(phsle, "HH_concentration");
-
+      
+      phsleGate = 
+	  CreateConcGate(phsle, "HH_concentration");
+      
+      
       if(!phsleGate)
 	return 0;
 
@@ -185,16 +228,10 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
       return 1;
 
 
-
-
-
-
     }
     else if( strncmp(field,"Z_B->table",10) == 0 ){
 
 
-
-    
 	struct PidinStack *ppistB = PidinStackDuplicate(ppist);
 
 
@@ -224,8 +261,6 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
     else if( strncmp(field,"X_B->table",10) == 0 ){
 
 
-
-      
 	struct PidinStack *ppistB = PidinStackDuplicate(ppist);
 
 
@@ -343,7 +378,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 
 	return 1;
 
-   }
+    }
 
 
 

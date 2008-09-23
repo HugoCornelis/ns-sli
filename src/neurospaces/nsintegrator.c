@@ -50,7 +50,7 @@ int NSGenesisInitialize(){
    {
       "genesis-neurospaces-bridge",
       //NULL,
-          "/usr/local/neurospaces/models/library/utilities/empty_model.ndf",
+       "/usr/local/neurospaces/models/library/utilities/empty_model.ndf",
             "empty_model.ndf",
       NULL,
       NULL,
@@ -88,18 +88,18 @@ int NSGenesisInitialize(){
    //t
    //t create array for storing the neurospaces sumbol table.
    //t
-   pnsintegrator->iNumSyms = 0; //initial number of symbols is zero
+/*    pnsintegrator->iNumSyms = 0; //initial number of symbols is zero */
 
-   pnsintegrator->ppSymbols = 
-     (struct neurospaces_symbol**)calloc(MAX_NSSYMBOLS,sizeof(struct neurospaces_symbol*));
+/*    pnsintegrator->ppSymbols =  */
+/*      (struct neurospaces_symbol**)calloc(MAX_NSSYMBOLS,sizeof(struct neurospaces_symbol*)); */
 
 
-   if( !pnsintegrator->ppSymbols ){
+/*    if( !pnsintegrator->ppSymbols ){ */
 
-     fprintf(stderr,"Error initializing Neurospaces Symbol table\n");
-     return -1;
+/*      fprintf(stderr,"Error initializing Neurospaces Symbol table\n"); */
+/*      return -1; */
 
-   }
+/*    } */
 
 
 

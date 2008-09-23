@@ -35,20 +35,20 @@ int tab_xdivs = 20; int tab_xfills = 50
 	    for (i = 0; i <= ({tab_xdivs}); i = i + 1)
 		    y = 0.2/(3.3*({exp {(x + 0.035)/0.02}}) + {exp {-(x + 0.035)/0.02}})
 
-echo {i} {x} {y}
+//echo {i} {x} {y}
 
 		    setfield /hardcoded_neutral/c/km X_A->table[{i}] {y}
 
 		    y = 1.0/(1.0 + {exp {-(x + 0.035)/0.01}})
 
-echo {i} {x} {y}
+//echo {i} {x} {y}
 
 		    setfield /hardcoded_neutral/c/km X_B->table[{i}] {y}
 		    x = x + dx
 	    end
 	    tweaktau /hardcoded_neutral/c/km X
 	    setfield /hardcoded_neutral/c/km X_A->calc_mode 0 X_B->calc_mode 0
-	    call /hardcoded_neutral/c/km TABFILL X {tab_xfills + 1} 0
+	    call /hardcoded_neutral/c/km TABFILL X {tab_xfills} 0
 
 addmsg /hardcoded_neutral/c /hardcoded_neutral/c/km VOLTAGE Vm
 addmsg /hardcoded_neutral/c/km /hardcoded_neutral/c CHANNEL Gk Ek

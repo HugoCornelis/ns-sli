@@ -42,7 +42,7 @@
 
 
 
-#define MODELCONTAINER_ROOT "/hardcoded_neutral"
+#define MODELCONTAINER_ROOT "hardcoded_neutral"
 
 
 
