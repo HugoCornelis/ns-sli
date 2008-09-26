@@ -1,13 +1,14 @@
 setclock 0 2e-5
-create compartment c
-setfield c \
+create neutral /hardcoded_neutral
+create compartment /hardcoded_neutral/c
+setfield /hardcoded_neutral/c \
 	Cm 4.57537e-11 \
 	Em -0.08 \
 	initVm -0.028 \
 	Ra 360502 \
 	Rm 3.58441e8
-create tabchannel c/cat
-setfield c/cat \
+create tabchannel /hardcoded_neutral/c/cat
+setfield /hardcoded_neutral/c/cat \
 	Ek 0.1375262439 \
 	Gbar 1.394928884e-08 \
 	Ik 0.0 \
@@ -15,7 +16,7 @@ setfield c/cat \
 	Xpower 1.0 \
 	Ypower 1.0 \
 	Zpower 0.0
-setupalpha c/cat \
+setupalpha /hardcoded_neutral/c/cat \
 	X \
 	2.6e3 \
 	0.0 \
@@ -29,7 +30,7 @@ setupalpha c/cat \
 	4e-3 \
 	-size 3000 \
 	-range -0.1 0.05
-setupalpha c/cat \
+setupalpha /hardcoded_neutral/c/cat \
 	Y \
 	0.0025e3 \
 	0.0 \
@@ -43,58 +44,33 @@ setupalpha c/cat \
 	-10.0e-3 \
 	-size 3000 \
 	-range -0.1 0.05
-addmsg c c/cat VOLTAGE Vm
-addmsg c/cat c CHANNEL Gk Ek
-create Ca_concen c/p
-setfield c/p \
+addmsg /hardcoded_neutral/c /hardcoded_neutral/c/cat VOLTAGE Vm
+addmsg /hardcoded_neutral/c/cat /hardcoded_neutral/c CHANNEL Gk Ek
+create Ca_concen /hardcoded_neutral/c/p
+setfield /hardcoded_neutral/c/p \
 	tau 0.00010 \
 	B 9412391936 \
 	Ca_base 4e-05 \
 	thick 2e-07
-addmsg c/cat c/p I_Ca Ik
-create hsolve h
-setmethod h 11
-setfield h \
-	calcmode 0 \
-	chanmode 4 \
-	path /c
-call h SETUP
+addmsg /hardcoded_neutral/c/cat /hardcoded_neutral/c/p I_Ca Ik
+
+
+silent 1
+
 reset
 
-function showfields
+set_nsintegrator_verbose_level 2
 
-	showfield h \
-		chip[4] \
-		chip[5] \
-		conc[0] \
-		results[0] \
-		results[1] \
-		vm[0]
-end
+echo Initiated
 
-function showtables
+call neurospaces_integrator NSINTEGRATOR_DUMP
 
-	int i
+echo -------
+echo Iteration 0
 
-	for (i = 0 ; i < 3001 ; i = i + 1)
+step 1
 
-		echo {i} {getfield /c/cat X_A->table[{i}]}
-	end
 
-	for (i = 0 ; i < 3001 ; i = i + 1)
 
-		echo {i} {getfield /c/cat X_B->table[{i}]}
-	end
-
-	for (i = 0 ; i < 3001 ; i = i + 1)
-
-		echo {i} {getfield /c/cat Y_A->table[{i}]}
-	end
-
-	for (i = 0 ; i < 3001 ; i = i + 1)
-
-		echo {i} {getfield /c/cat Y_B->table[{i}]}
-	end
-
-end
+call model_container NEUROSPACES_QUERY
 
