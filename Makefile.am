@@ -19,8 +19,3 @@ html-upload-prepare:
 
 html-upload: html-upload-prepare
 	scp -pr html/htdocs/* hcornelis@shell.sourceforge.net:/home/groups/n/ne/neurospaces/htdocs/
-
-
-
-doxygen:
-	doxygen dox.cfg

@@ -78,7 +78,7 @@ int NSmsg(const char *pcSrcpath, const char *pcDstpath, const char *pcTypename){
   else if (strcmp(pcTypename, "VOLTAGE") == 0){
 
 
-    return 1;
+    return VoltageMsg(pcSrcpath,pcDstpath);
 
   }
   else if(strcmp(pcTypename,"CHANNEL") == 0){
@@ -182,7 +182,7 @@ int AxialMsg(const char *pcSrcpath, const char *pcDstpath)
 
 
 //----------------------------------------------------------------------------
-/*
+/*!
  *   \fun int ChannelMsg(const char *pcSrcpath, const char *pcTgtpath)
  */
 //----------------------------------------------------------------------------
@@ -190,23 +190,58 @@ int ChannelMsg(const char *pcSrcpath, const char *pcDstpath)
 {
 
 
-  struct symtab_IdentifierIndex *pidinTarget =  
-    PidinQueueLookupTarget(pcSrcpath,pcDstpath);
+  struct symtab_HSolveListElement *phsleSrc = NSLookupHSolveListElement(pcSrcpath);
+
+  struct symtab_HSolveListElement *phsleDst = NSLookupHSolveListElement(pcDstpath);
 
 
-/*   struct PidinStack * */
-/*     SymbolPrincipalSerial2Context(struct symtab_HSolveListElement *phsle, */
-/* 				struct PidinStack *ppist,int iPrincipal); */
+  struct PidinStack *ppistSrc = PidinStackParse(pcSrcpath);
+  
+  struct PidinStack *ppistDst = PidinStackParse(pcDstpath);
+
+
+  //!
+  //! recaculate all serials before performing a pidinstack subtract
+  //!
+  struct nsintegrator_type *pelnsintegrator
+      = (struct nsintegrator_type *)GetElement("/neurospaces_integrator");
+
+  SymbolRecalcAllSerials(pelnsintegrator->pnsintegrator->phsleCachedRoot, 
+                         pelnsintegrator->pnsintegrator->ppistCachedRoot);
+
+  
+  struct PidinStack *ppistTarget = PidinStackSubtract(ppistSrc,ppistDst);
+
+
+  if(!ppistTarget)
+  {
+
+    fprintf(stderr,"Error adding message from %s to %s\n",pcSrcpath,pcDstpath);
+    return -1;
+    
+  }
 
 
 
 
-   //- bind I/O relations 
+  //- bind I/O relations
 
-/*   SymbolAssignInputs(&$4->bio.ioh.iol.hsle, $3);  */
+  char pcTarget[100];
+  
+
+  PidinStackString(ppistTarget,pcTarget,sizeof(pcTarget));
 
 
-/*   ChannelSetup(struct  symtab_Channel *pchan,struct ParserContext *pac);  */
+  int iLen = strlen(pcTarget);
+
+  strcpy(&pcTarget[iLen],"->I");
+
+
+  struct symtab_InputOutput *pio =  CreateInputOutput(pcTarget,INPUT_TYPE_INPUT);
+
+  SymbolAssignInputs(phsleDst, pio);
+
+
 
   return 1;
 
@@ -228,76 +263,12 @@ int CalciumPoolMsg(const char *pcSrcpath, const char *pcDstpath)
 
 
 
-//-----------------------------------------------------------------------------
+//----------------------------------------------------------------------------
 /*!
  *
  */
-//-----------------------------------------------------------------------------
-static struct symtab_IOContainer *IOContainerFromList(char *ppcParmaters[], int iType[])
-{
-
-
-  int i;
-
-  int iParameterLen = 0;
-
-  for(iParameterLen=0;ppcParmaters[iParameterLen];iParameterLen++);
-    
-  
-  struct symtab_InputOutput ** pios = 
-    (struct symtab_InputOutput **)calloc(iParameterLen,sizeof(struct symtab_InputOutput*));
-
-
-  //! 
-  //! First create the ios and idins
-  //!
-  for( i=0; i<iParameterLen; i++)
-  {
-
-    struct symtab_IdentifierIndex *pidin = IdinNewFromChars(ppcParmaters[i]);
-
-    struct symtab_InputOutput *pio = 
-      InputOutputNewForType( iType[i] );
-
-
-    //! set the pidin in the pidinField
-    pio->pidinField = pidin;
-
-    //! put this pio into our pios array
-    pios[i] = pio;
-
-    //! go ahead and set this to point at element 0
-    pios[i]->pioFirst = pios[0];
-
-  }
-
-
-  //!
-  //! Now make each parameter point to the next in succession.
-  //!
-  for(i=0;i<iParameterLen;i++)
-  {
-
-    if(i == iParameterLen - 1)
-      pios[i]->pioNext = NULL;
-    else
-      pios[i]->pioNext = pios[i+1];
-
-  }
-
-  return IOContainerNewFromIO(pios);
-
-} 
-
-
-
-
-//-----------------------------------------------------------------------------------
-/*
- */
-//-----------------------------------------------------------------------------------
-static struct symtab_IdentifierIndex * PidinQueueLookupTarget(const char *pcSrcpath, 
-							      const char *pcDstpath)
+//----------------------------------------------------------------------------
+int VoltageMsg(const char *pcSrcpath, const char *pcDstpath)
 {
 
   struct symtab_HSolveListElement *phsleSrc = NSLookupHSolveListElement(pcSrcpath);
@@ -309,19 +280,9 @@ static struct symtab_IdentifierIndex * PidinQueueLookupTarget(const char *pcSrcp
   
   struct PidinStack *ppistDst = PidinStackParse(pcDstpath);
 
-  
-  struct symtab_IdentifierIndex *pidinSrc = PidinStackToPidinQueue(ppistSrc);
-  
-  struct symtab_IdentifierIndex *pidinDst = PidinStackToPidinQueue(ppistDst);
-  
-
-  PidinStackPushCompactAll(ppistSrc,pidinSrc);
-  PidinStackPushCompactAll(ppistDst,pidinDst);
-
 
   //!
-  //! Fetch the cached root and context to recalculate all serials in the model
-  //! container.
+  //! recaculate all serials before performing a pidinstack subtract
   //!
   struct nsintegrator_type *pelnsintegrator
       = (struct nsintegrator_type *)GetElement("/neurospaces_integrator");
@@ -329,31 +290,37 @@ static struct symtab_IdentifierIndex * PidinQueueLookupTarget(const char *pcSrcp
   SymbolRecalcAllSerials(pelnsintegrator->pnsintegrator->phsleCachedRoot, 
                          pelnsintegrator->pnsintegrator->ppistCachedRoot);
 
-
-
-  PidinStackUpdateCaches(ppistSrc);
-  PidinStackUpdateCaches(ppistDst);
-
-
   
-  int iSrc = PidinStackToSerial(ppistSrc);
-
-  int iDst = PidinStackToSerial(ppistDst);
+  struct PidinStack *ppistTarget = PidinStackSubtract(ppistSrc,ppistDst);
 
 
-  int iPrincipal = iDst - iSrc;
+  if(!ppistTarget)
+  {
+
+    fprintf(stderr,"Error adding message from %s to %s\n",pcSrcpath,pcDstpath);
+    return -1;
+    
+  }
 
 
+  //- bind I/O relations
 
-  struct PidinStack *ppistTarget = 
-    SymbolPrincipalSerial2Context(phsleDst, 
-				  ppistDst,
-				  iPrincipal);
+  char pcTarget[100];
+  
 
-
-  struct symtab_IdentifierIndex *pidinTarget = PidinStackToPidinQueue(ppistTarget);
-
-  return pidinTarget;
+  PidinStackString(ppistTarget,pcTarget,sizeof(pcTarget));
 
 
+  int iLen = strlen(pcTarget);
+
+  strcpy(&pcTarget[iLen],"->Vm");
+
+
+  struct symtab_InputOutput *pio =  CreateInputOutput(pcTarget,INPUT_TYPE_INPUT);
+
+  SymbolAssignInputs(phsleDst, pio);
+
+
+  return 1;
+  
 }
