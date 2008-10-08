@@ -198,7 +198,8 @@ int iInModelContainer;
        }
 
 	if(iModelContainerResult == NSINTEGRATOR_COMPARTMENT ||
-	   iModelContainerResult == NSINTEGRATOR_TABCHANNEL ){
+	   iModelContainerResult == NSINTEGRATOR_TABCHANNEL ||
+	   iModelContainerResult == NSINTEGRATOR_POOL){
 
 	  return (Element*)-1;
 
@@ -408,7 +409,8 @@ int                   i,j = 0;
 
     if(strcmp("neutral",type) == 0 ||
        strcmp("tabchannel",type) == 0 ||
-       strcmp("compartment",type) == 0)
+       strcmp("compartment",type) == 0 ||
+       strcmp("Ca_concen",type) == 0)
       iInModelContainer = 1;
 
     //-

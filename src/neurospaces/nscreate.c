@@ -78,7 +78,9 @@ int NSCreate( char* name,  char* pcParent, char* pcType){
    else if(!strcmp("Ca_concen",pcType)){
 
      //! create a calcium pool
+     phsleChild = (struct symtab_HSolveListElement*)PoolCalloc();
 
+     iResult = NSINTEGRATOR_POOL;
      
    }else{
 

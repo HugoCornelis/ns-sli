@@ -258,7 +258,61 @@ int CalciumPoolMsg(const char *pcSrcpath, const char *pcDstpath)
 {
 
 
+  struct symtab_HSolveListElement *phsleSrc = NSLookupHSolveListElement(pcSrcpath);
+
+  struct symtab_HSolveListElement *phsleDst = NSLookupHSolveListElement(pcDstpath);
+
+
+  struct PidinStack *ppistSrc = PidinStackParse(pcSrcpath);
+  
+  struct PidinStack *ppistDst = PidinStackParse(pcDstpath);
+
+
+  //!
+  //! recaculate all serials before performing a pidinstack subtract
+  //!
+  struct nsintegrator_type *pelnsintegrator
+      = (struct nsintegrator_type *)GetElement("/neurospaces_integrator");
+
+  SymbolRecalcAllSerials(pelnsintegrator->pnsintegrator->phsleCachedRoot, 
+                         pelnsintegrator->pnsintegrator->ppistCachedRoot);
+
+  
+  struct PidinStack *ppistTarget = PidinStackSubtract(ppistSrc,ppistDst);
+
+
+  if(!ppistTarget)
+  {
+
+    fprintf(stderr,"Error adding message from %s to %s\n",pcSrcpath,pcDstpath);
+    return -1;
+    
+  }
+
+
+
+
+  //- bind I/O relations
+
+  char pcTarget[100];
+  
+
+  PidinStackString(ppistTarget,pcTarget,sizeof(pcTarget));
+
+
+  int iLen = strlen(pcTarget);
+
+  strcpy(&pcTarget[iLen],"->I");
+
+
+  struct symtab_InputOutput *pio =  CreateInputOutput(pcTarget,INPUT_TYPE_INPUT);
+
+  SymbolAssignInputs(phsleDst, pio);
+
+
+
   return 1;
+
 }
 
 

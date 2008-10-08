@@ -51,7 +51,8 @@ setfield /hardcoded_neutral/c/p \
 	tau 0.00010 \
 	B 9412391936 \
 	Ca_base 4e-05 \
-	thick 2e-07
+	thick 2e-07   \
+	concen_init 0.000040
 addmsg /hardcoded_neutral/c/cat /hardcoded_neutral/c/p I_Ca Ik
 
 

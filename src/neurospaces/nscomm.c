@@ -373,7 +373,31 @@ static char * mapParameter(char *pcfield){
     pcresult = "POWER";
 
     } 
-    else{
+  else if(!strcmp(pcfield,"tau"))
+  {
+    
+    pcresult = "TAU";
+
+  }
+  else if(!strcmp(pcfield,"thick"))
+  {
+
+    pcresult = "THICK";
+
+  }
+  else if(!strcmp(pcfield,"Ca_base"))
+  {
+
+    pcresult = "BASE";
+
+  }
+  else if(!strcmp(pcfield,"B"))
+  {
+
+    pcresult = "BETA";
+
+  }
+  else{
 
     //fprintf(stdout,"Unrecognized Compartment field: %s\n",pcresult);
     pcresult = strdup(pcfield);
