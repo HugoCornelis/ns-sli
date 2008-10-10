@@ -92,6 +92,12 @@ reset
 
 set_nsintegrator_verbose_level 2
 
+setfield /nsintegrator \
+	heccer_dump_selection { \
+				HECCER_DUMP_INDEXERS_SUMMARY \
+				+ HECCER_DUMP_INDEXERS_STRUCTURE \
+				}
+
 echo Initiated
 
 call neurospaces_integrator NSINTEGRATOR_DUMP

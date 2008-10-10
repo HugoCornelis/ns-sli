@@ -35,7 +35,9 @@ struct nsintegrator_type {
 
   struct neurospaces_integrator *pnsintegrator;
 
-  
+
+  int heccer_dump_selection;
+
 };
 //------ end nsintegrator_type -------------------------------
 

@@ -15,9 +15,27 @@
 #include "neurospaces/neurospaces_ext.h"
 #include "neurospaces/pidinstack.h"
 
+
+
+
+/*
+ *  \fn int NSSetField(int argc, char **argv)
+ */
+int NSSetField(int argc, char **argv)
+{
+
+
+  int i;
+
+
+
+}
+
+
+
 //------------------------------------------------------------------
 /*!
- *  \fn int NeurospacesSetField(struct symtab_HSolveListElement *phsle,char *field,char *value)
+ *  \fn int SetField(struct symtab_HSolveListElement *phsle,char *field,char *value)
  *  \return 0 on error, 1 on success.
  *  \param phsle A pointer to an Hsolve list element.
  *  \param ppist A Pidin stack for searching for child objects.

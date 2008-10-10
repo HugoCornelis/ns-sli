@@ -228,16 +228,33 @@ int		empty_ok = 0;
     //t uses the same routing method as setfield (sim_set.c)
     //t
     //hack ---------------insert neurospaces support ---------------------
-    ElementList *elist = CreateElementList(1);
+    ElementList *elist = CreateElementList(10);
 
-    Element *compartment = (Element *)PidinStackParse(pathname);
 
-    elist->element[0] = compartment;
- 
+    struct PidinStack *ppist = PidinStackParse(pathname);
 
-    elist->flags[0] = ELIST_FLAG_NEUROSPACES;
+    struct symtab_HSolveListElement *phsle
+      = PidinStackLookupTopSymbol(ppist);
 
-    elist->nelements = 1;
+    if (phsle)
+      {
+	elist->element[elist->nelements] = ppist;
+
+	elist->flags[elist->nelements] = ELIST_FLAG_NEUROSPACES;
+
+	elist->nelements++;
+
+      }
+
+    Element *pel = GetElement(pathname);
+
+    if (pel)
+      {
+	elist->element[elist->nelements] = pel;
+
+	elist->nelements++;
+
+      }
 
     list = elist;
 

@@ -141,6 +141,11 @@ int NSGenesisInitialize(){
      } 
 
 
+     //-----------------------------------------------------------
+     //- First set the default heccer dump selection value
+
+     pelnsintegrator->heccer_dump_selection = HECCER_DUMP_ALL;
+
     //------------------------------------------------------------
    //-
    //- Create a global heccer with default options.
