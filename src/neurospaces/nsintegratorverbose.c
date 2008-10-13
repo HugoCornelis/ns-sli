@@ -49,36 +49,30 @@ int get_nsintegrator_verbose_level(void)
   return(iNSIntegratorVerbose);
 }
 
-int nsintegrator_dump(struct nsintegrator_type *pelnsintegrator, int iSelection)
+int nsintegrator_dump(struct nsintegrator_type *pelnsintegrator, int iSelection, int heccer_dump_selection)
 {
 
 
-  struct Heccer **ppheccer = pelnsintegrator->pnsintegrator->ppheccer;
 
-/*   int i; */
-/*   for(i=0;i<pelnsintegrator->pnsintegrator->iHeccers;i++) */
-/*     HeccerDump(ppheccer[1], stdout, iSelection); */
+    if (iSelection & 1)  
+     {  
+        struct Heccer **ppheccer = pelnsintegrator->pnsintegrator->ppheccer;  
 
+        int i;  
+        for(i=0;i<pelnsintegrator->pnsintegrator->iHeccers;i++)  
+	  HeccerDump(ppheccer[i],stdout,heccer_dump_selection);  
 
+      }  
 
-   if (iSelection & 1) 
-    { 
-       struct Heccer **ppheccer = pelnsintegrator->pnsintegrator->ppheccer; 
+    if (iSelection & 2)  
+      {  
+        //t print some info about the model container  
+      }  
 
-       int i; 
-       for(i=0;i<pelnsintegrator->pnsintegrator->iHeccers;i++) 
- 	HeccerDumpV(ppheccer[i]); 
-     } 
-
-   if (iSelection & 2) 
-     { 
-       //t print some info about the model container 
-     } 
-
-   if (iSelection & 4) 
-     { 
-       //t print some global information about simulator state 
-     } 
+    if (iSelection & 4)  
+      {  
+        //t print some global information about simulator state  
+      }  
 
   return 1;
 }

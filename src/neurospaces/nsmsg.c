@@ -241,8 +241,6 @@ int ChannelMsg(const char *pcSrcpath, const char *pcDstpath)
 
   SymbolAssignInputs(phsleDst, pio);
 
-
-
   return 1;
 
 }

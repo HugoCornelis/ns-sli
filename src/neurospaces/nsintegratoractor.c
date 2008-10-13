@@ -91,7 +91,9 @@ int NeurospacesIntegratorActor(struct nsintegrator_type *pnsintegrator_type,
       {
 	int iSelection = 1;
 
-	nsintegrator_dump(pnsintegrator_type, iSelection);
+	nsintegrator_dump(pnsintegrator_type, 
+			  iSelection,
+			  pnsintegrator_type->heccer_dump_selection);
 
 	break;
       }
@@ -125,7 +127,9 @@ int NeurospacesIntegratorActor(struct nsintegrator_type *pnsintegrator_type,
 
 	  if (iNSIntegratorVerbose == 2)
 	    {
-	      nsintegrator_dump(pnsintegrator_type, 1);
+	      nsintegrator_dump(pnsintegrator_type, 
+				1,
+				pnsintegrator_type->heccer_dump_selection);
 	    }
 	}
 	
