@@ -208,9 +208,14 @@ int NSSetupAlpha( char *pcName, char *pcField, char **pcArgs,
 		  int iArgc);
 
 
+
+
+
 //-- Defined in nsintegratorverbose.c --
 int nsintegrator_dump(struct nsintegrator_type *pelnsintegrator, int iSelection, int heccer_dump_selection);
-
+int get_nsintegrator_verbose_level(void);
+int set_nsintegrator_verbose_level(int iLevel);
+int do_set_nsintegrator_verbose_level(argc,argv);
 
 
 //- -- Defined in nscall.c --

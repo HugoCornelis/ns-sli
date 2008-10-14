@@ -62,6 +62,14 @@ reset
 
 set_nsintegrator_verbose_level 2
 
+setfield neurospaces_integrator heccer_dump_selection { HECCER_DUMP_VM_COMPARTMENT_MATRIX + \
+				    			HECCER_DUMP_VM_COMPARTMENT_DATA + \
+				     			HECCER_DUMP_VM_COMPARTMENT_OPERATIONS + \
+				     			HECCER_DUMP_VM_CHANNEL_POOL_FLUXES + \
+				     			HECCER_DUMP_VM_MECHANISM_DATA + \
+				     			HECCER_DUMP_VM_MECHANISM_OPERATIONS + \
+				     			HECCER_DUMP_VM_SUMMARY }
+
 echo Initiated
 
 call neurospaces_integrator NSINTEGRATOR_DUMP
