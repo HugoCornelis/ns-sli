@@ -97,6 +97,8 @@ int NSmsg(const char *pcSrcpath, const char *pcDstpath, const char *pcTypename){
 
 //---------------------------------------------------------------
 /*!
+ *  \fun int AxialMsg(const char *pcSrcpath, const char *pcDstpath)
+ *  
  */
 //----------------------------------------------------------------
 int AxialMsg(const char *pcSrcpath, const char *pcDstpath)
@@ -288,8 +290,6 @@ int CalciumPoolMsg(const char *pcSrcpath, const char *pcDstpath)
   }
 
 
-
-
   //- bind I/O relations
 
   char pcTarget[100];
@@ -298,12 +298,52 @@ int CalciumPoolMsg(const char *pcSrcpath, const char *pcDstpath)
   PidinStackString(ppistTarget,pcTarget,sizeof(pcTarget));
 
 
-  int iLen = strlen(pcTarget);
-
-  strcpy(&pcTarget[iLen],"->I");
 
 
-  struct symtab_InputOutput *pio =  CreateInputOutput(pcTarget,INPUT_TYPE_INPUT);
+  //!
+  //! Put these lines back in when pindinstack parse properly accounts for the 'I' at
+  //! the end.
+  //!
+  //  int iLen = strlen(pcTarget);
+  //
+  //strcpy(&pcTarget[iLen],"->I");
+  // struct symtab_InputOutput *pio =  CreateInputOutput(pcTarget,INPUT_TYPE_INPUT);
+
+
+  //!
+  //! this code will tack on 'I' to the end of the idin queue and 
+  //! flag it as a binding.
+  //!
+  //! ----------------------------------------------------------------
+  struct PidinStack *ppist = PidinStackParse(pcTarget);
+
+  struct symtab_IdentifierIndex *idinTarget = PidinStackToPidinQueue(ppist);
+  
+  
+  //! create 'I'
+  struct symtab_IdentifierIndex *idinI = IdinNewFromChars("I");
+
+
+  idinI->pidinRoot = idinTarget;
+  idinI->iFlags = FLAG_IDENTINDEX_FIELD;
+
+  struct symtab_IdentifierIndex *idin;
+  for(idin = idinTarget; idin->pidinNext ;idin = idin->pidinNext);
+  
+  idin->pidinNext = idinI;
+
+
+  struct symtab_InputOutput *pio = InputOutputNewForType(INPUT_TYPE_INPUT);
+
+  if(!pio)
+  {
+    return NULL;
+  }
+
+
+  pio->pidinField = idinTarget;
+
+  //! ---------------- end inserted code ------------------------------
 
   SymbolAssignInputs(phsleDst, pio);
 

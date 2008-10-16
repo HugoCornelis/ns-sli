@@ -19,7 +19,13 @@
 
 
 
-
+/*!
+ *  \fun int NSTabFill(char *pcName, char *pcField, char *pcNumTabEntries)
+ *  \param pcName String to a tabchannel name to create.
+ *  \param pcField The field (X,Y,or Z) to modify for the table.
+ *  \param pcNumTabEntries The number of table entries to create.
+ *  \return 0 on error, 1 on success.
+ */
 int NSTabFill(char *pcName, char *pcField, char *pcNumTabEntries)
 {
 
@@ -39,13 +45,6 @@ int NSTabFill(char *pcName, char *pcField, char *pcNumTabEntries)
     return 0;
 
   }
-
-
-
-
-
-
-
 
 
   struct PidinStack * ppistA = getGateContext(pcName,pcField,"A");

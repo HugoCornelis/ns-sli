@@ -77,6 +77,7 @@ void NSReset(){
   struct Heccer * pheccer = pnsintegrator->ppheccer[0];
 
 
+
   if(!pheccer){
 
   //t

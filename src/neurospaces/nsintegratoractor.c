@@ -111,26 +111,38 @@ int NeurospacesIntegratorActor(struct nsintegrator_type *pnsintegrator_type,
 
 	struct Heccer **ppheccer = pnsintegrator->ppheccer;
 
-	for(i=0;i<pnsintegrator->iHeccers;i++){
+       
 
+	for(i=0;i<pnsintegrator->iHeccers;i++)
+	{
 
+	  // need to link to "double simulation_time" in sim_step.c
+          //	
 	  HeccerHeccs(ppheccer[i], 
 		      ppheccer[i]->dTime + ppheccer[i]->dStep);
 
+
 	  if (iNSIntegratorVerbose == 1)
-	    {
-	      fprintf(stdout,"%s: time = %f ; step = %d          \n",
-		      ppheccer[i]->pcName,
-		      ppheccer[i]->dTime,
-		      ppheccer[i]->dStep);
-	    }
+	  {
+	    if((GetCurrentStep()%pnsintegrator_type->heccer_reporting_granularity) != 0)
+	      return iResult;
+
+	    fprintf(stdout,"%s: time = %f ; step = %d          \n",
+		    ppheccer[i]->pcName,
+		    ppheccer[i]->dTime,
+		    ppheccer[i]->dStep);
+	  }
 
 	  if (iNSIntegratorVerbose == 2)
-	    {
-	      nsintegrator_dump(pnsintegrator_type, 
-				1,
-				pnsintegrator_type->heccer_dump_selection);
-	    }
+	  {
+
+	    if((GetCurrentStep()%pnsintegrator_type->heccer_reporting_granularity) != 0)
+	      return iResult;
+
+	    nsintegrator_dump(pnsintegrator_type, 
+			      1,
+			      pnsintegrator_type->heccer_dump_selection);
+	  }
 	}
 	
 	break;

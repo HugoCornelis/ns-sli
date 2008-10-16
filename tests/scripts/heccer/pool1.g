@@ -70,6 +70,8 @@ setfield neurospaces_integrator heccer_dump_selection { HECCER_DUMP_VM_COMPARTME
 				     			HECCER_DUMP_VM_MECHANISM_OPERATIONS + \
 				     			HECCER_DUMP_VM_SUMMARY }
 
+setfield neurospaces_integrator heccer_reporting_granularity 100
+
 echo Initiated
 
 call neurospaces_integrator NSINTEGRATOR_DUMP
@@ -77,9 +79,68 @@ call neurospaces_integrator NSINTEGRATOR_DUMP
 echo -------
 echo Iteration 0
 
-step 1
+step 100
 
 
+echo -------
+echo Iteration 100
+
+step 100
+
+
+
+echo -------
+echo Iteration 200
+
+step 100
+
+
+echo -------
+echo Iteration 300
+
+step 100
+
+
+echo -------
+echo Iteration 400
+
+step 100
+
+
+echo -------
+echo Iteration 500
+
+step 100
+
+
+echo -------
+echo Iteration 600
+
+step 100
+
+
+echo -------
+echo Iteration 700
+
+step 100
+
+
+echo -------
+echo Iteration 800
+
+step 100
+
+
+echo -------
+echo Iteration 900
+
+step 100
+
+
+echo -------
+echo Iteration Final Iteration
+
+step 100
 
 call model_container NEUROSPACES_QUERY
 

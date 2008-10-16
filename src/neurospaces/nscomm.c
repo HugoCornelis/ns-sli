@@ -597,12 +597,24 @@ struct symtab_HSolveListElement * lookupGate(char *pcName, char *pcField)
  *
  */
 //--------------------------------------------------------------------
-struct symtab_InputOutput * CreateInputOutput(char *pcParameter, int iType)
+struct symtab_InputOutput * CreateInputOutput(char *pcContext, int iType)
 {
 
-  char *pc = strdup(pcParameter);
 
-  struct symtab_IdentifierIndex *pidin = IdinNewFromChars(pc);
+
+  //  char *pc = strdup(pcContext);
+
+  struct PidinStack *ppist = PidinStackParse(pcContext);
+
+  if(!ppist)
+  {
+
+    return NULL;
+
+  }
+
+
+  struct symtab_IdentifierIndex *pidin = PidinStackToPidinQueue(ppist);
 
   
   if(!pidin)
