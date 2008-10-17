@@ -79,7 +79,7 @@ call neurospaces_integrator NSINTEGRATOR_DUMP
 echo -------
 echo Iteration 0
 
-step 100
+step 0
 
 
 echo -------
@@ -138,9 +138,13 @@ step 100
 
 
 echo -------
-echo Iteration Final Iteration
+echo Final Iteration
 
-step 100
+step 99
+
+call neurospaces_integrator NSINTEGRATOR_DUMP
+
+
 
 call model_container NEUROSPACES_QUERY
 

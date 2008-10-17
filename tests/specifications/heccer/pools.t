@@ -43,6 +43,27 @@ my $test
 
 
 
+
+       {
+				arguments => [
+					      "$::config->{core_directory}/tests/scripts/heccer/pool2.g",
+					    
+					     ],
+				command => 'src/nsgenesis',
+				command_tests => [
+						  {
+						   description => "Is a pool integrated correctly, two compartments, two pools case ?",,
+						   read => (join '', `cat  /usr/local/heccer/tests/specifications/strings/pool2.txt | perl -pe 's/unnamed test/hardcoded_neutral/g'`),
+						   timeout => 5,
+						   write => undef,
+						  },
+						 ],
+				description => "pool integration, two compartments, two pools",
+			       },
+
+
+
+
 			      ],
        description => "Pool integration & related",
        name => 'pools.t',
