@@ -36,6 +36,7 @@ setupalpha /hardcoded_neutral/c1/cat \
 	4e-3 \
 	-size 3000 \
 	-range -0.1 0.05
+
 setupalpha /hardcoded_neutral/c1/cat \
 	Y \
 	0.0025e3 \
@@ -52,13 +53,17 @@ setupalpha /hardcoded_neutral/c1/cat \
 	-range -0.1 0.05
 addmsg /hardcoded_neutral/c1 /hardcoded_neutral/c1/cat VOLTAGE Vm
 addmsg /hardcoded_neutral/c1/cat /hardcoded_neutral/c1 CHANNEL Gk Ek
+
+
 create Ca_concen /hardcoded_neutral/c1/p
 setfield /hardcoded_neutral/c1/p \
-	tau 0.00020 \
-	B 9412391936 \
+	tau 0.00010 \
+	B 7.579027046e+10 \
 	Ca_base 4e-05 \
 	thick 2e-07 \
 	concen_init 0.000040
+
+
 
 addmsg /hardcoded_neutral/c1/cat /hardcoded_neutral/c1/p I_Ca Ik
 
@@ -69,7 +74,9 @@ setfield /hardcoded_neutral/c2 \
 	initVm -0.068 \
 	Ra 772813.4375 \
 	Rm 8.548598272e9
+
 create tabchannel /hardcoded_neutral/c2/cat
+
 setfield /hardcoded_neutral/c2/cat \
 	Ek 0.1470214874 \
 	Gbar 1.754672296e-09 \
@@ -111,8 +118,8 @@ addmsg /hardcoded_neutral/c2 /hardcoded_neutral/c2/cat VOLTAGE Vm
 addmsg /hardcoded_neutral/c2/cat /hardcoded_neutral/c2 CHANNEL Gk Ek
 create Ca_concen /hardcoded_neutral/c2/p
 setfield /hardcoded_neutral/c2/p \
-	tau 0.00010 \
-	B 7.579027046e+10 \
+	tau 0.00020 \
+	B 9412391936 \
 	Ca_base 4e-05 \
 	thick 2e-07 \
 	concen_init 0.000040
