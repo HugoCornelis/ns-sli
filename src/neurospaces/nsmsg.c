@@ -87,7 +87,11 @@ int NSmsg(const char *pcSrcpath, const char *pcDstpath, const char *pcTypename){
     return ChannelMsg(pcSrcpath,pcDstpath);
 
   }
+  else if(strcmp(pcTypename,"CONCEN") == 0){
 
+    return ConcenMsg(pcSrcpath,pcDstpath);
+
+  }
 
   return 0;
 }
@@ -416,3 +420,108 @@ int VoltageMsg(const char *pcSrcpath, const char *pcDstpath)
   return 1;
   
 }
+
+
+
+
+
+
+//----------------------------------------------------------------------------
+int ConcenMsg(const char *pcSrcpath, const char *pcDstpath)
+{
+
+
+  struct symtab_HSolveListElement *phsleSrc = NSLookupHSolveListElement(pcSrcpath);
+
+  struct symtab_HSolveListElement *phsleDst = NSLookupHSolveListElement(pcDstpath);
+
+
+  struct PidinStack *ppistSrc = PidinStackParse(pcSrcpath);
+  
+  struct PidinStack *ppistDst = PidinStackParse(pcDstpath);
+
+
+  //!
+  //! recaculate all serials before performing a pidinstack subtract
+  //!
+  struct nsintegrator_type *pelnsintegrator
+      = (struct nsintegrator_type *)GetElement("/neurospaces_integrator");
+
+  SymbolRecalcAllSerials(pelnsintegrator->pnsintegrator->phsleCachedRoot, 
+                         pelnsintegrator->pnsintegrator->ppistCachedRoot);
+
+  
+  struct PidinStack *ppistTarget = PidinStackSubtract(ppistSrc,ppistDst);
+
+
+  if(!ppistTarget)
+  {
+
+    fprintf(stderr,"Error adding message from %s to %s\n",pcSrcpath,pcDstpath);
+    return -1;
+    
+  }
+
+
+  //- bind I/O relations
+
+  char pcTarget[100];
+  
+
+  PidinStackString(ppistTarget,pcTarget,sizeof(pcTarget));
+
+
+
+
+  //!
+  //! Put these lines back in when pindinstack parse properly accounts for the 'I' at
+  //! the end.
+  //!
+    int iLen = strlen(pcTarget);
+  //
+  strcpy(&pcTarget[iLen],"->concen");
+   struct symtab_InputOutput *pio =  CreateInputOutput(pcTarget,INPUT_TYPE_INPUT);
+
+
+  //!
+  //! this code will tack on 'I' to the end of the idin queue and 
+  //! flag it as a binding.
+  //!
+  //! ----------------------------------------------------------------
+/*   struct PidinStack *ppist = PidinStackParse(pcTarget); */
+
+/*   struct symtab_IdentifierIndex *idinTarget = PidinStackToPidinQueue(ppist); */
+  
+  
+/*   //! create 'I' */
+/*   struct symtab_IdentifierIndex *idinI = IdinNewFromChars("concen"); */
+
+
+/*   idinI->pidinRoot = idinTarget; */
+/*   idinI->iFlags = FLAG_IDENTINDEX_FIELD; */
+
+/*   struct symtab_IdentifierIndex *idin; */
+/*   for(idin = idinTarget; idin->pidinNext ;idin = idin->pidinNext); */
+  
+/*   idin->pidinNext = idinI; */
+/*   struct symtab_InputOutput *pio = InputOutputNewForType(INPUT_TYPE_INPUT); */
+
+/*   if(!pio) */
+/*   { */
+/*     return NULL; */
+/*   } */
+
+
+/*   pio->pidinField = idinTarget; */
+
+  //! ---------------- end inserted code ------------------------------
+
+  SymbolAssignInputs(phsleDst, pio);
+
+
+
+  return 1;
+
+
+}
+

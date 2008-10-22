@@ -375,8 +375,8 @@ int NSSetupAlpha( char *pcName, char *pcField, char **pcArgs,
 
     
     //! no need to worry about this variable at the moment
-    //  if( pheccerOptions->ho.iSmallTableSize == HECCER_INTERVAL_DEFAULT_END )
-    // pheccerOptions->ho.iSmallTableSize = atoi(pcArgs[10]);
+    //if( pheccerOptions->ho.iSmallTableSize == HECCER_INTERVAL_DEFAULT_END )
+    //  pheccerOptions->ho.iSmallTableSize = atoi(pcArgs[10]);
     
 
     if( pheccerOptions->ho.dConcentrationGateStart == 
