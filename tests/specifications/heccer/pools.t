@@ -74,7 +74,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Is a pool integrated correctly, one compartment, one pool with a feedback loop ?",,
-						   read => (join '', `cat  /usr/local/heccer/tests/specifications/strings/pool1-feedback1.txt | perl -pe 's/unnamed test/hardcoded_neutral/g'`),
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/pool1-feedback1.txt | perl -pe 's/unnamed test/hardcoded_neutral/g' | perl -pe 's/149/3000/g'`),
 						   timeout => 5,
 						   write => undef,
 						  },

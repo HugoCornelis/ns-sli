@@ -58,7 +58,8 @@ setfield /hardcoded_neutral/c/p \
 	tau 0.00010 \
 	B 9412391936 \
 	Ca_base 4e-05 \
-	thick 2e-07
+	thick 2e-07 \
+	concen_init 0.000040
 
 addmsg /hardcoded_neutral/c/cat /hardcoded_neutral/c/p I_Ca Ik
 
@@ -75,50 +76,100 @@ addmsg /hardcoded_neutral/c/p /hardcoded_neutral/c/n CIN Ca
 addmsg /hardcoded_neutral/c/n /hardcoded_neutral/c/cat EK E
 
 
+
+
+
+
+silent 1
+
 reset
 
-function showfields
+set_nsintegrator_verbose_level 2
 
-	showfield h \
-		chip[4] \
-		chip[5] \
-		givals[5] \
-		givals[4] \
-		givals[3] \
-		conc[0] \
-		flux[0] \
-		results[0] \
-		results[1] \
-		vm[0]
 
-// 	showfield c/cap X
-// 	showfield c/cap Y
-// 	showfield c/cap Ek
+setfield neurospaces_integrator heccer_dump_selection { HECCER_DUMP_VM_COMPARTMENT_MATRIX + \
+				    			HECCER_DUMP_VM_COMPARTMENT_DATA + \
+				     			HECCER_DUMP_VM_COMPARTMENT_OPERATIONS + \
+				     			HECCER_DUMP_VM_CHANNEL_POOL_FLUXES + \
+				     			HECCER_DUMP_VM_MECHANISM_DATA + \
+				     			HECCER_DUMP_VM_MECHANISM_OPERATIONS + \
+				     			HECCER_DUMP_VM_SUMMARY }
 
-// 	showfield c/cap Ik
-// 	showfield c/cap Gk
+setfield neurospaces_integrator heccer_reporting_granularity 100
 
-// 	showfield c/cat X Y Ek
+echo Initiated
 
-// 	showfield c/cat Ik Gk
+call neurospaces_integrator NSINTEGRATOR_DUMP
 
-// 	showfield c/n Cin E
+echo -------
+echo Iteration 0
 
-// 	showfield c Vm
-end
+step 0
 
-// echo {findsolvefield /h c/cap X}
-// echo {findsolvefield /h c/cap Y}
-// echo {findsolvefield /h c/cap Ek}
 
-// echo {findsolvefield /h c/cap Ik}
-// echo {findsolvefield /h c/cap Gk}
+echo -------
+echo Iteration 100
 
-echo {findsolvefield /h c/cat X}
-echo {findsolvefield /h c/cat Y}
+step 100
 
-echo {findsolvefield /h c/cat Ik}
-echo {findsolvefield /h c/cat Gk}
-echo {findsolvefield /h c/cat Ek}
 
-echo {findsolvefield /h c Vm}
+
+echo -------
+echo Iteration 200
+
+step 100
+
+
+echo -------
+echo Iteration 300
+
+step 100
+
+
+echo -------
+echo Iteration 400
+
+step 100
+
+
+echo -------
+echo Iteration 500
+
+step 100
+
+
+echo -------
+echo Iteration 600
+
+step 100
+
+
+echo -------
+echo Iteration 700
+
+step 100
+
+
+echo -------
+echo Iteration 800
+
+step 100
+
+
+echo -------
+echo Iteration 900
+
+step 100
+
+
+echo -------
+echo Final Iteration
+
+step 99
+
+call neurospaces_integrator NSINTEGRATOR_DUMP
+
+
+
+call model_container NEUROSPACES_QUERY
+

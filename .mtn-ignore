@@ -16,3 +16,4 @@ dox.tag
 ^html
 ^tests/html
 out
+src/.gdbinit

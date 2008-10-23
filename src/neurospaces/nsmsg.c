@@ -29,6 +29,14 @@
 
 
 
+static int AxialMsg(const char *pcSrcpath, const char *pcDstpath);
+static int ChannelMsg(const char *pcSrcpath, const char *pcDstpath);
+static int CalciumPoolMsg(const char *pcSrcpath, const char *pcDstpath);
+static int VoltageMsg(const char *pcSrcpath, const char *pcDstpath);
+static int ConcenMsg(const char *pcSrcpath, const char *pcDstpath);
+static int CinMsg(const char *pcSrcpath, const char *pcDstpath);
+static int EkMsg(const char *pcSrcpath, const char *pcDstpath);
+
 
 static struct symtab_IOContainer *IOContainerFromList(char *ppcParmaters[], int iType[]);
 static struct symtab_IdentifierIndex * PidinQueueLookupTarget(const char *pcSrcpath, 
@@ -92,6 +100,18 @@ int NSmsg(const char *pcSrcpath, const char *pcDstpath, const char *pcTypename){
     return ConcenMsg(pcSrcpath,pcDstpath);
 
   }
+  else if(strcmp(pcTypename,"CIN") == 0){
+
+    return CinMsg(pcSrcpath,pcDstpath);
+
+  }
+  else if(strcmp(pcTypename,"EK") == 0){
+
+    return EkMsg(pcSrcpath,pcDstpath);
+
+  }
+
+
 
   return 0;
 }
@@ -105,7 +125,7 @@ int NSmsg(const char *pcSrcpath, const char *pcDstpath, const char *pcTypename){
  *  
  */
 //----------------------------------------------------------------
-int AxialMsg(const char *pcSrcpath, const char *pcDstpath)
+static int AxialMsg(const char *pcSrcpath, const char *pcDstpath)
 {
 
 
@@ -192,7 +212,7 @@ int AxialMsg(const char *pcSrcpath, const char *pcDstpath)
  *   \fun int ChannelMsg(const char *pcSrcpath, const char *pcTgtpath)
  */
 //----------------------------------------------------------------------------
-int ChannelMsg(const char *pcSrcpath, const char *pcDstpath)
+static int ChannelMsg(const char *pcSrcpath, const char *pcDstpath)
 {
 
 
@@ -258,7 +278,7 @@ int ChannelMsg(const char *pcSrcpath, const char *pcDstpath)
 /*!
  */
 //----------------------------------------------------------------------------
-int CalciumPoolMsg(const char *pcSrcpath, const char *pcDstpath)
+static int CalciumPoolMsg(const char *pcSrcpath, const char *pcDstpath)
 {
 
 
@@ -364,7 +384,7 @@ int CalciumPoolMsg(const char *pcSrcpath, const char *pcDstpath)
  *
  */
 //----------------------------------------------------------------------------
-int VoltageMsg(const char *pcSrcpath, const char *pcDstpath)
+static int VoltageMsg(const char *pcSrcpath, const char *pcDstpath)
 {
 
   struct symtab_HSolveListElement *phsleSrc = NSLookupHSolveListElement(pcSrcpath);
@@ -427,7 +447,7 @@ int VoltageMsg(const char *pcSrcpath, const char *pcDstpath)
 
 
 //----------------------------------------------------------------------------
-int ConcenMsg(const char *pcSrcpath, const char *pcDstpath)
+static int ConcenMsg(const char *pcSrcpath, const char *pcDstpath)
 {
 
 
@@ -525,3 +545,39 @@ int ConcenMsg(const char *pcSrcpath, const char *pcDstpath)
 
 }
 
+
+
+
+
+static int CinMsg(const char *pcSrcpath, const char *pcDstpath)
+{
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  return 1;
+
+}
+
+
+
+
+static int EkMsg(const char *pcSrcpath, const char *pcDstpath)
+{
+
+
+
+
+  return 1;
+
+}

@@ -82,12 +82,19 @@ int NSCreate( char* name,  char* pcParent, char* pcType){
 
      iResult = NSINTEGRATOR_POOL;
      
-   }else{
+   }
+   else if(!strcmp("nernst",pcType)){
+
+     phsleChild = (struct symtab_HSolveListElement*)GroupCalloc();
+
+     iResult = NSINTEGRATOR_GROUP;
+
+   }
+   else{
 
      phsleChild = (struct symtab_HSolveListElement*)CellCalloc();
 
      iResult = NSINTEGRATOR_NEUTRAL;
-
    }
    
    
@@ -410,26 +417,8 @@ static struct symtab_ConcentrationGateKinetic *CreateConcGateKinetic(char *pcDir
 
 
 
-int CreateCalciumPool(){
 
-  
+//---------------------------------------------------------------------
 
-  /*
 
-		    $$ = PoolCalloc();
-
-		    $$->depool.iType = TYPE_POOL_PARAMETERS;
-
-		    SymbolAssignParameters(&$$->bio.ioh.iol.hsle,$1);
-
-		    //- set actual symbol
-
-		    ParserContextSetActual
-			((PARSERCONTEXT *)pacParserContext,
-			 &$$->bio.ioh.iol.hsle);
-  */
-
-  //  struct symtab_Pool ppool = PoolCalloc();
-
-  
-}
+//---------------------------------------------------------------------

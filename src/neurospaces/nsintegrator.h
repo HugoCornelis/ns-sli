@@ -25,7 +25,7 @@
 #define NSINTEGRATOR_NEUTRAL 20
 #define NSINTEGRATOR_TABCHANNEL 30
 #define NSINTEGRATOR_POOL 40
-
+#define NSINTEGRATOR_GROUP 50
 
 //!
 //! Used in nsetfield.c
