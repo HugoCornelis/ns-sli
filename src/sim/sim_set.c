@@ -78,7 +78,7 @@ static char rcsid[] = "$Id: sim_set.c,v 1.2 2005/06/27 19:01:09 svitak Exp $";
 #include "shell_func_ext.h"
 #include "sim_ext.h"
 
-#include "neurospaces/biocomp.h"
+
 #include "neurospaces/function.h"
 #include "neurospaces/parameters.h"
 

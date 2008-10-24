@@ -12,12 +12,11 @@
 #include "shell_func_ext.h"
 #include "sim_ext.h"
 
-
-#include "neurospaces/segment.h"  
+ 
 #include "neurospaces/symbols.h"  
 #include "neurospaces/symboltable.h"  
 #include "neurospaces/pidinstack.h"
-#include "neurospaces/concentrationgatekinetic.h"
+
 
 //t includes from our nsgenesis library
 #include "neurospaces/neurospaces_ext.h"
@@ -33,7 +32,7 @@ struct symtab_HSolveListElement * CreateHHGate(
 		 struct symtab_HSolveListElement *phsleChannel, 
 		 char *pcName);
 static struct symtab_ConcentrationGateKinetic *CreateConcGateKinetic(char *pcDirection);
-
+static struct symtab_HSolveListElement * NernstCalloc();
 
 
 //--------------------------------------------------------------------
@@ -85,9 +84,9 @@ int NSCreate( char* name,  char* pcParent, char* pcType){
    }
    else if(!strcmp("nernst",pcType)){
 
-     phsleChild = (struct symtab_HSolveListElement*)GroupCalloc();
+     phsleChild = (struct symtab_HSolveListElement*)NernstCalloc();
 
-     iResult = NSINTEGRATOR_GROUP;
+     iResult = NSINTEGRATOR_NERNST;
 
    }
    else{
@@ -419,6 +418,41 @@ static struct symtab_ConcentrationGateKinetic *CreateConcGateKinetic(char *pcDir
 
 
 //---------------------------------------------------------------------
-
-
+/*
+ */
 //---------------------------------------------------------------------
+static struct symtab_HSolveListElement * NernstCalloc()
+{
+
+  struct symtab_HSolveListElement *phsle = GroupCalloc();
+
+  if(!phsle)
+    return NULL;
+
+  
+  //  setParameter(phsle,"NSSLI_GROUP","NERNST",SETPARA_STRING);
+
+
+  struct symtab_Parameters *ppar = ParameterCalloc();    
+
+  ParameterSetName(ppar,"Erev");
+
+  ppar->pparFirst = ppar;
+
+
+
+  struct symtab_Function *pfun = FunctionCalloc();
+  
+  FunctionSetName(pfun,"NERNST");
+
+  ppar->uValue.pfun = pfun;
+
+
+  ParameterSetType(ppar,TYPE_PARA_FUNCTION);
+
+  BioComponentChangeParameter((struct symtab_BioComponent *)phsle,ppar);
+
+
+  return phsle;
+
+}

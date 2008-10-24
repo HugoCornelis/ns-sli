@@ -14,7 +14,7 @@
 #include "sim_ext.h"
 
 
-#include "neurospaces/segment.h"  
+
 #include "neurospaces/symbols.h"  
 #include "neurospaces/symboltable.h"  
 #include "neurospaces/pidinstack.h"
@@ -553,15 +553,78 @@ static int CinMsg(const char *pcSrcpath, const char *pcDstpath)
 {
 
 
+  struct symtab_HSolveListElement *phsleSrc = NSLookupHSolveListElement(pcSrcpath);
+
+  struct symtab_HSolveListElement *phsleDst = NSLookupHSolveListElement(pcDstpath);
 
 
+  struct PidinStack *ppistSrc = PidinStackParse(pcSrcpath);
+  
+  struct PidinStack *ppistDst = PidinStackParse(pcDstpath);
 
 
+  //!
+  //! recaculate all serials before performing a pidinstack subtract
+  //!
+  struct nsintegrator_type *pelnsintegrator
+      = (struct nsintegrator_type *)GetElement("/neurospaces_integrator");
+
+  SymbolRecalcAllSerials(pelnsintegrator->pnsintegrator->phsleCachedRoot, 
+                         pelnsintegrator->pnsintegrator->ppistCachedRoot);
+
+  
+  struct PidinStack *ppistTarget = PidinStackSubtract(ppistSrc,ppistDst);
 
 
+  if(!ppistTarget)
+  {
+
+    fprintf(stderr,"Error adding message from %s to %s\n",pcSrcpath,pcDstpath);
+    return -1;
+    
+  }
 
 
+  //- bind I/O relations
 
+  char pcTarget[100];
+  
+
+  PidinStackString(ppistTarget,pcTarget,sizeof(pcTarget));
+
+
+  //! ----------------------------------------------------------------
+  struct PidinStack *ppist = PidinStackParse(pcTarget);
+
+  struct symtab_IdentifierIndex *idinTarget = PidinStackToPidinQueue(ppist);
+  
+  
+  //! create 'I'
+  struct symtab_IdentifierIndex *idinI = IdinNewFromChars("I");
+
+
+  idinI->pidinRoot = idinTarget;
+  idinI->iFlags = FLAG_IDENTINDEX_FIELD;
+
+  struct symtab_IdentifierIndex *idin;
+  for(idin = idinTarget; idin->pidinNext ;idin = idin->pidinNext);
+  
+  idin->pidinNext = idinI;
+
+
+  struct symtab_InputOutput *pio = InputOutputNewForType(INPUT_TYPE_INPUT);
+
+  if(!pio)
+  {
+    return NULL;
+  }
+
+
+  pio->pidinField = idinTarget;
+
+  //! ---------------- end inserted code ------------------------------
+
+  SymbolAssignInputs(phsleDst, pio);
 
 
 
@@ -575,6 +638,80 @@ static int CinMsg(const char *pcSrcpath, const char *pcDstpath)
 static int EkMsg(const char *pcSrcpath, const char *pcDstpath)
 {
 
+
+
+  struct symtab_HSolveListElement *phsleSrc = NSLookupHSolveListElement(pcSrcpath);
+
+  struct symtab_HSolveListElement *phsleDst = NSLookupHSolveListElement(pcDstpath);
+
+
+  struct PidinStack *ppistSrc = PidinStackParse(pcSrcpath);
+  
+  struct PidinStack *ppistDst = PidinStackParse(pcDstpath);
+
+
+  //!
+  //! recaculate all serials before performing a pidinstack subtract
+  //!
+  struct nsintegrator_type *pelnsintegrator
+      = (struct nsintegrator_type *)GetElement("/neurospaces_integrator");
+
+  SymbolRecalcAllSerials(pelnsintegrator->pnsintegrator->phsleCachedRoot, 
+                         pelnsintegrator->pnsintegrator->ppistCachedRoot);
+
+  
+  struct PidinStack *ppistTarget = PidinStackSubtract(ppistSrc,ppistDst);
+
+
+  if(!ppistTarget)
+  {
+
+    fprintf(stderr,"Error adding message from %s to %s\n",pcSrcpath,pcDstpath);
+    return -1;
+    
+  }
+
+
+  //- bind I/O relations
+
+  char pcTarget[100];
+  
+
+  PidinStackString(ppistTarget,pcTarget,sizeof(pcTarget));
+
+
+  //! ----------------------------------------------------------------
+  struct PidinStack *ppist = PidinStackParse(pcTarget);
+
+  struct symtab_IdentifierIndex *idinTarget = PidinStackToPidinQueue(ppist);
+  
+  
+  //! create 'I'
+  struct symtab_IdentifierIndex *idinI = IdinNewFromChars("I");
+
+
+  idinI->pidinRoot = idinTarget;
+  idinI->iFlags = FLAG_IDENTINDEX_FIELD;
+
+  struct symtab_IdentifierIndex *idin;
+  for(idin = idinTarget; idin->pidinNext ;idin = idin->pidinNext);
+  
+  idin->pidinNext = idinI;
+
+
+  struct symtab_InputOutput *pio = InputOutputNewForType(INPUT_TYPE_INPUT);
+
+  if(!pio)
+  {
+    return NULL;
+  }
+
+
+  pio->pidinField = idinTarget;
+
+  //! ---------------- end inserted code ------------------------------
+
+  SymbolAssignInputs(phsleDst, pio);
 
 
 

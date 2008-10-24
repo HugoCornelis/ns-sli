@@ -13,7 +13,7 @@
 #include "sim_ext.h"
 
 
-#include "neurospaces/segment.h"  
+
 #include "neurospaces/symbols.h"  
 #include "neurospaces/symboltable.h"  
 #include "neurospaces/pidinstack.h"

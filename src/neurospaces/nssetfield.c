@@ -71,6 +71,23 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
     return 0;
   
 
+  if(instanceof_group(phsle))
+  {
+    
+    struct symtab_Parameters *ppar = 
+      BioComponentGetParameter((struct symtab_BioComponent*)phsle,
+			       ppist,
+			       "Erev");
+    
+    if(ParameterIsFunction(ppar))
+    {
+
+      setParameter(phsle,field,pcPathname,SETPARA_SYMBOL);
+      setParameter(phsle,field,value,SETPARA_NUM);
+
+    }
+  }
+
   //-
   //- Check the type on the phsle object passed. For certain types
   //- we must add parameters to the child objects rather than the object

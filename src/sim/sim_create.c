@@ -200,7 +200,7 @@ int iInModelContainer;
 	if(iModelContainerResult == NSINTEGRATOR_COMPARTMENT ||
 	   iModelContainerResult == NSINTEGRATOR_TABCHANNEL ||
 	   iModelContainerResult == NSINTEGRATOR_POOL ||
-	   iModelContainerResult == NSINTEGRATOR_GROUP){
+	   iModelContainerResult == NSINTEGRATOR_NERNST){
 
 	  return (Element*)-1;
 

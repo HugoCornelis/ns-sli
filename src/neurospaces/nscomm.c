@@ -188,12 +188,25 @@ int setParameter(struct symtab_HSolveListElement *phsle,
     ParameterSetType(pparTop,TYPE_PARA_FUNCTION);
 
   } 
-  else if( iFlag == SETPARA_NUM ){
+  else if( iFlag == SETPARA_NUM )
+  {
 
 
     double dNumber = strtod(pcValue,NULL);
 
     pparTop->uValue.dNumber = dNumber;
+    ParameterSetType(pparTop,TYPE_PARA_NUMBER);
+
+  }
+  else if( iFlag == SETPARA_SYMBOL )
+  {
+
+    struct PidinStack *ppist  = PidinStackParse(pcValue);
+
+    struct symtab_IdentifierIndex *pidin = 
+      PidinStackToPidinQueue(ppist);
+
+    pparTop->uValue.pidin = pidin;
     ParameterSetType(pparTop,TYPE_PARA_NUMBER);
 
   }
@@ -207,10 +220,6 @@ int setParameter(struct symtab_HSolveListElement *phsle,
 
 
  
-  pparTop->pparFirst = pparTop;
-
-
-  BioComponentChangeParameter((struct symtab_BioComponent *)phsle,pparTop);
   
   return 1;
 

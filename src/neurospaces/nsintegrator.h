@@ -25,7 +25,7 @@
 #define NSINTEGRATOR_NEUTRAL 20
 #define NSINTEGRATOR_TABCHANNEL 30
 #define NSINTEGRATOR_POOL 40
-#define NSINTEGRATOR_GROUP 50
+#define NSINTEGRATOR_NERNST 50
 
 //!
 //! Used in nsetfield.c
@@ -36,6 +36,9 @@
 #define SETPARA_GENESIS2 2
 #define SETPARA_NUM 3
 #define SETPARA_STRING 4
+#define SETPARA_SYMBOL 5
+
+
 
 #define MAX_HECCERS 100
 #define MAX_NSSYMBOLS 200
@@ -43,8 +46,6 @@
 
 
 #define MODELCONTAINER_ROOT "hardcoded_neutral"
-
-
 
 //---------------------------------------------------------------
 /*!
