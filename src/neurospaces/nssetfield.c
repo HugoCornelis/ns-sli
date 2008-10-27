@@ -73,19 +73,9 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 
   if(instanceof_group(phsle))
   {
-    
-    struct symtab_Parameters *ppar = 
-      BioComponentGetParameter((struct symtab_BioComponent*)phsle,
-			       ppist,
-			       "Erev");
-    
-    if(ParameterIsFunction(ppar))
-    {
-
-      setParameter(phsle,field,pcPathname,SETPARA_SYMBOL);
-      setParameter(phsle,field,value,SETPARA_NUM);
-
-    }
+  
+    setParameter(phsle,field,value,SETPARA_NUM);
+    return 1;
   }
 
   //-

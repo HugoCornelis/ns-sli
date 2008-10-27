@@ -440,19 +440,66 @@ static struct symtab_HSolveListElement * NernstCalloc()
   ppar->pparFirst = ppar;
 
 
-
+  //! allocate function and function parameters.
   struct symtab_Function *pfun = FunctionCalloc();
   
   FunctionSetName(pfun,"NERNST");
 
+
+  struct PidinStack *ppistCIn = PidinStackParse(".->Cin");
+  struct symtab_IdentifierIndex *pidinCIn = PidinStackToPidinQueue(ppistCIn);
+  
+  struct symtab_Parameters *pparCIn = 
+    ParameterNewFromPidinQueue("Cin",pidinCIn,TYPE_PARA_SYMBOLIC); 
+
+
+
+  struct PidinStack *ppistCOut = PidinStackParse(".->Cout");
+  struct symtab_IdentifierIndex *pidinCOut = PidinStackToPidinQueue(ppistCOut);
+
+  struct symtab_Parameters *pparCOut = 
+    ParameterNewFromPidinQueue("Cout",pidinCOut,TYPE_PARA_SYMBOLIC);
+
+
+  struct PidinStack *ppistValency = PidinStackParse(".->valency");
+  struct symtab_IdentifierIndex *pidinValency = PidinStackToPidinQueue(ppistValency);
+
+  struct symtab_Parameters *pparValency = 
+    ParameterNewFromPidinQueue("valency",pidinValency,TYPE_PARA_SYMBOLIC);
+
+
+  struct PidinStack *ppistT = PidinStackParse(".->T");
+  struct symtab_IdentifierIndex *pidinT = PidinStackToPidinQueue(ppistT);
+
+  struct symtab_Parameters *pparT = 
+    ParameterNewFromPidinQueue("T",pidinT,TYPE_PARA_SYMBOLIC);
+
+
+
+  pparCIn->pparFirst = pparCIn;
+  pparCIn->pparNext = pparCOut;
+
+  pparCOut->pparFirst = pparCIn;
+  pparCOut->pparNext = pparValency;
+  
+  pparValency->pparFirst = pparCIn;
+  pparValency->pparNext = pparT;
+
+  pparT->pparFirst = pparCIn;
+  pparT->pparNext = NULL;
+
+  FunctionAssignParameters(pfun,pparCIn);
+
+
+  
   ppar->uValue.pfun = pfun;
 
 
   ParameterSetType(ppar,TYPE_PARA_FUNCTION);
 
+
+
   BioComponentChangeParameter((struct symtab_BioComponent *)phsle,ppar);
-
-
   return phsle;
 
 }

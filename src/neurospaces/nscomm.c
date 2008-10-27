@@ -207,7 +207,7 @@ int setParameter(struct symtab_HSolveListElement *phsle,
       PidinStackToPidinQueue(ppist);
 
     pparTop->uValue.pidin = pidin;
-    ParameterSetType(pparTop,TYPE_PARA_NUMBER);
+    ParameterSetType(pparTop,TYPE_PARA_SYMBOLIC);
 
   }
   else
@@ -220,6 +220,8 @@ int setParameter(struct symtab_HSolveListElement *phsle,
 
 
  
+
+  BioComponentChangeParameter((struct symtab_BioComponent *)phsle,pparTop);
   
   return 1;
 
