@@ -36,7 +36,7 @@
 #define SETPARA_GENESIS2 2
 #define SETPARA_NUM 3
 #define SETPARA_STRING 4
-#define SETPARA_SYMBOL 5
+#define SETPARA_FIELD 5
 
 
 

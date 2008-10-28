@@ -639,7 +639,6 @@ static int EkMsg(const char *pcSrcpath, const char *pcDstpath)
 {
 
 
-
   struct symtab_HSolveListElement *phsleSrc = NSLookupHSolveListElement(pcSrcpath);
 
   struct symtab_HSolveListElement *phsleDst = NSLookupHSolveListElement(pcDstpath);
@@ -663,6 +662,7 @@ static int EkMsg(const char *pcSrcpath, const char *pcDstpath)
   struct PidinStack *ppistTarget = PidinStackSubtract(ppistSrc,ppistDst);
 
 
+
   if(!ppistTarget)
   {
 
@@ -680,40 +680,20 @@ static int EkMsg(const char *pcSrcpath, const char *pcDstpath)
   PidinStackString(ppistTarget,pcTarget,sizeof(pcTarget));
 
 
-  //! ----------------------------------------------------------------
-  struct PidinStack *ppist = PidinStackParse(pcTarget);
+  int iLen = strlen(pcTarget);
 
-  struct symtab_IdentifierIndex *idinTarget = PidinStackToPidinQueue(ppist);
-  
-  
-  //! create 'I'
-  struct symtab_IdentifierIndex *idinI = IdinNewFromChars("I");
+  strcpy(&pcTarget[iLen],"->Erev");
 
 
-  idinI->pidinRoot = idinTarget;
-  idinI->iFlags = FLAG_IDENTINDEX_FIELD;
+  int iResult = setParameter(phsleDst,"Erev",pcTarget,SETPARA_FIELD);
 
-  struct symtab_IdentifierIndex *idin;
-  for(idin = idinTarget; idin->pidinNext ;idin = idin->pidinNext);
-  
-  idin->pidinNext = idinI;
-
-
-  struct symtab_InputOutput *pio = InputOutputNewForType(INPUT_TYPE_INPUT);
-
-  if(!pio)
+  if(!iResult)
   {
-    return NULL;
+
+    fprintf(stderr,"Error adding message from %s to %s\n",pcSrcpath,pcDstpath);
+    return -1;
+    
   }
-
-
-  pio->pidinField = idinTarget;
-
-  //! ---------------- end inserted code ------------------------------
-
-  SymbolAssignInputs(phsleDst, pio);
-
-
 
   return 1;
 

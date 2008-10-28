@@ -450,7 +450,7 @@ static struct symtab_HSolveListElement * NernstCalloc()
   struct symtab_IdentifierIndex *pidinCIn = PidinStackToPidinQueue(ppistCIn);
   
   struct symtab_Parameters *pparCIn = 
-    ParameterNewFromPidinQueue("Cin",pidinCIn,TYPE_PARA_SYMBOLIC); 
+    ParameterNewFromPidinQueue("Cin",pidinCIn,TYPE_PARA_FIELD); 
 
 
 
@@ -458,21 +458,21 @@ static struct symtab_HSolveListElement * NernstCalloc()
   struct symtab_IdentifierIndex *pidinCOut = PidinStackToPidinQueue(ppistCOut);
 
   struct symtab_Parameters *pparCOut = 
-    ParameterNewFromPidinQueue("Cout",pidinCOut,TYPE_PARA_SYMBOLIC);
+    ParameterNewFromPidinQueue("Cout",pidinCOut,TYPE_PARA_FIELD);
 
 
   struct PidinStack *ppistValency = PidinStackParse(".->valency");
   struct symtab_IdentifierIndex *pidinValency = PidinStackToPidinQueue(ppistValency);
 
   struct symtab_Parameters *pparValency = 
-    ParameterNewFromPidinQueue("valency",pidinValency,TYPE_PARA_SYMBOLIC);
+    ParameterNewFromPidinQueue("valency",pidinValency,TYPE_PARA_FIELD);
 
 
   struct PidinStack *ppistT = PidinStackParse(".->T");
   struct symtab_IdentifierIndex *pidinT = PidinStackToPidinQueue(ppistT);
 
   struct symtab_Parameters *pparT = 
-    ParameterNewFromPidinQueue("T",pidinT,TYPE_PARA_SYMBOLIC);
+    ParameterNewFromPidinQueue("T",pidinT,TYPE_PARA_FIELD);
 
 
 

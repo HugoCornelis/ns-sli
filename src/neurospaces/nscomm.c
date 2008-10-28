@@ -198,7 +198,7 @@ int setParameter(struct symtab_HSolveListElement *phsle,
     ParameterSetType(pparTop,TYPE_PARA_NUMBER);
 
   }
-  else if( iFlag == SETPARA_SYMBOL )
+  else if( iFlag == SETPARA_FIELD )
   {
 
     struct PidinStack *ppist  = PidinStackParse(pcValue);
@@ -207,7 +207,7 @@ int setParameter(struct symtab_HSolveListElement *phsle,
       PidinStackToPidinQueue(ppist);
 
     pparTop->uValue.pidin = pidin;
-    ParameterSetType(pparTop,TYPE_PARA_SYMBOLIC);
+    ParameterSetType(pparTop,TYPE_PARA_FIELD);
 
   }
   else
