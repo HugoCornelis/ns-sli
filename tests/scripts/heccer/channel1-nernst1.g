@@ -72,7 +72,7 @@ setfield /hardcoded_neutral/c/n Cin {CCaI} Cout {CCaO} valency {2} \
      scale {1.0} T {37}
 
 addmsg /hardcoded_neutral/c/p /hardcoded_neutral/c/n CIN Ca
-
+//cat
 addmsg /hardcoded_neutral/c/n /hardcoded_neutral/c/cat EK E
 
 
