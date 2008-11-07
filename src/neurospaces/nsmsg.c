@@ -500,7 +500,7 @@ static int ConcenMsg(const char *pcSrcpath, const char *pcDstpath)
     int iLen = strlen(pcTarget);
   //
   strcpy(&pcTarget[iLen],"->concen");
-   struct symtab_InputOutput *pio =  CreateInputOutput(pcTarget,INPUT_TYPE_INPUT);
+  struct symtab_InputOutput *pio =  CreateInputOutput(pcTarget,INPUT_TYPE_INPUT);
 
 
   //!
@@ -593,7 +593,7 @@ static int CinMsg(const char *pcSrcpath, const char *pcDstpath)
 
   int iLen = strlen(pcTarget);
 
-  strcpy(&pcTarget[iLen],"->concen");
+  strcpy(&pcTarget[iLen],"->concen_init");
 
 
   int iResult = setParameter(phsleDst,"Cin",pcTarget,SETPARA_FIELD);
