@@ -493,7 +493,6 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
     }
 
 
-
   }
 
   return setParameter(phsle,field,value,SETPARA_GENESIS2);
