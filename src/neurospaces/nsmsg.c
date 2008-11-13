@@ -588,14 +588,14 @@ static int CinMsg(const char *pcSrcpath, const char *pcDstpath)
   char pcTarget[100];
 
 
-  setParameter(phsleSrc,"concen",".->concen_init",SETPARA_FIELD);
+  setParameter(phsleSrc,"Cin",".->concen_init",SETPARA_FIELD);
   
 
   PidinStackString(ppistTarget,pcTarget,sizeof(pcTarget));
 
   int iLen = strlen(pcTarget);
 
-  strcpy(&pcTarget[iLen],"->concen");
+  strcpy(&pcTarget[iLen],"->concen_init");
 
 
   int iResult = setParameter(phsleDst,"Cin",pcTarget,SETPARA_FIELD);

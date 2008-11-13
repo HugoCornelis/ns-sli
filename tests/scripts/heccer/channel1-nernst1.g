@@ -56,10 +56,12 @@ create Ca_concen /hardcoded_neutral/c/p
 
 setfield /hardcoded_neutral/c/p \
 	tau 0.00010 \
-	B 9412391936 \
+	B 7.579027046e+10 \
 	Ca_base 4e-05 \
 	thick 2e-07 \
 	concen_init 0.000040
+
+//old B val 9412391936
 
 addmsg /hardcoded_neutral/c/cat /hardcoded_neutral/c/p I_Ca Ik
 
@@ -95,7 +97,7 @@ setfield neurospaces_integrator heccer_dump_selection { HECCER_DUMP_VM_COMPARTME
 				     			HECCER_DUMP_VM_MECHANISM_OPERATIONS + \
 				     			HECCER_DUMP_VM_SUMMARY }
 
-setfield neurospaces_integrator heccer_reporting_granularity 100
+setfield neurospaces_integrator heccer_reporting_granularity 100000
 
 echo Initiated
 
@@ -108,64 +110,64 @@ step 0
 
 
 echo -------
-echo Iteration 100
+echo Iteration 100000
 
-step 100
+step 100000
 
-
-
-echo -------
-echo Iteration 200
-
-step 100
 
 
 echo -------
-echo Iteration 300
+echo Iteration 200000
 
-step 100
-
-
-echo -------
-echo Iteration 400
-
-step 100
+step 100000
 
 
 echo -------
-echo Iteration 500
+echo Iteration 300000
 
-step 100
-
-
-echo -------
-echo Iteration 600
-
-step 100
+step 100000
 
 
 echo -------
-echo Iteration 700
+echo Iteration 400000
 
-step 100
-
-
-echo -------
-echo Iteration 800
-
-step 100
+step 100000
 
 
 echo -------
-echo Iteration 900
+echo Iteration 500000
 
-step 100
+step 100000
+
+
+echo -------
+echo Iteration 600000
+
+step 100000
+
+
+echo -------
+echo Iteration 700000
+
+step 100000
+
+
+echo -------
+echo Iteration 800000
+
+step 100000
+
+
+echo -------
+echo Iteration 900000
+
+step 100000
 
 
 echo -------
 echo Final Iteration
 
-step 99
+step 99999
 
 call neurospaces_integrator NSINTEGRATOR_DUMP
 
