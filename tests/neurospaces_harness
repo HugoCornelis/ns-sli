@@ -1315,6 +1315,7 @@ sub numerical_compare
     {
 	if ($texts1->[$index] ne $texts2->[$index])
 	{
+
 	    return 'numerical_compare(): texts differ ($texts1->[$index] ne $texts2->[$index]), aborting with an error';
 	}
     }

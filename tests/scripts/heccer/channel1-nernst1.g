@@ -99,6 +99,7 @@ setfield neurospaces_integrator heccer_dump_selection { HECCER_DUMP_VM_COMPARTME
 
 setfield neurospaces_integrator heccer_reporting_granularity 100000
 
+
 echo Initiated
 
 call neurospaces_integrator NSINTEGRATOR_DUMP
@@ -173,5 +174,5 @@ call neurospaces_integrator NSINTEGRATOR_DUMP
 
 
 
-call model_container NEUROSPACES_QUERY
+//call model_container NEUROSPACES_QUERY
 
