@@ -51,7 +51,7 @@ char *getenv();
 #include <sys/utsname.h>
 struct utsname utsn;
 #else
-#include <unistd.h>
+// #include <unistd.h>
 #endif
 
     if((user=getenv("USER")) == NULL){

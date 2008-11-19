@@ -1,4 +1,5 @@
 Makefile$
+Makefile.in
 .*\@\.[ch]
 ylwrap
 .*\.output$
