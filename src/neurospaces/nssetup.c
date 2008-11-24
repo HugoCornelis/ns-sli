@@ -3,7 +3,8 @@
  *  \file nssetup.c
  *  \author Mando Rodriguez
  *
- *
+ *  Contains the implementation for setting a series of specific 
+ *  fields, given via script, for use in a simulation.
 */
 //------------------------------------------------------------------
 #include <stdio.h>
@@ -18,7 +19,16 @@
 
 
 //------------------------------------------------------------------
-/*
+/*!
+ *  \fun int NSSetupAlpha( char *pcName, char *pcField, char **pcArgs, int iArgc)
+ *  \param pcName The element name to set up values for.
+ *  \param pcField The field (X, Y, or Z) which determines where to place the values.
+ *  \param pcArgs An array of strings which contain the values to be parsed.
+ *  \param iArgc An integer which indicates the number of strings in pcArgs
+ *  \return 0 on error, 1 on success.
+ *
+ *  Performs the GENESIS command 'setupalpha' and delegates values 
+ *  from the GENESIS SLI to the neurospaces model-container.
  *
  */
 //------------------------------------------------------------------

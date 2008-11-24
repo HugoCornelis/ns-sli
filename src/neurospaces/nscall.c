@@ -26,8 +26,17 @@
 
 
 //--------------------------------------------------------------------
-/*
-*
+/*!
+ *  \fun int NSCall(int argc, char **argv)
+ *  \param argc Number of strings contained in argv
+ *  \param argv An aray of strings to be parsed into calls.
+ *  \return 0 on error, 1 on success.
+ *  \sa NSTabCreate
+ *  \sa NSTabFill
+ *
+ *  Function parses out GENESIS calls and delegates them to functions
+ *  for certain GENESIS features.
+ *  
 */
 //--------------------------------------------------------------------
 int NSCall(int argc, char **argv){
