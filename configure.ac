@@ -22,6 +22,18 @@ AC_PROG_CPP
 
 
 
+AC_CHECK_HEADERS([ heccer/heccer.h ],[],[
+   echo "Error! Heccer header files not installed."
+   exit -1
+])
+
+dnl AC_CHECK_HEADERS([ neurospaces/pidinstack.h ],[],[
+dnl   echo "Error! Model Container header files not installed."
+dnl   exit -1
+dnl ])
+
+
+
 
 AC_OUTPUT(Makefile \
 	src/Makefile \

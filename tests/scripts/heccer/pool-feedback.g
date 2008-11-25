@@ -238,5 +238,5 @@ call neurospaces_integrator NSINTEGRATOR_DUMP
 
 
 
-call model_container NEUROSPACES_QUERY
+//call model_container NEUROSPACES_QUERY
 
