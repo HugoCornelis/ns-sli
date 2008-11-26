@@ -23,12 +23,12 @@ AC_PROG_CPP
 
 
 AC_CHECK_HEADERS([ heccer/heccer.h ],[],[
-   echo "Error! Heccer header files not installed."
+   echo "Error! Heccer header files not found in any standard location."
    exit -1
 ])
 
 dnl AC_CHECK_HEADERS([ neurospaces/pidinstack.h ],[],[
-dnl   echo "Error! Model Container header files not installed."
+dnl   echo "Error! Model Container header files not found in any standard location."
 dnl   exit -1
 dnl ])
 

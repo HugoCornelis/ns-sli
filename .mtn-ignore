@@ -16,5 +16,6 @@ src/c2genesis/makestructs$
 dox.tag
 ^html
 ^tests/html
+^html/htdocs/neurospaces_project/ns-sli/
 out
 src/.gdbinit

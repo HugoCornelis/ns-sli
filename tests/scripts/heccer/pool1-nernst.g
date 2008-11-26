@@ -51,7 +51,7 @@ addmsg /hardcoded_neutral/c/cat /hardcoded_neutral/c CHANNEL Gk Ek
 create Ca_concen /hardcoded_neutral/c/p
 setfield /hardcoded_neutral/c/p \
 	tau 0.00010 \
-	B 9412391936 \
+	B 75790270460 \
 	Ca_base 4e-05 \
 	thick 2e-07 \
 	concen_init 0.000040
@@ -64,7 +64,7 @@ create nernst /hardcoded_neutral/c/n
 setfield /hardcoded_neutral/c/n Cin {CCaI} Cout {CCaO} valency {2} \
      scale {1.0} T {37}
 
-addmsg /hardcoded_neutral/c/n /hardcoded_neutral/c/cat EK E
+//addmsg /hardcoded_neutral/c/n /hardcoded_neutral/c/cat EK E
 
 addmsg /hardcoded_neutral/c/p /hardcoded_neutral/c/n CIN Ca
 

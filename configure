@@ -4430,7 +4430,7 @@ _ACEOF
 
 else
 
-   echo "Error! Heccer header files not installed."
+   echo "Error! Heccer header files not found in any standard location."
    exit -1
 
 fi
