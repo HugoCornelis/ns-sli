@@ -2,6 +2,8 @@
 
 * remove script.c script.h from the sources
 
+* remove config.log
+
 * remove Makefile.am.stuff
 
 * remove empty_model.ndf and src/empty_model.ndf
