@@ -165,7 +165,7 @@ int dimension_size[MAX_DIMENSIONS];
     stat(file,&stbuf);
     fsize = stbuf.st_size;
     buf = (char *)malloc(fsize+1);
-    fread(buf,fsize,1,fp);
+    (void)fread(buf,fsize,1,fp);
     buf[fsize] = '\0';
     fprintf(out,"%s\n",include);
 

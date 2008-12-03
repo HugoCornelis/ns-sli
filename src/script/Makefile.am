@@ -6,21 +6,25 @@ utildir = $(top_srcdir)/src/util
 
 INCLUDES = -I$(sysdir) -I$(scriptdir) -I$(shelldir) -I$(utildir) -I.
 
-noinst_LIBRARIES = libscript.a
+noinst_LIBRARIES = libparser.a libscript.a 
 
 BUILT_SOURCES = \
 	syntax.c \
-	syntax.h 
+	syntax.h \
+	lexical.c
+
 
 CLEANFILES = \
 	syntax.c \
-	syntax.h 
+	syntax.h \
+	lexical.c
+ 
 
 AM_LFLAGS = -l
 AM_YFLAGS = -dv
 
 
-noinst_HEADERS = \
+noinst_HEADERS = 
 	parse.h \
 	printoptusage.h \
 	result.h \
@@ -28,13 +32,25 @@ noinst_HEADERS = \
 	symtab.h \
 	syntax.h
 
-libscript_a_SOURCES = \
-	eval.c \
-	parse.c \
-	strsave.c \
-	symtab.c \
-	yyless.c \
+libparser_a_SOURCES = \
+	lexical.l \
 	syntax.y 
+
+
+#libscript_a_SOURCES = \
+#	eval.c \
+#	parse.c \
+#	strsave.c \
+#	symtab.c \
+#	yyless.c \
+#	syntax.y 
+
+
+
+
+
+
+
 
 
 

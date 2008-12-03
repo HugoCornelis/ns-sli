@@ -1,5 +1,5 @@
+Makefile\.in$
 Makefile$
-Makefile.in
 .*\@\.[ch]
 ylwrap
 .*\.output$
@@ -19,3 +19,10 @@ dox.tag
 ^html/htdocs/neurospaces_project/ns-sli/
 out
 src/.gdbinit
+src/loadlib.c
+src/liblist.c
+src/minloadlib.c
+src/script/lex.yy.c
+src/script/lexical.c
+src/script/syntax.c
+src/script/syntax.h

@@ -1,11 +1,5 @@
 -*- outline -*-
 
-* remove script.c script.h from the sources
-
-* remove Makefile.am.stuff
-
-* remove empty_model.ndf and src/empty_model.ndf
-
 * remove src/loadlib.c, src/liblist, src/minloadlib.c
 src/script/lex.yy.c src/script/lexical.c
 

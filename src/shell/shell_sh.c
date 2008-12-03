@@ -75,6 +75,6 @@ extern char *ArgListToString();
       }
 
     if(optargc > 1)
-	system(ArgListToString(optargc-1,optargv+1));
+      (void)system(ArgListToString(optargc-1,optargv+1));
 }
 
