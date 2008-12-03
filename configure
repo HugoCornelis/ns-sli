@@ -3882,6 +3882,8 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
 
 
 
+
+
 { echo "$as_me:$LINENO: checking for grep that handles long lines and -e" >&5
 echo $ECHO_N "checking for grep that handles long lines and -e... $ECHO_C" >&6; }
 if test "${ac_cv_path_GREP+set}" = set; then
@@ -4438,6 +4440,10 @@ fi
 done
 
 
+#AC_CHECK_HEADERS([ neurospaces/pidinstack.h ],[],[
+#	echo "Error! Model Container header files not found in any standard location."
+#	exit -1
+#])
 
 
 

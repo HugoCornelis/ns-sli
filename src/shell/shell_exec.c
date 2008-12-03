@@ -187,7 +187,7 @@ FuncTable	command;
 	    fflush(stdout);
 	    savefd = dup(stdoutfd);
 	    close(stdoutfd);
-	    dup(fileno(fp));
+	    (void)dup(fileno(fp));
 #else
 	    /*
 	    ** redirect stdout by replacing the stdout 
@@ -218,7 +218,7 @@ FuncTable	command;
 	    ** restore the stdout file structure
 	    */
 #ifndef OLD
-	    dup(savefd);
+	    (void)dup(savefd);
 	    close(savefd);
 #else
 	    BCOPY(&tmpfile,output,sizeof(FILE));

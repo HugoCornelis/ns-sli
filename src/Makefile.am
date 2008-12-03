@@ -10,8 +10,7 @@ nsdir = $(top_srcdir)/src/neurospaces
 olfdir = $(top_srcdir)/src/olf
 
 EXTRA_DIST = \
-	libsh \
-	empty_model.ndf
+	libsh 
 
 AM_CLAGS=-DPLAINTERM
 
@@ -23,7 +22,7 @@ CLEANFILES = \
 	loadlib.c \
 	liblist
 
-bin_PROGRAMS = nsgenesis
+bin_PROGRAMS = nsgenesis 
 
 nsgenesis_SOURCES = \
 	loadlib.c 
@@ -37,10 +36,10 @@ nsgenesis_LDADD = \
 	$(pardir)/libpar.a \
 	$(olfdir)/libolf.a \
 	$(nsdir)/libneurospaces.a \
-	-L/usr/local/lib/model-container -lneurospacesread \
-	-L/usr/local/lib/neurospaces/algorithms/symbol -lsymbol_algorithms \
-	-L/usr/local/lib/heccer -lheccer \
-	-L/usr/local/lib/heccer -lhneurospaces \
+	-L${libdir}/model-container -lneurospacesread \
+	-L${libdir}/neurospaces/algorithms/symbol -lsymbol_algorithms \
+	-L${libdir}/heccer -lheccer \
+	-L${libdir}/heccer -lhneurospaces \
 	-lfl \
 	-lreadline \
 	-lhistory \
@@ -55,6 +54,3 @@ liblist: Makefile
 loadlib.c: liblist
 	$(srcdir)/libsh < liblist > loadlib.c
 
-move:
-	mv nsgenesis $(top_srcdir)
-	echo "Built negenesis!"

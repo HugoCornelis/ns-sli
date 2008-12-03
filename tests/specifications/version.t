@@ -19,6 +19,7 @@ my $test
 description => "Does the version information match with ns-genesis-SLI-network-2 ?",
 						   # $Format: "read => \"${package}-${label}\","$
 read => "ns-genesis-SLI-network-2",
+						   write=> 'exit',
 						   
 						  },
 						 ],

@@ -75,14 +75,14 @@ off_t fsize;
     }
 #endif
     if(s){
-	fwrite(s,1,strlen(s),fp);
+      (void)fwrite(s,1,strlen(s),fp);
     }
     fclose(fp);
     /*
     ** run the editor on the file
     */
     sprintf(com,"%s %s",editor,tmpname);
-    system(com);
+    (void)system(com);
     /*
     ** copy the results back into the string
     */
@@ -96,7 +96,7 @@ off_t fsize;
     fstat(fileno(fp),&stbuf);
     fsize = stbuf.st_size;
     buf = (char *)calloc(fsize+1,1);
-    fread(buf,fsize,1,fp);
+    (void)fread(buf,fsize,1,fp);
     fclose(fp);
 
     if((s != NULL) && (fsize <= (off_t)strlen(s))){

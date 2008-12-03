@@ -333,7 +333,7 @@ static ResultValue RV;			/* Dummy ReturnValue for PTNew */
 extern YYSTYPE	yylval;
 
 #include "syntax.h"
-#include "lexical.c"
+#include "lex.yy.c"
 
 #endif
 

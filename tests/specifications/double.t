@@ -158,7 +158,7 @@ my $test
 			       },
 			      ],
        description => "create a neutral object with a compartment as a child, check if ",
-       name => 'heccerreset.t'
+       name => 'double.t'
       };
 
 
