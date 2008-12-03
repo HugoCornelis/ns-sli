@@ -1,9 +1,7 @@
 -*- outline -*-
 
-* remove src/loadlib.c, src/liblist, src/minloadlib.c
-src/script/lex.yy.c src/script/lexical.c
 
-* add TODO.txt
+
 
 * check the name entries inside the .t files
 eg. double.t has name => 'heccerreset.t'
