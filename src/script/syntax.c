@@ -291,6 +291,7 @@ static char parsercsid[] = "$Id: script.y,v 1.5 2006/02/15 18:47:00 svitak Exp $
 #include <stdio.h>
 #include <setjmp.h>
 #include <string.h>
+#include <string.h>
 #include "parse.h"
 #include "symtab.h"
 #include "ss_func_ext.h"
@@ -313,15 +314,16 @@ extern jmp_buf	ReturnBuf;	/* Used to return out of a script */
 static int	DefType;	/* Remembers type in a var decl */
 static int	DefCast;	/* Remembers cast in a var decl */
 static int	BreakAllowed = 0; /* In a loop control structure */
-
+static int	ReturnIdents = 0; /* 1 ==> lexer doesn't classify IDENTs */
 static int	Compiling = 0;	/* Make a statement list rather than execute */
 static int	InFunctionDefinition = 0;
 static int	NextLocal;	/* Next local symbol offset */
 static int	ArgMatch;	/* Matches argument number to name in func */
-
+Symtab		GlobalSymbols;	/* Symbols defined outside a function */
+static Symtab	*LocalSymbols = NULL;	/* Symbols local to a function */
 static ResultValue RV;			/* Dummy ReturnValue for PTNew */
 
-#line 194 "syntax.y"
+#line 196 "syntax.y"
 
 #if !defined(decalpha) || defined(bison) || defined(T3E)
 /*
@@ -331,7 +333,7 @@ static ResultValue RV;			/* Dummy ReturnValue for PTNew */
 extern YYSTYPE	yylval;
 
 #include "syntax.h"
-#include "lexical.c"
+#include "lex.yy.c"
 
 #endif
 
@@ -367,7 +369,7 @@ typedef int YYSTYPE;
 
 
 /* Line 216 of yacc.c.  */
-#line 371 "syntax.c"
+#line 373 "syntax.c"
 
 #ifdef short
 # undef short
@@ -703,20 +705,20 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint16 yyrline[] =
 {
-       0,   210,   210,   214,   218,   217,   253,   254,   255,   258,
-     259,   260,   261,   262,   263,   264,   265,   266,   267,   268,
-     269,   270,   271,   272,   275,   296,   295,   313,   312,   335,
-     341,   334,   358,   357,   375,   378,   381,   380,   397,   412,
-     411,   421,   457,   491,   494,   535,   534,   549,   548,   580,
-     579,   619,   627,   626,   648,   651,   657,   661,   667,   668,
-     671,   672,   675,   676,   679,   685,   693,   700,   707,   715,
-     719,   714,   728,   732,   736,   745,   764,   770,   805,   854,
-     858,   853,   874,   875,   879,   890,   903,   909,   915,   923,
-     929,   931,   930,   944,   943,   955,   956,   960,   972,   978,
-     987,   990,   992,   994,   996,   999,  1002,  1004,  1006,  1008,
-    1010,  1012,  1014,  1017,  1019,  1021,  1024,  1026,  1028,  1030,
-    1032,  1034,  1037,  1057,  1064,  1071,  1079,  1087,  1091,  1095,
-    1099
+       0,   212,   212,   216,   220,   219,   255,   256,   257,   260,
+     261,   262,   263,   264,   265,   266,   267,   268,   269,   270,
+     271,   272,   273,   274,   277,   298,   297,   315,   314,   337,
+     343,   336,   360,   359,   377,   380,   383,   382,   399,   414,
+     413,   423,   459,   493,   496,   537,   536,   551,   550,   582,
+     581,   621,   629,   628,   650,   653,   659,   663,   669,   670,
+     673,   674,   677,   678,   681,   687,   695,   702,   709,   717,
+     721,   716,   730,   734,   738,   747,   766,   772,   807,   856,
+     860,   855,   876,   877,   881,   892,   905,   911,   917,   925,
+     931,   933,   932,   946,   945,   957,   958,   962,   974,   980,
+     989,   992,   994,   996,   998,  1001,  1004,  1006,  1008,  1010,
+    1012,  1014,  1016,  1019,  1021,  1023,  1026,  1028,  1030,  1032,
+    1034,  1036,  1039,  1059,  1066,  1073,  1081,  1089,  1093,  1097,
+    1101
 };
 #endif
 
@@ -1809,14 +1811,14 @@ yyreduce:
   switch (yyn)
     {
         case 3:
-#line 214 "syntax.y"
+#line 216 "syntax.y"
     { 
 		    (yyval.pn) = NULL;
  		  }
     break;
 
   case 4:
-#line 218 "syntax.y"
+#line 220 "syntax.y"
     {
 		    (yyval.str) = (char *) MakeScriptInfo();
 		    SetLine((yyval.str));
@@ -1824,7 +1826,7 @@ yyreduce:
     break;
 
   case 5:
-#line 223 "syntax.y"
+#line 225 "syntax.y"
     {
 		    ResultValue	v;
 
@@ -1856,7 +1858,7 @@ yyreduce:
     break;
 
   case 24:
-#line 276 "syntax.y"
+#line 278 "syntax.y"
     {
 		    /*
 		    ** When the end of a script is encountered, the simulator
@@ -1877,7 +1879,7 @@ yyreduce:
     break;
 
   case 25:
-#line 296 "syntax.y"
+#line 298 "syntax.y"
     {
 		    Compiling++;
 		    BreakAllowed++;
@@ -1886,7 +1888,7 @@ yyreduce:
     break;
 
   case 26:
-#line 302 "syntax.y"
+#line 304 "syntax.y"
     {
 		    ResultValue	v;
 
@@ -1898,7 +1900,7 @@ yyreduce:
     break;
 
   case 27:
-#line 313 "syntax.y"
+#line 315 "syntax.y"
     {
 		      Compiling++;
 		      BreakAllowed++;
@@ -1907,7 +1909,7 @@ yyreduce:
     break;
 
   case 28:
-#line 320 "syntax.y"
+#line 322 "syntax.y"
     {
 		    ResultValue	v;
 		    ParseNode	*forbody, *whilepart;
@@ -1923,7 +1925,7 @@ yyreduce:
     break;
 
   case 29:
-#line 335 "syntax.y"
+#line 337 "syntax.y"
     {
 			BEGIN FUNCLIT;
 			Compiling++;
@@ -1932,14 +1934,14 @@ yyreduce:
     break;
 
   case 30:
-#line 341 "syntax.y"
+#line 343 "syntax.y"
     {
 			BEGIN 0;
 		    }
     break;
 
   case 31:
-#line 345 "syntax.y"
+#line 347 "syntax.y"
     {
 		    Result	*rp;
 		    ResultValue	v;
@@ -1953,7 +1955,7 @@ yyreduce:
     break;
 
   case 32:
-#line 358 "syntax.y"
+#line 360 "syntax.y"
     {
 		    Compiling++;
 		    (yyval.str) = (char *) MakeScriptInfo();
@@ -1961,7 +1963,7 @@ yyreduce:
     break;
 
   case 33:
-#line 363 "syntax.y"
+#line 365 "syntax.y"
     {
 		    ResultValue	v;
 		    ParseNode	*stmntlists;
@@ -1974,19 +1976,19 @@ yyreduce:
     break;
 
   case 34:
-#line 375 "syntax.y"
+#line 377 "syntax.y"
     {
  		    (yyval.pn) = NULL;
  		  }
     break;
 
   case 35:
-#line 379 "syntax.y"
+#line 381 "syntax.y"
     { (yyval.pn) = (yyvsp[(2) - (2)].pn); }
     break;
 
   case 36:
-#line 381 "syntax.y"
+#line 383 "syntax.y"
     {
 		    Compiling++;
 		    (yyval.str) = (char *) MakeScriptInfo();
@@ -1994,7 +1996,7 @@ yyreduce:
     break;
 
   case 37:
-#line 386 "syntax.y"
+#line 388 "syntax.y"
     {
 		    ResultValue	v;
 		    ParseNode	*stmntlists;
@@ -2007,7 +2009,7 @@ yyreduce:
     break;
 
   case 38:
-#line 398 "syntax.y"
+#line 400 "syntax.y"
     {
 		    ResultValue	v;
 		    Result	*rp;
@@ -2022,21 +2024,21 @@ yyreduce:
     break;
 
   case 39:
-#line 412 "syntax.y"
+#line 414 "syntax.y"
     {
 		    Pushyybgin(LIT);
 		  }
     break;
 
   case 40:
-#line 416 "syntax.y"
+#line 418 "syntax.y"
     {
 		    (yyval.str) = NULL;
 		  }
     break;
 
   case 41:
-#line 422 "syntax.y"
+#line 424 "syntax.y"
     {
 		    ResultValue	v;
 		    int		argc;
@@ -2075,7 +2077,7 @@ yyreduce:
     break;
 
   case 42:
-#line 458 "syntax.y"
+#line 460 "syntax.y"
     {
 		    ResultValue	v;
 		    int		argc;
@@ -2109,28 +2111,28 @@ yyreduce:
     break;
 
   case 43:
-#line 491 "syntax.y"
+#line 493 "syntax.y"
     {
 		    (yyval.pn) = (ParseNode*) NULL;
 		  }
     break;
 
   case 44:
-#line 495 "syntax.y"
+#line 497 "syntax.y"
     {
 		    (yyval.pn) = (yyvsp[(1) - (1)].pn);
 		  }
     break;
 
   case 45:
-#line 535 "syntax.y"
+#line 537 "syntax.y"
     {
 		    Pushyybgin(LIT);
 		  }
     break;
 
   case 46:
-#line 539 "syntax.y"
+#line 541 "syntax.y"
     {
 		    ResultValue	v;
 
@@ -2143,14 +2145,14 @@ yyreduce:
     break;
 
   case 47:
-#line 549 "syntax.y"
+#line 551 "syntax.y"
     {
 		    Pushyybgin(LIT);
 		  }
     break;
 
   case 48:
-#line 553 "syntax.y"
+#line 555 "syntax.y"
     {
 		    ResultValue	v;
 		    char*	varname;
@@ -2167,14 +2169,14 @@ yyreduce:
     break;
 
   case 49:
-#line 580 "syntax.y"
+#line 582 "syntax.y"
     {
 		    BEGIN LIT;
 		  }
     break;
 
   case 50:
-#line 584 "syntax.y"
+#line 586 "syntax.y"
     {
 		    int		argc;
 		    char	*argv[100];
@@ -2211,7 +2213,7 @@ yyreduce:
     break;
 
   case 51:
-#line 620 "syntax.y"
+#line 622 "syntax.y"
     {
 		    Pushyybgin(LIT);
 		    (yyval.str) = (yyvsp[(1) - (1)].str);
@@ -2219,14 +2221,14 @@ yyreduce:
     break;
 
   case 52:
-#line 627 "syntax.y"
+#line 629 "syntax.y"
     {
 		    BEGIN LIT;
 		  }
     break;
 
   case 53:
-#line 631 "syntax.y"
+#line 633 "syntax.y"
     {
 		    ResultValue	v;
 		    Result	*rp;
@@ -2244,35 +2246,35 @@ yyreduce:
     break;
 
   case 54:
-#line 648 "syntax.y"
+#line 650 "syntax.y"
     {
 		    (yyval.pn) = NULL;
 		  }
     break;
 
   case 55:
-#line 652 "syntax.y"
+#line 654 "syntax.y"
     {
 		    (yyval.pn) = PTNew(ARGLIST, RV, (yyvsp[(1) - (3)].pn), (yyvsp[(3) - (3)].pn));
 		  }
     break;
 
   case 56:
-#line 658 "syntax.y"
+#line 660 "syntax.y"
     {
 		    (yyval.pn) = PTNew(ARGLIST, RV, NULL, (yyvsp[(1) - (1)].pn));
 		  }
     break;
 
   case 57:
-#line 662 "syntax.y"
+#line 664 "syntax.y"
     {
 		    (yyval.pn) = PTNew(ARGLIST, RV, (yyvsp[(1) - (3)].pn), (yyvsp[(3) - (3)].pn));
 		  }
     break;
 
   case 64:
-#line 680 "syntax.y"
+#line 682 "syntax.y"
     {
 			    ResultValue	v;
 
@@ -2281,7 +2283,7 @@ yyreduce:
     break;
 
   case 65:
-#line 686 "syntax.y"
+#line 688 "syntax.y"
     {
 			    ResultValue	v;
 
@@ -2290,7 +2292,7 @@ yyreduce:
     break;
 
   case 66:
-#line 694 "syntax.y"
+#line 696 "syntax.y"
     {
 		    ResultValue	v;
 
@@ -2300,7 +2302,7 @@ yyreduce:
     break;
 
   case 67:
-#line 701 "syntax.y"
+#line 703 "syntax.y"
     {
 		    ResultValue	v;
 
@@ -2310,7 +2312,7 @@ yyreduce:
     break;
 
   case 68:
-#line 708 "syntax.y"
+#line 710 "syntax.y"
     {
 		    ResultValue	v;
 
@@ -2320,42 +2322,42 @@ yyreduce:
     break;
 
   case 69:
-#line 715 "syntax.y"
+#line 717 "syntax.y"
     {
 		    Pushyybgin(0);
 		  }
     break;
 
   case 70:
-#line 719 "syntax.y"
+#line 721 "syntax.y"
     {
 		    Popyybgin();
 		  }
     break;
 
   case 71:
-#line 723 "syntax.y"
+#line 725 "syntax.y"
     {
 		    (yyval.pn) = (yyvsp[(3) - (5)].pn);
 		  }
     break;
 
   case 72:
-#line 729 "syntax.y"
+#line 731 "syntax.y"
     {
 		    (yyval.pn) = (yyvsp[(1) - (1)].pn);
 		  }
     break;
 
   case 73:
-#line 733 "syntax.y"
+#line 735 "syntax.y"
     {
 		    (yyval.pn) = (yyvsp[(1) - (1)].pn);
 		  }
     break;
 
   case 74:
-#line 737 "syntax.y"
+#line 739 "syntax.y"
     {
 		    if ((yyvsp[(1) - (1)].pn)->pn_val.r_type == STRCONST)
 			(yyvsp[(1) - (1)].pn)->pn_val.r_type = LITERAL;
@@ -2365,7 +2367,7 @@ yyreduce:
     break;
 
   case 75:
-#line 746 "syntax.y"
+#line 748 "syntax.y"
     {
 		    ParseNode	*funcpn;
 		    ResultValue	v;
@@ -2387,14 +2389,14 @@ yyreduce:
     break;
 
   case 76:
-#line 765 "syntax.y"
+#line 767 "syntax.y"
     {
 		    (yyval.pn) = NULL;
 		  }
     break;
 
   case 77:
-#line 771 "syntax.y"
+#line 773 "syntax.y"
     {
 		    ParseNode	*funcpn;
 		    ResultValue	v;
@@ -2432,7 +2434,7 @@ yyreduce:
     break;
 
   case 78:
-#line 806 "syntax.y"
+#line 808 "syntax.y"
     {
 		    ParseNode	*funcpn;
 		    Result	*rp;
@@ -2481,21 +2483,21 @@ yyreduce:
     break;
 
   case 79:
-#line 854 "syntax.y"
+#line 856 "syntax.y"
     {
 		    ReturnIdents = 1;
 		  }
     break;
 
   case 80:
-#line 858 "syntax.y"
+#line 860 "syntax.y"
     {
 		    ReturnIdents = 0;
 		  }
     break;
 
   case 81:
-#line 862 "syntax.y"
+#line 864 "syntax.y"
     {
 		    InFunctionDefinition--;
 
@@ -2508,17 +2510,17 @@ yyreduce:
     break;
 
   case 82:
-#line 874 "syntax.y"
+#line 876 "syntax.y"
     { (yyval.pn) = NULL; }
     break;
 
   case 83:
-#line 876 "syntax.y"
+#line 878 "syntax.y"
     { (yyval.pn) = (yyvsp[(2) - (3)].pn); }
     break;
 
   case 84:
-#line 880 "syntax.y"
+#line 882 "syntax.y"
     {
 		    ResultValue	v;
 		    ParseNode	*init;
@@ -2532,7 +2534,7 @@ yyreduce:
     break;
 
   case 85:
-#line 891 "syntax.y"
+#line 893 "syntax.y"
     {
 		    ResultValue	v;
 		    ParseNode	*init;
@@ -2546,7 +2548,7 @@ yyreduce:
     break;
 
   case 86:
-#line 904 "syntax.y"
+#line 906 "syntax.y"
     {
 		    ReturnIdents = 1;
 		    DefType = INT;
@@ -2555,7 +2557,7 @@ yyreduce:
     break;
 
   case 87:
-#line 910 "syntax.y"
+#line 912 "syntax.y"
     {
 		    ReturnIdents = 1;
 		    DefType = FLOAT;
@@ -2564,7 +2566,7 @@ yyreduce:
     break;
 
   case 88:
-#line 916 "syntax.y"
+#line 918 "syntax.y"
     {
 		    ReturnIdents = 1;
 		    DefType = STR;
@@ -2573,21 +2575,21 @@ yyreduce:
     break;
 
   case 89:
-#line 924 "syntax.y"
+#line 926 "syntax.y"
     {
 		    (yyval.pn) = (yyvsp[(2) - (2)].pn);
 		  }
     break;
 
   case 91:
-#line 931 "syntax.y"
+#line 933 "syntax.y"
     {
 		    ReturnIdents = 1;
 		  }
     break;
 
   case 92:
-#line 935 "syntax.y"
+#line 937 "syntax.y"
     {
 		    ResultValue	v;
 
@@ -2597,14 +2599,14 @@ yyreduce:
     break;
 
   case 93:
-#line 944 "syntax.y"
+#line 946 "syntax.y"
     {
 		    ReturnIdents = 0;
 		  }
     break;
 
   case 94:
-#line 948 "syntax.y"
+#line 950 "syntax.y"
     {
 		    (yyval.pn) = vardef((yyvsp[(1) - (3)].str), DefType, DefCast, (yyvsp[(3) - (3)].pn));
 		    free((yyvsp[(1) - (3)].str));
@@ -2612,17 +2614,17 @@ yyreduce:
     break;
 
   case 95:
-#line 955 "syntax.y"
+#line 957 "syntax.y"
     { (yyval.pn) = NULL; }
     break;
 
   case 96:
-#line 957 "syntax.y"
+#line 959 "syntax.y"
     { (yyval.pn) = (yyvsp[(2) - (2)].pn); }
     break;
 
   case 97:
-#line 961 "syntax.y"
+#line 963 "syntax.y"
     {
 		    ResultValue	v;
 
@@ -2635,7 +2637,7 @@ yyreduce:
     break;
 
   case 98:
-#line 973 "syntax.y"
+#line 975 "syntax.y"
     {
 		    ResultValue	v;
 
@@ -2644,7 +2646,7 @@ yyreduce:
     break;
 
   case 99:
-#line 979 "syntax.y"
+#line 981 "syntax.y"
     {
 		    ResultValue	v;
 
@@ -2653,117 +2655,117 @@ yyreduce:
     break;
 
   case 100:
-#line 987 "syntax.y"
+#line 989 "syntax.y"
     { (yyval.pn) = NULL; }
     break;
 
   case 101:
-#line 991 "syntax.y"
+#line 993 "syntax.y"
     { (yyval.pn) = PTNew('|', RV, (yyvsp[(1) - (3)].pn), (yyvsp[(3) - (3)].pn)); }
     break;
 
   case 102:
-#line 993 "syntax.y"
+#line 995 "syntax.y"
     { (yyval.pn) = PTNew('&', RV, (yyvsp[(1) - (3)].pn), (yyvsp[(3) - (3)].pn)); }
     break;
 
   case 103:
-#line 995 "syntax.y"
+#line 997 "syntax.y"
     { (yyval.pn) = PTNew('^', RV, (yyvsp[(1) - (3)].pn), (yyvsp[(3) - (3)].pn)); }
     break;
 
   case 104:
-#line 997 "syntax.y"
+#line 999 "syntax.y"
     { (yyval.pn) = PTNew('~', RV, (yyvsp[(2) - (2)].pn), NULL); }
     break;
 
   case 105:
-#line 1000 "syntax.y"
+#line 1002 "syntax.y"
     { (yyval.pn) = PTNew('@', RV, (yyvsp[(1) - (3)].pn), (yyvsp[(3) - (3)].pn)); }
     break;
 
   case 106:
-#line 1003 "syntax.y"
+#line 1005 "syntax.y"
     { (yyval.pn) = PTNew('+', RV, (yyvsp[(1) - (3)].pn), (yyvsp[(3) - (3)].pn)); }
     break;
 
   case 107:
-#line 1005 "syntax.y"
+#line 1007 "syntax.y"
     { (yyval.pn) = PTNew('-', RV, (yyvsp[(1) - (3)].pn), (yyvsp[(3) - (3)].pn)); }
     break;
 
   case 108:
-#line 1007 "syntax.y"
+#line 1009 "syntax.y"
     { (yyval.pn) = PTNew('*', RV, (yyvsp[(1) - (3)].pn), (yyvsp[(3) - (3)].pn)); }
     break;
 
   case 109:
-#line 1009 "syntax.y"
+#line 1011 "syntax.y"
     { (yyval.pn) = PTNew('/', RV, (yyvsp[(1) - (3)].pn), (yyvsp[(3) - (3)].pn)); }
     break;
 
   case 110:
-#line 1011 "syntax.y"
+#line 1013 "syntax.y"
     { (yyval.pn) = PTNew('%', RV, (yyvsp[(1) - (3)].pn), (yyvsp[(3) - (3)].pn)); }
     break;
 
   case 111:
-#line 1013 "syntax.y"
+#line 1015 "syntax.y"
     { (yyval.pn) = PTNew(POW, RV, (yyvsp[(1) - (3)].pn), (yyvsp[(3) - (3)].pn)); }
     break;
 
   case 112:
-#line 1015 "syntax.y"
+#line 1017 "syntax.y"
     { (yyval.pn) = PTNew(UMINUS, RV, (yyvsp[(2) - (2)].pn), NULL); }
     break;
 
   case 113:
-#line 1018 "syntax.y"
+#line 1020 "syntax.y"
     { (yyval.pn) = PTNew(OR, RV, (yyvsp[(1) - (3)].pn), (yyvsp[(3) - (3)].pn)); }
     break;
 
   case 114:
-#line 1020 "syntax.y"
+#line 1022 "syntax.y"
     { (yyval.pn) = PTNew(AND, RV, (yyvsp[(1) - (3)].pn), (yyvsp[(3) - (3)].pn)); }
     break;
 
   case 115:
-#line 1022 "syntax.y"
+#line 1024 "syntax.y"
     { (yyval.pn) = PTNew('!', RV, (yyvsp[(2) - (2)].pn), NULL); }
     break;
 
   case 116:
-#line 1025 "syntax.y"
+#line 1027 "syntax.y"
     { (yyval.pn) = PTNew(LT, RV, (yyvsp[(1) - (3)].pn), (yyvsp[(3) - (3)].pn)); }
     break;
 
   case 117:
-#line 1027 "syntax.y"
+#line 1029 "syntax.y"
     { (yyval.pn) = PTNew(LE, RV, (yyvsp[(1) - (3)].pn), (yyvsp[(3) - (3)].pn)); }
     break;
 
   case 118:
-#line 1029 "syntax.y"
+#line 1031 "syntax.y"
     { (yyval.pn) = PTNew(GT, RV, (yyvsp[(1) - (3)].pn), (yyvsp[(3) - (3)].pn)); }
     break;
 
   case 119:
-#line 1031 "syntax.y"
+#line 1033 "syntax.y"
     { (yyval.pn) = PTNew(GE, RV, (yyvsp[(1) - (3)].pn), (yyvsp[(3) - (3)].pn)); }
     break;
 
   case 120:
-#line 1033 "syntax.y"
+#line 1035 "syntax.y"
     { (yyval.pn) = PTNew(EQ, RV, (yyvsp[(1) - (3)].pn), (yyvsp[(3) - (3)].pn)); }
     break;
 
   case 121:
-#line 1035 "syntax.y"
+#line 1037 "syntax.y"
     { (yyval.pn) = PTNew(NE, RV, (yyvsp[(1) - (3)].pn), (yyvsp[(3) - (3)].pn)); }
     break;
 
   case 122:
-#line 1038 "syntax.y"
+#line 1040 "syntax.y"
     { 
 		    Result	*rp;
 		    ResultValue	v;
@@ -2785,7 +2787,7 @@ yyreduce:
     break;
 
   case 123:
-#line 1058 "syntax.y"
+#line 1060 "syntax.y"
     { 
 		    ResultValue	v;
 
@@ -2795,7 +2797,7 @@ yyreduce:
     break;
 
   case 124:
-#line 1065 "syntax.y"
+#line 1067 "syntax.y"
     { 
 		    ResultValue	v;
 
@@ -2805,7 +2807,7 @@ yyreduce:
     break;
 
   case 125:
-#line 1072 "syntax.y"
+#line 1074 "syntax.y"
     { 
 		    ResultValue	v;
 
@@ -2815,7 +2817,7 @@ yyreduce:
     break;
 
   case 126:
-#line 1080 "syntax.y"
+#line 1082 "syntax.y"
     {
 		    ResultValue	v;
 
@@ -2825,28 +2827,28 @@ yyreduce:
     break;
 
   case 127:
-#line 1088 "syntax.y"
+#line 1090 "syntax.y"
     { (yyval.pn) = (yyvsp[(2) - (3)].pn); }
     break;
 
   case 128:
-#line 1092 "syntax.y"
+#line 1094 "syntax.y"
     { (yyval.pn) = (yyvsp[(2) - (3)].pn); }
     break;
 
   case 129:
-#line 1096 "syntax.y"
+#line 1098 "syntax.y"
     { (yyval.pn) = (yyvsp[(2) - (3)].pn); }
     break;
 
   case 130:
-#line 1100 "syntax.y"
+#line 1102 "syntax.y"
     { (yyval.pn) = (yyvsp[(2) - (3)].pn); }
     break;
 
 
 /* Line 1267 of yacc.c.  */
-#line 2850 "syntax.c"
+#line 2852 "syntax.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -3060,7 +3062,7 @@ yyreturn:
 }
 
 
-#line 1103 "syntax.y"
+#line 1105 "syntax.y"
 
 
 #if defined(decalpha) && !defined(bison) && !defined(T3E)
@@ -3075,7 +3077,6 @@ extern YYSTYPE	yylval;
 #endif
 
 #include "lex.yy.c"
-
 #endif
 
 /*

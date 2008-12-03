@@ -4440,6 +4440,10 @@ fi
 done
 
 
+#AC_CHECK_HEADERS([ neurospaces/pidinstack.h ],[],[
+#	echo "Error! Model Container header files not found in any standard location."
+#	exit -1
+#])
 
 
 

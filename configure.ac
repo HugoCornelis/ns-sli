@@ -30,10 +30,10 @@ AC_CHECK_HEADERS([ heccer/heccer.h ],[],[
    exit -1
 ])
 
-dnl AC_CHECK_HEADERS([ neurospaces/pidinstack.h ],[],[
-dnl   echo "Error! Model Container header files not found in any standard location."
-dnl   exit -1
-dnl ])
+#AC_CHECK_HEADERS([ neurospaces/pidinstack.h ],[],[
+#	echo "Error! Model Container header files not found in any standard location."
+#	exit -1
+#])
 
 
 

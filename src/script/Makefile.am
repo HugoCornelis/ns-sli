@@ -3,21 +3,20 @@ scriptdir = $(top_srcdir)/src/script
 shelldir = $(top_srcdir)/src/shell
 utildir = $(top_srcdir)/src/util
 
-
 INCLUDES = -I$(sysdir) -I$(scriptdir) -I$(shelldir) -I$(utildir) -I.
 
-noinst_LIBRARIES = libparser.a libscript.a 
+noinst_LIBRARIES = libscript.a 
 
 BUILT_SOURCES = \
 	syntax.c \
 	syntax.h \
-	lexical.c
-
+	lex.yy.c
 
 CLEANFILES = \
 	syntax.c \
 	syntax.h \
-	lexical.c
+	lexical.c \
+	lex.yy.c
  
 
 AM_LFLAGS = -l
@@ -32,18 +31,24 @@ noinst_HEADERS =
 	symtab.h \
 	syntax.h
 
-libparser_a_SOURCES = \
-	lexical.l \
+#
+# Target for generating the lexical analyzer code. 
+# Automake cannot compile it due to a dependency in the lexical code 
+# insertion, so the lex.yy.c file must be generated beforehand.
+# 
+#
+lex.yy.c: lexical.l
+	echo Using \"`which $(LEX)` $(AM_LFLAGS)\" for lexical parsing
+	$(LEX) $(AM_LFLAGS) lexical.l
+
+
+libscript_a_SOURCES = \
+	eval.c \
+	parse.c \
+	strsave.c \
+	symtab.c \
+	yyless.c \
 	syntax.y 
-
-
-#libscript_a_SOURCES = \
-#	eval.c \
-#	parse.c \
-#	strsave.c \
-#	symtab.c \
-#	yyless.c \
-#	syntax.y 
 
 
 

@@ -1,14 +1,12 @@
 -*- outline -*-
 
-* remove src/loadlib.c, src/liblist, src/minloadlib.c
-src/script/lex.yy.c src/script/lexical.c
-
-* add TODO.txt
-
 * check the name entries inside the .t files
 eg. double.t has name => 'heccerreset.t'
 
 * solve all compiler warnings on ubuntu
 
+* remove the need for "hardcoded_neutral" in the scripting language.
+
+* create a proper target for Doxygen to execute using automake.
 
 
