@@ -10,7 +10,7 @@ makestructs = $(c2genesisdir)/makestructs
 makelib = $(c2genesisdir)/makelib
 
 
-INCLUDES = -I$(utildir) -I$(shelldir) -I$(simdir) -I$(scriptdir) -I$(olfdir) -I/usr/local/neurospaces/instrumentor 
+INCLUDES = -I$(utildir) -I$(shelldir) -I$(simdir) -I$(scriptdir) -I$(olfdir) -I${prefix}/neurospaces/instrumentor 
 
 AM_CPPFLAGS = -DPRE_PROTO_TRAVERSAL
 
