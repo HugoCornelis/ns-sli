@@ -10,4 +10,8 @@ eg. double.t has name => 'heccerreset.t'
 
 * create a proper target for Doxygen to execute using automake.
 
+* need to get showfield working, this should be trivial with the tools in nscomm.c
 
+* need to make nsgenesis seek out the neurospaces model enviroment variable upon startup.
+
+* move the genesis script library from startup into the library package.

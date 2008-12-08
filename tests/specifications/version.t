@@ -18,8 +18,8 @@ my $test
 						   # $Format: "description => \"Does the version information match with ${package}-${label} ?\","$
 description => "Does the version information match with ns-genesis-SLI-network-2 ?",
 						   # $Format: "read => \"${package}-${label}\","$
-read => "ns-genesis-SLI-network-2",
 						   write=> 'exit',
+						   read => "ns-genesis-SLI-network-2",
 						   
 						  },
 						 ],
