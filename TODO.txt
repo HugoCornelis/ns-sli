@@ -8,7 +8,6 @@ eg. double.t has name => 'heccerreset.t'
 
 * remove the need for "hardcoded_neutral" in the scripting language.
 
-* create a proper target for Doxygen to execute using automake.
 
 * need to get showfield working, this should be trivial with the tools in nscomm.c
 

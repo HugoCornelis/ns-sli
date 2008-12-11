@@ -20,9 +20,7 @@ AC_PROG_LEX
 AC_PROG_RANLIB
 AC_PROG_CPP
 
-
-dnl AC_SUBST([LEX_OUTPUT_ROOT], [lexical])
-
+AC_PATH_PROGS(PERL, perl perl5)
 
 
 AC_CHECK_HEADERS([ heccer/heccer.h ],[],[

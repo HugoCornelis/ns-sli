@@ -26,7 +26,7 @@ my $test
 
 						  {
 						   description => "Can we add a message between compartments ?",
-										   read => (join '', `cat  /usr/local/heccer/tests/specifications/strings/c1c2p2.txt | perl -pe 's/unnamed test/hardcoded_neutral/g'`),
+										   read => (join '', `cat  /usr/local/heccer/tests/specifications/strings/c1c2p2.txt | perl -pe 's/unnamed test/\/hardcoded_neutral/g'`),
 						   timeout => 5,
 						   write => undef,
 						  },

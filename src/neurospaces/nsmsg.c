@@ -638,7 +638,7 @@ static int CinMsg(const char *pcSrcpath, const char *pcDstpath)
 
   int iLen = strlen(pcTarget);
 
-  strcpy(&pcTarget[iLen],"->concen_init");
+  strcpy(&pcTarget[iLen],"->Cin");
 
 
   int iResult = setParameter(phsleDst,"Cin",pcTarget,SETPARA_FIELD);
