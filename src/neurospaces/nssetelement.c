@@ -23,6 +23,18 @@
 //i link parameter list to phsle
 //i
 
+//-----------------------------------------------------------------------------
+/*!
+ *  \fun int NeurospacesSetElement(Element *element, char *field, char *value)
+ *  \param element A pointer to a GENESIS element in the GENESIS namespace.
+ *  \param field A pointer to a string indicating the element field.
+ *  \param value A string with the value to place in the element field.
+ *  \return 0 on error, 1 on success.
+ *  \sa NeurospacesSetField
+ *  
+ *  Depricated, see NeurospacesSetField.
+ */
+//-----------------------------------------------------------------------------
 int NeurospacesSetElement(Element *element, char *field, char *value){
 
    double dValue = atof(value);

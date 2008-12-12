@@ -7,6 +7,13 @@
  *  for communication between the GENESIS SLI and components 
  *  in the Neurospaces projects Model Container and Heccer. 
 */
+
+/*!
+ *  \mainpage Neurospaces GENESIS backward compatability layer.
+ *
+ *  This is developer documentation for the GENESIS 3 backward compatability
+ *  layer. 
+ */
 //-------------------------------------------------------------------
 
 #include "neurospaces_ext.h"
@@ -85,12 +92,6 @@ struct neurospaces_integrator {
 
 
 
-  /*!
-   *  An array of neurospaces symbol references for lookup in the
-   *  GENESIS SLI. 
-   */
-  struct neurospaces_symbol **ppSymbols;  
-                                         
 
 
 
@@ -129,55 +130,6 @@ struct neurospaces_integrator {
 
 
 
-
-
-//-----------------------------------------------------------
-/*!
- *  \struct neurospaces_symbol
- *
- *  A struct for storing data for a neurospaces object
- *  created in the genesis SLI.
- *
- */
-//------------------------------------------------------------
-struct neurospaces_symbol {
-
-
-
-  /*!
-   *   The name of this symbol.
-   */
-  char * pcPathname; 
-
-
-
-
-
-  /*!
-   *   The defined type of this symbol.
-   */
-  int iType; 
-
-
-
-
-
-  /*!
-   *    The serial ID for retrieving the neurospaces instance. 
-   */
-  int iSerial; 
-
-
-  //struct symtab_HSolveListElement *phsle;
-
-
-  /*!
-   *    A pointer to a mapped GENESIS element in the GENESIS SLI.
-   */
-  Element *pgenel; 
-  
-};
-//------- end neurospaces_symbol ----------------------------
 
 
 

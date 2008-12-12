@@ -3,7 +3,8 @@
  *  \file nssetfield.c
  *  \author Mando Rodriguez
  *
- *
+ *  File contains the code for setting element fields for model container
+ *  objects that are referenced in the GENESIS namespace.
 */
 //------------------------------------------------------------------
 #include <stdio.h>
@@ -18,24 +19,13 @@
 
 
 
-/*
- *  \fn int NSSetField(int argc, char **argv)
- */
-int NSSetField(int argc, char **argv)
-{
 
-
-  int i;
-
-
-
-}
 
 
 
 //------------------------------------------------------------------
 /*!
- *  \fn int SetField(struct symtab_HSolveListElement *phsle,char *field,char *value)
+ *  \fun int NeurospacesSetField(struct symtab_HSolveListElement *phsle,char *field,char *value)
  *  \return 0 on error, 1 on success.
  *  \param phsle A pointer to an Hsolve list element.
  *  \param ppist A Pidin stack for searching for child objects.
@@ -60,11 +50,11 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
  
 
 
-  //!
-  //! -The parameter fields "Ik" and "Gk" are solved variables in 
-  //!  Heccer so they don't need a parameter to be set at all, thus they
-  //!  are ignored completely.
-  //!
+  //
+  // -The parameter fields "Ik" and "Gk" are solved variables in 
+  //  Heccer so they don't need a parameter to be set at all, thus they
+  //  are ignored completely.
+  //
   if(!phsle || 
      !strcmp(field,"Ik") || 
      !strcmp(field,"Gk") )
@@ -417,10 +407,10 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
       if(dNumber == 0.0)
 	return 1;
 
-      //!
-      //! A bit dangerous since I'm not making sure that HH_activation
-      //! has been created first. Will safty check it later.
-      //!
+      //
+      // A bit dangerous since I'm not making sure that HH_activation
+      // has been created first. Will safty check it later.
+      //
       struct PidinStack *ppistCopy = PidinStackDuplicate(ppist);
 
       struct symtab_HSolveListElement *phsleGate = 
@@ -445,10 +435,10 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
       if(dNumber == 0.0)
 	return 1;
 
-      //!
-      //! A bit dangerous since I'm not making sure that HH_activation
-      //! has been created first. Will safty check it later.
-      //!
+      //
+      // A bit dangerous since I'm not making sure that HH_activation
+      // has been created first. Will safty check it later.
+      //
       struct PidinStack *ppistCopy = PidinStackDuplicate(ppist);
 
       struct symtab_HSolveListElement *phsleGate = 
@@ -473,10 +463,10 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
       if(dNumber == 0.0)
 	return 1;
 
-      //!
-      //! A bit dangerous since I'm not making sure that HH_activation
-      //! has been created first. Will safty check it later.
-      //!
+      //
+      // A bit dangerous since I'm not making sure that HH_activation
+      // has been created first. Will safty check it later.
+      //
       struct PidinStack *ppistCopy = PidinStackDuplicate(ppist);
 
       struct symtab_HSolveListElement *phsleGate = 
