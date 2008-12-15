@@ -11,8 +11,6 @@
 //-------------------------------------------------------------------
 #include <stdio.h>
 #include "shell_func_ext.h"
-#include "sim_ext.h"
-
 
 
 #include "neurospaces/symbols.h"  
@@ -21,10 +19,7 @@
 #include "neurospaces/pidinstack.h"
 #include "neurospaces/function.h"
 
-
-
-//t includes from our nsgenesis library
-#include "neurospaces/neurospaces_ext.h"
+//t includes from our nsgenesis library"
 #include "neurospaces/nsintegrator.h"
 
 

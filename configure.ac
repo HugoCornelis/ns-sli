@@ -22,6 +22,7 @@ AC_PROG_CPP
 
 AC_PATH_PROGS(PERL, perl perl5)
 
+AC_PATH_PROGS(DOXYGEN,doxygen,["NULL"])
 
 AC_CHECK_HEADERS([ heccer/heccer.h ],[],[
    echo "Error! Heccer header files not found in any standard location."

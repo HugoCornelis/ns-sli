@@ -28,4 +28,6 @@ html-upload: html-upload-prepare
 
 
 doxygen: doxygen.cfg
-	doxygen doxygen.cfg
+	$(DOXYGEN) doxygen.cfg
+
+
