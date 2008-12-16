@@ -1,5 +1,14 @@
 -*- outline -*-
 
+* mtn missing files to be removed
+mtn: warning: missing file 'src/liblist'
+mtn: warning: missing file 'src/loadlib.c'
+mtn: warning: missing file 'src/script/syntax.c'
+mtn: warning: missing file 'src/script/syntax.h'
+mtn: warning: missing file 'src/neurospaces/tmp_neurospaces_struct.h'
+mtn: warning: missing file 'src/neurospaces/tmp_nsintegrator_struct.h'
+mtn: warning: missing file 'src/olf/tmp_olf_struct.h'
+
 * remove script.c script.h from the sources
 
 * remove config.log
