@@ -1,5 +1,4 @@
 Makefile$
-Makefile.in
 .*\@\.[ch]
 ylwrap
 .*\.output$
@@ -19,3 +18,18 @@ dox.tag
 ^html/htdocs/neurospaces_project/ns-sli/
 out
 src/.gdbinit
+src/loadlib\.c
+src/liblist\.c
+src/minloadlib\.c
+src/script/lex\.yy\.c
+src/script/lexical\.c
+src/script/syntax\.c
+src/script/syntax\.h
+src/neurospaces/tmp_neurospaces_struct\.h
+src/neurospaces/tmp_nsintegrator_struct\.h
+src/olf/tmp_olf_struct\.h
+src/liblist
+src/config.h
+config.log
+config.status
+docs/doxygen.tag

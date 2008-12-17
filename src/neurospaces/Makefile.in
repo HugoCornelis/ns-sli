@@ -56,12 +56,12 @@ am_libneurospaces_a_OBJECTS = neurospacesmodel.$(OBJEXT) \
 	nssetfield.$(OBJEXT) nscreate.$(OBJEXT) nscopy.$(OBJEXT) \
 	nsmsg.$(OBJEXT) nscomm.$(OBJEXT) nstabcreate.$(OBJEXT) \
 	nscall.$(OBJEXT) nssetup.$(OBJEXT) nstweak.$(OBJEXT) \
-	nstabfill.$(OBJEXT) nssymboltable.$(OBJEXT) \
-	nsintegratorverbose.$(OBJEXT) heccercreate.$(OBJEXT) \
-	nsreset.$(OBJEXT) nslookup.$(OBJEXT) neurospaces_d@.$(OBJEXT) \
-	neurospaces_g@.$(OBJEXT) neurospaces_l@.$(OBJEXT) \
-	nsintegrator_d@.$(OBJEXT) nsintegrator_g@.$(OBJEXT) \
-	nsintegrator_l@.$(OBJEXT) nsintegratoractor.$(OBJEXT)
+	nstabfill.$(OBJEXT) nsintegratorverbose.$(OBJEXT) \
+	heccercreate.$(OBJEXT) nsreset.$(OBJEXT) nslookup.$(OBJEXT) \
+	neurospaces_d@.$(OBJEXT) neurospaces_g@.$(OBJEXT) \
+	neurospaces_l@.$(OBJEXT) nsintegrator_d@.$(OBJEXT) \
+	nsintegrator_g@.$(OBJEXT) nsintegrator_l@.$(OBJEXT) \
+	nsintegratoractor.$(OBJEXT)
 libneurospaces_a_OBJECTS = $(am_libneurospaces_a_OBJECTS)
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I$(top_builddir)/src
 depcomp = $(SHELL) $(top_srcdir)/depcomp
@@ -92,6 +92,7 @@ CPPFLAGS = @CPPFLAGS@
 CYGPATH_W = @CYGPATH_W@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
+DOXYGEN = @DOXYGEN@
 ECHO_C = @ECHO_C@
 ECHO_N = @ECHO_N@
 ECHO_T = @ECHO_T@
@@ -118,6 +119,7 @@ PACKAGE_STRING = @PACKAGE_STRING@
 PACKAGE_TARNAME = @PACKAGE_TARNAME@
 PACKAGE_VERSION = @PACKAGE_VERSION@
 PATH_SEPARATOR = @PATH_SEPARATOR@
+PERL = @PERL@
 RANLIB = @RANLIB@
 SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
@@ -169,7 +171,7 @@ c2genesisdir = $(top_srcdir)/src/c2genesis
 c2genesis = $(c2genesisdir)/c2genesis
 makestructs = $(c2genesisdir)/makestructs
 makelib = $(c2genesisdir)/makelib
-INCLUDES = -I$(utildir) -I$(shelldir) -I$(simdir) -I$(scriptdir) -I$(olfdir) -I/usr/local/neurospaces/instrumentor 
+INCLUDES = -I$(utildir) -I$(shelldir) -I$(simdir) -I$(scriptdir) -I$(olfdir) -I${prefix}/neurospaces/instrumentor 
 AM_CPPFLAGS = -DPRE_PROTO_TRAVERSAL
 noinst_LIBRARIES = libneurospaces.a
 BUILT_SOURCES = \
@@ -220,7 +222,6 @@ libneurospaces_a_SOURCES = \
 	nssetup.c \
 	nstweak.c \
 	nstabfill.c \
-	nssymboltable.c \
 	nsintegratorverbose.c \
 	heccercreate.c \
 	nsreset.c \
@@ -304,7 +305,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nssetelement.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nssetfield.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nssetup.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nssymboltable.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nstabcreate.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nstabfill.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nstweak.Po@am__quote@

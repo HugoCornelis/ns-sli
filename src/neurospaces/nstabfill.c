@@ -9,10 +9,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "shell_func_ext.h"
-#include "sim_ext.h"
 
 #include "neurospaces/function.h"
-#include "neurospaces/neurospaces_ext.h"
 #include "neurospaces/pidinstack.h"
 
 #include "nsintegrator.h"

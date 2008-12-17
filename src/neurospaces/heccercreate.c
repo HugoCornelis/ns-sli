@@ -7,10 +7,7 @@
  *  instance directly with the Heccer API.
 */
 //-------------------------------------------------------------------
-#include "heccer/heccer.h"
 #include "neurospaces_defs.h"
-#include "neurospaces_ext.h"
-#include "neurospaces_struct.h"
 #include "nsintegrator.h"
 
 #include <stdio.h>

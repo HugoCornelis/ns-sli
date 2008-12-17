@@ -12,10 +12,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "shell_func_ext.h"
-#include "sim_ext.h"
+
 
 #include "neurospaces/function.h"
-#include "neurospaces/neurospaces_ext.h"
 #include "neurospaces/pidinstack.h"
 
 #include "nsintegrator.h"
@@ -107,8 +106,13 @@ int NSCall(int argc, char **argv){
 
 
 //-------------------------------------------------------------
-/*
+/*!
+ *  \fun int nsCallCheck(char *pcCall)
+ *  \param A string with the argument for the call parameter.
+ *  \sa NSCall
  *
+ *  Function is simply a check to see if the sli has parsed out 
+ *  a parameter for a tabulated operation.
  */
 //--------------------------------------------------------------
 int nsCallCheck(char *pcCall){

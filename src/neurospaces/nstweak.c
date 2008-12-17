@@ -8,14 +8,12 @@
 //------------------------------------------------------------------
 #include <stdio.h>
 #include "shell_func_ext.h"
-#include "sim_ext.h"
 #include <string.h>
 #include "nsintegrator.h"
 
 
 
 #include "neurospaces/function.h"
-#include "neurospaces/neurospaces_ext.h"
 #include "neurospaces/pidinstack.h"
 
 
@@ -24,7 +22,7 @@
 
 //-------------------------------------------------------------------
 /*!
- *  \func int NSTweakTau(char *pcName, char *pcField)
+ *  \fun int NSTweakTau(char *pcName, char *pcField)
  *
  *  Performs a manipulation for tau to transform it into an AB 
  *  representation. 

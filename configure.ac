@@ -1,7 +1,7 @@
 
 
 # $Format: "AC_INIT(${package}, ${label}, ${email})"$
-AC_INIT(ns-genesis-SLI, network-2, hugo.cornelis@gmail.com)
+AC_INIT(ns-sli, network-2, hugo.cornelis@gmail.com)
 
 
 
@@ -11,7 +11,7 @@ AC_CONFIG_HEADER(src/config.h)
 
 
 # $Format: "AM_INIT_AUTOMAKE(${package}, ${label})"$
-AM_INIT_AUTOMAKE(ns-genesis-SLI, network-2)
+AM_INIT_AUTOMAKE(ns-sli, network-2)
 
 
 AC_PROG_CC
@@ -20,17 +20,19 @@ AC_PROG_LEX
 AC_PROG_RANLIB
 AC_PROG_CPP
 
+AC_PATH_PROGS(PERL, perl perl5)
 
+AC_PATH_PROGS(DOXYGEN,doxygen,["NULL"])
 
 AC_CHECK_HEADERS([ heccer/heccer.h ],[],[
    echo "Error! Heccer header files not found in any standard location."
    exit -1
 ])
 
-dnl AC_CHECK_HEADERS([ neurospaces/pidinstack.h ],[],[
-dnl   echo "Error! Model Container header files not found in any standard location."
-dnl   exit -1
-dnl ])
+#AC_CHECK_HEADERS([ neurospaces/pidinstack.h ],[],[
+#	echo "Error! Model Container header files not found in any standard location."
+#	exit -1
+#])
 
 
 
