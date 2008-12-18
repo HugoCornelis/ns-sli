@@ -26,7 +26,7 @@
 
 //--------------------------------------------------------------------
 /*!
- *  \fun int NSCall(int argc, char **argv)
+ *  \fn int NSCall(int argc, char **argv)
  *  \param argc Number of strings contained in argv
  *  \param argv An aray of strings to be parsed into calls.
  *  \return 0 on error, 1 on success.
@@ -107,8 +107,8 @@ int NSCall(int argc, char **argv){
 
 //-------------------------------------------------------------
 /*!
- *  \fun int nsCallCheck(char *pcCall)
- *  \param A string with the argument for the call parameter.
+ *  \fn int nsCallCheck(char *pcCall)
+ *  \param pcCall string with the argument for the call parameter.
  *  \sa NSCall
  *
  *  Function is simply a check to see if the sli has parsed out 

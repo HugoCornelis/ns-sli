@@ -17,7 +17,7 @@
 
 //-------------------------------------------------------------------------
 /*!
- * \fun struct symtab_HSolveListElement * NSLookupHSolveListElement(char *pcPath)
+ * \fn struct symtab_HSolveListElement * NSLookupHSolveListElement(char *pcPath)
  * \param pcPath A symbol identifier to look up.
  * \return A pointer to the Element that pcPath points to.
  */

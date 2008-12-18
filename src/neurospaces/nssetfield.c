@@ -23,10 +23,13 @@
 
 //------------------------------------------------------------------
 /*!
- *  \fun int NeurospacesSetField(struct symtab_HSolveListElement *phsle,char *field,char *value)
+ *  \fn int NeurospacesSetField(struct symtab_HSolveListElement *phsle, 
+			struct PidinStack *ppist,
+			char *pcPathname, char *field, char *value)
  *  \return 0 on error, 1 on success.
  *  \param phsle A pointer to an Hsolve list element.
  *  \param ppist A Pidin stack for searching for child objects.
+ *  \param pcPathname A string with the complete pathname of the parent object.
  *  \param field A field value to 
  *  \param value The value to place in the field given in the previous argument.
  *

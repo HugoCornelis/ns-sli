@@ -22,9 +22,9 @@
 
 //-------------------------------------------------------------------
 /*!
- *   \fn int NSCopy(const Element* pelSrcelement, char *pcDstname)
- *   \param pelSrcelement A pointer to the element to be copied.
- *   \param pcDstname A character array with the name for the new element.
+ *   \fn int NSCopy(struct PidinStack *ppistSrc, char *pcDst)
+ *   \param ppistSrc A pointer to the element to be copied.
+ *   \param pcDst A character array with the name for the new element.
  *   \return 0 on error, 1 on success.
  *
  *

@@ -30,9 +30,9 @@ extern double			clock_value[NCLOCKS];
 
 //------------------------------------------------------------------
 /*!
- *  \fn int HeccerCreate(char* idin)
+ *  \fn int HeccerCreate(char* pcContext)
  *  \return -1 on error, 1 on success.
- *  \param idin A char array holding the name for the Heccer to create.
+ *  \param pcContext A char array holding the name for the Heccer to create.
  *  \sa neurospaces_integrator
  *
  *  Creates a Heccer instace and stores is in the global Heccer

@@ -22,7 +22,7 @@
 
 //-------------------------------------------------------------------
 /*!
- *  \fun int NSTweakTau(char *pcName, char *pcField)
+ *  \fn int NSTweakTau(char *pcName, char *pcField)
  *
  *  Performs a manipulation for tau to transform it into an AB 
  *  representation. 

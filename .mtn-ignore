@@ -12,6 +12,9 @@ src/c2genesis/makefunc$
 src/c2genesis/makelib$
 src/c2genesis/makestructs$
 ^docs/html
+^docs/rtf
+^docs/man
+^docs/latex
 dox.tag
 ^html
 ^tests/html

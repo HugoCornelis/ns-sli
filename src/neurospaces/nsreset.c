@@ -1,6 +1,6 @@
 //------------------------------------------------------------------
 /*!
- *  \file heccerreset.c
+ *  \file nsreset.c
  *  \author Mando Rodriguez
  *  
  *  This file contains the function implementations for performing
