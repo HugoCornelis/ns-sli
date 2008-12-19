@@ -3,7 +3,7 @@ scriptdir = $(top_srcdir)/src/script
 utildir = $(top_srcdir)/src/util
 pardir = $(top_srcdir)/src/par
 nsdir = $(top_srcdir)/src/neurospaces
-hierarchy = /usr/local/neurospaces/instrumentor
+hierarchy = ${prefix}/neurospaces/instrumentor
 
 c2genesisdir = $(top_srcdir)/src/c2genesis
 c2genesis = $(c2genesisdir)/c2genesis

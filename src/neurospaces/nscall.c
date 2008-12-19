@@ -12,10 +12,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "shell_func_ext.h"
-#include "sim_ext.h"
+
 
 #include "neurospaces/function.h"
-#include "neurospaces/neurospaces_ext.h"
 #include "neurospaces/pidinstack.h"
 
 #include "nsintegrator.h"
@@ -27,7 +26,7 @@
 
 //--------------------------------------------------------------------
 /*!
- *  \fun int NSCall(int argc, char **argv)
+ *  \fn int NSCall(int argc, char **argv)
  *  \param argc Number of strings contained in argv
  *  \param argv An aray of strings to be parsed into calls.
  *  \return 0 on error, 1 on success.
@@ -107,8 +106,13 @@ int NSCall(int argc, char **argv){
 
 
 //-------------------------------------------------------------
-/*
+/*!
+ *  \fn int nsCallCheck(char *pcCall)
+ *  \param pcCall string with the argument for the call parameter.
+ *  \sa NSCall
  *
+ *  Function is simply a check to see if the sli has parsed out 
+ *  a parameter for a tabulated operation.
  */
 //--------------------------------------------------------------
 int nsCallCheck(char *pcCall){

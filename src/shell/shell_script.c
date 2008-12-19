@@ -97,7 +97,7 @@ int i;
     */
     line[0] = '\0';
     while(EmptyLine(line) && !feof(fp)){
-	fgets(line,SIZE,fp);
+      (void)fgets(line,SIZE,fp);
     }
     /*
     ** skip white space

@@ -9,18 +9,16 @@
 //------------------------------------------------------------------
 #include <stdio.h>
 #include "shell_func_ext.h"
-#include "sim_ext.h"
 #include <string.h>
 #include "nsintegrator.h"
 
 #include "neurospaces/function.h"
-#include "neurospaces/neurospaces_ext.h"
 #include "neurospaces/pidinstack.h"
 
 
 //------------------------------------------------------------------
 /*!
- *  \fun int NSSetupAlpha( char *pcName, char *pcField, char **pcArgs, int iArgc)
+ *  \fn int NSSetupAlpha( char *pcName, char *pcField, char **pcArgs, int iArgc)
  *  \param pcName The element name to set up values for.
  *  \param pcField The field (X, Y, or Z) which determines where to place the values.
  *  \param pcArgs An array of strings which contain the values to be parsed.

@@ -84,6 +84,7 @@ CPPFLAGS = @CPPFLAGS@
 CYGPATH_W = @CYGPATH_W@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
+DOXYGEN = @DOXYGEN@
 ECHO_C = @ECHO_C@
 ECHO_N = @ECHO_N@
 ECHO_T = @ECHO_T@
@@ -110,6 +111,7 @@ PACKAGE_STRING = @PACKAGE_STRING@
 PACKAGE_TARNAME = @PACKAGE_TARNAME@
 PACKAGE_VERSION = @PACKAGE_VERSION@
 PATH_SEPARATOR = @PATH_SEPARATOR@
+PERL = @PERL@
 RANLIB = @RANLIB@
 SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
@@ -157,25 +159,21 @@ scriptdir = $(top_srcdir)/src/script
 shelldir = $(top_srcdir)/src/shell
 utildir = $(top_srcdir)/src/util
 INCLUDES = -I$(sysdir) -I$(scriptdir) -I$(shelldir) -I$(utildir) -I.
-noinst_LIBRARIES = libscript.a
+noinst_LIBRARIES = libscript.a 
 BUILT_SOURCES = \
 	syntax.c \
-	syntax.h 
+	syntax.h \
+	lex.yy.c
 
 CLEANFILES = \
 	syntax.c \
-	syntax.h 
+	syntax.h \
+	lexical.c \
+	lex.yy.c
 
 AM_LFLAGS = -l
 AM_YFLAGS = -dv
-noinst_HEADERS = \
-	parse.h \
-	printoptusage.h \
-	result.h \
-	ss_func_ext.h \
-	symtab.h \
-	syntax.h
-
+noinst_HEADERS = 
 libscript_a_SOURCES = \
 	eval.c \
 	parse.c \
@@ -443,6 +441,22 @@ uninstall-am: uninstall-info-am
 	mostlyclean-generic pdf pdf-am ps ps-am tags uninstall \
 	uninstall-am uninstall-info-am
 
+	parse.h \
+	printoptusage.h \
+	result.h \
+	ss_func_ext.h \
+	symtab.h \
+	syntax.h
+
+#
+# Target for generating the lexical analyzer code. 
+# Automake cannot compile it due to a dependency in the lexical code 
+# insertion, so the lex.yy.c file must be generated beforehand.
+# 
+#
+lex.yy.c: lexical.l
+	echo Using \"`which $(LEX)` $(AM_LFLAGS)\" for lexical parsing
+	$(LEX) $(AM_LFLAGS) lexical.l
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:

@@ -32,7 +32,7 @@ extern double			clock_value[NCLOCKS];
 //-------------------------------------------------------------
 /*!
  *   \fn int NeurospacesIntegratorActor(struct nsintegrator_type *pnsintegrator_type, Action *action)
- *   \param nsintegrator_type A data member passed by the GENESIS SLI.
+ *   \param pnsintegrator_type A data member passed by the GENESIS SLI.
  *   \param action An action call passed from the GENESIS SLI.
  *   \return 1 is call was ok, -1 on error.
  *   \sa neurosapces_integrator   

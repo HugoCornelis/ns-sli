@@ -98,7 +98,7 @@ my $test
 						  {
 						   numerical_compare => 1,
 						   description => "Are gates tabulated correctly, delayed rectifier potassium gates ?",,
-						   read => (join '', `cat  /usr/local/heccer/tests/specifications/strings/table-kdr.txt | perl -pe 's/unnamed test/hardcoded_neutral/g'`),
+						   read => (join '', `cat  /usr/local/heccer/tests/specifications/strings/table-kdr.txt | perl -pe 's/unnamed test/\/hardcoded_neutral/g'`),
 						   timeout => 5,
 						   write => undef,
 						  },

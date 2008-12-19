@@ -11,10 +11,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "shell_func_ext.h"
-#include "sim_ext.h"
+
 
 #include "neurospaces/function.h"
-#include "neurospaces/neurospaces_ext.h"
 #include "neurospaces/pidinstack.h"
 
 #include "nsintegrator.h"
@@ -24,7 +23,7 @@
 
 //-------------------------------------------------------------------
 /*!
- *  \fun int isTable(char *pcName)
+ *  \fn int isTable(char *pcName)
  *  \param pcName A string with a Name token parsed from GENESIS
  *  \return 1 if pcName is part of a table, 0 if not. 
  *
@@ -53,7 +52,7 @@ int isTable(char *pcField){
 
 //------------------------------------------------------------------
 /*
- *  \fun int NSTabCreate(int argc, char **argv)
+ *  \fn int NSTabCreate(int argc, char **argv)
  *  \param argc Number of tokens in argv
  *  \param argv Array of pointers to chars
  *  \return 0 on error, 1 on success.

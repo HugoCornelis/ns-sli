@@ -10,10 +10,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "shell_func_ext.h"
-#include "sim_ext.h"
+
 
 #include "neurospaces/function.h"
-#include "neurospaces/neurospaces_ext.h"
 #include "neurospaces/pidinstack.h"
 
 #include "nsintegrator.h"
@@ -56,7 +55,6 @@ struct GateState GateStateTableInitializers[] =
 
   {"ka/HH_inactivation", "0.7474853827"},
   {"ka/HH_activation", "0.08371356085"},
-
   {"kc/HH_activation","0.063531859768213905"},
   {"kc/HH_concentration","0.0099009900989999993"},
   {"h1/HH_activation","0.03540844397"},
@@ -123,7 +121,7 @@ int setStateInit(struct PidinStack *ppist){
 
 //----------------------------------------------------------------------------
 /*!
- *  \fun int setParameter(struct symtab_HSolveListElement *phsle,
+ *  \fn int setParameter(struct symtab_HSolveListElement *phsle,
  *		 char *pcField, char *pcValue,int iFlag)
  *  
  */
@@ -231,8 +229,8 @@ int setParameter(struct symtab_HSolveListElement *phsle,
 
 //-------------------------------------------------------------
 /*!
- *  \fun int setParameterNumber((struct symtab_HSolveListElement *phsle,
-		 char *pcField, double dNumber)
+ *  \fn int setParameterNumber(struct symtab_HSolveListElement *phsle, 
+                               char *pcField, double dNumber)
  *
  *   Function to to set a number without the overhead of 
  *   reconverting it back into a string for setParameter().
@@ -282,7 +280,7 @@ int setParameterNumber(struct symtab_HSolveListElement *phsle,
 
 //----------------------------------------------------------------------------
 /*!
- *   \fn static char * mapParameter(const char *pcfield)
+ *   \fn static char * mapParameter(char *pcfield)
  *   \param pcfield A pchar containing a field label from the GENESIS SLI.
  *   
  *   Maps a GENESIS field to the appropriate Neurospaces field parameter

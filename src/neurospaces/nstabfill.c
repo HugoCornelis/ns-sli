@@ -9,10 +9,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "shell_func_ext.h"
-#include "sim_ext.h"
 
 #include "neurospaces/function.h"
-#include "neurospaces/neurospaces_ext.h"
 #include "neurospaces/pidinstack.h"
 
 #include "nsintegrator.h"
@@ -20,7 +18,7 @@
 
 
 /*!
- *  \fun int NSTabFill(char *pcName, char *pcField, char *pcNumTabEntries)
+ *  \fn int NSTabFill(char *pcName, char *pcField, char *pcNumTabEntries)
  *  \param pcName String to a tabchannel name to create.
  *  \param pcField The field (X,Y,or Z) to modify for the table.
  *  \param pcNumTabEntries The number of table entries to create.

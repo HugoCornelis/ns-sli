@@ -3,7 +3,7 @@ simdir = $(top_srcdir)/src/sim
 scriptdir = $(top_srcdir)/src/script
 utildir = $(top_srcdir)/src/util
 nsdir = $(top_srcdir)/src/neurospaces
-hierarchy = /usr/local/neurospaces/instrumentor
+hierarchy = ${prefix}/neurospaces/instrumentor
 
 c2genesisdir = $(top_srcdir)/src/c2genesis
 c2genesis = $(c2genesisdir)/c2genesis
@@ -11,7 +11,7 @@ makestructs = $(c2genesisdir)/makestructs
 makelib = $(c2genesisdir)/makelib
 
 
-INCLUDES = -I$(utildir) -I$(shelldir) -I$(simdir) -I$(scriptdir) -I$(nsdir) -I$(hierarchy)  -I/usr/local/neurospaces/instrumentor 
+INCLUDES = -I$(utildir) -I$(shelldir) -I$(simdir) -I$(scriptdir) -I$(nsdir) -I$(hierarchy)  -I${prefix}/neurospaces/instrumentor 
 
 AM_CPPFLAGS = -DPRE_PROTO_TRAVERSAL
 

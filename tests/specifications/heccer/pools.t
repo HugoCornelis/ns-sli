@@ -29,7 +29,7 @@ my $test
 						  {
 						   numerical_compare => 1,
 						   description => "Is a pool integrated correctly, one compartment, single pool case ?",,
-						   read => (join '', `cat  /usr/local/heccer/tests/specifications/strings/pool1.txt | perl -pe 's/unnamed test/hardcoded_neutral/g'`),
+						   read => (join '', `cat  /usr/local/heccer/tests/specifications/strings/pool1.txt | perl -pe 's/unnamed test/\/hardcoded_neutral/g'`),
 						   timeout => 5,
 						   write => undef,
 						  },
@@ -53,7 +53,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Is a pool integrated correctly, two compartments, two pools case ?",,
-						   read => (join '', `cat  /usr/local/heccer/tests/specifications/strings/pool2.txt | perl -pe 's/unnamed test/hardcoded_neutral/g'`),
+						   read => (join '', `cat  /usr/local/heccer/tests/specifications/strings/pool2.txt | perl -pe 's/unnamed test/\/hardcoded_neutral/g'`),
 						   timeout => 5,
 						   write => undef,
 						  },
@@ -74,7 +74,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Is a pool integrated correctly, one compartment, one pool with a feedback loop ?",,
-						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/pool1-feedback1.txt | perl -pe 's/unnamed test/hardcoded_neutral/g' | perl -pe 's/149/3000/g'`),
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/pool1-feedback1.txt | perl -pe 's/unnamed test/\/hardcoded_neutral/g' | perl -pe 's/149/3000/g'`),
 						   timeout => 5,
 						   write => undef,
 						  },

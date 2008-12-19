@@ -11,8 +11,6 @@
 //-------------------------------------------------------------------
 #include <stdio.h>
 #include "shell_func_ext.h"
-#include "sim_ext.h"
-
 
 
 #include "neurospaces/symbols.h"  
@@ -21,10 +19,7 @@
 #include "neurospaces/pidinstack.h"
 #include "neurospaces/function.h"
 
-
-
-//t includes from our nsgenesis library
-#include "neurospaces/neurospaces_ext.h"
+//t includes from our nsgenesis library"
 #include "neurospaces/nsintegrator.h"
 
 
@@ -46,8 +41,8 @@ static struct symtab_IdentifierIndex * PidinQueueLookupTarget(const char *pcSrcp
 //-------------------------------------------------------------------
 /*!
  *   \fn int NSmsg(const char *pcSrcpath, const char *pcDstpath, const char *pcTypename)
- *   \param pcSrcPath The identifier for the Parent HSolve element.
- *   \param pcDstPath The identidier for the Child HSolve element.
+ *   \param pcSrcpath The identifier for the Parent HSolve element.
+ *   \param pcDstpath The identidier for the Child HSolve element.
  *   \param pcTypename The "message" type to pass to from Parent to child.
  *   \return 0 on error, 1 on success.
  *
@@ -120,9 +115,9 @@ int NSmsg(const char *pcSrcpath, const char *pcDstpath, const char *pcTypename){
 
 //---------------------------------------------------------------
 /*!
- *  \fun int AxialMsg(const char *pcSrcpath, const char *pcDstpath)
+ *  \fn int AxialMsg(const char *pcSrcpath, const char *pcDstpath)
  *  \param pcSrcpath The identifier for the Parent HSolve element.
- *  \param pcDstPath The identidier for the Child HSolve element.  
+ *  \param pcDstpath The identidier for the Child HSolve element.  
  *  \return 0 on error, 1 on success.
  *
  *  This is done by setting the parameter pcSrcPath as "PARENT" and 
@@ -214,9 +209,9 @@ static int AxialMsg(const char *pcSrcpath, const char *pcDstpath)
 
 //----------------------------------------------------------------------------
 /*!
- *  \fun int ChannelMsg(const char *pcSrcpath, const char *pcTgtpath)
+ *  \fn int ChannelMsg(const char *pcSrcpath, const char *pcDstpath)
  *  \param pcSrcpath The identifier for the Parent HSolve element.
- *  \param pcDstPath The identidier for the Child HSolve element.  
+ *  \param pcDstpath The identidier for the Child HSolve element.  
  *  \return 0 on error, 1 on success.
 
  *  Creates a message between channels by way of bindables and bindings. 
@@ -286,9 +281,9 @@ static int ChannelMsg(const char *pcSrcpath, const char *pcDstpath)
 
 //----------------------------------------------------------------------------
 /*!
- *  \fun static int CalciumPoolMsg(const char *pcSrcpath, const char *pcDstpath
+ *  \fn static int CalciumPoolMsg(const char *pcSrcpath, const char *pcDstpath)
  *  \param pcSrcpath The identifier for the Parent HSolve element.
- *  \param pcDstPath The identidier for the Child HSolve element.  
+ *  \param pcDstpath The identidier for the Child HSolve element.  
  *  \return 0 on error, 1 on success.
  *
  *  Creates a message for a calcium pool via bindings and bindables.
@@ -397,9 +392,9 @@ static int CalciumPoolMsg(const char *pcSrcpath, const char *pcDstpath)
 
 //----------------------------------------------------------------------------
 /*!
- *  \fun static int VoltageMsg(const char *pcSrcpath, const char *pcDstpath)
+ *  \fn static int VoltageMsg(const char *pcSrcpath, const char *pcDstpath)
  *  \param pcSrcpath The identifier for the Parent HSolve element.
- *  \param pcDstPath The identidier for the Child HSolve element.  
+ *  \param pcDstpath The identidier for the Child HSolve element.  
  *  \return 0 on error, 1 on success.
  *
  *  Creates A voltage message by way of a "Vm" binding for input.
@@ -470,9 +465,9 @@ static int VoltageMsg(const char *pcSrcpath, const char *pcDstpath)
 
 //----------------------------------------------------------------------------
 /*!
- *  \fun static int ConcenMsg(const char *pcSrcpath, const char *pcDstpath)
+ *  \fn static int ConcenMsg(const char *pcSrcpath, const char *pcDstpath)
  *  \param pcSrcpath The identifier for the Parent HSolve element.
- *  \param pcDstPath The identidier for the Child HSolve element.  
+ *  \param pcDstpath The identidier for the Child HSolve element.  
  *  \return 0 on error, 1 on success.
  *
  *  Creates a concentration message by linking to the "concen" parameter
@@ -582,9 +577,9 @@ static int ConcenMsg(const char *pcSrcpath, const char *pcDstpath)
 
 //-------------------------------------------------------------------------
 /*!
- *  \fun static int CinMsg(const char *pcSrcpath, const char *pcDstpath)
+ *  \fn static int CinMsg(const char *pcSrcpath, const char *pcDstpath)
  *  \param pcSrcpath The identifier for the Parent HSolve element.
- *  \param pcDstPath The identidier for the Child HSolve element.  
+ *  \param pcDstpath The identidier for the Child HSolve element.  
  *  \return 0 on error, 1 on success.
  *
  *  Creates a Cin message via two parameter setting. A reference to a local
@@ -638,7 +633,7 @@ static int CinMsg(const char *pcSrcpath, const char *pcDstpath)
 
   int iLen = strlen(pcTarget);
 
-  strcpy(&pcTarget[iLen],"->concen_init");
+  strcpy(&pcTarget[iLen],"->Cin");
 
 
   int iResult = setParameter(phsleDst,"Cin",pcTarget,SETPARA_FIELD);
@@ -661,9 +656,9 @@ static int CinMsg(const char *pcSrcpath, const char *pcDstpath)
 
 //-------------------------------------------------------------------------
 /*!
- *
+ *  \fn static int EkMsg(const char *pcSrcpath, const char *pcDstpath)
  *  \param pcSrcpath The identifier for the Parent HSolve element.
- *  \param pcDstPath The identidier for the Child HSolve element.  
+ *  \param pcDstpath The identidier for the Child HSolve element.  
  *  \return 0 on error, 1 on success.
  */
 //-------------------------------------------------------------------------

@@ -10,7 +10,7 @@
 //-------------------------------------------------------------------
 #include <stdio.h>
 #include "shell_func_ext.h"
-#include "sim_ext.h"
+
 
  
 #include "neurospaces/symbols.h"  
@@ -19,7 +19,6 @@
 
 
 //t includes from our nsgenesis library
-#include "neurospaces/neurospaces_ext.h"
 #include "neurospaces/nsintegrator.h"
 
 
@@ -161,7 +160,7 @@ int NSCreate( char* name,  char* pcParent, char* pcType){
 
 //--------------------------------------------------------------------
 /*!
- *  \fun static struct symtab_HSolveListElement * GenChannelCalloc()
+ *  \fn static struct symtab_HSolveListElement * GenChannelCalloc()
  *  \return A pointer to a newly allocated Tab channel object.
  *
  *  
@@ -193,11 +192,12 @@ static struct symtab_HSolveListElement * GenChannelCalloc(){
 
 //------------------------------------------------------------------
 /*!
- *  \fn int CreateHHGate(struct symtab_HSolveListElement phsleChannel, 
+ *  \fn struct symtab_HSolveListElemen *CreateHHGate(
+                 struct symtab_HSolveListElement *phsleChannel, 
 		 char *pcName)
  *  \param phsleChannel Pointer to the Channel to attach gates.
- *  \param pcName
- *
+ *  \param pcName A name for the HH gate.
+ *  \return A pointer to an HSolveListElement which had been appended to phsleChannel
  */
 //------------------------------------------------------------------
 struct symtab_HSolveListElement * CreateHHGate(
@@ -268,10 +268,12 @@ struct symtab_HSolveListElement * CreateHHGate(
 
 //------------------------------------------------------------------
 /*!
- *  \fn int CreateConcGate(struct symtab_HSolveListElement phsleChannel, 
+ *  \fn struct symtab_HSolveListElement *CreateConcGate(
+                 struct symtab_HSolveListElement *phsleChannel, 
 		 char *pcName)
  *  \param phsleChannel Pointer to the Channel to attach gates.
- *  \param pcName
+ *  \param pcName  A name for the concentration gate.
+ *  \return A pointer to an HSolveListElement which had been appended to phsleChannel
  *
  */
 //------------------------------------------------------------------
@@ -341,7 +343,7 @@ struct symtab_HSolveListElement * CreateConcGate(
 
 //------------------------------------------------------------------
 /*
- * \fun static struct symtab_GateKinetic *CreateGateKinetic(char *pcDirection)
+ * \fn static struct symtab_GateKinetic *CreateGateKinetic(char *pcDirection)
  */
 //------------------------------------------------------------------
 static struct symtab_GateKinetic *CreateGateKinetic(char *pcDirection){
@@ -379,7 +381,7 @@ static struct symtab_GateKinetic *CreateGateKinetic(char *pcDirection){
 
 //------------------------------------------------------------------
 /*
- * \fun static struct symtab_GateKinetic *CreateConcGateKinetic(char *pcDirection)
+ * \fn static struct symtab_GateKinetic *CreateConcGateKinetic(char *pcDirection)
  */
 //------------------------------------------------------------------
 static struct symtab_ConcentrationGateKinetic *CreateConcGateKinetic(char *pcDirection){

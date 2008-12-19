@@ -2,13 +2,19 @@ SUBDIRS = src
 
 
 EXTRA_DIST = \
-	dox.cfg \
+	doxygen.cfg \
 	docs	\
 	tests.config \
 	tests
 
 TESTS = $(top_srcdir)/tests/neurospaces_harness
 
+
+CLEANFILES = \
+	$(top_srcdir)/docs/doxygen.tag
+
+clean-local:
+	rm -rf $(top_srcdir)/docs/html
 
 html-upload-prepare:
 	rm -fr html/htdocs/neurospaces_project/ns-sli
@@ -20,7 +26,8 @@ html-upload-prepare:
 html-upload: html-upload-prepare
 	scp -pr html/htdocs/* hcornelis,neurospaces@web.sourceforge.net:/home/groups/n/ne/neurospaces/htdocs/
 
-doxygen:
 
-docs: doxygen html-upload-prepare
+doxygen: doxygen.cfg
+	$(DOXYGEN) doxygen.cfg
+
 
