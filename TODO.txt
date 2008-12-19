@@ -1,5 +1,7 @@
 -*- outline -*-
 
+* Check the developer TODO in heccer/pool-feedback.t
+
 * mtn missing files to be removed
 mtn: warning: missing file 'src/liblist'
 mtn: warning: missing file 'src/loadlib.c'
