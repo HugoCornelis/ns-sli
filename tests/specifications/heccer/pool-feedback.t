@@ -8,9 +8,11 @@ use strict;
 
 local $/;
 
+my $root_neutral = "hardcoded_neutral";
+
 #t the substitution string should be 's/^.*iSmallTableSize.*3000.*\$/Heccer Options (iSmallTableSize) : (149)/g', with an additional backslash before the dollar sign that marks the end of string.
 
-my $text_expected =  `cat  /usr/local/heccer/tests/specifications/strings/pool1-feedback1.txt | perl -pe 's/unnamed test/\/hardcoded_neutral/g' | perl -pe 's/^.*iSmallTableSize.*3000.*$/Heccer Options (iSmallTableSize) : (149)/g'`;
+my $text_expected =  `cat  /usr/local/heccer/tests/specifications/strings/pool1-feedback1.txt | perl -pe 's/unnamed test/$root_neutral/g' | perl -pe 's/^.*iSmallTableSize.*3000.*$/Heccer Options (iSmallTableSize) : (149)/g'`;
 
 my $test
     = {

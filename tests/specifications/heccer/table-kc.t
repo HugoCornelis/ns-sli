@@ -8,25 +8,11 @@ use strict;
 
 local $/;
 
+my $root_neutral = "hardcoded_neutral";
 
 my $test
     = {
        command_definitions => [
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 			       {
 				arguments => [
@@ -121,15 +107,6 @@ my $test
 
 
 
-
-
-
-
-
-
-
-
-
 			       {
 				arguments => [
 					         "$::config->{core_directory}/tests/scripts/heccer/table-kc.g",
@@ -138,7 +115,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Are gates tabulated correctly, simple potassium gates ?",,
-						   read => (join '', `cat  /usr/local/heccer/tests/specifications/strings/table-kc.txt | perl -pe 's/unnamed test/\\/hardcoded_neutral/g'`),
+						   read => (join '', `cat  /usr/local/heccer/tests/specifications/strings/table-kc.txt | perl -pe 's/unnamed test/$root_neutral/g'`),
 						   timeout => 5,
 						   write => undef,
 						  },
@@ -154,7 +131,7 @@ my $test
 
 			      ],
        description => "Gate tabulation",
-       name => 'tables.t',
+       name => 'table-kc.t',
       };
 
 
