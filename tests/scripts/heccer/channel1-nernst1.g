@@ -78,10 +78,6 @@ addmsg /hardcoded_neutral/c/p /hardcoded_neutral/c/n CIN Ca
 addmsg /hardcoded_neutral/c/n /hardcoded_neutral/c/cat EK E
 
 
-
-
-
-
 silent 1
 
 reset
