@@ -186,7 +186,7 @@ void DisplayHeader()
 
 
     // $Format: "    static char *pcVersion=\"${package}-${label}\";"$
-    static char *pcVersion="ns-genesis-SLI-network-2";
+    static char *pcVersion="ns-sli-python-2";
 
 
 printf("==========================================================================\n");

@@ -16,10 +16,9 @@ my $test
 					
 						  {
 						   # $Format: "description => \"Does the version information match with ${package}-${label} ?\","$
-description => "Does the version information match with ns-genesis-SLI-network-2 ?",
+description => "Does the version information match with ns-sli-python-2 ?",
 						   # $Format: "read => \"${package}-${label}\","$
-						   write=> 'exit',
-						   read => "ns-genesis-SLI-network-2",
+read => "ns-sli-python-2",
 						   
 						  },
 						 ],
