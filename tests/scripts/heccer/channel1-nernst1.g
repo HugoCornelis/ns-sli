@@ -169,6 +169,3 @@ step 99999
 call neurospaces_integrator NSINTEGRATOR_DUMP
 
 
-
-//call model_container NEUROSPACES_QUERY
-

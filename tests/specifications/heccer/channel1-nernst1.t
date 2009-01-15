@@ -49,8 +49,6 @@ my $test
 
 
 
-
-
 			      ],
        description => "Channel and Nernst equation integration",
        name => 'channel1-nernst1.t',

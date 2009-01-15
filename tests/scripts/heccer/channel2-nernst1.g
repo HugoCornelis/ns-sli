@@ -1,6 +1,10 @@
 setclock 0 1e-11
-create compartment c
-setfield c \
+
+create neutral hardcoded_neutral
+
+create compartment /hardcoded_neutral/c
+
+setfield /hardcoded_neutral/c \
 	Cm 5.755329373e-12 \
 	Em -0.08 \
 	initVm -0.068 \
@@ -8,16 +12,16 @@ setfield c \
 	Rm 8.548598272e9 \
 	inject 1e-9
 
-create tabchannel c/cap
-setfield c/cap \
+create tabchannel /hardcoded_neutral/c/cap
+setfield /hardcoded_neutral/c/cap \
 	Ek 0.1470214874 \
-	Gbar 1.57921e-08 \
+	Gbar   1.75467e-09 \
 	Ik 0.0 \
 	Gk 0.0 \
 	Xpower 1.0 \
 	Ypower 1.0 \
 	Zpower 0.0
-setupalpha c/cap \
+setupalpha /hardcoded_neutral/c/cap \
 	X \
 	8.50e3 \
 	0.0 \
@@ -31,7 +35,7 @@ setupalpha c/cap \
 	14.5e-3 \
 	-size 3000 \
 	-range -0.1 0.05
-setupalpha c/cap \
+setupalpha /hardcoded_neutral/c/cap \
 	Y \
 	0.0015e3 \
 	0.0 \
@@ -45,10 +49,10 @@ setupalpha c/cap \
 	-8.0e-3 \
 	-size 3000 \
 	-range -0.1 0.05
-addmsg c c/cap VOLTAGE Vm
-addmsg c/cap c CHANNEL Gk Ek
-create tabchannel c/cat
-setfield c/cat \
+addmsg /hardcoded_neutral/c /hardcoded_neutral/c/cap VOLTAGE Vm
+addmsg /hardcoded_neutral/c/cap /hardcoded_neutral/c CHANNEL Gk Ek
+create tabchannel /hardcoded_neutral/c/cat
+setfield /hardcoded_neutral/c/cat \
 	Ek 0.1470214874 \
 	Gbar 1.754672296e-09 \
 	Ik 0.0 \
@@ -56,7 +60,7 @@ setfield c/cat \
 	Xpower 1.0 \
 	Ypower 1.0 \
 	Zpower 0.0
-setupalpha c/cat \
+setupalpha /hardcoded_neutral/c/cat \
 	X \
 	2.6e3 \
 	0.0 \
@@ -70,7 +74,7 @@ setupalpha c/cat \
 	4e-3 \
 	-size 3000 \
 	-range -0.1 0.05
-setupalpha c/cat \
+setupalpha /hardcoded_neutral/c/cat \
 	Y \
 	0.0025e3 \
 	0.0 \
@@ -84,78 +88,121 @@ setupalpha c/cat \
 	-10.0e-3 \
 	-size 3000 \
 	-range -0.1 0.05
-addmsg c c/cat VOLTAGE Vm
-addmsg c/cat c CHANNEL Gk Ek
-create Ca_concen c/p
-setfield c/p \
+addmsg /hardcoded_neutral/c /hardcoded_neutral/c/cat VOLTAGE Vm
+addmsg /hardcoded_neutral/c/cat /hardcoded_neutral/c CHANNEL Gk Ek
+create Ca_concen /hardcoded_neutral/c/p
+setfield /hardcoded_neutral/c/p \
 	tau 0.00010 \
-	B 9412391936 \
+	B 7.579027046e+10  \
 	Ca_base 4e-05 \
-	thick 2e-07
-addmsg c/cap c/p I_Ca Ik
-addmsg c/cat c/p I_Ca Ik
+	thick 2e-07 \
+	concen_init 0.000040
+
+//old val 9412391936
+
+addmsg /hardcoded_neutral/c/cap /hardcoded_neutral/c/p I_Ca Ik
+addmsg /hardcoded_neutral/c/cat /hardcoded_neutral/c/p I_Ca Ik
 
 float CCaO = 2.4000 		//external Ca as in normal slice Ringer
 float CCaI = 0.000040		//internal Ca in mM
-create nernst c/n
-setfield c/n Cin {CCaI} Cout {CCaO} valency {2} \
+create nernst /hardcoded_neutral/c/n
+setfield /hardcoded_neutral/c/n Cin {CCaI} Cout {CCaO} valency {2} \
      scale {1.0} T {37}
-addmsg c/p c/n CIN Ca
-addmsg c/n c/cap EK E
-addmsg c/n c/cat EK E
+addmsg /hardcoded_neutral/c/p /hardcoded_neutral/c/n CIN Ca
+addmsg /hardcoded_neutral/c/n /hardcoded_neutral/c/cap EK E
+addmsg /hardcoded_neutral/c/n /hardcoded_neutral/c/cat EK E
 
-create hsolve h
-setmethod h 11
-setfield h \
-	calcmode 0 \
-	chanmode 4 \
-	path /c
-call h SETUP
+
+
+
+silent 1
+
 reset
 
-function showfields
+set_nsintegrator_verbose_level 2
 
-	showfield h \
-		chip[7] \
-		chip[8] \
-		givals[8] \
-		givals[7] \
-		givals[6] \
-		chip[4] \
-		chip[5] \
-		givals[4] \
-		givals[3] \
-		givals[5] \
-		vm[0]
 
-// 	showfield c/cap X
-// 	showfield c/cap Y
-// 	showfield c/cap Ek
+setfield neurospaces_integrator heccer_dump_selection { HECCER_DUMP_VM_COMPARTMENT_MATRIX + \
+				    			HECCER_DUMP_VM_COMPARTMENT_DATA + \
+				     			HECCER_DUMP_VM_COMPARTMENT_OPERATIONS + \
+				     			HECCER_DUMP_VM_CHANNEL_POOL_FLUXES + \
+				     			HECCER_DUMP_VM_MECHANISM_DATA + \
+				     			HECCER_DUMP_VM_MECHANISM_OPERATIONS + \
+				     			HECCER_DUMP_VM_SUMMARY }
 
-// 	showfield c/cap Ik
-// 	showfield c/cap Gk
+setfield neurospaces_integrator heccer_reporting_granularity 100000
 
-// 	showfield c/cat X Y Ek
 
-// 	showfield c/cat Ik Gk
+echo Initiated
 
-// 	showfield c/n Cin E
+call neurospaces_integrator NSINTEGRATOR_DUMP
 
-// 	showfield c Vm
-end
+echo -------
+echo Iteration 0
 
-echo {findsolvefield /h c/cap X}
-echo {findsolvefield /h c/cap Y}
-echo {findsolvefield /h c/cap Ek}
+step 0
 
-echo {findsolvefield /h c/cap Ik}
-echo {findsolvefield /h c/cap Gk}
 
-echo {findsolvefield /h c/cat X}
-echo {findsolvefield /h c/cat Y}
+echo -------
+echo Iteration 100000
 
-echo {findsolvefield /h c/cat Ik}
-echo {findsolvefield /h c/cat Gk}
-echo {findsolvefield /h c/cat Ek}
+step 100000
 
-echo {findsolvefield /h c Vm}
+
+
+echo -------
+echo Iteration 200000
+
+step 100000
+
+
+echo -------
+echo Iteration 300000
+
+step 100000
+
+
+echo -------
+echo Iteration 400000
+
+step 100000
+
+
+echo -------
+echo Iteration 500000
+
+step 100000
+
+
+echo -------
+echo Iteration 600000
+
+step 100000
+
+
+echo -------
+echo Iteration 700000
+
+step 100000
+
+
+echo -------
+echo Iteration 800000
+
+step 100000
+
+
+echo -------
+echo Iteration 900000
+
+step 100000
+
+
+echo -------
+echo Final Iteration
+
+step 99999
+
+call neurospaces_integrator NSINTEGRATOR_DUMP
+
+
