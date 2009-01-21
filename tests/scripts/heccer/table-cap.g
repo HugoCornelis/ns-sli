@@ -26,7 +26,9 @@ setfield /hardcoded_neutral/c/cap \
 	Xpower 1.0 \
 	Ypower 1.0 \
 	Zpower 0.0 \
-	X_init 0.001391094927
+	X_init 0.001391094927 \
+	Y_init 0.9868968318
+
 
 setupalpha /hardcoded_neutral/c/cap \
 	X \

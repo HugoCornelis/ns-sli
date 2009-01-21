@@ -88,6 +88,21 @@ int NSCreate( char* name,  char* pcParent, char* pcType){
      iResult = NSINTEGRATOR_NERNST;
 
    }
+   else if(!strcmp("synchan",pcType)){
+
+     iResult = NSINTEGRATOR_SYNCHAN;
+
+   }
+   else if(!strcmp("asc_file",pcType)){
+
+     iResult = NSINTEGRATOR_ASCFILE;
+
+   }
+   else if(!strcmp("asc_out",pcType)){
+
+     iResult = NSINTEGRATOR_ASCOUT;
+
+   }
    else{
 
      phsleChild = (struct symtab_HSolveListElement*)CellCalloc();

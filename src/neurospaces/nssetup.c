@@ -80,7 +80,7 @@ int NSSetupAlpha( char *pcName, char *pcField, char **pcArgs,
 
 
     //- Here we set the state_init parameter. 
-    setStateInit(ppistForward);
+    //setStateInit(ppistForward);
   
 
     struct symtab_HSolveListElement *phsleForward = 
@@ -189,7 +189,7 @@ int NSSetupAlpha( char *pcName, char *pcField, char **pcArgs,
 
 
     //- Here we set the state_init parameter. 
-    setStateInit(ppistForward);
+    //setStateInit(ppistForward);
   
 
     struct symtab_HSolveListElement *phsleForward = 
@@ -300,7 +300,7 @@ int NSSetupAlpha( char *pcName, char *pcField, char **pcArgs,
 
 
     //- Here we set the state_init parameter. 
-    setStateInit(ppistForward);
+    //setStateInit(ppistForward);
   
 
 

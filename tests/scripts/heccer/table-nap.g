@@ -21,7 +21,9 @@ setfield /hardcoded_neutral/c/nap \
 	Gk 0.0 \
 	Xpower 3.0 \
 	Ypower 0.0 \
-	Zpower 0.0
+	Zpower 0.0 \
+	X_init 0.7612305421
+
 //     /* Persistent Na current, eq#2b */
 //     make_chan Purk_NaP {ENa} {GNa} 3 200.0e3 0.0 1.0 -0.018 -16.0e-3  \
 //         25.00e3 0.0 1.0 0.058 8.0e-3 0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0  \

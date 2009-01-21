@@ -15,26 +15,17 @@ my $test
     = {
        command_definitions => [
 
-
-
-
-
-
-
-
-
-
-
 		       {
 				arguments => [
 					         "$::config->{core_directory}/tests/scripts/heccer/channel2-nernst1.g",
+					
 					     ],
 				command => 'src/nsgenesis',
 				command_tests => [
 						  {
 						   numerical_compare => 1,
 						    description => "Is the solved nernst potential applied for two channel reversal potentials ?",
-						   read => (join '', `cat  /usr/local/heccer/tests/specifications/strings/channel2-nernst1.txt | perl -pe 's/unnamed test/$root_neutral/g' |  perl -pe 's/^.*INTERNALNERNST.*\\\n//g'`),
+						   read => (join '', `cat  /usr/local/heccer/tests/specifications/strings/pool1-nernst.txt | perl -pe 's/unnamed test/hardcoded_neutral/g'`),
 						   timeout => 5,
 						   write => undef,
 						  },

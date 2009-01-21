@@ -1,4 +1,4 @@
-setclock 0 1e-11
+setclock 0 1e-06
 
 create neutral hardcoded_neutral
 
@@ -15,12 +15,15 @@ setfield /hardcoded_neutral/c \
 create tabchannel /hardcoded_neutral/c/cap
 setfield /hardcoded_neutral/c/cap \
 	Ek 0.1470214874 \
-	Gbar   1.75467e-09 \
+	Gbar 1.75467e-09 \
 	Ik 0.0 \
 	Gk 0.0 \
 	Xpower 1.0 \
 	Ypower 1.0 \
-	Zpower 0.0
+	Zpower 0.0 \
+	X_init 0.038918706451336625 \
+	Y_init 0.08260212813
+
 setupalpha /hardcoded_neutral/c/cap \
 	X \
 	8.50e3 \
@@ -54,12 +57,16 @@ addmsg /hardcoded_neutral/c/cap /hardcoded_neutral/c CHANNEL Gk Ek
 create tabchannel /hardcoded_neutral/c/cat
 setfield /hardcoded_neutral/c/cat \
 	Ek 0.1470214874 \
-	Gbar 1.754672296e-09 \
+	Gbar  1.57921e-08 \
 	Ik 0.0 \
 	Gk 0.0 \
 	Xpower 1.0 \
 	Ypower 1.0 \
-	Zpower 0.0
+	Zpower 0.0 \
+	X_init 0.001391094927 \
+	Y_init 0.9868968318
+
+
 setupalpha /hardcoded_neutral/c/cat \
 	X \
 	2.6e3 \

@@ -19,7 +19,9 @@ setfield /hardcoded_neutral/c/cat \
 	Gk 0.0 \
 	Xpower 1.0 \
 	Ypower 1.0 \
-	Zpower 0.0
+	Zpower 0.0 \
+	Y_init 0.082602128127539254 \
+	X_init 0.038918706451336625
 
 setupalpha /hardcoded_neutral/c/cat \
 	X \

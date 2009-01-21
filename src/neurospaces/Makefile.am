@@ -94,6 +94,7 @@ libneurospaces_a_SOURCES = \
 	heccercreate.c \
 	nsreset.c \
 	nslookup.c \
+	nsasc.c \
 	neurospaces_d@.c \
 	neurospaces_g@.c \
 	neurospaces_l@.c \

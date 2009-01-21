@@ -20,7 +20,9 @@ setfield /hardcoded_neutral/c/naf \
 	Gk 0.0 \
 	Xpower 3.0 \
 	Ypower 1.0 \
-	Zpower 0.0
+	Zpower 0.0 \
+	Y_init 0.26397776926502026 \
+	X_init 0.007840644937141521
 
 
 
