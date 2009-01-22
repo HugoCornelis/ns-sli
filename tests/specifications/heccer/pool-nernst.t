@@ -13,12 +13,6 @@ my $test
        command_definitions => [
 
 
-
-
-
-
-
-
 			       {
 				arguments => [
 					         "$::config->{core_directory}/tests/scripts/heccer/pool1-nernst.g",

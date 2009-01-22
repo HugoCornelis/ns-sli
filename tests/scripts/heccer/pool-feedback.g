@@ -20,7 +20,10 @@ setfield /hardcoded_neutral/c2/kc \
 	Gk 0.0 \
 	Xpower 1.0 \
 	Ypower 0.0 \
-	Zpower 2.0
+	Zpower 2.0 \
+	X_init 0.063531859768213905 \
+	Z_init 0.0099009900989999993
+
 // 1 7.5e3 0.0 0.0 0.0 1.0e12 0.110e3 0.0  \
 //         0.0 -0.035 14.9e-3 0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 2  \
 //         0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
@@ -74,7 +77,9 @@ setfield /hardcoded_neutral/c2/cat \
 	Gk 0.0 \
 	Xpower 1.0 \
 	Ypower 1.0 \
-	Zpower 0.0
+	Zpower 0.0 \
+	Y_init 0.082602128127539254 \
+	X_init 0.038918706451336625
 setupalpha /hardcoded_neutral/c2/cat \
 	X \
 	2.6e3 \

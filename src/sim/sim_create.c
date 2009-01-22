@@ -408,11 +408,14 @@ int                   i,j = 0;
 
     int iInModelContainer = 0;
 
-    if(strcmp("neutral",type) == 0 ||
-       strcmp("tabchannel",type) == 0 ||
-       strcmp("compartment",type) == 0 ||
-       strcmp("Ca_concen",type) == 0 ||
-       strcmp("nernst",type) == 0)
+    if(!strcmp("neutral",type) ||
+       !strcmp("tabchannel",type) ||
+       !strcmp("compartment",type) ||
+       !strcmp("Ca_concen",type) ||
+       !strcmp("nernst",type) ||
+       !strcmp("synchan",type) ||
+       !strcmp("asc_file",type) ||
+       !strcmp("asc_out",type) )
       iInModelContainer = 1;
 
     //-
@@ -490,7 +493,15 @@ int                   i,j = 0;
 
 
 
-    if ((new_element = Create(type,name,parent_element,parent_name,&action,index,iInModelContainer))) {
+    if ((new_element = 
+	 Create(type,
+		name,
+		parent_element,
+		parent_name,
+		&action,
+		index,
+		iInModelContainer))) 
+      {
       
 
       //hack----------------------------------------------------------

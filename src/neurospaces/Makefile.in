@@ -58,10 +58,10 @@ am_libneurospaces_a_OBJECTS = neurospacesmodel.$(OBJEXT) \
 	nscall.$(OBJEXT) nssetup.$(OBJEXT) nstweak.$(OBJEXT) \
 	nstabfill.$(OBJEXT) nsintegratorverbose.$(OBJEXT) \
 	heccercreate.$(OBJEXT) nsreset.$(OBJEXT) nslookup.$(OBJEXT) \
-	neurospaces_d@.$(OBJEXT) neurospaces_g@.$(OBJEXT) \
-	neurospaces_l@.$(OBJEXT) nsintegrator_d@.$(OBJEXT) \
-	nsintegrator_g@.$(OBJEXT) nsintegrator_l@.$(OBJEXT) \
-	nsintegratoractor.$(OBJEXT)
+	nsasc.$(OBJEXT) neurospaces_d@.$(OBJEXT) \
+	neurospaces_g@.$(OBJEXT) neurospaces_l@.$(OBJEXT) \
+	nsintegrator_d@.$(OBJEXT) nsintegrator_g@.$(OBJEXT) \
+	nsintegrator_l@.$(OBJEXT) nsintegratoractor.$(OBJEXT)
 libneurospaces_a_OBJECTS = $(am_libneurospaces_a_OBJECTS)
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I$(top_builddir)/src
 depcomp = $(SHELL) $(top_srcdir)/depcomp
@@ -226,6 +226,7 @@ libneurospaces_a_SOURCES = \
 	heccercreate.c \
 	nsreset.c \
 	nslookup.c \
+	nsasc.c \
 	neurospaces_d@.c \
 	neurospaces_g@.c \
 	neurospaces_l@.c \
@@ -289,6 +290,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/neurospacesfield.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/neurospacesmodel.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/neurospacesquery.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nsasc.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nscall.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nscomm.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nscopy.Po@am__quote@
