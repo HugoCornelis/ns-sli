@@ -42,9 +42,9 @@ setfield ^ \
 	leave_open 1
 //addmsg /h a1 SAVE vm[0]
 call a1 RESET
-resched
+//resched
 
-reset
+//reset
 
 //function showfields
 
@@ -67,7 +67,7 @@ step 90
 
 step 900
 
-// step 1000
+step 1000
 
 step 9000
 

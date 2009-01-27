@@ -79,7 +79,6 @@ int NSmsg(const char *pcSrcpath, const char *pcDstpath, const char *pcTypename){
   }
   else if (strcmp(pcTypename, "VOLTAGE") == 0){
 
-
     return VoltageMsg(pcSrcpath,pcDstpath);
 
   }
@@ -530,36 +529,6 @@ static int ConcenMsg(const char *pcSrcpath, const char *pcDstpath)
   struct symtab_InputOutput *pio =  CreateInputOutput(pcTarget,INPUT_TYPE_INPUT);
 
 
-  //!
-  //! this code will tack on 'I' to the end of the idin queue and 
-  //! flag it as a binding.
-  //!
-  //! ----------------------------------------------------------------
-/*   struct PidinStack *ppist = PidinStackParse(pcTarget); */
-
-/*   struct symtab_IdentifierIndex *idinTarget = PidinStackToPidinQueue(ppist); */
-  
-  
-/*   //! create 'I' */
-/*   struct symtab_IdentifierIndex *idinI = IdinNewFromChars("concen"); */
-
-
-/*   idinI->pidinRoot = idinTarget; */
-/*   idinI->iFlags = FLAG_IDENTINDEX_FIELD; */
-
-/*   struct symtab_IdentifierIndex *idin; */
-/*   for(idin = idinTarget; idin->pidinNext ;idin = idin->pidinNext); */
-  
-/*   idin->pidinNext = idinI; */
-/*   struct symtab_InputOutput *pio = InputOutputNewForType(INPUT_TYPE_INPUT); */
-
-/*   if(!pio) */
-/*   { */
-/*     return NULL; */
-/*   } */
-
-
-/*   pio->pidinField = idinTarget; */
 
   //! ---------------- end inserted code ------------------------------
 

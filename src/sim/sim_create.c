@@ -185,29 +185,46 @@ int iInModelContainer;
 
     //hack-------------------------------------------------------------------
     
+    int iModelContainerResult;
     
-    if(iInModelContainer)
-      {
+    if(iInModelContainer==1)
+    {
 
-	int iModelContainerResult = NSCreate(name,pcParent,object_name);
+      iModelContainerResult = NSCreate(name,pcParent,object_name);
 
-	if(iModelContainerResult == -1){
+      if(iModelContainerResult == -1){
 
-	  return NULL;
+	return NULL;
 
        }
+
 
 	if(iModelContainerResult == NSINTEGRATOR_COMPARTMENT ||
 	   iModelContainerResult == NSINTEGRATOR_TABCHANNEL ||
 	   iModelContainerResult == NSINTEGRATOR_POOL ||
-	   iModelContainerResult == NSINTEGRATOR_NERNST){
+	   iModelContainerResult == NSINTEGRATOR_NERNST ||
+	   iModelContainerResult == NSINTEGRATOR_SYNCHAN){
 
 	  return (Element*)-1;
 
 	}
 
 	
+    }
+    else if(iInModelContainer==2)
+    {
+
+
+      iModelContainerResult = NSAscCreate(name,pcParent);
+
+      if(iModelContainerResult==NSINTEGRATOR_ASCFILE ||
+	 iModelContainerResult==NSINTEGRATOR_ASCOUT){
+
+	return (Element*)-1;
+
       }
+    }
+    
 
     //hack------------------------------------------------------------------
 
@@ -413,10 +430,11 @@ int                   i,j = 0;
        !strcmp("compartment",type) ||
        !strcmp("Ca_concen",type) ||
        !strcmp("nernst",type) ||
-       !strcmp("synchan",type) ||
-       !strcmp("asc_file",type) ||
-       !strcmp("asc_out",type) )
+       !strcmp("synchan",type) )
       iInModelContainer = 1;
+    else if( !strcmp("asc_file",type) ||
+             !strcmp("asc_out",type) )
+      iInModelContainer = 2;
 
     //-
     //- here is the check for the parent element.

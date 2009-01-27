@@ -121,6 +121,23 @@ int NSGenesisInitialize(){
      return -1;
 
    }
+
+   //t
+   //t Initializes the heccer asc_files for output.
+   //
+   pnsintegrator->iAscFiles = 0;
+
+   pnsintegrator->ppAscFiles = 
+     (struct asc_file**)calloc(MAX_ASCFILES,sizeof(struct asc_file*));
+
+
+   if( !pnsintegrator->ppAscFiles ){
+
+     fprintf(stderr,"Error initializing Ascii object storage\n");
+     return -1;
+
+   }
+
     
    
      char	*argvar2[5];  

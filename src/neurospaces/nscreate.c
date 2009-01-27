@@ -32,11 +32,15 @@ struct symtab_HSolveListElement * CreateHHGate(
 		 char *pcName);
 static struct symtab_ConcentrationGateKinetic *CreateConcGateKinetic(char *pcDirection);
 static struct symtab_HSolveListElement * NernstCalloc();
-
+static struct symtab_HSolveListElement * SynChannelCalloc();
 
 //--------------------------------------------------------------------
-/*
- *
+/*!
+ *  \fn int NSCreate( char* name,  char* pcParent, char* pcType)
+ *  \param name
+ *  \param pcParent
+ *  \param pcType
+ *  \return 0 on error, 1 on success.
  */
 //--------------------------------------------------------------------
 int NSCreate( char* name,  char* pcParent, char* pcType){
@@ -89,6 +93,8 @@ int NSCreate( char* name,  char* pcParent, char* pcType){
 
    }
    else if(!strcmp("synchan",pcType)){
+
+     phsleChild = (struct symtab_HSolveListElement*)SynChannelCalloc();
 
      iResult = NSINTEGRATOR_SYNCHAN;
 
@@ -201,6 +207,34 @@ static struct symtab_HSolveListElement * GenChannelCalloc(){
 
 
 
+
+
+
+//--------------------------------------------------------------------
+/*!
+ *  \fn static struct symtab_HSolveListElement * SynChannelCalloc()
+ *  \return A pointer to a newly allocated channel object.
+ *
+ *  
+ */
+//--------------------------------------------------------------------
+static struct symtab_HSolveListElement * SynChannelCalloc(){
+
+
+  struct symtab_HSolveListElement *phsleChannel = 
+    (struct symtab_HSolveListElement*)ChannelCalloc();
+
+
+  setParameter(phsleChannel,"CHANNEL_TYPE","ChannelSynchan",0);
+  
+
+  struct symtab_IdentifierIndex *pidinChannel;
+
+
+  return phsleChannel;
+
+
+}
 
 
 

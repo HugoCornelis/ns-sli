@@ -52,7 +52,7 @@
 
 
 #define MAX_HECCERS 100
-#define MAX_NSSYMBOLS 200
+#define MAX_ASCFILES 200
 
 
 
@@ -129,9 +129,64 @@ struct neurospaces_integrator {
 
 
   
+  /*!
+   *  Storage for ascii heccer obejects.
+   */
+  struct asc_file **ppAscFiles;
+
+  /*!
+   *  Keeps the current number of ascii objects for heccer to dump.
+   */
+  int iAscFiles;
+
 };
 //------ end neurospaces_integrator -------------------------------
 
+
+
+
+//-----------------------------------------------------------------
+/*!
+ *  struct asc_out
+ *  
+ *  
+ */
+//-----------------------------------------------------------------
+struct asc_file{
+
+  /*!
+   * asc object name.
+   */
+  char *pcName;
+
+  /*!
+   *  Stores the output location of the ascii output.
+   */
+  char *pcFilename;
+
+
+  /*!
+   * Open in append mode or not.
+   */
+  int iAppend; 
+
+
+  /*!
+   * Flush output or not. 
+   */
+  int iFlush;
+
+  
+  /*!
+   * Flag to leave file handle open or close it.
+   */
+  int iLeaveOpen;
+
+
+
+};
+
+//------ end asc_out ----------------------------------------------
 
 
 
