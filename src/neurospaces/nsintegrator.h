@@ -231,6 +231,10 @@ int set_nsintegrator_verbose_level(int iLevel);
 int do_set_nsintegrator_verbose_level(argc,argv);
 
 
+//-- Defined in nsasc.c --
+int NSSetAscField(char *pcPathname, char *pcField, char *pcValue);
+
+
 //- -- Defined in nscall.c --
 
 #endif

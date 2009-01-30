@@ -207,12 +207,12 @@ int		empty_ok = 0;
     } else {
 	pathname = ".";
 
-
-
-
-
     }
     
+
+    // fprintf(stdout,"pathname=%s, field = %s\n",pathname,optargv[2]);
+
+
     //t
     //t -building an element list for NS assuming there are no errors.
     //t -We assume that there are no wildcards in the pathname 
@@ -237,14 +237,29 @@ int		empty_ok = 0;
       = PidinStackLookupTopSymbol(ppist);
 
     if (phsle)
-      {
+    {
 	elist->element[elist->nelements] = ppist;
 
 	elist->flags[elist->nelements] = ELIST_FLAG_NEUROSPACES;
 
 	elist->nelements++;
 
-      }
+    }
+    else if( !strcmp(optargv[2],"append") || 
+	     !strcmp(optargv[2],"filename") || 
+	     !strcmp(optargv[2],"flush") ||
+	     !strcmp(optargv[2],"leave_open"))
+    {
+
+      //- set a flag for parsing the asc_file fields
+
+      elist->flags[elist->nelements] = ELIST_FLAG_ASC;
+
+      elist->nelements++;
+
+    }
+
+    
 
     Element *pel = GetElement(pathname);
 
@@ -321,7 +336,7 @@ int		empty_ok = 0;
 	  //hack --- insert neurospaces support -------------------------
 
 	  if (list->flags[i] == ELIST_FLAG_NEUROSPACES)
-	    {
+	  {
 	      struct PidinStack *ppist = (struct PidinStack *)list->element[i];
 
 	      struct symtab_HSolveListElement *phsle
@@ -339,8 +354,23 @@ int		empty_ok = 0;
 		}
 	      continue;
 		  
-	    }
+	  }
+	  else if(list->flags[i] == ELIST_FLAG_ASC)
+	  {
 
+	    //- These fields are only found in the asc_file object so 
+	    //- for now it's safe if we filter out a potential asc_file
+	    //- set command via the field.
+	    //-
+	    //- here we check to see if an asc object is in the nsintegrator
+	    int iAscResult;
+
+	    iAscResult = NSSetAscField(pathname,field,value);
+	    
+	    continue;
+
+
+	  }
 	  //hack ----- end insert --------------------------------------------
 
 
@@ -474,6 +504,7 @@ int		empty_ok = 0;
     /*
     ** done with the list
     */
+
     FreeElementList(list);
     free(action.argv);
     OK();

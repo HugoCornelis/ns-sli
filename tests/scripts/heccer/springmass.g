@@ -35,13 +35,13 @@ addmsg /hardcoded_neutral/c2/s /hardcoded_neutral/c2/s ACTIVATION z
 //call h SETUP
 
 create asc_file /a1
-setfield ^ \
+setfield /a1 \
 	append 0 \
 	filename "/tmp/a1" \
 	flush 1 \
 	leave_open 1
 //addmsg /h a1 SAVE vm[0]
-call a1 RESET
+//call a1 RESET
 //resched
 
 //reset

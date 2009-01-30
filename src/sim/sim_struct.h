@@ -335,6 +335,7 @@ struct projection_parm_type {
 //t
 
 #define ELIST_FLAG_NEUROSPACES 1
+#define ELIST_FLAG_ASC 2
 
 typedef struct element_list_type {
     int 					size;

@@ -103,6 +103,11 @@ int NSmsg(const char *pcSrcpath, const char *pcDstpath, const char *pcTypename){
     return EkMsg(pcSrcpath,pcDstpath);
 
   }
+  else if(strcmp(pcTypename,"ACTIVATION") == 0){
+
+    return 1;
+
+  }
 
 
 
