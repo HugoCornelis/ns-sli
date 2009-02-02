@@ -44,7 +44,7 @@ setfield /a1 \
 //call a1 RESET
 //resched
 
-//reset
+reset
 
 //function showfields
 

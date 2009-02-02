@@ -183,6 +183,10 @@ struct asc_file{
   int iLeaveOpen;
 
 
+  /*!
+   * An output generator object for heccer to use during execution. 
+   */
+  struct OutputGenerator *pogAsc;
 
 };
 

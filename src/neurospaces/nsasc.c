@@ -182,3 +182,69 @@ struct asc_file * getAscFile(char *pcName)
   return NULL;
 
 }
+
+
+
+//---------------------------------------------------------
+/*!
+ *  \fn int NSAscReset(char *pcName)
+ *  \param pcName The name of the asc_file object to reset.
+ *  \return -1 on error, 1 on success.
+ */
+//---------------------------------------------------------
+int NSAscReset(char *pcName)
+{
+
+
+  struct asc_file *pasc = getAscFile(pcName);
+
+  if(!pasc)
+  {
+    
+    fprintf(stdout,"Error: asc_file object %s not found.\n",pcName);
+    fprintf(stdout,"%s","Reset could not be performed.\n");
+
+    return -1;
+
+  }
+
+  
+
+  //-
+  //- If the output generator is not already allocated then we 
+  //- allocate it here.
+  //-
+  if(!pasc->pogAsc)
+  {
+
+    pasc->pogAsc = OutputGeneratorNew(pasc->pcFilename);
+
+    if(!pasc->pogAsc)
+    {
+
+      fprintf(stdout,
+	      "Error: Could not create file %s for asc_object %s.\n",
+	      pasc->pcFilename,
+	      pasc->pcName);
+
+      return -1;
+
+    }
+
+  }
+
+
+  if(OutputGeneratorInitiate(pasc->pogAsc) == -1)
+  {
+
+    fprintf(stdout,
+	    "Error: Cound open file \"%s\" for write in asc_file %s\n",
+	    pasc->pcFilename,
+	    pasc->pcName);
+
+    return -1;
+
+  }
+
+  return 1;
+}
