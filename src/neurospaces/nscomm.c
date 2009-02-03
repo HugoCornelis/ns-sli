@@ -362,7 +362,8 @@ static char * mapParameter(char *pcfield){
     //!
     pcresult = "Erev";
 
-  } else if(!strcmp(pcfield,"Gbar")){
+  } else if(!strcmp(pcfield,"Gbar") || 
+	    !strcmp(pcfield,"gmax")){
 
     //!
     //! maps to a channel
@@ -384,6 +385,18 @@ static char * mapParameter(char *pcfield){
   {
     
     pcresult = "TAU";
+
+  }
+  else if(!strcmp(pcfield,"tau1"))
+  {
+    
+    pcresult = "TAU1";
+
+  }
+  else if(!strcmp(pcfield,"tau2"))
+  {
+    
+    pcresult = "TAU2";
 
   }
   else if(!strcmp(pcfield,"thick"))
@@ -590,6 +603,7 @@ struct symtab_HSolveListElement * lookupGate(char *pcName, char *pcField)
     PidinStackPushString(ppist,pcAorB);
 
   }
+
 
   return ppist;
 

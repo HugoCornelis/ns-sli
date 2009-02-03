@@ -225,14 +225,85 @@ static struct symtab_HSolveListElement * SynChannelCalloc(){
     (struct symtab_HSolveListElement*)ChannelCalloc();
 
 
-  setParameter(phsleChannel,"CHANNEL_TYPE","ChannelSynchan",0);
+  struct symtab_Equation *peq = EquationCalloc();
   
 
-  //struct symtab_IdentifierIndex *pidinChannel;
+
+  struct symtab_IdentifierIndex *pidinEq = 
+    IdinNewFromChars("eq2");
+
+  if(!pidinEq)
+    return NULL;
+
+
+  SymbolSetName(peq,pidinEq);
+
+
+  SymbolAddChild(phsleChannel,peq);
+
+  
+  struct symtab_Attachment *patta = AttachmentCalloc();
+
+  AttachmentSetType(patta, TYPE_ATTACHMENT_INCOMING);
+
+  AttachmentSetType(patta,"null data"); 
+
+
+  struct symtab_IdentifierIndex *pidinAct = 
+    IdinNewFromChars("synapse");
+
+  if(!pidinAct)
+    return NULL;
+
+  SymbolSetName(patta,pidinAct);
+
+
+  SymbolAddChild(phsleChannel,patta); 
+
+
+  //-
+  //- 
+  //- 
+
+/*   struct PidinStack *ppistZ = PidinStackParse("..->z"); */
+/*   struct symtab_IdentifierIndex *pidinZ = PidinStackToPidinQueue(ppistZ); */
+  
+/*   struct symtab_Parameters *pparZ =  */
+/*     ParameterNewFromPidinQueue("activation",pidinZ,TYPE_PARA_FIELD);  */
+
+
+
+
+  struct PidinStack *ppistTau2 = PidinStackParse("..->TAU2");
+  struct symtab_IdentifierIndex *pidinTau2 = PidinStackToPidinQueue(ppistTau2);
+  
+  struct symtab_Parameters *pparTau2 = 
+    ParameterNewFromPidinQueue("TAU2",pidinTau2,TYPE_PARA_FIELD); 
+
+
+  
+  struct PidinStack *ppistTau1 = PidinStackParse("..->TAU1");
+  struct symtab_IdentifierIndex *pidinTau1 = PidinStackToPidinQueue(ppistTau1);
+  
+  struct symtab_Parameters *pparTau1 = 
+    ParameterNewFromPidinQueue("TAU1",pidinTau1,TYPE_PARA_FIELD); 
+
+
+  //  pparZ->pparFirst = pparZ;
+  //pparZ->pparNext = pparTau1;
+
+  pparTau1->pparFirst = pparTau1;
+  pparTau1->pparNext = pparTau2;
+
+  pparTau2->pparFirst = pparTau1;
+  pparTau2->pparNext = NULL;
+
+
+  SymbolAssignParameters(peq,pparTau1);
+
 
 
   return phsleChannel;
-
 
 }
 
