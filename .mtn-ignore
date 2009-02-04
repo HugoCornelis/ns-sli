@@ -34,5 +34,4 @@ src/olf/tmp_olf_struct\.h
 src/liblist
 src/config.h
 config.log
-config.status
 docs/doxygen.tag
