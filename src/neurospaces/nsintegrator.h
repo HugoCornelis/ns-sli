@@ -18,7 +18,10 @@
 
 #include "neurospaces_ext.h"
 #include "heccer/heccer.h"
+#include "heccer/output.h"
 #include "nsintegrator_struct.h"
+#include "ascfile_struct.h"
+
 
 #ifndef NSINTEGRATOR_H
 #define NSINTEGRATOR_H
@@ -129,15 +132,6 @@ struct neurospaces_integrator {
 
 
   
-  /*!
-   *  Storage for ascii heccer obejects.
-   */
-  struct asc_file **ppAscFiles;
-
-  /*!
-   *  Keeps the current number of ascii objects for heccer to dump.
-   */
-  int iAscFiles;
 
 };
 //------ end neurospaces_integrator -------------------------------

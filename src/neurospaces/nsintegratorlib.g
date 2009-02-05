@@ -71,6 +71,9 @@ object	 nsintegrator  nsintegrator_type  NeurospacesIntegratorActor	genesis3 \
 	-description	"Neurospaces Integration"
 					
 
+
+
+
 addfunc		set_nsintegrator_verbose_level			do_set_nsintegrator_verbose_level		int
 
 

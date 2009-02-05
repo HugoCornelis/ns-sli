@@ -245,19 +245,6 @@ int		empty_ok = 0;
 	elist->nelements++;
 
     }
-    else if( !strcmp(optargv[2],"append") || 
-	     !strcmp(optargv[2],"filename") || 
-	     !strcmp(optargv[2],"flush") ||
-	     !strcmp(optargv[2],"leave_open"))
-    {
-
-      //- set a flag for parsing the asc_file fields
-
-      elist->flags[elist->nelements] = ELIST_FLAG_ASC;
-
-      elist->nelements++;
-
-    }
 
     
 
@@ -355,22 +342,7 @@ int		empty_ok = 0;
 	      continue;
 		  
 	  }
-	  else if(list->flags[i] == ELIST_FLAG_ASC)
-	  {
 
-	    //- These fields are only found in the asc_file object so 
-	    //- for now it's safe if we filter out a potential asc_file
-	    //- set command via the field.
-	    //-
-	    //- here we check to see if an asc object is in the nsintegrator
-	    int iAscResult;
-
-	    iAscResult = NSSetAscField(pathname,field,value);
-	    
-	    continue;
-
-
-	  }
 	  //hack ----- end insert --------------------------------------------
 
 

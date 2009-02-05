@@ -246,7 +246,7 @@ static struct symtab_HSolveListElement * SynChannelCalloc(){
 
   AttachmentSetType(patta, TYPE_ATTACHMENT_INCOMING);
 
-  AttachmentSetType(patta,"null data"); 
+  AttachmentSetDataType(patta,"null data"); 
 
 
   struct symtab_IdentifierIndex *pidinAct = 

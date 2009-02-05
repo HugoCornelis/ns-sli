@@ -58,10 +58,12 @@ am_libneurospaces_a_OBJECTS = neurospacesmodel.$(OBJEXT) \
 	nscall.$(OBJEXT) nssetup.$(OBJEXT) nstweak.$(OBJEXT) \
 	nstabfill.$(OBJEXT) nsintegratorverbose.$(OBJEXT) \
 	heccercreate.$(OBJEXT) nsreset.$(OBJEXT) nslookup.$(OBJEXT) \
-	nsasc.$(OBJEXT) neurospaces_d@.$(OBJEXT) \
-	neurospaces_g@.$(OBJEXT) neurospaces_l@.$(OBJEXT) \
-	nsintegrator_d@.$(OBJEXT) nsintegrator_g@.$(OBJEXT) \
-	nsintegrator_l@.$(OBJEXT) nsintegratoractor.$(OBJEXT)
+	nsasc.$(OBJEXT) ascfileactor.$(OBJEXT) \
+	neurospaces_d@.$(OBJEXT) neurospaces_g@.$(OBJEXT) \
+	neurospaces_l@.$(OBJEXT) nsintegrator_d@.$(OBJEXT) \
+	nsintegrator_g@.$(OBJEXT) nsintegrator_l@.$(OBJEXT) \
+	ascfile_d@.$(OBJEXT) ascfile_g@.$(OBJEXT) ascfile_l@.$(OBJEXT) \
+	nsintegratoractor.$(OBJEXT)
 libneurospaces_a_OBJECTS = $(am_libneurospaces_a_OBJECTS)
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I$(top_builddir)/src
 depcomp = $(SHELL) $(top_srcdir)/depcomp
@@ -182,7 +184,11 @@ BUILT_SOURCES = \
 	nsintegrator_d@.c \
 	nsintegrator_g@.c \
 	nsintegrator_g@.h \
-	nsintegrator_l@.c
+	nsintegrator_l@.c \
+	ascfile_d@.c \
+	ascfile_g@.c \
+	ascfile_g@.h \
+	ascfile_l@.c 
 
 CLEANFILES = \
 	neurospaces_d@.c \
@@ -194,7 +200,12 @@ CLEANFILES = \
 	nsintegrator_g@.c \
 	nsintegrator_g@.h \
 	nsintegrator_l@.c \
-	tmp_nsintegrator_struct.h
+	tmp_nsintegrator_struct.h \
+	ascfile_d@.c \
+	ascfile_g@.c \
+	ascfile_g@.h \
+	ascfile_l@.c \
+	tmp_ascfile_struct.h 
 
 noinst_HEADERS = \
 	neurospaces_defs.h \
@@ -204,7 +215,8 @@ noinst_HEADERS = \
 	neurospaces_struct.h \
 	neurospacessupport.h \
 	nsintegrator.h \
-	nsintegrator_struct.h 
+	nsintegrator_struct.h \
+	ascfile_struct.h 
 
 libneurospaces_a_SOURCES = \
 	neurospacesmodel.c \
@@ -227,12 +239,17 @@ libneurospaces_a_SOURCES = \
 	nsreset.c \
 	nslookup.c \
 	nsasc.c \
+	ascfileactor.c \
 	neurospaces_d@.c \
 	neurospaces_g@.c \
 	neurospaces_l@.c \
 	nsintegrator_d@.c \
 	nsintegrator_g@.c \
 	nsintegrator_l@.c \
+	ascfile_d@.c \
+	ascfile_g@.c \
+	ascfile_g@.h \
+	ascfile_l@.c \
 	nsintegratoractor.c
 
 all: $(BUILT_SOURCES)
@@ -283,6 +300,10 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ascfile_d@.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ascfile_g@.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ascfile_l@.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ascfileactor.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/heccercreate.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/neurospaces_d@.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/neurospaces_g@.Po@am__quote@
@@ -513,6 +534,16 @@ nsintegrator_g@.c:
 
 nsintegrator_l@.c:
 	$(makelib) nsintegrator -o nsintegrator_l@.c
+
+ascfile_d@.c:
+	cpp -P ascfile_struct.h tmp_ascfile_struct.h -I../script -I../util -I../sim -I../shell -I/usr/local/heccer -DPRE_PROTO_TRAVERSAL
+	$(makestructs) tmp_ascfile_struct.h ascfile -I nsintegrator.h -NI -o ascfile_d@.c
+
+ascfile_g@.c:
+	$(c2genesis) ascfilelib.g nsintegrator.h ascfile
+
+ascfile_l@.c:
+	$(makelib) ascfile -o ascfile_l@.c
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:

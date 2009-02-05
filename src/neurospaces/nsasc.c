@@ -39,44 +39,44 @@ static struct asc_file * AscCalloc(char *pcName)
  *  \fn void NSAscCreate()
  *  \return -1 on error, 0 on success.
  */
-int NSAscCreate(char *pcName, char *pcParent)
-{
+/* int NSAscCreate(char *pcName, char *pcParent) */
+/* { */
 
-  char *pc;
+/*   char *pc; */
 
-  struct nsintegrator_type *pelnsintegrator
-    = (struct nsintegrator_type *)GetElement("/neurospaces_integrator");
-
-  
-  if(!pelnsintegrator)
-    return -1;
-
-  struct neurospaces_integrator *pnsintegrator
-    = pelnsintegrator->pnsintegrator;
-
-  if(!pnsintegrator)
-    return -1;
+/*   struct nsintegrator_type *pelnsintegrator */
+/*     = (struct nsintegrator_type *)GetElement("/neurospaces_integrator"); */
 
   
-  char pcPathName[1024];
-  bzero(pcPathName,1024);
+/*   if(!pelnsintegrator) */
+/*     return -1; */
 
-  int iLen = strlen(pcParent);
+/*   struct neurospaces_integrator *pnsintegrator */
+/*     = pelnsintegrator->pnsintegrator; */
 
-  sprintf(pcPathName,"%s",pcParent,iLen);
-  sprintf(&pcPathName[iLen],"%s",pcName,strlen(pcName));
+/*   if(!pnsintegrator) */
+/*     return -1; */
+
+  
+/*   char pcPathName[1024]; */
+/*   bzero(pcPathName,1024); */
+
+/*   int iLen = strlen(pcParent); */
+
+/*   sprintf(pcPathName,"%s",pcParent,iLen); */
+/*   sprintf(&pcPathName[iLen],"%s",pcName,strlen(pcName)); */
 
 
-  struct asc_file *pAscFile = AscCalloc(pcPathName);
+/*   struct asc_file *pAscFile = AscCalloc(pcPathName); */
 
 
-  pnsintegrator->ppAscFiles[pnsintegrator->iAscFiles++] =
-    pAscFile;
+/*   pnsintegrator->ppAscFiles[pnsintegrator->iAscFiles++] = */
+/*     pAscFile; */
 
 
-  return NSINTEGRATOR_ASCFILE;
+/*   return NSINTEGRATOR_ASCFILE; */
 
-}
+/* } */
 
 
 /*!
@@ -146,42 +146,42 @@ int NSSetAscField(char *pcPathname, char *pcField, char *pcValue)
  *  \param pcName Name of asc_file to search for.
  *  \return 1 if present, 0 if not present.
  */
-struct asc_file * getAscFile(char *pcName)
-{
+/* struct asc_file * getAscFile(char *pcName) */
+/* { */
 
-  struct nsintegrator_type *pelnsintegrator
-    = (struct nsintegrator_type *)GetElement("/neurospaces_integrator");
+/*   struct nsintegrator_type *pelnsintegrator */
+/*     = (struct nsintegrator_type *)GetElement("/neurospaces_integrator"); */
 
   
-  if(!pelnsintegrator)
-    return NULL;
+/*   if(!pelnsintegrator) */
+/*     return NULL; */
 
-  struct neurospaces_integrator *pnsintegrator
-    = pelnsintegrator->pnsintegrator;
+/*   struct neurospaces_integrator *pnsintegrator */
+/*     = pelnsintegrator->pnsintegrator; */
 
-  if(!pnsintegrator)
-    return NULL;
+/*   if(!pnsintegrator) */
+/*     return NULL; */
 
-  struct asc_file **ppAscFiles = pnsintegrator->ppAscFiles;
-  int iAscFiles = pnsintegrator->iAscFiles;
-  int i;
+/*   struct asc_file **ppAscFiles = pnsintegrator->ppAscFiles; */
+/*   int iAscFiles = pnsintegrator->iAscFiles; */
+/*   int i; */
 
-  for( i=0; i < iAscFiles; i++)
-  {
+/*   for( i=0; i < iAscFiles; i++) */
+/*   { */
 
-    if(ppAscFiles[i])
-    {
+/*     if(ppAscFiles[i]) */
+/*     { */
 
-      if(!strcmp(ppAscFiles[i]->pcName,pcName))
-	return ppAscFiles[i];
+/*       if(!strcmp(ppAscFiles[i]->pcName,pcName)) */
+/* 	return ppAscFiles[i]; */
 
-    }
+/*     } */
 
-  }
+/*   } */
 
-  return NULL;
+/*   return NULL; */
 
-}
+/* } */
 
 
 

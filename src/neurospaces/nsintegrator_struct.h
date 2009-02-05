@@ -24,6 +24,8 @@
 /*!
  *  \struct nintegrator_type
  *
+ *  This is the struct use to create the neintegrator data object
+ *  in the Genesis SLI.
  */
 //----------------------------------------------------------------
 struct nsintegrator_type {

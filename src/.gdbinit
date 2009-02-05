@@ -3,8 +3,8 @@
 set args
 file ./nsgenesis
 break parsererror
-directory ~/neurospaces_project/model-container/ 
-directory ~/neurospaces_project/model-container/neurospaces/
-directory ~/neurospaces_project/model-container/hierarchy/output/symbols/
+directory ~/model-container/ 
+directory ~/model-container/neurospaces/
+directory ~/model-container/hierarchy/output/symbols/
 echo .gdbinit: Done .gdbinit in nsgenesis dir\n
 set print pretty

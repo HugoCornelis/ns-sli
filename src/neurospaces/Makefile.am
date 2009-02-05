@@ -24,7 +24,11 @@ BUILT_SOURCES = \
 	nsintegrator_d@.c \
 	nsintegrator_g@.c \
 	nsintegrator_g@.h \
-	nsintegrator_l@.c
+	nsintegrator_l@.c \
+	ascfile_d@.c \
+	ascfile_g@.c \
+	ascfile_g@.h \
+	ascfile_l@.c 
 
 CLEANFILES = \
 	neurospaces_d@.c \
@@ -36,8 +40,12 @@ CLEANFILES = \
 	nsintegrator_g@.c \
 	nsintegrator_g@.h \
 	nsintegrator_l@.c \
-	tmp_nsintegrator_struct.h
-
+	tmp_nsintegrator_struct.h \
+	ascfile_d@.c \
+	ascfile_g@.c \
+	ascfile_g@.h \
+	ascfile_l@.c \
+	tmp_ascfile_struct.h 
 
 neurospaces_d@.c:
 	cpp -P neurospaces_struct.h tmp_neurospaces_struct.h -I../script -I../util -I../sim -I../shell
@@ -63,6 +71,20 @@ nsintegrator_l@.c:
 	$(makelib) nsintegrator -o nsintegrator_l@.c
 
 
+
+ascfile_d@.c:
+	cpp -P ascfile_struct.h tmp_ascfile_struct.h -I../script -I../util -I../sim -I../shell -I/usr/local/heccer -DPRE_PROTO_TRAVERSAL
+	$(makestructs) tmp_ascfile_struct.h ascfile -I nsintegrator.h -NI -o ascfile_d@.c
+
+
+ascfile_g@.c:
+	$(c2genesis) ascfilelib.g nsintegrator.h ascfile
+
+ascfile_l@.c:
+	$(makelib) ascfile -o ascfile_l@.c
+
+
+
 noinst_HEADERS = \
 	neurospaces_defs.h \
 	neurospaces_ext.h  \
@@ -71,7 +93,8 @@ noinst_HEADERS = \
 	neurospaces_struct.h \
 	neurospacessupport.h \
 	nsintegrator.h \
-	nsintegrator_struct.h 
+	nsintegrator_struct.h \
+	ascfile_struct.h 
 
 
 libneurospaces_a_SOURCES = \
@@ -95,11 +118,16 @@ libneurospaces_a_SOURCES = \
 	nsreset.c \
 	nslookup.c \
 	nsasc.c \
+	ascfileactor.c \
 	neurospaces_d@.c \
 	neurospaces_g@.c \
 	neurospaces_l@.c \
 	nsintegrator_d@.c \
 	nsintegrator_g@.c \
 	nsintegrator_l@.c \
+	ascfile_d@.c \
+	ascfile_g@.c \
+	ascfile_g@.h \
+	ascfile_l@.c \
 	nsintegratoractor.c
 
