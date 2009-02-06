@@ -1,3 +1,5 @@
+
+
 //------------------------------------------------------------
 /*!
  *   \file nsintegratoractor.c
@@ -9,11 +11,13 @@
 #include "ascfile_g@.h"
 
 
+extern double simulation_time;
+
 
 
 //-------------------------------------------------------------
 /*
- *
+ *r
  */
 //-------------------------------------------------------------
 int AscFileActor(struct ascfile_type *pascfile_type,
@@ -21,7 +25,7 @@ int AscFileActor(struct ascfile_type *pascfile_type,
 
   
 
-  int i;
+
 
   
   //- set default result : ok
@@ -62,21 +66,33 @@ int AscFileActor(struct ascfile_type *pascfile_type,
        *
        ***************************************/
     case PROCESS:
-      {
+    {
 
-
-	printf(stdout,"OMGWTFBBQ!!1one!!!\n");
-	break;
-      }
+      
+      iResult = OutputGeneratorTimedStep(pascfile_type->og, 
+					     simulation_time);
+      break;
+    }
 
 
     case RESET:
-      {
+    {
 
 
-	break;
-      }
+      iResult = AscReset(pascfile_type);
 
+      break;
+    }
+
+
+    case FINISH:
+    {
+
+      iResult = OutputGeneratorFinish(pascfile_type->og);
+
+      break;
+
+    }
 
 
 

@@ -127,7 +127,7 @@ int NeurospacesIntegratorActor(struct nsintegrator_type *pnsintegrator_type,
 	    if(((GetCurrentStep()+1)%pnsintegrator_type->heccer_reporting_granularity) != 0)
 	      return iResult;
 
-	    fprintf(stdout,"%s: time = %f ; step = %d          \n",
+	    fprintf(stdout,"%s: time = %lf ; step = %lf          \n",
 		    ppheccer[i]->pcName,
 		    ppheccer[i]->dTime,
 		    ppheccer[i]->dStep);

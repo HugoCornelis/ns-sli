@@ -139,57 +139,6 @@ struct neurospaces_integrator {
 
 
 
-//-----------------------------------------------------------------
-/*!
- *  struct asc_out
- *  
- *  
- */
-//-----------------------------------------------------------------
-struct asc_file{
-
-  /*!
-   * asc object name.
-   */
-  char *pcName;
-
-  /*!
-   *  Stores the output location of the ascii output.
-   */
-  char *pcFilename;
-
-
-  /*!
-   * Open in append mode or not.
-   */
-  int iAppend; 
-
-
-  /*!
-   * Flush output or not. 
-   */
-  int iFlush;
-
-  
-  /*!
-   * Flag to leave file handle open or close it.
-   */
-  int iLeaveOpen;
-
-
-  /*!
-   * An output generator object for heccer to use during execution. 
-   */
-  struct OutputGenerator *pogAsc;
-
-};
-
-//------ end asc_out ----------------------------------------------
-
-
-
-
-
 
 
 //i -- Defined in nsintegrator.c --

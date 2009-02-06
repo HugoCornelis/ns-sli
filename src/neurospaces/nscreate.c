@@ -225,7 +225,7 @@ static struct symtab_HSolveListElement * SynChannelCalloc(){
     (struct symtab_HSolveListElement*)ChannelCalloc();
 
 
-  struct symtab_Equation *peq = EquationCalloc();
+  struct symtab_Equation *peq = EquationExponentialCalloc();
   
 
 
