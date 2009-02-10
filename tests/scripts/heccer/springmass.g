@@ -39,7 +39,7 @@ setfield /a1 \
 	append 0 \
 	filename "/tmp/a1" \
 	flush 1 \
-	leave_open 1
+	leave_open 1 
 
 //addmsg /h a1 SAVE vm[0]
 
@@ -76,6 +76,8 @@ step 9000
 step 90000
 
 call a1 FINISH
+
+echo output written
 
 
 

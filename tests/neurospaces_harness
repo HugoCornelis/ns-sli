@@ -261,7 +261,7 @@ sub main
 
     if (defined ($config->{model_library}))
     {
-	$library_sha_before = model_library_sha();
+x	$library_sha_before = model_library_sha();
 
     }
 
@@ -639,9 +639,12 @@ Total of $test_report->{global}->{test_count} tests (encountered $error_count er
 			else
 			{
 			    # compose the alternatives regex
+			  if($read->{alternatives})
+			  {
 
 			    my $alternatives = $read->{alternatives};
 
+ 	    
 			    my $expected = '(' . (join '|', map { quotemeta } @$alternatives) . ')';
 
 			    # read from the application
@@ -652,6 +655,51 @@ Total of $test_report->{global}->{test_count} tests (encountered $error_count er
 			     $before_match,
 			     $after_match)
 				= $exp->expect($timeout, "-re", $expected, );
+
+
+			  }
+			  elsif($read->{from_file})
+			  {
+
+			    print "Reading in output and expected from file.\n";
+			    #
+			    # This is added to support reading in files
+			    # for testing. 
+			    #
+			    my $application_output_file = 
+			      $read->{application_output_file};
+
+			    print 'Application output file: $application_output_file\n';
+
+			    my $expected_output_file = 
+			      $read->{expected_output_file};
+
+
+			    print 'Expected output file: $expected_output_file\n';
+
+			    local $/;
+
+			    my $application_output = `cat "$application_output_file"`;
+
+			    my $expected_output = `cat "$expected_output_file"`;
+
+# 			    ($matched_pattern_position,
+# 			     $error,
+# 			     $successfully_matching_string,
+# 			     $before_match,
+# 			     $after_match)
+# 				= $exp->expect($timeout, , );
+
+			    if ($expected_output eq $application_output)
+			      {
+				
+			      }
+			    else
+			      {
+				$error = 'expected_output does not match application_output';
+			      }
+			  }
+
 # 				= $exp->expect($timeout, "ThIs TeXt ShOuLd NeVeR oCcUr", );
 
 # 			    # loop over expected alternatives
