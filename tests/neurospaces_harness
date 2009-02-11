@@ -658,7 +658,7 @@ Total of $test_report->{global}->{test_count} tests (encountered $error_count er
 
 
 			  }
-			  elsif($read->{from_file})
+			  elsif($read->{application_output_file})
 			  {
 
 			    print "Reading in output and expected from file.\n";
@@ -692,12 +692,24 @@ Total of $test_report->{global}->{test_count} tests (encountered $error_count er
 
 			    if ($expected_output eq $application_output)
 			      {
-				
+
+				$before_match = $application_output;
+
+#				$error = '@@@@@';
+
 			      }
 			    else
 			      {
+				$before_match = $application_output;
 				$error = 'expected_output does not match application_output';
 			      }
+
+			    #
+			    # clean up the generated files
+			    #
+			    print `pwd`;
+			    `rm -f $application_output_file`;
+
 			  }
 
 # 				= $exp->expect($timeout, "ThIs TeXt ShOuLd NeVeR oCcUr", );
@@ -767,7 +779,9 @@ Total of $test_report->{global}->{test_count} tests (encountered $error_count er
 			 {
 			  description => $description,
 			  error => $error,
-			  expected => (ref $command_test->{read} eq 'ARRAY' ? $command_test->{read}->[1] : $command_test->{read}),
+			  expected => (ref $command_test->{read} eq 'ARRAY'
+				       ? $command_test->{read}->[1]
+				       : $command_test->{read}),
 			  message => $message,
 			  module_name => $module_name,
 			  seen => $before_match,

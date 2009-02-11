@@ -23,7 +23,7 @@ my $test
 						   description => "Can we perform a test using asc_file objects to write application output?",
 						   read => { 
 							    application_output_file => '/tmp/a1',
-							    expected_output_file => '$::config->{core_directory}/tests/specifications/strings/a1.txt' },
+							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/a1.txt" },
 						   timeout => 2,
 						   write => undef,
 						  },

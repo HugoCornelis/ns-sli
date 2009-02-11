@@ -32,6 +32,7 @@ static int ConcenMsg(const char *pcSrcpath, const char *pcDstpath);
 static int CinMsg(const char *pcSrcpath, const char *pcDstpath);
 static int EkMsg(const char *pcSrcpath, const char *pcDstpath);
 
+static int ActMsg(const char *pcSrcpath, const char *pcDstpath);
 
 static struct symtab_IOContainer *IOContainerFromList(char *ppcParmaters[], int iType[]);
 static struct symtab_IdentifierIndex * PidinQueueLookupTarget(const char *pcSrcpath, 
@@ -105,7 +106,7 @@ int NSmsg(const char *pcSrcpath, const char *pcDstpath, const char *pcTypename){
   }
   else if(strcmp(pcTypename,"ACTIVATION") == 0){
 
-    return 1;
+    return ActMsg(pcSrcpath,pcDstpath);
 
   }
 
@@ -697,3 +698,50 @@ static int EkMsg(const char *pcSrcpath, const char *pcDstpath)
   return 1;
 
 }
+
+
+
+
+
+
+static int ActMsg(const char *pcSrcpath, const char *pcDstpath){
+
+
+  if(strcmp(pcSrcpath,pcDstpath))
+  {
+    fprintf(stderr,"%s","Error: Activation message objects do not match.\n");
+    fprintf(stderr,"------ src:%s dst:%s\n",pcSrcpath,pcDstpath);
+    return -1;
+  }
+
+
+  struct PidinStack *ppistSrc = PidinStackParse(pcSrcpath); 
+
+  int iSerial = PidinStackToSerial(ppistSrc);
+
+
+
+  //-
+  //- Obtain the heccer struct and pass the pointer. There is only one 
+  //- heccer object at index 0 for now.
+  //-
+  struct nsintegrator_type *pelnsintegrator
+      = (struct nsintegrator_type *)GetElement("/neurospaces_integrator");
+
+  struct neurospaces_integrator *pnsintegrator = pelnsintegrator->pnsintegrator;
+  struct Heccer *pheccer = pnsintegrator->ppheccer[0];
+ 
+
+
+
+  double *pdAddress = HeccerAddressVariable(pheccer, iSerial,"activation");
+
+
+  return 1;
+
+}
+
+
+
+
+

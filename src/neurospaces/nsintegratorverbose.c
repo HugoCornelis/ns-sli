@@ -1,7 +1,7 @@
 
 #include "nsintegrator.h"
 
-int iNSIntegratorVerbose = 1;
+int iNSIntegratorVerbose = 0;
 
 
 int do_set_nsintegrator_verbose_level(argc,argv)
