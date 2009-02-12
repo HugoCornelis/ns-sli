@@ -729,12 +729,13 @@ static int ActMsg(const char *pcSrcpath, const char *pcDstpath){
       = (struct nsintegrator_type *)GetElement("/neurospaces_integrator");
 
   struct neurospaces_integrator *pnsintegrator = pelnsintegrator->pnsintegrator;
-  struct Heccer *pheccer = pnsintegrator->ppheccer[0];
+  //struct Heccer *pheccer = pnsintegrator->ppheccer[0];
  
 
+  pnsintegrator->iActMsgSerial = iSerial;
 
 
-  double *pdAddress = HeccerAddressVariable(pheccer, iSerial,"activation");
+  //double *pdAddress = HeccerAddressVariable(pheccer, iSerial,"activation");
 
 
   return 1;

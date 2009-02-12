@@ -132,6 +132,12 @@ struct neurospaces_integrator {
 
 
   
+  /*!
+   *  A serial ID for an actication message to post process after a reset. 
+   */
+  int iActMsgSerial;
+
+  
 
 };
 //------ end neurospaces_integrator -------------------------------

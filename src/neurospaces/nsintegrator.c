@@ -182,6 +182,8 @@ int NSGenesisInitialize(){
 /*    pheccer->ho.iSmallTableSize = HECCER_DEFAULT_INTERPOL_INTERVAL_ENTRIES; */
 
 
+   pnsintegrator->iActMsgSerial = INT_MAX;
+
    //! Default values are already set for the object when allocated
    //! The defaults are defined in "heccer/heccer.h"
 

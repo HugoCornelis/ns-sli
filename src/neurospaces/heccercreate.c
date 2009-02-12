@@ -87,6 +87,16 @@ int HeccerCreate(char* pcContext){
   pnsintegrator->ppheccer[pnsintegrator->iHeccers++] = 
     pheccer;
   
+
+  if(pnsintegrator->iActMsgSerial != INT_MAX)
+  {
+
+    double *pdActivation = HeccerAddressVariable(pheccer, pnsintegrator->iActMsgSerial,"activation");
+
+    
+
+  }
+
   return 1;
 
 }
