@@ -116,11 +116,13 @@ int NeurospacesIntegratorActor(struct nsintegrator_type *pnsintegrator_type,
 	for(i=0;i<pnsintegrator->iHeccers;i++)
 	{
 
+
+
 	  // need to link to "double simulation_time" in sim_step.c
           //	
 	  HeccerHeccs(ppheccer[i],simulation_time + clock_value[0]);
  
-    
+ 
 
 	  if (iNSIntegratorVerbose == 1)
 	  {

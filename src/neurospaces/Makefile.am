@@ -47,6 +47,20 @@ CLEANFILES = \
 	ascfile_l@.c \
 	tmp_ascfile_struct.h 
 
+
+
+ascfile_d@.c:
+	cpp -P ascfile_struct.h tmp_ascfile_struct.h -I../script -I../util -I../sim -I../shell -I/usr/local/heccer -DPRE_PROTO_TRAVERSAL
+	$(makestructs) tmp_ascfile_struct.h ascfile -I nsintegrator.h -NI -o ascfile_d@.c
+
+
+ascfile_g@.c:
+	$(c2genesis) ascfilelib.g nsintegrator.h ascfile
+
+ascfile_l@.c:
+	$(makelib) ascfile -o ascfile_l@.c
+
+
 neurospaces_d@.c:
 	cpp -P neurospaces_struct.h tmp_neurospaces_struct.h -I../script -I../util -I../sim -I../shell
 	$(makestructs) tmp_neurospaces_struct.h neurospaces -I neurospaces_ext.h -NI -o neurospaces_d@.c
@@ -72,16 +86,6 @@ nsintegrator_l@.c:
 
 
 
-ascfile_d@.c:
-	cpp -P ascfile_struct.h tmp_ascfile_struct.h -I../script -I../util -I../sim -I../shell -I/usr/local/heccer -DPRE_PROTO_TRAVERSAL
-	$(makestructs) tmp_ascfile_struct.h ascfile -I nsintegrator.h -NI -o ascfile_d@.c
-
-
-ascfile_g@.c:
-	$(c2genesis) ascfilelib.g nsintegrator.h ascfile
-
-ascfile_l@.c:
-	$(makelib) ascfile -o ascfile_l@.c
 
 
 

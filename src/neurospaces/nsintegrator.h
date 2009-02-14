@@ -61,6 +61,22 @@
 
 #define MODELCONTAINER_ROOT "hardcoded_neutral"
 
+
+
+struct ActivationMsg{
+
+  int iSerial;
+
+  char *pcSynchan;
+
+  char *pcField;
+
+  double *pdActivation;
+};
+
+
+
+
 //---------------------------------------------------------------
 /*!
  *  \struct neurospaces_integrator
@@ -129,19 +145,10 @@ struct neurospaces_integrator {
    *    The number of Heccer instances in the ppheccer array
    */
   int iHeccers; 
-
-
-  
-  /*!
-   *  A serial ID for an actication message to post process after a reset. 
-   */
-  int iActMsgSerial;
-
-  
+ 
 
 };
 //------ end neurospaces_integrator -------------------------------
-
 
 
 

@@ -4,5 +4,6 @@ struct ascfile_type {
   int append;
   int flush;
   int leave_open;
-  struct OutputGenerator *og;
+  struct OutputGenerator *pog;
+  struct ActivationMsg *pamActivation;
 };

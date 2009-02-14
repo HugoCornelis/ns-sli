@@ -662,3 +662,68 @@ struct symtab_InputOutput * CreateInputOutput(char *pcContext, int iType)
 
 
 
+
+
+//-----------------------------------------------------------------------
+/*
+ *
+ */
+//-----------------------------------------------------------------------
+int ActivationStep(struct ActivationMsg *pam){
+
+
+  double *pdActivation = NULL;
+
+  if(!pam)
+    return -1;
+
+
+  if(!pam->pdActivation)
+  {
+
+    //-
+    //- First obtain the heccer activation variable. 
+    //- 
+ 
+    struct nsintegrator_type *pelnsintegrator
+      = (struct nsintegrator_type *)GetElement("/neurospaces_integrator");
+
+    struct neurospaces_integrator *pnsintegrator = pelnsintegrator->pnsintegrator;
+    
+    struct Heccer *pheccer = pnsintegrator->ppheccer[0];
+
+    pdActivation = pam->pdActivation = HeccerAddressVariable(pheccer, pam->iSerial,"activation");
+  
+  }
+  else
+  {
+    pdActivation = pam->pdActivation;
+
+  }
+
+
+
+  //- now obtain the value in the Activation Message Field.
+
+  struct PidinStack *ppist = PidinStackParse(pam->pcSynchan);
+
+  PidinStackUpdateCaches(ppist);
+
+  struct symtab_HSolveListElement *phsle = PidinStackLookupTopSymbol(ppist);
+
+
+  struct symtab_Parameters *ppar = SymbolFindParameter(phsle, ppist, pam->pcField);
+
+
+  if(ppar && pdActivation)
+  {
+    double dFieldValue = ParameterResolveValue(ppar,ppist);
+    (*pdActivation) += dFieldValue;
+
+  }
+  else
+    return -1;
+    
+  return 1;
+
+}

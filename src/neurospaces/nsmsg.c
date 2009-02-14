@@ -31,8 +31,8 @@ static int VoltageMsg(const char *pcSrcpath, const char *pcDstpath);
 static int ConcenMsg(const char *pcSrcpath, const char *pcDstpath);
 static int CinMsg(const char *pcSrcpath, const char *pcDstpath);
 static int EkMsg(const char *pcSrcpath, const char *pcDstpath);
-
-static int ActMsg(const char *pcSrcpath, const char *pcDstpath);
+static int ActMsg(const char *pcSrcpath, const char *pcDstpath,char *pcField);
+static int AscfileSaveMsg(const char *pcSrcpath, const char *pcDstpath,char *pcField);
 
 static struct symtab_IOContainer *IOContainerFromList(char *ppcParmaters[], int iType[]);
 static struct symtab_IdentifierIndex * PidinQueueLookupTarget(const char *pcSrcpath, 
@@ -50,7 +50,7 @@ static struct symtab_IdentifierIndex * PidinQueueLookupTarget(const char *pcSrcp
  *   Function creates a message between two objects.
  */
 //-------------------------------------------------------------------
-int NSmsg(const char *pcSrcpath, const char *pcDstpath, const char *pcTypename){
+int NSmsg(const char *pcSrcpath, const char *pcDstpath, const char *pcTypename, char *pcField){
 
 
   //-
@@ -106,8 +106,12 @@ int NSmsg(const char *pcSrcpath, const char *pcDstpath, const char *pcTypename){
   }
   else if(strcmp(pcTypename,"ACTIVATION") == 0){
 
-    return ActMsg(pcSrcpath,pcDstpath);
+    return ActMsg(pcSrcpath,pcDstpath,pcField);
 
+  }
+  else if(strcmp(pcTypename,"SAVE") == 0){
+
+    return AscfileSaveMsg(pcSrcpath,pcDstpath,pcField);
   }
 
 
@@ -704,7 +708,7 @@ static int EkMsg(const char *pcSrcpath, const char *pcDstpath)
 
 
 
-static int ActMsg(const char *pcSrcpath, const char *pcDstpath){
+static int ActMsg(const char *pcSrcpath, const char *pcDstpath, char *pcField){
 
 
   if(strcmp(pcSrcpath,pcDstpath))
@@ -715,34 +719,95 @@ static int ActMsg(const char *pcSrcpath, const char *pcDstpath){
   }
 
 
+   struct PidinStack *ppistSrc = PidinStackParse(pcSrcpath);  
+
+   PidinStackUpdateCaches(ppistSrc); 
+
+   struct symtab_HSolveListElement *phsle =  
+     PidinStackLookupTopSymbol(ppistSrc); 
+
+  setParameter(phsle,"z","0",SETPARA_NUM);
+
+  // int iSerial = PidinStackToSerial(ppistSrc);
+
+
+
+  //double *pdActivation = HeccerAddressVariable(pheccer, iSerial,"activation");
+
+  // struct Heccer *pheccer = pnsintegrator->ppheccer[0]; 
+
+  
+
+  return 1;
+
+};
+
+
+
+
+//-------------------------------------------------------------------------------
+/*
+ *
+ */
+//-------------------------------------------------------------------------------
+static int AscfileSaveMsg(const char *pcSrcpath, const char *pcDstpath,char *pcField){
+
+
+
+  if(!pcSrcpath || !pcDstpath || !pcField)
+    return -1;
+
+
   struct PidinStack *ppistSrc = PidinStackParse(pcSrcpath); 
+
+  PidinStackUpdateCaches(ppistSrc);
+
+  struct symtab_HSolveListElement *phsle = 
+    PidinStackLookupTopSymbol(ppistSrc);
+
 
   int iSerial = PidinStackToSerial(ppistSrc);
 
 
 
   //-
-  //- Obtain the heccer struct and pass the pointer. There is only one 
-  //- heccer object at index 0 for now.
+  //- Obtain the heccer struct and pass the Activation message.
   //-
-  struct nsintegrator_type *pelnsintegrator
-      = (struct nsintegrator_type *)GetElement("/neurospaces_integrator");
+  struct ascfile_type *pascfile = (struct ascfile_type *)GetElement(pcDstpath);
 
-  struct neurospaces_integrator *pnsintegrator = pelnsintegrator->pnsintegrator;
-  //struct Heccer *pheccer = pnsintegrator->ppheccer[0];
+  if(!pascfile)
+    return -1;
  
 
-  pnsintegrator->iActMsgSerial = iSerial;
+  if(!pascfile->pamActivation)
+    pascfile->pamActivation = 
+      (struct ActivationMsg*)calloc(1,sizeof(struct ActivationMsg));
+
+  pascfile->pamActivation->iSerial = iSerial;
+
+  pascfile->pamActivation->pcField = strdup(pcField);
+
+  pascfile->pamActivation->pcSynchan = strdup(pcSrcpath);
 
 
-  //double *pdAddress = HeccerAddressVariable(pheccer, iSerial,"activation");
+  //-
+  //- Now we set and cache the pdActivation value.
+  //-
+/*    struct nsintegrator_type *pelnsintegrator  */
+/*      = (struct nsintegrator_type *)GetElement("/neurospaces_integrator");  */
+
+/*    struct neurospaces_integrator *pnsintegrator = pelnsintegrator->pnsintegrator;  */
+    
+/*    struct Heccer *pheccer = pnsintegrator->ppheccer[0];  */
+  
+/*    pascfile->pamActivation->pdActivation = HeccerAddressVariable(pheccer, pascfile->pamActivation->iSerial,"activation");  */
+  
+/*    OutputGeneratorAddVariable(pascfile->pog,  */
+/*  			     pascfile->pamActivation->pcField,   */
+/*  			     (void *)pascfile->pamActivation->pdActivation);  */
+
 
 
   return 1;
 
-}
-
-
-
-
-
+};

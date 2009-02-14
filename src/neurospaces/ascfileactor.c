@@ -69,7 +69,9 @@ int AscFileActor(struct ascfile_type *pascfile_type,
     {
 
       
-      iResult = OutputGeneratorTimedStep(pascfile_type->og, 
+      ActivationStep(pascfile_type->pamActivation);
+	
+      iResult = OutputGeneratorTimedStep(pascfile_type->pog, 
 					     simulation_time);
       break;
     }
@@ -88,7 +90,7 @@ int AscFileActor(struct ascfile_type *pascfile_type,
     case FINISH:
     {
 
-      iResult = OutputGeneratorFinish(pascfile_type->og);
+      iResult = OutputGeneratorFinish(pascfile_type->pog);
 
       break;
 

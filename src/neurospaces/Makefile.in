@@ -515,6 +515,16 @@ uninstall-am: uninstall-info-am
 	uninstall-am uninstall-info-am
 
 
+ascfile_d@.c:
+	cpp -P ascfile_struct.h tmp_ascfile_struct.h -I../script -I../util -I../sim -I../shell -I/usr/local/heccer -DPRE_PROTO_TRAVERSAL
+	$(makestructs) tmp_ascfile_struct.h ascfile -I nsintegrator.h -NI -o ascfile_d@.c
+
+ascfile_g@.c:
+	$(c2genesis) ascfilelib.g nsintegrator.h ascfile
+
+ascfile_l@.c:
+	$(makelib) ascfile -o ascfile_l@.c
+
 neurospaces_d@.c:
 	cpp -P neurospaces_struct.h tmp_neurospaces_struct.h -I../script -I../util -I../sim -I../shell
 	$(makestructs) tmp_neurospaces_struct.h neurospaces -I neurospaces_ext.h -NI -o neurospaces_d@.c
@@ -534,16 +544,6 @@ nsintegrator_g@.c:
 
 nsintegrator_l@.c:
 	$(makelib) nsintegrator -o nsintegrator_l@.c
-
-ascfile_d@.c:
-	cpp -P ascfile_struct.h tmp_ascfile_struct.h -I../script -I../util -I../sim -I../shell -I/usr/local/heccer -DPRE_PROTO_TRAVERSAL
-	$(makestructs) tmp_ascfile_struct.h ascfile -I nsintegrator.h -NI -o ascfile_d@.c
-
-ascfile_g@.c:
-	$(c2genesis) ascfilelib.g nsintegrator.h ascfile
-
-ascfile_l@.c:
-	$(makelib) ascfile -o ascfile_l@.c
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:

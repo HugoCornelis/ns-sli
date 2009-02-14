@@ -2219,13 +2219,13 @@ short		slot_type;
     src_path = optargv[1];
     dst_path = optargv[2];
     typename = optargv[3];
-
+    char *field = optargv[4];
     
     //hack
     //hack  Here we route to our model contaner for
     //hack  doing message passing. 
     //hack
-    if(NSmsg(src_path,dst_path,typename)==1){
+    if(NSmsg(src_path,dst_path,typename,field)==1){
 
       OK();
       return 1;

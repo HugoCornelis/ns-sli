@@ -19,7 +19,9 @@ struct ascfile_type {
 
   int leave_open;
 
-  struct OutputGenerator *og;
+  struct OutputGenerator *pog;
+
+  struct ActivationMsg *pamActivation;
 
 };
 

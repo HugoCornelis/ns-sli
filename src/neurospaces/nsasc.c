@@ -36,7 +36,7 @@ int AscStep(struct ascfile_type *pasc)
 
 
   
-  OutputGeneratorTimedStep(pasc->og, simulation_time);
+  OutputGeneratorTimedStep(pasc->pog, simulation_time);
 
 
   return 1;
@@ -58,12 +58,12 @@ int AscReset(struct ascfile_type *pasc)
   //- If the output generator is not already allocated then we 
   //- allocate it here.
   //-
-  if(!pasc->og)
+  if(!pasc->pog)
   {
 
-    pasc->og = OutputGeneratorNew(pasc->filename);
+    pasc->pog = OutputGeneratorNew(pasc->filename);
 
-    if(!pasc->og)
+    if(!pasc->pog)
     {
 
       fprintf(stdout,
@@ -78,7 +78,7 @@ int AscReset(struct ascfile_type *pasc)
   }
 
 
-  if(OutputGeneratorInitiate(pasc->og) == -1)
+  if(OutputGeneratorInitiate(pasc->pog) == -1)
   {
 
     fprintf(stdout,
@@ -89,6 +89,26 @@ int AscReset(struct ascfile_type *pasc)
     return -1;
 
   }
+
+
+  //-
+  //- Now we set and cache the pdActivation value.
+  //-
+   struct nsintegrator_type *pelnsintegrator 
+     = (struct nsintegrator_type *)GetElement("/neurospaces_integrator"); 
+
+   struct neurospaces_integrator *pnsintegrator = pelnsintegrator->pnsintegrator; 
+    
+   struct Heccer *pheccer = pnsintegrator->ppheccer[0]; 
+  
+   if(pheccer)
+   {
+     pasc->pamActivation->pdActivation = HeccerAddressVariable(pheccer, pasc->pamActivation->iSerial,"activation"); 
+  
+     OutputGeneratorAddVariable(pasc->pog, 
+				pasc->pamActivation->pcField,  
+				(void *)pasc->pamActivation->pdActivation); 
+   }
 
   return 1;
 }
