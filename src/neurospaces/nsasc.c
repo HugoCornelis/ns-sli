@@ -101,7 +101,7 @@ int AscReset(struct ascfile_type *pasc)
     
    struct Heccer *pheccer = pnsintegrator->ppheccer[0]; 
   
-   if(pheccer)
+   if(pheccer && pasc->pamActivation)
    {
      pasc->pamActivation->pdActivation = HeccerAddressVariable(pheccer, pasc->pamActivation->iSerial,"activation"); 
   
