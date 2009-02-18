@@ -23,6 +23,6 @@ addaction FINISH 30101
 object	 asc_file  ascfile_type  AscFileActor	genesis3 \
 	-author 	"Mando Rodriguez" 	\
 	-actions	PROCESS RESET CHECK CREATE FINISH \
-	-description	"Heccer output object"
+	-description	"asc file replacement that integrates with neurospaces"
 
 

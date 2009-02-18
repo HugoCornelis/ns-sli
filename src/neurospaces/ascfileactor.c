@@ -26,7 +26,7 @@ int AscFileActor(struct ascfile_type *pascfile_type,
   
 
 
-
+  struct ascfile_type *pasc = pascfile_type;
   
   //- set default result : ok
   int iResult = 1;
@@ -42,7 +42,24 @@ int AscFileActor(struct ascfile_type *pascfile_type,
 
      case CREATE:
      {
-   
+
+
+	 //-
+	 //- Now we need to make an ioMsg in the integrator.
+	 //- For now I'm also adding it to the ascfile object.
+	 //-
+       //	 struct neurospaces_integrator *pnsintegrator = getNsintegrator();
+
+       //	 struct ioMsg *pioMsg = 
+       //  (struct ioMsg*)calloc(1,sizeof(struct ioMsg));
+
+       //pnsintegrator->ppioMsg[pnsintegrator->iIoMsgs++] =
+       //  pioMsg;
+
+	 
+       //pasc = pioMsg;
+	 
+
 	break;
       }
 
@@ -50,7 +67,6 @@ int AscFileActor(struct ascfile_type *pascfile_type,
 
     case CHECK:
       {
-	//t check all heccer clocks: within limits ?
 	break;
       }
 
@@ -58,18 +74,10 @@ int AscFileActor(struct ascfile_type *pascfile_type,
 
 
 
-
-      /***************************************
-       *
-       * performs a single step on every heccer
-       * instance.
-       *
-       ***************************************/
     case PROCESS:
     {
-
-      
-      ActivationStep(pascfile_type->pamActivation);
+    
+      //ActivationStep();
 	
       iResult = OutputGeneratorTimedStep(pascfile_type->pog, 
 					     simulation_time);

@@ -612,6 +612,19 @@ struct symtab_HSolveListElement * lookupGate(char *pcName, char *pcField)
 
 
 
+/*
+ *
+ */
+struct neurospaces_integrator *getNsintegrator(){
+
+  struct nsintegrator_type *pelnsintegrator
+    = (struct nsintegrator_type *)GetElement("/neurospaces_integrator");
+
+  return pelnsintegrator->pnsintegrator;
+
+}
+
+
 
 //--------------------------------------------------------------------
 /*!
@@ -669,16 +682,16 @@ struct symtab_InputOutput * CreateInputOutput(char *pcContext, int iType)
  *
  */
 //-----------------------------------------------------------------------
-int ActivationStep(struct ActivationMsg *pam){
+int ActivationStep(struct ioMsg *piom){
 
 
   double *pdActivation = NULL;
 
-  if(!pam)
+  if(!piom)
     return -1;
 
 
-  if(!pam->pdActivation)
+  if(!piom->dValue)
   {
 
     //-
@@ -692,12 +705,12 @@ int ActivationStep(struct ActivationMsg *pam){
     
     struct Heccer *pheccer = pnsintegrator->ppheccer[0];
 
-    pdActivation = pam->pdActivation = HeccerAddressVariable(pheccer, pam->iSerial,"activation");
+    // pdActivation = piom->pdActivation = HeccerAddressVariable(pheccer, piom->iSerial,"activation");
   
   }
   else
   {
-    pdActivation = pam->pdActivation;
+    //    pdActivation = piom->pdActivation;
 
   }
 
@@ -705,14 +718,15 @@ int ActivationStep(struct ActivationMsg *pam){
 
   //- now obtain the value in the Activation Message Field.
 
-  struct PidinStack *ppist = PidinStackParse(pam->pcSynchan);
+  struct PidinStack *ppist = PidinStackParse(piom->pcSourceSymbol);
 
   PidinStackUpdateCaches(ppist);
 
   struct symtab_HSolveListElement *phsle = PidinStackLookupTopSymbol(ppist);
 
 
-  struct symtab_Parameters *ppar = SymbolFindParameter(phsle, ppist, pam->pcField);
+  struct symtab_Parameters *ppar = 
+    SymbolFindParameter(phsle, ppist, piom->pcSourceField);
 
 
   if(ppar && pdActivation)

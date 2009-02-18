@@ -122,7 +122,9 @@ int NSGenesisInitialize(){
 
    }
 
- 
+  
+
+
     
    
      char	*argvar2[5];  
@@ -187,6 +189,27 @@ int NSGenesisInitialize(){
 
    pnsintegrator->pheccerOptions = pheccer;
    //---------------------------------------------------
+
+
+   //-
+   //- Initialize the message array.
+   //-
+
+   pnsintegrator->ppioMsg = 
+     (struct ioMsg**)calloc(NUMBER_OF_ASC_MESSAGES,
+			    sizeof(struct ioMsg*));
+   pnsintegrator->iIoMsgs = 0;
+
+   if( !pnsintegrator->ppioMsg ){
+
+     fprintf(stderr,"Error initializing IO Message storage\n");
+     return -1;
+
+   }
+
+
+
+
 
    pelnsintegrator->pnsintegrator = pnsintegrator; 
 

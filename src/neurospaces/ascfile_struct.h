@@ -21,7 +21,7 @@ struct ascfile_type {
 
   struct OutputGenerator *pog;
 
-  struct ActivationMsg *pamActivation;
+  struct ioMsg *pioMsg;
 
 };
 

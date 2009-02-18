@@ -44,6 +44,8 @@ int AscStep(struct ascfile_type *pasc)
 }
 
 
+
+
 //---------------------------------------------------------
 /*!
  *  \fn int NSAscReset(char *name)
@@ -91,24 +93,67 @@ int AscReset(struct ascfile_type *pasc)
   }
 
 
-  //-
-  //- Now we set and cache the pdActivation value.
-  //-
-   struct nsintegrator_type *pelnsintegrator 
-     = (struct nsintegrator_type *)GetElement("/neurospaces_integrator"); 
+  return 1;
+}
 
-   struct neurospaces_integrator *pnsintegrator = pelnsintegrator->pnsintegrator; 
-    
-   struct Heccer *pheccer = pnsintegrator->ppheccer[0]; 
-  
-   if(pheccer && pasc->pamActivation)
-   {
-     pasc->pamActivation->pdActivation = HeccerAddressVariable(pheccer, pasc->pamActivation->iSerial,"activation"); 
-  
-     OutputGeneratorAddVariable(pasc->pog, 
-				pasc->pamActivation->pcField,  
-				(void *)pasc->pamActivation->pdActivation); 
-   }
+
+
+/*!
+ * \fn int NSProcessMessages(struct neurospaces_integrator *pnsintegrator)
+ * \param pnsintegrator A pointer to the neurospace integrator struct.
+ * \return -1 on error, 1 on success.
+ *
+ */
+int NSProcessMessages(struct neurospaces_integrator *pnsintegrator)
+{
+
+  int i;
+
+  struct ioMsg **ppioMsg = pnsintegrator->ppioMsg;
+
+  struct Heccer **ppheccer = pnsintegrator->ppheccer;
+
+  if(!ppioMsg)
+    return -1;
+
+  for (i = 0 ; i < NUMBER_OF_ASC_MESSAGES ; i++) 
+  {
+
+    if(ppioMsg[i]->pcSourceSymbol)
+    {
+      //- resolve source
+
+      struct PidinStack *ppistSource
+	= PidinStackParse(ppioMsg[i]->pcSourceSymbol);
+
+      struct symtab_HSolveListElement *phsleSource
+	= PidinStackLookupTopSymbol(ppistSource);
+
+      //- fetch value
+
+      ppioMsg[i]->dValue
+	= SymbolParameterResolveValue(phsleSource, ppistSource, ppioMsg[i]->pcSourceField);
+
+      //- resolve target
+
+      struct PidinStack *ppistTarget
+	= PidinStackParse(ppioMsg[i]->pcTargetSymbol);
+
+      PidinStackUpdateCaches(ppistTarget);
+
+      int iTarget = PidinStackToSerial(ppistTarget);
+
+      double *pdValue
+	= HeccerAddressVariable(ppheccer[0], iTarget, ppioMsg[i]->pcTargetField);
+
+      //- add source to target
+
+      *pdValue += ppioMsg[i]->dValue;
+
+    }
+
+  }
 
   return 1;
+
 }

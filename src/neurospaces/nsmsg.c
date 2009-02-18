@@ -32,7 +32,7 @@ static int ConcenMsg(const char *pcSrcpath, const char *pcDstpath);
 static int CinMsg(const char *pcSrcpath, const char *pcDstpath);
 static int EkMsg(const char *pcSrcpath, const char *pcDstpath);
 static int ActMsg(const char *pcSrcpath, const char *pcDstpath,char *pcField);
-static int AscfileSaveMsg(const char *pcSrcpath, const char *pcDstpath,char *pcField);
+static int AscfileMsg(const char *pcSrcpath, const char *pcDstpath,char *pcField);
 
 static struct symtab_IOContainer *IOContainerFromList(char *ppcParmaters[], int iType[]);
 static struct symtab_IdentifierIndex * PidinQueueLookupTarget(const char *pcSrcpath, 
@@ -111,7 +111,7 @@ int NSmsg(const char *pcSrcpath, const char *pcDstpath, const char *pcTypename, 
   }
   else if(strcmp(pcTypename,"SAVE") == 0){
 
-    return AscfileSaveMsg(pcSrcpath,pcDstpath,pcField);
+    return AscfileMsg(pcSrcpath,pcDstpath,pcField);
   }
 
 
@@ -711,6 +711,8 @@ static int EkMsg(const char *pcSrcpath, const char *pcDstpath)
 static int ActMsg(const char *pcSrcpath, const char *pcDstpath, char *pcField){
 
 
+  //t there is nothing wrong with different paths here, is there?
+
   if(strcmp(pcSrcpath,pcDstpath))
   {
     fprintf(stderr,"%s","Error: Activation message objects do not match.\n");
@@ -750,7 +752,7 @@ static int ActMsg(const char *pcSrcpath, const char *pcDstpath, char *pcField){
  *
  */
 //-------------------------------------------------------------------------------
-static int AscfileSaveMsg(const char *pcSrcpath, const char *pcDstpath,char *pcField){
+static int AscfileMsg(const char *pcSrcpath, const char *pcDstpath,char *pcField){
 
 
 
@@ -779,32 +781,15 @@ static int AscfileSaveMsg(const char *pcSrcpath, const char *pcDstpath,char *pcF
     return -1;
  
 
-  if(!pascfile->pamActivation)
-    pascfile->pamActivation = 
-      (struct ActivationMsg*)calloc(1,sizeof(struct ActivationMsg));
+  if(!pascfile->pioMsg)
+    pascfile->pioMsg = 
+      (struct ioMsg*)calloc(1,sizeof(struct ioMsg));
 
-  pascfile->pamActivation->iSerial = iSerial;
+  pascfile->pioMsg->iSerial = iSerial;
 
-  pascfile->pamActivation->pcField = strdup(pcField);
+  pascfile->pioMsg->pcSourceField = strdup(pcField);
 
-  pascfile->pamActivation->pcSynchan = strdup(pcSrcpath);
-
-
-  //-
-  //- Now we set and cache the pdActivation value.
-  //-
-/*    struct nsintegrator_type *pelnsintegrator  */
-/*      = (struct nsintegrator_type *)GetElement("/neurospaces_integrator");  */
-
-/*    struct neurospaces_integrator *pnsintegrator = pelnsintegrator->pnsintegrator;  */
-    
-/*    struct Heccer *pheccer = pnsintegrator->ppheccer[0];  */
-  
-/*    pascfile->pamActivation->pdActivation = HeccerAddressVariable(pheccer, pascfile->pamActivation->iSerial,"activation");  */
-  
-/*    OutputGeneratorAddVariable(pascfile->pog,  */
-/*  			     pascfile->pamActivation->pcField,   */
-/*  			     (void *)pascfile->pamActivation->pdActivation);  */
+  pascfile->pioMsg->pcSourceSymbol = strdup(pcSrcpath);
 
 
 

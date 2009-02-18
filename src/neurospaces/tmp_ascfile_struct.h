@@ -5,5 +5,5 @@ struct ascfile_type {
   int flush;
   int leave_open;
   struct OutputGenerator *pog;
-  struct ActivationMsg *pamActivation;
+  struct ioMsg *pioMsg;
 };

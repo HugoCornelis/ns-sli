@@ -81,12 +81,6 @@ int NeurospacesIntegratorActor(struct nsintegrator_type *pnsintegrator_type,
 
 
 
-      /*************************************
-       *
-       * This action prints out the verbose contents
-       * of every heccer instance.
-       *
-       ************************************/
     case NSINTEGRATOR_DUMP:
       {
 	int iSelection = 1;
@@ -100,18 +94,13 @@ int NeurospacesIntegratorActor(struct nsintegrator_type *pnsintegrator_type,
 
 
 
-      /***************************************
-       *
-       * performs a single step on every heccer
-       * instance.
-       *
-       ***************************************/
+
     case PROCESS:
       {
 
 	struct Heccer **ppheccer = pnsintegrator->ppheccer;
 
-       
+	//NSProcessMessages(pnsintegrator);
 
 	for(i=0;i<pnsintegrator->iHeccers;i++)
 	{

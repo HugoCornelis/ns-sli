@@ -58,20 +58,52 @@
 #define MAX_ASCFILES 200
 
 
+#define NUMBER_OF_ASC_MESSAGES 20
 
 #define MODELCONTAINER_ROOT "hardcoded_neutral"
 
 
 
-struct ActivationMsg{
+/*!
+ * \struct ioMsg
+ *
+ * A struct for storing parameters for a message to be processed after
+ * performing a reset.
+ */
+struct ioMsg{
 
+
+  /*!
+   *  A serial ID for an actication message to post process after a reset. 
+   * synaptic activation messages
+   */
   int iSerial;
 
-  char *pcSynchan;
 
-  char *pcField;
 
-  double *pdActivation;
+  /*! for an activation message to post process after a
+   *  reset: source element in the model container.
+   */
+  char *pcSourceSymbol;
+
+
+  char *pcTargetSymbol;
+
+  /*!
+   * field of activation message
+   */
+  char *pcSourceField;
+
+
+
+  char *pcTargetField;
+
+
+  /*!
+   * the value of activation
+   */
+  double dValue;
+
 };
 
 
@@ -146,6 +178,14 @@ struct neurospaces_integrator {
    */
   int iHeccers; 
  
+
+  /*!
+   * An array of IO messages which are executed during a reset.
+   */
+  struct ioMsg **ppioMsg;
+
+
+  int iIoMsgs;
 
 };
 //------ end neurospaces_integrator -------------------------------
