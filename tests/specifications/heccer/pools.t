@@ -55,6 +55,7 @@ my $test
 				command => 'src/nsgenesis',
 				command_tests => [
 						  {
+						    numerical_compare => 1,
 						   description => "Is a pool integrated correctly, two compartments, two pools case ?",,
 						   read => (join '', `cat  /usr/local/heccer/tests/specifications/strings/pool2.txt | perl -pe 's/unnamed test/$root_neutral/g'`),
 						   timeout => 5,

@@ -44,85 +44,27 @@ setfield ^ \
 	leave_open 1
 addmsg /hardcoded_neutral/c1 a1 SAVE Vm
 call a1 RESET
+
+
+
+
 resched
 
 reset
 
-//function showfields
-//SymbolParameterResolveValue
-//	showfield h \
-//		vm[0] \
-//		vm[1]
-//end
+setfield /hardcoded_neutral/c2/s z 0
 
-// Firing 1270, 1e-05
-// Firing 2348, 1e-05
-// Firing 4537, 1e-05
-// Firing 5376, 1e-05
-// Firing 6646, 1e-05
-// Firing 7421, 1e-05
-// Firing 7440, 1e-05
-
-//step 1270
-
-
-step 5
+step 1271
 
 setfield /hardcoded_neutral/c2/s z {1 / dt}
 
-step
+step {10000}
 
-setfield /hardcoded_neutral/c2/s z 0
 
-step {1078 - 1}
 
-setfield /hardcoded_neutral/c2/s z {1 / dt}
 
-step
+echo output written
 
-setfield /hardcoded_neutral/c2/s z 0
-
-step {2189 - 1}
-
-setfield /hardcoded_neutral/c2/s z {1 / dt}
-
-step
-
-setfield /hardcoded_neutral/c2/s z 0
-
-step {839 - 1}
-
-setfield /hardcoded_neutral/c2/s z {1 / dt}
-
-step
-
-setfield /hardcoded_neutral/c2/s z 0
-
-step {1270 - 1}
-
-setfield /hardcoded_neutral/c2/s z {1 / dt}
-
-step
-
-setfield /hardcoded_neutral/c2/s z 0
-
-step {775 - 1}
-
-setfield /hardcoded_neutral/c2/s z {1 / dt}
-
-step
-
-setfield /hardcoded_neutral/c2/s z 0
-
-step {19 - 1}
-
-setfield /hardcoded_neutral/c2/s z {1 / dt}
-
-step
-
-setfield /hardcoded_neutral/c2/s z 0
-
-step {2560 - 1}
 
 
 
