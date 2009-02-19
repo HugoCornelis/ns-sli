@@ -10,7 +10,7 @@
 //-------------------------------------------------------------------
 #include "nsintegrator.h"
 #include "heccer/heccer.h"
-
+#include "ascfile_struct.h"
 
 //------------------------------------------------------------------
 /*
@@ -91,6 +91,48 @@ void NSReset(){
   else
     singleHeccerReset(pheccer);
 
+
+  //-
+  //- Now add annotated variables since the heccer instance has
+  //- been created.
+  //-
+  int i;
+
+  struct ioMsg **ppioMsg = pnsintegrator->ppioMsg;
+  int iIoMsgs = pnsintegrator->iIoMsgs;
+
+
+  for(i = 0; i < iIoMsgs; i++)
+  {
+
+    if(!strcmp(ppioMsg[i]->pcMsgName,"save"))
+    {
+
+      struct ascfile_type *pasc = 
+	(struct ascfile_type*)GetElement(ppioMsg[i]->pcTargetSymbol);
+
+
+      struct PidinStack *ppist = 
+	PidinStackParse(ppioMsg[i]->pcSourceSymbol);
+
+      PidinStackUpdateCaches(ppist);
+      
+      ppioMsg[i]->iSerial = PidinStackToSerial(ppist);
+
+      //- only do this with one heccer for now. 
+      double *pdValue
+	= HeccerAddressVariable(pnsintegrator->ppheccer[0], 
+				ppioMsg[i]->iSerial, 
+				ppioMsg[i]->pcSourceField);
+
+      OutputGeneratorAddVariable(pasc->pog,
+				 ppioMsg[i]->pcSourceField,
+				 (void *)pdValue);
+
+
+    }
+
+  }
 
   
 }

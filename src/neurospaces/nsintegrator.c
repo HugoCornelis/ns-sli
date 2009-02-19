@@ -196,7 +196,7 @@ int NSGenesisInitialize(){
    //-
 
    pnsintegrator->ppioMsg = 
-     (struct ioMsg**)calloc(NUMBER_OF_ASC_MESSAGES,
+     (struct ioMsg**)calloc(NUMBER_OF_MESSAGES,
 			    sizeof(struct ioMsg*));
    pnsintegrator->iIoMsgs = 0;
 

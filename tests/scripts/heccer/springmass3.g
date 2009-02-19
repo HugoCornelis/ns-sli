@@ -49,7 +49,7 @@ resched
 reset
 
 //function showfields
-//
+//SymbolParameterResolveValue
 //	showfield h \
 //		vm[0] \
 //		vm[1]
@@ -63,7 +63,10 @@ reset
 // Firing 7421, 1e-05
 // Firing 7440, 1e-05
 
-step 1270
+//step 1270
+
+
+step 5
 
 setfield /hardcoded_neutral/c2/s z {1 / dt}
 

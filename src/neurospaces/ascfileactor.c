@@ -43,21 +43,6 @@ int AscFileActor(struct ascfile_type *pascfile_type,
      case CREATE:
      {
 
-
-	 //-
-	 //- Now we need to make an ioMsg in the integrator.
-	 //- For now I'm also adding it to the ascfile object.
-	 //-
-       //	 struct neurospaces_integrator *pnsintegrator = getNsintegrator();
-
-       //	 struct ioMsg *pioMsg = 
-       //  (struct ioMsg*)calloc(1,sizeof(struct ioMsg));
-
-       //pnsintegrator->ppioMsg[pnsintegrator->iIoMsgs++] =
-       //  pioMsg;
-
-	 
-       //pasc = pioMsg;
 	 
 
 	break;

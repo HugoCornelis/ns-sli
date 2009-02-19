@@ -14,7 +14,7 @@ my $test
 				command => 'src/nsgenesis',
 				command_tests => [
 						  {
-						   disable => 'Test is disabled until the ascfile integration is completed.',
+						   
 						   description => 'Does the application report that it writes its output?',
 						   read => 'output written',
 						    timeout => 200,
@@ -23,7 +23,7 @@ my $test
 						  {
 						   description => "Can we perform a test using asc_file objects to write application output?",
 						   read => {
-							    disable => 'Test is disabled until the ascfile integration is completed.', 
+							     
 							    application_output_file => '/tmp/a1',
 							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/a1.txt" },
 						   timeout => 2,

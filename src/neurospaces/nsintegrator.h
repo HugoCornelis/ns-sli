@@ -58,7 +58,7 @@
 #define MAX_ASCFILES 200
 
 
-#define NUMBER_OF_ASC_MESSAGES 20
+#define NUMBER_OF_MESSAGES 20
 
 #define MODELCONTAINER_ROOT "hardcoded_neutral"
 
@@ -95,9 +95,7 @@ struct ioMsg{
   char *pcSourceField;
 
 
-
-  char *pcTargetField;
-
+  char *pcMsgName;
 
   /*!
    * the value of activation

@@ -100,7 +100,7 @@ int NeurospacesIntegratorActor(struct nsintegrator_type *pnsintegrator_type,
 
 	struct Heccer **ppheccer = pnsintegrator->ppheccer;
 
-	//NSProcessMessages(pnsintegrator);
+	NSProcessMessages(pnsintegrator);
 
 	for(i=0;i<pnsintegrator->iHeccers;i++)
 	{
