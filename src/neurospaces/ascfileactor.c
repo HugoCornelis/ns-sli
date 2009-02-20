@@ -63,9 +63,15 @@ int AscFileActor(struct ascfile_type *pascfile_type,
     {
     
       //ActivationStep();
+      if(simulation_time > 0){
 	
-      iResult = OutputGeneratorTimedStep(pascfile_type->pog, 
-					     simulation_time);
+	iResult = OutputGeneratorTimedStep(pascfile_type->pog, 
+					    simulation_time);
+
+	OutputGeneratorFlush(pascfile_type->pog);
+
+      }
+
       break;
     }
 

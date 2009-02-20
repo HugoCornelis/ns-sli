@@ -111,6 +111,8 @@ void NSReset(){
       struct ascfile_type *pasc = 
 	(struct ascfile_type*)GetElement(ppioMsg[i]->pcTargetSymbol);
 
+      if(!pasc)
+	continue;
 
       struct PidinStack *ppist = 
 	PidinStackParse(ppioMsg[i]->pcSourceSymbol);

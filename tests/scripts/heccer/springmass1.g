@@ -1,4 +1,4 @@
-float dt = 2e-7
+float dt = 1e-5
 setclock 0 {dt}
 create neutral hardcoded_neutral
 create compartment /hardcoded_neutral/c1
@@ -24,9 +24,11 @@ setfield /hardcoded_neutral/c2/s \
 	tau1 5e-4 \
 	tau2 1.2e-3
 addmsg /hardcoded_neutral/c2 /hardcoded_neutral/c2/s VOLTAGE Vm
-addmsg /hardcoded_neutral/c2/s /hardcoded_neutral/c2 CHANNEL Gk Ek
+addmsg /hardcoded_neutral/c2/s /hardcoded_neutral/c2/s CHANNEL Gk Ek
 addmsg /hardcoded_neutral/c2/s /hardcoded_neutral/c2/s ACTIVATION z 
+
 //create hsolve h
+
 //setmethod h 11
 //setfield h \
 //	calcmode 0 \
@@ -35,44 +37,47 @@ addmsg /hardcoded_neutral/c2/s /hardcoded_neutral/c2/s ACTIVATION z
 //call h SETUP
 
 create asc_file /a1
-setfield /a1 \
+setfield ^ \
 	append 0 \
 	filename "/tmp/a1" \
 	flush 1 \
-	leave_open 1 
-
-//addmsg /h a1 SAVE vm[0]
-
+	leave_open 1
+addmsg /hardcoded_neutral/c1 a1 SAVE Vm
 call a1 RESET
-//resched
+
+
+create asc_file /a2
+setfield ^ \
+	append 0 \
+	filename "/tmp/a2" \
+	flush 1 \
+	leave_open 1
+addmsg /hardcoded_neutral/c2 a2 SAVE Vm
+call a2 RESET
+
+
+resched
 
 reset
 
+setfield /hardcoded_neutral/c2/s z 0
 
+step 11
 
-step 5
+setfield /hardcoded_neutral/c2/s z {0.99006633466223737 / dt}
 
-setfield /hardcoded_neutral/c2/s z {1 / dt}
-
-step
+step 1
 
 setfield /hardcoded_neutral/c2/s z 0
 
-step 4
+step {2000 - 11}
 
-step 90
 
-step 900
 
-step 1000
-
-step 9000
-
-step 90000
-
-call a1 FINISH
 
 echo output written
+
+
 
 
 

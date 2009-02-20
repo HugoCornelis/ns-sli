@@ -545,6 +545,8 @@ Total of $test_report->{global}->{test_count} tests (encountered $error_count er
 		    $before_match,
 		    $after_match);
 
+		my $expected;
+
 		my $time_elapsed;
 
 		if (ref $command eq 'CODE')
@@ -620,6 +622,8 @@ Total of $test_report->{global}->{test_count} tests (encountered $error_count er
 			     $before_match,
 			     $after_match)
 				= $exp->expect($timeout, $read, );
+
+			    $expected = $read;
 			}
 
 			# if array, means regex match
@@ -632,6 +636,10 @@ Total of $test_report->{global}->{test_count} tests (encountered $error_count er
 			     $before_match,
 			     $after_match)
 				= $exp->expect($timeout, @$read, );
+
+			    #! skip the expect '-re' flag
+
+			    $expected = $read->[1];
 			}
 
 			# else, hash, one of several alternatives expected
@@ -645,7 +653,7 @@ Total of $test_report->{global}->{test_count} tests (encountered $error_count er
 			    my $alternatives = $read->{alternatives};
 
  	    
-			    my $expected = '(' . (join '|', map { quotemeta } @$alternatives) . ')';
+			    $expected = '(' . (join '|', map { quotemeta } @$alternatives) . ')';
 
 			    # read from the application
 
@@ -683,6 +691,8 @@ Total of $test_report->{global}->{test_count} tests (encountered $error_count er
 
 			    my $expected_output = `cat "$expected_output_file"`;
 
+			    $expected = $expected_output;
+
 # 			    ($matched_pattern_position,
 # 			     $error,
 # 			     $successfully_matching_string,
@@ -701,8 +711,12 @@ Total of $test_report->{global}->{test_count} tests (encountered $error_count er
 			    else
 			      {
 				$before_match = $application_output;
+				$read = $expected_output;
 				$error = 'expected_output does not match application_output';
 			      }
+
+
+			    
 
 			    #
 			    # clean up the generated files
@@ -779,9 +793,7 @@ Total of $test_report->{global}->{test_count} tests (encountered $error_count er
 			 {
 			  description => $description,
 			  error => $error,
-			  expected => (ref $command_test->{read} eq 'ARRAY'
-				       ? $command_test->{read}->[1]
-				       : $command_test->{read}),
+			  expected => $expected,
 			  message => $message,
 			  module_name => $module_name,
 			  seen => $before_match,
