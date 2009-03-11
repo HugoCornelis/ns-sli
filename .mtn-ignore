@@ -1,4 +1,14 @@
 ^src/neurospaces/tmp_ascfile_struct.h$
+*Makefile.in$
+aclocal.m4$
+src/c2genesis/Makefile.in$
+src/neurospaces/Makefile.in$
+src/olf/Makefile.in$
+src/par/Makefile.in$
+src/script/Makefile.in$
+src/shell/Makefile.in$
+src/sim/Makefile.in$
+src/util/Makefile.in$
 Makefile$
 .*\@\.[ch]
 ylwrap

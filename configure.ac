@@ -3,7 +3,8 @@
 # $Format: "AC_INIT(${package}, ${label}, ${email})"$
 AC_INIT(ns-sli, python-2, hugo.cornelis@gmail.com)
 
-
+dnl Obtain operating system information.
+AC_CANONICAL_TARGET
 
 AC_CONFIG_SRCDIR(src)
 AC_CONFIG_HEADER(src/config.h)
@@ -35,6 +36,25 @@ AC_CHECK_HEADERS([ heccer/heccer.h ],[],[
 #])
 
 
+AC_MSG_CHECKING([Checking OS])
+AC_MSG_RESULT([Host is running $host_os.])
+case "$host_os" in
+
+  darwin*)
+
+    AC_MSG_CHECKING([Using libtool for MAC OS X.])
+    AR=libtool
+    ARFLAGS='-static -c -o'
+    AC_SUBST(AR)
+    AC_SUBST(ARFLAGS)
+    AC_MSG_RESULT([$AR $ARFLAGS])
+
+  ;;
+
+  *)
+
+  ;;
+esac
 
 
 AC_OUTPUT(Makefile \

@@ -167,7 +167,9 @@ struct sgttyb old_tty_stdin, old_tty_stdout, new_tty_stdin, new_tty_stdout;
 #endif /* TERMIO */
 static char area[1024];
 
+#if !defined(__APPLE__)
 #include <termio.h>
+#endif
 
 /*
 ** terminal capabilities
