@@ -51,8 +51,12 @@ case "$host_os" in
 
   ;;
 
-  *)
+  *) #default settings (Linux 2.6)
 
+    AR=ar
+    ARFLAGS='cru'
+    AC_SUBST(AR)
+    AC_SUBST(ARFLAGS)
   ;;
 esac
 
