@@ -647,98 +647,87 @@ Total of $test_report->{global}->{test_count} tests (encountered $error_count er
 			else
 			{
 			    # compose the alternatives regex
-			  if($read->{alternatives})
-			  {
 
-			    my $alternatives = $read->{alternatives};
+			    if ($read->{alternatives})
+			    {
+				my $alternatives = $read->{alternatives};
 
- 	    
-			    $expected = '(' . (join '|', map { quotemeta } @$alternatives) . ')';
+				$expected = '(' . (join '|', map { quotemeta } @$alternatives) . ')';
 
-			    # read from the application
+				# read from the application
 
-			    ($matched_pattern_position,
-			     $error,
-			     $successfully_matching_string,
-			     $before_match,
-			     $after_match)
-				= $exp->expect($timeout, "-re", $expected, );
+				($matched_pattern_position,
+				 $error,
+				 $successfully_matching_string,
+				 $before_match,
+				 $after_match)
+				    = $exp->expect($timeout, "-re", $expected, );
+			    }
+			    elsif ($read->{application_output_file})
+			    {
+				my $application_output_file
+				    = $read->{application_output_file};
 
+ 				print '** Application output file: $application_output_file\n';
 
-			  }
-			  elsif($read->{application_output_file})
-			  {
+				my $expected_output_file
+				    = $read->{expected_output_file};
 
-			    print "Reading in output and expected from file.\n";
-			    #
-			    # This is added to support reading in files
-			    # for testing. 
-			    #
-			    my $application_output_file = 
-			      $read->{application_output_file};
+ 				print '*** Expected output file: $expected_output_file\n';
 
-			    print 'Application output file: $application_output_file\n';
+				local $/;
 
-			    my $expected_output_file = 
-			      $read->{expected_output_file};
+				my $application_output = `cat "$application_output_file"`;
 
+				my $expected_output = `cat "$expected_output_file"`;
 
-			    print 'Expected output file: $expected_output_file\n';
+				$expected = $expected_output;
 
-			    local $/;
+				if ($expected_output eq $application_output)
+				{
+				    $before_match = $application_output;
+				}
+				else
+				{
+				    $before_match = $application_output;
 
-			    my $application_output = `cat "$application_output_file"`;
+				    $read = $expected_output;
 
-			    my $expected_output = `cat "$expected_output_file"`;
+				    $error = 'expected_output does not match application_output';
+				}
 
-			    $expected = $expected_output;
+				#t mando, why is this needed?? if the
+				#t application generates a file that we
+				#t use for testing, we remove it here,
+				#t but may be that the application still
+				#t needs it.
 
-# 			    ($matched_pattern_position,
-# 			     $error,
-# 			     $successfully_matching_string,
-# 			     $before_match,
-# 			     $after_match)
-# 				= $exp->expect($timeout, , );
+				#
+				# clean up the generated files
+				#
 
-			    if ($expected_output eq $application_output)
-			      {
+# 				print `pwd`;
 
-				$before_match = $application_output;
+				`rm -f $application_output_file`;
+			    }
+			    elsif ($read->{shell})
+			    {
+				my $shell = $read->{shell};
 
-#				$error = '@@@@@';
+				my $expected = `$shell`;
 
-			      }
+				($matched_pattern_position,
+				 $error,
+				 $successfully_matching_string,
+				 $before_match,
+				 $after_match)
+				    = $exp->expect($timeout, $expected, );
+
+			    }
 			    else
-			      {
-				$before_match = $application_output;
-				$read = $expected_output;
-				$error = 'expected_output does not match application_output';
-			      }
-
-
-			    
-
-			    #
-			    # clean up the generated files
-			    #
-			    print `pwd`;
-			    `rm -f $application_output_file`;
-
-			  }
-
-# 				= $exp->expect($timeout, "ThIs TeXt ShOuLd NeVeR oCcUr", );
-
-# 			    # loop over expected alternatives
-
-# 			    my $alternatives = $read->{alternatives};
-
-# 			    foreach my $alternative (@$alternatives)
-# 			    {
-# 				if ($before_match =~ /$alternative/)
-# 				{
-# 				    last;
-# 				}
-# 			    }
+			    {
+				die "test not understood by $0, aborting";
+			    }
 			}
 
 			$time_elapsed = tv_interval($time_start);
@@ -979,19 +968,19 @@ sub read_cmd_line
 	    "
 $0: test definition executor
 
-options :
-    email              allow to send emails, the default is taken from \$ENV{NEUROSPACES_HARNESS_OPTION_EMAIL}.
-    flattenout         flattenout the test definitions before testing,
-                       this experimental feature might increase test performance,
-                       by recycling test definitions.
-    help               print usage information.
-    numerical-compare  attempt to compare numbers numerically when string differences are found (default enabled).
-    randomize-order    randomize the order of the tests before executing them (require List::Util to be installed).
-    regex-selector     defines a regex to run specific tests.
-    report-disabled    include information of disabled tests in the test report.
-    timeout-multiplier multiply all timeout values with this constant.
-    timings            add timing information about the tests to the report.
-    verbose            set verbosity level.
+options:
+    --email              allow to send emails, the default is taken from \$ENV{NEUROSPACES_HARNESS_OPTION_EMAIL}.
+    --flattenout         flattenout the test definitions before testing,
+                         this experimental feature might increase test performance,
+                         by recycling test definitions.
+    --help               print usage information.
+    --numerical-compare  attempt to compare numbers numerically when string differences are found (default enabled).
+    --randomize-order    randomize the order of the tests before executing them (require List::Util to be installed).
+    --regex-selector     defines a regex to run specific tests.
+    --report-disabled    include information of disabled tests in the test report.
+    --timeout-multiplier multiply all timeout values with this constant.
+    --timings            add timing information about the tests to the report.
+    --verbose            set verbosity level.
 ";
 
 	exit 1;
@@ -1389,7 +1378,6 @@ sub numerical_compare
     {
 	if ($texts1->[$index] ne $texts2->[$index])
 	{
-
 	    return 'numerical_compare(): texts differ ($texts1->[$index] ne $texts2->[$index]), aborting with an error';
 	}
     }
