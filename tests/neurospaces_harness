@@ -261,7 +261,7 @@ sub main
 
     if (defined ($config->{model_library}))
     {
-x	$library_sha_before = model_library_sha();
+	$library_sha_before = model_library_sha();
 
     }
 
