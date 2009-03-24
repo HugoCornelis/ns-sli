@@ -174,6 +174,7 @@ static char rcsid[] = "$Id: shell_io.c,v 1.5 2005/10/04 22:05:13 svitak Exp $";
 #define MAXLINE 100 	/* maximum number of buffered lines */
 #define MAXESCAPE 100 	/* maximum number of characters in the escape buffer */
 
+
 extern EscapeCommand	*esc_command;
 static int		escape_char_index = 0;
 

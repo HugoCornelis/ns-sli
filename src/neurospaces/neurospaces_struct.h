@@ -4,7 +4,7 @@
 #define NEUROSPACES_STRUCT_H
 
 
-#include "struct_defs.h"
+#include "../sim/struct_defs.h"
 
 
 /* neurospaces model description */
