@@ -66,7 +66,8 @@ libshellc2genesis_a_OBJECTS = $(am_libshellc2genesis_a_OBJECTS)
 PROGRAMS = $(noinst_PROGRAMS)
 am_c2genesis_OBJECTS = c2genesis.$(OBJEXT)
 c2genesis_OBJECTS = $(am_c2genesis_OBJECTS)
-c2genesis_DEPENDENCIES =
+c2genesis_DEPENDENCIES = ./libshellc2genesis.a $(utildir)/libutil.a \
+	$(scriptdir)/libscript.a
 am_makefunc_OBJECTS = makefunc.$(OBJEXT)
 makefunc_OBJECTS = $(am_makefunc_OBJECTS)
 makefunc_LDADD = $(LDADD)
@@ -240,9 +241,9 @@ c2genesis_SOURCES = \
 	c2genesis.c
 
 c2genesis_LDADD = \
-	-L. -lshellc2genesis \
-	-L$(scriptdir) -lscript \
-	-L$(utildir) -lutil \
+	./libshellc2genesis.a \
+	$(utildir)/libutil.a \
+	$(scriptdir)/libscript.a \
 	-lfl \
 	-lncurses \
 	-lm

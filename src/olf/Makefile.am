@@ -32,7 +32,7 @@ CLEANFILES = \
 
 
 olf_d@.c: olflib.g
-	cpp -P olf_struct.h tmp_olf_struct.h -I../script -I../util -I../sim -I../shell
+	cpp -P olf_struct.h -I../script -I../util -I../sim -I../shell > tmp_olf_struct.h
 	$(makestructs) tmp_olf_struct.h olf -I ./olf_ext.h -NI -o olf_d@.c
 
 olf_g@.c: olflib.g
