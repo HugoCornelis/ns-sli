@@ -3,4 +3,4 @@
 aclocal \
 && autoconf \
 && autoheader \
-&& automake -a \
+&& automake -a --foreign
