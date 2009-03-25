@@ -11,9 +11,9 @@ my $test
     = {
        command_definitions => [
 			       {
-				arguments => [
-				  "$::config->{core_directory}/tests/scripts/0_listobjects.g",
-					],
+# 				arguments => [
+# 					      "$::config->{core_directory}/tests/scripts/0_listobjects.g",
+# 					     ],
 				command => 'src/nsgenesis',
 				command_tests => [
 						  {
@@ -41,9 +41,16 @@ asc_file            neurospaces         neutral             nsintegrator',
 					       reparer =>
 					       sub
 					       {
-						 $ENV{NEUROSPACES_MODELS} = $previous_library;
+						   if (defined $previous_library)
+						   {
+						       $ENV{NEUROSPACES_MODELS} = $previous_library;
+						   }
+						   else
+						   {
+						       undef $previous_library;
+						   }
 
-						 '';
+						   '';
 					       },
 					      },
 			       },
