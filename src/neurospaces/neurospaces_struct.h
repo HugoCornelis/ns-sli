@@ -6,6 +6,7 @@
 
 #include "../sim/struct_defs.h"
 
+#define MAX_NUM_OF_PROJECTIONS		20
 
 /* neurospaces model description */
 
@@ -28,8 +29,6 @@ struct neurospaces_type
     //m projections to be queried during reset
 
 //    struct ProjectionQuery *ppq;
-
-#define MAX_NUM_OF_PROJECTIONS		20
 
 //    struct symtab_Projection * ppproj[MAX_NUM_OF_PROJECTIONS];
 

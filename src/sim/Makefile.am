@@ -10,6 +10,7 @@ c2genesis = $(c2genesisdir)/c2genesis
 makestructs = $(c2genesisdir)/makestructs
 makefunc = $(c2genesisdir)/makefunc
 
+AM_CPPFLAGS = -DPRE_PROTO_TRAVERSAL
 
 INCLUDES = \
 	-I$(utildir) \
@@ -35,7 +36,7 @@ CLEANFILES = \
 noinst_LIBRARIES = libsim.a
 
 basic_d@.c:
-	cpp -P -I$(scriptdir) -I$(shelldir) -I$(pardir) sim_struct.h > tmp_sim_struct.h
+	$(CPP) -I$(scriptdir) -I$(shelldir) -I$(pardir) sim_struct.h > tmp_sim_struct.h
 	$(makestructs) tmp_sim_struct.h basic -I sim_ext.h -NI -o basic_d@.c
 	rm tmp_sim_struct.h
 
@@ -45,7 +46,6 @@ basic_g@.c:
 basic_f@.c:
 	$(makefunc) simfuncs basic > basic_f@.c
 
-AM_CFLAGS = -DPRE_PROTO_TRAVERSAL
 
 
 noinst_HEADERS = \
@@ -55,8 +55,7 @@ noinst_HEADERS = \
 	sim.h \
 	sim_struct.h \
 	sim_version.h \
-	struct_defs.h 
-
+	basic_g@.h 
 
 libsim_a_SOURCES= \
 		sim_access.c \
@@ -127,15 +126,7 @@ libsim_a_SOURCES= \
 		nsim_wildcard.c \
 	basic_d@.c \
 	basic_f@.c \
-	basic_g@.c \
-	basic_g@.h \
- 	sim_defs.h \
-	sim_ext.h  \
-	sim_func_ext.h \
-	sim.h \
-	sim_struct.h \
-	sim_version.h \
-	struct_defs.h
+	basic_g@.c
 
 
 

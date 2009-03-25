@@ -50,7 +50,7 @@ CLEANFILES = \
 
 
 ascfile_d@.c:
-	cpp -P ascfile_struct.h tmp_ascfile_struct.h -I../script -I../util -I../sim -I../shell -I/usr/local/heccer -DPRE_PROTO_TRAVERSAL
+	$(CPP) ascfile_struct.h -I../script -I../util -I../sim -I../shell -I/usr/local/heccer -DPRE_PROTO_TRAVERSAL > tmp_ascfile_struct.h
 	$(makestructs) tmp_ascfile_struct.h ascfile -I nsintegrator.h -NI -o ascfile_d@.c
 
 
@@ -62,7 +62,7 @@ ascfile_l@.c:
 
 
 neurospaces_d@.c:
-	cpp -P neurospaces_struct.h tmp_neurospaces_struct.h -I../script -I../util -I../sim -I../shell
+	$(CPP) neurospaces_struct.h -I../script -I../util -I../sim -I../shell > tmp_neurospaces_struct.h
 	$(makestructs) tmp_neurospaces_struct.h neurospaces -I neurospaces_ext.h -NI -o neurospaces_d@.c
 
 neurospaces_g@.c:
@@ -74,7 +74,7 @@ neurospaces_l@.c:
 
 
 nsintegrator_d@.c:
-	cpp -P nsintegrator_struct.h tmp_nsintegrator_struct.h -I../script -I../util -I../sim -I../shell -I/usr/local/neurospaces/instrumentor -DPRE_PROTO_TRAVERSAL
+	$(CPP) nsintegrator_struct.h -I../script -I../util -I../sim -I../shell -I/usr/local/neurospaces/instrumentor -DPRE_PROTO_TRAVERSAL > tmp_nsintegrator_struct.h
 	$(makestructs) tmp_nsintegrator_struct.h nsintegrator -I nsintegrator.h -NI -o nsintegrator_d@.c
 
 

@@ -49,6 +49,10 @@ case "$host_os" in
     AC_SUBST(ARFLAGS)
     AC_MSG_RESULT([$AR $ARFLAGS])
 
+
+    SYSLIBLINKS=' -lncurses -lfl -lreadline -lm'
+    AC_SUBST(SYSLIBLINKS)    
+
   ;;
 
   *) #default settings (Linux 2.6)
@@ -57,6 +61,9 @@ case "$host_os" in
     ARFLAGS='cru'
     AC_SUBST(AR)
     AC_SUBST(ARFLAGS)
+
+    SYSLIBLINKS='-lfl -lreadline -lhistory -lm -lncurses'
+    AC_SUBST(SYSLIBLINKS)
   ;;
 esac
 

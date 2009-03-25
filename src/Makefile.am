@@ -40,11 +40,8 @@ nsgenesis_LDADD = \
 	-L${libdir}/neurospaces/algorithms/symbol -lsymbol_algorithms \
 	-L${libdir}/heccer -lheccer \
 	-L${libdir}/heccer -lhneurospaces \
-	-lfl \
-	-lreadline \
-	-lhistory \
-	-lm \
-	-lncurses
+	$(SYSLIBLINKS)
+
 
 liblist: Makefile
 	@echo "# liblist - This file is generated automatically." > liblist
