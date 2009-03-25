@@ -1,8 +1,12 @@
 ^src/neurospaces/tmp_ascfile_struct.h$
 .*Makefile\.in$
+^aclocal\.m4$
+.*Makefile$
+.*Makefile\.in$
 aclocal\.m4$
 .*Makefile$
 .*\@\.[ch]
+ylwrap$
 ylwrap
 .*\.output$
 config.guess

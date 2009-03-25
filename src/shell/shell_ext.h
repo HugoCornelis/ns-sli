@@ -37,5 +37,4 @@
 /* mds3 changes */
 #include "system_deps.h"
 
-
 #endif /* SHELL_EXT_H */
