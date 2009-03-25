@@ -65,11 +65,11 @@
  *
 */
 
-#if defined(__APPLE__)
-  #include "../sim/struct_defs.h"
-#else
+//#if defined(__APPLE__)
+//  #include "../sim/struct_defs.h"
+//#else
   #include "struct_defs.h"
-#endif
+//#endif
 
 
 typedef struct tab_channel_type Tchan;

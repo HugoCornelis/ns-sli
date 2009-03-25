@@ -4,7 +4,7 @@
 #define NEUROSPACES_STRUCT_H
 
 
-#include "../sim/struct_defs.h"
+#include "struct_defs.h"
 
 #define MAX_NUM_OF_PROJECTIONS		20
 
@@ -12,6 +12,7 @@
 
 struct neurospaces_type
 {
+
     ELEMENT_TYPE
 
     //m globals from reading description file
