@@ -23,7 +23,7 @@ static char rcsid[] = "$Id: shell_esc.c,v 1.2 2005/06/26 08:25:37 svitak Exp $";
 
 #include "shell_ext.h"
 
-EscapeCommand	*esc_command;
+EscapeCommand	*esc_command = NULL;
 
 EscapeCommand *AddEscapeString(seq,string,exec_mode,id)
 char 	*seq;

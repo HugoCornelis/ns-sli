@@ -49,12 +49,13 @@ c2genesis_SOURCES = \
 	c2genesis.c
 
 c2genesis_LDADD = \
-	-L. -lshellc2genesis \
-	-L$(scriptdir) -lscript \
-	-L$(utildir) -lutil \
+	./libshellc2genesis.a \
+	$(utildir)/libutil.a \
+	$(scriptdir)/libscript.a \
 	-lfl \
 	-lncurses \
 	-lm
+
 
 
 makestructs_SOURCES = makestructs.c
