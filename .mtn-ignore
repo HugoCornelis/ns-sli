@@ -1,12 +1,12 @@
 ^src/neurospaces/tmp_ascfile_struct.h$
-.*Makefile\.in$
 ^aclocal\.m4$
 .*Makefile$
+.*Makefile\.in$
 .*\@\.[ch]
-ylwrap$
+^ylwrap$
 .*\.output$
-config.guess
-config.sub
+^config.guess$
+^config.sub$
 stamp-h1
 ^installed
 src/nsgenesis

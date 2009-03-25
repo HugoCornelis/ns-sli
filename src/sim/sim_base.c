@@ -61,9 +61,6 @@ static char rcsid[] = "$Id: sim_base.c,v 1.4 2005/07/01 10:03:08 svitak Exp $";
 #include <signal.h>
 #include <sys/types.h>
 #include <unistd.h>
-#if !defined(Solaris) && !defined(hpux) && !defined(MacOSXDarwin)
-#include <a.out.h>
-#endif
 #include "sim_ext.h"
 #include "profile.h"
 #include "shell_func_ext.h"
