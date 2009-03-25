@@ -11,9 +11,10 @@ my $test
     = {
        command_definitions => [
 			       {
-# 				arguments => [
-# 					      "$::config->{core_directory}/tests/scripts/0_listobjects.g",
-# 					     ],
+				arguments => [
+				  "$::config->{core_directory}/tests/scripts/basic-g/listobjects.g",
+					],
+
 				command => 'src/nsgenesis',
 				command_tests => [
 						  {
