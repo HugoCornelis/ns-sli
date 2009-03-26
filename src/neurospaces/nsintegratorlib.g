@@ -76,4 +76,6 @@ object	 nsintegrator  nsintegrator_type  NeurospacesIntegratorActor	genesis3 \
 
 addfunc		set_nsintegrator_verbose_level			do_set_nsintegrator_verbose_level		int
 
+// The cell reading utility
+addfunc 	readcell 	do_read_cell
 

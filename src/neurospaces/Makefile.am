@@ -123,6 +123,9 @@ libneurospaces_a_SOURCES = \
 	nslookup.c \
 	nsasc.c \
 	ascfileactor.c \
+	traverse.c \
+	hines_data.c \
+	new_parser.c \
 	neurospaces_d@.c \
 	neurospaces_g@.c \
 	neurospaces_l@.c \
