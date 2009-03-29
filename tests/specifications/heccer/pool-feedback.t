@@ -33,7 +33,7 @@ my $test
 				command_tests => [
 						  {
 						   numerical_compare => 1,
-						   description => "Is ota pool integrated correctly, one compartment, one pool with a feedback loop ?",,
+						   description => "Is a pool integrated correctly, one compartment, one pool with a feedback loop ?",
 						   read => (join '', $text_expected),
 						   timeout => 5,
 						   write => undef,
