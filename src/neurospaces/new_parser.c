@@ -291,16 +291,19 @@ static char rcsid[] = "$Id: new_parser.c,v 1.4 2006/01/09 16:28:50 svitak Exp $"
 #include <string.h>
 #include <time.h>
 #include "sim_ext.h"
-#include "tools.h"
-#include "seg_struct.h"
-#include "hh_struct.h"
-#include "dev_struct.h"
-#include "olf_struct.h"
-#include "buf_struct.h"
-#include "conc_struct.h"
-#include "conc_defs.h"
-#include "hines_struct.h"
-#include "newconn_struct.h"
+/* #include "tools.h" */
+/* #include "seg_struct.h" */
+/* #include "hh_struct.h" */
+/* #include "dev_struct.h" */
+
+//t why is the following present in the source ??
+/* #include "olf_struct.h" */
+
+/* #include "buf_struct.h" */
+/* #include "conc_struct.h" */
+/* #include "conc_defs.h" */
+/* #include "hines_struct.h" */
+/* #include "newconn_struct.h" */
 #include "result.h"
 #include "symtab.h"
 
@@ -376,15 +379,15 @@ static float MLambda;
 
 static char *chomp_leading_spaces();
 float	calc_dia(),calc_len();
-int		fill_arglist();
+/* int		fill_arglist(); */
 void add_spines();
 void add_fspine();
 void read_script();
 void unscale_kids();
 void scale_kids();
-void traverse_cell();
-void makeproto_func();
-void set_compt_field();
+/* void traverse_cell(); */
+/* void makeproto_func(); */
+/* void set_compt_field(); */
 void unscale_shells();
 
 float calc_surf(len,dia)
@@ -437,7 +440,7 @@ float calc_shell_vol(len,dia,thick)
 	return(volume);
 }
 
-Element *add_compartment(flags,name,link,len,dia,surface,volume,x0,y0,z0,x,y,z,split)
+struct symtab_HSolveListElement *add_compartment(flags,name,link,len,dia,surface,volume,x0,y0,z0,x,y,z,split)
 	int	flags;
 	char	*name;
 	char	*link;
@@ -450,7 +453,7 @@ Element *add_compartment(flags,name,link,len,dia,surface,volume,x0,y0,z0,x,y,z,s
 {
 	int 	i,argc;
 	char	*argv[10];
-	struct symcompartment_type  *compt,*lcompt;
+/* 	struct symcompartment_type  *compt,*lcompt; */
 	char	src[MAX_LINELEN],dest[MAX_LINELEN];
 	MsgIn	*msgin;
 	Element *elm,*lelm,*nelm;
@@ -459,8 +462,14 @@ Element *add_compartment(flags,name,link,len,dia,surface,volume,x0,y0,z0,x,y,z,s
 	float   rangauss();
 	int     Strindex();
 
-	compt = (struct symcompartment_type *)(GetElement(name));
-	if (compt) {
+	//t get compartment element
+
+	struct PidinStack *ppistComp = NULL;
+
+	struct symtab_HSolveListElement *phsleComp = PidinStackLookupTopSymbol(ppistComp);
+
+/* 	compt = (struct symcompartment_type *)(GetElement(name)); */
+	if (phsleComp) {
 	    fprintf(stderr,"double definition of (sym)compartment '%s'\n",name);
 	    return(NULL);
 	}
@@ -473,8 +482,11 @@ Element *add_compartment(flags,name,link,len,dia,surface,volume,x0,y0,z0,x,y,z,s
 	    do_copy(3,argv);
 	}
 
-	compt = (struct symcompartment_type *)(GetElement(name));
-	if (!compt) {
+	phsleComp = PidinStackLookupTopSymbol(ppistComp);
+
+/* 	compt = (struct symcompartment_type *)(GetElement(name)); */
+
+	if (!phsleComp) {
 	    fprintf(stderr,"could not find (sym)compartment '%s'\n",name);
 	    return(NULL);
 	}
@@ -491,452 +503,476 @@ Element *add_compartment(flags,name,link,len,dia,surface,volume,x0,y0,z0,x,y,z,s
 
 	/* Rescaling all kids of copied element to its dimensions
 	**  copied element is assumed to be cylindrical */
-	if ((elm=compt->child)) {
-	    tlen = compt->len;
-	    tdia = compt->dia;
-	    if (tdia <= 0.0) {
-		    fprintf(stderr,"Compartment '%s' has zero diameter\n",
-			    compt->name);
-		    return(NULL);
-	    }
-	    tsurface = calc_surf(tlen,tdia);
-	    tvolume = calc_vol(tlen,tdia);
-	    /* do any depth of tree */
-	    dochild=1;
-	    while (elm) {
-		/* go first to bottom of tree, as we may need to delete the top 
-		** only if we did not move back up last */
-		while (dochild) {
-		    if (elm->child) {           /* do subtree first */
-			elm=elm->child;
-		    } else {
-			break;
-		    }
-		}
-		if (!dochild) dochild=1;    /* next time do it again */
-		/* find nelm first: elm may be deleted by scale_kids */
-		if (elm->next) {   /* continue doing this subtree */
-		    nelm=elm->next;
-		} else {                    /* subtrees done */
-		    nelm=elm->parent;       /* move one up */
-		    dochild=0;
-		    if (nelm==(Element *)compt) {   /* done all subtrees */
-			nelm=NULL;
-		    }
-		}
-		/* EDS20l modification to copy index to compartment children */
-		if (Strindex(BaseObject(elm)->name,"compartment")>=0) {
-		    /* elm is a compartment, as it is not scaled it is assumed
-		    ** to have correct Cm, Rm, Ra and correct msgs. */
-		    lcompt=(struct symcompartment_type *)(elm);
-		    lcompt->index=compt->index;
-		    lcompt->initVm = EREST_ACT;
-		    lcompt->Em = ELEAK;
-		} else {	/* elm is not a compartment */
-		    unscale_kids(elm,&val,&val2,&val3,tdia,tlen,tsurface,tvolume,flags);
-		    scale_kids(elm,val,val2,val3,dia,len,surface,volume,flags);
-		}
-		elm=nelm;
-	    }
+/* 	if ((elm=compt->child)) { */
+/* 	    tlen = compt->len; */
+/* 	    tdia = compt->dia; */
+/* 	    if (tdia <= 0.0) { */
+/* 		    fprintf(stderr,"Compartment '%s' has zero diameter\n", */
+/* 			    compt->name); */
+/* 		    return(NULL); */
+/* 	    } */
+/* 	    tsurface = calc_surf(tlen,tdia); */
+/* 	    tvolume = calc_vol(tlen,tdia); */
+/* 	    /* do any depth of tree * */
+/* 	    dochild=1; */
+/* 	    while (elm) { */
+/* 		/* go first to bottom of tree, as we may need to delete the top  */
+/* 		** only if we did not move back up last * */
+/* 		while (dochild) { */
+/* 		    if (elm->child) {           /* do subtree first * */
+/* 			elm=elm->child; */
+/* 		    } else { */
+/* 			break; */
+/* 		    } */
+/* 		} */
+/* 		if (!dochild) dochild=1;    /* next time do it again * */
+/* 		/* find nelm first: elm may be deleted by scale_kids * */
+/* 		if (elm->next) {   /* continue doing this subtree * */
+/* 		    nelm=elm->next; */
+/* 		} else {                    /* subtrees done * */
+/* 		    nelm=elm->parent;       /* move one up * */
+/* 		    dochild=0; */
+/* 		    if (nelm==(Element *)compt) {   /* done all subtrees * */
+/* 			nelm=NULL; */
+/* 		    } */
+/* 		} */
+/* 		/* EDS20l modification to copy index to compartment children * */
+/* 		if (Strindex(BaseObject(elm)->name,"compartment")>=0) { */
+/* 		    /* elm is a compartment, as it is not scaled it is assumed */
+/* 		    ** to have correct Cm, Rm, Ra and correct msgs. * */
+/* 		    lcompt=(struct symcompartment_type *)(elm); */
+/* 		    lcompt->index=compt->index; */
+/* 		    lcompt->initVm = EREST_ACT; */
+/* 		    lcompt->Em = ELEAK; */
+/* 		} else {	/* elm is not a compartment * */
+/* 		    unscale_kids(elm,&val,&val2,&val3,tdia,tlen,tsurface,tvolume,flags); */
+/* 		    scale_kids(elm,val,val2,val3,dia,len,surface,volume,flags); */
+/* 		} */
+/* 		elm=nelm; */
+/* 	    } */
 
-	}
+/* 	} */
 
 	/* make messages to connect with parent compartment */
 	if (flags & NEW_CELL) {
 	    if (strcmp(link,"none") != 0) {
-		if (split==0) {
-		    /* check if splitting has changed name of parent */
-		    for (i=MaxSplit; i>1; i--) {
-			sprintf(src,"%d%s",i,link);
-			lcompt = (struct symcompartment_type *)(GetElement(src));
-			if (lcompt) {
-			    strcpy(link,src);
-			    break;
-			}
-		    }
-		}
+/* 		if (split==0) { */
+/* 		    /* check if splitting has changed name of parent * */
+/* 		    for (i=MaxSplit; i>1; i--) { */
+/* 			sprintf(src,"%d%s",i,link); */
+/* 			lcompt = (struct symcompartment_type *)(GetElement(src)); */
+/* 			if (lcompt) { */
+/* 			    strcpy(link,src); */
+/* 			    break; */
+/* 			} */
+/* 		    } */
+/* 		} */
 		/* for the messages we need to distinguish between 
 		**	asymmetric or symmetric compartments */
-		if (strcmp(BaseObject(compt)->name,"compartment") == 0) {
-		    argv[0] = "c_do_add_msg";
-		    argv[1] = link;
-		    argv[2] = name;
-		    argv[3] = "AXIAL";
-		    argv[4] = "previous_state";
-		    do_add_msg(5,argv);
+/* 		if (strcmp(BaseObject(compt)->name,"compartment") == 0) { */
+
+		//t set PARENT parameter to equal ../$link
+
+/* 		    argv[0] = "c_do_add_msg"; */
+/* 		    argv[1] = link; */
+/* 		    argv[2] = name; */
+/* 		    argv[3] = "AXIAL"; */
+/* 		    argv[4] = "previous_state"; */
+/* 		    do_add_msg(5,argv); */
 	    
-		    argv[1] = name;
-		    argv[2] = link;
-		    argv[3] = "RAXIAL";
-		    argv[4] = "Ra";
-		    argv[5] = "previous_state";
-		    for (i=1; i<=TAILWEIGHT; i+=1) {
-			do_add_msg(6,argv);
-		    }
-		} else if (strcmp(BaseObject(compt)->name,"symcompartment")==0) {
-		/* Check shape of parent compartment, if not found will default 
-		**  to cylinder */
-		    /* get pointer to parent compartment */
-		    lcompt=(struct symcompartment_type *)(GetElement(link));
-		    if (!lcompt) {
-			Error();
-			printf(" could not find symcompartment '%s'\n",link);
-			return(NULL);
-		    }
-		    /* setup axial current into head of name_compt */ 
-		    argv[0] = "c_do_add_msg";
-		    argv[1] = link;
-		    argv[2] = name;
-		    argv[3] = "CONNECTHEAD";
-		    argv[4] = "Ra";
-		    argv[5] = "previous_state";
-		    do_add_msg(6,argv);
+/* 		    argv[1] = name; */
+/* 		    argv[2] = link; */
+/* 		    argv[3] = "RAXIAL"; */
+/* 		    argv[4] = "Ra"; */
+/* 		    argv[5] = "previous_state"; */
+/* 		    for (i=1; i<=TAILWEIGHT; i+=1) { */
+/* 			do_add_msg(6,argv); */
+/* 		    } */
+/* 		} else if (strcmp(BaseObject(compt)->name,"symcompartment")==0) { */
+/* 		/* Check shape of parent compartment, if not found will default  */
+/* 		**  to cylinder * */
+/* 		    /* get pointer to parent compartment * */
+/* 		    lcompt=(struct symcompartment_type *)(GetElement(link)); */
+/* 		    if (!lcompt) { */
+/* 			Error(); */
+/* 			printf(" could not find symcompartment '%s'\n",link); */
+/* 			return(NULL); */
+/* 		    } */
+/* 		    /* setup axial current into head of name_compt *  */
+/* 		    argv[0] = "c_do_add_msg"; */
+/* 		    argv[1] = link; */
+/* 		    argv[2] = name; */
+/* 		    argv[3] = "CONNECTHEAD"; */
+/* 		    argv[4] = "Ra"; */
+/* 		    argv[5] = "previous_state"; */
+/* 		    do_add_msg(6,argv); */
 
-		    /* if another compartment is already the child of 
-		    ** parent of link_compt, cross link with it */
-		    MSGLOOP(lcompt, msgin) {
-			case 1: /* CONNECTTAIL */
-			    /* another child compartment exists! */
-			    /* crossing axial R to head of name_compt */
-			    lelm=msgin->src;
-			    sprintf(src,"%s[%d]",lelm->name,lelm->index);
-			    argv[1] = src;
-			    argv[2] = name;
-			    argv[3] = "CONNECTCROSS";
-			    do_add_msg(6,argv);
-			    /* crossing axial R to head cross_compt */
-			    argv[1] = name;
-			    argv[2] = src;
-			    do_add_msg(6,argv);
-			    break;
-			default:
-			    break;
-		    }
-		    /* setup axial current out to tail of link_compt */
-		    argv[1] = name;
-		    argv[2] = link;
-		    argv[3] = "CONNECTTAIL";
-		    for (i=1; i<=TAILWEIGHT; i+=1) {
-			do_add_msg(6,argv);
-		    }
-		} else {  /* neither compartment or symcompartment */
-		    Error();
-		    printf("'%s' is not a (sym)compartment!\n",comptname);
-		    return(NULL);
-		}
-		/* This handles the case where we want to send messages
-		**  to the compartment proximal to current compartment,
-		**  using the -env variables. The less exotic cases are
-		**  handled later on.
-		** These messages may be present in any subelement
-		**  of the prototype and should be of the form:
-		**	sendmsg#	"-/...	./...	MSGTYPE	MSGVARS"
-		**  or
-		**	sendmsg#	"./...	-/...	MSGTYPE	MSGVARS"
-		**  where the - symbol refers to the parent element and
-		**  the (first) . symbol to the new compartment.  The
-		**  rest of the subpath has to be specified completely
-		**
-		**  Since environment vars have been replaced by extended
-		**  fields, the code below has been changed to look for
-		**  the specific variable names of the form described above
-		**  and the names must begin with sendmsg1 and go in numer-
-		**  ical order.  The old code allowed for any variable which
-		**  started with sendmsg.  All occurances of the sendmsg
-		**  variables in neurokit appear to be consistent with the
-		**  new requirements.
-		*/
-		if ((elm=compt->child)) {
-		    for(;elm;elm=elm->next){
-			for(i = 1 ; 1; i++) {
-			    char	varname[20];
-			    char*	varvalue;
+/* 		    /* if another compartment is already the child of  */
+/* 		    ** parent of link_compt, cross link with it * */
+/* 		    MSGLOOP(lcompt, msgin) { */
+/* 			case 1: /* CONNECTTAIL * */
+/* 			    /* another child compartment exists! * */
+/* 			    /* crossing axial R to head of name_compt * */
+/* 			    lelm=msgin->src; */
+/* 			    sprintf(src,"%s[%d]",lelm->name,lelm->index); */
+/* 			    argv[1] = src; */
+/* 			    argv[2] = name; */
+/* 			    argv[3] = "CONNECTCROSS"; */
+/* 			    do_add_msg(6,argv); */
+/* 			    /* crossing axial R to head cross_compt * */
+/* 			    argv[1] = name; */
+/* 			    argv[2] = src; */
+/* 			    do_add_msg(6,argv); */
+/* 			    break; */
+/* 			default: */
+/* 			    break; */
+/* 		    } */
+/* 		    /* setup axial current out to tail of link_compt * */
+/* 		    argv[1] = name; */
+/* 		    argv[2] = link; */
+/* 		    argv[3] = "CONNECTTAIL"; */
+/* 		    for (i=1; i<=TAILWEIGHT; i+=1) { */
+/* 			do_add_msg(6,argv); */
+/* 		    } */
+/* 		} else {  /* neither compartment or symcompartment * */
+/* 		    Error(); */
+/* 		    printf("'%s' is not a (sym)compartment!\n",comptname); */
+/* 		    return(NULL); */
+/* 		} */
+/* 		/* This handles the case where we want to send messages */
+/* 		**  to the compartment proximal to current compartment, */
+/* 		**  using the -env variables. The less exotic cases are */
+/* 		**  handled later on. */
+/* 		** These messages may be present in any subelement */
+/* 		**  of the prototype and should be of the form: */
+/* 		**	sendmsg#	"-/...	./...	MSGTYPE	MSGVARS" */
+/* 		**  or */
+/* 		**	sendmsg#	"./...	-/...	MSGTYPE	MSGVARS" */
+/* 		**  where the - symbol refers to the parent element and */
+/* 		**  the (first) . symbol to the new compartment.  The */
+/* 		**  rest of the subpath has to be specified completely */
+/* 		** */
+/* 		**  Since environment vars have been replaced by extended */
+/* 		**  fields, the code below has been changed to look for */
+/* 		**  the specific variable names of the form described above */
+/* 		**  and the names must begin with sendmsg1 and go in numer- */
+/* 		**  ical order.  The old code allowed for any variable which */
+/* 		**  started with sendmsg.  All occurances of the sendmsg */
+/* 		**  variables in neurokit appear to be consistent with the */
+/* 		**  new requirements. */
+/* 		* */
+/* 		if ((elm=compt->child)) { */
+/* 		    for(;elm;elm=elm->next){ */
+/* 			for(i = 1 ; 1; i++) { */
+/* 			    char	varname[20]; */
+/* 			    char*	varvalue; */
 
-			    sprintf(varname, "addmsg%d", i);
-			    varvalue = GetExtField(elm, varname);
-			    if (varvalue == NULL) {
-				sprintf(varname, "sendmsg%d", i);
-				varvalue = GetExtField(elm,varname);
-			    }
+/* 			    sprintf(varname, "addmsg%d", i); */
+/* 			    varvalue = GetExtField(elm, varname); */
+/* 			    if (varvalue == NULL) { */
+/* 				sprintf(varname, "sendmsg%d", i); */
+/* 				varvalue = GetExtField(elm,varname); */
+/* 			    } */
 
-			    if (varvalue == NULL)
-				break;
+/* 			    if (varvalue == NULL) */
+/* 				break; */
 
-			    /* since the zeroth argv is already filled*/
-			    argc=fill_arglist(argv+1,varvalue)+1;
-			    if (strncmp(argv[1],"-/",2)==0) {
-				/* source is parent sub-element */
-				argv[1] +=1;  /* skip the '-' */
-				sprintf(src,"%s%s",link,argv[1]);
-				argv[2] +=1;  /* skip the '.' */
-				sprintf(dest,"%s%s",name,argv[2]);
-				argv[1] = src;
-				argv[2] = dest;
-				lelm=(GetElement(src));
-				if (lelm) {
-				    /* only if parent element exists */
-				    do_add_msg(argc,argv);
-				}
-			    } else if (strncmp(argv[2],"-/",2)==0) {
-				/* destination is parent sub-element */
-				argv[1] +=1;  /* skip the '.' */
-				sprintf(src,"%s%s",name,argv[1]);
-				argv[2] +=1;  /* skip the '-' */
-				sprintf(dest,"%s%s",link,argv[2]);
-				argv[1] = src;
-				argv[2] = dest;
-				lelm=(GetElement(dest));
-				if (lelm) {
-					/* only if parent element exists */
-					do_add_msg(argc,argv);
-				}
-			    }
-			}
-		    }
-		}
+/* 			    /* since the zeroth argv is already filled* */
+/* 			    argc=fill_arglist(argv+1,varvalue)+1; */
+/* 			    if (strncmp(argv[1],"-/",2)==0) { */
+/* 				/* source is parent sub-element * */
+/* 				argv[1] +=1;  /* skip the '-' * */
+/* 				sprintf(src,"%s%s",link,argv[1]); */
+/* 				argv[2] +=1;  /* skip the '.' * */
+/* 				sprintf(dest,"%s%s",name,argv[2]); */
+/* 				argv[1] = src; */
+/* 				argv[2] = dest; */
+/* 				lelm=(GetElement(src)); */
+/* 				if (lelm) { */
+/* 				    /* only if parent element exists * */
+/* 				    do_add_msg(argc,argv); */
+/* 				} */
+/* 			    } else if (strncmp(argv[2],"-/",2)==0) { */
+/* 				/* destination is parent sub-element * */
+/* 				argv[1] +=1;  /* skip the '.' * */
+/* 				sprintf(src,"%s%s",name,argv[1]); */
+/* 				argv[2] +=1;  /* skip the '-' * */
+/* 				sprintf(dest,"%s%s",link,argv[2]); */
+/* 				argv[1] = src; */
+/* 				argv[2] = dest; */
+/* 				lelm=(GetElement(dest)); */
+/* 				if (lelm) { */
+/* 					/* only if parent element exists * */
+/* 					do_add_msg(argc,argv); */
+/* 				} */
+/* 			    } */
+/* 			} */
+/* 		    } */
+/* 		} */
 	    }
 	}
 
-	/* compute membrane surface and RA */
-	if (len==0.0) {	/* SPHERICAL */
-	    /* Thinking of the 'one-dimensional' cable resistance of a 
-	    ** sphere is a bit of a challenge...  As an approximation we
-	    ** choose here the Ra of an equivalent cylinder C with the same
-	    ** surface and volume as the sphere S: 
-	    **  lenC = 3/2 diaS  and  diaC = 2/3 diaS
-	    */
-	    compt->Ra = 13.50 * RA / (dia * PI);
-	}
-	else {		/* CYLINDRICAL */
-	    compt->Ra = 4.0 * RA * len /(dia * dia * PI);
-	}
-	compt->dia = dia;	/* needed by spine routines */
-	compt->len = len;
-	Gabs_position(compt,x0,y0,z0,x,y,z);
+/* 	/* compute membrane surface and RA * */
+/* 	if (len==0.0) {	/* SPHERICAL * */
+/* 	    /* Thinking of the 'one-dimensional' cable resistance of a  */
+/* 	    ** sphere is a bit of a challenge...  As an approximation we */
+/* 	    ** choose here the Ra of an equivalent cylinder C with the same */
+/* 	    ** surface and volume as the sphere S:  */
+/* 	    **  lenC = 3/2 diaS  and  diaC = 2/3 diaS */
+/* 	    * */
+/* 	    compt->Ra = 13.50 * RA / (dia * PI); */
+/* 	} */
+/* 	else {		/* CYLINDRICAL * */
+/* 	    compt->Ra = 4.0 * RA * len /(dia * dia * PI); */
+/* 	} */
+
+	//t set diameter and length
+
+	SymbolSetParameterContext(phsleComp, "DIA", NULL);
+	SymbolSetParameterDouble(phsleComp, "DIA", dia);
+	SymbolSetParameterDouble(phsleComp, "LENGTH", len);
+
+/* 	compt->dia = dia;	/* needed by spine routines * */
+/* 	compt->len = len; */
+
+	//t not sure but perhaps we need to set X,Y,Z (check if is it
+	//t calculated correctly by the model-container)
+
+/* 	Gabs_position(compt,x0,y0,z0,x,y,z); */
+
 	tsurface = *surface;
 	if (len > 0.0) { /* CYLINDRICAL */
 	    if (flags & SPINES) {
-			if (dia <= RDENDR_DIAM) {
-				val = len * SPINE_DENS;  /* number of collapsed spines */
-				if ((dia > RDENDR_MIN) && (SPINE_FREQ != 0.0)) {
-					add_spines(flags,compt,name,&val,len);
-				}
-			} else {
-				val=0;
-			}
-			if ((dia > FDENDR_MIN) && (dia <= FDENDR_DIAM)) {
-				if (SPINE_NUM>0) {
-					if (SKIP_COUNT>=SPINE_SKIP) {
-						add_fspine(flags,compt,name,&val,0,0);
-						SPINE_NUM--;
-						SKIP_COUNT-=SPINE_SKIP;
-					}
-				}
-				SKIP_COUNT+=1.0;
-			}
-			if (val>0) tsurface = tsurface + val * SPINE_SURF;
-		}
-	}
-	if (flags & MEMB_FLAG)
-		tsurface *= MEMB_FACTOR;
-
-	compt->Cm = CM * tsurface;
-	compt->Rm = RM / tsurface;
-	compt->initVm = EREST_ACT;
-	compt->Em = ELEAK;
-	return((Element *)compt);
-}
-
-void add_spines(flags,dendr,name,spinenum,len)
-	int     flags;
-	struct symcompartment_type  *dendr;
-	char	*name;
-	float	*spinenum;
-	float	len;
-{
-	float	l,u,v;
-	int	i,r;
-
-	if (SPINE_FREQ == 1.0) {
-		/* give every comp 1 spine */
-		r = 1.0;
-	} else if (SPINE_FREQ > 1.0) {
-		if (AV_LENGTH > 0.0) {
-		/* If the user wants more than 1 spine per comp then the best
-		** distibution is at least one per comp. We try to spread
-		** additional ones preferentially over longer comps */ 
-		    v = len / AV_LENGTH;
-		    if (v > 1.0) {
-			    l = SPINE_FREQ;
-			    u = SPINE_FREQ + v;
-		    } else {
-			    l = SPINE_FREQ - 1.0 + v;
-			    if (l < 1) {
-			    /* always at least one spine */
-				    l = 1.0;
-			    }
-			    u = SPINE_FREQ;
-		    }
-		    r = frandom(l,u);
-		} else {
-		    r = SPINE_FREQ;
-		}
-	} else { 	/* SPINE_FREQ < 1.0 */
-		/* less than one spine per comp, random distribution independent
-		** of length */
-		l = SPINE_FREQ / 2;
-		u = SPINE_FREQ * 2;
-		r = frandom(l,u);
-	}
-	for (i=1; i<=r; i++) {
-		add_fspine(flags,dendr,name,spinenum,i,r);
-	}
-}
-
-void add_fspine(flags,dendr,name,spinenum,num,total)
-	int     flags;
-	struct symcompartment_type  *dendr;
-	char	*name;
-	float	*spinenum;
-	int	num,total;
-{
-	struct  symcompartment_type  *spine;
-	Element	*elm;
-	int	oldflags;
-	char	spinename[20],oldcomptname[NAMELEN];
-	float   len,dia,lratio,x = 0.0,y = 0.0,z = 0.0,surf,vol;
-	float   rangauss();
-
-	/* store values */
-	strcpy(oldcomptname,comptname);
-	oldflags=flags;
-	if (num>0) {
-	    strcpy(comptname,spine_proto);
-	} else {
-	    strcpy(comptname,fspine_proto);
-	}
-	flags &= ~SPINES;
-
-	*spinenum = *spinenum - 1;
-	strcpy(spinename,"spine[");
-	strcat(spinename,itoa(NUM_SPINES));
-	strcat(spinename,rbracket);
-	spine = (struct symcompartment_type *)(GetElement(comptname));
-	if (!spine) {
-	    fprintf(stderr,"'%s' not found\n",comptname);
-	    return;
-	}
-	len=spine->len;
-	dia=spine->dia;
-	if (flags & RANDSIZE) {
-	    if ((len>0.0)&&(Vlen>0.0)) len=rangauss(len,Vlen);
-	    if (Vdia>0.0) dia=rangauss(dia,Vdia);
-	} else if (flags & PROPRANDSIZE) {
-	    if ((len>0.0)&&(Vlen>0.0)) len=rangauss(len,Vlen*len*len);
-	    if (Vdia>0.0) dia=rangauss(dia,Vdia*dia*dia);
-	}
-	if (flags & DISTSPINE) {
-	/* distribute spines evenly over the surface of the parent cylinder */
-	    /*
-	    set_spine_position(dendr,spine,num,total);
-	    */
-	} else {
-	    if (len > 0.0) {
-		lratio=len/spine->len;
-	    } else {
-		lratio=1.0;
+/* 			if (dia <= RDENDR_DIAM) { */
+/* 				val = len * SPINE_DENS;  /* number of collapsed spines * */
+/* 				if ((dia > RDENDR_MIN) && (SPINE_FREQ != 0.0)) { */
+/* 					add_spines(flags,compt,name,&val,len); */
+/* 				} */
+/* 			} else { */
+/* 				val=0; */
+/* 			} */
+/* 			if ((dia > FDENDR_MIN) && (dia <= FDENDR_DIAM)) { */
+/* 				if (SPINE_NUM>0) { */
+/* 					if (SKIP_COUNT>=SPINE_SKIP) { */
+/* 						add_fspine(flags,compt,name,&val,0,0); */
+/* 						SPINE_NUM--; */
+/* 						SKIP_COUNT-=SPINE_SKIP; */
+/* 					} */
+/* 				} */
+/* 				SKIP_COUNT+=1.0; */
+/* 			} */
+/* 			if (val>0) tsurface = tsurface + val * SPINE_SURF; */
 	    }
-	    x = dendr->x + lratio * spine->x;
-	    y = dendr->y + lratio * spine->y;
-	    z = dendr->z + lratio * spine->z;
 	}
-	if (!(elm=add_compartment(flags,spinename,name,len,dia,&surf,&vol,dendr->x,dendr->y,dendr->z,x,y,z,0))) return;
-	NUM_SPINES++;
+/* 	if (flags & MEMB_FLAG) */
+/* 		tsurface *= MEMB_FACTOR; */
 
-	/* restore values */
-	strcpy(comptname,oldcomptname);
-	flags=oldflags;
+	SymbolSetParameterDouble(phsleComp, "SURFACE", tsurface);
+
+/* 	compt->Cm = CM * tsurface; */
+/* 	compt->Rm = RM / tsurface; */
+
+	SymbolSetParameterDouble(phsleComp, "Vm_init", EREST_ACT);
+
+/* 	compt->initVm = EREST_ACT; */
+
+	SymbolSetParameterDouble(phsleComp, "ELEAK", ELEAK);
+
+/* 	compt->Em = ELEAK; */
+
+	return(phsleComp);
 }
 
-Element *add_channel(name,parent)
-	char	*name;
-	char	*parent;
-{
-	char	*argv[10];
-	Element	*elm;
-	static char	dest[NAMELEN];
-	char	*oname;
+/* void add_spines(flags,dendr,name,spinenum,len) */
+/* 	int     flags; */
+/* 	struct symcompartment_type  *dendr; */
+/* 	char	*name; */
+/* 	float	*spinenum; */
+/* 	float	len; */
+/* { */
+/* 	float	l,u,v; */
+/* 	int	i,r; */
 
-	if (!(elm = GetElement(name)))
-		return(NULL);
+/* 	if (SPINE_FREQ == 1.0) { */
+/* 		/* give every comp 1 spine * */
+/* 		r = 1.0; */
+/* 	} else if (SPINE_FREQ > 1.0) { */
+/* 		if (AV_LENGTH > 0.0) { */
+/* 		/* If the user wants more than 1 spine per comp then the best */
+/* 		** distibution is at least one per comp. We try to spread */
+/* 		** additional ones preferentially over longer comps *  */
+/* 		    v = len / AV_LENGTH; */
+/* 		    if (v > 1.0) { */
+/* 			    l = SPINE_FREQ; */
+/* 			    u = SPINE_FREQ + v; */
+/* 		    } else { */
+/* 			    l = SPINE_FREQ - 1.0 + v; */
+/* 			    if (l < 1) { */
+/* 			    /* always at least one spine * */
+/* 				    l = 1.0; */
+/* 			    } */
+/* 			    u = SPINE_FREQ; */
+/* 		    } */
+/* 		    r = frandom(l,u); */
+/* 		} else { */
+/* 		    r = SPINE_FREQ; */
+/* 		} */
+/* 	} else { 	/* SPINE_FREQ < 1.0 * */
+/* 		/* less than one spine per comp, random distribution independent */
+/* 		** of length * */
+/* 		l = SPINE_FREQ / 2; */
+/* 		u = SPINE_FREQ * 2; */
+/* 		r = frandom(l,u); */
+/* 	} */
+/* 	for (i=1; i<=r; i++) { */
+/* 		add_fspine(flags,dendr,name,spinenum,i,r); */
+/* 	} */
+/* } */
+
+/* void add_fspine(flags,dendr,name,spinenum,num,total) */
+/* 	int     flags; */
+/* 	struct symcompartment_type  *dendr; */
+/* 	char	*name; */
+/* 	float	*spinenum; */
+/* 	int	num,total; */
+/* { */
+/* 	struct  symcompartment_type  *spine; */
+/* 	Element	*elm; */
+/* 	int	oldflags; */
+/* 	char	spinename[20],oldcomptname[NAMELEN]; */
+/* 	float   len,dia,lratio,x = 0.0,y = 0.0,z = 0.0,surf,vol; */
+/* 	float   rangauss(); */
+
+/* 	/* store values * */
+/* 	strcpy(oldcomptname,comptname); */
+/* 	oldflags=flags; */
+/* 	if (num>0) { */
+/* 	    strcpy(comptname,spine_proto); */
+/* 	} else { */
+/* 	    strcpy(comptname,fspine_proto); */
+/* 	} */
+/* 	flags &= ~SPINES; */
+
+/* 	*spinenum = *spinenum - 1; */
+/* 	strcpy(spinename,"spine["); */
+/* 	strcat(spinename,itoa(NUM_SPINES)); */
+/* 	strcat(spinename,rbracket); */
+/* 	spine = (struct symcompartment_type *)(GetElement(comptname)); */
+/* 	if (!spine) { */
+/* 	    fprintf(stderr,"'%s' not found\n",comptname); */
+/* 	    return; */
+/* 	} */
+/* 	len=spine->len; */
+/* 	dia=spine->dia; */
+/* 	if (flags & RANDSIZE) { */
+/* 	    if ((len>0.0)&&(Vlen>0.0)) len=rangauss(len,Vlen); */
+/* 	    if (Vdia>0.0) dia=rangauss(dia,Vdia); */
+/* 	} else if (flags & PROPRANDSIZE) { */
+/* 	    if ((len>0.0)&&(Vlen>0.0)) len=rangauss(len,Vlen*len*len); */
+/* 	    if (Vdia>0.0) dia=rangauss(dia,Vdia*dia*dia); */
+/* 	} */
+/* 	if (flags & DISTSPINE) { */
+/* 	/* distribute spines evenly over the surface of the parent cylinder * */
+/* 	    /* */
+/* 	    set_spine_position(dendr,spine,num,total); */
+/* 	    * */
+/* 	} else { */
+/* 	    if (len > 0.0) { */
+/* 		lratio=len/spine->len; */
+/* 	    } else { */
+/* 		lratio=1.0; */
+/* 	    } */
+/* 	    x = dendr->x + lratio * spine->x; */
+/* 	    y = dendr->y + lratio * spine->y; */
+/* 	    z = dendr->z + lratio * spine->z; */
+/* 	} */
+/* 	if (!(elm=add_compartment(flags,spinename,name,len,dia,&surf,&vol,dendr->x,dendr->y,dendr->z,x,y,z,0))) return; */
+/* 	NUM_SPINES++; */
+
+/* 	/* restore values * */
+/* 	strcpy(comptname,oldcomptname); */
+/* 	flags=oldflags; */
+/* } */
+
+/* Element *add_channel(name,parent) */
+/* 	char	*name; */
+/* 	char	*parent; */
+/* { */
+/* 	char	*argv[10]; */
+/* 	Element	*elm; */
+/* 	static char	dest[NAMELEN]; */
+/* 	char	*oname; */
+
+/* 	if (!(elm = GetElement(name))) */
+/* 		return(NULL); */
 	
-	sprintf (dest,"%s/%s[%d]",parent,elm->name,elm->index);
-	argv[0] = "c_do_copy";
-	argv[1] = name;
-	argv[2] = dest;
-	do_copy(3,argv);
+/* 	sprintf (dest,"%s/%s[%d]",parent,elm->name,elm->index); */
+/* 	argv[0] = "c_do_copy"; */
+/* 	argv[1] = name; */
+/* 	argv[2] = dest; */
+/* 	do_copy(3,argv); */
 
-	if (!(elm = GetElement(dest)))
-		return(NULL);
+/* 	if (!(elm = GetElement(dest))) */
+/* 		return(NULL); */
 
-	abs_position(elm,elm->parent->x,elm->parent->y,elm->parent->z);
+/* 	abs_position(elm,elm->parent->x,elm->parent->y,elm->parent->z); */
 
-	oname = BaseObject(elm)->name;
+/* 	oname = BaseObject(elm)->name; */
 
-	argv[0] = "c_do_add_msg";
-	if (strcmp(oname,"channelC") == 0) {
-		argv[1] = dest;
-		argv[2] = parent;
-		argv[3] = "CHANNEL";
-		argv[4] = "Gk";
-		argv[5] = "Ek";
-		do_add_msg(6,argv);
-	} else if (strcmp(oname,"hh_channel") == 0 ||
-		strcmp(oname,"tabchannel") == 0 ||
-                strcmp(oname,"tab2Dchannel") == 0 ||
-		strncmp(oname,"tabcurrent",10) == 0 ||
-		strncmp(oname,"channel",7) == 0 ||
-		strcmp(oname,"synchan") == 0 ||
-		strcmp(oname,"synchan2") == 0 ||
-		strcmp(oname,"hebbsynchan") == 0 ||
-		strcmp(oname,"ddsyn") == 0 ||
-		strcmp(oname,"receptor2") == 0) {
-		argv[1] = dest;
-		argv[2] = parent;
-		argv[3] = "CHANNEL";
-		argv[4] = "Gk";
-		argv[5] = "Ek";
-		do_add_msg(6,argv);
+/* 	argv[0] = "c_do_add_msg"; */
+/* 	if (strcmp(oname,"channelC") == 0) { */
+/* 		argv[1] = dest; */
+/* 		argv[2] = parent; */
+/* 		argv[3] = "CHANNEL"; */
+/* 		argv[4] = "Gk"; */
+/* 		argv[5] = "Ek"; */
+/* 		do_add_msg(6,argv); */
+/* 	} else if (strcmp(oname,"hh_channel") == 0 || */
+/* 		strcmp(oname,"tabchannel") == 0 || */
+/*                 strcmp(oname,"tab2Dchannel") == 0 || */
+/* 		strncmp(oname,"tabcurrent",10) == 0 || */
+/* 		strncmp(oname,"channel",7) == 0 || */
+/* 		strcmp(oname,"synchan") == 0 || */
+/* 		strcmp(oname,"synchan2") == 0 || */
+/* 		strcmp(oname,"hebbsynchan") == 0 || */
+/* 		strcmp(oname,"ddsyn") == 0 || */
+/* 		strcmp(oname,"receptor2") == 0) { */
+/* 		argv[1] = dest; */
+/* 		argv[2] = parent; */
+/* 		argv[3] = "CHANNEL"; */
+/* 		argv[4] = "Gk"; */
+/* 		argv[5] = "Ek"; */
+/* 		do_add_msg(6,argv); */
 
-		argv[1] = parent;
-		argv[2] = dest;
-		argv[3] = "VOLTAGE";
-		argv[4] = "Vm";
-		do_add_msg(5,argv);
-	} else if (strcmp(oname,"vdep_channel") == 0) {
-		argv[1] = dest;
-		argv[2] = parent;
-		argv[3] = "CHANNEL";
-		argv[4] = "Gk";
-		argv[5] = "Ek";
-		do_add_msg(6,argv);
+/* 		argv[1] = parent; */
+/* 		argv[2] = dest; */
+/* 		argv[3] = "VOLTAGE"; */
+/* 		argv[4] = "Vm"; */
+/* 		do_add_msg(5,argv); */
+/* 	} else if (strcmp(oname,"vdep_channel") == 0) { */
+/* 		argv[1] = dest; */
+/* 		argv[2] = parent; */
+/* 		argv[3] = "CHANNEL"; */
+/* 		argv[4] = "Gk"; */
+/* 		argv[5] = "Ek"; */
+/* 		do_add_msg(6,argv); */
 
-		argv[1] = parent;
-		argv[2] = dest;
-		argv[3] = "VOLTAGE";
-		argv[4] = "Vm";
-		do_add_msg(5,argv);
-	} else if (strcmp(oname,"graded") == 0 ||
-		strcmp(oname,"spikegen") == 0 ||
-		strcmp(oname,"spike") == 0) {
-		argv[1] = parent;
-		argv[2] = dest;
-		argv[3] = "INPUT";
-		argv[4] = "Vm";
-		do_add_msg(5,argv);
-	}
-	return(elm);
-}
+/* 		argv[1] = parent; */
+/* 		argv[2] = dest; */
+/* 		argv[3] = "VOLTAGE"; */
+/* 		argv[4] = "Vm"; */
+/* 		do_add_msg(5,argv); */
+/* 	} else if (strcmp(oname,"graded") == 0 || */
+/* 		strcmp(oname,"spikegen") == 0 || */
+/* 		strcmp(oname,"spike") == 0) { */
+/* 		argv[1] = parent; */
+/* 		argv[2] = dest; */
+/* 		argv[3] = "INPUT"; */
+/* 		argv[4] = "Vm"; */
+/* 		do_add_msg(5,argv); */
+/* 	} */
+/* 	return(elm); */
+/* } */
 
 
 void parse_compartment(flags,name,parent,x,y,z,x00,y00,z00,d,nargs,ch,dens)
@@ -1083,44 +1119,44 @@ void parse_compartment(flags,name,parent,x,y,z,x00,y00,z00,d,nargs,ch,dens)
 				name,nlambda);
 	}
 
-	for (j = 7,k=0 ; j < nargs ; j += 2,k++) {
-		sprintf(src,"/library/%s",ch[k]);
-		chanlist[k] = NULL;
-		if (!(elm = add_channel(src,name))) {
-			set_compt_field(compt,ch[k],dens[k],len,d,flags);
-			continue;
-		}
-		chanlist[k] = elm;
-		scale_kids(elm,dens[k],val2,val3,d,len,&surf,&vol,flags);
-	}
-	argv[0] = "c_do_add_msg";
-	for (j = 7,k=0 ; j < nargs ; j += 2,k++) {
-		if (!(elm = chanlist[k]))
-			continue;
-		ch_name = ch[k];
-		for (i = 1; 1; i++) {
-		    char	varname[20];
-		    char*	varvalue;
+/* 	for (j = 7,k=0 ; j < nargs ; j += 2,k++) { */
+/* 		sprintf(src,"/library/%s",ch[k]); */
+/* 		chanlist[k] = NULL; */
+/* 		if (!(elm = add_channel(src,name))) { */
+/* 			set_compt_field(compt,ch[k],dens[k],len,d,flags); */
+/* 			continue; */
+/* 		} */
+/* 		chanlist[k] = elm; */
+/* 		scale_kids(elm,dens[k],val2,val3,d,len,&surf,&vol,flags); */
+/* 	} */
+/* 	argv[0] = "c_do_add_msg"; */
+/* 	for (j = 7,k=0 ; j < nargs ; j += 2,k++) { */
+/* 		if (!(elm = chanlist[k])) */
+/* 			continue; */
+/* 		ch_name = ch[k]; */
+/* 		for (i = 1; 1; i++) { */
+/* 		    char	varname[20]; */
+/* 		    char*	varvalue; */
 
-		    sprintf(varname, "addmsg%d", i);
-		    varvalue = GetExtField(elm, varname);
-		    if (varvalue == NULL) {
-			    sprintf(varname, "sendmsg%d", i);
-			    varvalue = GetExtField(elm, varname);
-		    }
+/* 		    sprintf(varname, "addmsg%d", i); */
+/* 		    varvalue = GetExtField(elm, varname); */
+/* 		    if (varvalue == NULL) { */
+/* 			    sprintf(varname, "sendmsg%d", i); */
+/* 			    varvalue = GetExtField(elm, varname); */
+/* 		    } */
 
-		    if (varvalue == NULL)
-			break;
+/* 		    if (varvalue == NULL) */
+/* 			break; */
 
-		    /* since the zeroth argv is already filled */
-		    argc = fill_arglist(argv + 1,varvalue)+1;
-		    sprintf(src,"%s/%s/%s",name,ch_name,argv[1]);
-		    sprintf(dest,"%s/%s/%s",name,ch_name,argv[2]);
-		    argv[1] = src;
-		    argv[2] = dest;
-		    do_add_msg(argc,argv);
-		}
-	}
+/* 		    /* since the zeroth argv is already filled * */
+/* 		    argc = fill_arglist(argv + 1,varvalue)+1; */
+/* 		    sprintf(src,"%s/%s/%s",name,ch_name,argv[1]); */
+/* 		    sprintf(dest,"%s/%s/%s",name,ch_name,argv[2]); */
+/* 		    argv[1] = src; */
+/* 		    argv[2] = dest; */
+/* 		    do_add_msg(argc,argv); */
+/* 		} */
+/* 	} */
 }
 
 void append_to_cell(name,flags)
@@ -1160,12 +1196,12 @@ void start_cell(name,flags)
 	*flags |= NEW_CELL;
 	argvar[0] = "c_do_create";
 	argvar[2] = name;
-	if (*flags & HSOLVE) {
-		/* creating the hsolve element */
-		argvar[1] = "hsolve";
-	} else {
+/* 	if (*flags & HSOLVE) { */
+/* 		/* creating the hsolve element * */
+/* 		argvar[1] = "hsolve"; */
+/* 	} else { */
 		argvar[1] = "neutral";
-	}
+/* 	} */
 	do_create(3,argvar);
 	ChangeWorkingElement(name);
 }
@@ -1197,7 +1233,7 @@ void do_read_cell(argc,argv)
 	int     nargs;
 	Result  *rp,*SymtabLook();
 	int	status;
-	Hsolve	*hsolve;
+/* 	Hsolve	*hsolve; */
 
 	initopt(argc, argv, "file-name cell-name -hsolve -prand SDlen SDdia -rand SDlen SDdia -split Number -lambdasplit maxl");
 	MaxSplit=NSplit=1;
@@ -1216,6 +1252,7 @@ void do_read_cell(argc,argv)
 		Vdia*=Vdia; /* convert SD into V */
 		flags |=RANDSIZE;
 	    } else if (strcmp(G_optopt, "-hsolve") == 0) {
+		printf(" during readcell: -hsolve is not used anymore\n");
 		flags |= HSOLVE;
 	    } else if (strcmp(G_optopt, "-split") == 0) {
 		MaxSplit=NSplit=atoi(optargv[1]);
@@ -1372,23 +1409,24 @@ void do_read_cell(argc,argv)
 	if (!elm) {
 		printf ("No current element for traverse cell\n");
 	} else {
-		traverse_cell(elm, &ncompts,&nchans,&nshells,&nothers);
+/* 		traverse_cell(elm, &ncompts,&nchans,&nshells,&nothers); */
+	    printf("traverse_cell() is not implemented\n");
 	}
-	if (flags & HSOLVE) {
-	    hsolve = (Hsolve *)(GetElement(cellname));
-	    if (!hsolve) {
-		Error();
-		printf(" could not create hsolve '%s'\n",cellname);
-	    } else {
-		if (!hsolve->path) hsolve->path=(char *)calloc(30,sizeof(char));
-		if (flags & SYMMETRIC) {
-		    strcpy(hsolve->path,"./##[][TYPE=symcompartment]");
-		    hsolve->symflag=1;
-		} else {
-		    strcpy(hsolve->path,"./##[][TYPE=compartment]");
-		}
-	    }
-	} 
+/* 	if (flags & HSOLVE) { */
+/* 	    hsolve = (Hsolve *)(GetElement(cellname)); */
+/* 	    if (!hsolve) { */
+/* 		Error(); */
+/* 		printf(" could not create hsolve '%s'\n",cellname); */
+/* 	    } else { */
+/* 		if (!hsolve->path) hsolve->path=(char *)calloc(30,sizeof(char)); */
+/* 		if (flags & SYMMETRIC) { */
+/* 		    strcpy(hsolve->path,"./##[][TYPE=symcompartment]"); */
+/* 		    hsolve->symflag=1; */
+/* 		} else { */
+/* 		    strcpy(hsolve->path,"./##[][TYPE=compartment]"); */
+/* 		} */
+/* 	    } */
+/* 	}  */
 	if (IsSilent() < 2) {
 	    if (flags & SYMMETRIC) {
 		printf("%s read: %d symcompartments",filename,ncompts);
@@ -1405,58 +1443,58 @@ void do_read_cell(argc,argv)
 }
 
 
-void add_branch(flags,order,up,maxorder,dp,x0,xp,y0,yp,z0,zp,name,index,parent)
-/* recursively called, adds maxorder binary branches */
-	int		flags,order,maxorder;
-	int		*index;
-	short	up;
-	float   dp,x0,y0,z0,xp,yp,zp;
-	char	*name,*parent;
-{
-	int 	i;
-	float   dn,maxd,ln,xn = 0.0,yn = 0.0,zn = 0.0,sn,vn;
-	char	new[NAMELEN];
-	Element  *compt;
+/* void add_branch(flags,order,up,maxorder,dp,x0,xp,y0,yp,z0,zp,name,index,parent) */
+/* /* recursively called, adds maxorder binary branches * */
+/* 	int		flags,order,maxorder; */
+/* 	int		*index; */
+/* 	short	up; */
+/* 	float   dp,x0,y0,z0,xp,yp,zp; */
+/* 	char	*name,*parent; */
+/* { */
+/* 	int 	i; */
+/* 	float   dn,maxd,ln,xn = 0.0,yn = 0.0,zn = 0.0,sn,vn; */
+/* 	char	new[NAMELEN]; */
+/* 	Element  *compt; */
 
-	if (MIN_D[order] < dp) {
-		maxd = MAX_D[order];
-		for (i=0; i<NUM_COMPS[order]; i++) {
-			strcpy(new,name);
-			strcat(new,itoa(*index));
-			strcat(new,rbracket);
-			(*index)++;
-			ln=frandom(MIN_L[order],MAX_L[order]);
-			dn=frandom(MIN_D[order],maxd);
-			maxd = dn; /* next comp of branch cannot be thicker */
-			xn = x0 + xp * ln;
-			if (up) {
-				yn = y0 + yp * ln;
-			} else {
-				yn = y0 - yp * ln;
-			}
-			zn = z0 + zp * ln;
-			compt=add_compartment(flags,new,parent,ln,dn,&sn,&vn,x0,y0,z0,xn,yn,zn,0);
-			if (!compt) {
-				fprintf(stderr,"could not create random compt %s\n",new);
-				return;
-			}
-		}
-		if (up) {
-			/* make down branch also (of pair) */
-			add_branch(flags,order,0,maxorder,dp,x0,xp,y0,yp,z0,zp,name,index,parent);
-		}	
-	} else {
-		strcpy(new,parent);
-		xn = x0;
-		yn = y0;
-		zn = z0;
-	}
-	order++;
-	if (order<maxorder) {
-		/* make next order of branch */
-		add_branch(flags,order,1,maxorder,dp,xn,xp,yn,yp,zn,zp,name,index,new);
-	}	
-}
+/* 	if (MIN_D[order] < dp) { */
+/* 		maxd = MAX_D[order]; */
+/* 		for (i=0; i<NUM_COMPS[order]; i++) { */
+/* 			strcpy(new,name); */
+/* 			strcat(new,itoa(*index)); */
+/* 			strcat(new,rbracket); */
+/* 			(*index)++; */
+/* 			ln=frandom(MIN_L[order],MAX_L[order]); */
+/* 			dn=frandom(MIN_D[order],maxd); */
+/* 			maxd = dn; /* next comp of branch cannot be thicker * */
+/* 			xn = x0 + xp * ln; */
+/* 			if (up) { */
+/* 				yn = y0 + yp * ln; */
+/* 			} else { */
+/* 				yn = y0 - yp * ln; */
+/* 			} */
+/* 			zn = z0 + zp * ln; */
+/* 			compt=add_compartment(flags,new,parent,ln,dn,&sn,&vn,x0,y0,z0,xn,yn,zn,0); */
+/* 			if (!compt) { */
+/* 				fprintf(stderr,"could not create random compt %s\n",new); */
+/* 				return; */
+/* 			} */
+/* 		} */
+/* 		if (up) { */
+/* 			/* make down branch also (of pair) * */
+/* 			add_branch(flags,order,0,maxorder,dp,x0,xp,y0,yp,z0,zp,name,index,parent); */
+/* 		}	 */
+/* 	} else { */
+/* 		strcpy(new,parent); */
+/* 		xn = x0; */
+/* 		yn = y0; */
+/* 		zn = z0; */
+/* 	} */
+/* 	order++; */
+/* 	if (order<maxorder) { */
+/* 		/* make next order of branch * */
+/* 		add_branch(flags,order,1,maxorder,dp,xn,xp,yn,yp,zn,zp,name,index,new); */
+/* 	}	 */
+/* } */
 
 int read_data(line,lineno,flags)
 	char	*line;
@@ -1537,40 +1575,40 @@ int read_data(line,lineno,flags)
 **  name parent  r0 theta0 phi0 r theta phi dia ch dens... if polar
 **
 */
-    if ((flags & RAND_BRANCH) && (strcmp(parent,lastname) != 0)) {
-        /* attached to a different parent, thus the "lastname" is probably
-       ** a dendritic tip */
-        tip = (struct symcompartment_type *)(GetElement(lastname));
-        if (!tip) {
-            fprintf(stderr,"could not find parent compt %s\n",lastname);
-        } else if ((tip->dia <= MAX_DIA) && (urandom() <= RAND_FREQ)) {
-            dp = tip->dia;
-			strcpy(randname,tip->name);
-			strcat(randname,rand_postfix);
-			if (strcmp(prevname,randname) != 0) {
-				/* a different name -> start indexing from zero */
-				nindex = 0;
-			}
-			strcpy(prevname,randname);
-            /* compute orientation of branches */
-			ptip = find_parent_dend(tip);
-			if (ptip) {
-				xp = tip->x - ptip->x;
-				yp = tip->y - ptip->y;
-				zp = tip->z - ptip->z;
-			} else {
-				xp = 0.866;  /* 30 degree angle */
-				yp = 0.500;
-				zp = 0.0;
-			}
-            lp = sqrt(xp*xp + yp*yp + zp*zp);
-            xp = xp/lp;
-            yp = yp/lp;
-            zp = zp/lp;
-            /* add random branches recursively */
-	    add_branch(flags,0,1,NUM_ORDERS,dp,tip->x,xp,tip->y,yp,tip->z,zp,randname,&nindex,lastname);
-        }
-    }
+/*     if ((flags & RAND_BRANCH) && (strcmp(parent,lastname) != 0)) { */
+/*         /* attached to a different parent, thus the "lastname" is probably */
+/*        ** a dendritic tip * */
+/*         tip = (struct symcompartment_type *)(GetElement(lastname)); */
+/*         if (!tip) { */
+/*             fprintf(stderr,"could not find parent compt %s\n",lastname); */
+/*         } else if ((tip->dia <= MAX_DIA) && (urandom() <= RAND_FREQ)) { */
+/*             dp = tip->dia; */
+/* 			strcpy(randname,tip->name); */
+/* 			strcat(randname,rand_postfix); */
+/* 			if (strcmp(prevname,randname) != 0) { */
+/* 				/* a different name -> start indexing from zero * */
+/* 				nindex = 0; */
+/* 			} */
+/* 			strcpy(prevname,randname); */
+/*             /* compute orientation of branches * */
+/* 			ptip = find_parent_dend(tip); */
+/* 			if (ptip) { */
+/* 				xp = tip->x - ptip->x; */
+/* 				yp = tip->y - ptip->y; */
+/* 				zp = tip->z - ptip->z; */
+/* 			} else { */
+/* 				xp = 0.866;  /* 30 degree angle * */
+/* 				yp = 0.500; */
+/* 				zp = 0.0; */
+/* 			} */
+/*             lp = sqrt(xp*xp + yp*yp + zp*zp); */
+/*             xp = xp/lp; */
+/*             yp = yp/lp; */
+/*             zp = zp/lp; */
+/*             /* add random branches recursively * */
+/* 	    add_branch(flags,0,1,NUM_ORDERS,dp,tip->x,xp,tip->y,yp,tip->z,zp,randname,&nindex,lastname); */
+/*         } */
+/*     } */
 	if (flags & POLAR) {
 		r = x * 1.0e-6;
 		theta = y * PI/180.0;
@@ -1902,7 +1940,8 @@ void read_script(line,lineno,flags)
 		if (nargs != 2) {
 			printf("One compartment must be defined to be prototype\n");
 		} else {
-			makeproto_func(field);
+/* 			makeproto_func(field); */
+		    printf("makeproto_func() is not implemented\n");
 		}
 	} else if (strcmp(command,"*hsolve") == 0) {
 			printf("Warning: *hsolve option is obsolote.\n");
@@ -1971,11 +2010,13 @@ void read_script(line,lineno,flags)
 				}
 #endif
 
-				if (compt->len == 0.0) {  /* is SPHERICAL */
-					*flags |= SPHERICAL;
-				} else {
-					*flags &= ~SPHERICAL;
-				}
+				//t this likely needs to be incorporated for parsing somata.
+
+/* 				if (compt->len == 0.0) {  /* is SPHERICAL * */
+/* 					*flags |= SPHERICAL; */
+/* 				} else { */
+/* 					*flags &= ~SPHERICAL; */
+/* 				} */
 			}
 		}
 	} else {
@@ -2002,683 +2043,683 @@ static char *chomp_leading_spaces(line)
 }
 
 
-void unscale_kids(elm,dens,dens2,dens3,dia,length,surface,volume,flags)
-	Element	*elm;
-	float	*dens,*dens2,*dens3;
-	float	dia,length,surface,volume;
-	int	flags;
-{
-	char*	oname;
-	struct Ca_concen_type *shell;
-	Dshell	*dshell;
-	Dbuffer *dbuffer;
-	Cpool	*cpool;
+/* void unscale_kids(elm,dens,dens2,dens3,dia,length,surface,volume,flags) */
+/* 	Element	*elm; */
+/* 	float	*dens,*dens2,*dens3; */
+/* 	float	dia,length,surface,volume; */
+/* 	int	flags; */
+/* { */
+/* 	char*	oname; */
+/* 	struct Ca_concen_type *shell; */
+/* 	Dshell	*dshell; */
+/* 	Dbuffer *dbuffer; */
+/* 	Cpool	*cpool; */
 
-	oname = BaseObject(elm)->name;
-	if (strcmp(oname,"hh_channel") == 0) {
-		*dens = ((struct hh_channel_type *)elm)->Gbar;
-		if (*dens > 0.0)
-			*dens /= surface;
-	} else if ((strcmp(oname,"tabchannel") == 0) ||
-	           (strcmp(oname,"tab2Dchannel") == 0)) {
-		*dens = ((struct tab_channel_type *)elm)->Gbar;
-		if (*dens > 0.0)
-			*dens /= surface;
-	} else if (strcmp(oname,"tabcurrent") == 0) {
-		*dens = ((struct tab_current_type *)elm)->Gbar;
-		if (*dens > 0.0)
-			*dens /= surface;
-	} else if (strcmp(oname,"vdep_channel") == 0) {
-		*dens = ((struct vdep_channel_type *)elm)->gbar;
-		if (*dens > 0.0)
-			*dens /= surface;
-	} else if ((strcmp(oname,"channelC2") == 0) ||
-			   (strcmp(oname,"channelC3") == 0)) {
-		*dens = ((struct channelC2_type *)elm)->gmax;
-		if (*dens > 0.0)
-			*dens /= surface;
-	} else if (strcmp(oname,"synchan") == 0) {
-		*dens = ((struct Synchan_type *)elm)->gmax;
-		if (*dens > 0.0)
-			*dens /= surface;
-	} else if (strcmp(oname,"synchan2") == 0) {
-		*dens = ((struct Synchan_type *)elm)->gmax;
-		if (*dens > 0.0)
-			*dens /= surface;
-	} else if (strcmp(oname,"hebbsynchan") == 0) {
-		*dens = ((struct HebbSynchan_type *)elm)->gmax;
-		if (*dens > 0.0)
-			*dens /= surface;
-	} else if (strcmp(oname,"receptor2") == 0) {
-		*dens = ((struct olf_receptor2_type *)elm)->gmax;
-		if (*dens > 0.0)
-			*dens /= surface;
-	} else if (strcmp(oname,"channelC") == 0) {
-		*dens = ((struct channelC_type *)elm)->gmax;
-		if (*dens > 0.0)
-			*dens /= surface;
-	} else if (strcmp(oname,"manuelconduct") == 0) {
-		*dens = ((struct manuelconduct_type *)elm)->gmax;
-		if (*dens > 0.0)
-			*dens /= surface;
-	} else if (strcmp(oname,"ddsyn") == 0) {
-		*dens = ((struct dd_syn_type *)elm)->gmax;
-		if (*dens > 0.0)
-			*dens /= surface;
-	/* Shortcut for specifying spike thresholds */
-	} else if (strcmp(oname,"spike") == 0) {
-		*dens = ((struct spike_type *)elm)->thresh;
-	} else if (strcmp(oname,"spikegen") == 0) {
-		*dens = ((struct Spikegen_type *)elm)->thresh;
-	} else if (strcmp(oname,"Ca_concen") == 0) {
-        	shell = (struct Ca_concen_type *)elm;
-        	*dens = shell->B;
-		if (*dens > 0.0) *dens *= calc_shell_vol(length,dia,shell->thick);
-	} else if (strcmp(oname,"difshell") == 0) {
-		dshell = (Dshell *)elm;
-       		*dens = dshell->dia;
-        	*dens2 = dshell->len;
-        	*dens3 = dshell->thick;
-		unscale_shells(elm,dshell->shape_mode,dia,length,dens,dens2,dens3,oname);
-	} else if (strcmp(oname,"difbuffer") == 0) {
-        	dbuffer = (Dbuffer *)elm;
-        	*dens = dbuffer->dia;
-        	*dens2 = dbuffer->len;
-        	*dens3 = dbuffer->thick;
-		unscale_shells(elm,dbuffer->shape_mode,dia,length,dens,dens2,dens3,oname);
-	} else if (strcmp(oname,"concpool") == 0) {
-        	cpool = (Cpool *)elm;
-        	*dens = cpool->dia;
-        	*dens2 = cpool->len;
-        	*dens3 = cpool->thick;
-		unscale_shells(elm,cpool->shape_mode,dia,length,dens,dens2,dens3,oname);
-	} else if (strcmp(oname,"mmpump") == 0) {
-		*dens = ((Mpump *)elm)->vmax;
-		if (*dens > 0.0)
-			*dens /= surface;
-	} else if (strcmp(oname,"hillpump") == 0) {
-		/* positive values are handled by scale_shells, negative
-		** ones are changed by RESET action */
-	}
-}
+/* 	oname = BaseObject(elm)->name; */
+/* 	if (strcmp(oname,"hh_channel") == 0) { */
+/* 		*dens = ((struct hh_channel_type *)elm)->Gbar; */
+/* 		if (*dens > 0.0) */
+/* 			*dens /= surface; */
+/* 	} else if ((strcmp(oname,"tabchannel") == 0) || */
+/* 	           (strcmp(oname,"tab2Dchannel") == 0)) { */
+/* 		*dens = ((struct tab_channel_type *)elm)->Gbar; */
+/* 		if (*dens > 0.0) */
+/* 			*dens /= surface; */
+/* 	} else if (strcmp(oname,"tabcurrent") == 0) { */
+/* 		*dens = ((struct tab_current_type *)elm)->Gbar; */
+/* 		if (*dens > 0.0) */
+/* 			*dens /= surface; */
+/* 	} else if (strcmp(oname,"vdep_channel") == 0) { */
+/* 		*dens = ((struct vdep_channel_type *)elm)->gbar; */
+/* 		if (*dens > 0.0) */
+/* 			*dens /= surface; */
+/* 	} else if ((strcmp(oname,"channelC2") == 0) || */
+/* 			   (strcmp(oname,"channelC3") == 0)) { */
+/* 		*dens = ((struct channelC2_type *)elm)->gmax; */
+/* 		if (*dens > 0.0) */
+/* 			*dens /= surface; */
+/* 	} else if (strcmp(oname,"synchan") == 0) { */
+/* 		*dens = ((struct Synchan_type *)elm)->gmax; */
+/* 		if (*dens > 0.0) */
+/* 			*dens /= surface; */
+/* 	} else if (strcmp(oname,"synchan2") == 0) { */
+/* 		*dens = ((struct Synchan_type *)elm)->gmax; */
+/* 		if (*dens > 0.0) */
+/* 			*dens /= surface; */
+/* 	} else if (strcmp(oname,"hebbsynchan") == 0) { */
+/* 		*dens = ((struct HebbSynchan_type *)elm)->gmax; */
+/* 		if (*dens > 0.0) */
+/* 			*dens /= surface; */
+/* 	} else if (strcmp(oname,"receptor2") == 0) { */
+/* 		*dens = ((struct olf_receptor2_type *)elm)->gmax; */
+/* 		if (*dens > 0.0) */
+/* 			*dens /= surface; */
+/* 	} else if (strcmp(oname,"channelC") == 0) { */
+/* 		*dens = ((struct channelC_type *)elm)->gmax; */
+/* 		if (*dens > 0.0) */
+/* 			*dens /= surface; */
+/* 	} else if (strcmp(oname,"manuelconduct") == 0) { */
+/* 		*dens = ((struct manuelconduct_type *)elm)->gmax; */
+/* 		if (*dens > 0.0) */
+/* 			*dens /= surface; */
+/* 	} else if (strcmp(oname,"ddsyn") == 0) { */
+/* 		*dens = ((struct dd_syn_type *)elm)->gmax; */
+/* 		if (*dens > 0.0) */
+/* 			*dens /= surface; */
+/* 	/* Shortcut for specifying spike thresholds * */
+/* 	} else if (strcmp(oname,"spike") == 0) { */
+/* 		*dens = ((struct spike_type *)elm)->thresh; */
+/* 	} else if (strcmp(oname,"spikegen") == 0) { */
+/* 		*dens = ((struct Spikegen_type *)elm)->thresh; */
+/* 	} else if (strcmp(oname,"Ca_concen") == 0) { */
+/*         	shell = (struct Ca_concen_type *)elm; */
+/*         	*dens = shell->B; */
+/* 		if (*dens > 0.0) *dens *= calc_shell_vol(length,dia,shell->thick); */
+/* 	} else if (strcmp(oname,"difshell") == 0) { */
+/* 		dshell = (Dshell *)elm; */
+/*        		*dens = dshell->dia; */
+/*         	*dens2 = dshell->len; */
+/*         	*dens3 = dshell->thick; */
+/* 		unscale_shells(elm,dshell->shape_mode,dia,length,dens,dens2,dens3,oname); */
+/* 	} else if (strcmp(oname,"difbuffer") == 0) { */
+/*         	dbuffer = (Dbuffer *)elm; */
+/*         	*dens = dbuffer->dia; */
+/*         	*dens2 = dbuffer->len; */
+/*         	*dens3 = dbuffer->thick; */
+/* 		unscale_shells(elm,dbuffer->shape_mode,dia,length,dens,dens2,dens3,oname); */
+/* 	} else if (strcmp(oname,"concpool") == 0) { */
+/*         	cpool = (Cpool *)elm; */
+/*         	*dens = cpool->dia; */
+/*         	*dens2 = cpool->len; */
+/*         	*dens3 = cpool->thick; */
+/* 		unscale_shells(elm,cpool->shape_mode,dia,length,dens,dens2,dens3,oname); */
+/* 	} else if (strcmp(oname,"mmpump") == 0) { */
+/* 		*dens = ((Mpump *)elm)->vmax; */
+/* 		if (*dens > 0.0) */
+/* 			*dens /= surface; */
+/* 	} else if (strcmp(oname,"hillpump") == 0) { */
+/* 		/* positive values are handled by scale_shells, negative */
+/* 		** ones are changed by RESET action * */
+/* 	} */
+/* } */
 
-void unscale_shells(elm,shape,dia,length,dens,dens2,dens3,oname)
-	Element	*elm;
-	short	shape;
-	float	dia,length,*dens,*dens2,*dens3;
-	char	*oname;
-{
-	Dshell	*dshell;
+/* void unscale_shells(elm,shape,dia,length,dens,dens2,dens3,oname) */
+/* 	Element	*elm; */
+/* 	short	shape; */
+/* 	float	dia,length,*dens,*dens2,*dens3; */
+/* 	char	*oname; */
+/* { */
+/* 	Dshell	*dshell; */
 
-	dshell = (Dshell *)elm;
-	if (shape==SHELL) {
-	    if (*dens3 >= 0.0) { /* scale everything proportional */
-		*dens3 /= dia;
-		if (*dens > 0.0)
-		    *dens /= dia;
-		if ((length!=0.0) && (*dens2 > 0.0))
-		    *dens2 /= length;
-	    } else {            /* scale dia, keep correct thick */
-		/* precompute surface and volume to enable correct scaling of concpool and hillpump */
-		if (strcmp(oname,"difshell") == 0) {
-		    dshell->vol= calc_shell_vol(fabs(*dens2),fabs(*dens),fabs(*dens3));
-		    dshell->surf_up=calc_surf(fabs(*dens2),fabs(*dens));
-		}
-		if (*dens < 0.0) fprintf(stderr,"Warning: dia and thick should not be both negative in '%s'\n",elm->name);
-		*dens = -(dia-*dens) / *dens3;   /* 2 times number of shell */
-		if (fabs(*dens) > 1000.0) {
-		    fprintf(stderr,"Warning: apparently very large number of shells at '%s'.\n",elm->name);
-		    fprintf(stderr,"Is prototype compartment dia same as first shell dia?\n");
-		}
-		if (*dens2 > 0.0)
-		    *dens2 /= length;
-	    }
-	} else if (shape==SLAB) {
-	    if (*dens > 0.0)
-		*dens /= dia;
-	    if ((length!=0.0) && (*dens3 > 0.0))
-		*dens3 /= length;
-	} else if (shape==TUBE) {
-	    if (*dens > 0.0) { 
-		/* scale everything proportional for negative dia case */
-		*dens /= dia;
-		*dens2 /= length;
-	    } /* else: done inside scale_shells */
-	} else {
-	    Error();
-	    printf(" unknown shape_mode '%d' in '%s'\n",shape,Pathname(elm));
-	}
-}
+/* 	dshell = (Dshell *)elm; */
+/* 	if (shape==SHELL) { */
+/* 	    if (*dens3 >= 0.0) { /* scale everything proportional * */
+/* 		*dens3 /= dia; */
+/* 		if (*dens > 0.0) */
+/* 		    *dens /= dia; */
+/* 		if ((length!=0.0) && (*dens2 > 0.0)) */
+/* 		    *dens2 /= length; */
+/* 	    } else {            /* scale dia, keep correct thick * */
+/* 		/* precompute surface and volume to enable correct scaling of concpool and hillpump * */
+/* 		if (strcmp(oname,"difshell") == 0) { */
+/* 		    dshell->vol= calc_shell_vol(fabs(*dens2),fabs(*dens),fabs(*dens3)); */
+/* 		    dshell->surf_up=calc_surf(fabs(*dens2),fabs(*dens)); */
+/* 		} */
+/* 		if (*dens < 0.0) fprintf(stderr,"Warning: dia and thick should not be both negative in '%s'\n",elm->name); */
+/* 		*dens = -(dia-*dens) / *dens3;   /* 2 times number of shell * */
+/* 		if (fabs(*dens) > 1000.0) { */
+/* 		    fprintf(stderr,"Warning: apparently very large number of shells at '%s'.\n",elm->name); */
+/* 		    fprintf(stderr,"Is prototype compartment dia same as first shell dia?\n"); */
+/* 		} */
+/* 		if (*dens2 > 0.0) */
+/* 		    *dens2 /= length; */
+/* 	    } */
+/* 	} else if (shape==SLAB) { */
+/* 	    if (*dens > 0.0) */
+/* 		*dens /= dia; */
+/* 	    if ((length!=0.0) && (*dens3 > 0.0)) */
+/* 		*dens3 /= length; */
+/* 	} else if (shape==TUBE) { */
+/* 	    if (*dens > 0.0) {  */
+/* 		/* scale everything proportional for negative dia case * */
+/* 		*dens /= dia; */
+/* 		*dens2 /= length; */
+/* 	    } /* else: done inside scale_shells * */
+/* 	} else { */
+/* 	    Error(); */
+/* 	    printf(" unknown shape_mode '%d' in '%s'\n",shape,Pathname(elm)); */
+/* 	} */
+/* } */
 
-void scale_kids(elm,dens,dens2,dens3,dia,length,surface,volume,flags)
-	Element	*elm;
-	float	dens,dens2,dens3;
-	float	dia,length,*surface,*volume;
-	int	flags;
-{
-	char	*oname;
-	struct Ca_concen_type *shell;
-	int scale_shells();
-	Mpump	*mpump;
+/* void scale_kids(elm,dens,dens2,dens3,dia,length,surface,volume,flags) */
+/* 	Element	*elm; */
+/* 	float	dens,dens2,dens3; */
+/* 	float	dia,length,*surface,*volume; */
+/* 	int	flags; */
+/* { */
+/* 	char	*oname; */
+/* 	struct Ca_concen_type *shell; */
+/* 	int scale_shells(); */
+/* 	Mpump	*mpump; */
 
-	oname = BaseObject(elm)->name;
-	if (strcmp(oname,"hh_channel") == 0) {
-		if (dens < 0.0)
-			((struct hh_channel_type *)elm)->Gbar = -1.0 * dens;
-		else
-			((struct hh_channel_type *)elm)->Gbar = dens * *surface;
-	} else if ((strcmp(oname,"tabchannel") == 0) ||
-	           (strcmp(oname,"tab2Dchannel") == 0)) {
-		if (dens < 0.0) 
-			((struct tab_channel_type *)elm)->Gbar = -1.0 * dens;
-		else
-			((struct tab_channel_type *)elm)->Gbar = dens * *surface;
-		((struct tab_channel_type *)elm)->surface = *surface;
-	} else if (strcmp(oname,"tabcurrent") == 0) {
-		if (dens < 0.0) 
-			((struct tab_current_type *)elm)->Gbar = -1.0 * dens;
-		else
-			((struct tab_current_type *)elm)->Gbar = dens * *surface;
-		((struct tab_current_type *)elm)->surface = *surface;
-	} else if (strcmp(oname,"vdep_channel") == 0) {
-		if (dens < 0.0)
-			((struct vdep_channel_type *)elm)->gbar = -1.0 * dens;
-		else
-			((struct vdep_channel_type *)elm)->gbar=dens * *surface;
-	} else if ((strcmp(oname,"channelC2") == 0) ||
-			   (strcmp(oname,"channelC3") == 0)) {
-		if (dens < 0.0)
-			((struct channelC2_type *)elm)->gmax = -1.0 * dens;
-		else
-			((struct channelC2_type *)elm)->gmax = dens * *surface;
-	} else if (strcmp(oname,"synchan") == 0) {
-		if (dens < 0.0)
-			((struct Synchan_type *)elm)->gmax = -1.0 * dens;
-		else
-			((struct Synchan_type *)elm)->gmax = dens * *surface;
-	} else if (strcmp(oname,"synchan2") == 0) {
-		if (dens < 0.0)
-			((struct Synchan_type *)elm)->gmax = -1.0 * dens;
-		else
-			((struct Synchan_type *)elm)->gmax = dens * *surface;
-	} else if (strcmp(oname,"hebbsynchan") == 0) {
-		if (dens < 0.0)
-			((struct HebbSynchan_type *)elm)->gmax = -1.0 * dens;
-		else
-			((struct HebbSynchan_type *)elm)->gmax = dens * *surface;
-	} else if (strcmp(oname,"manuelconduct") == 0) {
-		if (dens < 0.0)
-			((struct manuelconduct_type *)elm)->gmax = -1.0 * dens;
-		else
-			((struct manuelconduct_type *)elm)->gmax = dens * *surface;
-	} else if (strcmp(oname,"receptor2") == 0) {
-		if (dens < 0.0)
-			((struct olf_receptor2_type *)elm)->gmax = -1.0 * dens;
-		else
-			((struct olf_receptor2_type *)elm)->gmax=dens * *surface;
-	} else if (strcmp(oname,"channelC") == 0) {
-		if (dens < 0.0)
-			((struct channelC_type *)elm)->gmax = -1.0 * dens;
-		else
-			((struct channelC_type *)elm)->gmax = dens * *surface; 
-	} else if (strcmp(oname,"ddsyn") == 0) {
-		if (dens < 0.0)
-			((struct dd_syn_type *)elm)->gmax = -1.0 * dens;
-		else
-			((struct dd_syn_type *)elm)->gmax = dens * *surface;
-	/* Shortcut for specifying spike thresholds */
-	} else if (strcmp(oname,"spike") == 0) {
-		((struct spike_type *)elm)->thresh = dens;
-	} else if (strcmp(oname,"spikegen") == 0) {
-		((struct Spikegen_type *)elm)->thresh = dens;
-	} else if (strcmp(oname,"Ca_concen") == 0) {
-        	shell = (struct Ca_concen_type *)elm;
-        	if (dens < 0.0)
-         		shell->B = -1.0 * dens;
-        	else
-       			shell->B = dens / calc_shell_vol(length,dia,shell->thick);
-	} else if ((strcmp(oname,"difshell") == 0) ||
-			   (strcmp(oname,"difbuffer") == 0) ||
-			   (strcmp(oname,"concpool") == 0)) {
-		if (scale_shells(elm,dens,dia,length,dens,dens2,dens3)) {
-		    /* delete dshell and all its children */
-		    /* For some reason  DeleteElement does not delete a
-		    ** concpool properly and crashes upon deleting its
-		    ** parent difshell next, therefore this hack: */
-		    /*
-		    pname = BaseObject(elm->parent)->name;
-		    if (strcmp(pname,"difshell") != 0) DeleteElement(elm);
-		    */
-		    DeleteElement(elm);
-		}
-	} else if (strcmp(oname,"mmpump") == 0) {
-		mpump = (Mpump *)elm;
-		if (dens < 0.0)
-			mpump->vmax = -1.0 * dens;
-		else
-			mpump->vmax = dens * *surface;
-	} else if (strcmp(oname,"hillpump") == 0) {
-		/* positive values are handled by scale_shells, negative
-		** ones are changed by RESET action */
-	}
-}
+/* 	oname = BaseObject(elm)->name; */
+/* 	if (strcmp(oname,"hh_channel") == 0) { */
+/* 		if (dens < 0.0) */
+/* 			((struct hh_channel_type *)elm)->Gbar = -1.0 * dens; */
+/* 		else */
+/* 			((struct hh_channel_type *)elm)->Gbar = dens * *surface; */
+/* 	} else if ((strcmp(oname,"tabchannel") == 0) || */
+/* 	           (strcmp(oname,"tab2Dchannel") == 0)) { */
+/* 		if (dens < 0.0)  */
+/* 			((struct tab_channel_type *)elm)->Gbar = -1.0 * dens; */
+/* 		else */
+/* 			((struct tab_channel_type *)elm)->Gbar = dens * *surface; */
+/* 		((struct tab_channel_type *)elm)->surface = *surface; */
+/* 	} else if (strcmp(oname,"tabcurrent") == 0) { */
+/* 		if (dens < 0.0)  */
+/* 			((struct tab_current_type *)elm)->Gbar = -1.0 * dens; */
+/* 		else */
+/* 			((struct tab_current_type *)elm)->Gbar = dens * *surface; */
+/* 		((struct tab_current_type *)elm)->surface = *surface; */
+/* 	} else if (strcmp(oname,"vdep_channel") == 0) { */
+/* 		if (dens < 0.0) */
+/* 			((struct vdep_channel_type *)elm)->gbar = -1.0 * dens; */
+/* 		else */
+/* 			((struct vdep_channel_type *)elm)->gbar=dens * *surface; */
+/* 	} else if ((strcmp(oname,"channelC2") == 0) || */
+/* 			   (strcmp(oname,"channelC3") == 0)) { */
+/* 		if (dens < 0.0) */
+/* 			((struct channelC2_type *)elm)->gmax = -1.0 * dens; */
+/* 		else */
+/* 			((struct channelC2_type *)elm)->gmax = dens * *surface; */
+/* 	} else if (strcmp(oname,"synchan") == 0) { */
+/* 		if (dens < 0.0) */
+/* 			((struct Synchan_type *)elm)->gmax = -1.0 * dens; */
+/* 		else */
+/* 			((struct Synchan_type *)elm)->gmax = dens * *surface; */
+/* 	} else if (strcmp(oname,"synchan2") == 0) { */
+/* 		if (dens < 0.0) */
+/* 			((struct Synchan_type *)elm)->gmax = -1.0 * dens; */
+/* 		else */
+/* 			((struct Synchan_type *)elm)->gmax = dens * *surface; */
+/* 	} else if (strcmp(oname,"hebbsynchan") == 0) { */
+/* 		if (dens < 0.0) */
+/* 			((struct HebbSynchan_type *)elm)->gmax = -1.0 * dens; */
+/* 		else */
+/* 			((struct HebbSynchan_type *)elm)->gmax = dens * *surface; */
+/* 	} else if (strcmp(oname,"manuelconduct") == 0) { */
+/* 		if (dens < 0.0) */
+/* 			((struct manuelconduct_type *)elm)->gmax = -1.0 * dens; */
+/* 		else */
+/* 			((struct manuelconduct_type *)elm)->gmax = dens * *surface; */
+/* 	} else if (strcmp(oname,"receptor2") == 0) { */
+/* 		if (dens < 0.0) */
+/* 			((struct olf_receptor2_type *)elm)->gmax = -1.0 * dens; */
+/* 		else */
+/* 			((struct olf_receptor2_type *)elm)->gmax=dens * *surface; */
+/* 	} else if (strcmp(oname,"channelC") == 0) { */
+/* 		if (dens < 0.0) */
+/* 			((struct channelC_type *)elm)->gmax = -1.0 * dens; */
+/* 		else */
+/* 			((struct channelC_type *)elm)->gmax = dens * *surface;  */
+/* 	} else if (strcmp(oname,"ddsyn") == 0) { */
+/* 		if (dens < 0.0) */
+/* 			((struct dd_syn_type *)elm)->gmax = -1.0 * dens; */
+/* 		else */
+/* 			((struct dd_syn_type *)elm)->gmax = dens * *surface; */
+/* 	/* Shortcut for specifying spike thresholds * */
+/* 	} else if (strcmp(oname,"spike") == 0) { */
+/* 		((struct spike_type *)elm)->thresh = dens; */
+/* 	} else if (strcmp(oname,"spikegen") == 0) { */
+/* 		((struct Spikegen_type *)elm)->thresh = dens; */
+/* 	} else if (strcmp(oname,"Ca_concen") == 0) { */
+/*         	shell = (struct Ca_concen_type *)elm; */
+/*         	if (dens < 0.0) */
+/*          		shell->B = -1.0 * dens; */
+/*         	else */
+/*        			shell->B = dens / calc_shell_vol(length,dia,shell->thick); */
+/* 	} else if ((strcmp(oname,"difshell") == 0) || */
+/* 			   (strcmp(oname,"difbuffer") == 0) || */
+/* 			   (strcmp(oname,"concpool") == 0)) { */
+/* 		if (scale_shells(elm,dens,dia,length,dens,dens2,dens3)) { */
+/* 		    /* delete dshell and all its children * */
+/* 		    /* For some reason  DeleteElement does not delete a */
+/* 		    ** concpool properly and crashes upon deleting its */
+/* 		    ** parent difshell next, therefore this hack: * */
+/* 		    /* */
+/* 		    pname = BaseObject(elm->parent)->name; */
+/* 		    if (strcmp(pname,"difshell") != 0) DeleteElement(elm); */
+/* 		    * */
+/* 		    DeleteElement(elm); */
+/* 		} */
+/* 	} else if (strcmp(oname,"mmpump") == 0) { */
+/* 		mpump = (Mpump *)elm; */
+/* 		if (dens < 0.0) */
+/* 			mpump->vmax = -1.0 * dens; */
+/* 		else */
+/* 			mpump->vmax = dens * *surface; */
+/* 	} else if (strcmp(oname,"hillpump") == 0) { */
+/* 		/* positive values are handled by scale_shells, negative */
+/* 		** ones are changed by RESET action * */
+/* 	} */
+/* } */
 
-int scale_shells(elm,number,dia,length,shdia,shlen,shthick)
-/* boolean: if true elm does not exist and needs to be deleted, otherwise
-** sets dia,len and thick of a difshell, difbuffer or concpool */
-	Element	*elm;
-	float	number,dia,length,shdia,shlen,shthick;
-{
-	char*	oname;
-	Dshell	*dshell = NULL;
-	Dbuffer *dbuffer = NULL;
-	Cpool	*cpool = NULL;
-	Dshell	*ssrc;
-	Hpump	*pump;
-	MsgIn   *msgin,*smsgin;
-	MsgOut  *msgout;
-	short	shape = 0;
-	double	dvol,cvol,csurf0,csurf;
+/* int scale_shells(elm,number,dia,length,shdia,shlen,shthick) */
+/* /* boolean: if true elm does not exist and needs to be deleted, otherwise */
+/* ** sets dia,len and thick of a difshell, difbuffer or concpool * */
+/* 	Element	*elm; */
+/* 	float	number,dia,length,shdia,shlen,shthick; */
+/* { */
+/* 	char*	oname; */
+/* 	Dshell	*dshell = NULL; */
+/* 	Dbuffer *dbuffer = NULL; */
+/* 	Cpool	*cpool = NULL; */
+/* 	Dshell	*ssrc; */
+/* 	Hpump	*pump; */
+/* 	MsgIn   *msgin,*smsgin; */
+/* 	MsgOut  *msgout; */
+/* 	short	shape = 0; */
+/* 	double	dvol,cvol,csurf0,csurf; */
 
-	oname = BaseObject(elm)->name;
-	if (strcmp(oname,"difshell") == 0) {
-	    dshell = (Dshell *)elm;
-	    shape=dshell->shape_mode;
-	} else if (strcmp(oname,"difbuffer") == 0) {
-	    dbuffer = (Dbuffer *)elm;
-	    shape=dbuffer->shape_mode;
-	} else if (strcmp(oname,"concpool") == 0) {
-	    cpool = (Cpool *)elm;
-	    shape=cpool->shape_mode;
-	}
-	if (shape==SHELL) {
-	    if (shlen < 0.0) {
-		shlen = -1.0 * shlen;
-	    } else if (length!=0.0) {
-		shlen = shlen * length;
-	    }
-	    if (shthick >= 0.0) {  /* scale everything proportional */
-		if (shdia < 0.0) {
-		    shdia = -1.0 * shdia;
-		} else {
-		    shdia = shdia * dia;
-		}
-		shthick = shthick * dia;
-	    } else {            /* scale dia, keep correct thick */
-		/* number is 2 * number of shell, 0 being submembrane */
-		shthick=-1.0 * shthick;
-		shdia = dia - (shthick*number);
-		if (shdia <= 0.0) {  
-		    /* does not exist physically */
-		    return(1);
-		} else if ((number>0)&&(shdia <= shthick/2.0)) {  
-		    /* assuming that shell above is same shthick, this
-		    **  would result in a shell that has 25% or smaller
-		    **  thickness than the one above, which will cause
-		    **  convergence problems -> fuse it with preceding one */
-		    MSGLOOP(elm, msgin) {	/* find preceding elm */
-			case DIFF_DOWN: /* found it */
-			    ssrc=(Dshell *)msgin->src;
-			    /* make it a core shell: note that we are
-			    ** not guaranteed that this shell has been
-			    ** handled by scale_kids yet, we need to
-			    ** check for this! */
-			    shdia = dia - (shthick*(number-2));
-			    if (ssrc->thick<0) {	/* not scaled yet */
-				ssrc->thick=-shdia/2.0;
-			    } else {	/* dia has been scaled */
-				ssrc->thick=ssrc->dia/2.0;
-			    }
-			    MSGLOOP(ssrc, smsgin) {
-			    /* find any diffusable buffer */
-				case BUFFER: 
-				case STOREINFLUX:
-				case STOREOUTFLUX:
-				    oname = BaseObject(smsgin->src)->name;
-				    if (strcmp(oname,"difbuffer") == 0) {
-					/* fuse diffusable buffer also,
-					** the innermost one may be deleted
-					** together with innermost shell */
-					dbuffer=(Dbuffer *)smsgin->src;
-					if (dbuffer->shape_mode==SHELL) {
-					    if (dbuffer->thick<0) {
-						dbuffer->thick=-shdia/2.0;
-					    } else {  /* dia has been scaled */
-						dbuffer->thick=dbuffer->dia/2.0;
-					    }
-					}
-				    } else if (strcmp(oname,"concpool") == 0) {
-					cpool=(Cpool *)smsgin->src;
-					if (cpool->shape_mode==SHELL) {
-					    if (cpool->thick<0) {
-						cpool->thick=-shdia/2.0;
-					    } else {	
-						cpool->thick=cpool->dia/2.0;
-					    }
-					}
-				    }
-				    break;
-			    }
-			    break;
-		    }
-		    return(1); /* delete elm and all its children */
-		} else {
-		    if (shthick+shthick>shdia) shthick=shdia/2.0; /* make it a core shell */
-		}
-	    }
-	} else if (shape==SLAB) {
-	    if (shdia < 0.0) {
-		shdia = -1.0 * shdia;
-	    } else {
-		shdia = shdia * dia;
-	    }
-	    if (shthick < 0.0) {
-		shthick = -1.0 * shthick;
-	    } else if (length!=0.0) {
-		shthick = shthick * length;
-	    }
-	} else if (shape==TUBE) {	/* thick field is dia of tube */
-	    if (shdia > 0.0) { /* scale everything proportional */
-		shdia = shdia * dia;
-		shlen = shlen * length;
-	    } 	/* else: recompute length so as to conserve relative volume with shell is done in call from difshell */
-	}
-	if (strcmp(oname,"difshell") == 0) {
-		dshell->dia = shdia;
-		dshell->len = shlen;
-		dshell->thick = shthick;
-		/* Rescale any attached concpools and hillpumps */
-		cpool=NULL;
-		pump=NULL;
-		MSGLOOP(elm, msgin) {	/* find preceding elm */
-		    case HILLPUMP: /* found it */
-			pump=(Hpump *)msgin->src;
-			/* find attached concpool */
-			MSGOUTLOOP(pump, msgout) {
-			    oname = BaseObject((Element *)msgout->dst)->name;
-			    if (strcmp(oname,"concpool")==0) cpool=(Cpool *)msgout->dst;
-			}
-			break;
+/* 	oname = BaseObject(elm)->name; */
+/* 	if (strcmp(oname,"difshell") == 0) { */
+/* 	    dshell = (Dshell *)elm; */
+/* 	    shape=dshell->shape_mode; */
+/* 	} else if (strcmp(oname,"difbuffer") == 0) { */
+/* 	    dbuffer = (Dbuffer *)elm; */
+/* 	    shape=dbuffer->shape_mode; */
+/* 	} else if (strcmp(oname,"concpool") == 0) { */
+/* 	    cpool = (Cpool *)elm; */
+/* 	    shape=cpool->shape_mode; */
+/* 	} */
+/* 	if (shape==SHELL) { */
+/* 	    if (shlen < 0.0) { */
+/* 		shlen = -1.0 * shlen; */
+/* 	    } else if (length!=0.0) { */
+/* 		shlen = shlen * length; */
+/* 	    } */
+/* 	    if (shthick >= 0.0) {  /* scale everything proportional * */
+/* 		if (shdia < 0.0) { */
+/* 		    shdia = -1.0 * shdia; */
+/* 		} else { */
+/* 		    shdia = shdia * dia; */
+/* 		} */
+/* 		shthick = shthick * dia; */
+/* 	    } else {            /* scale dia, keep correct thick * */
+/* 		/* number is 2 * number of shell, 0 being submembrane * */
+/* 		shthick=-1.0 * shthick; */
+/* 		shdia = dia - (shthick*number); */
+/* 		if (shdia <= 0.0) {   */
+/* 		    /* does not exist physically * */
+/* 		    return(1); */
+/* 		} else if ((number>0)&&(shdia <= shthick/2.0)) {   */
+/* 		    /* assuming that shell above is same shthick, this */
+/* 		    **  would result in a shell that has 25% or smaller */
+/* 		    **  thickness than the one above, which will cause */
+/* 		    **  convergence problems -> fuse it with preceding one * */
+/* 		    MSGLOOP(elm, msgin) {	/* find preceding elm * */
+/* 			case DIFF_DOWN: /* found it * */
+/* 			    ssrc=(Dshell *)msgin->src; */
+/* 			    /* make it a core shell: note that we are */
+/* 			    ** not guaranteed that this shell has been */
+/* 			    ** handled by scale_kids yet, we need to */
+/* 			    ** check for this! * */
+/* 			    shdia = dia - (shthick*(number-2)); */
+/* 			    if (ssrc->thick<0) {	/* not scaled yet * */
+/* 				ssrc->thick=-shdia/2.0; */
+/* 			    } else {	/* dia has been scaled * */
+/* 				ssrc->thick=ssrc->dia/2.0; */
+/* 			    } */
+/* 			    MSGLOOP(ssrc, smsgin) { */
+/* 			    /* find any diffusable buffer * */
+/* 				case BUFFER:  */
+/* 				case STOREINFLUX: */
+/* 				case STOREOUTFLUX: */
+/* 				    oname = BaseObject(smsgin->src)->name; */
+/* 				    if (strcmp(oname,"difbuffer") == 0) { */
+/* 					/* fuse diffusable buffer also, */
+/* 					** the innermost one may be deleted */
+/* 					** together with innermost shell * */
+/* 					dbuffer=(Dbuffer *)smsgin->src; */
+/* 					if (dbuffer->shape_mode==SHELL) { */
+/* 					    if (dbuffer->thick<0) { */
+/* 						dbuffer->thick=-shdia/2.0; */
+/* 					    } else {  /* dia has been scaled * */
+/* 						dbuffer->thick=dbuffer->dia/2.0; */
+/* 					    } */
+/* 					} */
+/* 				    } else if (strcmp(oname,"concpool") == 0) { */
+/* 					cpool=(Cpool *)smsgin->src; */
+/* 					if (cpool->shape_mode==SHELL) { */
+/* 					    if (cpool->thick<0) { */
+/* 						cpool->thick=-shdia/2.0; */
+/* 					    } else {	 */
+/* 						cpool->thick=cpool->dia/2.0; */
+/* 					    } */
+/* 					} */
+/* 				    } */
+/* 				    break; */
+/* 			    } */
+/* 			    break; */
+/* 		    } */
+/* 		    return(1); /* delete elm and all its children * */
+/* 		} else { */
+/* 		    if (shthick+shthick>shdia) shthick=shdia/2.0; /* make it a core shell * */
+/* 		} */
+/* 	    } */
+/* 	} else if (shape==SLAB) { */
+/* 	    if (shdia < 0.0) { */
+/* 		shdia = -1.0 * shdia; */
+/* 	    } else { */
+/* 		shdia = shdia * dia; */
+/* 	    } */
+/* 	    if (shthick < 0.0) { */
+/* 		shthick = -1.0 * shthick; */
+/* 	    } else if (length!=0.0) { */
+/* 		shthick = shthick * length; */
+/* 	    } */
+/* 	} else if (shape==TUBE) {	/* thick field is dia of tube * */
+/* 	    if (shdia > 0.0) { /* scale everything proportional * */
+/* 		shdia = shdia * dia; */
+/* 		shlen = shlen * length; */
+/* 	    } 	/* else: recompute length so as to conserve relative volume with shell is done in call from difshell * */
+/* 	} */
+/* 	if (strcmp(oname,"difshell") == 0) { */
+/* 		dshell->dia = shdia; */
+/* 		dshell->len = shlen; */
+/* 		dshell->thick = shthick; */
+/* 		/* Rescale any attached concpools and hillpumps * */
+/* 		cpool=NULL; */
+/* 		pump=NULL; */
+/* 		MSGLOOP(elm, msgin) {	/* find preceding elm * */
+/* 		    case HILLPUMP: /* found it * */
+/* 			pump=(Hpump *)msgin->src; */
+/* 			/* find attached concpool * */
+/* 			MSGOUTLOOP(pump, msgout) { */
+/* 			    oname = BaseObject((Element *)msgout->dst)->name; */
+/* 			    if (strcmp(oname,"concpool")==0) cpool=(Cpool *)msgout->dst; */
+/* 			} */
+/* 			break; */
 
-		    case STOREINFLUX:
-		    case STOREOUTFLUX:
-			oname = BaseObject(msgin->src)->name;
-			if (strcmp(oname,"concpool") == 0) 
-			    cpool=(Cpool *)msgin->src;
-			break;
+/* 		    case STOREINFLUX: */
+/* 		    case STOREOUTFLUX: */
+/* 			oname = BaseObject(msgin->src)->name; */
+/* 			if (strcmp(oname,"concpool") == 0)  */
+/* 			    cpool=(Cpool *)msgin->src; */
+/* 			break; */
 		    
-		    default:
-			break;
-		}
-		/* scale any attached concpool or hillpump */
-		if (cpool && (cpool->shape_mode==TUBE) && (cpool->dia<0.0)) {
-		    cpool->dia = -1.0 * cpool->dia;
-		    /* new difshell volume */
-		    dvol= calc_shell_vol(shlen,shdia,shthick);
-		    /* unscaled concpool volume and surface */
-		    cvol=calc_vol(cpool->len,cpool->dia);
-		    csurf0=calc_surf(cpool->len,cpool->dia);
-		    /* properly scaled concpool relative volume */
-		    cpool->vol = cvol*(dvol/dshell->vol);
-		    /* keep dia, but rescale length for correct volume */
-		    cpool->len = cpool->vol/(cpool->dia*cpool->dia/4.0*PI);
-		    if (pump && (pump->vmax>0)) {
-			csurf=calc_surf(cpool->len,cpool->dia);
-			pump->vmax = pump->vmax * csurf/csurf0;
-		    }
-		} else if (pump) {
-		    /* perform standard surface scaling proportional to difshell */
-		    csurf=calc_surf(shlen,shdia);
-		    pump->vmax = pump->vmax * csurf/dshell->surf_up;
-		}
-	} else if (strcmp(oname,"difbuffer") == 0) {
-		dbuffer->dia = shdia;
-		dbuffer->len = shlen;
-		dbuffer->thick = shthick;
-	} else if ((strcmp(oname,"concpool") == 0) && (cpool->vol==0.0)) {
-		/* not scaled from inside difshell */
-		cpool->dia = shdia;
-		cpool->len = shlen;
-		cpool->thick = shthick;
-	}
-	return(0);
-}
+/* 		    default: */
+/* 			break; */
+/* 		} */
+/* 		/* scale any attached concpool or hillpump * */
+/* 		if (cpool && (cpool->shape_mode==TUBE) && (cpool->dia<0.0)) { */
+/* 		    cpool->dia = -1.0 * cpool->dia; */
+/* 		    /* new difshell volume * */
+/* 		    dvol= calc_shell_vol(shlen,shdia,shthick); */
+/* 		    /* unscaled concpool volume and surface * */
+/* 		    cvol=calc_vol(cpool->len,cpool->dia); */
+/* 		    csurf0=calc_surf(cpool->len,cpool->dia); */
+/* 		    /* properly scaled concpool relative volume * */
+/* 		    cpool->vol = cvol*(dvol/dshell->vol); */
+/* 		    /* keep dia, but rescale length for correct volume * */
+/* 		    cpool->len = cpool->vol/(cpool->dia*cpool->dia/4.0*PI); */
+/* 		    if (pump && (pump->vmax>0)) { */
+/* 			csurf=calc_surf(cpool->len,cpool->dia); */
+/* 			pump->vmax = pump->vmax * csurf/csurf0; */
+/* 		    } */
+/* 		} else if (pump) { */
+/* 		    /* perform standard surface scaling proportional to difshell * */
+/* 		    csurf=calc_surf(shlen,shdia); */
+/* 		    pump->vmax = pump->vmax * csurf/dshell->surf_up; */
+/* 		} */
+/* 	} else if (strcmp(oname,"difbuffer") == 0) { */
+/* 		dbuffer->dia = shdia; */
+/* 		dbuffer->len = shlen; */
+/* 		dbuffer->thick = shthick; */
+/* 	} else if ((strcmp(oname,"concpool") == 0) && (cpool->vol==0.0)) { */
+/* 		/* not scaled from inside difshell * */
+/* 		cpool->dia = shdia; */
+/* 		cpool->len = shlen; */
+/* 		cpool->thick = shthick; */
+/* 	} */
+/* 	return(0); */
+/* } */
 
-int fill_arglist(argv,line)
-/* parses a message of the form "src dst type var1 var2 ..."
-** into separate arguments */
-	char	**argv;
-	char	*line;
-{
-	int nargs = 0;
-	static char	str[INPUT_LINELEN];
-	char	*s;
-	int		new=1;
+/* int fill_arglist(argv,line) */
+/* /* parses a message of the form "src dst type var1 var2 ..." */
+/* ** into separate arguments * */
+/* 	char	**argv; */
+/* 	char	*line; */
+/* { */
+/* 	int nargs = 0; */
+/* 	static char	str[INPUT_LINELEN]; */
+/* 	char	*s; */
+/* 	int		new=1; */
 
-	strcpy(str,line);
+/* 	strcpy(str,line); */
 
-	for (s=str;*s;s++) {
-		if (*s == ' ' || *s == '\t') {
-			*s = '\0';
-			new = 1;
-		} else if (new) {
-			argv[nargs] = s;
-			nargs++;
-			new = 0;
-		}
-	}
-	return(nargs);
-}
+/* 	for (s=str;*s;s++) { */
+/* 		if (*s == ' ' || *s == '\t') { */
+/* 			*s = '\0'; */
+/* 			new = 1; */
+/* 		} else if (new) { */
+/* 			argv[nargs] = s; */
+/* 			nargs++; */
+/* 			new = 0; */
+/* 		} */
+/* 	} */
+/* 	return(nargs); */
+/* } */
 
-void do_paste_channel(argc,argv)
-	int argc;
-	char	**argv;
-{
-	Element *elm;
-	Element *add_channel();
-	int		i;
-	char	*argtab[20];
-	char	*name,*ch_name;
-	char	*oname;
-	char	src[MAX_LINELEN],dest[MAX_LINELEN];
+/* void do_paste_channel(argc,argv) */
+/* 	int argc; */
+/* 	char	**argv; */
+/* { */
+/* 	Element *elm; */
+/* 	Element *add_channel(); */
+/* 	int		i; */
+/* 	char	*argtab[20]; */
+/* 	char	*name,*ch_name; */
+/* 	char	*oname; */
+/* 	char	src[MAX_LINELEN],dest[MAX_LINELEN]; */
 	
-	initopt(argc, argv, "source-channel dest-compartment");
-	if (G_getopt(argc, argv) != 0)
-	  {
-		printoptusage(argc, argv);
-		return;
-	  }
+/* 	initopt(argc, argv, "source-channel dest-compartment"); */
+/* 	if (G_getopt(argc, argv) != 0) */
+/* 	  { */
+/* 		printoptusage(argc, argv); */
+/* 		return; */
+/* 	  } */
 
-	ch_name = optargv[1];
-	name = optargv[2];
+/* 	ch_name = optargv[1]; */
+/* 	name = optargv[2]; */
 
-	if ((elm = GetElement(ch_name)) == NULL) {
-		printf("Could not find channel '%s'\n",ch_name);
-		return;
-	}
+/* 	if ((elm = GetElement(ch_name)) == NULL) { */
+/* 		printf("Could not find channel '%s'\n",ch_name); */
+/* 		return; */
+/* 	} */
 
-	if ((elm = GetElement(name)) == NULL) {
-		printf("Could not find compartment '%s'\n",name);
-		return;
-	}
+/* 	if ((elm = GetElement(name)) == NULL) { */
+/* 		printf("Could not find compartment '%s'\n",name); */
+/* 		return; */
+/* 	} */
 
-	oname = BaseObject(elm)->name;
-	if ((strcmp(oname,"compartment") != 0) &&
-		(strcmp(oname,"symcompartment") != 0)) {
-		printf("Element '%s' is not a (sym)compartment.\n",name);
-		return;
-	}
+/* 	oname = BaseObject(elm)->name; */
+/* 	if ((strcmp(oname,"compartment") != 0) && */
+/* 		(strcmp(oname,"symcompartment") != 0)) { */
+/* 		printf("Element '%s' is not a (sym)compartment.\n",name); */
+/* 		return; */
+/* 	} */
 
-	elm = add_channel(ch_name,name);
+/* 	elm = add_channel(ch_name,name); */
 
-	if (!elm) {
-		/*
-		** is this supposed to name the channel or the compartment?
-		** is naming the compartment which seem wrong
-		*/
-		printf("Could not add channel '%s'\n",name);
-		return;
-	}
-
-
-	/* Filling in the setenv messages */
-	argtab[0] = "c_do_add_msg";
-	for(i = 1; 1; i++) {
-		char	varname[20];
-		char	*varvalue;
-
-		sprintf(varname, "addmsg%d", i);
-		varvalue = GetExtField(elm, varname);
-		if (varvalue == NULL) {
-			sprintf(varname, "sendmsg%d", i);
-			varvalue = GetExtField(elm, varname);
-		}
-
-		if (varvalue == NULL)
-			break;
-
-		/* since the zeroth argtab is already filled */
-		argc = fill_arglist(argtab + 1,varvalue)+1;
-		sprintf(src,"%s/%s/%s",name,ch_name,argtab[1]);
-		sprintf(dest,"%s/%s/%s",name,ch_name,argtab[2]);
-		argtab[1] = src;
-		argtab[2] = dest;
-		do_add_msg(argc,argtab);
-	}
-}
-
-void traverse_cell(elm,ncompts,nchans,nshells,nothers)
-	Element	*elm;
-	int	*ncompts,*nchans,*nshells,*nothers;
-{
-
-	for (;elm ; elm = elm->next) {
-		char*	oname;
-
-		oname = BaseObject(elm)->name;
-		if (strcmp(oname,"compartment") == 0 ||
-			strcmp(oname,"symcompartment") == 0)
-			*ncompts += 1;
-		else if (strcmp(oname,"hh_channel") == 0 ||
-			strcmp(oname,"vdep_channel") == 0 || 
-			strcmp(oname,"tabchannel") == 0 || 
-			strcmp(oname,"tab2Dchannel") == 0 || 
-			strncmp(oname,"channel",7) == 0 ||
-			strcmp(oname,"synchan") == 0 ||
-			strcmp(oname,"synchan2") == 0 ||
-			strcmp(oname,"hebbsynchan") == 0 ||
-			strcmp(oname,"ddsyn") == 0 ||
-			strcmp(oname,"receptor2") == 0) 
-			*nchans += 1;
-		else if (strcmp(oname,"difshell") == 0)
-			*nshells += 1;
-		else
-			*nothers += 1;
-
-		if (elm->child)
-			traverse_cell(elm->child,ncompts,nchans,nshells,nothers);
-	}
-}
+/* 	if (!elm) { */
+/* 		/* */
+/* 		** is this supposed to name the channel or the compartment? */
+/* 		** is naming the compartment which seem wrong */
+/* 		* */
+/* 		printf("Could not add channel '%s'\n",name); */
+/* 		return; */
+/* 	} */
 
 
-/*
-** Converting a new cell to the prototype configuration. This is
-** done by changing the 'flat' element heirarchy to one where the
-** parent is the specified compartment.
-** We need to do some tricky element juggling here. First,
-** remove the proto from the childlist of elm. Then,
-** add the childlist of elm to the childlist of proto. Then,
-** replace elm by proto
-*/
-void makeproto_func(field)
-	char	*field;
-{
-	Element	*elm,*child,*proto;
+/* 	/* Filling in the setenv messages * */
+/* 	argtab[0] = "c_do_add_msg"; */
+/* 	for(i = 1; 1; i++) { */
+/* 		char	varname[20]; */
+/* 		char	*varvalue; */
 
-	elm = (Element *)GetElement(field);
-	proto = NULL;
-	if (!elm) {
-		printf("could not find cell %s\n",field);
-		return;
-	}
+/* 		sprintf(varname, "addmsg%d", i); */
+/* 		varvalue = GetExtField(elm, varname); */
+/* 		if (varvalue == NULL) { */
+/* 			sprintf(varname, "sendmsg%d", i); */
+/* 			varvalue = GetExtField(elm, varname); */
+/* 		} */
 
-	/* Removing proto from elm's childlist */
-	if (strcmp(elm->child->name,elm->name) == 0) {
-		proto=elm->child;
-		elm->child=proto->next;
-	} else {
-		for (child=elm->child;child;child=child->next){
-			if (child->next) {
-				if(strcmp(elm->name,child->next->name)==0) {
-					proto=child->next;
-					child->next = proto->next;
-				}
-			}
-		}
-	}
-	if (!proto) {
-		printf("could not find compartment %s\n",field);
-		return;
-	}
+/* 		if (varvalue == NULL) */
+/* 			break; */
 
-	/* Add childlist of elm to childlist of proto */
-	if (!(proto->child)) {
-		proto->child = elm->child;
-	} else {
-		for (child=proto->child;child;child=child->next) {
-			if (!(child->next)) {
-				child->next = elm->child;
-				break;
-			}
-		}
-	}
+/* 		/* since the zeroth argtab is already filled * */
+/* 		argc = fill_arglist(argtab + 1,varvalue)+1; */
+/* 		sprintf(src,"%s/%s/%s",name,ch_name,argtab[1]); */
+/* 		sprintf(dest,"%s/%s/%s",name,ch_name,argtab[2]); */
+/* 		argtab[1] = src; */
+/* 		argtab[2] = dest; */
+/* 		do_add_msg(argc,argtab); */
+/* 	} */
+/* } */
 
-	/* Replace elm by proto */
-	if (elm == elm->parent->child) {
-		elm->parent->child = proto;
-		proto->next = elm->next;
-		proto->parent = elm->parent;
-	} else {
-		for(child=elm->parent->child;child;child=child->next) {
-			if (elm == child->next) {
-				child->next = proto;
-				proto->next = elm->next;
-				proto->parent = elm->parent;
-				break;
-			}
-		}
-	}
-	elm->next = NULL;
-	elm->parent = NULL;
-	elm->child = NULL;
-	sfree(elm);
-}
+/* void traverse_cell(elm,ncompts,nchans,nshells,nothers) */
+/* 	Element	*elm; */
+/* 	int	*ncompts,*nchans,*nshells,*nothers; */
+/* { */
 
-void set_compt_field(compt,field,value,len,dia,flags)
-	struct symcompartment_type	*compt;
-	char	*field;
-	float	value,len,dia;
-	int		flags;
-{
-	float calc_surf();
+/* 	for (;elm ; elm = elm->next) { */
+/* 		char*	oname; */
 
-	if (strcmp(field,"RA") == 0){
-		if (compt->len==0.0) {
-	    	compt->Ra = 8.0 * RA / (dia * PI);
-		}
-		else {		/* CYLINDRICAL */
-	    	compt->Ra = 4.0 * RA * len /(dia * dia * PI);
-		}
-	} else if (strcmp(field,"RM") == 0){
-		compt->Rm = RM / calc_surf(len,dia);
-	} else if (strcmp(field,"CM") == 0){
-		compt->Cm = CM * calc_surf(len,dia);
-	} else {
-		if (!SetElement(compt,field,ftoa(value)))
-		    printf("readcell: unable to set field '%s' on compartment '%s'\n",
-			    field, Pathname(compt));
-	}
-}
+/* 		oname = BaseObject(elm)->name; */
+/* 		if (strcmp(oname,"compartment") == 0 || */
+/* 			strcmp(oname,"symcompartment") == 0) */
+/* 			*ncompts += 1; */
+/* 		else if (strcmp(oname,"hh_channel") == 0 || */
+/* 			strcmp(oname,"vdep_channel") == 0 ||  */
+/* 			strcmp(oname,"tabchannel") == 0 ||  */
+/* 			strcmp(oname,"tab2Dchannel") == 0 ||  */
+/* 			strncmp(oname,"channel",7) == 0 || */
+/* 			strcmp(oname,"synchan") == 0 || */
+/* 			strcmp(oname,"synchan2") == 0 || */
+/* 			strcmp(oname,"hebbsynchan") == 0 || */
+/* 			strcmp(oname,"ddsyn") == 0 || */
+/* 			strcmp(oname,"receptor2") == 0)  */
+/* 			*nchans += 1; */
+/* 		else if (strcmp(oname,"difshell") == 0) */
+/* 			*nshells += 1; */
+/* 		else */
+/* 			*nothers += 1; */
+
+/* 		if (elm->child) */
+/* 			traverse_cell(elm->child,ncompts,nchans,nshells,nothers); */
+/* 	} */
+/* } */
+
+
+/* /* */
+/* ** Converting a new cell to the prototype configuration. This is */
+/* ** done by changing the 'flat' element heirarchy to one where the */
+/* ** parent is the specified compartment. */
+/* ** We need to do some tricky element juggling here. First, */
+/* ** remove the proto from the childlist of elm. Then, */
+/* ** add the childlist of elm to the childlist of proto. Then, */
+/* ** replace elm by proto */
+/* * */
+/* void makeproto_func(field) */
+/* 	char	*field; */
+/* { */
+/* 	Element	*elm,*child,*proto; */
+
+/* 	elm = (Element *)GetElement(field); */
+/* 	proto = NULL; */
+/* 	if (!elm) { */
+/* 		printf("could not find cell %s\n",field); */
+/* 		return; */
+/* 	} */
+
+/* 	/* Removing proto from elm's childlist * */
+/* 	if (strcmp(elm->child->name,elm->name) == 0) { */
+/* 		proto=elm->child; */
+/* 		elm->child=proto->next; */
+/* 	} else { */
+/* 		for (child=elm->child;child;child=child->next){ */
+/* 			if (child->next) { */
+/* 				if(strcmp(elm->name,child->next->name)==0) { */
+/* 					proto=child->next; */
+/* 					child->next = proto->next; */
+/* 				} */
+/* 			} */
+/* 		} */
+/* 	} */
+/* 	if (!proto) { */
+/* 		printf("could not find compartment %s\n",field); */
+/* 		return; */
+/* 	} */
+
+/* 	/* Add childlist of elm to childlist of proto * */
+/* 	if (!(proto->child)) { */
+/* 		proto->child = elm->child; */
+/* 	} else { */
+/* 		for (child=proto->child;child;child=child->next) { */
+/* 			if (!(child->next)) { */
+/* 				child->next = elm->child; */
+/* 				break; */
+/* 			} */
+/* 		} */
+/* 	} */
+
+/* 	/* Replace elm by proto * */
+/* 	if (elm == elm->parent->child) { */
+/* 		elm->parent->child = proto; */
+/* 		proto->next = elm->next; */
+/* 		proto->parent = elm->parent; */
+/* 	} else { */
+/* 		for(child=elm->parent->child;child;child=child->next) { */
+/* 			if (elm == child->next) { */
+/* 				child->next = proto; */
+/* 				proto->next = elm->next; */
+/* 				proto->parent = elm->parent; */
+/* 				break; */
+/* 			} */
+/* 		} */
+/* 	} */
+/* 	elm->next = NULL; */
+/* 	elm->parent = NULL; */
+/* 	elm->child = NULL; */
+/* 	sfree(elm); */
+/* } */
+
+/* void set_compt_field(compt,field,value,len,dia,flags) */
+/* 	struct symcompartment_type	*compt; */
+/* 	char	*field; */
+/* 	float	value,len,dia; */
+/* 	int		flags; */
+/* { */
+/* 	float calc_surf(); */
+
+/* 	if (strcmp(field,"RA") == 0){ */
+/* 		if (compt->len==0.0) { */
+/* 	    	compt->Ra = 8.0 * RA / (dia * PI); */
+/* 		} */
+/* 		else {		/* CYLINDRICAL * */
+/* 	    	compt->Ra = 4.0 * RA * len /(dia * dia * PI); */
+/* 		} */
+/* 	} else if (strcmp(field,"RM") == 0){ */
+/* 		compt->Rm = RM / calc_surf(len,dia); */
+/* 	} else if (strcmp(field,"CM") == 0){ */
+/* 		compt->Cm = CM * calc_surf(len,dia); */
+/* 	} else { */
+/* 		if (!SetElement(compt,field,ftoa(value))) */
+/* 		    printf("readcell: unable to set field '%s' on compartment '%s'\n", */
+/* 			    field, Pathname(compt)); */
+/* 	} */
+/* } */
 
 #undef INPUT
 #undef VOLTAGE
