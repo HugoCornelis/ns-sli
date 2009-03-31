@@ -306,6 +306,7 @@ static char rcsid[] = "$Id: new_parser.c,v 1.4 2006/01/09 16:28:50 svitak Exp $"
 /* #include "newconn_struct.h" */
 #include "result.h"
 #include "symtab.h"
+#include "nsintegrator.h"
 
 /* flags bit definitions */
 #define NEW_CELL 0x01
@@ -464,13 +465,22 @@ struct symtab_HSolveListElement *add_compartment(flags,name,link,len,dia,surface
 
 	//t get compartment element
 
-	struct PidinStack *ppistComp = NULL;
+       	Element *elmCurrentElement = GetElement(".");
+
+       	char *pcCurrentElement = Pathname(elmCurrentElement);
+
+	char *pcComp = pcCurrentElement;
+
+	strcat(pcComp,"/");
+	strcat(pcComp,name);
+
+	struct PidinStack *ppistComp = PidinStackParse(pcComp);
 
 	struct symtab_HSolveListElement *phsleComp = PidinStackLookupTopSymbol(ppistComp);
 
 /* 	compt = (struct symcompartment_type *)(GetElement(name)); */
 	if (phsleComp) {
-	    fprintf(stderr,"double definition of (sym)compartment '%s'\n",name);
+	    fprintf(stderr,"double definition of (sym)compartment '%s'\n",pcComp);
 	    return(NULL);
 	}
 	/* copy the predefined prototype compartment with all its 
@@ -478,16 +488,20 @@ struct symtab_HSolveListElement *add_compartment(flags,name,link,len,dia,surface
 	if (flags & NEW_CELL) {
 	    argv[0] = "c_do_copy";
 	    argv[1] = comptname;
-	    argv[2] = name;
+	    argv[2] = pcComp;
 	    do_copy(3,argv);
 	}
 
+	PidinStackFree(ppistComp);
+
+	ppistComp = PidinStackParse(pcComp);
 	phsleComp = PidinStackLookupTopSymbol(ppistComp);
 
+	//NSCreate();
 /* 	compt = (struct symcompartment_type *)(GetElement(name)); */
 
 	if (!phsleComp) {
-	    fprintf(stderr,"could not find (sym)compartment '%s'\n",name);
+	    fprintf(stderr,"could not find (sym)compartment '%s'\n",pcComp);
 	    return(NULL);
 	}
 
@@ -571,23 +585,23 @@ struct symtab_HSolveListElement *add_compartment(flags,name,link,len,dia,surface
 		**	asymmetric or symmetric compartments */
 /* 		if (strcmp(BaseObject(compt)->name,"compartment") == 0) { */
 
-		//t set PARENT parameter to equal ../$link
 
-/* 		    argv[0] = "c_do_add_msg"; */
-/* 		    argv[1] = link; */
-/* 		    argv[2] = name; */
-/* 		    argv[3] = "AXIAL"; */
-/* 		    argv[4] = "previous_state"; */
-/* 		    do_add_msg(5,argv); */
+
+ 		    argv[0] = "c_do_add_msg"; 
+ 		    argv[1] = link; 
+ 		    argv[2] = name; 
+ 		    argv[3] = "AXIAL"; 
+ 		    argv[4] = "previous_state"; 
+ 		    do_add_msg(5,argv); 
 	    
-/* 		    argv[1] = name; */
-/* 		    argv[2] = link; */
-/* 		    argv[3] = "RAXIAL"; */
-/* 		    argv[4] = "Ra"; */
-/* 		    argv[5] = "previous_state"; */
-/* 		    for (i=1; i<=TAILWEIGHT; i+=1) { */
-/* 			do_add_msg(6,argv); */
-/* 		    } */
+ 		    argv[1] = name; 
+ 		    argv[2] = link; 
+ 		    argv[3] = "RAXIAL"; 
+ 		    argv[4] = "Ra"; 
+ 		    argv[5] = "previous_state"; 
+		    //   for (i=1; i<=TAILWEIGHT; i+=1) { 
+ 			do_add_msg(6,argv); 
+			//} 
 /* 		} else if (strcmp(BaseObject(compt)->name,"symcompartment")==0) { */
 /* 		/* Check shape of parent compartment, if not found will default  */
 /* 		**  to cylinder * */
@@ -728,7 +742,7 @@ struct symtab_HSolveListElement *add_compartment(flags,name,link,len,dia,surface
 
 	//t set diameter and length
 
-	SymbolSetParameterContext(phsleComp, "DIA", NULL);
+	//	SymbolSetParameterContext(phsleComp, "DIA", NULL);
 	SymbolSetParameterDouble(phsleComp, "DIA", dia);
 	SymbolSetParameterDouble(phsleComp, "LENGTH", len);
 
@@ -781,6 +795,7 @@ struct symtab_HSolveListElement *add_compartment(flags,name,link,len,dia,surface
 /* 	compt->Em = ELEAK; */
 
 	return(phsleComp);
+	
 }
 
 /* void add_spines(flags,dendr,name,spinenum,len) */
@@ -1001,6 +1016,13 @@ void parse_compartment(flags,name,parent,x,y,z,x00,y00,z00,d,nargs,ch,dens)
 	char	newname[NAMELEN+2],newpname[NAMELEN+2];
 	int	split;
 
+
+	Element *elmCurrentElement = GetElement(".");
+
+   
+	char *pcCurrentElement = Pathname(elmCurrentElement); 
+
+
 	if (strcmp(parent,"none") == 0) {
                 if (flags & DOUBLE_ENDPOINT) {
                    x0=x00; y0=y00;z0=z00;
@@ -1008,7 +1030,11 @@ void parse_compartment(flags,name,parent,x,y,z,x00,y00,z00,d,nargs,ch,dens)
                	   x0=X0; y0=Y0; z0=Y0;
                 }
 	} else {
-		parent_compt = GetElement(parent);
+
+	  struct PidinStack *ppistParent = PidinStackParse(parent);
+	  
+	  PidinStackPop(ppistParent);
+	  //parent_compt = GetElement(parent);
 		if (!parent_compt)  {
 		    fprintf(stderr,"could not find parent compt %s\n",parent);
 		    return;

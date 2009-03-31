@@ -163,7 +163,12 @@ static char rcsid[] = "$Id: sim_main.c,v 1.6 2005/10/16 20:48:35 svitak Exp $";
 #include "shell_func_ext.h"
 #include "ss_func_ext.h"
 #include "system_deps.h"
-#include "par_ext.h"
+
+//x
+//x removing anything having to do with the parallel 
+//x functionality
+//x
+// #include "par_ext.h"
 
 //t Including out Neurospaces Headers.
 #include "neurospaces/nsintegrator.h"
@@ -232,7 +237,11 @@ char simrc_name[256];
     mallopt(M_KEEP, 1);
 #endif
 
-    InitPar(&argc, &argv, &envp);
+    //x
+    //x no need for the parallel genesis struct to be
+    //x initilized.
+    //x
+    //InitPar(&argc, &argv, &envp);
 
     nxtarg = 0;
     use_simrc = 1;
@@ -541,7 +550,11 @@ char simrc_name[256];
     AlternatePrompt(NULL);
     Interpreter();
 
-    FinalizePar();
+
+    //x
+    //x Disabling the Parallel library
+    //x
+    //FinalizePar();
 
     return 0;
 }

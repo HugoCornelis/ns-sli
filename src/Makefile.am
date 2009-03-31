@@ -1,11 +1,10 @@
 
-SUBDIRS = util script c2genesis shell neurospaces olf par sim 
+SUBDIRS = util script c2genesis shell neurospaces olf sim 
 
 utildir = $(top_srcdir)/src/util
 scriptdir = $(top_srcdir)/src/script
 shelldir = $(top_srcdir)/src/shell
 simdir = $(top_srcdir)/src/sim
-pardir = $(top_srcdir)/src/par
 nsdir = $(top_srcdir)/src/neurospaces
 olfdir = $(top_srcdir)/src/olf
 
@@ -33,7 +32,6 @@ nsgenesis_LDADD = \
 	$(shelldir)/libshell.a \
 	$(utildir)/libutil.a \
 	$(scriptdir)/libscript.a \
-	$(pardir)/libpar.a \
 	$(olfdir)/libolf.a \
 	$(nsdir)/libneurospaces.a \
 	-L${libdir}/model-container -lneurospacesread \

@@ -38,6 +38,7 @@ AC_CHECK_HEADERS([ heccer/heccer.h ],[],[
 #])
 
 
+
 AC_MSG_CHECKING([Checking OS])
 AC_MSG_RESULT([Host is running $host_os.])
 case "$host_os" in
@@ -76,10 +77,9 @@ AC_OUTPUT(Makefile \
 	src/c2genesis/Makefile \
 	src/script/Makefile \
 	src/shell/Makefile \
+	src/olf/Makefile \
 	src/neurospaces/Makefile \
-	src/par/Makefile \
-	src/sim/Makefile \
-	src/olf/Makefile
+	src/sim/Makefile 
 )
 
 

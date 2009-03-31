@@ -55,10 +55,9 @@ int NSCopy(struct PidinStack *ppistSrc, char *pcDst){
 
 
 
-  //t copy /h/c /h/d
-  //t ce /h ; cp c d
 
-  //t copy /h/c /i/d
+
+
 
 
   struct PidinStack *ppistDst = PidinStackParse(pcDst);
@@ -76,10 +75,19 @@ int NSCopy(struct PidinStack *ppistSrc, char *pcDst){
 
   if (PidinStackIsRooted(ppistDst))
     {
-      //t nothing ?
+
+      //t copy /h/c /i/d
+      int dumb = 0;
+
+      struct PidinStack *ppistDstParent = PidinStackParse(pcDst);
+
+      PidinStackPop(ppistDstParent);
+      
     }
   else
     {
+      //t copy /h/c /h/d
+      //t ce /h ; cp c d
       PidinStackPushCompact(ppistDst,pidinDst);
     }
   
