@@ -463,40 +463,40 @@ struct symtab_HSolveListElement *add_compartment(flags,name,link,len,dia,surface
 	float   rangauss();
 	int     Strindex();
 
+
+	char *pcComp;
 	//t get compartment element
-
-       	Element *elmCurrentElement = GetElement(".");
-
-       	char *pcCurrentElement = Pathname(elmCurrentElement);
-
-	char *pcComp = pcCurrentElement;
-
-	strcat(pcComp,"/");
-	
-	if(strcmp(link,"none") != 0)
+	if(name[0]!='/')
 	{
-	  strcat(pcComp,link);
+	  Element *elmCurrentElement = GetElement(".");
+
+	  char *pcCurrentElement = Pathname(elmCurrentElement);
+
+	  pcComp = pcCurrentElement;
+	
 	  strcat(pcComp,"/");
-
+	  strcat(pcComp,name);
 	}
-
-	strcat(pcComp,name);
+	else
+	{
+	  pcComp = name;
+	}
 
 	struct PidinStack *ppistComp = PidinStackParse(pcComp);
 
 	struct symtab_HSolveListElement *phsleComp = PidinStackLookupTopSymbol(ppistComp);
-
+	
 /* 	compt = (struct symcompartment_type *)(GetElement(name)); */
 	if (phsleComp) {
 	    fprintf(stderr,"double definition of (sym)compartment '%s'\n",pcComp);
-	    return(NULL);
+	   return(NULL);
 	}
 	/* copy the predefined prototype compartment with all its 
 	** subelements */
 	if (flags & NEW_CELL) {
 	    argv[0] = "c_do_copy";
 	    argv[1] = comptname;
-	    argv[2] = pcComp;
+	    argv[2] = name;
 	    do_copy(3,argv);
 	}
 

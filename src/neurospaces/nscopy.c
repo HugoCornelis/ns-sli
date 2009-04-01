@@ -54,14 +54,45 @@ int NSCopy(struct PidinStack *ppistSrc, char *pcDst){
   }
 
 
+  struct PidinStack *ppistDst = NULL;
 
 
 
+  //i
+  //i If the destination is not rooted then we must root it to the 
+  //i current working element.
+  //i
+  if(pcDst[0] != '/')
+  {
+    Element *elmCurrentElement = GetElement(".");
+
+    char *pcCurrentElement = Pathname(elmCurrentElement);
+
+    char *pcNewDst = strdup(pcCurrentElement);
 
 
+    //i
+    //i If current working element is NOT "/" then we
+    //i need to add a slash.
+    //i 
+    if(strcmp(pcCurrentElement,"/") != 0)
+    {
 
-  struct PidinStack *ppistDst = PidinStackParse(pcDst);
+      strcat(pcNewDst,"/");
 
+    }
+
+    strcat(pcNewDst,pcDst);
+
+    ppistDst = PidinStackParse(pcNewDst);
+
+  }
+  else
+  {
+
+    ppistDst = PidinStackParse(pcDst);
+
+  }
 
   struct symtab_IdentifierIndex *pidinDst = PidinStackPop(ppistDst);
 
@@ -77,12 +108,7 @@ int NSCopy(struct PidinStack *ppistSrc, char *pcDst){
     {
 
       //t copy /h/c /i/d
-      int dumb = 0;
-
-/*       struct PidinStack *ppistDstParent = PidinStackParse(pcDst); */
-
-/*       PidinStackPop(ppistDstParent); */
-      
+     
     }
   else
     {
