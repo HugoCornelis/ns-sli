@@ -472,6 +472,14 @@ struct symtab_HSolveListElement *add_compartment(flags,name,link,len,dia,surface
 	char *pcComp = pcCurrentElement;
 
 	strcat(pcComp,"/");
+	
+	if(strcmp(link,"none") != 0)
+	{
+	  strcat(pcComp,link);
+	  strcat(pcComp,"/");
+
+	}
+
 	strcat(pcComp,name);
 
 	struct PidinStack *ppistComp = PidinStackParse(pcComp);
@@ -1034,7 +1042,7 @@ void parse_compartment(flags,name,parent,x,y,z,x00,y00,z00,d,nargs,ch,dens)
 	  struct PidinStack *ppistParent = PidinStackParse(parent);
 	  
 	  PidinStackPop(ppistParent);
-	  //parent_compt = GetElement(parent);
+	  parent_compt = GetElement(parent);
 		if (!parent_compt)  {
 		    fprintf(stderr,"could not find parent compt %s\n",parent);
 		    return;
@@ -1050,6 +1058,8 @@ void parse_compartment(flags,name,parent,x,y,z,x00,y00,z00,d,nargs,ch,dens)
                    x0=parent_compt->x; y0=parent_compt->y; z0=parent_compt->z;
                 }
 	}
+
+
 	strcpy(newname,name);
 	strcpy(newpname,parent);
 	tx = x;

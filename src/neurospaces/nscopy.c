@@ -79,9 +79,9 @@ int NSCopy(struct PidinStack *ppistSrc, char *pcDst){
       //t copy /h/c /i/d
       int dumb = 0;
 
-      struct PidinStack *ppistDstParent = PidinStackParse(pcDst);
+/*       struct PidinStack *ppistDstParent = PidinStackParse(pcDst); */
 
-      PidinStackPop(ppistDstParent);
+/*       PidinStackPop(ppistDstParent); */
       
     }
   else

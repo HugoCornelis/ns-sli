@@ -29,7 +29,6 @@ AC_PATH_PROGS(DOXYGEN,doxygen,["NULL"])
 
 AC_CHECK_HEADERS([ heccer/heccer.h ],[],[
    echo "Error! Heccer header files not found in any standard location."
-   exit -1
 ])
 
 #AC_CHECK_HEADERS([ neurospaces/pidinstack.h ],[],[
