@@ -741,3 +741,52 @@ int ActivationStep(struct ioMsg *piom){
   return 1;
 
 }
+
+
+
+/*
+ *
+ *
+ */
+struct PidinStack *getRootedContext(char *pc)
+{
+
+  if(!pc)
+    return NULL;
+
+  char *pcCurrentElement = NULL;
+
+  char *pcCurrentElementPath = NULL;
+
+
+  if(pc[0] != '/')
+  {
+
+    Element *elmCurrentElement = GetElement(".");
+
+    pcCurrentElement = Pathname(elmCurrentElement);
+
+    pcCurrentElementPath = strdup(pcCurrentElement);
+
+    if(strcmp(pcCurrentElement,"/") != 0)
+    {
+
+	strcat(pcCurrentElementPath,"/");
+    }
+
+
+    //char *pcName = strdup(pc);
+    
+    strcat(pcCurrentElementPath,pc);
+
+
+  }
+  else
+  {
+
+  }
+
+    
+  return PidinStackParse(pcCurrentElementPath);
+
+}
