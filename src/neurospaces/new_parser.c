@@ -379,6 +379,9 @@ static float MLambda;
 
 static char *chomp_leading_spaces();
 float	calc_dia(),calc_len();
+double calc_surf(double len,double dia);
+double calc_vol(double len,double dia);
+
 /* int		fill_arglist(); */
 void add_spines();
 void add_fspine();
@@ -390,10 +393,9 @@ void scale_kids();
 /* void set_compt_field(); */
 void unscale_shells();
 
-float calc_surf(len,dia)
-	float len,dia;
+double calc_surf(double len,double dia)
 {
-	float surface;
+	double surface;
 
 	if (len == 0.0) {		/* SPHERICAL */
 	    surface = dia * dia * PI;
@@ -403,10 +405,9 @@ float calc_surf(len,dia)
 	return(surface);
 }
 
-float calc_vol(len,dia)
-	float len,dia;
-{
-	float	volume; 
+double calc_vol(double len,double dia)
+{	
+	double	volume; 
 
 	if (len == 0.0)		/* SPHERICAL */
 	    volume =  dia * dia * dia * PI / 6.0;
@@ -991,7 +992,8 @@ void parse_compartment(flags,name,parent,x,y,z,x00,y00,z00,d,nargs,ch,dens)
 	char	*ch_name;
 	float	tx,ty,tz;
 	int 	i,j,k;
-	float	len = 0.0,surf,vol;
+	float	len = 0.0;
+	double surf = 0.0,vol = 0.0;
 	float	val2 = 0.;    /* MUST initialize */
 	float	val3 = 0.;    /* MUST initialize */
 	Element	*elm, *compt = NULL, *parent_compt;
@@ -1017,7 +1019,6 @@ void parse_compartment(flags,name,parent,x,y,z,x00,y00,z00,d,nargs,ch,dens)
 
 	  struct symtab_HSolveListElement *phsleParent = 
 	    PidinStackLookupTopSymbol(ppistParent);
-
 	        if(!phsleParent)
 		{
 		    fprintf(stderr,"could not find parent compt %s\n",parent);
@@ -1044,7 +1045,7 @@ void parse_compartment(flags,name,parent,x,y,z,x00,y00,z00,d,nargs,ch,dens)
 	tx = x;
 	ty = y;
 	tz = z;
-	k=NSplit;
+	k=NSplit=1; //setting this to be 1 to see if it gets rid of a nasty bug
 	for (i=1; i<=k; i++) {
 	/* split compartments if desired */
 	    if (k==1) {	/* compute length */

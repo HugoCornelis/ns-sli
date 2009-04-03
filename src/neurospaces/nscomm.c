@@ -743,6 +743,58 @@ int ActivationStep(struct ioMsg *piom){
 }
 
 
+/*
+ *
+ */
+char *getRootedPathname(char *pc)
+{
+
+  char pcBuff[1024];
+
+  char *pcCurrentElement = NULL;
+
+
+
+
+  if(pc[0] != '/')
+  {
+
+    Element *elmCurrentElement = GetElement(".");
+
+    pcCurrentElement = Pathname(elmCurrentElement);
+
+
+    strcpy(&pcBuff[0],pcCurrentElement);
+
+    //    pcCurrentElementPath = strdup(pcCurrentElement);
+
+    if(strcmp(pcCurrentElement,"/") != 0)
+    {
+
+	strcat(pcBuff,"/");
+    }
+
+
+    //char *pcName = strdup(pc);
+    
+    strcat(pcBuff,pc);
+
+
+  }
+  else
+  {
+    //
+    // if rooted just return a copy
+    //
+    return strdup(pc);
+  }
+
+
+  return strdup(pcBuff);
+
+}
+
+
 
 /*
  *
@@ -754,39 +806,13 @@ struct PidinStack *getRootedContext(char *pc)
   if(!pc)
     return NULL;
 
-  char *pcCurrentElement = NULL;
+  char *pcCurrentElementPath = getRootedPathname(pc);
 
-  char *pcCurrentElementPath = NULL;
-
-
-  if(pc[0] != '/')
-  {
-
-    Element *elmCurrentElement = GetElement(".");
-
-    pcCurrentElement = Pathname(elmCurrentElement);
-
-    pcCurrentElementPath = strdup(pcCurrentElement);
-
-    if(strcmp(pcCurrentElement,"/") != 0)
-    {
-
-	strcat(pcCurrentElementPath,"/");
-    }
-
-
-    //char *pcName = strdup(pc);
-    
-    strcat(pcCurrentElementPath,pc);
-
-
-  }
-  else
-  {
-
-  }
-
+  if(!pcCurrentElementPath)
+    return NULL;
     
   return PidinStackParse(pcCurrentElementPath);
 
 }
+
+
