@@ -393,6 +393,11 @@ void scale_kids();
 /* void set_compt_field(); */
 void unscale_shells();
 
+struct symtab_HSolveListElement *add_compartment(int flags,char *name,char *link,double len,
+						 double dia,double *surface,double *volume,
+						 int x0,int y0,int z0,int x,int y,int z,int split);
+
+
 double calc_surf(double len,double dia)
 {
 	double surface;
@@ -441,16 +446,11 @@ float calc_shell_vol(len,dia,thick)
 	return(volume);
 }
 
-struct symtab_HSolveListElement *add_compartment(flags,name,link,len,dia,surface,volume,x0,y0,z0,x,y,z,split)
-	int	flags;
-	char	*name;
-	char	*link;
-	float	len;
-	float	dia;
-	float	*surface;
-	float	*volume;
-	float	x0,y0,z0,x,y,z;
-	int	split;
+
+
+struct symtab_HSolveListElement *add_compartment(int flags,char *name,char *link,double len,
+						 double dia,double *surface,double *volume,
+						 int x0,int y0,int z0,int x,int y,int z,int split)
 {
 	int 	i,argc;
 	char	*argv[10];
