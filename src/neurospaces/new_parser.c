@@ -307,6 +307,9 @@ static char rcsid[] = "$Id: new_parser.c,v 1.4 2006/01/09 16:28:50 svitak Exp $"
 #include "result.h"
 #include "symtab.h"
 
+#include "neurospaces/pidinstack.h"
+
+
 /* flags bit definitions */
 #define NEW_CELL 0x01
 #define RELATIVE 0x02
@@ -398,6 +401,11 @@ struct symtab_HSolveListElement *add_compartment(int flags,char *name,char *link
 						 int x0,int y0,int z0,int x,int y,int z,int split);
 
 
+void parse_compartment(int flags,char *name,char *parent,
+		       double x,double y,double z,
+		       double x00,double y00,double z00,
+		       double d,int nargs,char ch[][NAMELEN],double *dens);
+
 double calc_surf(double len,double dia)
 {
         double surface;
@@ -487,12 +495,16 @@ struct symtab_HSolveListElement *add_compartment(int flags,char *name,char *link
 	    do_copy(3,argv);
 	}
 
-	phsleComp = PidinStackLookupTopSymbol(ppistComp);
+	PidinStackFree(ppistComp);
 
+	ppistComp = getRootedContext(name);
+
+	phsleComp = PidinStackLookupTopSymbol(ppistComp);
 /* 	compt = (struct symcompartment_type *)(GetElement(name)); */
+	
 
 	if (!phsleComp) {
-	    fprintf(stderr,"could not find (sym)compartment '%s'\n",name);
+	    fprintf(stderr,"could not create (sym)compartment '%s'\n",name);
 	    return(NULL);
 	}
 
@@ -984,18 +996,13 @@ struct symtab_HSolveListElement *add_compartment(int flags,char *name,char *link
 /* 	return(elm); */
 /* } */
 
-
-void parse_compartment(flags,name,parent,x,y,z,x00,y00,z00,d,nargs,ch,dens)
-	int	flags;
-	char	*name;
-	char	*parent;
-	float	x,y,z,x00,y00,z00,d;
-	int	nargs;
-	char	ch[MAX_NCHANS][NAMELEN];
-	float	*dens;
+void parse_compartment(int flags,char *name,char *parent,
+		       double x,double y,double z,
+		       double x00,double y00,double z00,
+		       double d,int nargs,char ch[][NAMELEN],double * dens)
 {
-	float   nlambda;
-	char	*ch_name;
+	double   nlambda = 0.0;
+	char	*ch_name = NULL;
 	float	tx,ty,tz;
 	int 	i,j,k;
 	float	len = 0.0;
@@ -1040,9 +1047,12 @@ void parse_compartment(flags,name,parent,x,y,z,x00,y00,z00,d,nargs,ch,dens)
 		} else {
 		  //x0=parent_compt->x; y0=parent_compt->y; z0=parent_compt->z;
 
-		  x0 = SymbolParameterResolveValue(phsleParent,ppistParent,"x");
-		  y0 = SymbolParameterResolveValue(phsleParent,ppistParent,"y");
-		  z0 = SymbolParameterResolveValue(phsleParent,ppistParent,"z");
+		 /*  x0 = SymbolParameterResolveValue(phsleParent,ppistParent,"x"); */
+/* 		  y0 = SymbolParameterResolveValue(phsleParent,ppistParent,"y"); */
+/* 		  z0 = SymbolParameterResolveValue(phsleParent,ppistParent,"z"); */
+		  x0 = 0;
+		  y0 = 0;
+		  z0 = 0;
 
                 }
 	}
@@ -1051,7 +1061,10 @@ void parse_compartment(flags,name,parent,x,y,z,x00,y00,z00,d,nargs,ch,dens)
 	tx = x;
 	ty = y;
 	tz = z;
-	k=NSplit=1; //setting this to be 1 to see if it gets rid of a nasty bug
+	//k=NSplit=1; //setting this to be 1 to see if it gets rid of a nasty bug
+
+	NSplit = 1;
+	k = NSplit;
 	for (i=1; i<=k; i++) {
 	/* split compartments if desired */
 	    if (k==1) {	/* compute length */
