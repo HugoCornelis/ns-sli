@@ -378,9 +378,9 @@ static int NSplit,MaxSplit;
 static float MLambda;
 
 static char *chomp_leading_spaces();
-float	calc_dia(),calc_len();
-double calc_surf(double len,double dia);
-double calc_vol(double len,double dia);
+static float	calc_dia(),calc_len();
+static double calc_surf(double len,double dia);
+static double calc_vol(double len,double dia);
 
 /* int		fill_arglist(); */
 void add_spines();
@@ -400,7 +400,7 @@ struct symtab_HSolveListElement *add_compartment(int flags,char *name,char *link
 
 double calc_surf(double len,double dia)
 {
-	double surface;
+        double surface;
 
 	if (len == 0.0) {		/* SPHERICAL */
 	    surface = dia * dia * PI;
@@ -458,7 +458,8 @@ struct symtab_HSolveListElement *add_compartment(int flags,char *name,char *link
 	char	src[MAX_LINELEN],dest[MAX_LINELEN];
 	MsgIn	*msgin;
 	Element *elm,*lelm,*nelm;
-	float   tsurface,tvolume,tlen,tdia,val,val2,val3;
+	float   tvolume,tlen,tdia,val,val2,val3;
+	double tsurface;
 	int     dochild;
 	float   rangauss();
 	int     Strindex();
@@ -502,7 +503,12 @@ struct symtab_HSolveListElement *add_compartment(int flags,char *name,char *link
 	    if ((len>0.0)&&(Vlen>0.0)) len=rangauss(len,Vlen);
 	    if (Vdia>0.0) dia=rangauss(dia,Vdia*dia*dia);
 	}
-	*surface = calc_surf(len,dia);
+	//*surface = calc_surf(len,dia);
+	//i
+	//i Used a tenary operator in place of the calc_surf equation due to some error
+	//i on the proceedural stack which causes the return value to become "nan"
+	//i
+        *surface = (len == 0.0)  ? (dia*dia*PI):(len*dia*PI);
 	*volume = calc_vol(len,dia);
 
 	/* Rescaling all kids of copied element to its dimensions

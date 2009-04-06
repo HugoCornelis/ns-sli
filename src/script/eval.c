@@ -247,6 +247,9 @@ extern int      yyerror();
 #endif
 
 
+double GetScriptDouble(char *name);
+void CreateScriptFloat(char *name);
+
 static int bGFTrace = FALSE;
 
 static int iTraceIndent = 2;
