@@ -515,12 +515,12 @@ struct symtab_HSolveListElement *add_compartment(int flags,char *name,char *link
 	    if ((len>0.0)&&(Vlen>0.0)) len=rangauss(len,Vlen);
 	    if (Vdia>0.0) dia=rangauss(dia,Vdia*dia*dia);
 	}
-	//*surface = calc_surf(len,dia);
+	*surface = calc_surf(len,dia);
 	//i
 	//i Used a tenary operator in place of the calc_surf equation due to some error
 	//i on the proceedural stack which causes the return value to become "nan"
 	//i
-        *surface = (len == 0.0)  ? (dia*dia*PI):(len*dia*PI);
+/*         *surface = (len == 0.0)  ? (dia*dia*PI):(len*dia*PI); */
 	*volume = calc_vol(len,dia);
 
 	/* Rescaling all kids of copied element to its dimensions
