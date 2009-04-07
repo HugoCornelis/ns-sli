@@ -68,7 +68,9 @@ int NSCopy(struct PidinStack *ppistSrc, char *pcDst){
 
     char *pcCurrentElement = Pathname(elmCurrentElement);
 
-    char *pcNewDst = strdup(pcCurrentElement);
+    char pcNewDst[1000];
+
+    strcpy(pcNewDst, pcCurrentElement);
 
 
     //i

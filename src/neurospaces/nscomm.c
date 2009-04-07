@@ -779,6 +779,8 @@ char *getRootedPathname(char *pc)
     
     strcat(pcBuff,pc);
 
+    return strdup(pcBuff);
+
 
   }
   else
@@ -789,8 +791,6 @@ char *getRootedPathname(char *pc)
     return strdup(pc);
   }
 
-
-  return strdup(pcBuff);
 
 }
 
@@ -811,8 +811,12 @@ struct PidinStack *getRootedContext(char *pc)
   if(!pcCurrentElementPath)
     return NULL;
     
-  return PidinStackParse(pcCurrentElementPath);
+  struct PidinStack *ppistResult
+      = PidinStackParse(pcCurrentElementPath);
 
+  free(pcCurrentElementPath);
+
+  return(ppistResult);
 }
 
 
