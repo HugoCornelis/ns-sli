@@ -349,7 +349,7 @@ static char *cellname;
 static char lbracket[2],rbracket[2];
 /* These fields are set from the cell definition file and changed
 **  with *setglobal commands */
-static int TAILWEIGHT=1;
+//static int TAILWEIGHT=1;
 static float RM,CM,RA,EREST_ACT,ELEAK,X0,Y0,Z0;
 static int ELeakSet;
 /* Fields used by *compt option */
@@ -396,6 +396,10 @@ void scale_kids();
 /* void set_compt_field(); */
 void unscale_shells();
 
+void Gabs_position(struct symtab_HSolveListElement *phsle, 
+		   double x0,double y0,double z0,
+		   double x,double y,double z);
+
 struct symtab_HSolveListElement *add_compartment(int flags,char *name,char *link,double len,
 						 double dia,double *surface,double *volume,
 						 int x0,int y0,int z0,int x,int y,int z,int split);
@@ -405,6 +409,30 @@ void parse_compartment(int flags,char *name,char *parent,
 		       double x,double y,double z,
 		       double x00,double y00,double z00,
 		       double d,int nargs,char ch[][NAMELEN],double *dens);
+
+
+
+
+
+
+
+void Gabs_position(struct symtab_HSolveListElement *phsle, 
+		   double x0,double y0,double z0,
+		   double x,double y,double z){
+
+  double x1,y1,z1,dx,dy,dz;
+
+  SymbolSetParameterDouble(phsle, "X",x0);
+  SymbolSetParameterDouble(phsle, "Y",y0);
+  SymbolSetParameterDouble(phsle, "Z",z0);
+  
+  SymbolSetParameterDouble(phsle, "rel_X",x - x0);
+  SymbolSetParameterDouble(phsle, "rel_Y",y - y0);
+  SymbolSetParameterDouble(phsle, "rel_Z",z - z0);
+
+}
+
+
 
 double calc_surf(double len,double dia)
 {
@@ -595,21 +623,23 @@ struct symtab_HSolveListElement *add_compartment(int flags,char *name,char *link
 
 		//t set PARENT parameter to equal ../$link
 
-/* 		    argv[0] = "c_do_add_msg"; */
-/* 		    argv[1] = link; */
-/* 		    argv[2] = name; */
-/* 		    argv[3] = "AXIAL"; */
-/* 		    argv[4] = "previous_state"; */
-/* 		    do_add_msg(5,argv); */
+	      char *pcParent = getRootedPathname(link);
+	      char *pcName = getRootedPathname(name);
+	      argv[0] = "c_do_add_msg";
+	      argv[1] = pcParent;
+	      argv[2] = pcName;
+	      argv[3] = "AXIAL";
+	      argv[4] = "previous_state";
+	      do_add_msg(5,argv);
 	    
-/* 		    argv[1] = name; */
-/* 		    argv[2] = link; */
-/* 		    argv[3] = "RAXIAL"; */
-/* 		    argv[4] = "Ra"; */
-/* 		    argv[5] = "previous_state"; */
-/* 		    for (i=1; i<=TAILWEIGHT; i+=1) { */
-/* 			do_add_msg(6,argv); */
-/* 		    } */
+	      argv[1] = pcName;
+	      argv[2] = pcParent;
+	      argv[3] = "RAXIAL";
+	      argv[4] = "Ra";
+	      argv[5] = "previous_state";
+	      //    for (i=1; i<=TAILWEIGHT; i+=1) {
+	      do_add_msg(6,argv);
+	      //}
 /* 		} else if (strcmp(BaseObject(compt)->name,"symcompartment")==0) { */
 /* 		/* Check shape of parent compartment, if not found will default  */
 /* 		**  to cylinder * */
@@ -620,14 +650,14 @@ struct symtab_HSolveListElement *add_compartment(int flags,char *name,char *link
 /* 			printf(" could not find symcompartment '%s'\n",link); */
 /* 			return(NULL); */
 /* 		    } */
-/* 		    /* setup axial current into head of name_compt *  */
-/* 		    argv[0] = "c_do_add_msg"; */
-/* 		    argv[1] = link; */
-/* 		    argv[2] = name; */
-/* 		    argv[3] = "CONNECTHEAD"; */
-/* 		    argv[4] = "Ra"; */
-/* 		    argv[5] = "previous_state"; */
-/* 		    do_add_msg(6,argv); */
+	      /* setup axial current into head of name_compt */
+	    /*   argv[0] = "c_do_add_msg"; */
+/* 	      argv[1] = link; */
+/* 	      argv[2] = name; */
+/* 	      argv[3] = "CONNECTHEAD"; */
+/* 	      argv[4] = "Ra"; */
+/* 	      argv[5] = "previous_state"; */
+/* 	      do_add_msg(6,argv); */
 
 /* 		    /* if another compartment is already the child of  */
 /* 		    ** parent of link_compt, cross link with it * */
@@ -731,7 +761,11 @@ struct symtab_HSolveListElement *add_compartment(int flags,char *name,char *link
 /* 			} */
 /* 		    } */
 /* 		} */
+	      free(pcName);
+	      free(pcParent);
 	    }
+
+
 	}
 
 /* 	/* compute membrane surface and RA * */
@@ -748,6 +782,16 @@ struct symtab_HSolveListElement *add_compartment(int flags,char *name,char *link
 /* 	    compt->Ra = 4.0 * RA * len /(dia * dia * PI); */
 /* 	} */
 
+
+	if(len==0.0)
+	{
+	  SymbolSetParameterDouble(phsleComp, "RA",(13.50 * RA / (dia * PI)));
+	}
+	else
+	{
+	  SymbolSetParameterDouble(phsleComp, "RA",(4.0 * RA * len /(dia * dia * PI)));
+	}
+
 	//t set diameter and length
 
 	//SymbolSetParameterContext(phsleComp, "DIA", NULL);
@@ -760,7 +804,7 @@ struct symtab_HSolveListElement *add_compartment(int flags,char *name,char *link
 	//t not sure but perhaps we need to set X,Y,Z (check if is it
 	//t calculated correctly by the model-container)
 
-/* 	Gabs_position(compt,x0,y0,z0,x,y,z); */
+ 	Gabs_position(phsleComp,x0,y0,z0,x,y,z); 
 
 	tsurface = *surface;
 	if (len > 0.0) { /* CYLINDRICAL */
@@ -792,15 +836,18 @@ struct symtab_HSolveListElement *add_compartment(int flags,char *name,char *link
 	SymbolSetParameterDouble(phsleComp, "SURFACE", tsurface);
 
 /* 	compt->Cm = CM * tsurface; */
-/* 	compt->Rm = RM / tsurface; */
+	SymbolSetParameterDouble(phsleComp,"CM",(CM * tsurface));
 
-	SymbolSetParameterDouble(phsleComp, "Vm_init", EREST_ACT);
+/* 	compt->Rm = RM / tsurface; */
+	SymbolSetParameterDouble(phsleComp,"RM",(RM/tsurface));
 
 /* 	compt->initVm = EREST_ACT; */
-
-	SymbolSetParameterDouble(phsleComp, "ELEAK", ELEAK);
+	SymbolSetParameterDouble(phsleComp, "Vm_init", EREST_ACT);
 
 /* 	compt->Em = ELEAK; */
+	SymbolSetParameterDouble(phsleComp, "ELEAK", ELEAK);
+
+
 
 	return(phsleComp);
 }
@@ -1047,12 +1094,10 @@ void parse_compartment(int flags,char *name,char *parent,
 		} else {
 		  //x0=parent_compt->x; y0=parent_compt->y; z0=parent_compt->z;
 
-		 /*  x0 = SymbolParameterResolveValue(phsleParent,ppistParent,"x"); */
-/* 		  y0 = SymbolParameterResolveValue(phsleParent,ppistParent,"y"); */
-/* 		  z0 = SymbolParameterResolveValue(phsleParent,ppistParent,"z"); */
-		  x0 = 0;
-		  y0 = 0;
-		  z0 = 0;
+		  x0 = SymbolParameterResolveValue(phsleParent,ppistParent,"X");
+		  y0 = SymbolParameterResolveValue(phsleParent,ppistParent,"Y");
+		  z0 = SymbolParameterResolveValue(phsleParent,ppistParent,"Z");
+
 
                 }
 	}
@@ -1897,8 +1942,11 @@ void read_script(line,lineno,flags)
 		    }
 		}
 		if (strcmp(field,"CONNECTTAIL") == 0) {
+
+		  fprintf(stderr,"%s","Warning: CONNECTTAIL option not implemented.\n");
+
 		    /* implements Nodus weight function */
-		    TAILWEIGHT = value;
+		  //TAILWEIGHT = value;
 		} else {
 		    SetScriptDouble(field,value);
 		    if (strcmp(field,"RM") == 0)
@@ -1937,8 +1985,10 @@ void read_script(line,lineno,flags)
 		    }
 		}
 		if (strcmp(field,"CONNECTTAIL") == 0) 
+		  fprintf(stderr,"%s","Warning: CONNECTTAIL option not implemented.\n");
 		    /* implements Nodus weight function */
-		    TAILWEIGHT = value;
+		    //TAILWEIGHT = value;
+
 		if (strcmp(field,"RM") == 0)
 		    RM = value;
 		if (strcmp(field,"RA") == 0)
