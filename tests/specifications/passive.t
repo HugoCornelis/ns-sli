@@ -8,109 +8,7 @@ use strict;
 local $/;
 
 
-#t
-#t Need a test with one passive compartment that has self as parent.
-#t This is supposed to fail, but it just gives wrong results instead
-#t of failing.
-#t
-#t This came out as an annoyance during implementation of the swig perl glue.
-#t
-
-my $previous_library;
-
 my $root_neutral = "hardcoded_neutral";
-
-my $printinfo_output = "    Name, index ($root_neutral,-1)
-    Type (T_sym_cell)
-    cell  Name, index ($root_neutral,-1)
-    cell  {-- begin HIER sections ---
-        Name, index (c1,-1)
-        Type (T_sym_segment)
-        segmenName, index (c1,-1)
-            PARA  Name (RM)
-            PARA  Type (TYPE_PARA_FUNCTION), Value(GENESIS2)
-                FUNC  Name (GENESIS2)
-                    PARA  Name (scale)
-                    PARA  Type (TYPE_PARA_NUMBER), Value(1.000000e+00)
-                    PARA  Name (value)
-                    PARA  Type (TYPE_PARA_NUMBER), Value(3.584410e+08)
-            PARA  Name (RA)
-            PARA  Type (TYPE_PARA_FUNCTION), Value(GENESIS2)
-                FUNC  Name (GENESIS2)
-                    PARA  Name (scale)
-                    PARA  Type (TYPE_PARA_NUMBER), Value(1.000000e+00)
-                    PARA  Name (value)
-                    PARA  Type (TYPE_PARA_NUMBER), Value(3.605020e+05)
-            PARA  Name (Vm_init)
-            PARA  Type (TYPE_PARA_FUNCTION), Value(GENESIS2)
-                FUNC  Name (GENESIS2)
-                    PARA  Name (scale)
-                    PARA  Type (TYPE_PARA_NUMBER), Value(1.000000e+00)
-                    PARA  Name (value)
-                    PARA  Type (TYPE_PARA_NUMBER), Value(-6.800000e-02)
-            PARA  Name (ELEAK)
-            PARA  Type (TYPE_PARA_FUNCTION), Value(GENESIS2)
-                FUNC  Name (GENESIS2)
-                    PARA  Name (scale)
-                    PARA  Type (TYPE_PARA_NUMBER), Value(1.000000e+00)
-                    PARA  Name (value)
-                    PARA  Type (TYPE_PARA_NUMBER), Value(-8.000000e-02)
-            PARA  Name (CM)
-            PARA  Type (TYPE_PARA_FUNCTION), Value(GENESIS2)
-                FUNC  Name (GENESIS2)
-                    PARA  Name (scale)
-                    PARA  Type (TYPE_PARA_NUMBER), Value(1.000000e+00)
-                    PARA  Name (value)
-                    PARA  Type (TYPE_PARA_NUMBER), Value(4.575370e-11)
-        segmen{-- begin HIER sections ---
-        segmen}--  end  HIER sections ---
-        Name, index (c2,-1)
-        Type (T_sym_segment)
-        segmenName, index (c2,-1)
-            PARA  Name (PARENT)
-            PARA  Type (TYPE_PARA_SYMBOLIC), Value : ../c1
-        segmen{-- begin HIER sections ---
-        segmen}--  end  HIER sections ---
-            segmenName, index (c1,-1)
-                PARA  Name (RM)
-                PARA  Type (TYPE_PARA_FUNCTION), Value(GENESIS2)
-                    FUNC  Name (GENESIS2)
-                        PARA  Name (scale)
-                        PARA  Type (TYPE_PARA_NUMBER), Value(1.000000e+00)
-                        PARA  Name (value)
-                        PARA  Type (TYPE_PARA_NUMBER), Value(3.584410e+08)
-                PARA  Name (RA)
-                PARA  Type (TYPE_PARA_FUNCTION), Value(GENESIS2)
-                    FUNC  Name (GENESIS2)
-                        PARA  Name (scale)
-                        PARA  Type (TYPE_PARA_NUMBER), Value(1.000000e+00)
-                        PARA  Name (value)
-                        PARA  Type (TYPE_PARA_NUMBER), Value(3.605020e+05)
-                PARA  Name (Vm_init)
-                PARA  Type (TYPE_PARA_FUNCTION), Value(GENESIS2)
-                    FUNC  Name (GENESIS2)
-                        PARA  Name (scale)
-                        PARA  Type (TYPE_PARA_NUMBER), Value(1.000000e+00)
-                        PARA  Name (value)
-                        PARA  Type (TYPE_PARA_NUMBER), Value(-6.800000e-02)
-                PARA  Name (ELEAK)
-                PARA  Type (TYPE_PARA_FUNCTION), Value(GENESIS2)
-                    FUNC  Name (GENESIS2)
-                        PARA  Name (scale)
-                        PARA  Type (TYPE_PARA_NUMBER), Value(1.000000e+00)
-                        PARA  Name (value)
-                        PARA  Type (TYPE_PARA_NUMBER), Value(-8.000000e-02)
-                PARA  Name (CM)
-                PARA  Type (TYPE_PARA_FUNCTION), Value(GENESIS2)
-                    FUNC  Name (GENESIS2)
-                        PARA  Name (scale)
-                        PARA  Type (TYPE_PARA_NUMBER), Value(1.000000e+00)
-                        PARA  Name (value)
-                        PARA  Type (TYPE_PARA_NUMBER), Value(4.575370e-11)
-            segmen{-- begin HIER sections ---
-            segmen}--  end  HIER sections ---
-    cell  }--  end  HIER sections ---
-";
 
 my $test
     = {
@@ -311,7 +209,6 @@ my $test
 						 ],
 				description => "two passive compartments with asymetric properties and injected current",
 				
-			     disabled => 0,
 			       },
 
 
@@ -334,8 +231,6 @@ my $test
 						  },
 						 ],
 				description => "ten passive compartments with different properties and injected current",
-			   
-		       disabled => 0,
 
 
 

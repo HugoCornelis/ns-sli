@@ -8,8 +8,6 @@ use strict;
 local $/;
 
 
-my $root_neutral = "hardcoded_neutral";
-
 my $test
     = {
        command_definitions => [
