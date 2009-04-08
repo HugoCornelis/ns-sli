@@ -402,7 +402,7 @@ void Gabs_position(struct symtab_HSolveListElement *phsle,
 
 struct symtab_HSolveListElement *add_compartment(int flags,char *name,char *link,double len,
 						 double dia,double *surface,double *volume,
-						 int x0,int y0,int z0,int x,int y,int z,int split);
+						 double x0,double y0,double z0,double x,double y,double z,int split);
 
 
 void parse_compartment(int flags,char *name,char *parent,
@@ -422,9 +422,9 @@ void Gabs_position(struct symtab_HSolveListElement *phsle,
 
   double x1,y1,z1,dx,dy,dz;
 
-  SymbolSetParameterDouble(phsle, "X",x0);
-  SymbolSetParameterDouble(phsle, "Y",y0);
-  SymbolSetParameterDouble(phsle, "Z",z0);
+  SymbolSetParameterDouble(phsle, "X",x);
+  SymbolSetParameterDouble(phsle, "Y",y);
+  SymbolSetParameterDouble(phsle, "Z",z);
   
   SymbolSetParameterDouble(phsle, "rel_X",x - x0);
   SymbolSetParameterDouble(phsle, "rel_Y",y - y0);
@@ -486,7 +486,7 @@ float calc_shell_vol(len,dia,thick)
 
 struct symtab_HSolveListElement *add_compartment(int flags,char *name,char *link,double len,
 						 double dia,double *surface,double *volume,
-						 int x0,int y0,int z0,int x,int y,int z,int split)
+						 double x0,double y0,double z0,double x,double y,double z,int split)
 {
 	int 	i,argc;
 	char	*argv[10];
