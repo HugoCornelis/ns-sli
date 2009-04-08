@@ -396,6 +396,9 @@ void scale_kids();
 /* void set_compt_field(); */
 void unscale_shells();
 
+
+int ncompts=0,nchans=0,nshells=0,nothers=0;
+
 void Gabs_position(struct symtab_HSolveListElement *phsle, 
 		   double x0,double y0,double z0,
 		   double x,double y,double z);
@@ -782,15 +785,8 @@ struct symtab_HSolveListElement *add_compartment(int flags,char *name,char *link
 /* 	    compt->Ra = 4.0 * RA * len /(dia * dia * PI); */
 /* 	} */
 
+	SymbolSetParameterDouble(phsleComp, "RA",RA);
 
-	if(len==0.0)
-	{
-	  SymbolSetParameterDouble(phsleComp, "RA",(13.50 * RA / (dia * PI)));
-	}
-	else
-	{
-	  SymbolSetParameterDouble(phsleComp, "RA",(4.0 * RA * len /(dia * dia * PI)));
-	}
 
 	//t set diameter and length
 
@@ -836,10 +832,10 @@ struct symtab_HSolveListElement *add_compartment(int flags,char *name,char *link
 	SymbolSetParameterDouble(phsleComp, "SURFACE", tsurface);
 
 /* 	compt->Cm = CM * tsurface; */
-	SymbolSetParameterDouble(phsleComp,"CM",(CM * tsurface));
+	SymbolSetParameterDouble(phsleComp,"CM",CM);
 
 /* 	compt->Rm = RM / tsurface; */
-	SymbolSetParameterDouble(phsleComp,"RM",(RM/tsurface));
+	SymbolSetParameterDouble(phsleComp,"RM",RM);
 
 /* 	compt->initVm = EREST_ACT; */
 	SymbolSetParameterDouble(phsleComp, "Vm_init", EREST_ACT);
@@ -848,7 +844,8 @@ struct symtab_HSolveListElement *add_compartment(int flags,char *name,char *link
 	SymbolSetParameterDouble(phsleComp, "ELEAK", ELEAK);
 
 
-
+	ncompts++; 
+	
 	return(phsleComp);
 }
 
@@ -1293,7 +1290,6 @@ void do_read_cell(argc,argv)
 	char	**argv;
 {
 	int	i;
-	int	ncompts=0,nchans=0,nshells=0,nothers=0;
 	int	len;
 	char	rawline[ARRAY_LINELEN];
 	char	templine[ARRAY_LINELEN];
@@ -2029,7 +2025,7 @@ void read_script(line,lineno,flags)
 		    printf("makeproto_func() is not implemented\n");
 		}
 	} else if (strcmp(command,"*hsolve") == 0) {
-			printf("Warning: *hsolve option is obsolote.\n");
+			printf("Warning: *hsolve option is obsolete.\n");
 	} else if (nargs == 1) /* just setting flags */ {
 		if (strcmp(command,"*relative") == 0)
 			*flags |= RELATIVE;

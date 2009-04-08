@@ -18,7 +18,7 @@ clean-local:
 
 html-upload-prepare:
 	rm -fr html/htdocs/neurospaces_project/ns-sli
-	mkdir --parents html/htdocs/neurospaces_project/ns-sli
+	mkdir -p html/htdocs/neurospaces_project/ns-sli
 # $Format: "	( cd tests && ./tests_2_html --header '<img src=\"ns-main-logo-dark2-notext-32x32.jpg\" alt=\"Main Neurospaces logo\"> ${package}, ${label}, ${email} <hr>' --introduction introduction.html )" $
 	( cd tests && ./tests_2_html --header '<img src="ns-main-logo-dark2-notext-32x32.jpg" alt="Main Neurospaces logo"> Genesis 2 Backwards Compatibility Bridge <hr>' --introduction introduction.html )
 	tar cfh - tests/html | ( cd html/htdocs/neurospaces_project/ns-sli && tar vxf - )
