@@ -34,7 +34,7 @@ cached coordinate z = 2.8e-05
 						  },
 						  {
 						   description => 'Is the soma DIA diameter correct ?',
-						   read => "value = 0
+						   read => "value = 1.9e-05
 ",
 						   write => "printparameter /test/soma DIA",
 						  },
