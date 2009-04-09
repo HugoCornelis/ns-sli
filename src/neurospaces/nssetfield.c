@@ -94,7 +94,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 
 
       struct symtab_HSolveListElement *phsleGate = 
-        lookupGate(pcPathname,"Xpower"); 
+        (struct symtab_HSolveListElement*)lookupGate(pcPathname,"Xpower"); 
 
 
       if(phsleGate) 
@@ -121,7 +121,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
       //- the gate, ssets it as a child to phsle,
       //- and returns a pointer to the gate.
       phsleGate = 
-	CreateHHGate(phsle, "HH_activation");
+	(struct symtab_HSolveListElement*)CreateHHGate(phsle, "HH_activation");
 
       if(!phsleGate)
 	return 0;
@@ -135,7 +135,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 
 
     struct symtab_HSolveListElement *phsleGate = 
-        lookupGate(pcPathname,"Ypower"); 
+      (struct symtab_HSolveListElement*)lookupGate(pcPathname,"Ypower"); 
 
 
       if(phsleGate) 
@@ -157,7 +157,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
       
 
       phsleGate = 
-	CreateHHGate(phsle, "HH_inactivation");
+	(struct symtab_HSolveListElement*)CreateHHGate(phsle, "HH_inactivation");
 
       if(!phsleGate)
 	return 0;
@@ -170,7 +170,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 
 
     struct symtab_HSolveListElement *phsleGate = 
-        lookupGate(pcPathname,"Zpower"); 
+      (struct symtab_HSolveListElement*)lookupGate(pcPathname,"Zpower"); 
 
 
       if(phsleGate) 
@@ -194,7 +194,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 
       
       phsleGate = 
-	  CreateConcGate(phsle, "HH_concentration");
+	(struct symtab_HSolveListElement*)CreateConcGate(phsle, "HH_concentration");
       
       
       if(!phsleGate)

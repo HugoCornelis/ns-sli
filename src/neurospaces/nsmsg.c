@@ -20,27 +20,27 @@
 #include "neurospaces/function.h"
 
 //t includes from our nsgenesis library"
-#include "neurospaces/nsintegrator.h"
+#include "nsintegrator.h"
 
 
 
-static int AxialMsg(const char *pcSrcpath, const char *pcDstpath);
-static int ChannelMsg(const char *pcSrcpath, const char *pcDstpath);
-static int CalciumPoolMsg(const char *pcSrcpath, const char *pcDstpath);
-static int VoltageMsg(const char *pcSrcpath, const char *pcDstpath);
-static int ConcenMsg(const char *pcSrcpath, const char *pcDstpath);
-static int CinMsg(const char *pcSrcpath, const char *pcDstpath);
-static int EkMsg(const char *pcSrcpath, const char *pcDstpath);
-static int StoreMsg(const char *pcSrcpath, const char *pcDstpath,char *pcField,char *pcMsgName);
+static int AxialMsg(char *pcSrcpath, char *pcDstpath);
+static int ChannelMsg( char *pcSrcpath, char *pcDstpath);
+static int CalciumPoolMsg(char *pcSrcpath, char *pcDstpath);
+static int VoltageMsg(char *pcSrcpath, char *pcDstpath);
+static int ConcenMsg(char *pcSrcpath, char *pcDstpath);
+static int CinMsg(char *pcSrcpath, char *pcDstpath);
+static int EkMsg(char *pcSrcpath, char *pcDstpath);
+static int StoreMsg(char *pcSrcpath, char *pcDstpath,char *pcField,char *pcMsgName);
 
 static struct symtab_IOContainer *IOContainerFromList(char *ppcParmaters[], int iType[]);
-static struct symtab_IdentifierIndex * PidinQueueLookupTarget(const char *pcSrcpath, 
-							      const char *pcDstpath);
+static struct symtab_IdentifierIndex * PidinQueueLookupTarget(char *pcSrcpath, 
+							      char *pcDstpath);
 
 
 //-------------------------------------------------------------------
 /*!
- *   \fn int NSmsg(const char *pcSrcpath, const char *pcDstpath, const char *pcTypename)
+ *   \fn int NSmsg(char *pcSrcpath, char *pcDstpath, char *pcTypename)
  *   \param pcSrcpath The identifier for the Parent HSolve element.
  *   \param pcDstpath The identidier for the Child HSolve element.
  *   \param pcTypename The "message" type to pass to from Parent to child.
@@ -49,7 +49,7 @@ static struct symtab_IdentifierIndex * PidinQueueLookupTarget(const char *pcSrcp
  *   Function creates a message between two objects.
  */
 //-------------------------------------------------------------------
-int NSmsg(const char *pcSrcpath, const char *pcDstpath, const char *pcTypename, char *pcField){
+int NSmsg(char *pcSrcpath, char *pcDstpath, char *pcTypename, char *pcField){
 
 
   //-
@@ -123,7 +123,7 @@ int NSmsg(const char *pcSrcpath, const char *pcDstpath, const char *pcTypename, 
 
 //---------------------------------------------------------------
 /*!
- *  \fn int AxialMsg(const char *pcSrcpath, const char *pcDstpath)
+ *  \fn int AxialMsg(char *pcSrcpath, char *pcDstpath)
  *  \param pcSrcpath The identifier for the Parent HSolve element.
  *  \param pcDstpath The identidier for the Child HSolve element.  
  *  \return 0 on error, 1 on success.
@@ -133,7 +133,7 @@ int NSmsg(const char *pcSrcpath, const char *pcDstpath, const char *pcTypename, 
  *  reference.
  */
 //----------------------------------------------------------------
-static int AxialMsg(const char *pcSrcpath, const char *pcDstpath)
+static int AxialMsg(char *pcSrcpath, char *pcDstpath)
 {
 
 
@@ -217,7 +217,7 @@ static int AxialMsg(const char *pcSrcpath, const char *pcDstpath)
 
 //----------------------------------------------------------------------------
 /*!
- *  \fn int ChannelMsg(const char *pcSrcpath, const char *pcDstpath)
+ *  \fn int ChannelMsg(char *pcSrcpath, char *pcDstpath)
  *  \param pcSrcpath The identifier for the Parent HSolve element.
  *  \param pcDstpath The identidier for the Child HSolve element.  
  *  \return 0 on error, 1 on success.
@@ -225,7 +225,7 @@ static int AxialMsg(const char *pcSrcpath, const char *pcDstpath)
  *  Creates a message between channels by way of bindables and bindings. 
  */
 //----------------------------------------------------------------------------
-static int ChannelMsg(const char *pcSrcpath, const char *pcDstpath)
+static int ChannelMsg(char *pcSrcpath,char *pcDstpath)
 {
 
 
@@ -276,6 +276,7 @@ static int ChannelMsg(const char *pcSrcpath, const char *pcDstpath)
   strcpy(&pcTarget[iLen],"->I");
 
 
+
   struct symtab_InputOutput *pio =  CreateInputOutput(pcTarget,INPUT_TYPE_INPUT);
 
   SymbolAssignInputs(phsleDst, pio);
@@ -289,7 +290,7 @@ static int ChannelMsg(const char *pcSrcpath, const char *pcDstpath)
 
 //----------------------------------------------------------------------------
 /*!
- *  \fn static int CalciumPoolMsg(const char *pcSrcpath, const char *pcDstpath)
+ *  \fn static int CalciumPoolMsg(char *pcSrcpath, char *pcDstpath)
  *  \param pcSrcpath The identifier for the Parent HSolve element.
  *  \param pcDstpath The identidier for the Child HSolve element.  
  *  \return 0 on error, 1 on success.
@@ -297,7 +298,7 @@ static int ChannelMsg(const char *pcSrcpath, const char *pcDstpath)
  *  Creates a message for a calcium pool via bindings and bindables.
  */
 //----------------------------------------------------------------------------
-static int CalciumPoolMsg(const char *pcSrcpath, const char *pcDstpath)
+static int CalciumPoolMsg(char *pcSrcpath, char *pcDstpath)
 {
 
 
@@ -380,7 +381,7 @@ static int CalciumPoolMsg(const char *pcSrcpath, const char *pcDstpath)
 
   if(!pio)
   {
-    return NULL;
+    return 0;
   }
 
 
@@ -400,7 +401,7 @@ static int CalciumPoolMsg(const char *pcSrcpath, const char *pcDstpath)
 
 //----------------------------------------------------------------------------
 /*!
- *  \fn static int VoltageMsg(const char *pcSrcpath, const char *pcDstpath)
+ *  \fn static int VoltageMsg(char *pcSrcpath, char *pcDstpath)
  *  \param pcSrcpath The identifier for the Parent HSolve element.
  *  \param pcDstpath The identidier for the Child HSolve element.  
  *  \return 0 on error, 1 on success.
@@ -409,7 +410,7 @@ static int CalciumPoolMsg(const char *pcSrcpath, const char *pcDstpath)
  *  
  */
 //----------------------------------------------------------------------------
-static int VoltageMsg(const char *pcSrcpath, const char *pcDstpath)
+static int VoltageMsg(char *pcSrcpath, char *pcDstpath)
 {
 
   struct symtab_HSolveListElement *phsleSrc = NSLookupHSolveListElement(pcSrcpath);
@@ -473,7 +474,7 @@ static int VoltageMsg(const char *pcSrcpath, const char *pcDstpath)
 
 //----------------------------------------------------------------------------
 /*!
- *  \fn static int ConcenMsg(const char *pcSrcpath, const char *pcDstpath)
+ *  \fn static int ConcenMsg(char *pcSrcpath, char *pcDstpath)
  *  \param pcSrcpath The identifier for the Parent HSolve element.
  *  \param pcDstpath The identidier for the Child HSolve element.  
  *  \return 0 on error, 1 on success.
@@ -482,7 +483,7 @@ static int VoltageMsg(const char *pcSrcpath, const char *pcDstpath)
  *  in the destination element.
  */
 //----------------------------------------------------------------------------
-static int ConcenMsg(const char *pcSrcpath, const char *pcDstpath)
+static int ConcenMsg(char *pcSrcpath, char *pcDstpath)
 {
 
 
@@ -555,7 +556,7 @@ static int ConcenMsg(const char *pcSrcpath, const char *pcDstpath)
 
 //-------------------------------------------------------------------------
 /*!
- *  \fn static int CinMsg(const char *pcSrcpath, const char *pcDstpath)
+ *  \fn static int CinMsg(char *pcSrcpath, char *pcDstpath)
  *  \param pcSrcpath The identifier for the Parent HSolve element.
  *  \param pcDstpath The identidier for the Child HSolve element.  
  *  \return 0 on error, 1 on success.
@@ -565,7 +566,7 @@ static int ConcenMsg(const char *pcSrcpath, const char *pcDstpath)
  *  in a pool. 
  */
 //-------------------------------------------------------------------------
-static int CinMsg(const char *pcSrcpath, const char *pcDstpath)
+static int CinMsg(char *pcSrcpath, char *pcDstpath)
 {
 
 
@@ -634,13 +635,13 @@ static int CinMsg(const char *pcSrcpath, const char *pcDstpath)
 
 //-------------------------------------------------------------------------
 /*!
- *  \fn static int EkMsg(const char *pcSrcpath, const char *pcDstpath)
+ *  \fn static int EkMsg(char *pcSrcpath, char *pcDstpath)
  *  \param pcSrcpath The identifier for the Parent HSolve element.
  *  \param pcDstpath The identidier for the Child HSolve element.  
  *  \return 0 on error, 1 on success.
  */
 //-------------------------------------------------------------------------
-static int EkMsg(const char *pcSrcpath, const char *pcDstpath)
+static int EkMsg(char *pcSrcpath, char *pcDstpath)
 {
 
 
@@ -707,8 +708,8 @@ static int EkMsg(const char *pcSrcpath, const char *pcDstpath)
 
 
 
-static int StoreMsg(const char *pcSrcpath, 
-		  const char *pcDstpath, 
+static int StoreMsg(char *pcSrcpath, 
+		  char *pcDstpath, 
 		  char *pcField,
 		  char *pcMsgName){
 
@@ -833,7 +834,7 @@ int NSProcessMessages(struct neurospaces_integrator *pnsintegrator)
 
       
       double *pdValue
-	= HeccerAddressVariable(ppheccer[0], iTarget, ppioMsg[i]->pcMsgName);
+	= (double *)HeccerAddressVariable(ppheccer[0], iTarget, ppioMsg[i]->pcMsgName);
 
       if(!strcmp(ppioMsg[i]->pcMsgName,"activation")){
 	//- add source to target

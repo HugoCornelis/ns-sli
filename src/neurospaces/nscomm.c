@@ -429,6 +429,33 @@ static char * mapParameter(char *pcfield){
 }
 
 
+//-------------------------------------------------------------------------
+/*!
+ * \fn struct symtab_HSolveListElement * NSLookupHSolveListElement(char *pcPath)
+ * \param pcPath A symbol identifier to look up.
+ * \return A pointer to the Element that pcPath points to.
+ */
+//-------------------------------------------------------------------------
+struct symtab_HSolveListElement * NSLookupHSolveListElement(char *pcPath){
+
+
+    struct PidinStack *ppist  = PidinStackParse(pcPath);
+
+
+    if(!ppist)
+      return NULL;
+
+    struct symtab_HSolveListElement *phsle = 
+      PidinStackLookupTopSymbol(ppist);
+
+    if(!phsle)
+      return NULL;
+
+    return phsle;
+
+}
+
+
 
 //-----------------------------------------------------------------
 /*!

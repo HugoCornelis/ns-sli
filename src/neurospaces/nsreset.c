@@ -123,7 +123,7 @@ void NSReset(){
 
       //- only do this with one heccer for now. 
       double *pdValue
-	= HeccerAddressVariable(pnsintegrator->ppheccer[0], 
+	= (double *)HeccerAddressVariable(pnsintegrator->ppheccer[0], 
 				ppioMsg[i]->iSerial, 
 				ppioMsg[i]->pcSourceField);
 

@@ -505,7 +505,7 @@ struct symtab_HSolveListElement *add_compartment(int flags,char *name,char *link
 
 	//t get current compartment element
 
-	struct PidinStack *ppistComp = getRootedContext(name);
+	struct PidinStack *ppistComp = (struct PidinStack*)getRootedContext(name);
 
 	struct symtab_HSolveListElement *phsleComp = NULL;
 
@@ -528,7 +528,7 @@ struct symtab_HSolveListElement *add_compartment(int flags,char *name,char *link
 
 	PidinStackFree(ppistComp);
 
-	ppistComp = getRootedContext(name);
+	ppistComp = (struct PidinStack*)getRootedContext(name);
 
 	phsleComp = PidinStackLookupTopSymbol(ppistComp);
 /* 	compt = (struct symcompartment_type *)(GetElement(name)); */
@@ -626,8 +626,8 @@ struct symtab_HSolveListElement *add_compartment(int flags,char *name,char *link
 
 		//t set PARENT parameter to equal ../$link
 
-	      char *pcParent = getRootedPathname(link);
-	      char *pcName = getRootedPathname(name);
+	      char *pcParent = (char*)getRootedPathname(link);
+	      char *pcName = (char*)getRootedPathname(name);
 	      argv[0] = "c_do_add_msg";
 	      argv[1] = pcParent;
 	      argv[2] = pcName;
@@ -1072,10 +1072,10 @@ void parse_compartment(int flags,char *name,char *parent,
 	} else {
 	  //parent_compt = GetElement(parent);
 	  //		if (!parent_compt)  {
-	  struct PidinStack *ppistParent = getRootedContext(parent);
+	  struct PidinStack *ppistParent = (struct PidinStack*)getRootedContext(parent);
 
 	  struct symtab_HSolveListElement *phsleParent = 
-	    PidinStackLookupTopSymbol(ppistParent);
+	    (struct symtab_HSolveListElement*)PidinStackLookupTopSymbol(ppistParent);
 	        if(!phsleParent)
 		{
 		    fprintf(stderr,"could not find parent compt %s\n",parent);
@@ -1173,7 +1173,9 @@ void parse_compartment(int flags,char *name,char *parent,
 		    split=1;
 		}
 	    }
-	    if (!(compt = add_compartment(flags,newname,newpname,len,d,&surf,&vol,x0,y0,z0,x,y,z,split)))
+
+	    struct symtab_HSolveListElement *phsleCompt = NULL;
+	    if (!(phsleCompt = add_compartment(flags,newname,newpname,len,d,&surf,&vol,x0,y0,z0,x,y,z,split)))
 		return;
 	}
 	/*
@@ -1580,7 +1582,7 @@ int read_data(line,lineno,flags)
 	float	x,y,z,d, x0, y0, z0;
 	float	r,theta,phi, r0, theta0, phi0;
 	static char	ch[MAX_NCHANS][NAMELEN];
-	float	dens[MAX_NCHANS];
+	double	dens[MAX_NCHANS];
     float   dp,lp,xp,yp,zp;
 	static char	prevname[NAMELEN];
     char    randname[NAMELEN];

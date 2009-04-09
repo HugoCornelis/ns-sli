@@ -10,8 +10,8 @@
 #include "nsintegrator.h"
 
 
-
-
+static void SetupGeneric(int argc,char **argv,int mode);
+void tweak_tab_values(int argc,char **argv,int mode);
 
 
 /* Set up a tabulated channel from alpha-beta rate constants */
@@ -48,7 +48,7 @@ void TweakTau(argc,argv)
 
 
 
-void SetupGeneric(int argc,char **argv,int mode)
+static void SetupGeneric(int argc,char **argv,int mode)
 {
 	char *args[15];	
       
@@ -89,7 +89,7 @@ void SetupGeneric(int argc,char **argv,int mode)
 	iResult = NSSetupTau(argv[1],argv[2],args,optargc);
 
 
-      return iResult;
+      return;
 
 }
 

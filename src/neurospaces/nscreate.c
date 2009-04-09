@@ -16,6 +16,7 @@
 #include "neurospaces/symbols.h"  
 #include "neurospaces/symboltable.h"  
 #include "neurospaces/pidinstack.h"
+#include "neurospaces/idin.h"
 
 
 //t includes from our nsgenesis library
@@ -225,21 +226,23 @@ static struct symtab_HSolveListElement * SynChannelCalloc(){
     (struct symtab_HSolveListElement*)ChannelCalloc();
 
 
-  struct symtab_Equation *peq = EquationExponentialCalloc();
+  struct symtab_EquationExponential *peq = 
+    (struct symtab_EquationExponential *)EquationExponentialCalloc();
   
 
 
   struct symtab_IdentifierIndex *pidinEq = 
-    IdinNewFromChars("eq2");
+    (struct symtab_IdentifierIndex *)IdinNewFromChars("eq2");
 
   if(!pidinEq)
     return NULL;
 
 
-  SymbolSetName(peq,pidinEq);
+  SymbolSetName((struct symtab_HSolveListElement*)peq,pidinEq);
 
 
-  SymbolAddChild(phsleChannel,peq);
+  SymbolAddChild((struct symtab_HSolveListElement*)phsleChannel,
+		 (struct symtab_HSolveListElement*)peq);
 
   
   struct symtab_Attachment *patta = AttachmentCalloc();
@@ -255,10 +258,11 @@ static struct symtab_HSolveListElement * SynChannelCalloc(){
   if(!pidinAct)
     return NULL;
 
-  SymbolSetName(patta,pidinAct);
+  SymbolSetName((struct symtab_HSolveListElement*)patta,pidinAct);
 
 
-  SymbolAddChild(phsleChannel,patta); 
+  SymbolAddChild((struct symtab_HSolveListElement*)phsleChannel,
+		 (struct symtab_HSolveListElement*)patta); 
 
 
   //-
@@ -299,7 +303,7 @@ static struct symtab_HSolveListElement * SynChannelCalloc(){
   pparTau2->pparNext = NULL;
 
 
-  SymbolAssignParameters(peq,pparTau1);
+  SymbolAssignParameters((struct symtab_HSolveListElement*)peq,pparTau1);
 
 
 
@@ -546,7 +550,7 @@ static struct symtab_ConcentrationGateKinetic *CreateConcGateKinetic(char *pcDir
 static struct symtab_HSolveListElement * NernstCalloc()
 {
 
-  struct symtab_HSolveListElement *phsle = GroupCalloc();
+  struct symtab_HSolveListElement *phsle = (struct symtab_HSolveListElement *)GroupCalloc();
 
   if(!phsle)
     return NULL;
@@ -563,7 +567,7 @@ static struct symtab_HSolveListElement * NernstCalloc()
 
 
   //! allocate function and function parameters.
-  struct symtab_Function *pfun = FunctionCalloc();
+  struct symtab_Function *pfun = (struct symtab_Function*)FunctionCalloc();
   
   FunctionSetName(pfun,"NERNST");
 

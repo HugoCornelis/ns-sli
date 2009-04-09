@@ -120,7 +120,6 @@ libneurospaces_a_SOURCES = \
 	nsintegratorverbose.c \
 	heccercreate.c \
 	nsreset.c \
-	nslookup.c \
 	nsasc.c \
 	ascfileactor.c \
 	new_parser.c \
