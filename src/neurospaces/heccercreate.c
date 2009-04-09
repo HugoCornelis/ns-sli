@@ -25,6 +25,48 @@ extern double			clock_value[NCLOCKS];
 //------------------------------------------------------------------
 
 
+//------------------------------------------------------------------
+/*!
+ *  \fn int RegisterHeccerObject(char *pcName)
+ */
+
+//------------------------------------------------------------------
+int RegisterHeccerObject(char *pcName)
+{
+
+  if(!pcName)
+    return -1;
+
+  struct neurospaces_integrator *pnsintegrator = getNsintegrator();
+
+  if(!pnsintegrator)
+    return -1;
+
+  //i
+  //i first check to see if a heccer object with the same name exists.
+  //i if so we don't register the name and exit.
+  //i
+  int i;
+  char **ppcHeccerNames = pnsintegrator->ppcHeccerNames;
+  int iHeccerNames = pnsintegrator->iHeccerNames;
+
+  for(i = 0; i < iHeccerNames; i++)
+  {
+    
+    if(!strcmp(pcName,ppcHeccerNames[i]))
+      return 0;
+
+  }
+
+
+  pnsintegrator->ppcHeccerNames[pnsintegrator->iHeccerNames++] = 
+    strdup(pcName);
+
+  return 1;
+  
+
+}
+
 
 
 
@@ -40,7 +82,39 @@ extern double			clock_value[NCLOCKS];
  *
  */
 //------------------------------------------------------------------
-int HeccerCreate(char* pcContext){
+int InitHeccerObject(char* pcContext){
+
+
+
+  struct neurospaces_integrator *pnsintegrator = getNsintegrator();
+
+
+  //i
+  //i First check to see if a heccer of a certain name has been created
+  //i already. if so exit, this is a secondary check to prevent any 
+  //i low level heccers from being created twice.
+  //i
+  if( pnsintegrator->iHeccers > 0 )
+  {
+    int i;
+    int iHeccers = pnsintegrator->iHeccers;
+    struct Heccer **ppheccer = pnsintegrator->ppheccer;
+
+    for(i = 0; i < iHeccers; i++)
+    {
+      if(!strcmp(pcContext,ppheccer[i]->pcName))
+      {
+	fprintf(stdout,
+		"Warning: Heccer object %s exists, resetting it instead.\n.",
+		ppheccer[i]->pcName);
+
+	singleHeccerReset(ppheccer[i]);
+	return 0;
+      }
+    }
+  }
+
+
 
 
   struct Heccer *pheccer = HeccerNew(pcContext,NULL,NULL,NULL);
@@ -54,11 +128,6 @@ int HeccerCreate(char* pcContext){
   pheccer->dStep = clock_value[0];
   
  
-  struct nsintegrator_type *pelnsintegrator
-    = (struct nsintegrator_type *)GetElement("/neurospaces_integrator");
-
-  struct neurospaces_integrator *pnsintegrator
-    = pelnsintegrator->pnsintegrator;
 
 
   struct Neurospaces *pneuro = 

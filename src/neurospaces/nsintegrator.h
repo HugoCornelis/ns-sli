@@ -16,14 +16,12 @@
  */
 //-------------------------------------------------------------------
 
-#include "neurospaces_ext.h"
-#include "neurospaces/symboltable.h"
 #include "heccer/heccer.h"
 #include "heccer/output.h"
+#include "neurospaces_ext.h"
 #include "nsintegrator_struct.h"
+#include "neurospaces/symboltable.h"
 #include "ascfile_struct.h"
-
-
 #ifndef NSINTEGRATOR_H
 #define NSINTEGRATOR_H
 
@@ -165,12 +163,6 @@ struct neurospaces_integrator {
   struct Heccer *pheccerOptions;
 
 
-  /*!
-   *   This is an array of Heccer structs.
-   */
-  struct Heccer **ppheccer; 
-   
-
 
   /*!
    *    The number of Heccer instances in the ppheccer array
@@ -179,12 +171,39 @@ struct neurospaces_integrator {
  
 
   /*!
+   *   This is an array of Heccer structs.
+   */
+  struct Heccer **ppheccer; 
+   
+
+
+
+  /*!
+   * The number of heccer names registered. 
+   */
+  int iHeccerNames;
+
+
+  /*!
+   * An array of character strings which are used in the creation of heccer
+   * objects bearing the same name as a neutral rooted object to be used in the 
+   * model container.
+   */
+  char **ppcHeccerNames;
+
+
+
+
+
+  /*!
    * An array of IO messages which are executed during a reset.
    */
   struct ioMsg **ppioMsg;
 
 
   int iIoMsgs;
+
+
 
 };
 //------ end neurospaces_integrator -------------------------------

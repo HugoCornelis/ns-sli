@@ -35,7 +35,9 @@ extern double			clock_value[NCLOCKS];
  *   "pheccer."
  */
 //-------------------------------------------------------------------
-static void singleHeccerReset(struct Heccer *pheccer);
+void singleHeccerReset(struct Heccer *pheccer);
+static int SetupIOMessages( struct ioMsg **ppioMsg, int iIoMsgs,
+			    struct Heccer *pheccer);
 
 
 //--------------------------------------------------------------------
@@ -63,45 +65,65 @@ static void singleHeccerReset(struct Heccer *pheccer);
  *   neurospaces_integrator
  */
 //-----------------------------------------------------------------------
-void NSReset(){  
+int NSReset(){  
 
   
-  struct nsintegrator_type *pelnsintegrator
-    = (struct nsintegrator_type *)GetElement("/neurospaces_integrator");
+  struct neurospaces_integrator  *pnsintegrator = getNsintegrator();
 
-  struct neurospaces_integrator *pnsintegrator
-    = pelnsintegrator->pnsintegrator;
-
-
-  //t The first Heccer will be the only one we're concerned with now.  
-  struct Heccer * pheccer = pnsintegrator->ppheccer[0];
+  if(!pnsintegrator)
+    return -1;
 
 
+  //i
+  //i First create the heccer objects based on the crude heccer name
+  //i registry 
+  //i
+  int i;
+  char **ppcHeccerNames = pnsintegrator->ppcHeccerNames;
+  int iHeccerNames = pnsintegrator->iHeccerNames;
 
-  if(!pheccer){
+  for( i = 0; i < iHeccerNames; i++ )
+  {
 
-  //t
-  //t Create a heccer instance and tag it with "hardcoded_neutral"
-  //t which is the same id we give the genesis object all of the 
-  //t current objects will be clocked to.
-  //t
-    HeccerCreate(MODELCONTAINER_ROOT);
+    InitHeccerObject(ppcHeccerNames[i]);
 
   }
-  else
-    singleHeccerReset(pheccer);
+
 
 
   //-
   //- Now add annotated variables since the heccer instance has
-  //- been created.
+  //- been created. We set up messages for each heccer instance.
   //-
-  int i;
 
   struct ioMsg **ppioMsg = pnsintegrator->ppioMsg;
+  struct Heccer **ppheccer = pnsintegrator->ppheccer; 
   int iIoMsgs = pnsintegrator->iIoMsgs;
+  int iHeccers = pnsintegrator->iHeccers;
+  for( i = 0; i < iHeccers; i++ )
+  {
+
+    SetupIOMessages(ppioMsg,iIoMsgs,ppheccer[i]);
+
+  }
+
+  return 1;
+
+  
+}
 
 
+
+
+static int SetupIOMessages( struct ioMsg **ppioMsg, int iIoMsgs,
+			  struct Heccer *pheccer)
+{
+
+
+  if(!ppioMsg || !pheccer)
+    return -1;
+
+  int i;
   for(i = 0; i < iIoMsgs; i++)
   {
 
@@ -121,9 +143,9 @@ void NSReset(){
       
       ppioMsg[i]->iSerial = PidinStackToSerial(ppist);
 
-      //- only do this with one heccer for now. 
+ 
       double *pdValue
-	= (double *)HeccerAddressVariable(pnsintegrator->ppheccer[0], 
+	= (double *)HeccerAddressVariable(pheccer, 
 				ppioMsg[i]->iSerial, 
 				ppioMsg[i]->pcSourceField);
 
@@ -136,13 +158,15 @@ void NSReset(){
 
   }
 
-  
+
+  return 1;
+
 }
 
 
 
 
-static void singleHeccerReset(struct Heccer *pheccer){
+void singleHeccerReset(struct Heccer *pheccer){
 
   if(!pheccer)
     return;

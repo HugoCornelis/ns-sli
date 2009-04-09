@@ -770,9 +770,13 @@ int ActivationStep(struct ioMsg *piom){
 }
 
 
+
+//------------------------------------------------------------------
 /*
  *
+ *
  */
+//-------------------------------------------------------------------
 char *getRootedPathname(char *pc)
 {
 
@@ -822,11 +826,12 @@ char *getRootedPathname(char *pc)
 }
 
 
-
+//------------------------------------------------------------------
 /*
  *
  *
  */
+//-------------------------------------------------------------------
 struct PidinStack *getRootedContext(char *pc)
 {
 
@@ -845,5 +850,7 @@ struct PidinStack *getRootedContext(char *pc)
 
   return(ppistResult);
 }
+
+
 
 

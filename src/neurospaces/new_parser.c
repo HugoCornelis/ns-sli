@@ -505,7 +505,7 @@ struct symtab_HSolveListElement *add_compartment(int flags,char *name,char *link
 
 	//t get current compartment element
 
-	struct PidinStack *ppistComp = (struct PidinStack*)getRootedContext(name);
+	struct PidinStack *ppistComp = getRootedContext(name);
 
 	struct symtab_HSolveListElement *phsleComp = NULL;
 

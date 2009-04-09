@@ -123,8 +123,26 @@ int NSGenesisInitialize(){
    }
 
   
+   //i
+   //i Initialize the array for storing the heccer names.
+   //i Allocate same number as the amount for heccer pointers.
+   //i
+   pnsintegrator->iHeccerNames = 0;
+
+   pnsintegrator->ppcHeccerNames = 
+     (char**)calloc(MAX_HECCERS,sizeof(char*));
 
 
+   if( !pnsintegrator->ppcHeccerNames ){
+
+     fprintf(stderr,"Error initializing storage for Heccer names.\n");
+     return -1;
+
+   }
+   else
+   {
+     pnsintegrator->ppcHeccerNames[pnsintegrator->iHeccerNames++] = MODELCONTAINER_ROOT;
+   }
     
    
      char	*argvar2[5];  
@@ -206,9 +224,6 @@ int NSGenesisInitialize(){
      return -1;
 
    }
-
-
-
 
 
    pelnsintegrator->pnsintegrator = pnsintegrator; 
