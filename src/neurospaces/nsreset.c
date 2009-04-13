@@ -76,7 +76,7 @@ int NSReset(){
 
   //i
   //i First create the heccer objects based on the crude heccer name
-  //i registry 
+  //i registry. 
   //i
   int i;
   char **ppcHeccerNames = pnsintegrator->ppcHeccerNames;

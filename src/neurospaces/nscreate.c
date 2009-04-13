@@ -132,15 +132,15 @@ int NSCreate( char* name,  char* pcParent, char* pcType){
    SymbolSetName(phsleChild, pidinChild); 
    
 
-   //!
-   //! Retrieves the parent pathname from
-   //! the argument or from an Element in the GENESIS
-   //! namespace.
-   //! needed in cases where model container objects
-   //! are rooted in neutral objects that also reside in the GENESIS
-   //! namespace.
-   //! ex: /neutral/compartment
-   //!
+   //i
+   //i Retrieves the parent pathname from
+   //i the argument or from an Element in the GENESIS
+   //i namespace.
+   //i needed in cases where model container objects
+   //i are rooted in neutral objects that also reside in the GENESIS
+   //i namespace.
+   //i ex: /neutral/compartment
+   //i
 
    if(!strcmp(pcParent,"."))
      ppistParent = PidinStackParse("/");
@@ -329,9 +329,9 @@ struct symtab_HSolveListElement * CreateHHGate(
 		 char *pcName){
 
 
-  //!
-  //! Allocate an HH gate and set its parent to phsleTabChannel.
-  //!
+  //i
+  //i Allocate an HH gate and set its parent to phsleTabChannel.
+  //i
   struct symtab_HHGate *pgathh = HHGateCalloc();
 
 
@@ -356,11 +356,11 @@ struct symtab_HSolveListElement * CreateHHGate(
   SymbolAddChild(phsleChannel,&pgathh->bio.ioh.iol.hsle);
 
   
-  //!
-  //! Need to add a name for the forward and backward gate kinetics.
-  //! "forward" and "backward" respectively, then make these
-  //! the children of the HH Gate pgathh.
-  //!
+  //i
+  //i Need to add a name for the forward and backward gate kinetics.
+  //i "forward" and "backward" respectively, then make these
+  //i the children of the HH Gate pgathh.
+  //i
   struct symtab_GateKinetic *pgatkForward = 
     CreateGateKinetic("A");
 
@@ -406,9 +406,9 @@ struct symtab_HSolveListElement * CreateConcGate(
 		 char *pcName){
 
 
-  //!
-  //! Allocate an HH gate and set its parent to phsleTabChannel.
-  //!
+  //i
+  //i Allocate an HH gate and set its parent to phsleTabChannel.
+  //i
   struct symtab_HHGate *pgathh = HHGateCalloc();
 
 
@@ -431,11 +431,11 @@ struct symtab_HSolveListElement * CreateConcGate(
   SymbolAddChild(phsleChannel,&pgathh->bio.ioh.iol.hsle);
 
   
-  //!
-  //! Need to add a name for the forward and backward gate kinetics.
-  //! "forward" and "backward" respectively, then make these
-  //! the children of the HH Gate pgathh.
-  //!
+  //i
+  //i Need to add a name for the forward and backward gate kinetics.
+  //i "forward" and "backward" respectively, then make these
+  //i the children of the HH Gate pgathh.
+  //i
   struct symtab_ConcentrationGateKinetic *pconcgatkForward = 
     CreateConcGateKinetic("A");
 
@@ -566,7 +566,7 @@ static struct symtab_HSolveListElement * NernstCalloc()
   ppar->pparFirst = ppar;
 
 
-  //! allocate function and function parameters.
+  //i allocate function and function parameters.
   struct symtab_Function *pfun = (struct symtab_Function*)FunctionCalloc();
   
   FunctionSetName(pfun,"NERNST");

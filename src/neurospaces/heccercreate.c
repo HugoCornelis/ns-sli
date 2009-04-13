@@ -75,6 +75,7 @@ int RegisterHeccerObject(char *pcName)
  *  \fn int HeccerCreate(char* pcContext)
  *  \return -1 on error, 1 on success.
  *  \param pcContext A char array holding the name for the Heccer to create.
+ *  \return -1 on error, 1 on success, 0 for no operation.
  *  \sa neurospaces_integrator
  *
  *  Creates a Heccer instace and stores is in the global Heccer
@@ -87,6 +88,21 @@ int InitHeccerObject(char* pcContext){
 
 
   struct neurospaces_integrator *pnsintegrator = getNsintegrator();
+
+
+  //i
+  //i First check for a matching neutral element in the model container
+  //i before performing a reset. Without a check it can cause a seg fault
+  //i or no output.
+
+  struct symtab_HSolveListElement *phsle = NSLookupHSolveListElement(pcContext);
+
+  if(!phsle)
+  {
+    fprintf(stdout,"Warning: No neutral rooted object named %s for heccer.\n",pcContext);
+    return 0;
+  }
+
 
 
   //i

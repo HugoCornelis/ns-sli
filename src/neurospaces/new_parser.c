@@ -1393,6 +1393,8 @@ void do_read_cell(argc,argv)
 	/* setting the default compartment name */
 	strcpy(comptname,"/library/compartment");
 
+	RegisterHeccerObject(optargv[2]);
+
 	/* setting the default memb_factor */
 	MEMB_FACTOR = 1.0;
 	SPINE_FREQ = 0.0;
