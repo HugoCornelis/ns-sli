@@ -124,8 +124,9 @@ int NSCopy(struct PidinStack *ppistSrc, char *pcDst){
 /*   pidinDst = IdinNewFromChars(pcDstname); */
 
 
+  char *pcName = strdup(pcDst);
 
-  phsleDst = SymbolCreateAlias(phsleSrc,pidinDst);
+  phsleDst = SymbolCreateAlias(phsleSrc,pcName,pidinDst);
  
 
   //t

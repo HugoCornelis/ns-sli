@@ -1,0 +1,55 @@
+This directory contains the files of the 1992-1994 version of my Purkinje
+model (P2M9).  They require GENESIS2.1 or higher to run.
+
+See http://www.bbf.uia.ac.be/models/PM9.shtml for general model info.
+
+You should start up the simulation with one of the script files in all caps:
+CLIMBSPINE9.g: simulates a complex spike in vivo
+CLIMB9.g: simulates a complex spike in vitro
+CURRENT9.g: simulates a somatic current injection protocol in vitro
+ISPINE9.g: simulates irregular firing due to combined parallel fiber and
+	   inhibitory inputs in vivo
+SYNCHRONORM9.g: simulates the firing response to a synchronous parallel
+		fiber input in vivo
+SYNCHROPASS9.g: simulates the EPSP evoked by a synchronous parallel
+		fiber input in vivo
+
+
+All these scripts use additional files:
+Purk_const.g: contains the most important parameters for the model
+Purk_chan.g: sets up the channel kinetics.  Points either to:
+	Purk_chansave.g: run this the first time, will create a set of
+			 binary (-> machine-dependent) .tab files with
+			 tabulated channel kinetics
+	Purk_chanload.g: once the .tab files are created you can point
+			 Purk_chan.g to this file.  It runs much faster.
+        Note: if you use GENESIS2.2 the .tab files are no longer machine-
+              dependent.
+Purk_*comp.g: sets up the prototype compartments.  Different versions
+	      add different sets of synaptic channels.
+Purk_syn.g: sets up the synaptic channel kinetics.
+Purk2M0*p: different versions of the same morphology file without channels.
+Purk2M9*p: different versions of the same morphology file with active
+	   channels.  Difference in presence of spines (Purk2M9s*p, with
+	   different distributions) or not (Purk2M9.p).
+
+
+References:
+E. De Schutter and J.M. Bower: An active membrane model of the
+   cerebellar Purkinje cell. I. Simulation of current clamps in slice.
+   Journal of Neurophysiology  71: 375-400 (1994).
+   http://bbf-www.uia.ac.be/TNB/TNB_pub8.html
+E. De Schutter and J.M. Bower: An active membrane model of the
+   cerebellar Purkinje cell: II. Simulation of synaptic responses.
+   Journal of Neurophysiology  71: 401-419 (1994).
+   http://bbf-www.uia.ac.be/TNB/TNB_pub7.html
+E. De Schutter and J.M. Bower: Simulated responses of cerebellar
+   Purkinje cells are independent of the dendritic location of granule
+   cell synaptic inputs. Proceedings of the National Academy of Sciences
+   USA 91: 4736-4740 (1994).
+   http://bbf-www.uia.ac.be/TNB/TNB_pub6.html
+E. De Schutter: Modelling the cerebellar Purkinje cell: experiments
+   in computo. Progress in Brain Research, van Pelt J., Corner M.A.,
+   Uylings H.B.M. and Lopes da Silva F.H.  editors, 102: 417-431 (1994).
+   http://bbf-www.uia.ac.be/TNB/TNB_pub9.html
+
