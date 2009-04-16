@@ -1,21 +1,7 @@
 -*- outline -*-
 
-* Check the developer TODO in heccer/pool-feedback.t
+* Read in and implement a test for the morphology file tests/scripts/readcell/Purk2M9-nospines.p and tests/scripts/readcell/Purk2M9-spines.p
 
-* mtn missing files to be removed
-mtn: warning: missing file 'src/liblist'
-mtn: warning: missing file 'src/loadlib.c'
-mtn: warning: missing file 'src/script/syntax.c'
-mtn: warning: missing file 'src/script/syntax.h'
-mtn: warning: missing file 'src/neurospaces/tmp_neurospaces_struct.h'
-mtn: warning: missing file 'src/neurospaces/tmp_nsintegrator_struct.h'
-mtn: warning: missing file 'src/olf/tmp_olf_struct.h'
-
-
-* check the name entries inside the .t files
-eg. double.t has name => 'heccerreset.t'
-
-* solve all compiler warnings on ubuntu
 
 * remove the need for "hardcoded_neutral" in the scripting language.
 

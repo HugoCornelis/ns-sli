@@ -2070,6 +2070,12 @@ void read_script(line,lineno,flags)
 		if (strcmp(command,"*compt") == 0) {
 			/* setting the prototype compt */
 			strcpy(comptname,field);
+
+			//t
+			//t Need to have this case do a lookup on the model 
+			//t container for the element instead of in the genesis sli.
+			//t
+
 			/* set SPHERICAL flag correctly */
 			compt = (struct symcompartment_type *)(GetElement(comptname));
 			if (!compt) {
