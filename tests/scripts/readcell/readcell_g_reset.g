@@ -34,7 +34,7 @@ silent 1
 
 reset
 
-set_nsintegrator_verbose_level 2
+
 
 
 echo Initiated
@@ -44,52 +44,59 @@ echo Initiated
 echo -------
 echo Iteration 0
 
-step 1
+step 100
 
 echo -------
 echo Iteration 1
 
-step 1
+step 100
 
 echo -------
 echo Iteration 2
 
-step 1
+step 100
 
 echo -------
 echo Iteration 3
 
-step 1
+step 100
 
 echo -------
 echo Iteration 4
 
-step 1
+step 100
 
 echo -------
 echo Iteration 5
 
-step 1
+step 100
 
 echo -------
 echo Iteration 6
 
-step 1
+step 100
 
 echo -------
 echo Iteration 7
 
-step 1
+step 100
 
 echo -------
 echo Iteration 8
 
-step 1
+step 100
 
 echo -------
 echo Iteration 9
 
-step 1
+step 100
+
+
+step 9000
+
+step 15000
+
+
 
 
 

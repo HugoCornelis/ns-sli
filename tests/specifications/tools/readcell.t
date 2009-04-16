@@ -742,6 +742,38 @@ cached coordinate z = 0.000128
 			       },
 
 
+
+			       {
+				arguments => [
+					      "$::config->{core_directory}/tests/scripts/readcell/readcell_reset.g",
+					     ],
+				command => 'src/nsgenesis',
+				command_tests => [
+
+
+						  {
+						   
+						   description => 'Does the application report that it writes its output?',
+						   read => 'output written',
+						    timeout => 200,
+						  },
+						  {
+						   description => "Can we perform a reset and step on a cell morphology loaded via readcell?",
+						   read => {
+							     
+							    application_output_file => '/tmp/readcell_reset.txt',
+							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/readcell_reset.txt" },
+						   timeout => 2,
+						   write => undef,
+						  },
+						  ],
+				description => "A test of the readfile function.",
+			       },
+
+
+
+
+
 			      ],
        description => "readcell parameters and coordinates",
        name => 'readcell.t',

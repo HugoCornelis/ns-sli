@@ -146,9 +146,9 @@ end
 **
 **********************************************************************/
 
-include vclamp 
+//include vclamp 
 ce /library
-make_Vclamp
+//make_Vclamp
 ce /
 
 
