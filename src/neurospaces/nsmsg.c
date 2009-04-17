@@ -731,6 +731,19 @@ static int StoreMsg(char *pcSrcpath,
    struct symtab_HSolveListElement *phsle =  
      PidinStackLookupTopSymbol(ppistSrc); 
 
+   if(!phsle)
+   {
+     char pc[100];
+
+     PidinStackString(ppistSrc,&pc[0],100);
+
+     fprintf(stderr,
+	     "Error creating message for %s: Symbol not found.\n",
+	     pc);
+
+     return -1;
+   }
+
    struct symtab_Parameters *ppar = 
      SymbolFindParameter(phsle,ppistSrc,pcField);
 

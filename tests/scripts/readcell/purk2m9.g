@@ -39,87 +39,31 @@ setglobal ELEAK -0.01
   echo Performing readcell
   readcell ../tests/scripts/readcell/Purk2M9-nospines.p /test
 
-// addmsg /test/Purk_soma plot_out SAVE Vm
+addmsg /test/soma plot_out SAVE Vm
 
 
 
 silent 1
-//call plot_out RESET
+call plot_out RESET
 
 reset
 
 
-set_nsintegrator_verbose_level 2
 
 
 echo Initiated
 
 
-
-echo -------
-echo Iteration 0
-
-step 100
-
-echo -------
-echo Iteration 1
-
-//step 100
-
-echo -------
-echo Iteration 2
-
-//step 100
-
-echo -------
-echo Iteration 3
-
-//step 100
-
-echo -------
-echo Iteration 4
-
-//step 100
-
-echo -------
-echo Iteration 5
-
-//step 100
-
-echo -------
-echo Iteration 6
-
-//step 100
-
-echo -------
-echo Iteration 7
-
-//step 100
-
-echo -------
-echo Iteration 8
-
-//step 100
-
-echo -------
-echo Iteration 9
-
-//step 100
-
-
-//step 9000
-
-//step 15000
+step 25000
 
 
 
+call plot_out FINISH
 
-//call plot_out FINISH
+
+echo output written
 
 
-//echo output written
-
-//exit
 
 call model_container NEUROSPACES_QUERY
 

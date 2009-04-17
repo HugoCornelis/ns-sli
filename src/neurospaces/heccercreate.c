@@ -99,7 +99,7 @@ int InitHeccerObject(char* pcContext){
 
   if(!phsle)
   {
-    fprintf(stdout,"Warning: No neutral rooted object named %s for heccer.\n",pcContext);
+    //fprintf(stdout,"Warning: No neutral rooted object named %s for heccer.\n",pcContext);
     return 0;
   }
 

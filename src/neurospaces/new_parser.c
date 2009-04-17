@@ -2119,7 +2119,7 @@ void read_script(line,lineno,flags)
 
 				//t this likely needs to be incorporated for parsing somata.
 				double dLen = 1.0;
-				dLen = SymbolParameterResolveValue(phsleComp,ppistComp,"LEN");
+				dLen = SymbolParameterResolveValue(phsleComp,ppistComp,"Len");
 				if (dLen == 0.0) {  /* is SPHERICAL */
 					*flags |= SPHERICAL;
 				} else {
