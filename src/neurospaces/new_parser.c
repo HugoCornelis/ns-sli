@@ -2077,37 +2077,54 @@ void read_script(line,lineno,flags)
 			//t
 
 			/* set SPHERICAL flag correctly */
-			compt = (struct symcompartment_type *)(GetElement(comptname));
-			if (!compt) {
-			    fprintf(stderr,"could not find prototype compartment '%s'\n",comptname);
+			//compt = (struct symcompartment_type *)(GetElement(comptname));
+			struct PidinStack *ppistComp = getRootedContext(comptname);
+
+			struct symtab_HSolveListElement *phsleComp = NULL;
+
+			if(ppistComp)
+			  phsleComp = PidinStackLookupTopSymbol(ppistComp);
+		
+			
+
+			//if (!compt) {
+			if(!phsleComp){
+			    fprintf(stderr,
+				    "could not find prototype compartment '%s' in the model container\n",comptname);
 			} else {
-				oname = BaseObject(compt)->name;
-				if (strcmp(oname,"compartment")==0) {
-				    *flags &= ~SYMMETRIC;
-				} else if (strcmp(oname,"symcompartment")==0) {
-				    *flags |= SYMMETRIC;
-				} else {
-				    fprintf(stderr,"'%s' is not a (sym)compartment\n",comptname);
-				}
+			  //i
+			  //i So far all compartments are the same so we don't decriminate
+			  //i which one is which.
+			  //i
+			/* 	oname = BaseObject(compt)->name; */
+/* 				if (strcmp(oname,"compartment")==0) { */
+/* 				    *flags &= ~SYMMETRIC; */
+/* 				} else if (strcmp(oname,"symcompartment")==0) { */
+/* 				    *flags |= SYMMETRIC; */
+/* 				} else { */
+/* 				    fprintf(stderr,"'%s' is not a (sym)compartment\n",comptname); */
+/* 				} */
 #if 0
 			/* For compatibility with scripts that use the -env Len
 			**  field (older neurokit version) */
 				char*   lenvalue;
 
-				len = 1.0;    /* default is cylinder */
-				lenvalue = GetExtField(compt, "Len");
-				if (lenvalue != NULL) {
-					len=Atof(lenvalue);
-				}
+				//len = 1.0;    /* default is cylinder */
+			       
+				//lenvalue = GetExtField(compt, "Len");
+				//if (lenvalue != NULL) {
+				//	len=Atof(lenvalue);
+				//}
 #endif
 
 				//t this likely needs to be incorporated for parsing somata.
-
-/* 				if (compt->len == 0.0) {  /* is SPHERICAL * */
-/* 					*flags |= SPHERICAL; */
-/* 				} else { */
-/* 					*flags &= ~SPHERICAL; */
-/* 				} */
+				double dLen = 1.0;
+				dLen = SymbolParameterResolveValue(phsleComp,ppistComp,"LEN");
+				if (dLen == 0.0) {  /* is SPHERICAL */
+					*flags |= SPHERICAL;
+				} else {
+					*flags &= ~SPHERICAL;
+				}
 			}
 		}
 	} else {

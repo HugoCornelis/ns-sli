@@ -39,26 +39,27 @@ setglobal ELEAK -0.01
   echo Performing readcell
   readcell ../tests/scripts/readcell/Purk2M9-nospines.p /test
 
- // addmsg /test/Purk_soma plot_out SAVE Vm
+// addmsg /test/Purk_soma plot_out SAVE Vm
 
 
 
 silent 1
 //call plot_out RESET
 
-//reset
+reset
 
 
+set_nsintegrator_verbose_level 2
 
 
-//echo Initiated
+echo Initiated
 
 
 
 echo -------
 echo Iteration 0
 
-//step 100
+step 100
 
 echo -------
 echo Iteration 1
