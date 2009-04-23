@@ -238,7 +238,7 @@ int		empty_ok = 0;
 
     if (phsle)
     {
-      elist->element[elist->nelements] = (ElementList *)ppist;
+      elist->element[elist->nelements] = (Element *)ppist;
 
 	elist->flags[elist->nelements] = ELIST_FLAG_NEUROSPACES;
 
