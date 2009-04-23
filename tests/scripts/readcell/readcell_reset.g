@@ -105,10 +105,4 @@ call plot_out FINISH
 
 echo output written
 
-exit
-
-
-
-
-
 
