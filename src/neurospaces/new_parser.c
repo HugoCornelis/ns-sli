@@ -1186,7 +1186,7 @@ void parse_compartment(int flags,char *name,char *parent,
 
 	if (!(flags & SPHERICAL)) {
 		if (len == 0.0) {
-			printf("ERROR: cylindrical compartment '%s' has zero length!\n",name);
+/* 			printf("ERROR: cylindrical compartment '%s' has zero length!\n",name); */
 			return;
 		}
 	}
