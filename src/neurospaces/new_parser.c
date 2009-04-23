@@ -309,6 +309,8 @@ static char rcsid[] = "$Id: new_parser.c,v 1.4 2006/01/09 16:28:50 svitak Exp $"
 
 #include "neurospaces/pidinstack.h"
 
+#include "nsintegrator.h"
+
 
 /* flags bit definitions */
 #define NEW_CELL 0x01
