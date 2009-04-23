@@ -34,7 +34,7 @@ my $test
 			       },
 			      ],
        description => "asc_file object test.",
-       name => 'ascfile1.t',
+       name => 'tools/ascfile1.t',
       };
 
 

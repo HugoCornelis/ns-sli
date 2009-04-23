@@ -45,7 +45,7 @@ my $test
 
 			      ],
        description => "Channel and Nernst equation integration",
-       name => 'channel2-nernst1.t',
+       name => 'heccer/channel2-nernst1.t',
       };
 
 

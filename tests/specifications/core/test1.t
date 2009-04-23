@@ -45,7 +45,7 @@ ACTIVE CLOCKS
 			       },
 			      ],
        description => "simple startup, clock setting",
-       name => 'test1.t',
+       name => 'core/test1.t',
       };
 
 

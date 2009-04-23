@@ -42,7 +42,7 @@ my $test
 			       },
 			      ],
        description => "create a neutral object with a compartment as a child, check if ",
-       name => 'c1c2p2.t'
+       name => 'heccer/c1c2p2.t',
       };
 
 

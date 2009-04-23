@@ -48,7 +48,7 @@ showfield n x y z
 			       },
 			      ],
        description => "simple setfield operations",
-       name => 'setfield.t',
+       name => 'core/setfield.t',
       };
 
 

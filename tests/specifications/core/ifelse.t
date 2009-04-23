@@ -27,7 +27,7 @@ last else statement
 			       },
 			      ],
        description => "simple if else statements",
-       name => 'ifelse.t',
+       name => 'core/ifelse.t',
       };
 
 

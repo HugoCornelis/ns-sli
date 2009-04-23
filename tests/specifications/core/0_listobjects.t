@@ -57,7 +57,7 @@ asc_file            neurospaces         neutral             nsintegrator',
 			       },
 			      ],
        description => "List all available genesis objects.",
-       name => '0_listobjects.t'
+       name => 'core/0_listobjects.t',
       };
 
 

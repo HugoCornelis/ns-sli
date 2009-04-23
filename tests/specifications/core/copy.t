@@ -61,7 +61,7 @@ my $test
 			       },
 			      ],
        description => "create a compartment, set its fields and then copy it ",
-       name => 'copy.t'
+       name => 'core/copy.t',
       };
 
 

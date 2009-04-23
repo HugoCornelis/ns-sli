@@ -776,7 +776,7 @@ cached coordinate z = 0.000128
 
 			      ],
        description => "readcell parameters and coordinates",
-       name => 'readcell.t',
+       name => 'tools/readcell.t',
       };
 
 

@@ -39,7 +39,7 @@ my $test
 
 			      ],
        description => "concentration dependent nernst potential calculation",
-       name => 'pool-nernst.t',
+       name => 'heccer/pool-nernst.t',
       };
 
 

@@ -34,7 +34,7 @@ my $test
 			       },
 			      ],
        description => "simple startup, clock setting",
-       name => 'forendloop.t',
+       name => 'core/forendloop.t',
       };
 
 

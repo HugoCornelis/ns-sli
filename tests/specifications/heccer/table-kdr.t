@@ -115,7 +115,7 @@ my $test
 
 			      ],
        description => "Gate tabulation",
-       name => 'table-kdr.t',
+       name => 'heccer/table-kdr.t',
       };
 
 

@@ -39,7 +39,7 @@ my $test
 			       },
 			      ],
        description => "springmass equation test.",
-       name => 'ascfile1.t',
+       name => 'heccer/springmass.t',
       };
 
 
