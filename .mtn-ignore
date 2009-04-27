@@ -9,6 +9,7 @@
 ^configure$
 ^docs/html
 ^docs/latex
+^docs/nsgenesis
 ^docs/man
 ^docs/rtf
 ^html
