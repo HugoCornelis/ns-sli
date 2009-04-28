@@ -239,6 +239,8 @@ struct PidinStack * getGateContext(char *pcName, char *pcField, char *pcAorB);
 struct symtab_InputOutput * CreateInputOutput(char *pcContext, int iType);
 struct neurospaces_integrator *getNsintegrator();
 
+char *getRootedPathname(char *pc);
+struct PidinStack *getRootedContext(char *pc);
 
 //- -- Defined in nssetup.c --
 int NSSetupAlpha( char *pcName, char *pcField, char **pcArgs, 

@@ -61,7 +61,7 @@ my $test
 			       },
 			      ],
        description => "Can we copy a compartment from one independent neutral root to another when the destination is not rooted? ",
-       name => 'copy3.t'
+       name => 'core/copy3.t',
       };
 
 

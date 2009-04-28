@@ -744,11 +744,14 @@ static int StoreMsg(char *pcSrcpath,
      return -1;
    }
 
-   struct symtab_Parameters *ppar = 
-     SymbolFindParameter(phsle,ppistSrc,pcField);
+   //! we do not store 0 values for unknown fields, it is ok if fields
+   //! do not have a value assigned.
 
-   if(!ppar)
-     setParameter(phsle,pcField,"0",SETPARA_NUM);
+/*    struct symtab_Parameters *ppar =  */
+/*      SymbolFindParameter(phsle,ppistSrc,pcField); */
+
+/*    if(!ppar) */
+/*      setParameter(phsle,pcField,"0",SETPARA_NUM); */
 
 
    struct neurospaces_integrator *pnsintegrator =

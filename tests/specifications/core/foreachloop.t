@@ -50,7 +50,7 @@ three',
 			       },
 			      ],
        description => "",
-       name => 'foreachloop.t'
+       name => 'core/foreachloop.t',
       };
 
 

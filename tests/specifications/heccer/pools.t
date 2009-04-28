@@ -95,7 +95,7 @@ my $test
 
 			      ],
        description => "Pool integration & related",
-       name => 'pools.t',
+       name => 'heccer/pools.t',
       };
 
 

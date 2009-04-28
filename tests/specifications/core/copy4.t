@@ -61,7 +61,7 @@ my $test
 			       },
 			      ],
        description => "Can we copy a compartment from a non anchored root to an anchored destination? ",
-       name => 'copy4.t'
+       name => 'core/copy4.t',
       };
 
 

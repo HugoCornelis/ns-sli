@@ -41,7 +41,7 @@ setglobal ELEAK -0.01
 	leave_open 1 
 
   echo Performing readcell
-  readcell ../tests/scripts/readcell/Purk2M9-nospines.p /test
+  readcell tests/scripts/readcell/Purk2M9-nospines.p /test
 
 addmsg /test/soma plot_out SAVE Vm
 

@@ -26,7 +26,7 @@ positive
 			       },
 			      ],
        description => "simple function with ifelse control structures in it",
-       name => 'function_iftest.t'
+       name => 'core/function_iftest.t',
       };
 
 

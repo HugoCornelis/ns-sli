@@ -244,7 +244,7 @@ my $test
 
 
 
-       name => 'passive.t',
+       name => 'heccer/passive.t',
       };
 
 

@@ -309,6 +309,8 @@ static char rcsid[] = "$Id: new_parser.c,v 1.4 2006/01/09 16:28:50 svitak Exp $"
 
 #include "neurospaces/pidinstack.h"
 
+#include "nsintegrator.h"
+
 
 /* flags bit definitions */
 #define NEW_CELL 0x01
@@ -528,7 +530,7 @@ struct symtab_HSolveListElement *add_compartment(int flags,char *name,char *link
 
 	PidinStackFree(ppistComp);
 
-	ppistComp = (struct PidinStack*)getRootedContext(name);
+	ppistComp = getRootedContext(name);
 
 	phsleComp = PidinStackLookupTopSymbol(ppistComp);
 /* 	compt = (struct symcompartment_type *)(GetElement(name)); */
@@ -626,8 +628,8 @@ struct symtab_HSolveListElement *add_compartment(int flags,char *name,char *link
 
 		//t set PARENT parameter to equal ../$link
 
-	      char *pcParent = (char*)getRootedPathname(link);
-	      char *pcName = (char*)getRootedPathname(name);
+	      char *pcParent = getRootedPathname(link);
+	      char *pcName = getRootedPathname(name);
 	      argv[0] = "c_do_add_msg";
 	      argv[1] = pcParent;
 	      argv[2] = pcName;
@@ -1072,10 +1074,10 @@ void parse_compartment(int flags,char *name,char *parent,
 	} else {
 	  //parent_compt = GetElement(parent);
 	  //		if (!parent_compt)  {
-	  struct PidinStack *ppistParent = (struct PidinStack*)getRootedContext(parent);
+	  struct PidinStack *ppistParent = getRootedContext(parent);
 
 	  struct symtab_HSolveListElement *phsleParent = 
-	    (struct symtab_HSolveListElement*)PidinStackLookupTopSymbol(ppistParent);
+	      PidinStackLookupTopSymbol(ppistParent);
 	        if(!phsleParent)
 		{
 		    fprintf(stderr,"could not find parent compt %s\n",parent);
@@ -1184,7 +1186,7 @@ void parse_compartment(int flags,char *name,char *parent,
 
 	if (!(flags & SPHERICAL)) {
 		if (len == 0.0) {
-			printf("ERROR: cylindrical compartment '%s' has zero length!\n",name);
+/* 			printf("ERROR: cylindrical compartment '%s' has zero length!\n",name); */
 			return;
 		}
 	}

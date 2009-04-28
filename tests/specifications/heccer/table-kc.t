@@ -131,7 +131,7 @@ my $test
 
 			      ],
        description => "Gate tabulation",
-       name => 'table-kc.t',
+       name => 'heccer/table-kc.t',
       };
 
 

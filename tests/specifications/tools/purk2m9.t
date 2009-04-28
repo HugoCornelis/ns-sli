@@ -46,7 +46,7 @@ my $test
 
 			      ],
        description => "readcell parameters and coordinates",
-       name => 'readcell.t',
+       name => 'tools/purk2m9.t',
       };
 
 

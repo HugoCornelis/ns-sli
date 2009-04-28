@@ -56,7 +56,7 @@ my $test
 
 			      ],
        description => "pool integration, one compartment, one pool with a feedback loop",
-       name => 'pool-feedback.t',
+       name => 'heccer/pool-feedback.t',
       };
 
 
