@@ -59,8 +59,19 @@ int RegisterHeccerObject(char *pcName)
   }
 
 
-  pnsintegrator->ppcHeccerNames[pnsintegrator->iHeccerNames++] = 
-    strdup(pcName);
+  //- register the name of the heccer object
+
+  if (pnsintegrator->iHeccerNames == 0
+      && strcmp(pnsintegrator->ppcHeccerNames[pnsintegrator->iHeccerNames], HARDCODED_ROOT))
+  {
+      pnsintegrator->ppcHeccerNames[pnsintegrator->iHeccerNames] = 
+	  strdup(pcName);
+  }
+  else
+  {
+      pnsintegrator->ppcHeccerNames[pnsintegrator->iHeccerNames++] = 
+	  strdup(pcName);
+  }
 
   return 1;
   
@@ -95,14 +106,16 @@ int InitHeccerObject(char* pcContext){
   //i before performing a reset. Without a check it can cause a seg fault
   //i or no output.
 
-  //! Mando: interesting comment, but why ?  Can you explain?
+  //! Mando: interesting comment, but why ?  Can you explain?  Is this
+  //! related to hardcoded_neutral ?  If so we need to discuss this
+  //! because this 'hidden' logic can hide bugs easily.
 
   struct symtab_HSolveListElement *phsle = NSLookupHSolveListElement(pcContext);
 
   if(!phsle)
   {
-    //fprintf(stdout,"Warning: No neutral rooted object named %s for heccer.\n",pcContext);
-    return 0;
+      fprintf(stdout,"Warning: No neutral rooted object named %s for heccer.\n",pcContext);
+      return 0;
   }
 
 
@@ -169,6 +182,9 @@ int InitHeccerObject(char* pcContext){
 
   // \todo add this heccer to the global list come up with a function
   // for adding later.
+
+  // \todo add boundary checking here.
+
   pnsintegrator->ppheccer[pnsintegrator->iHeccers++] = 
     pheccer;
   
