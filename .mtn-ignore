@@ -1,7 +1,6 @@
-.*Makefile$
-.*Makefile\.in$
-.*\.output$
 .*\@\.[ch]
+Makefile$
+Makefile\.in$
 ^aclocal\.m4$
 ^config.guess$
 ^config.status$
@@ -9,8 +8,8 @@
 ^configure$
 ^docs/html
 ^docs/latex
-^docs/nsgenesis
 ^docs/man
+^docs/nsgenesis
 ^docs/rtf
 ^html
 ^html/htdocs/neurospaces_project/ns-sli/
@@ -22,7 +21,9 @@
 config.log
 docs/doxygen.tag
 dox.tag
-out
+output$
+plot_out
+results$
 src/.gdbinit
 src/c2genesis/c2genesis$
 src/c2genesis/makefunc$
