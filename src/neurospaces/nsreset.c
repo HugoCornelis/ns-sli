@@ -8,9 +8,10 @@
  *  (pelnsintegrator). 
 */
 //-------------------------------------------------------------------
-#include "nsintegrator.h"
-#include "heccer/heccer.h"
 #include "ascfile_struct.h"
+#include "heccer/addressing.h"
+#include "heccer/heccer.h"
+#include "nsintegrator.h"
 
 //------------------------------------------------------------------
 /*
