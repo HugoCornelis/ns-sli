@@ -99,7 +99,7 @@ setclock 9 1
 
 /* Create the output element */
 create asc_file /output/plot_out
-useclock /output/plot_out 9
+useclock /output/plot_out 8
 
 // setup the hines solver
 ce {cellpath}
@@ -114,7 +114,7 @@ setmethod 11
 /* Output voltage as from soma */
 // hstr={findsolvefield {cellpath} {cellpath}/soma Vm}
 // addmsg {cellpath} /output/plot_out SAVE {hstr}
-// setfield /output/plot_out filename {filename} initialize 1 append 1 leave_open 1
+setfield /output/plot_out filename {filename} initialize 1 append 1 leave_open 1
 addmsg {cellpath}/soma /output/plot_out SAVE Vm
 
 reset
@@ -124,7 +124,7 @@ t = {rand 0.170 0.200}
 step {t} -time		/* initial equilibration */
 useclock /output/plot_out 8 /* enable output */
 
-step 0.2 -time
+// step 0.2 -time
 
 // /* fire climbing fiber input as an ascending volley */
 // setfield {cellpath}/climb_presyn1 z  1
@@ -148,7 +148,7 @@ step 0.2 -time
 // setfield {cellpath}/climb_presyn5 z  0
 // step {delay} -time
 
-step 0.1 -time
+// step 0.1 -time
 
-quit
+// quit
 
