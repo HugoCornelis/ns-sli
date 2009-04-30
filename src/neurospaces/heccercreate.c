@@ -95,6 +95,8 @@ int InitHeccerObject(char* pcContext){
   //i before performing a reset. Without a check it can cause a seg fault
   //i or no output.
 
+  //! Mando: interesting comment, but why ?  Can you explain?
+
   struct symtab_HSolveListElement *phsle = NSLookupHSolveListElement(pcContext);
 
   if(!phsle)
@@ -165,10 +167,8 @@ int InitHeccerObject(char* pcContext){
 
   HeccerInitiate(pheccer);
 
-  //t
-  //t add this heccer to the global list
-  //t come up with a function for adding later
-  //t 
+  // \todo add this heccer to the global list come up with a function
+  // for adding later.
   pnsintegrator->ppheccer[pnsintegrator->iHeccers++] = 
     pheccer;
   
