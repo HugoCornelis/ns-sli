@@ -38,10 +38,13 @@ static struct symtab_HSolveListElement * SynChannelCalloc();
 //--------------------------------------------------------------------
 /*!
  *  \fn int NSCreate( char* name,  char* pcParent, char* pcType)
+ *
  *  \param name
  *  \param pcParent
  *  \param pcType
- *  \return 0 on error, 1 on success.
+ *
+ *  \return -1 on error, 1 for root element, a NSINTEGRATOR_* define
+ *  otherwise.
  */
 //--------------------------------------------------------------------
 int NSCreate( char* name,  char* pcParent, char* pcType){

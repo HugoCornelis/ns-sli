@@ -146,9 +146,9 @@ end
 **
 **********************************************************************/
 
-include vclamp 
+// include vclamp 
 ce /library
-make_Vclamp
+// make_Vclamp
 ce /
 
 
@@ -163,40 +163,40 @@ float TAB_XMIN = -0.1
 float TAB_XMAX = 0.05
 
 
-/* 
-** These SLI functions  been replaced by compiled functions with
-** clearer names.   The aliases defined below are just for
-** backwards compatibility. They replace the script functions below.
-*/
+// /* 
+// ** These SLI functions  been replaced by compiled functions with
+// ** clearer names.   The aliases defined below are just for
+// ** backwards compatibility. They replace the script functions below.
+// */
 
-addalias setup_table2 setupgate		// aka setupgate
-// The usage of this has changed, so "setupgate" should be used instead
+// addalias setup_table2 setupgate		// aka setupgate
+// // The usage of this has changed, so "setupgate" should be used instead
 
-addalias tweak_tabchan tweakalpha	// aka tweakalpha
-addalias tau_tweak_tabchan tweaktau	// aka tweaktau
-addalias setup_tabchan setupalpha	// aka setupalpha
-addalias setup_tabchan_tau setuptau	// aka setuptau
+// addalias tweak_tabchan tweakalpha	// aka tweakalpha
+// addalias tau_tweak_tabchan tweaktau	// aka tweaktau
+// addalias setup_tabchan setupalpha	// aka setupalpha
+// addalias setup_tabchan_tau setuptau	// aka setuptau
 
-function setup_table3(gate, table, xdivs, xmin, xmax, A, B, C, D, F)
-	setup_table2 {gate} {table} {A} {B} {C}  \
-	    {D} {F} -size {xdivs} -range {xmin} {xmax} -noalloc
-end
+// function setup_table3(gate, table, xdivs, xmin, xmax, A, B, C, D, F)
+// 	setup_table2 {gate} {table} {A} {B} {C}  \
+// 	    {D} {F} -size {xdivs} -range {xmin} {xmax} -noalloc
+// end
 
-function setup_table(gate, table, xdivs, A, B, C, D, F)
-	setup_table2 {gate} {table} {A}  \
-	    {B} {C} {D} {F} -size {xdivs} -range {TAB_XMIN} {TAB_XMAX}
-end
+// function setup_table(gate, table, xdivs, A, B, C, D, F)
+// 	setup_table2 {gate} {table} {A}  \
+// 	    {B} {C} {D} {F} -size {xdivs} -range {TAB_XMIN} {TAB_XMAX}
+// end
 
-// settab2const sets a range of entries in a tabgate table to a constant
-function settab2const(gate, table, imin, imax, value)
-    str gate
-    str table
-    int i, imin, imax
-    float value
-    for (i = (imin); i <= (imax); i = i + 1)
-        setfield {gate} {table}->table[{i}] {value}
-    end
-end
+// // settab2const sets a range of entries in a tabgate table to a constant
+// function settab2const(gate, table, imin, imax, value)
+//     str gate
+//     str table
+//     int i, imin, imax
+//     float value
+//     for (i = (imin); i <= (imax); i = i + 1)
+//         setfield {gate} {table}->table[{i}] {value}
+//     end
+// end
 
 /* The following "commented-out" functions were replaced by more
    efficient compiled functions in GENESIS ver. 1.4.  The older GENESIS

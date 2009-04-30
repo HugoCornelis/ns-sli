@@ -48,7 +48,7 @@ int AscStep(struct ascfile_type *pasc)
 
 //---------------------------------------------------------
 /*!
- *  \fn int NSAscReset(char *name)
+ *  \fn int AscReset(char *name)
  *  \param name The name of the asc_file object to reset.
  *  \return -1 on error, 1 on success.
  */

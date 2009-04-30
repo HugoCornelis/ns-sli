@@ -117,6 +117,14 @@ setmethod 11
 setfield /output/plot_out filename {filename} initialize 1 append 1 leave_open 1
 addmsg {cellpath} /output/plot_out SAVE {findsolvefield {cellpath} {cellpath}/soma Vm}
 
+//t this is currently a hack: the ascfile gets a RESET after the
+//t nsintegrator, such that it does not have a backend yet.  The
+//t nsintegrator needs the asc file backend for SetupIOMessages().
+//t the temporary solution is a hardcoded RESET of the ascfile
+//t overhere.
+
+call /output/plot_out RESET
+
 reset
 
 setfield {cellpath} {findsolvefield {cellpath} {cellpath}/soma inject} 1e-6

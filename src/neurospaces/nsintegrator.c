@@ -104,11 +104,11 @@ int NSGenesisInitialize(){
 
 
  
-   //t
-   //t Initializes the Heccer stuff: array + index.
-   //t The heccer array is just an array or pointers
-   //t to heccer objects.
-   //t
+   //-
+   //- Initializes the Heccer stuff: array + index.
+   //- The heccer array is an array of pointers
+   //- to heccer objects.
+   //-
    pnsintegrator->iHeccers = 0;
 
    pnsintegrator->ppheccer = 
@@ -141,7 +141,7 @@ int NSGenesisInitialize(){
    }
    else
    {
-     pnsintegrator->ppcHeccerNames[pnsintegrator->iHeccerNames++] = MODELCONTAINER_ROOT;
+     pnsintegrator->ppcHeccerNames[pnsintegrator->iHeccerNames++] = HARDCODED_ROOT;
    }
     
    

@@ -22,9 +22,9 @@
 
 //---------------------------------------------------------------
 /*!
- *  \struct nintegrator_type
+ *  \struct nsintegrator_type
  *
- *  This is the struct use to create the neintegrator data object
+ *  This is the struct use to create the nsintegrator data object
  *  in the Genesis SLI.
  */
 //----------------------------------------------------------------

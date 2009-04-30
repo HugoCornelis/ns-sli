@@ -59,7 +59,7 @@
 
 #define NUMBER_OF_MESSAGES 20
 
-#define MODELCONTAINER_ROOT "hardcoded_neutral"
+#define HARDCODED_ROOT "hardcoded_neutral"
 
 
 
@@ -147,10 +147,10 @@ struct neurospaces_integrator {
 
 
 
-  /*!
-   *   Number of symbols in the NSGenesis symbol table.
-   */
-  int iNumSyms; 
+/*   /*! */
+/*    *   Number of symbols in the NSGenesis symbol table. */
+/*    * */
+/*   int iNumSyms;  */
 
 
 

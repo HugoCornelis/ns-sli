@@ -145,9 +145,9 @@ static int SetupIOMessages( struct ioMsg **ppioMsg, int iIoMsgs,
 
  
       double *pdValue
-	= (double *)HeccerAddressVariable(pheccer, 
-				ppioMsg[i]->iSerial, 
-				ppioMsg[i]->pcSourceField);
+	  = HeccerAddressVariable(pheccer, 
+				  ppioMsg[i]->iSerial, 
+				  ppioMsg[i]->pcSourceField);
 
       OutputGeneratorAddVariable(pasc->pog,
 				 ppioMsg[i]->pcSourceField,

@@ -56,11 +56,38 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
   //  Heccer so they don't need a parameter to be set at all, thus they
   //  are ignored completely.
   //
+
+    // \todo what if we have an script_out element that sets Ik every
+    // time step?
+
   if(!phsle || 
      !strcmp(field,"Ik") || 
      !strcmp(field,"Gk") )
     return 0;
   
+
+  // \todo Mando: can you correct this: the following
+  // fields are only available on solve elements, and should be
+  // ignored for NS.
+
+  if (strcmp(field, "comptmode") == 0)
+  {
+      // \todo ignored
+
+      return 1;
+  }
+  else if (strcmp(field, "chanmode") == 0)
+  {
+      // \todo ignored or set heccer options?
+
+      return 1;
+  }
+  else if (strcmp(field, "calcmode") == 0)
+  {
+      // \todo set heccer option: enable or disable interpolation
+
+      return 1;
+  }
 
   if(instanceof_group(phsle))
   {
