@@ -25,7 +25,7 @@ my $test
 						   
 						   description => 'Does the application load a passive model of the purkinje cell?',
 						   read => 'output written',
-						    timeout => 200,
+						   timeout => 200,
 						  },
 						  {
 						   description => "?",
@@ -37,7 +37,7 @@ my $test
 						   write => undef,
 						  },
 						  ],
-				description => "A test of the readfile function.",
+				description => "readcell and a passive version of the purkinje cell model.",
 			       },
 
 
@@ -45,7 +45,7 @@ my $test
 
 
 			      ],
-       description => "readcell parameters and coordinates",
+       description => "readcell and the purkinje cell model",
        name => 'tools/purk2m9.t',
       };
 

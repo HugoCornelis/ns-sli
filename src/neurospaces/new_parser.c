@@ -1332,7 +1332,7 @@ void do_read_cell(argc,argv)
 		Vdia*=Vdia; /* convert SD into V */
 		flags |=RANDSIZE;
 	    } else if (strcmp(G_optopt, "-hsolve") == 0) {
-		printf(" during readcell: -hsolve is not used anymore\n");
+		printf(" during readcell: -hsolve is not used in GENESIS 3 and may be omitted\n");
 		flags |= HSOLVE;
 	    } else if (strcmp(G_optopt, "-split") == 0) {
 		MaxSplit=NSplit=atoi(optargv[1]);

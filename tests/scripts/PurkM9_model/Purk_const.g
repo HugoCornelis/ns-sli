@@ -3,7 +3,6 @@
 
 /* This file defines important simulation parameters, including gmax
 ** and Ek for all channels.  Everything uses SI units. */
-** See http://www.bbf.uia.ac.be/models/PM9.shtml for general model info.
 
 echo Using Purkinje 2M9 preferences. Crank Nicholson method.
 /* variables controlling hsolve integration */
