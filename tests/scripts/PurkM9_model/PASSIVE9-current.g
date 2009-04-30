@@ -99,7 +99,7 @@ setclock 9 1
 
 /* Create the output element */
 create asc_file /output/plot_out
-useclock /output/plot_out 8
+useclock /output/plot_out 0
 
 // setup the hines solver
 ce {cellpath}
@@ -115,14 +115,16 @@ setmethod 11
 // hstr={findsolvefield {cellpath} {cellpath}/soma Vm}
 // addmsg {cellpath} /output/plot_out SAVE {hstr}
 setfield /output/plot_out filename {filename} initialize 1 append 1 leave_open 1
-addmsg {cellpath}/soma /output/plot_out SAVE Vm
+addmsg {cellpath} /output/plot_out SAVE {findsolvefield {cellpath} {cellpath}/soma Vm}
 
 reset
 
-useclock /output/plot_out 9 /* disable output */
+setfield {cellpath} {findsolvefield {cellpath} {cellpath}/soma inject} 1e-6
+
+// useclock /output/plot_out 9 /* disable output */
 t = {rand 0.170 0.200}
 step {t} -time		/* initial equilibration */
-useclock /output/plot_out 8 /* enable output */
+// useclock /output/plot_out 8 /* enable output */
 
 // step 0.2 -time
 
