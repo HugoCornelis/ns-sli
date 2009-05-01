@@ -714,16 +714,6 @@ static int StoreMsg(char *pcSrcpath,
 		  char *pcMsgName){
 
 
-  //t there is nothing wrong with different paths here, is there?
-
-/*   if(strcmp(pcSrcpath,pcDstpath)) */
-/*   { */
-/*     fprintf(stderr,"%s","Error: Activation message objects do not match.\n"); */
-/*     fprintf(stderr,"------ src:%s dst:%s\n",pcSrcpath,pcDstpath); */
-/*     return -1; */
-/*   } */
-
-
    struct PidinStack *ppistSrc = PidinStackParse(pcSrcpath);  
 
    PidinStackUpdateCaches(ppistSrc); 
@@ -743,16 +733,6 @@ static int StoreMsg(char *pcSrcpath,
 
      return -1;
    }
-
-   //! we do not store 0 values for unknown fields, it is ok if fields
-   //! do not have a value assigned.
-
-/*    struct symtab_Parameters *ppar =  */
-/*      SymbolFindParameter(phsle,ppistSrc,pcField); */
-
-/*    if(!ppar) */
-/*      setParameter(phsle,pcField,"0",SETPARA_NUM); */
-
 
    struct neurospaces_integrator *pnsintegrator =
      getNsintegrator();
