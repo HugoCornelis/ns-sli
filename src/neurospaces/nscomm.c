@@ -848,6 +848,8 @@ struct PidinStack *getRootedContext(char *pc)
 
   free(pcCurrentElementPath);
 
+  PidinStackCompress(ppistResult);
+
   return(ppistResult);
 }
 
