@@ -50,7 +50,7 @@ CLEANFILES = \
 
 
 ascfile_d@.c:
-	$(CPP) ascfile_struct.h -I../script -I../util -I../sim -I../shell -I/usr/local/heccer -DPRE_PROTO_TRAVERSAL > tmp_ascfile_struct.h
+	$(CPP) ascfile_struct.h -I../script -I../util -I../sim -I../shell -I/usr/local/neurospaces/instrumentor -I/usr/local/heccer -DPRE_PROTO_TRAVERSAL > tmp_ascfile_struct.h
 	$(makestructs) tmp_ascfile_struct.h ascfile -I nsintegrator.h -NI -o ascfile_d@.c
 
 
