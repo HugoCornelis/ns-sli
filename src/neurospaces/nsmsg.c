@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include "shell_func_ext.h"
 
+#include "heccer/addressing.h"
 
 #include "neurospaces/symbols.h"  
 #include "neurospaces/symboltable.h"  
@@ -830,7 +831,7 @@ int NSProcessMessages(struct neurospaces_integrator *pnsintegrator)
 
       
       double *pdValue
-	= (double *)HeccerAddressVariable(ppheccer[0], iTarget, ppioMsg[i]->pcMsgName);
+	= HeccerAddressVariable(ppheccer[0], iTarget, ppioMsg[i]->pcMsgName);
 
       if(!strcmp(ppioMsg[i]->pcMsgName,"activation")){
 	//- add source to target

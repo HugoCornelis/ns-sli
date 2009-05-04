@@ -9,7 +9,7 @@
 //-------------------------------------------------------------
 #include "nsintegrator.h"
 #include "ascfile_g@.h"
-
+#include "heccer/output.h"
 
 extern double simulation_time;
 
