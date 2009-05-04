@@ -17,7 +17,7 @@
 #include "neurospaces/pidinstack.h"
 
 //t includes from our nsgenesis library
-#include "neurospaces/nsintegrator.h"
+#include "nsintegrator.h"
 
 
 //-------------------------------------------------------------------

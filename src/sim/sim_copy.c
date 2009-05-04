@@ -121,7 +121,8 @@ static char rcsid[] = "$Id: sim_copy.c,v 1.2 2005/06/27 19:00:58 svitak Exp $";
 #include "shell_func_ext.h"
 
 //-- added for the neurospaces calls --
-#include "neurospaces/neurospaces_ext.h"
+#include "nsintegrator.h"
+#include "neurospaces_ext.h"
 
 
 /*
@@ -336,7 +337,7 @@ int		do_autoindex;
 
     //hack---------------------------------------------------------
 
-    struct PidinStack *ppistSrc = PidinStackParse(src);
+    struct PidinStack *ppistSrc = getRootedContext(src); /* PidinStackParse(src); */
 
 
     if(ppistSrc){
