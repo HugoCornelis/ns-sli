@@ -82,6 +82,8 @@ static char rcsid[] = "$Id: sim_set.c,v 1.2 2005/06/27 19:01:09 svitak Exp $";
 #include "neurospaces/function.h"
 #include "neurospaces/parameters.h"
 
+#include "nsintegrator.h"
+
 
 /*
 ** CallSetActions
@@ -231,7 +233,9 @@ int		empty_ok = 0;
     ElementList *elist = CreateElementList(10);
 
 
-    struct PidinStack *ppist = PidinStackParse(pathname);
+/*     struct PidinStack *ppist = PidinStackParse(pathname); */
+
+    struct PidinStack *ppist = getRootedContext(pathname);
 
     struct symtab_HSolveListElement *phsle
       = PidinStackLookupTopSymbol(ppist);

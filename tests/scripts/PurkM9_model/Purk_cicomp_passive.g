@@ -39,9 +39,6 @@ function make_Purkinje_comps
 // 	shell_vol = (3*dia*dia*shell_dia - 3*dia*shell_dia*shell_dia + shell_dia*shell_dia*shell_dia)*{PI}/6.0
 	if (!({exists Purk_soma}))
 		create compartment Purk_soma
-
-		pwe
-		echo "Created soma"
 	end
 	setfield Purk_soma Cm {{CM}*surf} Ra {8.0*{RA}/(dia*{PI})}  \
 	    Em {ELEAK} initVm {EREST_ACT} Rm {{RMs}/surf} inject 0.0  \

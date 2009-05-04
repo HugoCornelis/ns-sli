@@ -145,10 +145,12 @@ int NSCreate( char* name,  char* pcParent, char* pcType){
    //i ex: /neutral/compartment
    //i
 
-   if(!strcmp(pcParent,"."))
-     ppistParent = PidinStackParse("/");
-   else
-     ppistParent = PidinStackParse(pcParent);
+   ppistParent = getRootedContext(pcParent);
+
+/*    if(!strcmp(pcParent,".")) */
+/*      ppistParent = PidinStackParse("/"); */
+/*    else */
+/*      ppistParent = PidinStackParse(pcParent); */
   
 
    if( !ppistParent ){

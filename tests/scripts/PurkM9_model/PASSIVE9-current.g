@@ -58,6 +58,9 @@ ce /library
 make_Purkinje_comps
 make_Purkinje_spines
 
+echo /model_container NEUROSPACES_QUERY
+call /model_container NEUROSPACES_QUERY
+
 /* create the model and set up the run cell mode */
 // read cell date from .p file and make hsolve element
 readcell tests/scripts/PurkM9_model/Purk2M9s.p {cellpath} -hsolve
