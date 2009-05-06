@@ -138,11 +138,14 @@ static int AxialMsg(char *pcSrcpath, char *pcDstpath)
 {
 
 
-  struct PidinStack *ppistSrc = 
-    (struct PidinStack *)PidinStackParse((char *)pcSrcpath);
+  struct PidinStack *ppistSrc = getRootedContext(pcSrcpath);
+  
+  struct PidinStack *ppistDst = getRootedContext(pcDstpath);
 
-  struct symtab_HSolveListElement *phsleSrc = 
-    PidinStackLookupTopSymbol(ppistSrc);
+  struct symtab_HSolveListElement *phsleSrc = PidinStackLookupTopSymbol(ppistSrc);
+
+  struct symtab_HSolveListElement *phsleDst = PidinStackLookupTopSymbol(ppistDst);
+
 
   if(!phsleSrc){
 
@@ -151,6 +154,15 @@ static int AxialMsg(char *pcSrcpath, char *pcDstpath)
     return 0;
 
   }
+
+  if(!phsleDst){ 
+
+    Error(); 
+    printf("dest %s of msg is not found in the Model Container.", pcDstpath); 
+    return 0; 
+    
+  } 
+
 
   struct symtab_IdentifierIndex *pidinSrc
     = IdinNewFromChars(SymbolGetName(phsleSrc));
@@ -182,26 +194,6 @@ static int AxialMsg(char *pcSrcpath, char *pcDstpath)
 
   struct symtab_Parameters *ppar
     = ParameterNewFromPidinQueue("PARENT", pidinThis, TYPE_PARA_SYMBOLIC);
-
-
-
-  struct PidinStack *ppistDst =  
-    (struct PidinStack *)PidinStackParse((char *)pcDstpath); 
-
-      
-
-  struct symtab_HSolveListElement *phsleDst =  
-    PidinStackLookupTopSymbol(ppistDst); 
-
-      
-
-  if(!phsleDst){ 
-
-    Error(); 
-    printf("dest %s of msg is not found in the Model Container.", pcDstpath); 
-    return 0; 
-    
-  } 
 
 
   BioComponentChangeParameter(
@@ -737,6 +729,8 @@ static int StoreMsg(char *pcSrcpath,
 		  char *pcField,
 		  char *pcMsgName){
 
+
+    // \todo not sure if this should be getRootedContext() or not.
 
    struct PidinStack *ppistSrc = PidinStackParse(pcSrcpath);  
 

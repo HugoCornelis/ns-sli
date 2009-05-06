@@ -69,7 +69,7 @@ int NSSetupAlpha( char *pcName, char *pcField, char **pcArgs,
 
 
     //- get a contect for the element we're looking for
-    struct PidinStack *ppist  = PidinStackParse(pcName);
+    struct PidinStack *ppist  = getRootedContext(pcName);
 
 
 
@@ -169,6 +169,8 @@ int NSSetupAlpha( char *pcName, char *pcField, char **pcArgs,
     if( pheccerOptions->ho.dIntervalEnd == HECCER_INTERVAL_DEFAULT_END )
       pheccerOptions->ho.dIntervalEnd = strtod(pcArgs[12],NULL);
 
+    PidinStackFree(ppist);
+
     return 1;
 
 
@@ -179,7 +181,7 @@ int NSSetupAlpha( char *pcName, char *pcField, char **pcArgs,
 
 
     //- get a contect for the element we're looking for
-    struct PidinStack *ppist  = PidinStackParse(pcName);
+    struct PidinStack *ppist  = getRootedContext(pcName);
 
  
     //- First we fetch the forward gate
@@ -278,6 +280,7 @@ int NSSetupAlpha( char *pcName, char *pcField, char **pcArgs,
     if( pheccerOptions->ho.dIntervalEnd == HECCER_INTERVAL_DEFAULT_END )
       pheccerOptions->ho.dIntervalEnd = strtod(pcArgs[12],NULL);
 
+    PidinStackFree(ppist);
 
     return 1;
 
@@ -290,7 +293,7 @@ int NSSetupAlpha( char *pcName, char *pcField, char **pcArgs,
 
 
     //- get a contect for the element we're looking for
-    struct PidinStack *ppist  = PidinStackParse(pcName);
+    struct PidinStack *ppist  = getRootedContext(pcName);
 
  
     //- First we fetch the forward gate
@@ -395,6 +398,8 @@ int NSSetupAlpha( char *pcName, char *pcField, char **pcArgs,
     if( pheccerOptions->ho.dConcentrationGateEnd  == 
 	HECCER_INTERVAL_CONCENTRATION_GATE_DEFAULT_END )
       pheccerOptions->ho.dConcentrationGateEnd = strtod(pcArgs[12],NULL);
+
+    PidinStackFree(ppist);
 
 
     return 1;
