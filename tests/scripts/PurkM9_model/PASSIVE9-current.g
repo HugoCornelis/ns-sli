@@ -58,8 +58,8 @@ ce /library
 make_Purkinje_comps
 make_Purkinje_spines
 
-echo /model_container NEUROSPACES_QUERY
-call /model_container NEUROSPACES_QUERY
+// echo /model_container NEUROSPACES_QUERY
+// call /model_container NEUROSPACES_QUERY
 
 /* create the model and set up the run cell mode */
 // read cell date from .p file and make hsolve element
@@ -117,7 +117,12 @@ setmethod 11
 /* Output voltage as from soma */
 // hstr={findsolvefield {cellpath} {cellpath}/soma Vm}
 // addmsg {cellpath} /output/plot_out SAVE {hstr}
-setfield /output/plot_out filename {filename} initialize 1 append 1 leave_open 1
+
+// note: the initialize field is not defined yet
+
+// setfield /output/plot_out filename {filename} initialize 1 append 1 leave_open 1
+setfield /output/plot_out filename {filename} append 1 leave_open 1
+
 addmsg {cellpath} /output/plot_out SAVE {findsolvefield {cellpath} {cellpath}/soma Vm}
 
 //t this is currently a hack: the ascfile gets a RESET after the

@@ -1,6 +1,6 @@
-.*\@\.[ch]
 Makefile$
 Makefile\.in$
+\@\.[ch]
 ^aclocal\.m4$
 ^config.guess$
 ^config.status$
@@ -16,6 +16,7 @@ Makefile\.in$
 ^installed
 ^missing$
 ^src/neurospaces/tmp_ascfile_struct.h$
+^src/neurospaces/tmp_hsolve_struct.h$
 ^tests/html
 ^ylwrap$
 config.log

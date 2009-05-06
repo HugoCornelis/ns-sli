@@ -414,6 +414,7 @@ int                   i,j = 0;
     int iInModelContainer = 0;
 
     if(!strcmp("neutral",type) ||
+       !strcmp("hsolve", type) ||
        !strcmp("tabchannel",type) ||
        !strcmp("compartment",type) ||
        !strcmp("Ca_concen",type) ||

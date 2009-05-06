@@ -37,4 +37,3 @@ object	neurospaces	neurospaces_type  NeuroSpacesActor	genesis3	\
 		NEUROSPACES_SETUP					\
 	-description	"Neurospaces interface"
 
-

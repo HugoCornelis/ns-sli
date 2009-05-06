@@ -22,6 +22,7 @@
 #include "nsintegrator_struct.h"
 #include "neurospaces/symboltable.h"
 #include "ascfile_struct.h"
+#include "hsolve_struct.h"
 #ifndef NSINTEGRATOR_H
 #define NSINTEGRATOR_H
 

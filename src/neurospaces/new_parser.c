@@ -1277,12 +1277,12 @@ void start_cell(name,flags)
 	*flags |= NEW_CELL;
 	argvar[0] = "c_do_create";
 	argvar[2] = name;
-/* 	if (*flags & HSOLVE) { */
-/* 		/* creating the hsolve element * */
-/* 		argvar[1] = "hsolve"; */
-/* 	} else { */
+	if (*flags & HSOLVE) {
+	    /* creating the hsolve element */
+		argvar[1] = "hsolve";
+	} else {
 		argvar[1] = "neutral";
-/* 	} */
+	}
 	do_create(3,argvar);
 	ChangeWorkingElement(name);
 }

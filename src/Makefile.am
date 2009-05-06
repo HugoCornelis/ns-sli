@@ -44,7 +44,7 @@ nsgenesis_LDADD = \
 liblist: Makefile
 	@echo "# liblist - This file is generated automatically." > liblist
 	@echo "#           DO NOT EDIT.  Edit Makefile instead." >> liblist
-	@echo neurospaces nsintegrator ascfile olf | tr ' ' '\012' >> liblist
+	@echo neurospaces nsintegrator ascfile olf hsolve | tr ' ' '\012' >> liblist
 
 loadlib.c: liblist
 	$(srcdir)/libsh < liblist > loadlib.c

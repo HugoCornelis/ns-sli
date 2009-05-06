@@ -17,35 +17,44 @@ AM_CPPFLAGS = -DPRE_PROTO_TRAVERSAL
 noinst_LIBRARIES = libneurospaces.a
 
 BUILT_SOURCES = \
-	neurospaces_d@.c \
-	neurospaces_g@.c \
-	neurospaces_g@.h \
-	neurospaces_l@.c \
-	nsintegrator_d@.c \
-	nsintegrator_g@.c \
-	nsintegrator_g@.h \
-	nsintegrator_l@.c \
-	ascfile_d@.c \
-	ascfile_g@.c \
-	ascfile_g@.h \
-	ascfile_l@.c 
-
-CLEANFILES = \
-	neurospaces_d@.c \
-	neurospaces_g@.c \
-	neurospaces_g@.h \
-	neurospaces_l@.c \
-	tmp_neurospaces_struct.h \
-	nsintegrator_d@.c \
-	nsintegrator_g@.c \
-	nsintegrator_g@.h \
-	nsintegrator_l@.c \
-	tmp_nsintegrator_struct.h \
 	ascfile_d@.c \
 	ascfile_g@.c \
 	ascfile_g@.h \
 	ascfile_l@.c \
-	tmp_ascfile_struct.h 
+	hsolve_d@.c \
+	hsolve_g@.c \
+	hsolve_g@.h \
+	hsolve_l@.c \
+	neurospaces_d@.c \
+	neurospaces_g@.c \
+	neurospaces_g@.h \
+	neurospaces_l@.c \
+	nsintegrator_d@.c \
+	nsintegrator_g@.c \
+	nsintegrator_g@.h \
+	nsintegrator_l@.c
+
+CLEANFILES = \
+	ascfile_d@.c \
+	ascfile_g@.c \
+	ascfile_g@.h \
+	ascfile_l@.c \
+	hsolve_d@.c \
+	hsolve_g@.c \
+	hsolve_g@.h \
+	hsolve_l@.c \
+	neurospaces_d@.c \
+	neurospaces_g@.c \
+	neurospaces_g@.h \
+	neurospaces_l@.c \
+	nsintegrator_d@.c \
+	nsintegrator_g@.c \
+	nsintegrator_g@.h \
+	nsintegrator_l@.c \
+	tmp_ascfile_struct.h \
+	tmp_hsolve_struct.h \
+	tmp_neurospaces_struct.h \
+	tmp_nsintegrator_struct.h
 
 
 
@@ -59,6 +68,18 @@ ascfile_g@.c:
 
 ascfile_l@.c:
 	$(makelib) ascfile -o ascfile_l@.c
+
+
+hsolve_d@.c:
+	$(CPP) hsolve_struct.h -I../script -I../util -I../sim -I../shell -I/usr/local/neurospaces/instrumentor -I/usr/local/heccer -DPRE_PROTO_TRAVERSAL > tmp_hsolve_struct.h
+	$(makestructs) tmp_hsolve_struct.h hsolve -I nsintegrator.h -NI -o hsolve_d@.c
+
+
+hsolve_g@.c:
+	$(c2genesis) hsolvelib.g nsintegrator.h hsolve
+
+hsolve_l@.c:
+	$(makelib) hsolve -o hsolve_l@.c
 
 
 neurospaces_d@.c:
@@ -91,48 +112,54 @@ nsintegrator_l@.c:
 
 
 noinst_HEADERS = \
+	ascfile_struct.h \
+	hsolve_struct.h \
 	neurospaces_defs.h \
 	neurospaces_ext.h  \
+	neurospaces_struct.h \
 	neurospacesquery.h \
 	neurospacessetup.h \
-	neurospaces_struct.h \
 	neurospacessupport.h \
 	nsintegrator.h \
-	nsintegrator_struct.h \
-	ascfile_struct.h 
+	nsintegrator_struct.h
 
 
 libneurospaces_a_SOURCES = \
-	neurospacesmodel.c \
-	neurospacesquery.c \
-	neurospacesfield.c \
-	nsintegrator.c \
-	nssetelement.c \
-	nssetfield.c \
-	nscreate.c \
-	nscopy.c \
-	nsmsg.c \
-	nscomm.c \
-	nstabcreate.c \
-	nscall.c \
-	nssetup.c \
-	nstweak.c \
-	nstabfill.c \
-	nsintegratorverbose.c \
-	heccercreate.c \
-	nsreset.c \
-	nsasc.c \
-	ascfileactor.c \
-	new_parser.c \
-	neurospaces_d@.c \
-	neurospaces_g@.c \
-	neurospaces_l@.c \
-	nsintegrator_d@.c \
-	nsintegrator_g@.c \
-	nsintegrator_l@.c \
 	ascfile_d@.c \
 	ascfile_g@.c \
 	ascfile_g@.h \
 	ascfile_l@.c \
-	nsintegratoractor.c
+	ascfileactor.c \
+	heccercreate.c \
+	hsolve_d@.c \
+	hsolve_g@.c \
+	hsolve_g@.h \
+	hsolve_l@.c \
+	hsolveactor.c \
+	neurospaces_d@.c \
+	neurospaces_g@.c \
+	neurospaces_l@.c \
+	neurospacesfield.c \
+	neurospacesmodel.c \
+	neurospacesquery.c \
+	new_parser.c \
+	nsasc.c \
+	nscall.c \
+	nscomm.c \
+	nscopy.c \
+	nscreate.c \
+	nsintegrator.c \
+	nsintegrator_d@.c \
+	nsintegrator_g@.c \
+	nsintegrator_l@.c \
+	nsintegratoractor.c \
+	nsintegratorverbose.c \
+	nsmsg.c \
+	nsreset.c \
+	nssetelement.c \
+	nssetfield.c \
+	nssetup.c \
+	nstabcreate.c \
+	nstabfill.c \
+	nstweak.c
 
