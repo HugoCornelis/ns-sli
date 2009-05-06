@@ -20,7 +20,8 @@ my $test
 						  {
 						   description =>  "Add a field to an object in genesis.",
 						   read => 'AVAILABLE OBJECTS:
-asc_file            neurospaces         neutral             nsintegrator',
+asc_file            hsolve              neurospaces         neutral             
+nsintegrator',
 						   write => 'listobjects',
 						  },
 						
