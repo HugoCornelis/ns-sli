@@ -110,7 +110,8 @@ int InitHeccerObject(char* pcContext){
   //! related to hardcoded_neutral ?  If so we need to discuss this
   //! because this 'hidden' logic can hide bugs easily.
 
-  struct symtab_HSolveListElement *phsle = NSLookupHSolveListElement(pcContext);
+  struct PidinStack *ppist = getRootedContext(pcContext);
+  struct symtab_HSolveListElement *phsle = PidinStackLookupTopSymbol(ppist);
 
   if(!phsle)
   {
@@ -118,7 +119,7 @@ int InitHeccerObject(char* pcContext){
       return 0;
   }
 
-
+  PidinStackFree(ppist);
 
   //i
   //i First check to see if a heccer of a certain name has been created

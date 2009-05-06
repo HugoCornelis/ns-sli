@@ -234,7 +234,7 @@ int setParameter(struct symtab_HSolveListElement *phsle,
 		 char *pcField, char *pcValue,int iFlag);
 struct symtab_HSolveListElement * lookupGateKinetic(char *pcName, char *pcField, char *pcAorB);
 struct symtab_HSolveListElement * lookupGate(char *pcName, char *pcField);
-struct symtab_HSolveListElement * NSLookupHSolveListElement(char *pcPath);
+/* struct symtab_HSolveListElement * NSLookupHSolveListElement(char *pcPath); */
 struct PidinStack * getGateContext(char *pcName, char *pcField, char *pcAorB);
 struct symtab_InputOutput * CreateInputOutput(char *pcContext, int iType);
 struct neurospaces_integrator *getNsintegrator();

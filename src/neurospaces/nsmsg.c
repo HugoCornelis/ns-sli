@@ -147,7 +147,7 @@ static int AxialMsg(char *pcSrcpath, char *pcDstpath)
   if(!phsleSrc){
 
     Error();
-    printf("%s is not found in the Model Container.",phsleSrc);
+    printf("source %s of msg is not found in the Model Container.", pcSrcpath);
     return 0;
 
   }
@@ -198,7 +198,7 @@ static int AxialMsg(char *pcSrcpath, char *pcDstpath)
   if(!phsleDst){ 
 
     Error(); 
-    printf("%s is not found in the Model Container.",phsleDst); 
+    printf("dest %s of msg is not found in the Model Container.", pcDstpath); 
     return 0; 
     
   } 
@@ -229,15 +229,13 @@ static int AxialMsg(char *pcSrcpath, char *pcDstpath)
 static int ChannelMsg(char *pcSrcpath,char *pcDstpath)
 {
 
-
-  struct symtab_HSolveListElement *phsleSrc = NSLookupHSolveListElement(pcSrcpath);
-
-  struct symtab_HSolveListElement *phsleDst = NSLookupHSolveListElement(pcDstpath);
-
-
-  struct PidinStack *ppistSrc = PidinStackParse(pcSrcpath);
+  struct PidinStack *ppistSrc = getRootedContext(pcSrcpath);
   
-  struct PidinStack *ppistDst = PidinStackParse(pcDstpath);
+  struct PidinStack *ppistDst = getRootedContext(pcDstpath);
+
+  struct symtab_HSolveListElement *phsleSrc = PidinStackLookupTopSymbol(ppistSrc);
+
+  struct symtab_HSolveListElement *phsleDst = PidinStackLookupTopSymbol(ppistDst);
 
 
   //!
@@ -282,6 +280,10 @@ static int ChannelMsg(char *pcSrcpath,char *pcDstpath)
 
   SymbolAssignInputs(phsleDst, pio);
 
+  PidinStackFree(ppistSrc);
+  PidinStackFree(ppistDst);
+  PidinStackFree(ppistTarget);
+
   return 1;
 
 }
@@ -303,14 +305,14 @@ static int CalciumPoolMsg(char *pcSrcpath, char *pcDstpath)
 {
 
 
-  struct symtab_HSolveListElement *phsleSrc = NSLookupHSolveListElement(pcSrcpath);
-
-  struct symtab_HSolveListElement *phsleDst = NSLookupHSolveListElement(pcDstpath);
-
-
-  struct PidinStack *ppistSrc = PidinStackParse(pcSrcpath);
+  struct PidinStack *ppistSrc = getRootedContext(pcSrcpath);
   
-  struct PidinStack *ppistDst = PidinStackParse(pcDstpath);
+  struct PidinStack *ppistDst = getRootedContext(pcDstpath);
+
+
+  struct symtab_HSolveListElement *phsleSrc = PidinStackLookupTopSymbol(ppistSrc);
+
+  struct symtab_HSolveListElement *phsleDst = PidinStackLookupTopSymbol(ppistDst);
 
 
   //!
@@ -392,7 +394,11 @@ static int CalciumPoolMsg(char *pcSrcpath, char *pcDstpath)
 
   SymbolAssignInputs(phsleDst, pio);
 
+  PidinStackFree(ppistSrc);
+  PidinStackFree(ppistDst);
+  PidinStackFree(ppistTarget);
 
+  PidinStackFree(ppist);
 
   return 1;
 
@@ -414,14 +420,14 @@ static int CalciumPoolMsg(char *pcSrcpath, char *pcDstpath)
 static int VoltageMsg(char *pcSrcpath, char *pcDstpath)
 {
 
-  struct symtab_HSolveListElement *phsleSrc = NSLookupHSolveListElement(pcSrcpath);
-
-  struct symtab_HSolveListElement *phsleDst = NSLookupHSolveListElement(pcDstpath);
-
-
-  struct PidinStack *ppistSrc = PidinStackParse(pcSrcpath);
+  struct PidinStack *ppistSrc = getRootedContext(pcSrcpath);
   
-  struct PidinStack *ppistDst = PidinStackParse(pcDstpath);
+  struct PidinStack *ppistDst = getRootedContext(pcDstpath);
+
+
+  struct symtab_HSolveListElement *phsleSrc = PidinStackLookupTopSymbol(ppistSrc);
+
+  struct symtab_HSolveListElement *phsleDst = PidinStackLookupTopSymbol(ppistDst);
 
 
   //!
@@ -463,6 +469,10 @@ static int VoltageMsg(char *pcSrcpath, char *pcDstpath)
 
   SymbolAssignInputs(phsleDst, pio);
 
+  PidinStackFree(ppistSrc);
+  PidinStackFree(ppistDst);
+  PidinStackFree(ppistTarget);
+
 
   return 1;
   
@@ -488,14 +498,14 @@ static int ConcenMsg(char *pcSrcpath, char *pcDstpath)
 {
 
 
-  struct symtab_HSolveListElement *phsleSrc = NSLookupHSolveListElement(pcSrcpath);
-
-  struct symtab_HSolveListElement *phsleDst = NSLookupHSolveListElement(pcDstpath);
-
-
-  struct PidinStack *ppistSrc = PidinStackParse(pcSrcpath);
+  struct PidinStack *ppistSrc = getRootedContext(pcSrcpath);
   
-  struct PidinStack *ppistDst = PidinStackParse(pcDstpath);
+  struct PidinStack *ppistDst = getRootedContext(pcDstpath);
+
+
+  struct symtab_HSolveListElement *phsleSrc = PidinStackLookupTopSymbol(ppistSrc);
+
+  struct symtab_HSolveListElement *phsleDst = PidinStackLookupTopSymbol(ppistDst);
 
 
   //!
@@ -546,6 +556,10 @@ static int ConcenMsg(char *pcSrcpath, char *pcDstpath)
   SymbolAssignInputs(phsleDst, pio);
 
 
+  PidinStackFree(ppistSrc);
+  PidinStackFree(ppistDst);
+  PidinStackFree(ppistTarget);
+
 
   return 1;
 
@@ -571,14 +585,14 @@ static int CinMsg(char *pcSrcpath, char *pcDstpath)
 {
 
 
-  struct symtab_HSolveListElement *phsleSrc = NSLookupHSolveListElement(pcSrcpath);
-
-  struct symtab_HSolveListElement *phsleDst = NSLookupHSolveListElement(pcDstpath);
-
-
-  struct PidinStack *ppistSrc = PidinStackParse(pcSrcpath);
+  struct PidinStack *ppistSrc = getRootedContext(pcSrcpath);
   
-  struct PidinStack *ppistDst = PidinStackParse(pcDstpath);
+  struct PidinStack *ppistDst = getRootedContext(pcDstpath);
+
+
+  struct symtab_HSolveListElement *phsleSrc = PidinStackLookupTopSymbol(ppistSrc);
+
+  struct symtab_HSolveListElement *phsleDst = PidinStackLookupTopSymbol(ppistDst);
 
 
   //!
@@ -626,6 +640,10 @@ static int CinMsg(char *pcSrcpath, char *pcDstpath)
     
   }
 
+  PidinStackFree(ppistSrc);
+  PidinStackFree(ppistDst);
+  PidinStackFree(ppistTarget);
+
 
   return 1;
 
@@ -646,14 +664,14 @@ static int EkMsg(char *pcSrcpath, char *pcDstpath)
 {
 
 
-  struct symtab_HSolveListElement *phsleSrc = NSLookupHSolveListElement(pcSrcpath);
-
-  struct symtab_HSolveListElement *phsleDst = NSLookupHSolveListElement(pcDstpath);
-
-
-  struct PidinStack *ppistSrc = PidinStackParse(pcSrcpath);
+  struct PidinStack *ppistSrc = getRootedContext(pcSrcpath);
   
-  struct PidinStack *ppistDst = PidinStackParse(pcDstpath);
+  struct PidinStack *ppistDst = getRootedContext(pcDstpath);
+
+
+  struct symtab_HSolveListElement *phsleSrc = PidinStackLookupTopSymbol(ppistSrc);
+
+  struct symtab_HSolveListElement *phsleDst = PidinStackLookupTopSymbol(ppistDst);
 
 
   //!
@@ -699,6 +717,11 @@ static int EkMsg(char *pcSrcpath, char *pcDstpath)
     return -1;
     
   }
+
+  PidinStackFree(ppistSrc);
+  PidinStackFree(ppistDst);
+  PidinStackFree(ppistTarget);
+
 
   return 1;
 
