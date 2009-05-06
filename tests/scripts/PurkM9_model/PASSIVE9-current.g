@@ -116,6 +116,7 @@ setmethod 11
 /* Initialize output */
 /* Output voltage as from soma */
 // hstr={findsolvefield {cellpath} {cellpath}/soma Vm}
+// echo {hstr}
 // addmsg {cellpath} /output/plot_out SAVE {hstr}
 
 // note: the initialize field is not defined yet
@@ -123,6 +124,7 @@ setmethod 11
 // setfield /output/plot_out filename {filename} initialize 1 append 1 leave_open 1
 setfield /output/plot_out filename {filename} append 1 leave_open 1
 
+// addmsg {cellpath}/soma /output/plot_out SAVE Vm
 addmsg {cellpath} /output/plot_out SAVE {findsolvefield {cellpath} {cellpath}/soma Vm}
 
 //t this is currently a hack: the ascfile gets a RESET after the

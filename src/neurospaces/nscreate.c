@@ -108,16 +108,18 @@ int NSCreate( char* name,  char* pcParent, char* pcType){
      iResult = NSINTEGRATOR_ASCFILE;
 
    }
-   else if(!strcmp("asc_out",pcType)){
+/*    else if(!strcmp("asc_out",pcType)){ */
 
-     iResult = NSINTEGRATOR_ASCOUT;
+/*      iResult = NSINTEGRATOR_ASCOUT; */
 
-   }
+/*    } */
    else{
 
-     phsleChild = (struct symtab_HSolveListElement*)CellCalloc();
+       // neutral, hsolve
 
-     iResult = NSINTEGRATOR_NEUTRAL;
+       phsleChild = (struct symtab_HSolveListElement*)CellCalloc();
+
+       iResult = NSINTEGRATOR_NEUTRAL;
    }
    
    

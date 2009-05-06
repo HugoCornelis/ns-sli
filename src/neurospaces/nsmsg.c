@@ -53,6 +53,8 @@ static struct symtab_IdentifierIndex * PidinQueueLookupTarget(char *pcSrcpath,
 int NSmsg(char *pcSrcpath, char *pcDstpath, char *pcTypename, char *pcField){
 
 
+    // model structure messages
+
   //-
   //- If the user tries to perform a mesage using Reverse Axial 
   //- then we return as success since we're ignoring this case.
@@ -104,11 +106,18 @@ int NSmsg(char *pcSrcpath, char *pcDstpath, char *pcTypename, char *pcField){
     return EkMsg(pcSrcpath,pcDstpath);
 
   }
+
+
+  // input messages
+
   else if(strcmp(pcTypename,"ACTIVATION") == 0){
 
     return StoreMsg(pcSrcpath,pcDstpath,pcField,"activation");
 
   }
+
+  // output messages
+
   else if(strcmp(pcTypename,"SAVE") == 0){
 
     return StoreMsg(pcSrcpath,pcDstpath,pcField,"save");
@@ -732,9 +741,11 @@ static int StoreMsg(char *pcSrcpath,
 
     // \todo not sure if this should be getRootedContext() or not.
 
-   struct PidinStack *ppistSrc = PidinStackParse(pcSrcpath);  
+/*    struct PidinStack *ppistSrc = PidinStackParse(pcSrcpath);   */
 
-   PidinStackUpdateCaches(ppistSrc); 
+   struct PidinStack *ppistSrc = getRootedContext(pcSrcpath);  
+
+/*    PidinStackUpdateCaches(ppistSrc);  */
 
    struct symtab_HSolveListElement *phsle =  
      PidinStackLookupTopSymbol(ppistSrc); 
