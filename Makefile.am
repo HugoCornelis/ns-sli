@@ -25,7 +25,7 @@ html-upload-prepare:
 	tar cfh - tests/html | ( cd html/htdocs/neurospaces_project/ns-sli && tar vxf - )
 
 html-upload: html-upload-prepare
-	scp -pr 
+	scp -pr html/htdocs/* hcornelis,neurospaces@web.sourceforge.net:/home/groups/n/ne/neurospaces/htdocs/
 
 doxygen-upload: 
 	scp -r docs/nsgenesis docs@repo-genesis3.cbi.utsa.edu:~/doxygen
