@@ -739,6 +739,18 @@ static int StoreMsg(char *pcSrcpath,
 		  char *pcMsgName){
 
 
+    //- do hsolve correction for fields
+
+    if (undo_findsolvefield(&pcSrcpath, &pcField))
+    {
+    }
+    else
+    {
+	pcSrcpath = strdup(pcSrcpath);
+
+	pcField = strdup(pcField);
+    }
+
     // \todo not sure if this should be getRootedContext() or not.
 
 /*    struct PidinStack *ppistSrc = PidinStackParse(pcSrcpath);   */
@@ -759,6 +771,8 @@ static int StoreMsg(char *pcSrcpath,
      fprintf(stderr,
 	     "Error creating message for %s: Symbol not found.\n",
 	     pc);
+
+     // \todo should return zero overhere?
 
      return -1;
    }
@@ -784,6 +798,14 @@ static int StoreMsg(char *pcSrcpath,
    //   piom->dValue = FLT_MAX;
 
    pnsintegrator->ppioMsg[pnsintegrator->iIoMsgs++] = piom;
+
+   //- free allocated memory
+
+   free(pcSrcpath);
+
+   free(pcField);
+
+   //- return success
 
    return 1;
 

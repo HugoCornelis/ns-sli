@@ -261,6 +261,9 @@ int do_set_nsintegrator_verbose_level(int argc, char **argv);
 //-- Defined in nsasc.c --
 int NSSetAscField(char *pcPathname, char *pcField, char *pcValue);
 
+//-- Defined in hsolveactor.c --
+int undo_findsolvefield(char **ppcElement, char **ppcField);
+
 
 //- -- Defined in nscall.c --
 

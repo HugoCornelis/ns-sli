@@ -22,6 +22,8 @@ struct hsolve_type
 
     int calcmode;
 
+    char * findsolvefield;
+
 };
 
 

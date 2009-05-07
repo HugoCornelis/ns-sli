@@ -46,10 +46,20 @@
 //------------------------------------------------------------------
 int NeurospacesSetField(struct symtab_HSolveListElement *phsle, 
 			struct PidinStack *ppist,
-			char *pcPathname, char *field, char *value){
+			char *pcPathname, char *pcField, char *value){
 
  
+    //- do hsolve correction for fields
 
+    if (undo_findsolvefield(&pcPathname, &pcField))
+    {
+    }
+    else
+    {
+	pcPathname = strdup(pcPathname);
+
+	pcField = strdup(pcField);
+    }
 
   //
   // -The parameter fields "Ik" and "Gk" are solved variables in 
@@ -61,8 +71,8 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
     // time step?
 
   if(!phsle || 
-     !strcmp(field,"Ik") || 
-     !strcmp(field,"Gk") )
+     !strcmp(pcField,"Ik") || 
+     !strcmp(pcField,"Gk") )
     return 0;
   
 
@@ -70,19 +80,19 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
   // fields are only available on solve elements, and should be
   // ignored for NS.
 
-  if (strcmp(field, "comptmode") == 0)
+  if (strcmp(pcField, "comptmode") == 0)
   {
       // \todo ignored
 
       return 1;
   }
-  else if (strcmp(field, "chanmode") == 0)
+  else if (strcmp(pcField, "chanmode") == 0)
   {
       // \todo ignored or set heccer options?
 
       return 1;
   }
-  else if (strcmp(field, "calcmode") == 0)
+  else if (strcmp(pcField, "calcmode") == 0)
   {
       // \todo set heccer option: enable or disable interpolation
 
@@ -92,7 +102,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
   if(instanceof_group(phsle))
   {
   
-    setParameter(phsle,field,value,SETPARA_NUM);
+    setParameter(phsle,pcField,value,SETPARA_NUM);
     return 1;
   }
 
@@ -116,7 +126,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
     //-
     //- is the order we must traverse the stack to get to the object.. 
     //-
-    if (strcmp(field, "Xpower") == 0){
+    if (strcmp(pcField, "Xpower") == 0){
 
 
 
@@ -153,11 +163,11 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
       if(!phsleGate)
 	return 0;
 
-      return setParameter(phsleGate,field,value,SETPARA_GENESIS2);
+      return setParameter(phsleGate,pcField,value,SETPARA_GENESIS2);
 
 
     }
-    else if (strcmp(field, "Ypower") == 0){
+    else if (strcmp(pcField, "Ypower") == 0){
 
 
 
@@ -189,11 +199,11 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
       if(!phsleGate)
 	return 0;
 
-      return setParameter(phsleGate,field,value,SETPARA_GENESIS2);
+      return setParameter(phsleGate,pcField,value,SETPARA_GENESIS2);
 
 
     }
-    else if(strcmp(field,"Zpower") == 0){ 
+    else if(strcmp(pcField,"Zpower") == 0){ 
 
 
     struct symtab_HSolveListElement *phsleGate = 
@@ -228,14 +238,14 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 	return 0;
 
 
-      return setParameter(phsleGate,field,value,SETPARA_GENESIS2);
+      return setParameter(phsleGate,pcField,value,SETPARA_GENESIS2);
 
 
       return 1; 
 
 
     }
-    else if( strncmp(field,"Z_A->table",10) == 0 ){
+    else if( strncmp(pcField,"Z_A->table",10) == 0 ){
 
       //-
       //- We're checking the field to see if it begins with 'Z'
@@ -266,13 +276,13 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
         return 0;
       }
 
-      setParameter(phsleA,&field[5],value,SETPARA_NUM);
+      setParameter(phsleA,&pcField[5],value,SETPARA_NUM);
 
       return 1;
 
 
     }
-    else if( strncmp(field,"Z_B->table",10) == 0 ){
+    else if( strncmp(pcField,"Z_B->table",10) == 0 ){
 
 
 	struct PidinStack *ppistB = PidinStackDuplicate(ppist);
@@ -294,14 +304,14 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 	  return 0;
 	}
 
-	setParameter(phsleB,&field[5],value,SETPARA_NUM);
+	setParameter(phsleB,&pcField[5],value,SETPARA_NUM);
 
 
 	return 1;
 
 
     }
-    else if( strncmp(field,"X_B->table",10) == 0 ){
+    else if( strncmp(pcField,"X_B->table",10) == 0 ){
 
 
 	struct PidinStack *ppistB = PidinStackDuplicate(ppist);
@@ -323,14 +333,14 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 	  return 0;
 	}
 
-	setParameter(phsleB,&field[5],value,SETPARA_NUM);
+	setParameter(phsleB,&pcField[5],value,SETPARA_NUM);
 
 
 	return 1;
 
 
     }
-    else if( strncmp(field,"X_A->table",10) == 0 ){
+    else if( strncmp(pcField,"X_A->table",10) == 0 ){
 
 
 
@@ -354,14 +364,14 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 	  return 0;
 	}
 
-	setParameter(phsleA,&field[5],value,SETPARA_NUM);
+	setParameter(phsleA,&pcField[5],value,SETPARA_NUM);
 
 
 	return 1;
 
     }
 
-    else if( strncmp(field,"Y_B->table",10) == 0 ){
+    else if( strncmp(pcField,"Y_B->table",10) == 0 ){
 
 
 
@@ -385,14 +395,14 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 	  return 0;
 	}
 
-	setParameter(phsleB,&field[5],value,SETPARA_NUM);
+	setParameter(phsleB,&pcField[5],value,SETPARA_NUM);
 
 
 	return 1;
 
 
     }
-    else if( strncmp(field,"Y_A->table",10) == 0 ){
+    else if( strncmp(pcField,"Y_A->table",10) == 0 ){
 
 
 
@@ -416,7 +426,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 	  return 0;
 	}
 
-	setParameter(phsleA,&field[5],value,SETPARA_NUM);
+	setParameter(phsleA,&pcField[5],value,SETPARA_NUM);
 
 
 	return 1;
@@ -425,7 +435,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 
 
 
-    else if(!strcmp(field,"X_init"))
+    else if(!strcmp(pcField,"X_init"))
     {
 
 
@@ -453,7 +463,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
       return setParameter(phsleGate,"state_init",value,SETPARA_GENESIS2);
 
     }
-    else if(!strcmp(field,"Y_init"))
+    else if(!strcmp(pcField,"Y_init"))
     {
 
 
@@ -481,7 +491,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
       return setParameter(phsleGate,"state_init",value,SETPARA_GENESIS2);
 
     }
-    else if(!strcmp(field,"Z_init"))
+    else if(!strcmp(pcField,"Z_init"))
     {
 
 
@@ -513,7 +523,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 
   }
 
-  return setParameter(phsle,field,value,SETPARA_GENESIS2);
+  return setParameter(phsle,pcField,value,SETPARA_GENESIS2);
 
 }
 
