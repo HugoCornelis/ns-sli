@@ -12,7 +12,7 @@ int neurospacesquery(struct neurospaces_type *pneuro)
 {
     //- if neurospaces initialized
 
-    if (pneuro->pneuro)
+    if (0 && pneuro->pneuro)
     {
 	//- set global parameters for current model
 
@@ -29,7 +29,7 @@ int neurospacesquery(struct neurospaces_type *pneuro)
 
     //- if neurospaces initialized
 
-    if (pneuro->pneuro)
+    if (0 && pneuro->pneuro)
     {
 	//- clear global parameters for current model
 

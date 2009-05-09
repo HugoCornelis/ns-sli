@@ -48,17 +48,29 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 			struct PidinStack *ppist,
 			char *pcPathname, char *pcField, char *value){
 
+    struct PidinStack *ppistWorking = NULL;
+    struct symtab_HSolveListElement *phsleWorking = NULL;
  
+    // \todo Mando there are many 'return' statements in this
+    // function, can you solve the resulting memory leaks?
+
     //- do hsolve correction for fields
 
     if (undo_findsolvefield(&pcPathname, &pcField))
     {
+	ppistWorking = PidinStackParse(pcPathname);
+
+	phsleWorking = PidinStackLookupTopSymbol(ppistWorking);
     }
     else
     {
 	pcPathname = strdup(pcPathname);
 
 	pcField = strdup(pcField);
+
+	ppistWorking = PidinStackDuplicate(ppist);
+
+	phsleWorking = phsle;
     }
 
   //
@@ -70,7 +82,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
     // \todo what if we have an script_out element that sets Ik every
     // time step?
 
-  if(!phsle || 
+  if(!phsleWorking || 
      !strcmp(pcField,"Ik") || 
      !strcmp(pcField,"Gk") )
     return 0;
@@ -99,19 +111,19 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
       return 1;
   }
 
-  if(instanceof_group(phsle))
+  if(instanceof_group(phsleWorking))
   {
   
-    setParameter(phsle,pcField,value,SETPARA_NUM);
+    setParameter(phsleWorking,pcField,value,SETPARA_NUM);
     return 1;
   }
 
   //-
-  //- Check the type on the phsle object passed. For certain types
+  //- Check the type on the phsleWorking object passed. For certain types
   //- we must add parameters to the child objects rather than the object
   //- itself.
   //-
-  if (instanceof_channel(phsle)){
+  if (instanceof_channel(phsleWorking)){
 
 
     //-
@@ -137,7 +149,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
       if(phsleGate) 
       { 
 
-        double dPower = SymbolParameterResolveValue(phsleGate, ppist, "POWER"); 
+        double dPower = SymbolParameterResolveValue(phsleGate, ppistWorking, "POWER"); 
 
         printf("Warning: Field \"Xpower\" for '%s' has already been set to %i.\n",  
  	      pcPathname,(int)dPower);  
@@ -155,10 +167,10 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 
       //-
       //- we create our HH gate. Function creates
-      //- the gate, ssets it as a child to phsle,
+      //- the gate, ssets it as a child to phsleWorking,
       //- and returns a pointer to the gate.
       phsleGate = 
-	  CreateHHGate(phsle, "HH_activation");
+	  CreateHHGate(phsleWorking, "HH_activation");
 
       if(!phsleGate)
 	return 0;
@@ -178,7 +190,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
       if(phsleGate) 
       { 
 
-        double dPower = SymbolParameterResolveValue(phsleGate, ppist, "POWER"); 
+        double dPower = SymbolParameterResolveValue(phsleGate, ppistWorking, "POWER"); 
 
         printf("Warning: Field \"Ypower\" for '%s' has already been set to %i.\n",  
  	      pcPathname,(int)dPower);  
@@ -194,7 +206,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
       
 
       phsleGate = 
-	  CreateHHGate(phsle, "HH_inactivation");
+	  CreateHHGate(phsleWorking, "HH_inactivation");
 
       if(!phsleGate)
 	return 0;
@@ -213,7 +225,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
       if(phsleGate) 
       { 
 
-        double dPower = SymbolParameterResolveValue(phsleGate, ppist, "POWER"); 
+        double dPower = SymbolParameterResolveValue(phsleGate, ppistWorking, "POWER"); 
 
         printf("Warning: Field \"Zpower\" for '%s' has already been set to %i.\n",  
  	      pcPathname,(int)dPower);  
@@ -231,7 +243,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 
       
       phsleGate = 
-	CreateConcGate(phsle, "HH_concentration");
+	CreateConcGate(phsleWorking, "HH_concentration");
       
       
       if(!phsleGate)
@@ -257,7 +269,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 
 
       //- fetch the forward gate
-      struct PidinStack *ppistA = PidinStackDuplicate(ppist);
+      struct PidinStack *ppistA = PidinStackDuplicate(ppistWorking);
 
 
       //- we must look up the concentration gate
@@ -285,7 +297,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
     else if( strncmp(pcField,"Z_B->table",10) == 0 ){
 
 
-	struct PidinStack *ppistB = PidinStackDuplicate(ppist);
+	struct PidinStack *ppistB = PidinStackDuplicate(ppistWorking);
 
 
        
@@ -314,7 +326,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
     else if( strncmp(pcField,"X_B->table",10) == 0 ){
 
 
-	struct PidinStack *ppistB = PidinStackDuplicate(ppist);
+	struct PidinStack *ppistB = PidinStackDuplicate(ppistWorking);
 
 
 	
@@ -345,7 +357,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 
 
       
-	struct PidinStack *ppistA = PidinStackDuplicate(ppist);
+	struct PidinStack *ppistA = PidinStackDuplicate(ppistWorking);
 
 
 	
@@ -376,7 +388,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 
 
       
-	struct PidinStack *ppistB = PidinStackDuplicate(ppist);
+	struct PidinStack *ppistB = PidinStackDuplicate(ppistWorking);
 
 
 	
@@ -407,7 +419,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 
 
       
-	struct PidinStack *ppistA = PidinStackDuplicate(ppist);
+	struct PidinStack *ppistA = PidinStackDuplicate(ppistWorking);
 
 
 	
@@ -449,7 +461,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
       // A bit dangerous since I'm not making sure that HH_activation
       // has been created first. Will safty check it later.
       //
-      struct PidinStack *ppistCopy = PidinStackDuplicate(ppist);
+      struct PidinStack *ppistCopy = PidinStackDuplicate(ppistWorking);
 
       struct symtab_HSolveListElement *phsleGate = 
 	PidinStackPushStringAndLookup(ppistCopy,"HH_activation");
@@ -477,7 +489,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
       // A bit dangerous since I'm not making sure that HH_activation
       // has been created first. Will safty check it later.
       //
-      struct PidinStack *ppistCopy = PidinStackDuplicate(ppist);
+      struct PidinStack *ppistCopy = PidinStackDuplicate(ppistWorking);
 
       struct symtab_HSolveListElement *phsleGate = 
 	PidinStackPushStringAndLookup(ppistCopy,"HH_inactivation");
@@ -505,7 +517,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
       // A bit dangerous since I'm not making sure that HH_activation
       // has been created first. Will safty check it later.
       //
-      struct PidinStack *ppistCopy = PidinStackDuplicate(ppist);
+      struct PidinStack *ppistCopy = PidinStackDuplicate(ppistWorking);
 
       struct symtab_HSolveListElement *phsleGate = 
 	PidinStackPushStringAndLookup(ppistCopy,"HH_concentration");
@@ -523,7 +535,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 
   }
 
-  return setParameter(phsle,pcField,value,SETPARA_GENESIS2);
+  return setParameter(phsleWorking,pcField,value,SETPARA_GENESIS2);
 
 }
 
