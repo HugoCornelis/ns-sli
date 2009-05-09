@@ -243,6 +243,17 @@ struct neurospaces_integrator *getNsintegrator();
 char *getRootedPathname(char *pc);
 struct PidinStack *getRootedContext(char *pc);
 
+//- -- Defined in nscreate.c --
+struct symtab_HSolveListElement *
+CreateHHGate
+(struct symtab_HSolveListElement *phsleChannel, 
+ char *pcName);
+
+struct symtab_HSolveListElement *
+CreateConcGate
+(struct symtab_HSolveListElement *phsleChannel, 
+ char *pcName);
+
 //- -- Defined in nssetup.c --
 int NSSetupAlpha( char *pcName, char *pcField, char **pcArgs, 
 		  int iArgc);

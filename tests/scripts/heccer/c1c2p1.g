@@ -14,8 +14,10 @@ setfield /hardcoded_neutral/c1 \
 	inject 1e-8
 
 //t
-//t changing the inject of c1 propogates to c2 due to aliasing
-//t furture work: implement use parameter caches. 
+//t changing the inject of c1 propogates to c2 due to aliasing,
+//t but it does not propagate back because c2 is an alias.
+//t
+//t future work: implement use parameter caches. 
 //t
 setfield /hardcoded_neutral/c2 \
 	inject 0

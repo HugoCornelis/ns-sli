@@ -42,7 +42,7 @@ basic_d@.c:
 
 basic_g@.c:
 	$(c2genesis) simlib.g sim_ext.h basic
- 
+
 basic_f@.c:
 	$(makefunc) simfuncs basic > basic_f@.c
 

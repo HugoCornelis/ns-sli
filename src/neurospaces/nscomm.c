@@ -550,7 +550,7 @@ struct symtab_HSolveListElement * lookupGate(char *pcName, char *pcField)
   struct PidinStack *ppistCopy = PidinStackDuplicate(ppist);
 
   
-  
+  // \todo the mapping Xpower -> HH_activation is coded here and in NeurospacesSetField().
   if(!strcmp(pcField,"X") || !strcmp(pcField,"Xpower"))
   {
 
@@ -560,7 +560,7 @@ struct symtab_HSolveListElement * lookupGate(char *pcName, char *pcField)
   }
   else if(!strcmp(pcField,"Y") || !strcmp(pcField,"Ypower"))
   {
-
+      // \todo the mapping Ypower -> HH_inactivation is coded here and in NeurospacesSetField().
     phsle = PidinStackPushStringAndLookup(ppistCopy,"HH_inactivation");
     
 

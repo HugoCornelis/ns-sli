@@ -807,25 +807,25 @@ struct symtab_HSolveListElement *add_compartment(int flags,char *name,char *link
 	tsurface = *surface;
 	if (len > 0.0) { /* CYLINDRICAL */
 	    if (flags & SPINES) {
-/* 			if (dia <= RDENDR_DIAM) { */
-/* 				val = len * SPINE_DENS;  /* number of collapsed spines * */
-/* 				if ((dia > RDENDR_MIN) && (SPINE_FREQ != 0.0)) { */
-/* 					add_spines(flags,compt,name,&val,len); */
-/* 				} */
-/* 			} else { */
-/* 				val=0; */
-/* 			} */
-/* 			if ((dia > FDENDR_MIN) && (dia <= FDENDR_DIAM)) { */
-/* 				if (SPINE_NUM>0) { */
-/* 					if (SKIP_COUNT>=SPINE_SKIP) { */
-/* 						add_fspine(flags,compt,name,&val,0,0); */
-/* 						SPINE_NUM--; */
-/* 						SKIP_COUNT-=SPINE_SKIP; */
-/* 					} */
-/* 				} */
-/* 				SKIP_COUNT+=1.0; */
-/* 			} */
-/* 			if (val>0) tsurface = tsurface + val * SPINE_SURF; */
+		if (dia <= RDENDR_DIAM) {
+		    val = len * SPINE_DENS;  /* number of collapsed spines */
+		    if ((dia > RDENDR_MIN) && (SPINE_FREQ != 0.0)) {
+			add_spines(flags,phsleComp,ppistComp,name,&val,len);
+		    }
+		} else {
+		    val=0;
+		}
+		if ((dia > FDENDR_MIN) && (dia <= FDENDR_DIAM)) {
+		    if (SPINE_NUM>0) {
+			if (SKIP_COUNT>=SPINE_SKIP) {
+			    add_fspine(flags,phsleComp,ppistComp,name,&val,0,0);
+			    SPINE_NUM--;
+			    SKIP_COUNT-=SPINE_SKIP;
+			}
+		    }
+		    SKIP_COUNT+=1.0;
+		}
+		if (val>0) tsurface = tsurface + val * SPINE_SURF;
 	    }
 	}
 /* 	if (flags & MEMB_FLAG) */
@@ -851,116 +851,131 @@ struct symtab_HSolveListElement *add_compartment(int flags,char *name,char *link
 	return(phsleComp);
 }
 
-/* void add_spines(flags,dendr,name,spinenum,len) */
-/* 	int     flags; */
-/* 	struct symcompartment_type  *dendr; */
-/* 	char	*name; */
-/* 	float	*spinenum; */
-/* 	float	len; */
-/* { */
-/* 	float	l,u,v; */
-/* 	int	i,r; */
+void add_spines(flags,phsleComp,ppistComp,name,spinenum,len)
+	int     flags;
+	struct symtab_HSolveListElement *phsleComp;
+	struct PidinStack *ppistComp;
+	char	*name;
+	float	*spinenum;
+	float	len;
+{
+    float	l,u,v;
+    int	i,r;
 
-/* 	if (SPINE_FREQ == 1.0) { */
-/* 		/* give every comp 1 spine * */
-/* 		r = 1.0; */
-/* 	} else if (SPINE_FREQ > 1.0) { */
-/* 		if (AV_LENGTH > 0.0) { */
-/* 		/* If the user wants more than 1 spine per comp then the best */
-/* 		** distibution is at least one per comp. We try to spread */
-/* 		** additional ones preferentially over longer comps *  */
-/* 		    v = len / AV_LENGTH; */
-/* 		    if (v > 1.0) { */
-/* 			    l = SPINE_FREQ; */
-/* 			    u = SPINE_FREQ + v; */
-/* 		    } else { */
-/* 			    l = SPINE_FREQ - 1.0 + v; */
-/* 			    if (l < 1) { */
-/* 			    /* always at least one spine * */
-/* 				    l = 1.0; */
-/* 			    } */
-/* 			    u = SPINE_FREQ; */
-/* 		    } */
-/* 		    r = frandom(l,u); */
-/* 		} else { */
-/* 		    r = SPINE_FREQ; */
-/* 		} */
-/* 	} else { 	/* SPINE_FREQ < 1.0 * */
-/* 		/* less than one spine per comp, random distribution independent */
-/* 		** of length * */
-/* 		l = SPINE_FREQ / 2; */
-/* 		u = SPINE_FREQ * 2; */
-/* 		r = frandom(l,u); */
-/* 	} */
-/* 	for (i=1; i<=r; i++) { */
-/* 		add_fspine(flags,dendr,name,spinenum,i,r); */
-/* 	} */
-/* } */
+    if (SPINE_FREQ == 1.0) {
+	/* give every comp 1 spine */
+	r = 1.0;
+    } else if (SPINE_FREQ > 1.0) {
+	if (AV_LENGTH > 0.0) {
+	    /* If the user wants more than 1 spine per comp then the best
+	    ** distibution is at least one per comp. We try to spread
+	    ** additional ones preferentially over longer comps */
+	    v = len / AV_LENGTH;
+	    if (v > 1.0) {
+		l = SPINE_FREQ;
+		u = SPINE_FREQ + v;
+	    } else {
+		l = SPINE_FREQ - 1.0 + v;
+		if (l < 1) {
+		    /* always at least one spine */
+		    l = 1.0;
+		}
+		u = SPINE_FREQ;
+	    }
+	    r = frandom(l,u);
+	} else {
+	    r = SPINE_FREQ;
+	}
+    } else { 	/* SPINE_FREQ < 1.0 */
+		/* less than one spine per comp, random distribution independent
+		** of length */
+	l = SPINE_FREQ / 2;
+	u = SPINE_FREQ * 2;
+	r = frandom(l,u);
+    }
+    for (i=1; i<=r; i++) {
+	add_fspine(flags,phsleComp,name,spinenum,i,r);
+    }
+}
 
-/* void add_fspine(flags,dendr,name,spinenum,num,total) */
-/* 	int     flags; */
-/* 	struct symcompartment_type  *dendr; */
-/* 	char	*name; */
-/* 	float	*spinenum; */
-/* 	int	num,total; */
-/* { */
-/* 	struct  symcompartment_type  *spine; */
-/* 	Element	*elm; */
-/* 	int	oldflags; */
-/* 	char	spinename[20],oldcomptname[NAMELEN]; */
-/* 	float   len,dia,lratio,x = 0.0,y = 0.0,z = 0.0,surf,vol; */
-/* 	float   rangauss(); */
+void add_fspine(flags,phsleComp,ppistComp,name,spinenum,num,total)
+	int     flags;
+	struct symtab_HSolveListElement *phsleComp;
+	struct PidinStack *ppistComp;
+	char	*name;
+	float	*spinenum;
+	int	num,total;
+{
+    int	oldflags;
+    char	spinename[20],oldcomptname[NAMELEN];
+    float lratio,x = 0.0,y = 0.0,z = 0.0;
+    double surf,vol;
+    float   rangauss();
 
-/* 	/* store values * */
-/* 	strcpy(oldcomptname,comptname); */
-/* 	oldflags=flags; */
-/* 	if (num>0) { */
-/* 	    strcpy(comptname,spine_proto); */
-/* 	} else { */
-/* 	    strcpy(comptname,fspine_proto); */
-/* 	} */
-/* 	flags &= ~SPINES; */
+    /* store values */
+    strcpy(oldcomptname,comptname);
+    oldflags=flags;
+    if (num>0) {
+	strcpy(comptname,spine_proto);
+    } else {
+	strcpy(comptname,fspine_proto);
+    }
+    flags &= ~SPINES;
 
-/* 	*spinenum = *spinenum - 1; */
-/* 	strcpy(spinename,"spine["); */
-/* 	strcat(spinename,itoa(NUM_SPINES)); */
-/* 	strcat(spinename,rbracket); */
-/* 	spine = (struct symcompartment_type *)(GetElement(comptname)); */
-/* 	if (!spine) { */
-/* 	    fprintf(stderr,"'%s' not found\n",comptname); */
-/* 	    return; */
-/* 	} */
-/* 	len=spine->len; */
-/* 	dia=spine->dia; */
-/* 	if (flags & RANDSIZE) { */
-/* 	    if ((len>0.0)&&(Vlen>0.0)) len=rangauss(len,Vlen); */
-/* 	    if (Vdia>0.0) dia=rangauss(dia,Vdia); */
-/* 	} else if (flags & PROPRANDSIZE) { */
-/* 	    if ((len>0.0)&&(Vlen>0.0)) len=rangauss(len,Vlen*len*len); */
-/* 	    if (Vdia>0.0) dia=rangauss(dia,Vdia*dia*dia); */
-/* 	} */
-/* 	if (flags & DISTSPINE) { */
-/* 	/* distribute spines evenly over the surface of the parent cylinder * */
-/* 	    /* */
-/* 	    set_spine_position(dendr,spine,num,total); */
-/* 	    * */
-/* 	} else { */
-/* 	    if (len > 0.0) { */
-/* 		lratio=len/spine->len; */
-/* 	    } else { */
-/* 		lratio=1.0; */
-/* 	    } */
-/* 	    x = dendr->x + lratio * spine->x; */
-/* 	    y = dendr->y + lratio * spine->y; */
-/* 	    z = dendr->z + lratio * spine->z; */
-/* 	} */
-/* 	if (!(elm=add_compartment(flags,spinename,name,len,dia,&surf,&vol,dendr->x,dendr->y,dendr->z,x,y,z,0))) return; */
-/* 	NUM_SPINES++; */
+    *spinenum = *spinenum - 1;
+    strcpy(spinename,"spine[");
+    strcat(spinename,itoa(NUM_SPINES));
+    strcat(spinename,rbracket);
+    struct PidinStack *ppistSpine = getRootedContext(comptname);
+    struct symtab_HSolveListElement *phsleSpine = PidinStackLookupTopSymbol(ppistSpine);
+    if (!phsleSpine) {
+	fprintf(stderr,"'%s' not found\n",comptname);
+	return;
+    }
+    float len = SymbolParameterResolveValue(phsleSpine, ppistSpine, "LENGTH");
+    float dia = SymbolParameterResolveValue(phsleSpine, ppistSpine, "DIA");
+    if (flags & RANDSIZE) {
+	if ((len>0.0)&&(Vlen>0.0)) len=rangauss(len,Vlen);
+	if (Vdia>0.0) dia=rangauss(dia,Vdia);
+    } else if (flags & PROPRANDSIZE) {
+	if ((len>0.0)&&(Vlen>0.0)) len=rangauss(len,Vlen*len*len);
+	if (Vdia>0.0) dia=rangauss(dia,Vdia*dia*dia);
+    }
+    if (flags & DISTSPINE) {
+	/* distribute spines evenly over the surface of the parent cylinder */
+	/*
+	  set_spine_position(dendr,spine,num,total);
+	*/
+    } else {
+	if (len > 0.0) {
+	    lratio = len / SymbolParameterResolveValue(phsleSpine, ppistSpine, "LENGTH");
+	} else {
+	    lratio=1.0;
+	}
+	x = SymbolParameterResolveValue(phsleComp, ppistComp, "X") + lratio * SymbolParameterResolveValue(phsleSpine, ppistSpine, "X");
+	y = SymbolParameterResolveValue(phsleComp, ppistComp, "Y") + lratio * SymbolParameterResolveValue(phsleSpine, ppistSpine, "Y");
+	z = SymbolParameterResolveValue(phsleComp, ppistComp, "Z") + lratio * SymbolParameterResolveValue(phsleSpine, ppistSpine, "Z");
+    }
+    if (!(add_compartment(flags,
+			  spinename,
+			  name,
+			  len,
+			  dia,
+			  &surf,
+			  &vol,
+			  SymbolParameterResolveValue(phsleComp, ppistComp, "X"),
+			  SymbolParameterResolveValue(phsleComp, ppistComp, "Y"),
+			  SymbolParameterResolveValue(phsleComp, ppistComp, "Z"),
+			  x,
+			  y,
+			  z,
+			  0))) return;
+    NUM_SPINES++;
 
-/* 	/* restore values * */
-/* 	strcpy(comptname,oldcomptname); */
-/* 	flags=oldflags; */
-/* } */
+    /* restore values */
+    strcpy(comptname,oldcomptname);
+    flags=oldflags;
+}
 
 /* Element *add_channel(name,parent) */
 /* 	char	*name; */

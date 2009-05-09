@@ -29,7 +29,7 @@
  *  \return 0 on error, 1 on success.
  *  \param phsle A pointer to an Hsolve list element.
  *  \param ppist A Pidin stack for searching for child objects.
- *  \param pcPathname A string with the complete pathname of the parent object.
+ *  \param pcPathname A string with the complete pathname of the object.
  *  \param field A field value to 
  *  \param value The value to place in the field given in the previous argument.
  *
@@ -131,7 +131,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 
 
       struct symtab_HSolveListElement *phsleGate = 
-        (struct symtab_HSolveListElement*)lookupGate(pcPathname,"Xpower"); 
+        lookupGate(pcPathname,"Xpower"); 
 
 
       if(phsleGate) 
@@ -158,7 +158,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
       //- the gate, ssets it as a child to phsle,
       //- and returns a pointer to the gate.
       phsleGate = 
-	(struct symtab_HSolveListElement*)CreateHHGate(phsle, "HH_activation");
+	  CreateHHGate(phsle, "HH_activation");
 
       if(!phsleGate)
 	return 0;
@@ -172,7 +172,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 
 
     struct symtab_HSolveListElement *phsleGate = 
-      (struct symtab_HSolveListElement*)lookupGate(pcPathname,"Ypower"); 
+      lookupGate(pcPathname,"Ypower"); 
 
 
       if(phsleGate) 
@@ -194,7 +194,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
       
 
       phsleGate = 
-	(struct symtab_HSolveListElement*)CreateHHGate(phsle, "HH_inactivation");
+	  CreateHHGate(phsle, "HH_inactivation");
 
       if(!phsleGate)
 	return 0;
@@ -207,7 +207,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 
 
     struct symtab_HSolveListElement *phsleGate = 
-      (struct symtab_HSolveListElement*)lookupGate(pcPathname,"Zpower"); 
+	lookupGate(pcPathname,"Zpower"); 
 
 
       if(phsleGate) 
@@ -231,7 +231,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 
       
       phsleGate = 
-	(struct symtab_HSolveListElement*)CreateConcGate(phsle, "HH_concentration");
+	CreateConcGate(phsle, "HH_concentration");
       
       
       if(!phsleGate)

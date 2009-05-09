@@ -15,7 +15,7 @@
 ** See http://www.bbf.uia.ac.be/models/PM9.shtml for general model info.
 */
 
-randseed 
+randseed 100
 // float phertz = 25
 // float ihertz = 1
 // float delay = 0.00020	/* sets speed of climbing fiber volley */
@@ -58,12 +58,9 @@ ce /library
 make_Purkinje_comps
 make_Purkinje_spines
 
-// echo /model_container NEUROSPACES_QUERY
-// call /model_container NEUROSPACES_QUERY
-
 /* create the model and set up the run cell mode */
 // read cell date from .p file and make hsolve element
-readcell tests/scripts/PurkM9_model/Purk2M9s.p {cellpath} -hsolve
+readcell tests/scripts/PurkM9_model/Purk2M9.p {cellpath} -hsolve
 
 // /* make climbing fiber presynaptic elements */
 // create neutral {cellpath}/climb_presyn1
@@ -122,7 +119,7 @@ setmethod 11
 // note: the initialize field is not defined yet
 
 // setfield /output/plot_out filename {filename} initialize 1 append 1 leave_open 1
-setfield /output/plot_out filename {filename} append 1 leave_open 1
+setfield /output/plot_out filename {filename} leave_open 1
 
 // addmsg {cellpath}/soma /output/plot_out SAVE Vm
 addmsg {cellpath} /output/plot_out SAVE {findsolvefield {cellpath} {cellpath}/soma Vm}
@@ -135,9 +132,12 @@ addmsg {cellpath} /output/plot_out SAVE {findsolvefield {cellpath} {cellpath}/so
 
 call /output/plot_out RESET
 
-reset
-
 setfield {cellpath} {findsolvefield {cellpath} {cellpath}/soma inject} 1e-6
+
+echo /model_container NEUROSPACES_QUERY
+call /model_container NEUROSPACES_QUERY
+
+reset
 
 // useclock /output/plot_out 9 /* disable output */
 t = {rand 0.170 0.200}
@@ -170,5 +170,5 @@ step {t} -time		/* initial equilibration */
 
 // step 0.1 -time
 
-// quit
+quit
 
