@@ -79,6 +79,34 @@ int RegisterHeccerObject(char *pcName)
 }
 
 
+//------------------------------------------------------------------
+/*!
+ *  \fn struct Heccer *LookupHeccerObject(char* pcContext)
+ *  \return struct Heccer * Heccer with the given name, NULL for failure.
+ *  \param pcContext name of the Heccer to search.
+ *  \sa neurospaces_integrator
+ *
+ *  Lookup a Heccer instace in the global Heccer array in
+ *  pelnsintegrator.
+ *
+ */
+//------------------------------------------------------------------
+
+struct Heccer *LookupHeccerObject(char *pcContext)
+{
+    struct neurospaces_integrator *pnsintegrator = getNsintegrator();
+    int i;
+
+    for (i = 0; i < pnsintegrator->iHeccers; i++)
+    {
+	if (0 == strcmp(pcContext, pnsintegrator->ppheccer[i]->pcName))
+	{
+	    return(pnsintegrator->ppheccer[i]);
+	}
+    }
+
+    return(NULL);
+}
 
 
 //------------------------------------------------------------------
@@ -126,24 +154,19 @@ int InitHeccerObject(char* pcContext){
   //i already. if so exit, this is a secondary check to prevent any 
   //i low level heccers from being created twice.
   //i
-  if( pnsintegrator->iHeccers > 0 )
+
   {
-    int i;
-    int iHeccers = pnsintegrator->iHeccers;
-    struct Heccer **ppheccer = pnsintegrator->ppheccer;
+      struct Heccer *pheccer = LookupHeccerObject(pcContext);
 
-    for(i = 0; i < iHeccers; i++)
-    {
-      if(!strcmp(pcContext,ppheccer[i]->pcName))
+      if (pheccer)
       {
-	fprintf(stdout,
-		"Warning: Heccer object %s exists, resetting it instead.\n.",
-		ppheccer[i]->pcName);
+	  fprintf(stdout,
+		  "Warning: Heccer object %s exists, resetting it instead.\n.",
+		  pheccer->pcName);
 
-	singleHeccerReset(ppheccer[i]);
-	return 0;
+	  singleHeccerReset(pheccer);
+	  return 0;
       }
-    }
   }
 
 

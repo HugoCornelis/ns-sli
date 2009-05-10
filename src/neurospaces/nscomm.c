@@ -19,7 +19,6 @@
 
 
 //------------------ static function declarations ------------------
-static char * mapParameter(char *pcfield);
 //------------------------------------------------------------------
 
 
@@ -285,7 +284,7 @@ int setParameterNumber(struct symtab_HSolveListElement *phsle,
  *   value.
  */
 //----------------------------------------------------------------------------
-static char * mapParameter(char *pcfield){
+char * mapParameter(char *pcfield){
 
   char *pcresult;
 

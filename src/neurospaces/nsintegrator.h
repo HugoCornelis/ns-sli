@@ -219,6 +219,7 @@ int NSGenesisInitialize();
 
 //i -- Defined in heccercreate.c --
 int HeccerCreate(char* idin);
+struct Heccer *LookupHeccerObject(char *pcContext);
 
 
 //i -- Defined in heccerreset.c --
@@ -231,6 +232,7 @@ struct neurospaces_symbol * NeurospacesGetSymbol(char *pcname);
 
 
 //- -- Defined in nscomm.c --
+char * mapParameter(char *pcfield);
 int setParameter(struct symtab_HSolveListElement *phsle,
 		 char *pcField, char *pcValue,int iFlag);
 struct symtab_HSolveListElement * lookupGateKinetic(char *pcName, char *pcField, char *pcAorB);

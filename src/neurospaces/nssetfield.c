@@ -8,8 +8,11 @@
 */
 //------------------------------------------------------------------
 #include <stdio.h>
+#include <stdlib.h>
+
 #include "shell_func_ext.h"
 
+#include <heccer/addressing.h>
 #include "nsintegrator.h"
 #include "neurospaces/function.h"
 #include "neurospaces/pidinstack.h"
@@ -51,6 +54,8 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
     struct PidinStack *ppistWorking = NULL;
     struct symtab_HSolveListElement *phsleWorking = NULL;
  
+    char *pcOriginal = pcPathname;
+
     // \todo Mando there are many 'return' statements in this
     // function, can you solve the resulting memory leaks?
 
@@ -61,6 +66,38 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 	ppistWorking = PidinStackParse(pcPathname);
 
 	phsleWorking = PidinStackLookupTopSymbol(ppistWorking);
+
+	//- if heccers have already been created
+
+	struct neurospaces_integrator  *pnsintegrator = getNsintegrator();
+
+	if (pnsintegrator->iHeccers)
+	{
+	    fprintf(stdout, "Warning setting fields after a RESET has been done, please do another RESET to make sure all parameters are correctly internalized by the solvers.\n");
+
+	    //- lookup the heccer object using the pathname before findsolvefield correction
+
+	    struct Heccer *pheccer = LookupHeccerObject(pcOriginal);
+
+	    //- address the variable
+
+	    char *pcParameter = mapParameter(pcField);
+
+	    int iSerial = PidinStackToSerial(ppistWorking);
+
+	    double *pd = HeccerAddressVariable(pheccer, iSerial, pcParameter);
+
+	    if (pd)
+	    {
+		double d = atof(value);
+
+		*pd = d;
+	    }
+	    else
+	    {
+		fprintf(stdout, "Warning cannot set field %s->%s after a RESET has been done, heccer does not know where it is in its memory.\n", pcPathname, pcField);
+	    }
+	}
     }
     else
     {

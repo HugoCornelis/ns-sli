@@ -132,12 +132,12 @@ addmsg {cellpath} /output/plot_out SAVE {findsolvefield {cellpath} {cellpath}/so
 
 call /output/plot_out RESET
 
-setfield {cellpath} {findsolvefield {cellpath} {cellpath}/soma inject} 1e-6
-
-echo /model_container NEUROSPACES_QUERY
-call /model_container NEUROSPACES_QUERY
+// echo /model_container NEUROSPACES_QUERY
+// call /model_container NEUROSPACES_QUERY
 
 reset
+
+setfield {cellpath} {findsolvefield {cellpath} {cellpath}/soma inject} 1e-6
 
 // useclock /output/plot_out 9 /* disable output */
 t = {rand 0.170 0.200}
