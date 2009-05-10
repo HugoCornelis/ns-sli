@@ -27,7 +27,7 @@ my $test
 						   wait => 10,
 						  },
 						 ],
-				description => "passive version of the purkinje cell model.",
+				description => "passive version of the purkinje cell model (1).",
 			       },
 			       {
 				arguments => [
@@ -45,7 +45,7 @@ my $test
 						   wait => 10,
 						  },
 						 ],
-				description => "passive version of the purkinje cell model.",
+				description => "passive version of the purkinje cell model (2).",
 			       },
 			      ],
        description => "purkinje cell model",
