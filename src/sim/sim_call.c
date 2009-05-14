@@ -147,7 +147,9 @@ int	i;
     //hack -------------------------------------------------------
     if (nsCallCheck(optargv[2]))
     {
-
+	// \todo replace nsCallCheck() and NSCall() with only one
+	// function call to avoid duplication of the action names
+	// known to the neurospaces integrator.
 
       NSCall(argc,argv);
       
