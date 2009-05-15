@@ -23,9 +23,9 @@
 
 //-------------------------------------------------------------------
 /*!
- *  \fn int isTable(char *pcName)
- *  \param pcName A string with a Name token parsed from GENESIS
- *  \return 1 if pcName is part of a table, 0 if not. 
+ *  \fn int isTable(char *pcField)
+ *  \param pcField A string with a Name token parsed from GENESIS
+ *  \return 1 if pcField is part of a table, 0 if not. 
  *
  *  
 */

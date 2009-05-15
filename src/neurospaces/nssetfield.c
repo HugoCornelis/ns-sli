@@ -348,7 +348,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 
 	if(!phsleB){
 	  fprintf(stdout,
-		  "Could not find forward gate kinetic for %s\n",
+		  "Could not find backward gate kinetic for %s\n",
 		  pcPathname);
 	  return 0;
 	}
