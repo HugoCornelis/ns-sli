@@ -191,7 +191,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
         printf("Warning: Field \"Xpower\" for '%s' has already been set to %i.\n",  
  	      pcPathname,(int)dPower);  
 
-        return 1; 
+/*         return 1;  */
       }
 
 
@@ -204,10 +204,12 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 
       //-
       //- we create our HH gate. Function creates
-      //- the gate, ssets it as a child to phsleWorking,
+      //- the gate, sets it as a child to phsleWorking,
       //- and returns a pointer to the gate.
-      phsleGate = 
-	  CreateHHGate(phsleWorking, "HH_activation");
+
+      if (!phsleGate)
+	  phsleGate = 
+	      CreateHHGate(phsleWorking, "HH_activation");
 
       if(!phsleGate)
 	return 0;
@@ -232,18 +234,19 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
         printf("Warning: Field \"Ypower\" for '%s' has already been set to %i.\n",  
  	      pcPathname,(int)dPower);  
 
-        return 1; 
+/*         return 1;  */
       } 
 
-     //- if zero, no need to create a gate.
+      //- if zero, no need to create a gate.
       double dNumber = strtod(value,NULL);
 
       if(dNumber == 0.0)
 	return 1;
       
 
-      phsleGate = 
-	  CreateHHGate(phsleWorking, "HH_inactivation");
+      if (!phsleGate)
+	  phsleGate = 
+	      CreateHHGate(phsleWorking, "HH_inactivation");
 
       if(!phsleGate)
 	return 0;
@@ -267,7 +270,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
         printf("Warning: Field \"Zpower\" for '%s' has already been set to %i.\n",  
  	      pcPathname,(int)dPower);  
 
-        return 1; 
+/*         return 1;  */
       } 
 
 
@@ -278,9 +281,9 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 	return 1;
       
 
-      
-      phsleGate = 
-	CreateConcGate(phsleWorking, "HH_concentration");
+      if (!phsleGate)
+	  phsleGate = 
+	      CreateConcGate(phsleWorking, "HH_concentration");
       
       
       if(!phsleGate)
@@ -288,9 +291,6 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 
 
       return setParameter(phsleGate,pcField,value,SETPARA_GENESIS2);
-
-
-      return 1; 
 
 
     }
@@ -301,7 +301,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
       //- which indicates a concentration table.
       //-
       //- Then we check to see if we need to add the table to the
-      //- A or B gate.
+      //- A or B kinetic.
       //-
 
 
@@ -310,8 +310,17 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 
 
       //- we must look up the concentration gate
-      PidinStackPushString(ppistA,"HH_concentration");
+      struct symtab_HSolveListElement *phsleConc
+	  = PidinStackPushStringAndLookup(ppistA, "HH_concentration");
   
+      if(!phsleConc){
+	  struct symtab_HSolveListElement *phsleWorking
+	      = PidinStackLookupTopSymbol(ppistWorking);
+
+	  struct symtab_HSolveListElement *phsleGate
+	      = CreateConcGate(phsleWorking, "HH_concentration");
+      }
+
 
       struct symtab_HSolveListElement *phsleA = 
 	PidinStackPushStringAndLookup(ppistA,"A");
@@ -319,6 +328,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
       PidinStackFree(ppistA);
 
       if(!phsleA){
+	  Error();
         fprintf(stdout,
       	  "Could not find forward gate kinetic for %s\n",
        	  pcPathname);
@@ -337,9 +347,18 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 	struct PidinStack *ppistB = PidinStackDuplicate(ppistWorking);
 
 
-       
-	PidinStackPushString(ppistB,"HH_concentration");
+	//- we must look up the concentration gate
+	struct symtab_HSolveListElement *phsleConc
+	    = PidinStackPushStringAndLookup(ppistB, "HH_concentration");
   
+	if(!phsleConc){
+	  struct symtab_HSolveListElement *phsleWorking
+	      = PidinStackLookupTopSymbol(ppistWorking);
+
+	    struct symtab_HSolveListElement *phsleGate
+		= CreateConcGate(phsleWorking, "HH_concentration");
+	}
+
 
 	struct symtab_HSolveListElement *phsleB = 
 	  PidinStackPushStringAndLookup(ppistB,"B");
@@ -347,6 +366,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 	PidinStackFree(ppistB);
 
 	if(!phsleB){
+	    Error();
 	  fprintf(stdout,
 		  "Could not find backward gate kinetic for %s\n",
 		  pcPathname);
@@ -365,10 +385,19 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 
 	struct PidinStack *ppistB = PidinStackDuplicate(ppistWorking);
 
-
 	
-	PidinStackPushString(ppistB,"HH_activation");
+	//- we must look up the HH gate
+	struct symtab_HSolveListElement *phsleActivation
+	    = PidinStackPushStringAndLookup(ppistB, "HH_activation");
   
+	if(!phsleActivation){
+	  struct symtab_HSolveListElement *phsleWorking
+	      = PidinStackLookupTopSymbol(ppistWorking);
+
+	    struct symtab_HSolveListElement *phsleGate
+		= CreateHHGate(phsleWorking, "HH_activation");
+	}
+
 
 	struct symtab_HSolveListElement *phsleB = 
 	  PidinStackPushStringAndLookup(ppistB,"B");
@@ -376,6 +405,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 	PidinStackFree(ppistB);
 
 	if(!phsleB){
+	    Error();
 	  fprintf(stdout,
 		  "Could not find backward gate kinetic for %s\n",
 		  pcPathname);
@@ -392,14 +422,22 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
     else if( strncmp(pcField,"X_A->table",10) == 0 ){
 
 
-
-      
 	struct PidinStack *ppistA = PidinStackDuplicate(ppistWorking);
 
 
-	
-	PidinStackPushString(ppistA,"HH_activation");
+	//- we must look up the HH gate
+	struct symtab_HSolveListElement *phsleActivation
+	    = PidinStackPushStringAndLookup(ppistA, "HH_activation");
   
+	if(!phsleActivation){
+	  struct symtab_HSolveListElement *phsleWorking
+	      = PidinStackLookupTopSymbol(ppistWorking);
+
+	    struct symtab_HSolveListElement *phsleGate
+		= CreateHHGate(phsleWorking, "HH_activation");
+	}
+
+
 
 	struct symtab_HSolveListElement *phsleA = 
 	  PidinStackPushStringAndLookup(ppistA,"A");
@@ -407,6 +445,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 	PidinStackFree(ppistA);
 
 	if(!phsleA){
+	    Error();
 	  fprintf(stdout,
 		  "Could not find forward gate kinetic for %s\n",
 		  pcPathname);
@@ -422,15 +461,21 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 
     else if( strncmp(pcField,"Y_B->table",10) == 0 ){
 
-
-
       
 	struct PidinStack *ppistB = PidinStackDuplicate(ppistWorking);
 
-
-	
-	PidinStackPushString(ppistB,"HH_inactivation");
+	//- we must look up the HH gate
+	struct symtab_HSolveListElement *phsleInactivation
+	    = PidinStackPushStringAndLookup(ppistB, "HH_inactivation");
   
+	if(!phsleInactivation){
+	  struct symtab_HSolveListElement *phsleWorking
+	      = PidinStackLookupTopSymbol(ppistWorking);
+
+	    struct symtab_HSolveListElement *phsleGate
+		= CreateHHGate(phsleWorking, "HH_inactivation");
+	}
+
 
 	struct symtab_HSolveListElement *phsleB = 
 	  PidinStackPushStringAndLookup(ppistB,"B");
@@ -438,6 +483,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 	PidinStackFree(ppistB);
 
 	if(!phsleB){
+	    Error();
 	  fprintf(stdout,
 		  "Could not find backward gate kinetic for %s\n",
 		  pcPathname);
@@ -453,14 +499,21 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
     }
     else if( strncmp(pcField,"Y_A->table",10) == 0 ){
 
-
-
       
 	struct PidinStack *ppistA = PidinStackDuplicate(ppistWorking);
 
 
-	
-	PidinStackPushString(ppistA,"HH_inactivation");
+	//- we must look up the HH gate
+	struct symtab_HSolveListElement *phsleInactivation
+	    = PidinStackPushStringAndLookup(ppistA, "HH_inactivation");
+  
+	if(!phsleInactivation){
+	  struct symtab_HSolveListElement *phsleWorking
+	      = PidinStackLookupTopSymbol(ppistWorking);
+
+	    struct symtab_HSolveListElement *phsleGate
+		= CreateHHGate(phsleWorking, "HH_inactivation");
+	}
   
 
 	struct symtab_HSolveListElement *phsleA = 
@@ -469,6 +522,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 	PidinStackFree(ppistA);
 
 	if(!phsleA){
+	    Error();
 	  fprintf(stdout,
 		  "Could not find forward gate kinetic for %s\n",
 		  pcPathname);
