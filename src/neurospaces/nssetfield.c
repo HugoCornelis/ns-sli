@@ -188,8 +188,8 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 
         double dPower = SymbolParameterResolveValue(phsleGate, ppistWorking, "POWER"); 
 
-        printf("Warning: Field \"Xpower\" for '%s' has already been set to %i.\n",  
- 	      pcPathname,(int)dPower);  
+        printf("Warning: Field \"Xpower\" for '%s' has already been set to %i, new value is %s.\n",  
+	       pcPathname,(int)dPower, value);
 
 /*         return 1;  */
       }
@@ -231,8 +231,8 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 
         double dPower = SymbolParameterResolveValue(phsleGate, ppistWorking, "POWER"); 
 
-        printf("Warning: Field \"Ypower\" for '%s' has already been set to %i.\n",  
- 	      pcPathname,(int)dPower);  
+        printf("Warning: Field \"Ypower\" for '%s' has already been set to %i, new value is %s.\n",  
+	       pcPathname,(int)dPower, value);
 
 /*         return 1;  */
       } 
@@ -267,8 +267,8 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 
         double dPower = SymbolParameterResolveValue(phsleGate, ppistWorking, "POWER"); 
 
-        printf("Warning: Field \"Zpower\" for '%s' has already been set to %i.\n",  
- 	      pcPathname,(int)dPower);  
+        printf("Warning: Field \"Zpower\" for '%s' has already been set to %i, new value is %s.\n",  
+	       pcPathname,(int)dPower, value);
 
 /*         return 1;  */
       } 

@@ -30,25 +30,23 @@ int NSTabFill(char *pcName, char *pcField, char *pcNumTabEntries)
 
   
 
-  struct symtab_HSolveListElement * phslegtkA = 
-    lookupGateKinetic(pcName,pcField,"A");
+  struct PidinStack * ppistA = getGateContext(pcName,pcField,"A");
 
-  struct symtab_HSolveListElement * phslegtkB = 
-    lookupGateKinetic(pcName,pcField,"B");
+  struct PidinStack * ppistB = getGateContext(pcName,pcField,"B");
+
+  struct symtab_HSolveListElement * phslegtkA = PidinStackLookupTopSymbol(ppistA);
+
+  struct symtab_HSolveListElement * phslegtkB = PidinStackLookupTopSymbol(ppistB);
 
 
   if(!phslegtkA || !phslegtkB)
   {
-
+      Error();
     printf("TABFILL Error: Field %s is not known for %s\n",pcField,pcName);
     return 0;
 
   }
 
-
-  struct PidinStack * ppistA = getGateContext(pcName,pcField,"A");
-
-  struct PidinStack * ppistB = getGateContext(pcName,pcField,"B");
 
   //!!
   //!! There is a '- 1' following a call to getting the number of table entries because 
@@ -172,6 +170,9 @@ int NSTabFill(char *pcName, char *pcField, char *pcNumTabEntries)
 
   pheccerOptions->ho.iIntervalEntries = iDestinationSize;
  
+
+  PidinStackFree(ppistA);
+  PidinStackFree(ppistB);
 
   return 1;
 

@@ -35,26 +35,12 @@
 int NSTweakTau(char *pcName, char *pcField){
 
   
-  struct symtab_HSolveListElement *phsle, *phslegtkA, *phslegtkB;
-
-  phsle = lookupGate(pcName,pcField);
-
-  phslegtkA = lookupGateKinetic(pcName,pcField,"A");
-  phslegtkB = lookupGateKinetic(pcName,pcField,"B");
-
-
-  if(!phslegtkA || !phslegtkB)
-  {
-
-    printf("Element '%s' not found\n",pcName);
-    return 0;
-
-  }
-
   //!
   //! Here at the start we set the HH_Format parameter on the 
   //! gate to indicate the procedure has started. 
   //!
+  struct symtab_HSolveListElement *phsle = lookupGate(pcName,pcField);
+
   setParameter(phsle,"HH_Format","steadystate-tau",SETPARA_STRING);
 
 
@@ -73,6 +59,19 @@ int NSTweakTau(char *pcName, char *pcField){
   //!! There is a '- 1' following a call to getting the number of table entries because 
   //!! of a glitch in the model container which causes it to return the number of entries+1.
   //!!
+
+  struct symtab_HSolveListElement *phslegtkA = PidinStackLookupTopSymbol(ppistA); // lookupGateKinetic(pcName,pcField,"A");
+  struct symtab_HSolveListElement *phslegtkB = PidinStackLookupTopSymbol(ppistB); // lookupGateKinetic(pcName,pcField,"B");
+
+
+  if(!phslegtkA || !phslegtkB)
+  {
+      Error();
+    printf("Element '%s' not found\n",pcName);
+    return 0;
+
+  }
+
   int iNumTabEntriesA = 
     (int)SymbolParameterResolveValue(phslegtkA, ppistA,"HH_NUMBER_OF_TABLE_ENTRIES");
 
@@ -83,6 +82,7 @@ int NSTweakTau(char *pcName, char *pcField){
 
   if( iNumTabEntriesA != iNumTabEntriesB )
   {
+      Error();
 
     printf(
 	   "Error: Gate kinetic A and B for gate \'%s\' have a different number of table entries.\n",
@@ -123,6 +123,8 @@ int NSTweakTau(char *pcName, char *pcField){
   }
 
 
+  PidinStackFree(ppistA);
+  PidinStackFree(ppistB);
 
   return 1;
 

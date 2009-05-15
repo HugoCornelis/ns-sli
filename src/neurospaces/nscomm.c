@@ -456,77 +456,77 @@ char * mapParameter(char *pcfield){
 
 
 
-//-----------------------------------------------------------------
-/*!
- *
- */
-//-----------------------------------------------------------------
-struct symtab_HSolveListElement * lookupGateKinetic(char *pcName, char *pcField, char *pcAorB)
-{
+/* //----------------------------------------------------------------- */
+/* /*! */
+/*  * */
+/*  * */
+/* //----------------------------------------------------------------- */
+/* struct symtab_HSolveListElement * lookupGateKinetic(char *pcName, char *pcField, char *pcAorB) */
+/* { */
 
-  struct symtab_HSolveListElement *phsle = NULL;
-
-
-  struct PidinStack *ppist  = PidinStackParse(pcName);
+/*   struct symtab_HSolveListElement *phsle = NULL; */
 
 
+/*   struct PidinStack *ppist  = getRootedContext(pcName); // PidinStackParse(pcName); */
 
-  struct PidinStack *ppistCopy = PidinStackDuplicate(ppist);
+
+
+/*   struct PidinStack *ppistCopy = PidinStackDuplicate(ppist); */
 
   
   
-  if(!strcmp(pcField,"X") || !strcmp(pcField,"Xpower"))
-  {
+/*   if(!strcmp(pcField,"X") || !strcmp(pcField,"Xpower")) */
+/*   { */
 
-    PidinStackPushString(ppistCopy,"HH_activation");
+/*     PidinStackPushString(ppistCopy,"HH_activation"); */
 
 
-  }
-  else if(!strcmp(pcField,"Y") || !strcmp(pcField,"Ypower"))
-  {
+/*   } */
+/*   else if(!strcmp(pcField,"Y") || !strcmp(pcField,"Ypower")) */
+/*   { */
 
-    PidinStackPushString(ppistCopy,"HH_inactivation");
+/*     PidinStackPushString(ppistCopy,"HH_inactivation"); */
     
 
-  }
-  else if(!strcmp(pcField,"Z") || !strcmp(pcField,"Zpower"))
-  {
+/*   } */
+/*   else if(!strcmp(pcField,"Z") || !strcmp(pcField,"Zpower")) */
+/*   { */
 
-    PidinStackPushString(ppistCopy,"HH_concentration");
+/*     PidinStackPushString(ppistCopy,"HH_concentration"); */
     
 
-  }
-  else
-  {
+/*   } */
+/*   else */
+/*   { */
 
-    PidinStackFree(ppist);
-    PidinStackFree(ppistCopy);
-    return NULL;
+/*     PidinStackFree(ppist); */
+/*     PidinStackFree(ppistCopy); */
+/*     return NULL; */
 
-  }
-
-
-  if(!strcmp(pcAorB,"A") || !strcmp(pcAorB,"B"))
-  {
-
-    phsle = PidinStackPushStringAndLookup(ppistCopy,pcAorB);
-
-  }
-  else
-  {
-
-    phsle = PidinStackLookupTopSymbol(ppistCopy);
-
-  }
+/*   } */
 
 
+/*   if(!strcmp(pcAorB,"A") || !strcmp(pcAorB,"B")) */
+/*   { */
 
-  PidinStackFree(ppistCopy);
+/*     phsle = PidinStackPushStringAndLookup(ppistCopy,pcAorB); */
+
+/*   } */
+/*   else */
+/*   { */
+
+/*     phsle = PidinStackLookupTopSymbol(ppistCopy); */
+
+/*   } */
+
+
+
+/*   PidinStackFree(ppistCopy); */
   
-  return phsle;
+/*   return phsle; */
 
 
-}
+/* } */
 
 
 
@@ -542,7 +542,7 @@ struct symtab_HSolveListElement * lookupGate(char *pcName, char *pcField)
   struct symtab_HSolveListElement *phsle = NULL;
 
 
-  struct PidinStack *ppist  = PidinStackParse(pcName);
+  struct PidinStack *ppist  = getRootedContext(pcName); //PidinStackParse(pcName);
 
 
 
@@ -593,7 +593,7 @@ struct symtab_HSolveListElement * lookupGate(char *pcName, char *pcField)
 
 
 
-  struct PidinStack *ppist  = PidinStackParse(pcName);
+    struct PidinStack *ppist  = getRootedContext(pcName); // PidinStackParse(pcName);
 
 
   if(!ppist)
