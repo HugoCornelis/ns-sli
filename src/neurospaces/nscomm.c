@@ -55,7 +55,27 @@ struct GateState GateStateTableInitializers[] =
   //{"kc/HH_activation","0.063531859768213905"},
   //{"kc/HH_concentration","0.0099009900989999993"},
   // {"h1/HH_activation","0.03540844397"},
-  {NULL, NULL},
+
+
+    {    "CaP/HH_activation",    "0.001391094927", },
+    {    "CaP/HH_inactivation",  "0.9868968318",   },
+    {    "CaT/HH_activation",    "0.03891870645",  },
+    {    "CaT/HH_inactivation",  "0.08260212813",  },
+    {    "K2/HH_activation",     "0.2046429639",   },
+    {    "K2/HH_concentration",  "0.1666666667",   },
+    {    "KA/HH_activation",     "0.08324405922",  },
+    {    "KA/HH_inactivation",   "0.7495011708",   },
+    {    "KC/HH_activation",     "0.06353185977",  },
+    {    "KC/HH_concentration",  "0.009900990099", },
+    {    "KM/HH_activation",     "0.03540844397",  },
+    {    "Kdr/HH_activation",    "0.004501601101", },
+    {    "Kdr/HH_inactivation",  "0.9999785878",   },
+    {    "NaF/HH_activation",    "0.007840644937", },
+    {    "NaF/HH_inactivation",  "0.2639777693",   },
+    {    "NaP/HH_activation",    "0.04529308881",  },
+    {    "h1/HH_activation",     "0.09618512922",  },
+    {    "h2/HH_activation",     "0.02404628231",  },
+    {    NULL, NULL,  },
 };
 
 

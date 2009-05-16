@@ -13,6 +13,10 @@
 
 
  
+#include "neurospaces/components/cell.h"
+#include "neurospaces/components/channel.h"
+#include "neurospaces/components/pool.h"
+#include "neurospaces/components/segment.h"
 #include "neurospaces/symbols.h"  
 #include "neurospaces/symboltable.h"  
 #include "neurospaces/pidinstack.h"
@@ -26,7 +30,7 @@
 
 
 //-- prototypes for setting up a basic channel object --
-static struct symtab_HSolveListElement * GenChannelCalloc();
+/* static struct symtab_HSolveListElement * GenChannelCalloc(); */
 static struct symtab_GateKinetic *CreateGateKinetic(char *pcDirection);
 struct symtab_HSolveListElement * CreateHHGate(
 		 struct symtab_HSolveListElement *phsleChannel, 
@@ -70,35 +74,36 @@ int NSCreate( char* name,  char* pcParent, char* pcType){
 
    if(!strcmp("compartment",pcType)){
 
-     phsleChild = (struct symtab_HSolveListElement*)SegmentCalloc();
+       
+     phsleChild = (struct symtab_HSolveListElement *)SegmentCalloc();
 
      iResult = NSINTEGRATOR_COMPARTMENT;
 
    }
    else if(!strcmp("tabchannel",pcType)){
 
-     phsleChild = (struct symtab_HSolveListElement*)GenChannelCalloc();
+     phsleChild = (struct symtab_HSolveListElement *)ChannelCalloc();
 
      iResult = NSINTEGRATOR_TABCHANNEL;
    }
    else if(!strcmp("Ca_concen",pcType)){
 
      //! create a calcium pool
-     phsleChild = (struct symtab_HSolveListElement*)PoolCalloc();
+     phsleChild = (struct symtab_HSolveListElement *)PoolCalloc();
 
      iResult = NSINTEGRATOR_POOL;
      
    }
    else if(!strcmp("nernst",pcType)){
 
-     phsleChild = (struct symtab_HSolveListElement*)NernstCalloc();
+     phsleChild = NernstCalloc();
 
      iResult = NSINTEGRATOR_NERNST;
 
    }
    else if(!strcmp("synchan",pcType)){
 
-     phsleChild = (struct symtab_HSolveListElement*)SynChannelCalloc();
+     phsleChild = SynChannelCalloc();
 
      iResult = NSINTEGRATOR_SYNCHAN;
 
@@ -117,7 +122,7 @@ int NSCreate( char* name,  char* pcParent, char* pcType){
 
        // neutral, hsolve
 
-       phsleChild = (struct symtab_HSolveListElement*)CellCalloc();
+       phsleChild = (struct symtab_HSolveListElement *)CellCalloc();
 
        iResult = NSINTEGRATOR_NEUTRAL;
    }
@@ -126,6 +131,7 @@ int NSCreate( char* name,  char* pcParent, char* pcType){
 
    if( !phsleChild ){
 
+       Error();
      fprintf(stderr,"Error allocating phsleChild for:%s\n",name);
      return -1;
 
@@ -187,31 +193,31 @@ int NSCreate( char* name,  char* pcParent, char* pcType){
 
 
 
-//--------------------------------------------------------------------
-/*!
- *  \fn static struct symtab_HSolveListElement * GenChannelCalloc()
- *  \return A pointer to a newly allocated Tab channel object.
- *
- *  
- */
-//--------------------------------------------------------------------
-static struct symtab_HSolveListElement * GenChannelCalloc(){
+/* //-------------------------------------------------------------------- */
+/* /*! */
+/*  *  \fn static struct symtab_HSolveListElement * GenChannelCalloc() */
+/*  *  \return A pointer to a newly allocated Tab channel object. */
+/*  * */
+/*  *   */
+/*  * */
+/* //-------------------------------------------------------------------- */
+/* static struct symtab_HSolveListElement * GenChannelCalloc(){ */
 
 
-  struct symtab_HSolveListElement *phsleChannel = 
-    (struct symtab_HSolveListElement*)ChannelCalloc();
+/*   struct symtab_HSolveListElement *phsleChannel =  */
+/*     ChannelCalloc(); */
 
 
-  //setParameter(phsleChannel,"CHANNEL_TYPE","ChannelAct",0);
+/*   //setParameter(phsleChannel,"CHANNEL_TYPE","ChannelAct",0); */
   
 
-  struct symtab_IdentifierIndex *pidinChannel;
+/*   struct symtab_IdentifierIndex *pidinChannel; */
 
 
-  return phsleChannel;
+/*   return phsleChannel; */
 
 
-}
+/* } */
 
 
 

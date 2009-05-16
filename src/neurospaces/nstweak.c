@@ -55,6 +55,12 @@ int NSTweakTau(char *pcName, char *pcField){
   struct PidinStack *ppistB = getGateContext(pcName,pcField,"B");
 
 
+  //- Here we set the state_init parameter. 
+
+  struct PidinStack *ppistGate = PidinStackDuplicate(ppistA);
+  PidinStackPop(ppistGate);
+  setStateInit(ppistGate);
+
   //!!
   //!! There is a '- 1' following a call to getting the number of table entries because 
   //!! of a glitch in the model container which causes it to return the number of entries+1.

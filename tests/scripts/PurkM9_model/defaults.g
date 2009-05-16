@@ -172,9 +172,9 @@ float TAB_XMAX = 0.05
 // addalias setup_table2 setupgate		// aka setupgate
 // // The usage of this has changed, so "setupgate" should be used instead
 
-// addalias tweak_tabchan tweakalpha	// aka tweakalpha
-// addalias tau_tweak_tabchan tweaktau	// aka tweaktau
-// addalias setup_tabchan setupalpha	// aka setupalpha
+addalias tweak_tabchan tweakalpha	// aka tweakalpha
+addalias tau_tweak_tabchan tweaktau	// aka tweaktau
+addalias setup_tabchan setupalpha	// aka setupalpha
 // addalias setup_tabchan_tau setuptau	// aka setuptau
 
 // function setup_table3(gate, table, xdivs, xmin, xmax, A, B, C, D, F)
