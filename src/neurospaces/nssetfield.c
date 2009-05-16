@@ -283,6 +283,11 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 	    if(!phsleGate)
 		return 0;
 
+	    struct symtab_HSolveListElement *phsleConc
+		= PidinStackPushStringAndLookup(ppistWorking, "HH_concentration");
+
+	    //- Here we set the state_init parameter. 
+	    setStateInit(ppistWorking);
 
 	    return setParameter(phsleGate,pcField,value,SETPARA_GENESIS2);
 
