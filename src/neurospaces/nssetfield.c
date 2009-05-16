@@ -110,523 +110,517 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 	phsleWorking = phsle;
     }
 
-  //
-  // -The parameter fields "Ik" and "Gk" are solved variables in 
-  //  Heccer so they don't need a parameter to be set at all, thus they
-  //  are ignored completely.
-  //
+    //
+    // -The parameter fields "Ik" and "Gk" are solved variables in 
+    //  Heccer so they don't need a parameter to be set at all, thus they
+    //  are ignored completely.
+    //
 
     // \todo what if we have an script_out element that sets Ik every
     // time step?
 
-  if(!phsleWorking || 
-     !strcmp(pcField,"Ik") || 
-     !strcmp(pcField,"Gk") )
-    return 0;
+    if(!phsleWorking || 
+       !strcmp(pcField,"Ik") || 
+       !strcmp(pcField,"Gk") )
+	return 0;
   
 
-  // \todo Mando: can you correct this: the following
-  // fields are only available on solve elements, and should be
-  // ignored for NS.
+    // \todo Mando: can you correct this: the following
+    // fields are only available on solve elements, and should be
+    // ignored for NS.
 
-  if (strcmp(pcField, "comptmode") == 0)
-  {
-      // \todo ignored
+    if (strcmp(pcField, "comptmode") == 0)
+    {
+	// \todo ignored
 
-      return 1;
-  }
-  else if (strcmp(pcField, "chanmode") == 0)
-  {
-      // \todo ignored or set heccer options?
+	return 1;
+    }
+    else if (strcmp(pcField, "chanmode") == 0)
+    {
+	// \todo ignored or set heccer options?
 
-      return 1;
-  }
-  else if (strcmp(pcField, "calcmode") == 0)
-  {
-      // \todo set heccer option: enable or disable interpolation
+	return 1;
+    }
+    else if (strcmp(pcField, "calcmode") == 0)
+    {
+	// \todo set heccer option: enable or disable interpolation
 
-      return 1;
-  }
+	return 1;
+    }
 
-  if(instanceof_group(phsleWorking))
-  {
+    if(instanceof_group(phsleWorking))
+    {
   
-    setParameter(phsleWorking,pcField,value,SETPARA_NUM);
-    return 1;
-  }
-
-  //-
-  //- Check the type on the phsleWorking object passed. For certain types
-  //- we must add parameters to the child objects rather than the object
-  //- itself.
-  //-
-  if (instanceof_channel(phsleWorking)){
-
+	setParameter(phsleWorking,pcField,value,SETPARA_NUM);
+	return 1;
+    }
 
     //-
-    //- The HHGate is only allocated when we see an Xpower value 
-    //- Greater than zero. 
-    //- 
-    //- Parameter Xpower is set in the HH gate object, which is
-    //- nexted in the Channel.
-    //- 
-    //-    Channel -> 
-    //-               HH_gate -parameter-> Xpower
+    //- Check the type on the phsleWorking object passed. For certain types
+    //- we must add parameters to the child objects rather than the object
+    //- itself.
     //-
-    //- is the order we must traverse the stack to get to the object.. 
-    //-
-    if (strcmp(pcField, "Xpower") == 0){
+    if (instanceof_channel(phsleWorking)){
 
 
+	//-
+	//- The HHGate is only allocated when we see an Xpower value 
+	//- Greater than zero. 
+	//- 
+	//- Parameter Xpower is set in the HH gate object, which is
+	//- nexted in the Channel.
+	//- 
+	//-    Channel -> 
+	//-               HH_gate -parameter-> Xpower
+	//-
+	//- is the order we must traverse the stack to get to the object.. 
+	//-
+	if (strcmp(pcField, "Xpower") == 0){
 
-      struct symtab_HSolveListElement *phsleGate = 
-        lookupGate(pcPathname,"Xpower"); 
 
 
-      if(phsleGate) 
-      { 
+	    struct symtab_HSolveListElement *phsleGate = 
+		lookupGate(pcPathname,"Xpower"); 
 
-        double dPower = SymbolParameterResolveValue(phsleGate, ppistWorking, "POWER"); 
 
-        printf("Warning: Field \"Xpower\" for '%s' has already been set to %i, new value is %s.\n",  
-	       pcPathname,(int)dPower, value);
+	    if(phsleGate) 
+	    { 
 
-/*         return 1;  */
-      }
+		double dPower = SymbolParameterResolveValue(phsleGate, ppistWorking, "POWER"); 
 
+		printf("Warning: Field \"Xpower\" for '%s' has already been set to %i, new value is %s.\n",  
+		       pcPathname,(int)dPower, value);
+	    }
 
 
-     //- if zero, no need to create a gate.
-      double dNumber = strtod(value,NULL);
 
-      if(dNumber == 0.0)
-	return 1;
+	    //- if zero, no need to create a gate.
+	    double dNumber = strtod(value,NULL);
 
-      //-
-      //- we create our HH gate. Function creates
-      //- the gate, sets it as a child to phsleWorking,
-      //- and returns a pointer to the gate.
+	    if(dNumber == 0.0)
+		return 1;
 
-      if (!phsleGate)
-	  phsleGate = 
-	      CreateHHGate(phsleWorking, "HH_activation");
+	    //-
+	    //- we create our HH gate. Function creates
+	    //- the gate, sets it as a child to phsleWorking,
+	    //- and returns a pointer to the gate.
 
-      if(!phsleGate)
-	return 0;
+	    if (!phsleGate)
+		phsleGate = 
+		    CreateHHGate(phsleWorking, "HH_activation");
 
-      return setParameter(phsleGate,pcField,value,SETPARA_GENESIS2);
+	    if(!phsleGate)
+		return 0;
 
+	    return setParameter(phsleGate,pcField,value,SETPARA_GENESIS2);
 
-    }
-    else if (strcmp(pcField, "Ypower") == 0){
 
-
-
-    struct symtab_HSolveListElement *phsleGate = 
-      lookupGate(pcPathname,"Ypower"); 
-
-
-      if(phsleGate) 
-      { 
-
-        double dPower = SymbolParameterResolveValue(phsleGate, ppistWorking, "POWER"); 
-
-        printf("Warning: Field \"Ypower\" for '%s' has already been set to %i, new value is %s.\n",  
-	       pcPathname,(int)dPower, value);
-
-/*         return 1;  */
-      } 
-
-      //- if zero, no need to create a gate.
-      double dNumber = strtod(value,NULL);
-
-      if(dNumber == 0.0)
-	return 1;
-      
-
-      if (!phsleGate)
-	  phsleGate = 
-	      CreateHHGate(phsleWorking, "HH_inactivation");
-
-      if(!phsleGate)
-	return 0;
-
-      return setParameter(phsleGate,pcField,value,SETPARA_GENESIS2);
-
-
-    }
-    else if(strcmp(pcField,"Zpower") == 0){ 
-
-
-    struct symtab_HSolveListElement *phsleGate = 
-	lookupGate(pcPathname,"Zpower"); 
-
-
-      if(phsleGate) 
-      { 
-
-        double dPower = SymbolParameterResolveValue(phsleGate, ppistWorking, "POWER"); 
-
-        printf("Warning: Field \"Zpower\" for '%s' has already been set to %i, new value is %s.\n",  
-	       pcPathname,(int)dPower, value);
-
-/*         return 1;  */
-      } 
-
-
-     //- if zero, no need to create a gate.
-      double dNumber = strtod(value,NULL);
-
-      if(dNumber == 0.0)
-	return 1;
-      
-
-      if (!phsleGate)
-	  phsleGate = 
-	      CreateConcGate(phsleWorking, "HH_concentration");
-      
-      
-      if(!phsleGate)
-	return 0;
-
-
-      return setParameter(phsleGate,pcField,value,SETPARA_GENESIS2);
-
-
-    }
-    else if( strncmp(pcField,"Z_A->table",10) == 0 ){
-
-      //-
-      //- We're checking the field to see if it begins with 'Z'
-      //- which indicates a concentration table.
-      //-
-      //- Then we check to see if we need to add the table to the
-      //- A or B kinetic.
-      //-
-
-
-      //- fetch the forward gate
-      struct PidinStack *ppistA = PidinStackDuplicate(ppistWorking);
-
-
-      //- we must look up the concentration gate
-      struct symtab_HSolveListElement *phsleConc
-	  = PidinStackPushStringAndLookup(ppistA, "HH_concentration");
-  
-      if(!phsleConc){
-	  struct symtab_HSolveListElement *phsleWorking
-	      = PidinStackLookupTopSymbol(ppistWorking);
-
-	  struct symtab_HSolveListElement *phsleGate
-	      = CreateConcGate(phsleWorking, "HH_concentration");
-      }
-
-
-      struct symtab_HSolveListElement *phsleA = 
-	PidinStackPushStringAndLookup(ppistA,"A");
-    
-      PidinStackFree(ppistA);
-
-      if(!phsleA){
-	  Error();
-        fprintf(stdout,
-      	  "Could not find forward gate kinetic for %s\n",
-       	  pcPathname);
-        return 0;
-      }
-
-      setParameter(phsleA,&pcField[5],value,SETPARA_NUM);
-
-      return 1;
-
-
-    }
-    else if( strncmp(pcField,"Z_B->table",10) == 0 ){
-
-
-	struct PidinStack *ppistB = PidinStackDuplicate(ppistWorking);
-
-
-	//- we must look up the concentration gate
-	struct symtab_HSolveListElement *phsleConc
-	    = PidinStackPushStringAndLookup(ppistB, "HH_concentration");
-  
-	if(!phsleConc){
-	  struct symtab_HSolveListElement *phsleWorking
-	      = PidinStackLookupTopSymbol(ppistWorking);
-
-	    struct symtab_HSolveListElement *phsleGate
-		= CreateConcGate(phsleWorking, "HH_concentration");
 	}
+	else if (strcmp(pcField, "Ypower") == 0){
 
 
-	struct symtab_HSolveListElement *phsleB = 
-	  PidinStackPushStringAndLookup(ppistB,"B");
-    
-	PidinStackFree(ppistB);
 
-	if(!phsleB){
-	    Error();
-	  fprintf(stdout,
-		  "Could not find backward gate kinetic for %s\n",
-		  pcPathname);
-	  return 0;
+	    struct symtab_HSolveListElement *phsleGate = 
+		lookupGate(pcPathname,"Ypower"); 
+
+
+	    if(phsleGate) 
+	    { 
+
+		double dPower = SymbolParameterResolveValue(phsleGate, ppistWorking, "POWER"); 
+
+		printf("Warning: Field \"Ypower\" for '%s' has already been set to %i, new value is %s.\n",  
+		       pcPathname,(int)dPower, value);
+	    } 
+
+	    //- if zero, no need to create a gate.
+	    double dNumber = strtod(value,NULL);
+
+	    if(dNumber == 0.0)
+		return 1;
+      
+
+	    if (!phsleGate)
+		phsleGate = 
+		    CreateHHGate(phsleWorking, "HH_inactivation");
+
+	    if(!phsleGate)
+		return 0;
+
+	    return setParameter(phsleGate,pcField,value,SETPARA_GENESIS2);
+
+
 	}
-
-	setParameter(phsleB,&pcField[5],value,SETPARA_NUM);
-
-
-	return 1;
+	else if(strcmp(pcField,"Zpower") == 0){ 
 
 
-    }
-    else if( strncmp(pcField,"X_B->table",10) == 0 ){
+	    struct symtab_HSolveListElement *phsleGate = 
+		lookupGate(pcPathname,"Zpower"); 
 
 
-	struct PidinStack *ppistB = PidinStackDuplicate(ppistWorking);
+	    if(phsleGate) 
+	    { 
+
+		double dPower = SymbolParameterResolveValue(phsleGate, ppistWorking, "POWER"); 
+
+		printf("Warning: Field \"Zpower\" for '%s' has already been set to %i, new value is %s.\n",  
+		       pcPathname,(int)dPower, value);
+	    } 
+
+
+	    //- if zero, no need to create a gate.
+	    double dNumber = strtod(value,NULL);
+
+	    if(dNumber == 0.0)
+		return 1;
+      
+
+	    if (!phsleGate)
+		phsleGate = 
+		    CreateConcGate(phsleWorking, "HH_concentration");
+      
+      
+	    if(!phsleGate)
+		return 0;
+
+
+	    return setParameter(phsleGate,pcField,value,SETPARA_GENESIS2);
+
+
+	}
+	else if( strncmp(pcField,"Z_A->table",10) == 0 ){
+
+	    //-
+	    //- We're checking the field to see if it begins with 'Z'
+	    //- which indicates a concentration table.
+	    //-
+	    //- Then we check to see if we need to add the table to the
+	    //- A or B kinetic.
+	    //-
+
+
+	    //- fetch the forward gate
+	    struct PidinStack *ppistA = PidinStackDuplicate(ppistWorking);
+
+
+	    //- we must look up the concentration gate
+	    struct symtab_HSolveListElement *phsleConc
+		= PidinStackPushStringAndLookup(ppistA, "HH_concentration");
+  
+	    if(!phsleConc){
+		struct symtab_HSolveListElement *phsleWorking
+		    = PidinStackLookupTopSymbol(ppistWorking);
+
+		struct symtab_HSolveListElement *phsleGate
+		    = CreateConcGate(phsleWorking, "HH_concentration");
+	    }
+
+
+	    struct symtab_HSolveListElement *phsleA = 
+		PidinStackPushStringAndLookup(ppistA,"A");
+    
+	    PidinStackFree(ppistA);
+
+	    if(!phsleA){
+		Error();
+		fprintf(stdout,
+			"Could not find forward gate kinetic for %s\n",
+			pcPathname);
+		return 0;
+	    }
+
+	    setParameter(phsleA,&pcField[5],value,SETPARA_NUM);
+
+	    return 1;
+
+
+	}
+	else if( strncmp(pcField,"Z_B->table",10) == 0 ){
+
+
+	    struct PidinStack *ppistB = PidinStackDuplicate(ppistWorking);
+
+
+	    //- we must look up the concentration gate
+	    struct symtab_HSolveListElement *phsleConc
+		= PidinStackPushStringAndLookup(ppistB, "HH_concentration");
+  
+	    if(!phsleConc){
+		struct symtab_HSolveListElement *phsleWorking
+		    = PidinStackLookupTopSymbol(ppistWorking);
+
+		struct symtab_HSolveListElement *phsleGate
+		    = CreateConcGate(phsleWorking, "HH_concentration");
+	    }
+
+
+	    struct symtab_HSolveListElement *phsleB = 
+		PidinStackPushStringAndLookup(ppistB,"B");
+    
+	    PidinStackFree(ppistB);
+
+	    if(!phsleB){
+		Error();
+		fprintf(stdout,
+			"Could not find backward gate kinetic for %s\n",
+			pcPathname);
+		return 0;
+	    }
+
+	    setParameter(phsleB,&pcField[5],value,SETPARA_NUM);
+
+
+	    return 1;
+
+
+	}
+	else if( strncmp(pcField,"X_B->table",10) == 0 ){
+
+
+	    struct PidinStack *ppistB = PidinStackDuplicate(ppistWorking);
 
 	
-	//- we must look up the HH gate
-	struct symtab_HSolveListElement *phsleActivation
-	    = PidinStackPushStringAndLookup(ppistB, "HH_activation");
+	    //- we must look up the HH gate
+	    struct symtab_HSolveListElement *phsleActivation
+		= PidinStackPushStringAndLookup(ppistB, "HH_activation");
   
-	if(!phsleActivation){
-	  struct symtab_HSolveListElement *phsleWorking
-	      = PidinStackLookupTopSymbol(ppistWorking);
+	    if(!phsleActivation){
+		struct symtab_HSolveListElement *phsleWorking
+		    = PidinStackLookupTopSymbol(ppistWorking);
 
-	    struct symtab_HSolveListElement *phsleGate
-		= CreateHHGate(phsleWorking, "HH_activation");
-	}
+		struct symtab_HSolveListElement *phsleGate
+		    = CreateHHGate(phsleWorking, "HH_activation");
+	    }
 
 
-	struct symtab_HSolveListElement *phsleB = 
-	  PidinStackPushStringAndLookup(ppistB,"B");
+	    struct symtab_HSolveListElement *phsleB = 
+		PidinStackPushStringAndLookup(ppistB,"B");
     
-	PidinStackFree(ppistB);
+	    PidinStackFree(ppistB);
 
-	if(!phsleB){
-	    Error();
-	  fprintf(stdout,
-		  "Could not find backward gate kinetic for %s\n",
-		  pcPathname);
-	  return 0;
+	    if(!phsleB){
+		Error();
+		fprintf(stdout,
+			"Could not find backward gate kinetic for %s\n",
+			pcPathname);
+		return 0;
+	    }
+
+	    setParameter(phsleB,&pcField[5],value,SETPARA_NUM);
+
+
+	    return 1;
+
+
 	}
-
-	setParameter(phsleB,&pcField[5],value,SETPARA_NUM);
-
-
-	return 1;
+	else if( strncmp(pcField,"X_A->table",10) == 0 ){
 
 
-    }
-    else if( strncmp(pcField,"X_A->table",10) == 0 ){
+	    struct PidinStack *ppistA = PidinStackDuplicate(ppistWorking);
 
 
-	struct PidinStack *ppistA = PidinStackDuplicate(ppistWorking);
-
-
-	//- we must look up the HH gate
-	struct symtab_HSolveListElement *phsleActivation
-	    = PidinStackPushStringAndLookup(ppistA, "HH_activation");
+	    //- we must look up the HH gate
+	    struct symtab_HSolveListElement *phsleActivation
+		= PidinStackPushStringAndLookup(ppistA, "HH_activation");
   
-	if(!phsleActivation){
-	  struct symtab_HSolveListElement *phsleWorking
-	      = PidinStackLookupTopSymbol(ppistWorking);
+	    if(!phsleActivation){
+		struct symtab_HSolveListElement *phsleWorking
+		    = PidinStackLookupTopSymbol(ppistWorking);
 
-	    struct symtab_HSolveListElement *phsleGate
-		= CreateHHGate(phsleWorking, "HH_activation");
-	}
+		struct symtab_HSolveListElement *phsleGate
+		    = CreateHHGate(phsleWorking, "HH_activation");
+	    }
 
 
 
-	struct symtab_HSolveListElement *phsleA = 
-	  PidinStackPushStringAndLookup(ppistA,"A");
+	    struct symtab_HSolveListElement *phsleA = 
+		PidinStackPushStringAndLookup(ppistA,"A");
     
-	PidinStackFree(ppistA);
+	    PidinStackFree(ppistA);
 
-	if(!phsleA){
-	    Error();
-	  fprintf(stdout,
-		  "Could not find forward gate kinetic for %s\n",
-		  pcPathname);
-	  return 0;
+	    if(!phsleA){
+		Error();
+		fprintf(stdout,
+			"Could not find forward gate kinetic for %s\n",
+			pcPathname);
+		return 0;
+	    }
+
+	    setParameter(phsleA,&pcField[5],value,SETPARA_NUM);
+
+
+	    return 1;
+
 	}
 
-	setParameter(phsleA,&pcField[5],value,SETPARA_NUM);
-
-
-	return 1;
-
-    }
-
-    else if( strncmp(pcField,"Y_B->table",10) == 0 ){
+	else if( strncmp(pcField,"Y_B->table",10) == 0 ){
 
       
-	struct PidinStack *ppistB = PidinStackDuplicate(ppistWorking);
+	    struct PidinStack *ppistB = PidinStackDuplicate(ppistWorking);
 
-	//- we must look up the HH gate
-	struct symtab_HSolveListElement *phsleInactivation
-	    = PidinStackPushStringAndLookup(ppistB, "HH_inactivation");
+	    //- we must look up the HH gate
+	    struct symtab_HSolveListElement *phsleInactivation
+		= PidinStackPushStringAndLookup(ppistB, "HH_inactivation");
   
-	if(!phsleInactivation){
-	  struct symtab_HSolveListElement *phsleWorking
-	      = PidinStackLookupTopSymbol(ppistWorking);
+	    if(!phsleInactivation){
+		struct symtab_HSolveListElement *phsleWorking
+		    = PidinStackLookupTopSymbol(ppistWorking);
 
-	    struct symtab_HSolveListElement *phsleGate
-		= CreateHHGate(phsleWorking, "HH_inactivation");
-	}
+		struct symtab_HSolveListElement *phsleGate
+		    = CreateHHGate(phsleWorking, "HH_inactivation");
+	    }
 
 
-	struct symtab_HSolveListElement *phsleB = 
-	  PidinStackPushStringAndLookup(ppistB,"B");
+	    struct symtab_HSolveListElement *phsleB = 
+		PidinStackPushStringAndLookup(ppistB,"B");
     
-	PidinStackFree(ppistB);
+	    PidinStackFree(ppistB);
 
-	if(!phsleB){
-	    Error();
-	  fprintf(stdout,
-		  "Could not find backward gate kinetic for %s\n",
-		  pcPathname);
-	  return 0;
+	    if(!phsleB){
+		Error();
+		fprintf(stdout,
+			"Could not find backward gate kinetic for %s\n",
+			pcPathname);
+		return 0;
+	    }
+
+	    setParameter(phsleB,&pcField[5],value,SETPARA_NUM);
+
+
+	    return 1;
+
+
 	}
-
-	setParameter(phsleB,&pcField[5],value,SETPARA_NUM);
-
-
-	return 1;
-
-
-    }
-    else if( strncmp(pcField,"Y_A->table",10) == 0 ){
+	else if( strncmp(pcField,"Y_A->table",10) == 0 ){
 
       
-	struct PidinStack *ppistA = PidinStackDuplicate(ppistWorking);
+	    struct PidinStack *ppistA = PidinStackDuplicate(ppistWorking);
 
 
-	//- we must look up the HH gate
-	struct symtab_HSolveListElement *phsleInactivation
-	    = PidinStackPushStringAndLookup(ppistA, "HH_inactivation");
+	    //- we must look up the HH gate
+	    struct symtab_HSolveListElement *phsleInactivation
+		= PidinStackPushStringAndLookup(ppistA, "HH_inactivation");
   
-	if(!phsleInactivation){
-	  struct symtab_HSolveListElement *phsleWorking
-	      = PidinStackLookupTopSymbol(ppistWorking);
+	    if(!phsleInactivation){
+		struct symtab_HSolveListElement *phsleWorking
+		    = PidinStackLookupTopSymbol(ppistWorking);
 
-	    struct symtab_HSolveListElement *phsleGate
-		= CreateHHGate(phsleWorking, "HH_inactivation");
-	}
+		struct symtab_HSolveListElement *phsleGate
+		    = CreateHHGate(phsleWorking, "HH_inactivation");
+	    }
   
 
-	struct symtab_HSolveListElement *phsleA = 
-	  PidinStackPushStringAndLookup(ppistA,"A");
+	    struct symtab_HSolveListElement *phsleA = 
+		PidinStackPushStringAndLookup(ppistA,"A");
     
-	PidinStackFree(ppistA);
+	    PidinStackFree(ppistA);
 
-	if(!phsleA){
-	    Error();
-	  fprintf(stdout,
-		  "Could not find forward gate kinetic for %s\n",
-		  pcPathname);
-	  return 0;
+	    if(!phsleA){
+		Error();
+		fprintf(stdout,
+			"Could not find forward gate kinetic for %s\n",
+			pcPathname);
+		return 0;
+	    }
+
+	    setParameter(phsleA,&pcField[5],value,SETPARA_NUM);
+
+
+	    return 1;
+
 	}
 
-	setParameter(phsleA,&pcField[5],value,SETPARA_NUM);
 
 
-	return 1;
-
-    }
-
+	else if(!strcmp(pcField,"X_init"))
+	{
 
 
-    else if(!strcmp(pcField,"X_init"))
-    {
+	    //- Return is it's just zero, not sure if this is right
+	    double dNumber = strtod(value,NULL);
 
+	    if(dNumber == 0.0)
+		return 1;
 
-     //- Return is it's just zero, not sure if this is right
-      double dNumber = strtod(value,NULL);
+	    //
+	    // A bit dangerous since I'm not making sure that HH_activation
+	    // has been created first. Will safty check it later.
+	    //
+	    struct PidinStack *ppistCopy = PidinStackDuplicate(ppistWorking);
 
-      if(dNumber == 0.0)
-	return 1;
-
-      //
-      // A bit dangerous since I'm not making sure that HH_activation
-      // has been created first. Will safty check it later.
-      //
-      struct PidinStack *ppistCopy = PidinStackDuplicate(ppistWorking);
-
-      struct symtab_HSolveListElement *phsleGate = 
-	PidinStackPushStringAndLookup(ppistCopy,"HH_activation");
+	    struct symtab_HSolveListElement *phsleGate = 
+		PidinStackPushStringAndLookup(ppistCopy,"HH_activation");
    
-      PidinStackFree(ppistCopy);
+	    PidinStackFree(ppistCopy);
 
 
-      if(!phsleGate)
-	return 0;
+	    if(!phsleGate)
+		return 0;
 
-      return setParameter(phsleGate,"state_init",value,SETPARA_GENESIS2);
+	    return setParameter(phsleGate,"state_init",value,SETPARA_GENESIS2);
 
-    }
-    else if(!strcmp(pcField,"Y_init"))
-    {
+	}
+	else if(!strcmp(pcField,"Y_init"))
+	{
 
 
-     //- Return is it's just zero, not sure if this is right
-      double dNumber = strtod(value,NULL);
+	    //- Return is it's just zero, not sure if this is right
+	    double dNumber = strtod(value,NULL);
 
-      if(dNumber == 0.0)
-	return 1;
+	    if(dNumber == 0.0)
+		return 1;
 
-      //
-      // A bit dangerous since I'm not making sure that HH_activation
-      // has been created first. Will safty check it later.
-      //
-      struct PidinStack *ppistCopy = PidinStackDuplicate(ppistWorking);
+	    //
+	    // A bit dangerous since I'm not making sure that HH_activation
+	    // has been created first. Will safty check it later.
+	    //
+	    struct PidinStack *ppistCopy = PidinStackDuplicate(ppistWorking);
 
-      struct symtab_HSolveListElement *phsleGate = 
-	PidinStackPushStringAndLookup(ppistCopy,"HH_inactivation");
+	    struct symtab_HSolveListElement *phsleGate = 
+		PidinStackPushStringAndLookup(ppistCopy,"HH_inactivation");
    
-      PidinStackFree(ppistCopy);
+	    PidinStackFree(ppistCopy);
 
 
-      if(!phsleGate)
-	return 0;
+	    if(!phsleGate)
+		return 0;
 
-      return setParameter(phsleGate,"state_init",value,SETPARA_GENESIS2);
+	    return setParameter(phsleGate,"state_init",value,SETPARA_GENESIS2);
 
-    }
-    else if(!strcmp(pcField,"Z_init"))
-    {
+	}
+	else if(!strcmp(pcField,"Z_init"))
+	{
 
 
-     //- Return is it's just zero, not sure if this is right
-      double dNumber = strtod(value,NULL);
+	    //- Return is it's just zero, not sure if this is right
+	    double dNumber = strtod(value,NULL);
 
-      if(dNumber == 0.0)
-	return 1;
+	    if(dNumber == 0.0)
+		return 1;
 
-      //
-      // A bit dangerous since I'm not making sure that HH_activation
-      // has been created first. Will safty check it later.
-      //
-      struct PidinStack *ppistCopy = PidinStackDuplicate(ppistWorking);
+	    //
+	    // A bit dangerous since I'm not making sure that HH_activation
+	    // has been created first. Will safty check it later.
+	    //
+	    struct PidinStack *ppistCopy = PidinStackDuplicate(ppistWorking);
 
-      struct symtab_HSolveListElement *phsleGate = 
-	PidinStackPushStringAndLookup(ppistCopy,"HH_concentration");
+	    struct symtab_HSolveListElement *phsleGate = 
+		PidinStackPushStringAndLookup(ppistCopy,"HH_concentration");
    
-      PidinStackFree(ppistCopy);
+	    PidinStackFree(ppistCopy);
 
 
-      if(!phsleGate)
-	return 0;
+	    if(!phsleGate)
+		return 0;
 
-      return setParameter(phsleGate,"state_init",value,SETPARA_GENESIS2);
+	    return setParameter(phsleGate,"state_init",value,SETPARA_GENESIS2);
+
+	}
+
 
     }
 
-
-  }
-
-  return setParameter(phsleWorking,pcField,value,SETPARA_GENESIS2);
+    return setParameter(phsleWorking,pcField,value,SETPARA_GENESIS2);
 
 }
 
