@@ -409,7 +409,7 @@ int NSSetupAlpha( char *pcName, char *pcField, char **pcArgs,
   }
   else{
 
-
+      Error();
     printf("%s:%s\n","Invalid field in setupalpha",pcField);
 
     return 0;
