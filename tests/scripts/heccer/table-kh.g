@@ -14,8 +14,8 @@ setfield /hardcoded_neutral/c \
 
 
 
-create tabchannel /hardcoded_neutral/c/h1
-setfield /hardcoded_neutral/c/h1 \
+create tabchannel /hardcoded_neutral/c/h11
+setfield /hardcoded_neutral/c/h11 \
 	Ek -0.030 \
 	Gbar 8.369573479e-09 \
 	Ik 0.0 \
@@ -26,8 +26,8 @@ setfield /hardcoded_neutral/c/h1 \
 	X_init 0.0240463
 
 
-create tabchannel /hardcoded_neutral/c/h2
-setfield /hardcoded_neutral/c/h2 \
+create tabchannel /hardcoded_neutral/c/h22
+setfield /hardcoded_neutral/c/h22 \
 	Ek -0.030 \
 	Gbar 8.369573479e-09 \
 	Ik 0.0 \
@@ -45,17 +45,17 @@ float y
 float tab_xmin = -0.10; float tab_xmax = 0.05
 int tab_xdivs = 20; int tab_xfills = 50
 
-	    call /hardcoded_neutral/c/h1 TABCREATE X {tab_xdivs} {tab_xmin} {tab_xmax}
-	    call /hardcoded_neutral/c/h2 TABCREATE X {tab_xdivs} {tab_xmin} {tab_xmax}
+	    call /hardcoded_neutral/c/h11 TABCREATE X {tab_xdivs} {tab_xmin} {tab_xmax}
+	    call /hardcoded_neutral/c/h22 TABCREATE X {tab_xdivs} {tab_xmin} {tab_xmax}
 
 	    x = {tab_xmin}
 	    dx = ({tab_xmax} - {tab_xmin})/{tab_xdivs}
 
 	    for (i = 0; i <= ({tab_xdivs}); i = i + 1)
 		    //fast component
-		    setfield /hardcoded_neutral/c/h1 X_A->table[{i}] 0.0076
+		    setfield /hardcoded_neutral/c/h11 X_A->table[{i}] 0.0076
 		    //slow component
-		    setfield /hardcoded_neutral/c/h2 X_A->table[{i}] 0.0368
+		    setfield /hardcoded_neutral/c/h22 X_A->table[{i}] 0.0368
 
 		    y = 1.0/(1 + {exp {(x + 0.082)/0.007}})
 		    float y1 = {0.8*y}
@@ -64,23 +64,23 @@ int tab_xdivs = 20; int tab_xfills = 50
 //echo {i} {dx} {y1}
 //echo {i} {dx} {y2}
 
-		    setfield /hardcoded_neutral/c/h1 X_B->table[{i}] {0.8*y}
-		    setfield /hardcoded_neutral/c/h2 X_B->table[{i}] {0.2*y}
+		    setfield /hardcoded_neutral/c/h11 X_B->table[{i}] {0.8*y}
+		    setfield /hardcoded_neutral/c/h22 X_B->table[{i}] {0.2*y}
 		    x = x + dx
 	    end
 
-	    tweaktau /hardcoded_neutral/c/h1 X
-	    setfield /hardcoded_neutral/c/h1 X_A->calc_mode 0 X_B->calc_mode 0
-	    call /hardcoded_neutral/c/h1 TABFILL X {tab_xfills} 0
+	    tweaktau /hardcoded_neutral/c/h11 X
+	    setfield /hardcoded_neutral/c/h11 X_A->calc_mode 0 X_B->calc_mode 0
+	    call /hardcoded_neutral/c/h11 TABFILL X {tab_xfills} 0
 
-	    tweaktau /hardcoded_neutral/c/h2 X
-	    setfield /hardcoded_neutral/c/h2 X_A->calc_mode 0 X_B->calc_mode 0
-	    call /hardcoded_neutral/c/h2 TABFILL X {tab_xfills} 0
+	    tweaktau /hardcoded_neutral/c/h22 X
+	    setfield /hardcoded_neutral/c/h22 X_A->calc_mode 0 X_B->calc_mode 0
+	    call /hardcoded_neutral/c/h22 TABFILL X {tab_xfills} 0
 
-addmsg /hardcoded_neutral/c /hardcoded_neutral/c/h1 VOLTAGE Vm
-addmsg /hardcoded_neutral/c/h1 /hardcoded_neutral/c CHANNEL Gk Ek
-addmsg /hardcoded_neutral/c /hardcoded_neutral/c/h2 VOLTAGE Vm
-addmsg /hardcoded_neutral/c/h2 /hardcoded_neutral/c CHANNEL Gk Ek
+addmsg /hardcoded_neutral/c /hardcoded_neutral/c/h11 VOLTAGE Vm
+addmsg /hardcoded_neutral/c/h11 /hardcoded_neutral/c CHANNEL Gk Ek
+addmsg /hardcoded_neutral/c /hardcoded_neutral/c/h22 VOLTAGE Vm
+addmsg /hardcoded_neutral/c/h22 /hardcoded_neutral/c CHANNEL Gk Ek
 
 
 
