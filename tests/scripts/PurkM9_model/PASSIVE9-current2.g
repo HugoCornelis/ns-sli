@@ -1,17 +1,14 @@
 //genesis - Purkinje cell version M9 genesis2.1 master script
 /* Copyright E. De Schutter (Caltech and BBF-UIA) */
 
-/* This script simulates a Purkinje cell in vivo, receiving a climbing
-**  fiber input combined with asynchronous background inputs from
-**  parallel fibers (phertz sets mean frequency)and stellate cells
-**  (ihertz) */
+/* This script simulates a passive purkinje cell morphology */
 
 /* Reference:
 ** E. De Schutter and J.M. Bower: An active membrane model of the
-** cerebellar Purkinje cell: II. Simulation of synaptic responses.
-** Journal of Neurophysiology  71: 401-419 (1994).
-** http://www.bbf.uia.ac.be/TNB/TNB_pub7.html
-** We reconstruct parts of Fig. 11
+** cerebellar Purkinje cell. I. Simulation of current clamps in slice.
+** Journal of Neurophysiology  71: 375-400 (1994).
+** http://www.bbf.uia.ac.be/TNB/TNB_pub8.html
+** We reconstruct parts of Fig 3 and of Fig. 11.
 ** See http://www.bbf.uia.ac.be/models/PM9.shtml for general model info.
 */
 
@@ -123,14 +120,6 @@ setfield /output/plot_out filename {filename} leave_open 1
 
 // addmsg {cellpath}/soma /output/plot_out SAVE Vm
 addmsg {cellpath} /output/plot_out SAVE {findsolvefield {cellpath} {cellpath}/soma Vm}
-
-//t this is currently a hack: the ascfile gets a RESET after the
-//t nsintegrator, such that it does not have a backend yet.  The
-//t nsintegrator needs the asc file backend for SetupIOMessages().
-//t the temporary solution is a hardcoded RESET of the ascfile
-//t overhere.
-
-call /output/plot_out RESET
 
 setfield {cellpath} {findsolvefield {cellpath} {cellpath}/soma inject} 1e-6
 

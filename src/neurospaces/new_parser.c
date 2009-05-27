@@ -1525,12 +1525,12 @@ void do_read_cell(argc,argv)
 /* 	    } */
 /* 	}  */
 	if (IsSilent() < 2) {
-	    if (flags & SYMMETRIC) {
+/* 	    if (flags & SYMMETRIC) { */
 		printf("%s read: %d symcompartments",filename,ncompts);
-	    } else {
-		printf("%s read: %d compartments",filename,ncompts);
-	    }
-	    printf(", %d channels, %d shells, %d others\n",nchans,nshells,nothers);
+/* 	    } else { */
+		printf("%s read: %d compartments\n",filename,ncompts);
+/* 	    } */
+/* 	    printf(", %d channels, %d shells, %d others\n",nchans,nshells,nothers); */
 	    if ((flags & SPINES) && (SPINE_FREQ > 0.0)) {
 		fprintf(stderr,"  %d spines attached\n",NUM_SPINES);
 	    }

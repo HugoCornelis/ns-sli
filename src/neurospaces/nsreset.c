@@ -134,8 +134,25 @@ static int SetupIOMessages( struct ioMsg **ppioMsg, int iIoMsgs,
       struct ascfile_type *pasc = 
 	(struct ascfile_type*)GetElement(ppioMsg[i]->pcTargetSymbol);
 
-      if(!pasc)
-	continue;
+      // I guess that if this test evaluates to true, it is an
+      // internal error?
+
+/*       if(!pasc) */
+/* 	continue; */
+
+      //- if the asc object did not receive a RESET yet, it did not
+      //- create the output generator, which can be detected overhere.
+
+      if (!pasc->pog)
+      {
+	  if (AscReset(pasc) == -1)
+	  {
+	      fprintf
+		  (stdout,
+		   "Error: resetting asc_file %s\n",
+		   pasc->name);
+	  }
+      }
 
       struct PidinStack *ppist = 
 	PidinStackParse(ppioMsg[i]->pcSourceSymbol);
