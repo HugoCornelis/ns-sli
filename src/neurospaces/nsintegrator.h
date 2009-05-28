@@ -43,7 +43,7 @@
 
 //!
 //! Used in nsetfield.c
-//! These are flags for passing to setParameter that
+//! These are flags for passing to setParameter() that
 //! allow using different functions of the model container
 //! to be called. 
 //!
@@ -276,10 +276,14 @@ struct neurospaces_symbol * NeurospacesGetSymbol(char *pcname);
 //- -- Defined in nscomm.c --
 char * mapParameterString(char *pcfield);
 struct ParameterMapper * mapParameter(char *pcfield);
-int setParameter(struct symtab_HSolveListElement *phsle,
+int setParameter(struct PidinStack *ppist,
+		 struct symtab_HSolveListElement *phsle,
 		 char *pcField, char *pcValue,int iFlag);
+int setParameterNumber(struct PidinStack *ppist,
+		       struct symtab_HSolveListElement *phsle,
+		       char *pcField, double dNumber);
 /* struct symtab_HSolveListElement * lookupGateKinetic(char *pcName, char *pcField, char *pcAorB); */
-struct symtab_HSolveListElement * lookupGateSymbol(char *pcName, char *pcField);
+struct PidinStack * lookupGate(char *pcName, char *pcField);
 /* struct symtab_HSolveListElement * NSLookupHSolveListElement(char *pcPath); */
 struct PidinStack * getGateContext(char *pcName, char *pcField, char *pcAorB);
 struct symtab_InputOutput * CreateInputOutput(char *pcContext, int iType);

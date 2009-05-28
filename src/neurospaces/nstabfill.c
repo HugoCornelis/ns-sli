@@ -34,12 +34,12 @@ int NSTabFill(char *pcName, char *pcField, char *pcNumTabEntries)
 
   struct PidinStack * ppistB = getGateContext(pcName,pcField,"B");
 
-  struct symtab_HSolveListElement * phslegtkA = PidinStackLookupTopSymbol(ppistA);
+  struct symtab_HSolveListElement * phsleA = PidinStackLookupTopSymbol(ppistA);
 
-  struct symtab_HSolveListElement * phslegtkB = PidinStackLookupTopSymbol(ppistB);
+  struct symtab_HSolveListElement * phsleB = PidinStackLookupTopSymbol(ppistB);
 
 
-  if(!phslegtkA || !phslegtkB)
+  if(!phsleA || !phsleB)
   {
       Error();
     printf("TABFILL Error: Field %s is not known for %s\n",pcField,pcName);
@@ -53,11 +53,11 @@ int NSTabFill(char *pcName, char *pcField, char *pcNumTabEntries)
   //!! of a glitch in the model container which causes it to return the number of entries+1.
   //!!
   int iNumTabEntriesA = 
-    (int)SymbolParameterResolveValue(phslegtkA, ppistA,"HH_NUMBER_OF_TABLE_ENTRIES");
+    (int)SymbolParameterResolveValue(phsleA, ppistA,"HH_NUMBER_OF_TABLE_ENTRIES");
 
   
   int iNumTabEntriesB = 
-    (int)SymbolParameterResolveValue(phslegtkB, ppistB,"HH_NUMBER_OF_TABLE_ENTRIES");
+    (int)SymbolParameterResolveValue(phsleB, ppistB,"HH_NUMBER_OF_TABLE_ENTRIES");
 
 
   if( iNumTabEntriesA != iNumTabEntriesB )
@@ -119,9 +119,9 @@ int NSTabFill(char *pcName, char *pcField, char *pcNumTabEntries)
   {
     sprintf(&pcTable[0], "table[%i]", j);
 
-    pdSourcesA[j]  = SymbolParameterResolveValue(phslegtkA, ppistA, pcTable);
+    pdSourcesA[j]  = SymbolParameterResolveValue(phsleA, ppistA, pcTable);
 
-    pdSourcesB[j]  = SymbolParameterResolveValue(phslegtkB, ppistB, pcTable);
+    pdSourcesB[j]  = SymbolParameterResolveValue(phsleB, ppistB, pcTable);
 
   }
 
@@ -147,8 +147,8 @@ int NSTabFill(char *pcName, char *pcField, char *pcNumTabEntries)
 
       sprintf(&pcTable[0], "table[%i]", i);
 
-      setParameterNumber(phslegtkA, pcTable, pdDestinationsA[i]);
-      setParameterNumber(phslegtkB, pcTable, pdDestinationsB[i]);
+      setParameterNumber(ppistA, phsleA, pcTable, pdDestinationsA[i]);
+      setParameterNumber(ppistB, phsleB, pcTable, pdDestinationsB[i]);
 
 
   }
@@ -158,8 +158,8 @@ int NSTabFill(char *pcName, char *pcField, char *pcNumTabEntries)
   //! for each gate. If it's not updated then not all values will 
   //! be properly caculated.
   //!
-  setParameterNumber(phslegtkA, "HH_NUMBER_OF_TABLE_ENTRIES", (double)iDestinationSize);
-  setParameterNumber(phslegtkB, "HH_NUMBER_OF_TABLE_ENTRIES", (double)iDestinationSize);
+  setParameterNumber(ppistA, phsleA, "HH_NUMBER_OF_TABLE_ENTRIES", (double)iDestinationSize);
+  setParameterNumber(ppistB, phsleB, "HH_NUMBER_OF_TABLE_ENTRIES", (double)iDestinationSize);
 
 
 

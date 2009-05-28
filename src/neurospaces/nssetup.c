@@ -86,8 +86,6 @@ int NSSetupAlpha( char *pcName, char *pcField, char **pcArgs,
     struct symtab_HSolveListElement *phsleForward = 
 	  PidinStackPushStringAndLookup(ppistForward,"A");
     
-    PidinStackFree(ppistForward);
-
     if(!phsleForward){
       fprintf(stdout,"Could not find forward gate kinetic for %s\n",pcName);
       return 0;
@@ -103,13 +101,14 @@ int NSSetupAlpha( char *pcName, char *pcField, char **pcArgs,
     //-    HH_AB_Offset_E - is at index 3
     //-    HH_AB_Tau - is at index 4
     //-
-    setParameter(phsleForward,"HH_AB_Scale",pcArgs[0],SETPARA_NUM);
-    setParameter(phsleForward,"HH_AB_Mult",pcArgs[1],SETPARA_NUM);
-    setParameter(phsleForward,"HH_AB_Factor_Flag","-1.0",SETPARA_NUM);
-    setParameter(phsleForward,"HH_AB_Add",pcArgs[2],SETPARA_NUM);
-    setParameter(phsleForward,"HH_AB_Offset_E",pcArgs[3],SETPARA_NUM);
-    setParameter(phsleForward,"HH_AB_Tau",pcArgs[4],SETPARA_NUM);
+    setParameter(ppistForward, phsleForward,"HH_AB_Scale",pcArgs[0],SETPARA_NUM);
+    setParameter(ppistForward, phsleForward,"HH_AB_Mult",pcArgs[1],SETPARA_NUM);
+    setParameter(ppistForward, phsleForward,"HH_AB_Factor_Flag","-1.0",SETPARA_NUM);
+    setParameter(ppistForward, phsleForward,"HH_AB_Add",pcArgs[2],SETPARA_NUM);
+    setParameter(ppistForward, phsleForward,"HH_AB_Offset_E",pcArgs[3],SETPARA_NUM);
+    setParameter(ppistForward, phsleForward,"HH_AB_Tau",pcArgs[4],SETPARA_NUM);
 
+    PidinStackFree(ppistForward);
 
 
     //- Now fetch the backward gate.
@@ -119,10 +118,6 @@ int NSSetupAlpha( char *pcName, char *pcField, char **pcArgs,
 
     struct symtab_HSolveListElement *phsleBackward =
       PidinStackPushStringAndLookup(ppistBackward,"B");
-
-
-    PidinStackFree(ppistBackward);
-
 
     if(!phsleBackward){
       fprintf(stdout,"Could not find backward gate for %s\n",pcName);
@@ -138,12 +133,14 @@ int NSSetupAlpha( char *pcName, char *pcField, char **pcArgs,
     //-    HH_AB_Offset_E - is at index 8
     //-    HH_AB_Tau - is at index 9
     //-
-    setParameter(phsleBackward,"HH_AB_Scale",pcArgs[5],SETPARA_NUM);
-    setParameter(phsleBackward,"HH_AB_Mult",pcArgs[6],SETPARA_NUM);
-    setParameter(phsleBackward,"HH_AB_Factor_Flag","-1.0",SETPARA_NUM);
-    setParameter(phsleBackward,"HH_AB_Add",pcArgs[7],SETPARA_NUM);
-    setParameter(phsleBackward,"HH_AB_Offset_E",pcArgs[8],SETPARA_NUM);
-    setParameter(phsleBackward,"HH_AB_Tau",pcArgs[9],SETPARA_NUM);
+    setParameter(ppistBackward, phsleBackward,"HH_AB_Scale",pcArgs[5],SETPARA_NUM);
+    setParameter(ppistBackward, phsleBackward,"HH_AB_Mult",pcArgs[6],SETPARA_NUM);
+    setParameter(ppistBackward, phsleBackward,"HH_AB_Factor_Flag","-1.0",SETPARA_NUM);
+    setParameter(ppistBackward, phsleBackward,"HH_AB_Add",pcArgs[7],SETPARA_NUM);
+    setParameter(ppistBackward, phsleBackward,"HH_AB_Offset_E",pcArgs[8],SETPARA_NUM);
+    setParameter(ppistBackward, phsleBackward,"HH_AB_Tau",pcArgs[9],SETPARA_NUM);
+
+    PidinStackFree(ppistBackward);
 
 
      //-
@@ -197,8 +194,6 @@ int NSSetupAlpha( char *pcName, char *pcField, char **pcArgs,
     struct symtab_HSolveListElement *phsleForward = 
 	  PidinStackPushStringAndLookup(ppistForward,"A");
     
-    PidinStackFree(ppistForward);
-
     if(!phsleForward){
       fprintf(stdout,"Could not find forward gate kinetic for %s\n",pcName);
       return 0;
@@ -214,12 +209,14 @@ int NSSetupAlpha( char *pcName, char *pcField, char **pcArgs,
     //-    HH_AB_Offset_E - is at index 3
     //-    HH_AB_Tau - is at index 4
     //-
-    setParameter(phsleForward,"HH_AB_Scale",pcArgs[0],SETPARA_NUM);
-    setParameter(phsleForward,"HH_AB_Mult",pcArgs[1],SETPARA_NUM);
-    setParameter(phsleForward,"HH_AB_Factor_Flag","-1.0",SETPARA_NUM);
-    setParameter(phsleForward,"HH_AB_Add",pcArgs[2],SETPARA_NUM);
-    setParameter(phsleForward,"HH_AB_Offset_E",pcArgs[3],SETPARA_NUM);
-    setParameter(phsleForward,"HH_AB_Tau",pcArgs[4],SETPARA_NUM);
+    setParameter(ppistForward, phsleForward,"HH_AB_Scale",pcArgs[0],SETPARA_NUM);
+    setParameter(ppistForward, phsleForward,"HH_AB_Mult",pcArgs[1],SETPARA_NUM);
+    setParameter(ppistForward, phsleForward,"HH_AB_Factor_Flag","-1.0",SETPARA_NUM);
+    setParameter(ppistForward, phsleForward,"HH_AB_Add",pcArgs[2],SETPARA_NUM);
+    setParameter(ppistForward, phsleForward,"HH_AB_Offset_E",pcArgs[3],SETPARA_NUM);
+    setParameter(ppistForward, phsleForward,"HH_AB_Tau",pcArgs[4],SETPARA_NUM);
+
+    PidinStackFree(ppistForward);
 
 
 
@@ -231,8 +228,6 @@ int NSSetupAlpha( char *pcName, char *pcField, char **pcArgs,
     struct symtab_HSolveListElement *phsleBackward =
       PidinStackPushStringAndLookup(ppistBackward,"B");
 
-
-    PidinStackFree(ppistBackward);
 
 
     if(!phsleBackward){
@@ -249,12 +244,14 @@ int NSSetupAlpha( char *pcName, char *pcField, char **pcArgs,
     //-    HH_AB_Offset_E - is at index 8
     //-    HH_AB_Tau - is at index 9
     //-
-    setParameter(phsleBackward,"HH_AB_Scale",pcArgs[5],SETPARA_NUM);
-    setParameter(phsleBackward,"HH_AB_Mult",pcArgs[6],SETPARA_NUM);
-    setParameter(phsleBackward,"HH_AB_Factor_Flag","-1.0",SETPARA_NUM);
-    setParameter(phsleBackward,"HH_AB_Add",pcArgs[7],SETPARA_NUM);
-    setParameter(phsleBackward,"HH_AB_Offset_E",pcArgs[8],SETPARA_NUM);
-    setParameter(phsleBackward,"HH_AB_Tau",pcArgs[9],SETPARA_NUM);
+    setParameter(ppistBackward, phsleBackward,"HH_AB_Scale",pcArgs[5],SETPARA_NUM);
+    setParameter(ppistBackward, phsleBackward,"HH_AB_Mult",pcArgs[6],SETPARA_NUM);
+    setParameter(ppistBackward, phsleBackward,"HH_AB_Factor_Flag","-1.0",SETPARA_NUM);
+    setParameter(ppistBackward, phsleBackward,"HH_AB_Add",pcArgs[7],SETPARA_NUM);
+    setParameter(ppistBackward, phsleBackward,"HH_AB_Offset_E",pcArgs[8],SETPARA_NUM);
+    setParameter(ppistBackward, phsleBackward,"HH_AB_Tau",pcArgs[9],SETPARA_NUM);
+
+    PidinStackFree(ppistBackward);
 
 
     //-
@@ -312,8 +309,6 @@ int NSSetupAlpha( char *pcName, char *pcField, char **pcArgs,
     struct symtab_HSolveListElement *phsleForward = 
 	  PidinStackPushStringAndLookup(ppistForward,"A");
     
-    PidinStackFree(ppistForward);
-
     if(!phsleForward){
       fprintf(stdout,"Could not find forward gate kinetic for %s\n",pcName);
       return 0;
@@ -329,12 +324,14 @@ int NSSetupAlpha( char *pcName, char *pcField, char **pcArgs,
     //-    HH_AB_Offset_E - is at index 3
     //-    HH_AB_Tau - is at index 4
     //-
-    // setParameter(phsleForward,"HH_AB_Scale",pcArgs[0],SETPARA_NUM);
-    // setParameter(phsleForward,"HH_AB_Mult",pcArgs[1],SETPARA_NUM);
-    // setParameter(phsleForward,"HH_AB_Factor_Flag","-1.0",SETPARA_NUM);
-    // setParameter(phsleForward,"HH_AB_Add",pcArgs[2],SETPARA_NUM);
-    // setParameter(phsleForward,"HH_AB_Offset_E",pcArgs[3],SETPARA_NUM);
-    // setParameter(phsleForward,"HH_AB_Tau",pcArgs[4],SETPARA_NUM);
+    // setParameter(ppistForward, phsleForward,"HH_AB_Scale",pcArgs[0],SETPARA_NUM);
+    // setParameter(ppistForward, phsleForward,"HH_AB_Mult",pcArgs[1],SETPARA_NUM);
+    // setParameter(ppistForward, phsleForward,"HH_AB_Factor_Flag","-1.0",SETPARA_NUM);
+    // setParameter(ppistForward, phsleForward,"HH_AB_Add",pcArgs[2],SETPARA_NUM);
+    // setParameter(ppistForward, phsleForward,"HH_AB_Offset_E",pcArgs[3],SETPARA_NUM);
+    // setParameter(ppistForward, phsleForward,"HH_AB_Tau",pcArgs[4],SETPARA_NUM);
+
+    PidinStackFree(ppistForward);
 
 
 
@@ -346,8 +343,6 @@ int NSSetupAlpha( char *pcName, char *pcField, char **pcArgs,
     struct symtab_HSolveListElement *phsleBackward =
       PidinStackPushStringAndLookup(ppistBackward,"B");
 
-
-    PidinStackFree(ppistBackward);
 
 
     if(!phsleBackward){
@@ -364,12 +359,14 @@ int NSSetupAlpha( char *pcName, char *pcField, char **pcArgs,
     //-    HH_AB_Offset_E - is at index 8
     //-    HH_AB_Tau - is at index 9
     //-
-    // setParameter(phsleBackward,"HH_AB_Scale",pcArgs[5],SETPARA_NUM);
-    // setParameter(phsleBackward,"HH_AB_Mult",pcArgs[6],SETPARA_NUM);
-    // setParameter(phsleBackward,"HH_AB_Factor_Flag","-1.0",SETPARA_NUM);
-    // setParameter(phsleBackward,"HH_AB_Add",pcArgs[7],SETPARA_NUM);
-    // setParameter(phsleBackward,"HH_AB_Offset_E",pcArgs[8],SETPARA_NUM);
-    // setParameter(phsleBackward,"HH_AB_Tau",pcArgs[9],SETPARA_NUM);
+    // setParameter(ppistBackward, phsleBackward,"HH_AB_Scale",pcArgs[5],SETPARA_NUM);
+    // setParameter(ppistBackward, phsleBackward,"HH_AB_Mult",pcArgs[6],SETPARA_NUM);
+    // setParameter(ppistBackward, phsleBackward,"HH_AB_Factor_Flag","-1.0",SETPARA_NUM);
+    // setParameter(ppistBackward, phsleBackward,"HH_AB_Add",pcArgs[7],SETPARA_NUM);
+    // setParameter(ppistBackward, phsleBackward,"HH_AB_Offset_E",pcArgs[8],SETPARA_NUM);
+    // setParameter(ppistBackward, phsleBackward,"HH_AB_Tau",pcArgs[9],SETPARA_NUM);
+
+    PidinStackFree(ppistBackward);
 
 
 
@@ -416,7 +413,6 @@ int NSSetupAlpha( char *pcName, char *pcField, char **pcArgs,
 
   }
 
-  //  return setParameter(phsle,field,value,SETPARA_GENESIS2);
   return 1;
 }
 

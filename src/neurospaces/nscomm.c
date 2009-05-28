@@ -113,7 +113,7 @@ int setStateInit(struct PidinStack *ppist){
       if(!phsle)
 	return 0;
 
-      setParameter(phsle, "state_init",
+      setParameter(ppist, phsle, "state_init",
 		   GateStateTableInitializers[i].pcValue,
 		   SETPARA_NUM);
 
@@ -138,7 +138,8 @@ int setStateInit(struct PidinStack *ppist){
 
 //----------------------------------------------------------------------------
 /*!
- *  \fn int setParameter(struct symtab_HSolveListElement *phsle,
+ *  \fn int setParameter(struct PidinStack *ppist,
+ *		 struct symtab_HSolveListElement *phsle,
  *		 char *pcField, char *pcValue,int iFlag)
  *
  * The setParameter() function gets called for SLI parameters and for
@@ -146,7 +147,8 @@ int setStateInit(struct PidinStack *ppist){
  * way it is right now.
  */
 //----------------------------------------------------------------------------
-int setParameter(struct symtab_HSolveListElement *phsle,
+int setParameter(struct PidinStack *ppist,
+		 struct symtab_HSolveListElement *phsle,
 		 char *pcField, char *pcValue,int iFlag){
 
  
@@ -253,16 +255,18 @@ int setParameter(struct symtab_HSolveListElement *phsle,
 
 //-------------------------------------------------------------
 /*!
- *  \fn int setParameterNumber(struct symtab_HSolveListElement *phsle, 
-                               char *pcField, double dNumber)
+ *  \fn int setParameterNumber(struct PidinStack *ppist,
+ *			struct symtab_HSolveListElement *phsle, 
+ *                               char *pcField, double dNumber)
  *
  *   Function to to set a number without the overhead of 
  *   reconverting it back into a string for setParameter().
  *   
  */
 //-------------------------------------------------------------
-int setParameterNumber(struct symtab_HSolveListElement *phsle,
-		 char *pcField, double dNumber)
+int setParameterNumber(struct PidinStack *ppist,
+		       struct symtab_HSolveListElement *phsle,
+		       char *pcField, double dNumber)
 {
 
 
@@ -436,29 +440,6 @@ struct PidinStack * lookupGate(char *pcName, char *pcField)
   }
   
   return ppistResult;
-
-
-}
-
-
-
-
-//------------------------------------------------------------------
-/*!
- *
- */
-//------------------------------------------------------------------
-struct symtab_HSolveListElement * lookupGateSymbol(char *pcName, char *pcField)
-{
-
-  struct PidinStack *ppist  = lookupGate(pcName, pcField);
-
-  struct symtab_HSolveListElement *phsleResult
-      = PidinStackLookupTopSymbol(ppist);
-
-  PidinStackFree(ppist);
-  
-  return(phsleResult);
 
 
 }

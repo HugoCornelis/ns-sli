@@ -621,7 +621,7 @@ static int CinMsg(char *pcSrcpath, char *pcDstpath)
   char pcTarget[100];
 
 
-  setParameter(phsleSrc,"Cin",".->concen_init",SETPARA_FIELD);
+  setParameter(ppistSrc, phsleSrc,"Cin",".->concen_init",SETPARA_FIELD);
   
 
   PidinStackString(ppistTarget,pcTarget,sizeof(pcTarget));
@@ -631,7 +631,7 @@ static int CinMsg(char *pcSrcpath, char *pcDstpath)
   strcpy(&pcTarget[iLen],"->Cin");
 
 
-  int iResult = setParameter(phsleDst,"Cin",pcTarget,SETPARA_FIELD);
+  int iResult = setParameter(ppistDst, phsleDst,"Cin",pcTarget,SETPARA_FIELD);
 
   if(!iResult)
   {
@@ -709,7 +709,7 @@ static int EkMsg(char *pcSrcpath, char *pcDstpath)
   strcpy(&pcTarget[iLen],"->Erev");
 
 
-  int iResult = setParameter(phsleDst,"Erev",pcTarget,SETPARA_FIELD);
+  int iResult = setParameter(ppistDst, phsleDst,"Erev",pcTarget,SETPARA_FIELD);
 
   if(!iResult)
   {

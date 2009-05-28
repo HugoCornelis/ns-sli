@@ -39,9 +39,11 @@ int NSTweakTau(char *pcName, char *pcField){
   //! Here at the start we set the HH_Format parameter on the 
   //! gate to indicate the procedure has started. 
   //!
-  struct symtab_HSolveListElement *phsle = lookupGateSymbol(pcName,pcField);
+  struct PidinStack *ppist = lookupGate(pcName,pcField);
 
-  setParameter(phsle,"HH_Format","steadystate-tau",SETPARA_STRING);
+  struct symtab_HSolveListElement *phsle = PidinStackLookupTopSymbol(ppist);
+
+  setParameter(ppist, phsle,"HH_Format","steadystate-tau",SETPARA_STRING);
 
 
   int i;
@@ -66,11 +68,11 @@ int NSTweakTau(char *pcName, char *pcField){
   //!! of a glitch in the model container which causes it to return the number of entries+1.
   //!!
 
-  struct symtab_HSolveListElement *phslegtkA = PidinStackLookupTopSymbol(ppistA); // lookupGateKinetic(pcName,pcField,"A");
-  struct symtab_HSolveListElement *phslegtkB = PidinStackLookupTopSymbol(ppistB); // lookupGateKinetic(pcName,pcField,"B");
+  struct symtab_HSolveListElement *phsleA = PidinStackLookupTopSymbol(ppistA);
+  struct symtab_HSolveListElement *phsleB = PidinStackLookupTopSymbol(ppistB);
 
 
-  if(!phslegtkA || !phslegtkB)
+  if(!phsleA || !phsleB)
   {
       Error();
     printf("Element '%s' not found\n",pcName);
@@ -79,11 +81,11 @@ int NSTweakTau(char *pcName, char *pcField){
   }
 
   int iNumTabEntriesA = 
-    (int)SymbolParameterResolveValue(phslegtkA, ppistA,"HH_NUMBER_OF_TABLE_ENTRIES");
+    (int)SymbolParameterResolveValue(phsleA, ppistA,"HH_NUMBER_OF_TABLE_ENTRIES");
 
   
   int iNumTabEntriesB = 
-    (int)SymbolParameterResolveValue(phslegtkB, ppistB,"HH_NUMBER_OF_TABLE_ENTRIES");
+    (int)SymbolParameterResolveValue(phsleB, ppistB,"HH_NUMBER_OF_TABLE_ENTRIES");
 
 
   if( iNumTabEntriesA != iNumTabEntriesB )
@@ -104,9 +106,9 @@ int NSTweakTau(char *pcName, char *pcField){
   {
       sprintf(&pcTable[0], "table[%i]", i);
 
-      dAlpha  = SymbolParameterResolveValue(phslegtkA, ppistA, pcTable);
+      dAlpha  = SymbolParameterResolveValue(phsleA, ppistA, pcTable);
 
-      dBeta  = SymbolParameterResolveValue(phslegtkB, ppistB, pcTable);
+      dBeta  = SymbolParameterResolveValue(phsleB, ppistB, pcTable);
 
 
       if (fabs(dAlpha) < 1e-17)
@@ -124,8 +126,8 @@ int NSTweakTau(char *pcName, char *pcField){
       dTableAval = dBeta / dAlpha;
       dTableBval = 1.0 / dAlpha;
 
-      setParameterNumber(phslegtkA, pcTable, dTableAval);
-      setParameterNumber(phslegtkB, pcTable, dTableBval);
+      setParameterNumber(ppistA, phsleA, pcTable, dTableAval);
+      setParameterNumber(ppistB, phsleB, pcTable, dTableBval);
   }
 
 
