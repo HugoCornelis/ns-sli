@@ -197,5 +197,5 @@ char* do_version(argc,argv)
 	int argc;
 	char **argv;
 {
-	return(CopyString(VERSIONSTR));
+	return(CopyString(G3_VERSIONSTR));
 }
