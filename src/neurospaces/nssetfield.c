@@ -336,9 +336,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 		return 0;
 	    }
 
-	    setParameter(phsleA,&pcField[5],value,SETPARA_NUM);
-
-	    return 1;
+	    return setParameter(phsleA,&pcField[5],value,SETPARA_NUM);
 
 
 	}
@@ -374,10 +372,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 		return 0;
 	    }
 
-	    setParameter(phsleB,&pcField[5],value,SETPARA_NUM);
-
-
-	    return 1;
+	    return setParameter(phsleB,&pcField[5],value,SETPARA_NUM);
 
 
 	}
@@ -413,10 +408,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 		return 0;
 	    }
 
-	    setParameter(phsleB,&pcField[5],value,SETPARA_NUM);
-
-
-	    return 1;
+	    return setParameter(phsleB,&pcField[5],value,SETPARA_NUM);
 
 
 	}
@@ -453,10 +445,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 		return 0;
 	    }
 
-	    setParameter(phsleA,&pcField[5],value,SETPARA_NUM);
-
-
-	    return 1;
+	    return setParameter(phsleA,&pcField[5],value,SETPARA_NUM);
 
 	}
 
@@ -491,10 +480,9 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 		return 0;
 	    }
 
-	    setParameter(phsleB,&pcField[5],value,SETPARA_NUM);
 
 
-	    return 1;
+	    return setParameter(phsleB,&pcField[5],value,SETPARA_NUM);
 
 
 	}
@@ -530,10 +518,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 		return 0;
 	    }
 
-	    setParameter(phsleA,&pcField[5],value,SETPARA_NUM);
-
-
-	    return 1;
+	    return setParameter(phsleA,&pcField[5],value,SETPARA_NUM);
 
 	}
 
