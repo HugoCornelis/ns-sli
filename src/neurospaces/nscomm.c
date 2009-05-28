@@ -115,7 +115,7 @@ int setStateInit(struct PidinStack *ppist){
 
       setParameter(phsle, "state_init",
 		   GateStateTableInitializers[i].pcValue,
-		   SETPARA_GENESIS2);
+		   SETPARA_NUM);
 
       return 1;
 
@@ -140,7 +140,10 @@ int setStateInit(struct PidinStack *ppist){
 /*!
  *  \fn int setParameter(struct symtab_HSolveListElement *phsle,
  *		 char *pcField, char *pcValue,int iFlag)
- *  
+ *
+ * The setParameter() function gets called for SLI parameters and for
+ * model-container parameters.  That is a bit awkward, but that is the
+ * way it is right now.
  */
 //----------------------------------------------------------------------------
 int setParameter(struct symtab_HSolveListElement *phsle,
@@ -155,10 +158,16 @@ int setParameter(struct symtab_HSolveListElement *phsle,
     return 0;
 
 
-  char *pcParameter = mapParameterString(pcField);
+  struct ParameterMapper *ppm = mapParameter(pcField);
 
-  ParameterSetName(pparTop,pcParameter);
-
+  if (ppm)
+  {
+      ParameterSetName(pparTop, ppm->pcModelContainer);
+  }
+  else
+  {
+      ParameterSetName(pparTop, strdup(pcField));
+  }
 
   //-
   //- check for the GENESIS2 flag, if on then
