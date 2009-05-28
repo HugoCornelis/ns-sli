@@ -93,6 +93,19 @@ struct ParameterMapper
 };
 
 
+/* // \define this parameter is set at the SLI side using a scaled value (unscaling allowed). */
+
+/* #define SLI_PARAMETER_SCALED 1 */
+
+// \define this parameter is scaled to compartment surface
+
+#define SLI_PARAMETER_SCALED_TO_COMPARTMENT_SURFACE 2
+
+// \define this parameter is scaled to compartment length
+
+#define SLI_PARAMETER_SCALED_TO_COMPARTMENT_LENGTH 4
+
+
 /*!
  * \struct ioMsg
  *
