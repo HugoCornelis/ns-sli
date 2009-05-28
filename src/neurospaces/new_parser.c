@@ -1526,7 +1526,7 @@ void do_read_cell(argc,argv)
 /* 	}  */
 	if (IsSilent() < 2) {
 /* 	    if (flags & SYMMETRIC) { */
-		printf("%s read: %d symcompartments",filename,ncompts);
+/* 		printf("%s read: %d symcompartments",filename,ncompts); */
 /* 	    } else { */
 		printf("%s read: %d compartments\n",filename,ncompts);
 /* 	    } */
