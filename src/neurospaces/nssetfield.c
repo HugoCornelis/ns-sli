@@ -214,7 +214,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 	    if(!phsleGate)
 		return 0;
 
-	    return setParameter(phsleGate,pcField,value,SETPARA_GENESIS2);
+	    return setParameter(phsleGate,pcField,value,SETPARA_NUM);
 
 
 	}
@@ -249,7 +249,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 	    if(!phsleGate)
 		return 0;
 
-	    return setParameter(phsleGate,pcField,value,SETPARA_GENESIS2);
+	    return setParameter(phsleGate,pcField,value,SETPARA_NUM);
 
 
 	}
@@ -291,7 +291,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 	    //- Here we set the state_init parameter. 
 	    setStateInit(ppistWorking);
 
-	    return setParameter(phsleGate,pcField,value,SETPARA_GENESIS2);
+	    return setParameter(phsleGate,pcField,value,SETPARA_NUM);
 
 
 	}
@@ -564,7 +564,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 	    if(!phsleGate)
 		return 0;
 
-	    return setParameter(phsleGate,"state_init",value,SETPARA_GENESIS2);
+	    return setParameter(phsleGate,"state_init",value,SETPARA_NUM);
 
 	}
 	else if(!strcmp(pcField,"Y_init"))
@@ -592,7 +592,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 	    if(!phsleGate)
 		return 0;
 
-	    return setParameter(phsleGate,"state_init",value,SETPARA_GENESIS2);
+	    return setParameter(phsleGate,"state_init",value,SETPARA_NUM);
 
 	}
 	else if(!strcmp(pcField,"Z_init"))
@@ -620,7 +620,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 	    if(!phsleGate)
 		return 0;
 
-	    return setParameter(phsleGate,"state_init",value,SETPARA_GENESIS2);
+	    return setParameter(phsleGate,"state_init",value,SETPARA_NUM);
 
 	}
 
