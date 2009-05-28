@@ -39,7 +39,7 @@ int NSTweakTau(char *pcName, char *pcField){
   //! Here at the start we set the HH_Format parameter on the 
   //! gate to indicate the procedure has started. 
   //!
-  struct symtab_HSolveListElement *phsle = lookupGate(pcName,pcField);
+  struct symtab_HSolveListElement *phsle = lookupGateSymbol(pcName,pcField);
 
   setParameter(phsle,"HH_Format","steadystate-tau",SETPARA_STRING);
 

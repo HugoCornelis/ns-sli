@@ -182,7 +182,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 
 
 	    struct symtab_HSolveListElement *phsleGate = 
-		lookupGate(pcPathname,"Xpower"); 
+		lookupGateSymbol(pcPathname,"Xpower"); 
 
 
 	    if(phsleGate) 
@@ -223,7 +223,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 
 
 	    struct symtab_HSolveListElement *phsleGate = 
-		lookupGate(pcPathname,"Ypower"); 
+		lookupGateSymbol(pcPathname,"Ypower"); 
 
 
 	    if(phsleGate) 
@@ -257,7 +257,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 
 
 	    struct symtab_HSolveListElement *phsleGate = 
-		lookupGate(pcPathname,"Zpower"); 
+		lookupGateSymbol(pcPathname,"Zpower"); 
 
 
 	    if(phsleGate) 

@@ -392,47 +392,64 @@ struct ParameterMapper * mapParameter(char *pcField){
  *
  */
 //------------------------------------------------------------------
-struct symtab_HSolveListElement * lookupGate(char *pcName, char *pcField)
+struct PidinStack * lookupGate(char *pcName, char *pcField)
 {
 
 
-  struct symtab_HSolveListElement *phsle = NULL;
-
-
-  struct PidinStack *ppist  = getRootedContext(pcName); //PidinStackParse(pcName);
+  struct PidinStack *ppistResult  = getRootedContext(pcName); //PidinStackParse(pcName);
 
 
 
-  struct PidinStack *ppistCopy = PidinStackDuplicate(ppist);
-
-  
   // \todo the mapping Xpower -> HH_activation is coded here and in NeurospacesSetField().
-  if(!strcmp(pcField,"X") || !strcmp(pcField,"Xpower"))
+  if(strcmp(pcField,"X") == 0
+     || strcmp(pcField,"Xpower") == 0)
   {
 
-    phsle = PidinStackPushStringAndLookup(ppistCopy,"HH_activation");
+      PidinStackPushString(ppistResult,"HH_activation");
 
 
   }
-  else if(!strcmp(pcField,"Y") || !strcmp(pcField,"Ypower"))
+  else if(strcmp(pcField,"Y") == 0
+	  || strcmp(pcField,"Ypower") == 0)
   {
       // \todo the mapping Ypower -> HH_inactivation is coded here and in NeurospacesSetField().
-    phsle = PidinStackPushStringAndLookup(ppistCopy,"HH_inactivation");
+      PidinStackPushString(ppistResult,"HH_inactivation");
     
 
   }
-  else if(!strcmp(pcField,"Z") || !strcmp(pcField,"Zpower"))
+  else if(strcmp(pcField,"Z") == 0
+	  || strcmp(pcField,"Zpower") == 0)
   {
 
-    phsle = PidinStackPushStringAndLookup(ppistCopy,"HH_concentration");
+      PidinStackPushString(ppistResult,"HH_concentration");
     
 
   }
-
-
-  PidinStackFree(ppistCopy);
   
-  return phsle;
+  return ppistResult;
+
+
+}
+
+
+
+
+//------------------------------------------------------------------
+/*!
+ *
+ */
+//------------------------------------------------------------------
+struct symtab_HSolveListElement * lookupGateSymbol(char *pcName, char *pcField)
+{
+
+  struct PidinStack *ppist  = lookupGate(pcName, pcField);
+
+  struct symtab_HSolveListElement *phsleResult
+      = PidinStackLookupTopSymbol(ppist);
+
+  PidinStackFree(ppist);
+  
+  return(phsleResult);
 
 
 }
@@ -445,50 +462,22 @@ struct symtab_HSolveListElement * lookupGate(char *pcName, char *pcField)
  *
  */
 //-----------------------------------------------------------------
- struct PidinStack * getGateContext(char *pcName, char *pcField, char *pcAorB)
+struct PidinStack * getGateContext(char *pcName, char *pcField, char *pcAorB)
 {
 
 
 
-    struct PidinStack *ppist  = getRootedContext(pcName); // PidinStackParse(pcName);
+    struct PidinStack *ppistResult  = lookupGate(pcName, pcField);
+
+    if(!strcmp(pcAorB,"A") || !strcmp(pcAorB,"B"))
+    {
+
+	PidinStackPushString(ppistResult, pcAorB);
+
+    }
 
 
-  if(!ppist)
-    return NULL;
-  
-  
-  if(!strcmp(pcField,"X") || !strcmp(pcField,"Xpower"))
-  {
-
-    PidinStackPushString(ppist,"HH_activation");
-
-
-  }
-  else if(!strcmp(pcField,"Y") || !strcmp(pcField,"Ypower"))
-  {
-
-    PidinStackPushString(ppist,"HH_inactivation");
-    
-
-  }
-  else if(!strcmp(pcField,"Z") || !strcmp(pcField,"Zpower"))
-  {
-
-    PidinStackPushString(ppist,"HH_concentration");
-    
-
-  }
-
-
-  if(!strcmp(pcAorB,"A") || !strcmp(pcAorB,"B"))
-  {
-
-    PidinStackPushString(ppist,pcAorB);
-
-  }
-
-
-  return ppist;
+    return ppistResult;
 
 
 }
