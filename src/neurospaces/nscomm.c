@@ -297,257 +297,92 @@ int setParameterNumber(struct symtab_HSolveListElement *phsle,
 
 //----------------------------------------------------------------------------
 /*!
- *   \fn static char * mapParameter(char *pcfield)
- *   \param pcfield A pchar containing a field label from the GENESIS SLI.
+ *   \fn static char * mapParameter(char *pcField)
+ *   \param pcField A pchar containing a field label from the GENESIS SLI.
  *   
  *   Maps a GENESIS field to the appropriate Neurospaces field parameter
  *   value.
  */
 //----------------------------------------------------------------------------
-char * mapParameter(char *pcfield){
+char * mapParameter(char *pcField){
 
-  char *pcresult;
+    // \struct SLI name to model-container mapper
 
-  //t
-  //t not sure about needing to do a string dup. 
-  //t
-  if(!strcmp(pcfield,"Cm")){
-
-    //!
-    //! maps to a compartment
-    //!
-    pcresult = "CM";
-
-  } else if(!strcmp(pcfield,"Rm")){
-
-    //!
-    //! maps to compartment
-    //!
-    pcresult = "RM";
-
-  } else if(!strcmp(pcfield,"Ra")){
-
-    //!
-    //! maps to compartment
-    //!
-    pcresult = "RA";
-
-  } else if(!strcmp(pcfield,"initVm")){
-
-    //!
-    //! maps to compartment
-    //!
-    pcresult = "Vm_init";
-  
-  } else if(!strcmp(pcfield,"Eleak")){
-
-    //!
-    //! maps to compartment
-    //!
-    pcresult = "ELEAK";
-
-  } else if(!strcmp(pcfield,"dia")){
-
-    //!
-    //! maps to compartment
-    //!
-    pcresult = "DIA";
-
-  } else if(!strcmp(pcfield,"len")){
-
-    //!
-    //! maps to compartment
-    //!
-    pcresult = "LEN";
-
-  } else if(!strcmp(pcfield,"inject")){
-
-    //!
-    //! maps to compartment
-    //!
-    pcresult = "INJECT";
-
-  } else if(!strcmp(pcfield,"Em")){ 
-    
-    //!
-    //! maps to compartment
-    //!
-    pcresult = "ELEAK";
-
-  } else if(!strcmp(pcfield,"Ek")){
-
-    //!
-    //! maps to a channel
-    //!
-    pcresult = "Erev";
-
-  } else if(!strcmp(pcfield,"Gbar") || 
-	    !strcmp(pcfield,"gmax")){
-
-    //!
-    //! maps to a channel
-    //!
-    pcresult = "G_MAX";
-
-  } else if(!strcmp(pcfield,"Xpower") ||
-	    !strcmp(pcfield,"Ypower") ||
-	    !strcmp(pcfield,"Zpower") )
+    struct ParameterMapper
     {
+	/// name of the parameter in the G2 SLI
 
-    //!
-    //! maps to the power parameter in gates.
-    //!
-    pcresult = "POWER";
+	char *pcSLI;
 
-    } 
-  else if(!strcmp(pcfield,"tau"))
-  {
-    
-    pcresult = "TAU";
+	/// name of the parameter in the NS model-container
 
-  }
-  else if(!strcmp(pcfield,"tau1"))
-  {
-    
-    pcresult = "TAU1";
+	char *pcModelContainer;
+    };
 
-  }
-  else if(!strcmp(pcfield,"tau2"))
-  {
-    
-    pcresult = "TAU2";
+    struct ParameterMapper ppm[] =
+    {
+	{	    "Cm",	"CM",	},
+	{	    "Rm",	"RM",	},
+	{	    "Ra",	"RA",	},
+	{	    "initVm",	"Vm_init",	},
+	{	    "Eleak",	"ELEAK",	},
+	{	    "dia",	"DIA",	},
+	{	    "len",	"LEN",	},
+	{	    "inject",	"INJECT",	},
+	{	    "Em",	"ELEAK",	},
+	{	    "Ek",	"Erev",	},
+	{	    "Gbar",	"G_MAX",	},
+	{	    "gmax",	"G_MAX",	},
+	{	    "Xpower",	"POWER",	},
+	{	    "Ypower",	"POWER",	},
+	{	    "Zpower",	"POWER",	},
+	{	    "tau",	"TAU",	},
+	{	    "tau1",	"TAU1",	},
+	{	    "tau2",	"TAU2",	},
+	{	    "thick",	"THICK",	},
+	{	    "Ca_base",	"BASE",	},
+	{	    "B",	"BETA",	},
+	{	    NULL,	NULL,	},
+    };
 
-  }
-  else if(!strcmp(pcfield,"thick"))
-  {
+    char *pcResult;
 
-    pcresult = "THICK";
+    //- loop over all known parameters
 
-  }
-  else if(!strcmp(pcfield,"Ca_base"))
-  {
+    int i;
 
-    pcresult = "BASE";
+    for (i = 0 ; ppm[i].pcSLI ; i++)
+    {
+	//- if field name matches
 
-  }
-  else if(!strcmp(pcfield,"B"))
-  {
+	if (0 == strcmp(pcField, ppm[i].pcSLI))
+	{
+	    //- set result: model-container parameter name
 
-    pcresult = "BETA";
+	    pcResult = ppm[i].pcModelContainer;
 
-  }
-  else{
+	    break;
+	}
+    }
 
-    //fprintf(stdout,"Unrecognized Compartment field: %s\n",pcresult);
-    pcresult = strdup(pcfield);
+    //- if not found
 
-  }
+    if (!ppm[i].pcSLI)
+    {
+	//- set result: duplicate the original field name
 
+	// I guess this is a memory leak?  Required because the SLI
+	// does a free of pcField?
 
-  return pcresult;
+	// Currently, removing the strdup() gives three test errors.
+
+	pcResult = strdup(pcField);
+    }
+
+    //- return result
+
+    return pcResult;
 }
-
-
-/* //------------------------------------------------------------------------- */
-/* /*! */
-/*  * \fn struct symtab_HSolveListElement * NSLookupHSolveListElement(char *pcPath) */
-/*  * \param pcPath A symbol identifier to look up. */
-/*  * \return A pointer to the Element that pcPath points to. */
-/*  * */
-/* //------------------------------------------------------------------------- */
-/* struct symtab_HSolveListElement * NSLookupHSolveListElement(char *pcPath){ */
-
-
-/*     struct PidinStack *ppist  = getRootedContext(pcPath); */
-
-
-/*     if(!ppist) */
-/*       return NULL; */
-
-/*     struct symtab_HSolveListElement *phsle =  */
-/*       PidinStackLookupTopSymbol(ppist); */
-
-/*     if(!phsle) */
-/*       return NULL; */
-
-/*     return phsle; */
-
-/* } */
-
-
-
-/* //----------------------------------------------------------------- */
-/* /*! */
-/*  * */
-/*  * */
-/* //----------------------------------------------------------------- */
-/* struct symtab_HSolveListElement * lookupGateKinetic(char *pcName, char *pcField, char *pcAorB) */
-/* { */
-
-/*   struct symtab_HSolveListElement *phsle = NULL; */
-
-
-/*   struct PidinStack *ppist  = getRootedContext(pcName); // PidinStackParse(pcName); */
-
-
-
-/*   struct PidinStack *ppistCopy = PidinStackDuplicate(ppist); */
-
-  
-  
-/*   if(!strcmp(pcField,"X") || !strcmp(pcField,"Xpower")) */
-/*   { */
-
-/*     PidinStackPushString(ppistCopy,"HH_activation"); */
-
-
-/*   } */
-/*   else if(!strcmp(pcField,"Y") || !strcmp(pcField,"Ypower")) */
-/*   { */
-
-/*     PidinStackPushString(ppistCopy,"HH_inactivation"); */
-    
-
-/*   } */
-/*   else if(!strcmp(pcField,"Z") || !strcmp(pcField,"Zpower")) */
-/*   { */
-
-/*     PidinStackPushString(ppistCopy,"HH_concentration"); */
-    
-
-/*   } */
-/*   else */
-/*   { */
-
-/*     PidinStackFree(ppist); */
-/*     PidinStackFree(ppistCopy); */
-/*     return NULL; */
-
-/*   } */
-
-
-/*   if(!strcmp(pcAorB,"A") || !strcmp(pcAorB,"B")) */
-/*   { */
-
-/*     phsle = PidinStackPushStringAndLookup(ppistCopy,pcAorB); */
-
-/*   } */
-/*   else */
-/*   { */
-
-/*     phsle = PidinStackLookupTopSymbol(ppistCopy); */
-
-/*   } */
-
-
-
-/*   PidinStackFree(ppistCopy); */
-  
-/*   return phsle; */
-
-
-/* } */
-
 
 
 //------------------------------------------------------------------

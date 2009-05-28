@@ -30,7 +30,6 @@
 
 
 //-- prototypes for setting up a basic channel object --
-/* static struct symtab_HSolveListElement * GenChannelCalloc(); */
 static struct symtab_GateKinetic *CreateGateKinetic(char *pcDirection);
 struct symtab_HSolveListElement * CreateHHGate(
 		 struct symtab_HSolveListElement *phsleChannel, 
@@ -187,37 +186,6 @@ int NSCreate( char* name,  char* pcParent, char* pcType){
 
 }
 
-
-
-
-
-
-
-/* //-------------------------------------------------------------------- */
-/* /*! */
-/*  *  \fn static struct symtab_HSolveListElement * GenChannelCalloc() */
-/*  *  \return A pointer to a newly allocated Tab channel object. */
-/*  * */
-/*  *   */
-/*  * */
-/* //-------------------------------------------------------------------- */
-/* static struct symtab_HSolveListElement * GenChannelCalloc(){ */
-
-
-/*   struct symtab_HSolveListElement *phsleChannel =  */
-/*     ChannelCalloc(); */
-
-
-/*   //setParameter(phsleChannel,"CHANNEL_TYPE","ChannelAct",0); */
-  
-
-/*   struct symtab_IdentifierIndex *pidinChannel; */
-
-
-/*   return phsleChannel; */
-
-
-/* } */
 
 
 
