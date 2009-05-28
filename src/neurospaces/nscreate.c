@@ -17,6 +17,7 @@
 #include "neurospaces/components/channel.h"
 #include "neurospaces/components/pool.h"
 #include "neurospaces/components/segment.h"
+#include "neurospaces/function.h"
 #include "neurospaces/symbols.h"  
 #include "neurospaces/symboltable.h"  
 #include "neurospaces/pidinstack.h"
@@ -548,7 +549,7 @@ static struct symtab_HSolveListElement * NernstCalloc()
 
 
   //i allocate function and function parameters.
-  struct symtab_Function *pfun = (struct symtab_Function*)FunctionCalloc();
+  struct symtab_Function *pfun = FunctionCalloc();
   
   FunctionSetName(pfun,"NERNST");
 
