@@ -155,9 +155,7 @@ int setParameter(struct symtab_HSolveListElement *phsle,
     return 0;
 
 
-  char *pcParameter = NULL;
-  pcParameter = mapParameter(pcField);
-  
+  char *pcParameter = mapParameterString(pcField);
 
   ParameterSetName(pparTop,pcParameter);
 
@@ -267,8 +265,7 @@ int setParameterNumber(struct symtab_HSolveListElement *phsle,
     return 0;
 
 
-  char *pcParameter = NULL;
-  pcParameter = mapParameter(pcField);
+  char *pcParameter = mapParameterString(pcField);
   
 
   ParameterSetName(pparTop,pcParameter);
@@ -297,27 +294,44 @@ int setParameterNumber(struct symtab_HSolveListElement *phsle,
 
 //----------------------------------------------------------------------------
 /*!
- *   \fn static char * mapParameter(char *pcField)
- *   \param pcField A pchar containing a field label from the GENESIS SLI.
+ *   \fn struct ParameterMapper * mapParameter(char *pcField)
+ *   \param pcField A field label from the GENESIS SLI.
  *   
- *   Maps a GENESIS field to the appropriate Neurospaces field parameter
- *   value.
+ *   Map a GENESIS field name to the appropriate model-container
+ *   parameter name.
  */
 //----------------------------------------------------------------------------
-char * mapParameter(char *pcField){
+char * mapParameterString(char *pcField){
 
-    // \struct SLI name to model-container mapper
+    //- obtain info about the field name
 
-    struct ParameterMapper
+    struct ParameterMapper *ppm = mapParameter(pcField);
+
+    if (ppm)
     {
-	/// name of the parameter in the G2 SLI
+	return(ppm->pcModelContainer);
+    }
+    else
+    {
+	// I guess this is a memory leak?  Required because the SLI
+	// does a free of pcField?
 
-	char *pcSLI;
+	// Currently, removing the strdup() gives three test errors.
 
-	/// name of the parameter in the NS model-container
+	return(strdup(pcField));
+    }
+}
 
-	char *pcModelContainer;
-    };
+
+//----------------------------------------------------------------------------
+/*!
+ *   \fn struct ParameterMapper * mapParameter(char *pcField)
+ *   \param pcField A field label from the GENESIS SLI.
+ *   
+ *   Obtain information about a GENESIS field name.
+ */
+//----------------------------------------------------------------------------
+struct ParameterMapper * mapParameter(char *pcField){
 
     struct ParameterMapper ppm[] =
     {
@@ -345,7 +359,9 @@ char * mapParameter(char *pcField){
 	{	    NULL,	NULL,	},
     };
 
-    char *pcResult;
+    //- set default result: failure
+
+    struct ParameterMapper *ppmResult = NULL;
 
     //- loop over all known parameters
 
@@ -359,29 +375,15 @@ char * mapParameter(char *pcField){
 	{
 	    //- set result: model-container parameter name
 
-	    pcResult = ppm[i].pcModelContainer;
+	    ppmResult = &ppm[i];
 
 	    break;
 	}
     }
 
-    //- if not found
-
-    if (!ppm[i].pcSLI)
-    {
-	//- set result: duplicate the original field name
-
-	// I guess this is a memory leak?  Required because the SLI
-	// does a free of pcField?
-
-	// Currently, removing the strdup() gives three test errors.
-
-	pcResult = strdup(pcField);
-    }
-
     //- return result
 
-    return pcResult;
+    return ppmResult;
 }
 
 

@@ -65,6 +65,35 @@
 
 
 /*!
+ * \struct SLI name to model-container mapper
+ *
+ * Associates a field name in the SLI with a parameter name in the model-container.
+ *
+ */
+
+struct ParameterMapper
+{
+    /*!
+     * name of the parameter in the G2 SLI
+     */
+
+    char *pcSLI;
+
+    /*!
+     * name of the parameter in the NS model-container
+     */
+
+    char *pcModelContainer;
+
+    /*!
+     * flags
+     */
+
+    int iFlags;
+};
+
+
+/*!
  * \struct ioMsg
  *
  * A struct for storing parameters for a message to be processed after
@@ -232,7 +261,8 @@ struct neurospaces_symbol * NeurospacesGetSymbol(char *pcname);
 
 
 //- -- Defined in nscomm.c --
-char * mapParameter(char *pcfield);
+char * mapParameterString(char *pcfield);
+struct ParameterMapper * mapParameter(char *pcfield);
 int setParameter(struct symtab_HSolveListElement *phsle,
 		 char *pcField, char *pcValue,int iFlag);
 /* struct symtab_HSolveListElement * lookupGateKinetic(char *pcName, char *pcField, char *pcAorB); */

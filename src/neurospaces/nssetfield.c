@@ -83,7 +83,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 
 	    //- address the variable
 
-	    char *pcParameter = mapParameter(pcField);
+	    char *pcParameter = mapParameterString(pcField);
 
 	    int iSerial = PidinStackToSerial(ppistWorking);
 
