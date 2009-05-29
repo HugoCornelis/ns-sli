@@ -25,28 +25,28 @@ my $test
 						  {
 						   description => "Is parameter CM set correctly?",
 						   read => 'value = 4.57537e-11',
-						   write => 'printparameter /c CM',
+						   write => 'printparameterscaled /c CM',
 						  },
 
 
 						  {
 						   description => "Is parameter CM set correctly in the copy?",
 						   read => 'value = 4.57537e-11',
-						   write => 'printparameter /o CM',
+						   write => 'printparameterscaled /o CM',
 						  },
 
 
 						  {
 						   description => "Is parameter RM set correctly?",
 						   read => 'value = 3.58441e+08',
-						   write => 'printparameter /c RM',
+						   write => 'printparameterscaled /c RM',
 						  },
 
 
 						  {
 						   description => "Is parameter RM set correctly in the copy?",
 						   read => 'value = 3.58441e+08',
-						   write => 'printparameter /o RM',
+						   write => 'printparameterscaled /o RM',
 						  },
 
 

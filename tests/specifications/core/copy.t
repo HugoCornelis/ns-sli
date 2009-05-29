@@ -25,28 +25,28 @@ my $test
 						  {
 						   description => "Is parameter CM set correctly?",
 						   read => 'value = 4.57537e-11',
-						   write => 'printparameter /hardcoded_neutral/c CM',
+						   write => 'printparameterscaled /hardcoded_neutral/c CM',
 						  },
 
 
 						  {
 						   description => "Is parameter CM set correctly in the copy?",
 						   read => 'value = 4.57537e-11',
-						   write => 'printparameter /hardcoded_neutral/o CM',
+						   write => 'printparameterscaled /hardcoded_neutral/o CM',
 						  },
 
 
 						  {
 						   description => "Is parameter RM set correctly?",
 						   read => 'value = 3.58441e+08',
-						   write => 'printparameter /hardcoded_neutral/c RM',
+						   write => 'printparameterscaled /hardcoded_neutral/c RM',
 						  },
 
 
 						  {
 						   description => "Is parameter RM set correctly in the copy?",
 						   read => 'value = 3.58441e+08',
-						   write => 'printparameter /hardcoded_neutral/o RM',
+						   write => 'printparameterscaled /hardcoded_neutral/o RM',
 						  },
 
 
