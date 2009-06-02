@@ -52,6 +52,7 @@
 #define SETPARA_STRING 4
 #define SETPARA_FIELD 5
 
+#define SETPARA_HERE 6
 
 
 #define MAX_HECCERS 100

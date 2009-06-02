@@ -14,7 +14,7 @@
 
 #include "neurospaces/function.h"
 #include "neurospaces/pidinstack.h"
-
+#include "neurospaces/symbolvirtual_protos.h"
 #include "nsintegrator.h"
 
 
@@ -164,6 +164,8 @@ int setParameter(struct PidinStack *ppist,
 
   int iFlags = 0;
 
+  double dHere = FLT_MAX;
+
   if (ppm)
   {
       ParameterSetName(pparTop, ppm->pcModelContainer);
@@ -188,9 +190,43 @@ int setParameter(struct PidinStack *ppist,
   {
       if (iType == 0)
       {
-	  fprintf(stdout, "changing type to SETPARA_GENESIS2 for %s\n", pcField);
+	  //t lookup compartment
+	  //t lookup compartment surface
+	  //t convert actual to specific value
+	  //t set parameter as number
 
-	  iType = SETPARA_GENESIS2;
+	  //- lookup compartment
+
+	  struct PidinStack *ppistComp = SymbolFindParentSegment(phsle, ppist);
+
+	  if (ppistComp)
+	  {
+	      struct symtab_HSolveListElement *phsleComp
+		  = PidinStackLookupTopSymbol(ppistComp);
+
+	      double dSurface = SymbolParameterResolveValue(phsleComp, ppistComp, "SURFACE");
+
+	      if (dSurface != FLT_MAX)
+	      {
+		  dHere = atof(pcValue);
+
+		  dHere /= dSurface;
+
+		  iType = SETPARA_HERE;
+	      }
+	      else
+	      {
+		  fprintf(stdout, "changing type to SETPARA_GENESIS2 for %s -- no segment surface defined\n", pcField);
+
+		  iType = SETPARA_GENESIS2;
+	      }
+	  }
+	  else
+	  {
+	      fprintf(stdout, "changing type to SETPARA_GENESIS2 for %s -- no parent segment found\n", pcField);
+
+	      iType = SETPARA_GENESIS2;
+	  }
       }
   }
   else if (iFlags & SLI_PARAMETER_SCALED_TO_COMPARTMENT_LENGTH)
@@ -253,25 +289,33 @@ int setParameter(struct PidinStack *ppist,
     ParameterSetType(pparTop,TYPE_PARA_FUNCTION);
 
   } 
+  else if( iType == SETPARA_HERE )
+  {
+
+
+    pparTop->uValue.dNumber = dHere;
+    ParameterSetType(pparTop,TYPE_PARA_NUMBER);
+
+  }
   else if( iType == SETPARA_NUM )
   {
 
 
-    double dNumber = strtod(pcValue,NULL);
+    double dValue = strtod(pcValue,NULL);
 
-    pparTop->uValue.dNumber = dNumber;
+    pparTop->uValue.dNumber = dValue;
     ParameterSetType(pparTop,TYPE_PARA_NUMBER);
 
   }
   else if( iType == SETPARA_FIELD )
   {
 
-    struct PidinStack *ppist  = PidinStackParse(pcValue);
+    struct PidinStack *ppistValue  = PidinStackParse(pcValue);
 
-    struct symtab_IdentifierIndex *pidin = 
-      PidinStackToPidinQueue(ppist);
+    struct symtab_IdentifierIndex *pidinValue = 
+      PidinStackToPidinQueue(ppistValue);
 
-    pparTop->uValue.pidin = pidin;
+    pparTop->uValue.pidin = pidinValue;
     ParameterSetType(pparTop,TYPE_PARA_FIELD);
 
   }
