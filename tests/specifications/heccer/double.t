@@ -104,6 +104,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Can we add a message between compartments ?",
+						   disabled => 'This test uses the printinfo querymachine command and requires to much developer work to maintain, because of the inferences made between different parameters such as compartment surface and maximal conductance and the way the model-container implements those inferences.',
 						   read => $printinfo_output,
 						   write => 'printinfo /hardcoded_neutral',
 						  },
@@ -114,11 +115,12 @@ my $test
 
 						 ],
 				description => "script performs a reset on a compartment",
-
+				disabled => "This test does not perform a reset, not sure what it is supposed to do.",
 
 			       },
 			      ],
        description => "create a neutral object with a compartment as a child, check if ",
+       disabled => "Check if what??  This test seems to be overlapping with other tests, so disabled.",
        name => 'heccer/double.t',
       };
 
