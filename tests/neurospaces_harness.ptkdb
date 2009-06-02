@@ -1,15 +1,24 @@
 $files = {
-           '_<tests/run' => [
-                              {
-                                'expr' => undef,
-                                'value' => '1',
-                                'text' => '		my $differences
+           '_<tests/neurospaces_harness' => [
+                                              {
+                                                'expr' => undef,
+                                                'value' => '1',
+                                                'text' => '		    if (defined $read)
 ',
-                                'fname' => 'tests/run',
-                                'type' => 'user',
-                                'line' => '323'
-                              }
-                            ]
+                                                'fname' => 'tests/neurospaces_harness',
+                                                'type' => 'user',
+                                                'line' => '620'
+                                              },
+                                              {
+                                                'expr' => undef,
+                                                'value' => '1',
+                                                'text' => '	if ($preparation)
+',
+                                                'fname' => 'tests/neurospaces_harness',
+                                                'type' => 'user',
+                                                'line' => '361'
+                                              }
+                                            ]
          };
 $expr_list = [
                {
@@ -26,4 +35,4 @@ $expr_list = [
                }
              ];
 $eval_saved_text = undef;
-$main_win_geometry = '1272x941+297+45';
+$main_win_geometry = '1592x1114+0+0';

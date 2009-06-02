@@ -578,7 +578,7 @@ static int ConcenMsg(char *pcSrcpath, char *pcDstpath)
  *  \return 0 on error, 1 on success.
  *
  *  Creates a Cin message via two parameter setting. A reference to a local
- *  cocen_init parameter, which references a concen_init parameter that is 
+ *  concen_init parameter, which references a concen_init parameter that is 
  *  in a pool. 
  */
 //-------------------------------------------------------------------------
@@ -860,38 +860,46 @@ int NSProcessMessages(struct neurospaces_integrator *pnsintegrator)
       ppioMsg[i]->dValue
 	= SymbolParameterResolveValue(phsleSource, ppistSource, ppioMsg[i]->pcSourceField);
 
-      //- resolve target
-
-      struct PidinStack *ppistTarget
-	= PidinStackParse(ppioMsg[i]->pcTargetSymbol);
-
-      PidinStackUpdateCaches(ppistTarget);
-
-
-      int iTarget;
-
-      if(ppioMsg[i]->iSerial == INT_MAX)
+      if (ppioMsg[i]->dValue != FLT_MAX)
       {
-	iTarget = PidinStackToSerial(ppistTarget);
-	ppioMsg[i]->iSerial = iTarget;
-      }
-      else
-	iTarget = ppioMsg[i]->iSerial;
+	  //- resolve target
+
+	  struct PidinStack *ppistTarget
+	      = PidinStackParse(ppioMsg[i]->pcTargetSymbol);
+
+	  PidinStackUpdateCaches(ppistTarget);
+
+
+	  int iTarget;
+
+	  if (ppioMsg[i]->iSerial == INT_MAX)
+	  {
+	      iTarget = PidinStackToSerial(ppistTarget);
+	      ppioMsg[i]->iSerial = iTarget;
+	  }
+	  else
+	      iTarget = ppioMsg[i]->iSerial;
 
 
       
-      double *pdValue
-	= HeccerAddressVariable(ppheccer[0], iTarget, ppioMsg[i]->pcMsgName);
+	  double *pdValue
+	      = HeccerAddressVariable(ppheccer[0], iTarget, ppioMsg[i]->pcMsgName);
 
-      if(!strcmp(ppioMsg[i]->pcMsgName,"activation")){
-	//- add source to target
+	  if(!strcmp(ppioMsg[i]->pcMsgName,"activation")){
+	      //- add source to target
 
-	*pdValue += ppioMsg[i]->dValue * clock_value[0];
-      
+	      *pdValue += ppioMsg[i]->dValue * clock_value[0];
+	  }
+	  else
+	      return -1;
       }
       else
-	return -1;
-
+      {
+	  fprintf(stderr,
+		  "Error accessing numeric field %s.\n",
+		  ppioMsg[i]->pcSourceField);
+	  
+      }
     }
 
   }

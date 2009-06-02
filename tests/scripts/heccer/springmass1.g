@@ -60,6 +60,9 @@ resched
 
 reset
 
+// call /model_container NEUROSPACES_QUERY
+
+
 setfield /hardcoded_neutral/c2/s z 0
 
 step 11

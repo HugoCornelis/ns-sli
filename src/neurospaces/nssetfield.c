@@ -49,7 +49,7 @@
 //------------------------------------------------------------------
 int NeurospacesSetField(struct symtab_HSolveListElement *phsle, 
 			struct PidinStack *ppist,
-			char *pcPathname, char *pcField, char *value){
+			char *pcPathname, char *pcField, char *pcValue){
 
     struct PidinStack *ppistWorking = NULL;
     struct symtab_HSolveListElement *phsleWorking = NULL;
@@ -91,7 +91,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 
 	    if (pd)
 	    {
-		double d = atof(value);
+		double d = atof(pcValue);
 
 		*pd = d;
 	    }
@@ -153,7 +153,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
     if(instanceof_group(phsleWorking))
     {
   
-	setParameter(ppistWorking, phsleWorking,pcField,value,SETPARA_NUM);
+	setParameter(ppistWorking, phsleWorking,pcField,pcValue,SETPARA_NUM);
 	return 1;
     }
 
@@ -180,7 +180,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 	if (strcmp(pcField, "Xpower") == 0){
 
 	    //- if zero, no need to create a gate.
-	    double dNumber = strtod(value,NULL);
+	    double dNumber = strtod(pcValue,NULL);
 
 	    if(dNumber == 0.0)
 		return 1;
@@ -199,7 +199,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 		double dPower = SymbolParameterResolveValue(phsleGate, ppistGate, "POWER"); 
 
 		printf("Warning: Field \"Xpower\" for '%s' has already been set to %i, new value is %s.\n",  
-		       pcPathname,(int)dPower, value);
+		       pcPathname,(int)dPower, pcValue);
 	    }
 	    else
 	    {
@@ -216,7 +216,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 	    if(!phsleGate)
 		return 0;
 
-	    int iResult = setParameter(ppistGate, phsleGate,pcField,value,SETPARA_NUM);
+	    int iResult = setParameter(ppistGate, phsleGate,pcField,pcValue,SETPARA_NUM);
 
 	    PidinStackFree(ppistGate);
 
@@ -227,7 +227,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 
 
 	    //- if zero, no need to create a gate.
-	    double dNumber = strtod(value,NULL);
+	    double dNumber = strtod(pcValue,NULL);
 
 	    if(dNumber == 0.0)
 		return 1;
@@ -246,7 +246,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 		double dPower = SymbolParameterResolveValue(phsleGate, ppistGate, "POWER"); 
 
 		printf("Warning: Field \"Ypower\" for '%s' has already been set to %i, new value is %s.\n",  
-		       pcPathname,(int)dPower, value);
+		       pcPathname,(int)dPower, pcValue);
 	    }
 	    else
 	    {
@@ -257,7 +257,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 	    if(!phsleGate)
 		return 0;
 
-	    int iResult = setParameter(ppistGate, phsleGate,pcField,value,SETPARA_NUM);
+	    int iResult = setParameter(ppistGate, phsleGate,pcField,pcValue,SETPARA_NUM);
 
 	    PidinStackFree(ppistGate);
 
@@ -269,7 +269,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 
 
 	    //- if zero, no need to create a gate.
-	    double dNumber = strtod(value,NULL);
+	    double dNumber = strtod(pcValue,NULL);
 
 	    if(dNumber == 0.0)
 		return 1;
@@ -286,7 +286,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 		double dPower = SymbolParameterResolveValue(phsleGate, ppistGate, "POWER"); 
 
 		printf("Warning: Field \"Zpower\" for '%s' has already been set to %i, new value is %s.\n",  
-		       pcPathname,(int)dPower, value);
+		       pcPathname,(int)dPower, pcValue);
 	    } 
 	    else
 	    {
@@ -303,7 +303,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 	    //- Here we set the state_init parameter. 
 	    setStateInit(ppistWorking);
 
-	    int iResult = setParameter(ppistGate, phsleGate,pcField,value,SETPARA_NUM);
+	    int iResult = setParameter(ppistGate, phsleGate,pcField,pcValue,SETPARA_NUM);
 
 	    PidinStackFree(ppistGate);
 
@@ -353,7 +353,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 		return 0;
 	    }
 
-	    int iResult = setParameter(ppistA, phsleA,&pcField[5],value,SETPARA_NUM);
+	    int iResult = setParameter(ppistA, phsleA,&pcField[5],pcValue,SETPARA_NUM);
 
 	    PidinStackFree(ppistA);
 
@@ -390,7 +390,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 		return 0;
 	    }
 
-	    int iResult = setParameter(ppistB, phsleB,&pcField[5],value,SETPARA_NUM);
+	    int iResult = setParameter(ppistB, phsleB,&pcField[5],pcValue,SETPARA_NUM);
 
 	    PidinStackFree(ppistB);
 
@@ -426,7 +426,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 		return 0;
 	    }
 
-	    int iResult = setParameter(ppistB, phsleB,&pcField[5],value,SETPARA_NUM);
+	    int iResult = setParameter(ppistB, phsleB,&pcField[5],pcValue,SETPARA_NUM);
 
 	    PidinStackFree(ppistB);
 
@@ -463,7 +463,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 		return 0;
 	    }
 
-	    int iResult = setParameter(ppistA, phsleA,&pcField[5],value,SETPARA_NUM);
+	    int iResult = setParameter(ppistA, phsleA,&pcField[5],pcValue,SETPARA_NUM);
 
 	    PidinStackFree(ppistA);
 
@@ -499,7 +499,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 		return 0;
 	    }
 
-	    int iResult = setParameter(ppistB, phsleB,&pcField[5],value,SETPARA_NUM);
+	    int iResult = setParameter(ppistB, phsleB,&pcField[5],pcValue,SETPARA_NUM);
 
 	    PidinStackFree(ppistB);
 
@@ -535,7 +535,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 		return 0;
 	    }
 
-	    int iResult = setParameter(ppistA, phsleA,&pcField[5],value,SETPARA_NUM);
+	    int iResult = setParameter(ppistA, phsleA,&pcField[5],pcValue,SETPARA_NUM);
 
 	    PidinStackFree(ppistA);
 
@@ -549,7 +549,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 
 
 	    //- Return is it's just zero, not sure if this is right
-	    double dNumber = strtod(value,NULL);
+	    double dNumber = strtod(pcValue,NULL);
 
 	    if(dNumber == 0.0)
 		return 1;
@@ -566,7 +566,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 	    if(!phsleGate)
 		return 0;
 
-	    int iResult = setParameter(ppistGate, phsleGate,"state_init",value,SETPARA_NUM);
+	    int iResult = setParameter(ppistGate, phsleGate,"state_init",pcValue,SETPARA_NUM);
 
 	    PidinStackFree(ppistGate);
 
@@ -577,7 +577,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 
 
 	    //- Return is it's just zero, not sure if this is right
-	    double dNumber = strtod(value,NULL);
+	    double dNumber = strtod(pcValue,NULL);
 
 	    if(dNumber == 0.0)
 		return 1;
@@ -594,7 +594,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 	    if(!phsleGate)
 		return 0;
 
-	    int iResult = setParameter(ppistGate, phsleGate,"state_init",value,SETPARA_NUM);
+	    int iResult = setParameter(ppistGate, phsleGate,"state_init",pcValue,SETPARA_NUM);
 
 	    PidinStackFree(ppistGate);
 
@@ -605,7 +605,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 
 
 	    //- Return is it's just zero, not sure if this is right
-	    double dNumber = strtod(value,NULL);
+	    double dNumber = strtod(pcValue,NULL);
 
 	    if(dNumber == 0.0)
 		return 1;
@@ -623,7 +623,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 	    if(!phsleGate)
 		return 0;
 
-	    int iResult = setParameter(ppistGate, phsleGate,"state_init",value,SETPARA_NUM);
+	    int iResult = setParameter(ppistGate, phsleGate,"state_init",pcValue,SETPARA_NUM);
 
 	    PidinStackFree(ppistGate);
 
@@ -633,7 +633,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 
     }
 
-    return setParameter(ppistWorking, phsleWorking,pcField,value,SETPARA_GENESIS2);
+    return setParameter(ppistWorking, phsleWorking, pcField, pcValue, 0);
 
 }
 

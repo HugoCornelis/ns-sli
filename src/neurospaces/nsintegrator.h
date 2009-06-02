@@ -93,9 +93,9 @@ struct ParameterMapper
 };
 
 
-/* // \define this parameter is set at the SLI side using a scaled value (unscaling allowed). */
+// \define this parameter is set at the SLI side using a scaled value and unscaling is not allowed.
 
-/* #define SLI_PARAMETER_SCALED 1 */
+#define SLI_PARAMETER_SCALED 1
 
 // \define this parameter is scaled to compartment surface
 
@@ -104,6 +104,10 @@ struct ParameterMapper
 // \define this parameter is scaled to compartment length
 
 #define SLI_PARAMETER_SCALED_TO_COMPARTMENT_LENGTH 4
+
+// \define this parameter is always has a numeric value
+
+#define SLI_PARAMETER_NUMBER 8
 
 
 /*!

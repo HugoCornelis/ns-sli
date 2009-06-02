@@ -18,7 +18,7 @@ my $test
 						   
 						   description => 'Does the application report that it writes its output?',
 						   read => 'output written',
-						    timeout => 200,
+						    timeout => 20,
 						  },
 
 						  {
@@ -28,17 +28,17 @@ my $test
 							  
 							    application_output_file => '/tmp/a1',
 							    expected_output_file => '/usr/local/heccer/tests/specifications/strings/springmass1-output.txt' },
-						   timeout => 200,
+						   timeout => 20,
 						  
 						  },
 
 
 
 						 ],
-				description => "springmass channel integration.",
+				description => "synaptic channel integration.",
 			       },
 			      ],
-       description => "springmass equation test.",
+       description => "synaptic equation test.",
        name => 'heccer/springmass.t',
       };
 

@@ -140,7 +140,7 @@ int setStateInit(struct PidinStack *ppist){
 /*!
  *  \fn int setParameter(struct PidinStack *ppist,
  *		 struct symtab_HSolveListElement *phsle,
- *		 char *pcField, char *pcValue,int iFlag)
+ *		 char *pcField, char *pcValue,int iType)
  *
  * The setParameter() function gets called for SLI parameters and for
  * model-container parameters.  That is a bit awkward, but that is the
@@ -149,7 +149,7 @@ int setStateInit(struct PidinStack *ppist){
 //----------------------------------------------------------------------------
 int setParameter(struct PidinStack *ppist,
 		 struct symtab_HSolveListElement *phsle,
-		 char *pcField, char *pcValue,int iFlag){
+		 char *pcField, char *pcValue,int iType){
 
  
        
@@ -162,20 +162,61 @@ int setParameter(struct PidinStack *ppist,
 
   struct ParameterMapper *ppm = mapParameter(pcField);
 
+  int iFlags = 0;
+
   if (ppm)
   {
       ParameterSetName(pparTop, ppm->pcModelContainer);
+
+      iFlags = ppm->iFlags;
   }
   else
   {
       ParameterSetName(pparTop, strdup(pcField));
   }
 
+  if (iFlags & SLI_PARAMETER_SCALED)
+  {
+      if (iType == 0)
+      {
+	  fprintf(stdout, "changing type to SETPARA_GENESIS2 for %s\n", pcField);
+
+	  iType = SETPARA_GENESIS2;
+      }
+  }
+  else if (iFlags & SLI_PARAMETER_SCALED_TO_COMPARTMENT_SURFACE)
+  {
+      if (iType == 0)
+      {
+	  fprintf(stdout, "changing type to SETPARA_GENESIS2 for %s\n", pcField);
+
+	  iType = SETPARA_GENESIS2;
+      }
+  }
+  else if (iFlags & SLI_PARAMETER_SCALED_TO_COMPARTMENT_LENGTH)
+  {
+      if (iType == 0)
+      {
+	  fprintf(stdout, "changing type to SETPARA_GENESIS2 for %s\n", pcField);
+
+	  iType = SETPARA_GENESIS2;
+      }
+  }
+  else if (iFlags & SLI_PARAMETER_NUMBER)
+  {
+      if (iType == 0)
+      {
+	  fprintf(stdout, "changing type to SETPARA_NUM for %s\n", pcField);
+
+	  iType = SETPARA_NUM;
+      }
+  }
+
   //-
   //- check for the GENESIS2 flag, if on then
   //- we mut allocate and set a GEN2 function parameter.
   //-
-  if( iFlag == SETPARA_GENESIS2 )
+  if( iType == SETPARA_GENESIS2 )
   {
 	  
     struct symtab_Parameters *pparScale = 
@@ -212,7 +253,7 @@ int setParameter(struct PidinStack *ppist,
     ParameterSetType(pparTop,TYPE_PARA_FUNCTION);
 
   } 
-  else if( iFlag == SETPARA_NUM )
+  else if( iType == SETPARA_NUM )
   {
 
 
@@ -222,7 +263,7 @@ int setParameter(struct PidinStack *ppist,
     ParameterSetType(pparTop,TYPE_PARA_NUMBER);
 
   }
-  else if( iFlag == SETPARA_FIELD )
+  else if( iType == SETPARA_FIELD )
   {
 
     struct PidinStack *ppist  = PidinStackParse(pcValue);
@@ -341,34 +382,39 @@ char * mapParameterString(char *pcField){
  *   \fn struct ParameterMapper * mapParameter(char *pcField)
  *   \param pcField A field label from the GENESIS SLI.
  *   
- *   Obtain information about a GENESIS field name.
+ *   Obtain information about a GENESIS field name and its
+ *   corresponding Neurospaces model-container parameter name.
  */
 //----------------------------------------------------------------------------
 struct ParameterMapper * mapParameter(char *pcField){
 
     struct ParameterMapper ppm[] =
     {
-	{	    "Cm",	"CM",	SLI_PARAMETER_SCALED_TO_COMPARTMENT_SURFACE,	},
-	{	    "Rm",	"RM",	SLI_PARAMETER_SCALED_TO_COMPARTMENT_SURFACE,	},
-	{	    "Ra",	"RA",	SLI_PARAMETER_SCALED_TO_COMPARTMENT_LENGTH,	},
-	{	    "initVm",	"Vm_init",	0,	},
-	{	    "Eleak",	"ELEAK",	0,	},
-	{	    "dia",	"DIA",	0,	},
-	{	    "len",	"LEN",	0,	},
-	{	    "inject",	"INJECT",	0,	},
-	{	    "Em",	"ELEAK",	0,	},
-	{	    "Ek",	"Erev",	0,	},
-	{	    "Gbar",	"G_MAX",	SLI_PARAMETER_SCALED_TO_COMPARTMENT_SURFACE,	},
-	{	    "gmax",	"G_MAX",	SLI_PARAMETER_SCALED_TO_COMPARTMENT_SURFACE,	},
-	{	    "Xpower",	"POWER",	0,	},
-	{	    "Ypower",	"POWER",	0,	},
-	{	    "Zpower",	"POWER",	0,	},
-	{	    "tau",	"TAU",	0,	},
-	{	    "tau1",	"TAU1",	0,	},
-	{	    "tau2",	"TAU2",	0,	},
-	{	    "thick",	"THICK",	0,	},
-	{	    "Ca_base",	"BASE",	0,	},
-	{	    "B",	"BETA",	0,	},
+	{	    "Cm",	"CM",	SLI_PARAMETER_SCALED_TO_COMPARTMENT_SURFACE | SLI_PARAMETER_NUMBER,	},
+	{	    "Rm",	"RM",	SLI_PARAMETER_SCALED_TO_COMPARTMENT_SURFACE | SLI_PARAMETER_NUMBER,	},
+	{	    "Ra",	"RA",	SLI_PARAMETER_SCALED_TO_COMPARTMENT_LENGTH | SLI_PARAMETER_NUMBER,	},
+	{	    "initVm",	"Vm_init",	SLI_PARAMETER_NUMBER,	},
+	{	    "Eleak",	"ELEAK",	SLI_PARAMETER_NUMBER,	},
+	{	    "dia",	"DIA",	SLI_PARAMETER_NUMBER,	},
+	{	    "len",	"LENGTH",	SLI_PARAMETER_NUMBER,	},
+	{	    "inject",	"INJECT",	SLI_PARAMETER_NUMBER,	},
+	{	    "Em",	"ELEAK",	SLI_PARAMETER_NUMBER,	},
+	{	    "Ek",	"Erev",	SLI_PARAMETER_NUMBER,	},
+	{	    "Gbar",	"G_MAX",	SLI_PARAMETER_SCALED_TO_COMPARTMENT_SURFACE | SLI_PARAMETER_NUMBER,	},
+	{	    "gmax",	"G_MAX",	SLI_PARAMETER_SCALED_TO_COMPARTMENT_SURFACE | SLI_PARAMETER_NUMBER,	},
+	{	    "Xpower",	"POWER",	SLI_PARAMETER_NUMBER,	},
+	{	    "Ypower",	"POWER",	SLI_PARAMETER_NUMBER,	},
+	{	    "Zpower",	"POWER",	SLI_PARAMETER_NUMBER,	},
+	{	    "tau",	"TAU",	SLI_PARAMETER_NUMBER,	},
+	{	    "tau1",	"TAU1",	SLI_PARAMETER_NUMBER,	},
+	{	    "tau2",	"TAU2",	SLI_PARAMETER_NUMBER,	},
+	{	    "thick",	"THICK",	SLI_PARAMETER_NUMBER,	},
+	{	    "Ca_base",	"BASE",	SLI_PARAMETER_NUMBER,	},
+	{	    "B",	"BETA",	SLI_PARAMETER_SCALED | SLI_PARAMETER_NUMBER,	},
+	{	    "concen_init",	"concen_init",	SLI_PARAMETER_NUMBER,	},
+	{	    "x",	"x",	SLI_PARAMETER_NUMBER,	},
+	{	    "y",	"y",	SLI_PARAMETER_NUMBER,	},
+	{	    "z",	"z",	SLI_PARAMETER_NUMBER,	},
 	{	    NULL,	NULL,	0,	},
     };
 
@@ -386,7 +432,7 @@ struct ParameterMapper * mapParameter(char *pcField){
 
 	if (0 == strcmp(pcField, ppm[i].pcSLI))
 	{
-	    //- set result: model-container parameter name
+	    //- set result: entry with parameter information
 
 	    ppmResult = &ppm[i];
 
