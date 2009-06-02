@@ -150,6 +150,8 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 	return 1;
     }
 
+    //! is this related to nernst elements ?
+
     if(instanceof_group(phsleWorking))
     {
   
@@ -631,6 +633,37 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 	}
 
 
+    }
+    else if (instanceof_segment(phsleWorking))
+    {
+	struct symtab_Parameters *pparSurface = NULL;
+
+	if (strcmp(pcField, "len") == 0)
+	{
+	    double d = strtod(pcValue, NULL);
+
+	    if (d == 0.0)
+	    {
+		SymbolSetOptions(phsleWorking, FLAG_SEGMENTER_SPHERICAL);
+	    }
+	    else
+	    {
+		SymbolSetOptions(phsleWorking, SymbolGetOptions(phsleWorking) & ~(FLAG_SEGMENTER_SPHERICAL));
+	    }
+
+	    pparSurface = SymbolGetParameter(phsleWorking, ppistWorking, "SURFACE");
+	}
+	else if (strcmp(pcField, "dia") == 0)
+	{
+	    pparSurface = SymbolGetParameter(phsleWorking, ppistWorking, "SURFACE");
+	}
+
+	if (pparSurface)
+	{
+	    double dSurface = SegmentGetSurface((struct symtab_Segment *)phsleWorking, ppistWorking);
+
+	    pparSurface->uValue.dNumber = dSurface;
+	}
     }
 
     return setParameter(ppistWorking, phsleWorking, pcField, pcValue, 0);
