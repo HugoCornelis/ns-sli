@@ -38,7 +38,7 @@ int NeuroSpacesActor(struct neurospaces_type *pneuro,Action *action)
     //- select action
 
     SELECT_ACTION(action)
-	{
+    {
 
 	//- create
 
@@ -133,7 +133,16 @@ int NeuroSpacesActor(struct neurospaces_type *pneuro,Action *action)
 	    neurospacesquery(pneuro);
 	    break;
 	}
+
+	case NEUROSPACES_REDUCE:
+	{
+	    //- unscale parameters in the model container
+
+	    NeurospacesReduce(pneuro->pneuro);
+
+	    break;
 	}
+    }
 
     //- return result
 
