@@ -636,7 +636,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
     }
     else if (instanceof_segment(phsleWorking))
     {
-	struct symtab_Parameters *pparSurface = NULL;
+/* 	struct symtab_Parameters *pparSurface = NULL; */
 
 	if (strcmp(pcField, "len") == 0)
 	{
@@ -651,19 +651,19 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 		SymbolSetOptions(phsleWorking, SymbolGetOptions(phsleWorking) & ~(FLAG_SEGMENTER_SPHERICAL));
 	    }
 
-	    pparSurface = SymbolGetParameter(phsleWorking, ppistWorking, "SURFACE");
+/* 	    pparSurface = SymbolGetParameter(phsleWorking, ppistWorking, "SURFACE"); */
 	}
 	else if (strcmp(pcField, "dia") == 0)
 	{
-	    pparSurface = SymbolGetParameter(phsleWorking, ppistWorking, "SURFACE");
+/* 	    pparSurface = SymbolGetParameter(phsleWorking, ppistWorking, "SURFACE"); */
 	}
 
-	if (pparSurface)
-	{
-	    double dSurface = SegmentGetSurface((struct symtab_Segment *)phsleWorking, ppistWorking);
+/* 	if (pparSurface) */
+/* 	{ */
+/* 	    double dSurface = SegmentGetSurface((struct symtab_Segment *)phsleWorking, ppistWorking); */
 
-	    pparSurface->uValue.dNumber = dSurface;
-	}
+/* 	    pparSurface->uValue.dNumber = dSurface; */
+/* 	} */
     }
 
     return setParameter(ppistWorking, phsleWorking, pcField, pcValue, 0);

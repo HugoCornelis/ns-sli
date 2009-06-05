@@ -199,29 +199,29 @@ int setParameter(struct PidinStack *ppist,
 
 	  struct PidinStack *ppistComp = SymbolFindParentSegment(phsle, ppist);
 
-	  if (ppistComp)
-	  {
-	      struct symtab_HSolveListElement *phsleComp
-		  = PidinStackLookupTopSymbol(ppistComp);
+/* 	  if (ppistComp) */
+/* 	  { */
+/* 	      struct symtab_HSolveListElement *phsleComp */
+/* 		  = PidinStackLookupTopSymbol(ppistComp); */
 
-	      double dSurface = SymbolParameterResolveValue(phsleComp, ppistComp, "SURFACE");
+/* 	      double dSurface = SymbolParameterResolveValue(phsleComp, ppistComp, "SURFACE"); */
 
-	      if (dSurface != FLT_MAX)
-	      {
-		  dHere = atof(pcValue);
+/* 	      if (dSurface != FLT_MAX) */
+/* 	      { */
+/* 		  dHere = atof(pcValue); */
 
-		  dHere /= dSurface;
+/* 		  dHere /= dSurface; */
 
-		  iType = SETPARA_HERE;
-	      }
-	      else
-	      {
-		  fprintf(stdout, "changing type to SETPARA_GENESIS2 for %s -- no segment surface defined\n", pcField);
+/* 		  iType = SETPARA_HERE; */
+/* 	      } */
+/* 	      else */
+/* 	      { */
+/* 		  fprintf(stdout, "changing type to SETPARA_GENESIS2 for %s -- no segment surface defined\n", pcField); */
 
-		  iType = SETPARA_GENESIS2;
-	      }
-	  }
-	  else
+/* 		  iType = SETPARA_GENESIS2; */
+/* 	      } */
+/* 	  } */
+/* 	  else */
 	  {
 	      fprintf(stdout, "changing type to SETPARA_GENESIS2 for %s -- no parent segment found\n", pcField);
 

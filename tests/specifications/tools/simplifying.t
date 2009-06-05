@@ -64,7 +64,6 @@ PUBLIC_MODELS
                 PARAMETER ( scale = 1 ),
                 PARAMETER ( value = 4.57537e-11 ),
             ), ),
-        PARAMETER ( SURFACE = 2.78986e-09 ),
       END PARAMETERS
       CHANNEL ka
         BINDABLES
@@ -77,7 +76,12 @@ PUBLIC_MODELS
         END BINDINGS
         PARAMETERS
           PARAMETER ( CHANNEL_TYPE = "ChannelActInact" ),
-          PARAMETER ( G_MAX = 150 ),
+          PARAMETER ( G_MAX = 
+            GENESIS2
+              (
+                  PARAMETER ( scale = 1 ),
+                  PARAMETER ( value = 4.18479e-07 ),
+              ), ),
           PARAMETER ( Erev = -0.085 ),
         END PARAMETERS
         HH_GATE HH_activation
