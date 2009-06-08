@@ -235,6 +235,7 @@ Principal serial ID = 5551 of 132457 Principal successors
 				description => "elementary tests for the purkinje cell model with genesis alike channels",
 			       },
 			      ],
+       comment => 'This test was derived from the model-container purkinje.t',
        description => "EDS purkinje cell model simplification",
        name => 'purkinje.t',
       };
