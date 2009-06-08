@@ -50,6 +50,24 @@ my $test
 			      ],
        description => "purkinje cell model",
        name => 'tools/purk2m9.t',
+       preparation => {
+		       description => "Create the results directory",
+		       preparer =>
+		       sub
+		       {
+			   `mkdir results`;
+		       },
+		      },
+       reparation => {
+		      description => "Remove the generated output files in the results directory",
+		      reparer =>
+		      sub
+		      {
+			  `rm "$::config->{core_directory}/results/PurkM9_inject_1e-6_none_Hz_i_none_Hz"`;
+			  `rm "$::config->{core_directory}/results/PurkM9_inject_1e-6_none_Hz_i_none_Hz"`;
+			  `rmdir results`;
+		      },
+		     },
       };
 
 
