@@ -307,6 +307,7 @@ static char rcsid[] = "$Id: new_parser.c,v 1.4 2006/01/09 16:28:50 svitak Exp $"
 #include "result.h"
 #include "symtab.h"
 
+#include "neurospaces/neurospaces.h"
 #include "neurospaces/pidinstack.h"
 
 #include "nsintegrator.h"
@@ -1329,6 +1330,10 @@ void do_read_cell(argc,argv)
 	Result  *rp,*SymtabLook();
 	int	status;
 /* 	Hsolve	*hsolve; */
+
+	struct neurospaces_integrator  *pnsintegrator = getNsintegrator();
+
+	NeurospacesReduce(pnsintegrator->pelNeurospaces->pneuro);
 
 	initopt(argc, argv, "file-name cell-name -hsolve -prand SDlen SDdia -rand SDlen SDdia -split Number -lambdasplit maxl");
 	MaxSplit=NSplit=1;
