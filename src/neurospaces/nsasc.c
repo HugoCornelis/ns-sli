@@ -80,7 +80,7 @@ int AscReset(struct ascfile_type *pasc)
   }
 
 
-  if(OutputGeneratorInitiate(pasc->pog) == -1)
+  if(!OutputGeneratorInitiate(pasc->pog))
   {
 
     fprintf(stdout,
