@@ -236,7 +236,7 @@ Principal serial ID = 5551 of 132457 Principal successors
 
 						  {
 						   description => "Can we reduce the model ?",
-						   wait => 10,
+						   wait => 20,
 						   write => "reduce",
 						  },
 						  (
