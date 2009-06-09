@@ -991,27 +991,27 @@ VM Membrane Potentials (pdVms[0]) : (-0.068)
 						  ),
 						 ],
 				description => 'Running the purkinje cell soma by itself, active channels, current injections',
+				preparation => {
+						description => "Create the results directory",
+						preparer =>
+						sub
+						{
+						    `mkdir results`;
+						},
+					       },
+				reparation => {
+					       description => "Remove the generated output files in the results directory",
+					       reparer =>
+					       sub
+					       {
+						   `rm "$::config->{core_directory}/results/PurkM9_soma_only_0.03nA"`;
+						   `rmdir results`;
+					       },
+					      },
 			       },
 			      ],
        description => "EDS purkinje cell model simplification",
        name => 'purkinje.t',
-       preparation => {
-		       description => "Create the results directory",
-		       preparer =>
-		       sub
-		       {
-			   `mkdir results`;
-		       },
-		      },
-       reparation => {
-		      description => "Remove the generated output files in the results directory",
-		      reparer =>
-		      sub
-		      {
-			  `rm "$::config->{core_directory}/results/PurkM9_soma_only_0.03nA"`;
-			  `rmdir results`;
-		      },
-		     },
       };
 
 
