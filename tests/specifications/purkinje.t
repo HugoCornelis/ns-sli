@@ -1024,134 +1024,31 @@ VM Membrane Potentials (pdVms[0]) : (-0.068)
 						   {
 						    description => "Is the cell constructed correctly ?",
 						    read => '
-- /Purkinje
 - /Purkinje/soma
-- /Purkinje/soma/NaF
-- /Purkinje/soma/NaF/HH_activation
-- /Purkinje/soma/NaF/HH_activation/A
-- /Purkinje/soma/NaF/HH_activation/B
-- /Purkinje/soma/NaF/HH_inactivation
-- /Purkinje/soma/NaF/HH_inactivation/A
-- /Purkinje/soma/NaF/HH_inactivation/B
-- /Purkinje/soma/NaP
-- /Purkinje/soma/NaP/HH_activation
-- /Purkinje/soma/NaP/HH_activation/A
-- /Purkinje/soma/NaP/HH_activation/B
-- /Purkinje/soma/CaT
-- /Purkinje/soma/CaT/HH_activation
-- /Purkinje/soma/CaT/HH_activation/A
-- /Purkinje/soma/CaT/HH_activation/B
-- /Purkinje/soma/CaT/HH_inactivation
-- /Purkinje/soma/CaT/HH_inactivation/A
-- /Purkinje/soma/CaT/HH_inactivation/B
-- /Purkinje/soma/KA
-- /Purkinje/soma/KA/HH_activation
-- /Purkinje/soma/KA/HH_activation/A
-- /Purkinje/soma/KA/HH_activation/B
-- /Purkinje/soma/KA/HH_inactivation
-- /Purkinje/soma/KA/HH_inactivation/A
-- /Purkinje/soma/KA/HH_inactivation/B
-- /Purkinje/soma/Kdr
-- /Purkinje/soma/Kdr/HH_activation
-- /Purkinje/soma/Kdr/HH_activation/A
-- /Purkinje/soma/Kdr/HH_activation/B
-- /Purkinje/soma/Kdr/HH_inactivation
-- /Purkinje/soma/Kdr/HH_inactivation/A
-- /Purkinje/soma/Kdr/HH_inactivation/B
-- /Purkinje/soma/KM
-- /Purkinje/soma/KM/HH_activation
-- /Purkinje/soma/KM/HH_activation/A
-- /Purkinje/soma/KM/HH_activation/B
-- /Purkinje/soma/h1
-- /Purkinje/soma/h1/HH_activation
-- /Purkinje/soma/h1/HH_activation/A
-- /Purkinje/soma/h1/HH_activation/B
-- /Purkinje/soma/h2
-- /Purkinje/soma/h2/HH_activation
-- /Purkinje/soma/h2/HH_activation/A
-- /Purkinje/soma/h2/HH_activation/B
-- /Purkinje/soma/Ca_pool
+- /Purkinje/main[0]
+- /Purkinje/main[1]
+- /Purkinje/main[2]
+- /Purkinje/main[3]
+- /Purkinje/main[4]
+- /Purkinje/main[5]
+- /Purkinje/main[6]
+- /Purkinje/main[7]
+- /Purkinje/main[8]
 ',
-						    write => 'expand /Purkinje/**',
+						    write => 'expand /Purkinje/*',
 						   },
 						   {
 						    description => 'Quit the model-container querymachine.',
 						    write => 'quit',
 						   },
 						   {
-						    description => "Is the model correctly compiled by heccer ?",
-						    disabled => 'Not sure if this should be in here',
-						    read => 'Heccer (pcName) : (/Purkinje)
-Heccer (iStatus) : (20)
-Heccer (iErrorCount) : (0)
-Heccer Options (iOptions) : (0)
-Heccer Options (dIntervalStart) : (-0.1)
-Heccer Options (dIntervalEnd) : (0.05)
-Heccer Options (dConcentrationGateStart) : (4e-05)
-Heccer Options (dConcentrationGateEnd) : (0.3)
-Heccer Options (iIntervalEntries) : (3000)
-Heccer Options (iSmallTableSize) : (149)
-Heccer (dTime) : (0)
-Heccer (dStep) : (2e-05)
-Compartment (mc.iType) : (1)
-Tables (iTabulatedGateCount) : (12)
-Compartment operations
------
-00000 :: FINISH
-00001 :: FINISH
-Mechanism operations
------
-00000 :: COMPARTMENT							 -2.23189e-10 0 218562 1.00061
-00001 :: INITIALIZECHANNEL 0.045 0.000209239
-00002 :: LOADVOLTAGETABLE
-00003 :: CONCEPTGATE 0 3 (nil)							 0.00784064
-00004 :: CONCEPTGATE 1 1 (nil)							 0.263978
-00005 :: UPDATECOMPARTMENTCURRENT
-00006 :: INITIALIZECHANNEL 0.045 2.78986e-08
-00007 :: LOADVOLTAGETABLE
-00008 :: CONCEPTGATE 2 3 (nil)							 0.0452931
-00009 :: UPDATECOMPARTMENTCURRENT
-00010 :: INITIALIZECHANNEL 0.137526 1.39493e-08
-00011 :: LOADVOLTAGETABLE
-00012 :: CONCEPTGATE 3 1 (nil)							 0.0389187
-00013 :: CONCEPTGATE 4 1 (nil)							 0.0826021
-00014 :: UPDATECOMPARTMENTCURRENT
-00015 :: REGISTERCHANNELCURRENT
-00016 :: FLUXPOOL							 0
-00017 :: INITIALIZECHANNEL -0.085 4.18479e-07
-00018 :: LOADVOLTAGETABLE
-00019 :: CONCEPTGATE 5 4 (nil)							 0.0832441
-00020 :: CONCEPTGATE 6 1 (nil)							 0.749501
-00021 :: UPDATECOMPARTMENTCURRENT
-00022 :: INITIALIZECHANNEL -0.085 1.67391e-05
-00023 :: LOADVOLTAGETABLE
-00024 :: CONCEPTGATE 7 2 (nil)							 0.0045016
-00025 :: CONCEPTGATE 8 1 (nil)							 0.999979
-00026 :: UPDATECOMPARTMENTCURRENT
-00027 :: INITIALIZECHANNEL -0.085 1.11594e-09
-00028 :: LOADVOLTAGETABLE
-00029 :: CONCEPTGATE 9 1 (nil)							 0.0354084
-00030 :: UPDATECOMPARTMENTCURRENT
-00031 :: INITIALIZECHANNEL -0.03 8.36957e-09
-00032 :: LOADVOLTAGETABLE
-00033 :: CONCEPTGATE 10 1 (nil)							 0.0961851
-00034 :: UPDATECOMPARTMENTCURRENT
-00035 :: INITIALIZECHANNEL -0.03 8.36957e-09
-00036 :: LOADVOLTAGETABLE
-00037 :: CONCEPTGATE 11 1 (nil)							 0.0240463
-00038 :: UPDATECOMPARTMENTCURRENT
-00039 :: EXPONENTIALDECAY 420702 4e-05 1.1
-			 (0) (nil) (nil) (nil)							 4e-05
-00040 :: FINISH
-VM Diagonals (pdDiagonals[0]) : (1.00061)
-VM Axial Resistances (pdResults[0]) : (0)
-VM Axial Resistances (pdResults[1]) : (0)
-VM Membrane Potentials (pdVms[0]) : (-0.068)
-',
+						    description => 'Do we see the simulation time after the simulation has finished ?',
+						    read => 'time = 1.300040',
+						    wait => 20,
 						   },
 						   {
 						    description => 'Quit the simulator.',
-						    wait => 1,
+						    wait => 2,
 						    write => 'quit',
 						   },
 						   {
@@ -1177,7 +1074,7 @@ VM Membrane Potentials (pdVms[0]) : (-0.068)
 					       reparer =>
 					       sub
 					       {
-						   `rm "$::config->{core_directory}/results/PurkM9_main1_only_-0.1nA"`;
+# 						   `rm "$::config->{core_directory}/results/PurkM9_main1_only_-0.1nA"`;
 						   `rmdir results`;
 					       },
 					      },

@@ -97,15 +97,15 @@ setfield /output/plot_out filename {filename} leave_open 1
 
 reset
 
-setfield /neurospaces_integrator heccer_dump_selection { HECCER_DUMP_VM_COMPARTMENT_MATRIX + \
-				    			HECCER_DUMP_VM_COMPARTMENT_DATA + \
-				     			HECCER_DUMP_VM_COMPARTMENT_OPERATIONS + \
-				     			HECCER_DUMP_VM_CHANNEL_POOL_FLUXES + \
-				     			HECCER_DUMP_VM_MECHANISM_DATA + \
-				     			HECCER_DUMP_VM_MECHANISM_OPERATIONS + \
-				     			HECCER_DUMP_VM_SUMMARY }
+// setfield /neurospaces_integrator heccer_dump_selection { HECCER_DUMP_VM_COMPARTMENT_MATRIX + \
+// 				    			HECCER_DUMP_VM_COMPARTMENT_DATA + \
+// 				     			HECCER_DUMP_VM_COMPARTMENT_OPERATIONS + \
+// 				     			HECCER_DUMP_VM_CHANNEL_POOL_FLUXES + \
+// 				     			HECCER_DUMP_VM_MECHANISM_DATA + \
+// 				     			HECCER_DUMP_VM_MECHANISM_OPERATIONS + \
+// 				     			HECCER_DUMP_VM_SUMMARY }
 
-call /neurospaces_integrator NSINTEGRATOR_DUMP
+// call /neurospaces_integrator NSINTEGRATOR_DUMP
 
 step 0.10 -time
 hstr={findsolvefield {cellpath} {cellpath}/soma inject}
