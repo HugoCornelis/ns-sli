@@ -143,7 +143,7 @@ int NSSetupAlpha( char *pcName, char *pcField, char **pcArgs,
     PidinStackFree(ppistBackward);
 
 
-     //-
+    //-
     //- This is for setting heccer options and passing them to 
     //- the channel setup.
     //-
