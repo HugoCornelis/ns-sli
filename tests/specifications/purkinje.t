@@ -133,14 +133,14 @@ my $test
 # 						  },
 						   {
 						    comment => "the spines algorithm was not used, this values is without spines",
-						    description => "What is the total surface of the purkinje cell ?",
+						    description => "What is the total dendritic length of the purkinje cell ?",
 						    read => 'value = 0.0120441
 ',
 						    write => "printparameter /Purkinje TOTALLENGTH",
 						   },
 # 						  {
 # 						   comment => "the spines algorithm was not used, this values is without spines",
-# 						   description => "What is the total surface of all the segments the purkinje cell ?",
+# 						   description => "What is the total dendritic length of all the segments of the purkinje cell ?",
 # 						   read => '= 0.0140198',
 # 						   write => "printparameter /Purkinje/segments TOTALLENGTH",
 # 						  },
@@ -354,14 +354,14 @@ Principal serial ID = 5551 of 132457 Principal successors
 # 						  },
 						    {
 						     comment => "the spines algorithm was not used, this values is without spines",
-						     description => "After reducing, what is the total surface of the purkinje cell ?",
+						     description => "After reducing, what is the total dendritic length of the purkinje cell ?",
 						     read => 'value = 0.0120441
 ',
 						     write => "printparameter /Purkinje TOTALLENGTH",
 						    },
 # 						  {
 # 						   comment => "the spines algorithm was not used, this values is without spines",
-# 						   description => "After reducing, what is the total surface of all the segments the purkinje cell ?",
+# 						   description => "After reducing, what is the total dendritic length of all the segments of the purkinje cell ?",
 # 						   read => '= 0.0140198',
 # 						   write => "printparameter /Purkinje/segments TOTALLENGTH",
 # 						  },
