@@ -813,7 +813,7 @@ struct symtab_HSolveListElement *add_compartment(int flags,char *name,char *link
 
 	tsurface = *surface;
 	if (len > 0.0
-	    && iNeurospacesAlgorithms) { /* CYLINDRICAL */
+	    && !iNeurospacesAlgorithms) { /* CYLINDRICAL */
 	    if (flags & SPINES) {
 		if (dia <= RDENDR_DIAM) {
 		    val = len * SPINE_DENS;  /* number of collapsed spines */
