@@ -314,7 +314,9 @@ static char rcsid[] = "$Id: new_parser.c,v 1.4 2006/01/09 16:28:50 svitak Exp $"
 #include "nsintegrator.h"
 
 
-struct symtab_AlgorithmSymbol *palgsActive = NULL;
+static struct symtab_AlgorithmSymbol *palgsActive = NULL;
+
+static int iNeurospacesAlgorithms = 1;
 
 
 /* flags bit definitions */
@@ -810,7 +812,8 @@ struct symtab_HSolveListElement *add_compartment(int flags,char *name,char *link
  	Gabs_position(phsleComp,x0,y0,z0,x,y,z); 
 
 	tsurface = *surface;
-	if (len > 0.0) { /* CYLINDRICAL */
+	if (len > 0.0
+	    && iNeurospacesAlgorithms) { /* CYLINDRICAL */
 	    if (flags & SPINES) {
 		if (dia <= RDENDR_DIAM) {
 		    val = len * SPINE_DENS;  /* number of collapsed spines */
@@ -1832,8 +1835,6 @@ void read_script(line,lineno,flags)
 						&SPINE_DENS,&SPINE_SURF);
 		if (nargs == 4) {
 		    *flags |= SPINES;
-
-		    int iNeurospacesAlgorithms = 0;
 
 		    if (iNeurospacesAlgorithms)
 		    {
