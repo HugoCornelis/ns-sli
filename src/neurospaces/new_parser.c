@@ -307,10 +307,14 @@ static char rcsid[] = "$Id: new_parser.c,v 1.4 2006/01/09 16:28:50 svitak Exp $"
 #include "result.h"
 #include "symtab.h"
 
+#include "neurospaces/algorithmset.h"
 #include "neurospaces/neurospaces.h"
 #include "neurospaces/pidinstack.h"
 
 #include "nsintegrator.h"
+
+
+struct symtab_AlgorithmSymbol *palgsActive = NULL;
 
 
 /* flags bit definitions */
@@ -529,9 +533,9 @@ struct symtab_HSolveListElement *add_compartment(int flags,char *name,char *link
 	    do_copy(3,argv);
 	}
 
-	PidinStackFree(ppistComp);
+/* 	PidinStackFree(ppistComp); */
 
-	ppistComp = getRootedContext(name);
+/* 	ppistComp = getRootedContext(name); */
 
 	phsleComp = PidinStackLookupTopSymbol(ppistComp);
 /* 	compt = (struct symcompartment_type *)(GetElement(name)); */
@@ -976,6 +980,8 @@ void add_fspine(flags,phsleComp,ppistComp,name,spinenum,num,total)
     /* restore values */
     strcpy(comptname,oldcomptname);
     flags=oldflags;
+
+    PidinStackFree(ppistSpine);
 }
 
 /* Element *add_channel(name,parent) */
@@ -1094,27 +1100,30 @@ void parse_compartment(int flags,char *name,char *parent,
 
 	  struct symtab_HSolveListElement *phsleParent = 
 	      PidinStackLookupTopSymbol(ppistParent);
-	        if(!phsleParent)
-		{
-		    fprintf(stderr,"could not find parent compt %s\n",parent);
-		    return;
-		}
-                if (flags & DOUBLE_ENDPOINT) {
-                   if (flags & RELATIVE) {
-                     x0=x00+parent_compt->x; y0=y00+parent_compt->y;
-                     z0=z00+parent_compt->z;
-                   } else {
-                     x0=x00; y0=y00;z0=z00;
-                   }
-		} else {
-		  //x0=parent_compt->x; y0=parent_compt->y; z0=parent_compt->z;
 
-		  x0 = SymbolParameterResolveValue(phsleParent,ppistParent,"X");
-		  y0 = SymbolParameterResolveValue(phsleParent,ppistParent,"Y");
-		  z0 = SymbolParameterResolveValue(phsleParent,ppistParent,"Z");
+	  if(!phsleParent)
+	  {
+	      fprintf(stderr,"could not find parent compt %s\n",parent);
+	      return;
+	  }
+	  if (flags & DOUBLE_ENDPOINT) {
+	      if (flags & RELATIVE) {
+		  x0=x00+parent_compt->x; y0=y00+parent_compt->y;
+		  z0=z00+parent_compt->z;
+	      } else {
+		  x0=x00; y0=y00;z0=z00;
+	      }
+	  } else {
+	      //x0=parent_compt->x; y0=parent_compt->y; z0=parent_compt->z;
+
+	      x0 = SymbolParameterResolveValue(phsleParent,ppistParent,"X");
+	      y0 = SymbolParameterResolveValue(phsleParent,ppistParent,"Y");
+	      z0 = SymbolParameterResolveValue(phsleParent,ppistParent,"Z");
 
 
-                }
+	  }
+
+	  PidinStackFree(ppistParent);
 	}
 	strcpy(newname,name);
 	strcpy(newpname,parent);
@@ -1541,6 +1550,59 @@ void do_read_cell(argc,argv)
 	    }
 	}
 	fclose(fp);
+
+	if (palgsActive)
+	{
+	    //- allocate parameters
+
+	    struct symtab_Parameters *ppar = NULL;
+
+	    //- instantiate algorithm
+
+	    struct neurospaces_integrator *pnsintegrator
+		= getNsintegrator();
+
+	    struct Neurospaces *pneuro = 
+		pnsintegrator->pelNeurospaces->pneuro;
+
+	    struct PidinStack *ppist = getRootedContext(cellname);
+
+	    struct symtab_HSolveListElement *phsle
+		= PidinStackLookupTopSymbol(ppist);
+
+	    ParserContextSetActual(pneuro->pacRootContext, phsle);
+
+/* 	    struct AlgorithmInstance *palgiResult */
+/* 		= AlgorithmSetInstantiateAlgorithm */
+/* 		  (pneuro->psym->pas, */
+/* 		   pneuro->pacRootContext, */
+/* 		   "Spines", */
+/* 		   "do_read_cell()", */
+/* 		   NULL, */
+/* 		   ppar, */
+/* 		   palgsActive); */
+
+	    //- call algorithm on current symbol
+
+	    struct PidinStack *ppistTmp = ppist;
+
+	    pneuro->pacRootContext->pist = *ppist;
+
+	    ParserAlgorithmHandle
+		(pneuro->pacRootContext,
+		 ParserContextGetActual(pneuro->pacRootContext),
+		 palgsActive->dealgs.palgi,
+		 "Spines",
+		 "do_read_cell()",
+		 NULL);
+
+	    pneuro->pacRootContext->pist = *ppistTmp;
+
+	    PidinStackFree(ppist);
+
+	    palgsActive = NULL;
+	}
+
 	SetWorkingElement(orig_working_elm);
 }
 
@@ -1770,10 +1832,50 @@ void read_script(line,lineno,flags)
 						&SPINE_DENS,&SPINE_SURF);
 		if (nargs == 4) {
 		    *flags |= SPINES;
+
+		    int iNeurospacesAlgorithms = 0;
+
+		    if (iNeurospacesAlgorithms)
+		    {
+			struct symtab_ParContainer *pparc
+			    = ParContainerNewFromList
+			      (ParameterNewFromNumber("DIA_MAX", RDENDR_DIAM),
+			       ParameterNewFromNumber("SPINE_DENSITY", SPINE_DENS),
+			       ParameterNewFromNumber("SPINE_SURFACE", SPINE_SURF),
+			       NULL);
+
+			struct symtab_AlgorithmSymbol *palgs
+			    = AlgorithmSymbolCalloc();
+
+			//t pparc is lost, memory leak
+
+			AlgorithmSymbolAssignParameters(palgs, pparc->ppars);
+
+			struct neurospaces_integrator *pnsintegrator
+			    = getNsintegrator();
+
+			struct Neurospaces *pneuro = 
+			    pnsintegrator->pelNeurospaces->pneuro;
+
+			struct AlgorithmInstance *palgi
+			    = ParserAlgorithmImport
+			      (pneuro->pacRootContext,
+			       "Spines",
+			       "do_read_cell()",
+			       NULL,
+			       pparc->ppars,
+			       palgs);
+
+			AlgorithmSymbolSetAlgorithmInstance(palgs, palgi);
+
+			palgsActive = palgs;
+		    }
+
 		    RDENDR_DIAM *= 1.0e-6;
 		    SPINE_DENS *= 1.0e6;
 		    SPINE_SURF *= 1.0e-12;
 		    SPINE_FREQ = -1.0;
+
 		} else {
 		    printf("** Warning - *add_spines: wrong number of arguments.\n");
 		}
@@ -2148,6 +2250,8 @@ void read_script(line,lineno,flags)
 					*flags &= ~SPHERICAL;
 				}
 			}
+
+			PidinStackFree(ppistComp);
 		}
 	} else {
 	    /* Else (probably) no valid script command.  Give some error msg.
