@@ -49,16 +49,15 @@ int NSGenesisInitialize(){
    char *ppvArgs[] =
    {
       "genesis-neurospaces-bridge",
-      //NULL,
-       "/usr/local/neurospaces/models/library/utilities/empty_model.ndf",
-            "empty_model.ndf",
+      "/usr/local/neurospaces/models/library/utilities/empty_model.ndf",
+      "empty_model.ndf",
       NULL,
       NULL,
    };
 
    
 
-   //t set NEUROSPACES_MODELS variable to point to where the model can be found  
+   //- set NEUROSPACES_MODELS variable to point to where the model can be found  
 
    pnsintegrator->pelNeurospaces->pneuro = 
        NeurospacesNewFromCmdLine(2, &ppvArgs[0]);
@@ -73,9 +72,8 @@ int NSGenesisInitialize(){
 
 
 
-   //t 
-   //t Now we cache the root context for easier referencing.
-   //t
+   //- Now we cache the root context for easier referencing.
+
    pnsintegrator->ppistCachedRoot =  PidinStackParse("/");
 
    pnsintegrator->phsleCachedRoot =  
@@ -85,25 +83,6 @@ int NSGenesisInitialize(){
 
 
 
-   //t
-   //t create array for storing the neurospaces sumbol table.
-   //t
-/*    pnsintegrator->iNumSyms = 0; //initial number of symbols is zero */
-
-/*    pnsintegrator->ppSymbols =  */
-/*      (struct neurospaces_symbol**)calloc(MAX_NSSYMBOLS,sizeof(struct neurospaces_symbol*)); */
-
-
-/*    if( !pnsintegrator->ppSymbols ){ */
-
-/*      fprintf(stderr,"Error initializing Neurospaces Symbol table\n"); */
-/*      return -1; */
-
-/*    } */
-
-
-
- 
    //-
    //- Initializes the Heccer stuff: array + index.
    //- The heccer array is an array of pointers
@@ -123,10 +102,9 @@ int NSGenesisInitialize(){
    }
 
   
-   //i
-   //i Initialize the array for storing the heccer names.
-   //i Allocate same number as the amount for heccer pointers.
-   //i
+   //- Initialize the array for storing the heccer names.
+   //- Allocate same number as the amount for heccer pointers.
+
    pnsintegrator->iHeccerNames = 0;
 
    pnsintegrator->ppcHeccerNames = 
