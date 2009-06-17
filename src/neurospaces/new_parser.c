@@ -316,7 +316,13 @@ static char rcsid[] = "$Id: new_parser.c,v 1.4 2006/01/09 16:28:50 svitak Exp $"
 
 static struct symtab_AlgorithmSymbol *palgsActive = NULL;
 
+#define USE_NEUROSPACES_ALGORITHMS
+
+#ifdef USE_NEUROSPACES_ALGORITHMS
+static int iNeurospacesAlgorithms = 1;
+#else
 static int iNeurospacesAlgorithms = 0;
+#endif
 
 
 /* flags bit definitions */
