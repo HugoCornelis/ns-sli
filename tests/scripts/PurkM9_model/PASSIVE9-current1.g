@@ -129,7 +129,7 @@ reset
 setfield {cellpath} {findsolvefield {cellpath} {cellpath}/soma inject} 1e-6
 
 // useclock /output/plot_out 9 /* disable output */
-t = {rand 0.170 0.200}
+t = 0.19728 // {rand 0.170 0.200}
 step {t} -time		/* initial equilibration */
 // useclock /output/plot_out 8 /* enable output */
 
