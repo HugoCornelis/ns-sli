@@ -1574,7 +1574,7 @@ void do_read_cell(argc,argv)
 	    struct Neurospaces *pneuro = 
 		pnsintegrator->pelNeurospaces->pneuro;
 
-	    struct PidinStack *ppist = getRootedContext(cellname);
+	    struct PidinStack *ppist = getRootedContext(".");
 
 	    struct symtab_HSolveListElement *phsle
 		= PidinStackLookupTopSymbol(ppist);
@@ -1604,6 +1604,9 @@ void do_read_cell(argc,argv)
 		 "Spines",
 		 "do_read_cell()",
 		 NULL);
+
+
+	    SymbolRecalcAllSerials(NULL, NULL);
 
 	    pneuro->pacRootContext->pist = *ppistTmp;
 
