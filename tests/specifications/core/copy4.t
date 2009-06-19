@@ -77,7 +77,7 @@ my $test
 						   description => "Is parameter len set correctly?",
 						   read => 'value = 1',
 						   timeout => 5,
-						   write => 'printparameterscaled /c LEN',
+						   write => 'printparameter /c LEN',
 						  },
 
 
@@ -85,7 +85,7 @@ my $test
 						   description => "Is parameter len set correctly in the copy?",
 						   read => 'value = 1',
 						   timeout => 5,
-						   write => 'printparameterscaled /o LEN',
+						   write => 'printparameter /o LEN',
 						  },
 
 
@@ -96,7 +96,7 @@ my $test
 						   description => "Is parameter dia set correctly?",
 						   read => 'value = 1',
 						   timeout => 5,
-						   write => 'printparameterscaled /c DIA',
+						   write => 'printparameter /c DIA',
 						  },
 
 
@@ -104,7 +104,7 @@ my $test
 						   description => "Is parameter dia set correctly in the copy?",
 						   read => 'value = 1',
 						   timeout => 5,
-						   write => 'printparameterscaled /o DIA',
+						   write => 'printparameter /o DIA',
 						  },
 
 
@@ -113,7 +113,7 @@ my $test
 						   description => "Is parameter initVm set correctly?",
 						   read => 'value = -0.068',
 						   timeout => 5,
-						   write => 'printparameterscaled /c Vm_init',
+						   write => 'printparameter /c Vm_init',
 						  },
 
 
@@ -121,7 +121,7 @@ my $test
 						   description => "Is parameter initVm set correctly in the copy?",
 						   read => 'value = -0.068',
 						   timeout => 5,
-						   write => 'printparameterscaled /o Vm_init',
+						   write => 'printparameter /o Vm_init',
 						  },
 
 

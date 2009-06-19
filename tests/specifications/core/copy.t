@@ -81,7 +81,7 @@ my $test
 						   description => "Is parameter len set correctly?",
 						   read => 'value = 1',
 						   timeout => 5,
-						   write => 'printparameterscaled /hardcoded_neutral/c LEN',
+						   write => 'printparameter /hardcoded_neutral/c LEN',
 						  },
 
 
@@ -89,7 +89,7 @@ my $test
 						   description => "Is parameter len set correctly in the copy?",
 						   read => 'value = 1',
 						   timeout => 5,
-						   write => 'printparameterscaled /hardcoded_neutral/o LEN',
+						   write => 'printparameter /hardcoded_neutral/o LEN',
 						  },
 
 
@@ -100,7 +100,7 @@ my $test
 						   description => "Is parameter dia set correctly?",
 						   read => 'value = 1',
 						   timeout => 5,
-						   write => 'printparameterscaled /hardcoded_neutral/c DIA',
+						   write => 'printparameter /hardcoded_neutral/c DIA',
 						  },
 
 
@@ -108,7 +108,7 @@ my $test
 						   description => "Is parameter dia set correctly in the copy?",
 						   read => 'value = 1',
 						   timeout => 5,
-						   write => 'printparameterscaled /hardcoded_neutral/o DIA',
+						   write => 'printparameter /hardcoded_neutral/o DIA',
 						  },
 
 
@@ -117,7 +117,7 @@ my $test
 						   description => "Is parameter initVm set correctly?",
 						   read => 'value = -0.068',
 						   timeout => 5,
-						   write => 'printparameterscaled /hardcoded_neutral/c Vm_init',
+						   write => 'printparameter /hardcoded_neutral/c Vm_init',
 						  },
 
 
@@ -125,7 +125,7 @@ my $test
 						   description => "Is parameter initVm set correctly in the copy?",
 						   read => 'value = -0.068',
 						   timeout => 5,
-						   write => 'printparameterscaled /hardcoded_neutral/o Vm_init',
+						   write => 'printparameter /hardcoded_neutral/o Vm_init',
 						  },
 
 
