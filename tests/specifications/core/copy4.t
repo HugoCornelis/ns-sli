@@ -77,7 +77,7 @@ my $test
 						   description => "Is parameter len set correctly?",
 						   read => 'value = 1',
 						   timeout => 5,
-						   write => 'printparameter /c LEN',
+						   write => 'printparameter /c LENGTH',
 						  },
 
 
@@ -85,7 +85,7 @@ my $test
 						   description => "Is parameter len set correctly in the copy?",
 						   read => 'value = 1',
 						   timeout => 5,
-						   write => 'printparameter /o LEN',
+						   write => 'printparameter /o LENGTH',
 						  },
 
 

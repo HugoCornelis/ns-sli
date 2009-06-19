@@ -81,7 +81,7 @@ my $test
 						   description => "Is parameter len set correctly?",
 						   read => 'value = 1',
 						   timeout => 5,
-						   write => 'printparameter /hardcoded_neutral/c LEN',
+						   write => 'printparameter /hardcoded_neutral/c LENGTH',
 						  },
 
 
@@ -89,7 +89,7 @@ my $test
 						   description => "Is parameter len set correctly in the copy?",
 						   read => 'value = 1',
 						   timeout => 5,
-						   write => 'printparameter /hardcoded_neutral/o LEN',
+						   write => 'printparameter /hardcoded_neutral/o LENGTH',
 						  },
 
 

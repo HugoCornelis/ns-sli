@@ -78,7 +78,7 @@ my $test
 						   description => "Is parameter len set correctly?",
 						   read => 'value = 1',
 						   timeout => 5,
-						   write => 'printparameter /n1/c LEN',
+						   write => 'printparameter /n1/c LENGTH',
 						  },
 
 
@@ -86,7 +86,7 @@ my $test
 						   description => "Is parameter len set correctly in the copy?",
 						   read => 'value = 1',
 						   timeout => 5,
-						   write => 'printparameterscaled /n2/o LEN',
+						   write => 'printparameter /n2/o LENGTH',
 						  },
 
 
@@ -97,7 +97,7 @@ my $test
 						   description => "Is parameter dia set correctly?",
 						   read => 'value = 1',
 						   timeout => 5,
-						   write => 'printparameterscaled /n1/c DIA',
+						   write => 'printparameter /n1/c DIA',
 						  },
 
 
