@@ -52,6 +52,99 @@ my $test
 
 
 
+						  {
+						   description => "Is parameter RA set correctly?",
+						   read => 'value = 360502',
+						   timeout => 5,
+						   write => 'printparameterscaled /c RA',
+						  },
+
+
+						  {
+						   description => "Is parameter RA set correctly in the copy?",
+						   read => 'value = 360502',
+						   timeout => 5,
+						   write => 'printparameterscaled /o RA',
+						  },
+
+
+
+
+
+
+
+						  {
+						   description => "Is parameter len set correctly?",
+						   read => 'value = 1',
+						   timeout => 5,
+						   write => 'printparameterscaled /c LEN',
+						  },
+
+
+						  {
+						   description => "Is parameter len set correctly in the copy?",
+						   read => 'value = 1',
+						   timeout => 5,
+						   write => 'printparameterscaled /o LEN',
+						  },
+
+
+
+
+
+						  {
+						   description => "Is parameter dia set correctly?",
+						   read => 'value = 1',
+						   timeout => 5,
+						   write => 'printparameterscaled /c DIA',
+						  },
+
+
+						  {
+						   description => "Is parameter dia set correctly in the copy?",
+						   read => 'value = 1',
+						   timeout => 5,
+						   write => 'printparameterscaled /o DIA',
+						  },
+
+
+
+						  {
+						   description => "Is parameter initVm set correctly?",
+						   read => 'value = -0.068',
+						   timeout => 5,
+						   write => 'printparameterscaled /c Vm_init',
+						  },
+
+
+						  {
+						   description => "Is parameter initVm set correctly in the copy?",
+						   read => 'value = -0.068',
+						   timeout => 5,
+						   write => 'printparameterscaled /o Vm_init',
+						  },
+
+
+
+
+						  {
+						   description => "Is parameter Eleak set correctly?",
+						   read => 'value = -0.08',
+						   timeout => 5,
+						   write => 'printparameter /c ELEAK',
+						  },
+
+
+						  {
+						   description => "Is parameter Eleak set correctly in the copy?",
+						   read => 'value = -0.08',
+						   timeout => 5,
+						   write => 'printparameter /o ELEAK',
+						  },
+
+
+
+
 
 
 						 ],
