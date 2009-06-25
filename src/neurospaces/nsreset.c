@@ -147,6 +147,7 @@ static int SetupIOMessages( struct ioMsg **ppioMsg, int iIoMsgs,
       {
 	  if (AscReset(pasc) == -1)
 	  {
+	      Error();
 	      fprintf
 		  (stdout,
 		   "Error: resetting asc_file %s\n",
@@ -167,10 +168,20 @@ static int SetupIOMessages( struct ioMsg **ppioMsg, int iIoMsgs,
 				  ppioMsg[i]->iSerial, 
 				  ppioMsg[i]->pcSourceField);
 
-      OutputGeneratorAddVariable(pasc->pog,
-				 ppioMsg[i]->pcSourceField,
-				 (void *)pdValue);
-
+      if (pdValue)
+      {
+	  OutputGeneratorAddVariable(pasc->pog,
+				     ppioMsg[i]->pcSourceField,
+				     (void *)pdValue);
+      }
+      else
+      {
+	  Error();
+	  fprintf
+	      (stdout,
+	       "Error: cannot find output fields for asc_file %s\n",
+	       pasc->name);
+      }
 
     }
 
