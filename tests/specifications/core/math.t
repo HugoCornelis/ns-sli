@@ -183,6 +183,8 @@ my $test
 						 ],
 				description => "Do the GENESIS 2 math functions work correctly?",
 
+				numerical_compare => 'small arithmetic due to double to float conversions and vice versa',
+
 
 			       },
 			      ],
