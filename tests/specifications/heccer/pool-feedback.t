@@ -10,8 +10,6 @@ local $/;
 
 my $root_neutral = "hardcoded_neutral";
 
-#t the substitution string should be 's/^.*iSmallTableSize.*3000.*\$/Heccer Options (iSmallTableSize) : (149)/g', with an additional backslash before the dollar sign that marks the end of string.
-
 my $text_expected =  `cat  /usr/local/heccer/tests/specifications/strings/pool1-feedback1.txt | perl -pe 's/unnamed test/$root_neutral/g' | perl -pe 's/.*iSmallTableSize.*149.*/Heccer Options (iSmallTableSize) : (3000)/g'`;
 
 my $test
@@ -35,7 +33,7 @@ my $test
 						   numerical_compare => 1,
 						   description => "Is a pool integrated correctly, one compartment, one pool with a feedback loop ?",
 						   read => (join '', $text_expected),
-						   timeout => 5,
+						   timeout => 7,
 						   write => undef,
 						  },
 						 ],
