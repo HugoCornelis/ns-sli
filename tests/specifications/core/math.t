@@ -12,9 +12,6 @@ my $test
     = {
        command_definitions => [
 			       {
-				arguments => [
-					         "",
-					     ],
 				command => 'src/nsgenesis',
 				command_tests => [
 						  
@@ -31,7 +28,7 @@ my $test
 
 						  {
 						   description => "Does arc cosine work correctly?",
-						   read => '45.00864904',
+						   read => '45.0086',
 						   write => 'echo {{ acos 0.707} * (360 / (2 * 3.1415926))}',
 						  },
 
