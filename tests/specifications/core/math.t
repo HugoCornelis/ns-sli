@@ -12,6 +12,11 @@ my $test
     = {
        command_definitions => [
 			       {
+				#t a bug in data_comparator() forces a single empty argument
+
+				arguments => [
+					      "",
+					     ],
 				command => 'src/nsgenesis',
 				command_tests => [
 						  
