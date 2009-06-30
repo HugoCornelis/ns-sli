@@ -1045,7 +1045,7 @@ VM Membrane Potentials (pdVms[0]) : (-0.068)
 						   },
 						   {
 						    description => 'Do we see the simulation time after the simulation has finished ?',
-						    read => 'time = 1.300040',
+						    read => 'time = 0.040000 ; step = 2000',
 						    wait => 20,
 						   },
 						   {
@@ -1054,7 +1054,9 @@ VM Membrane Potentials (pdVms[0]) : (-0.068)
 						    write => 'quit',
 						   },
 						   {
+						    comment => "The output file generated using Genesis 2.2.1 is not used for this test.",
 						    description => "Is the generated output correct ?",
+						    numerical_compare => 'small differences',
 						    read => {
 							     application_output_file => "$::config->{core_directory}/results/PurkM9_main1_only_-0.1nA",
 							     expected_output_file => "$::config->{core_directory}/tests/specifications/strings/PurkM9_main1_only_-0.1nA",

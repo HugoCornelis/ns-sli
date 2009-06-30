@@ -107,11 +107,12 @@ reset
 
 // call /neurospaces_integrator NSINTEGRATOR_DUMP
 
-step 0.10 -time
-hstr={findsolvefield {cellpath} {cellpath}/soma inject}
-setfield {cellpath} {hstr} {inject*1.e-9}
-step 1.0 -time
-setfield {cellpath} {hstr} 0.0
-step 0.2 -time
+step 2000
+// step 0.10 -time
+// hstr={findsolvefield {cellpath} {cellpath}/soma inject}
+// setfield {cellpath} {hstr} {inject*1.e-9}
+// step 1.0 -time
+// setfield {cellpath} {hstr} 0.0
+// step 0.2 -time
 // quit
 
