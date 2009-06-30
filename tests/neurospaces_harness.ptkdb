@@ -3,6 +3,15 @@ $files = {
                                               {
                                                 'expr' => undef,
                                                 'value' => '1',
+                                                'text' => '			    if ((!$command_test->{string_only}
+',
+                                                'fname' => 'tests/neurospaces_harness',
+                                                'type' => 'user',
+                                                'line' => '763'
+                                              },
+                                              {
+                                                'expr' => undef,
+                                                'value' => '1',
                                                 'text' => '		    if (defined $read)
 ',
                                                 'fname' => 'tests/neurospaces_harness',
@@ -16,7 +25,7 @@ $files = {
 ',
                                                 'fname' => 'tests/neurospaces_harness',
                                                 'type' => 'user',
-                                                'line' => '361'
+                                                'line' => 361
                                               }
                                             ]
          };
