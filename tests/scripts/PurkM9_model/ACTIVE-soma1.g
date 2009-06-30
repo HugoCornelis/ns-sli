@@ -56,7 +56,7 @@ setclock 9 1.0e-4
 
 /* Create the output element */
 create asc_file /output/plot_out
-useclock /output/plot_out 9
+useclock /output/plot_out 0
 
 // setup the hines solver
 ce {cellpath}
@@ -107,11 +107,12 @@ setfield /neurospaces_integrator heccer_dump_selection { HECCER_DUMP_VM_COMPARTM
 
 call /neurospaces_integrator NSINTEGRATOR_DUMP
 
-step 0.10 -time
-hstr={findsolvefield {cellpath} {cellpath}/soma inject}
-setfield {cellpath} {hstr} {inject*1.e-9}
-step 1.0 -time
-setfield {cellpath} {hstr} 0.0
-step 0.2 -time
+step 2000
+// step 0.10 -time
+// hstr={findsolvefield {cellpath} {cellpath}/soma inject}
+// setfield {cellpath} {hstr} {inject*1.e-9}
+// step 1.0 -time
+// setfield {cellpath} {hstr} 0.0
+// step 0.2 -time
 // quit
 

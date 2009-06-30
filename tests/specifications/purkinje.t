@@ -967,7 +967,7 @@ Mechanism operations
 00036 :: LOADVOLTAGETABLE
 00037 :: CONCEPTGATE 11 1 (nil)							 0.0240463
 00038 :: UPDATECOMPARTMENTCURRENT
-00039 :: EXPONENTIALDECAY 420702 4e-05 1.1
+00039 :: EXPONENTIALDECAY 188248 4e-05 1.1
 			 (0) (nil) (nil) (nil)							 4e-05
 00040 :: FINISH
 VM Diagonals (pdDiagonals[0]) : (1.00061)
@@ -982,10 +982,12 @@ VM Membrane Potentials (pdVms[0]) : (-0.068)
 						    write => 'quit',
 						   },
 						   {
+						    comment => "The output file used for the test was generated using Genesis 2.2.1, and the first line removed, and selected white space removed.",
 						    description => "Is the generated output correct ?",
+						    numerical_compare => 'compares against the Genesis 2.2.1 output',
 						    read => {
 							     application_output_file => "$::config->{core_directory}/results/PurkM9_soma_only_0.03nA",
-							     expected_output_file => "$::config->{core_directory}/tests/specifications/strings/PurkM9_soma_only_0.03nA",
+							     expected_output_file => "$::config->{core_directory}/tests/specifications/strings/PurkM9_soma_only_0.03nA.g2",
 							    },
 						   },
 						  ),
@@ -1004,7 +1006,7 @@ VM Membrane Potentials (pdVms[0]) : (-0.068)
 					       reparer =>
 					       sub
 					       {
-						   `rm "$::config->{core_directory}/results/PurkM9_soma_only_0.03nA"`;
+# 						   `rm "$::config->{core_directory}/results/PurkM9_soma_only_0.03nA"`;
 						   `rmdir results`;
 					       },
 					      },
