@@ -1006,7 +1006,7 @@ VM Membrane Potentials (pdVms[0]) : (-0.068)
 					       reparer =>
 					       sub
 					       {
-# 						   `rm "$::config->{core_directory}/results/PurkM9_soma_only_0.03nA"`;
+ 						   `rm "$::config->{core_directory}/results/PurkM9_soma_only_0.03nA"`;
 						   `rmdir results`;
 					       },
 					      },
@@ -1078,7 +1078,7 @@ VM Membrane Potentials (pdVms[0]) : (-0.068)
 					       reparer =>
 					       sub
 					       {
-# 						   `rm "$::config->{core_directory}/results/PurkM9_main1_only_-0.1nA"`;
+						   `rm "$::config->{core_directory}/results/PurkM9_main1_only_-0.1nA"`;
 						   `rmdir results`;
 					       },
 					      },
