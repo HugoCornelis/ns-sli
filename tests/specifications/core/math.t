@@ -49,7 +49,7 @@ my $test
 
 						  {
 						   description => "Can we compute the cosine of pi/4?",
-						   read => '0.7071072459',
+						   read => '0.707107',
 						   write => 'echo {cos {3.14159/4}}',
 						  },
 
@@ -129,7 +129,7 @@ my $test
 
 						  {
 						   description => "Can we get sqrt of 2?",
-						   read => '1.414213538',
+						   read => '1.414213',
 						   write => 'echo {sqrt 2}',
 						  },
 
