@@ -75,7 +75,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 	{
 	    TraceScript();
 
-	    fprintf(stdout, "Warning setting fields after a RESET has been done, please do another RESET to make sure all parameters are correctly internalized by the solvers.\n");
+	    fprintf(stdout, "Warning setting fields after a RESET has been done, double check your results.\n");
 
 	    //- lookup the heccer object using the pathname before findsolvefield correction
 
