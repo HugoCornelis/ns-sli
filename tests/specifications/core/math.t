@@ -70,13 +70,13 @@ my $test
 
 						  {
 						   description => "Can we compute the tangent of pi/4?",
-						   read => '0.9999987483',
+						   read => '0.9999987',
 						   write => 'echo {tan {3.14159/4}}',
 						  },
 
 						  {
 						   description => "Can we compute the arc tangent of 0.876?",
-						   read => '0.7193960547',
+						   read => '0.719396',
 						   write => 'echo { atan 0.876 }',
 						  },
 
