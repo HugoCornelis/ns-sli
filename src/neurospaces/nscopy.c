@@ -129,6 +129,25 @@ int NSCopy(struct PidinStack *ppistSrc, char *pcDst){
   phsleDst = SymbolCreateAlias(phsleSrc,pcName,pidinDst);
  
 
+  if (instanceof_bio_comp(phsleDst))
+  {
+      struct symtab_BioComponent *pbioDst
+	  = (struct symtab_BioComponent *)phsleDst;
+
+      //- if the original has no children yet
+
+      int iHasChildren = (SymbolGetPrincipalNumOfSuccessors(phsleSrc) != 0);
+
+      if (!iHasChildren)
+      {
+	  //- prevent traversal over the alias to see the children of
+	  //- the original
+
+	  SymbolSetOptions
+	      (phsleDst, (SymbolGetOptions(phsleDst) | BIOCOMP_OPTION_NO_PROTOTYPE_TRAVERSAL));
+      }
+  }
+
   //t
   //t Will only copy to the parent of the Src.
   //t

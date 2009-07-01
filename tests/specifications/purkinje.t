@@ -212,6 +212,7 @@ my $test
 						   {
 						    comment => 'note the differences when using G2 tabchans, G3 ns-sli and plain G3',
 						    description => "What are the forestspace IDs for the segment b0s01[1] ?",
+						    disabled => 'working on the use of BIOCOMP_OPTION_NO_PROTOTYPE_TRAVERSAL',
 						    read => 'Traversal serial ID = 5551
 Principal serial ID = 5551 of 132457 Principal successors
 ',
@@ -433,6 +434,7 @@ Principal serial ID = 5551 of 132457 Principal successors
 						    {
 						     comment => 'note the differences when using G2 tabchans, G3 ns-sli and plain G3',
 						     description => "After reducing, what are the forestspace IDs for the segment b0s01[1] ?",
+						     disabled => 'working on the use of BIOCOMP_OPTION_NO_PROTOTYPE_TRAVERSAL',
 						     read => 'Traversal serial ID = 5551
 Principal serial ID = 5551 of 132457 Principal successors
 ',
@@ -638,103 +640,7 @@ Principal serial ID = 5551 of 132457 Principal successors
 - /library/Purk_maind/Ca_pool
 - /library/Purk_maind/Ca_nernst
 - /library/Purk_axon
-- /library/Purk_axon/CaT
-- /library/Purk_axon/CaT/HH_activation
-- /library/Purk_axon/CaT/HH_activation/A
-- /library/Purk_axon/CaT/HH_activation/B
-- /library/Purk_axon/CaT/HH_inactivation
-- /library/Purk_axon/CaT/HH_inactivation/A
-- /library/Purk_axon/CaT/HH_inactivation/B
-- /library/Purk_axon/KA
-- /library/Purk_axon/KA/HH_activation
-- /library/Purk_axon/KA/HH_activation/A
-- /library/Purk_axon/KA/HH_activation/B
-- /library/Purk_axon/KA/HH_inactivation
-- /library/Purk_axon/KA/HH_inactivation/A
-- /library/Purk_axon/KA/HH_inactivation/B
-- /library/Purk_axon/Kdr
-- /library/Purk_axon/Kdr/HH_activation
-- /library/Purk_axon/Kdr/HH_activation/A
-- /library/Purk_axon/Kdr/HH_activation/B
-- /library/Purk_axon/Kdr/HH_inactivation
-- /library/Purk_axon/Kdr/HH_inactivation/A
-- /library/Purk_axon/Kdr/HH_inactivation/B
-- /library/Purk_axon/KM
-- /library/Purk_axon/KM/HH_activation
-- /library/Purk_axon/KM/HH_activation/A
-- /library/Purk_axon/KM/HH_activation/B
-- /library/Purk_axon/CaP
-- /library/Purk_axon/CaP/HH_activation
-- /library/Purk_axon/CaP/HH_activation/A
-- /library/Purk_axon/CaP/HH_activation/B
-- /library/Purk_axon/CaP/HH_inactivation
-- /library/Purk_axon/CaP/HH_inactivation/A
-- /library/Purk_axon/CaP/HH_inactivation/B
-- /library/Purk_axon/KC
-- /library/Purk_axon/KC/HH_activation
-- /library/Purk_axon/KC/HH_activation/A
-- /library/Purk_axon/KC/HH_activation/B
-- /library/Purk_axon/KC/HH_concentration
-- /library/Purk_axon/KC/HH_concentration/A
-- /library/Purk_axon/KC/HH_concentration/B
-- /library/Purk_axon/K2
-- /library/Purk_axon/K2/HH_activation
-- /library/Purk_axon/K2/HH_activation/A
-- /library/Purk_axon/K2/HH_activation/B
-- /library/Purk_axon/K2/HH_concentration
-- /library/Purk_axon/K2/HH_concentration/A
-- /library/Purk_axon/K2/HH_concentration/B
-- /library/Purk_axon/Ca_pool
-- /library/Purk_axon/Ca_nernst
 - /library/Purk_thickd
-- /library/Purk_thickd/CaT
-- /library/Purk_thickd/CaT/HH_activation
-- /library/Purk_thickd/CaT/HH_activation/A
-- /library/Purk_thickd/CaT/HH_activation/B
-- /library/Purk_thickd/CaT/HH_inactivation
-- /library/Purk_thickd/CaT/HH_inactivation/A
-- /library/Purk_thickd/CaT/HH_inactivation/B
-- /library/Purk_thickd/KA
-- /library/Purk_thickd/KA/HH_activation
-- /library/Purk_thickd/KA/HH_activation/A
-- /library/Purk_thickd/KA/HH_activation/B
-- /library/Purk_thickd/KA/HH_inactivation
-- /library/Purk_thickd/KA/HH_inactivation/A
-- /library/Purk_thickd/KA/HH_inactivation/B
-- /library/Purk_thickd/Kdr
-- /library/Purk_thickd/Kdr/HH_activation
-- /library/Purk_thickd/Kdr/HH_activation/A
-- /library/Purk_thickd/Kdr/HH_activation/B
-- /library/Purk_thickd/Kdr/HH_inactivation
-- /library/Purk_thickd/Kdr/HH_inactivation/A
-- /library/Purk_thickd/Kdr/HH_inactivation/B
-- /library/Purk_thickd/KM
-- /library/Purk_thickd/KM/HH_activation
-- /library/Purk_thickd/KM/HH_activation/A
-- /library/Purk_thickd/KM/HH_activation/B
-- /library/Purk_thickd/CaP
-- /library/Purk_thickd/CaP/HH_activation
-- /library/Purk_thickd/CaP/HH_activation/A
-- /library/Purk_thickd/CaP/HH_activation/B
-- /library/Purk_thickd/CaP/HH_inactivation
-- /library/Purk_thickd/CaP/HH_inactivation/A
-- /library/Purk_thickd/CaP/HH_inactivation/B
-- /library/Purk_thickd/KC
-- /library/Purk_thickd/KC/HH_activation
-- /library/Purk_thickd/KC/HH_activation/A
-- /library/Purk_thickd/KC/HH_activation/B
-- /library/Purk_thickd/KC/HH_concentration
-- /library/Purk_thickd/KC/HH_concentration/A
-- /library/Purk_thickd/KC/HH_concentration/B
-- /library/Purk_thickd/K2
-- /library/Purk_thickd/K2/HH_activation
-- /library/Purk_thickd/K2/HH_activation/A
-- /library/Purk_thickd/K2/HH_activation/B
-- /library/Purk_thickd/K2/HH_concentration
-- /library/Purk_thickd/K2/HH_concentration/A
-- /library/Purk_thickd/K2/HH_concentration/B
-- /library/Purk_thickd/Ca_pool
-- /library/Purk_thickd/Ca_nernst
 - /library/Purk_thickd/CaT
 - /library/Purk_thickd/CaT/HH_activation
 - /library/Purk_thickd/CaT/HH_activation/A
@@ -770,54 +676,6 @@ Principal serial ID = 5551 of 132457 Principal successors
 - /library/Purk_thickd/Ca_pool
 - /library/Purk_thickd/Ca_nernst
 - /library/Purk_spinyd
-- /library/Purk_spinyd/CaT
-- /library/Purk_spinyd/CaT/HH_activation
-- /library/Purk_spinyd/CaT/HH_activation/A
-- /library/Purk_spinyd/CaT/HH_activation/B
-- /library/Purk_spinyd/CaT/HH_inactivation
-- /library/Purk_spinyd/CaT/HH_inactivation/A
-- /library/Purk_spinyd/CaT/HH_inactivation/B
-- /library/Purk_spinyd/KA
-- /library/Purk_spinyd/KA/HH_activation
-- /library/Purk_spinyd/KA/HH_activation/A
-- /library/Purk_spinyd/KA/HH_activation/B
-- /library/Purk_spinyd/KA/HH_inactivation
-- /library/Purk_spinyd/KA/HH_inactivation/A
-- /library/Purk_spinyd/KA/HH_inactivation/B
-- /library/Purk_spinyd/Kdr
-- /library/Purk_spinyd/Kdr/HH_activation
-- /library/Purk_spinyd/Kdr/HH_activation/A
-- /library/Purk_spinyd/Kdr/HH_activation/B
-- /library/Purk_spinyd/Kdr/HH_inactivation
-- /library/Purk_spinyd/Kdr/HH_inactivation/A
-- /library/Purk_spinyd/Kdr/HH_inactivation/B
-- /library/Purk_spinyd/KM
-- /library/Purk_spinyd/KM/HH_activation
-- /library/Purk_spinyd/KM/HH_activation/A
-- /library/Purk_spinyd/KM/HH_activation/B
-- /library/Purk_spinyd/CaP
-- /library/Purk_spinyd/CaP/HH_activation
-- /library/Purk_spinyd/CaP/HH_activation/A
-- /library/Purk_spinyd/CaP/HH_activation/B
-- /library/Purk_spinyd/CaP/HH_inactivation
-- /library/Purk_spinyd/CaP/HH_inactivation/A
-- /library/Purk_spinyd/CaP/HH_inactivation/B
-- /library/Purk_spinyd/KC
-- /library/Purk_spinyd/KC/HH_activation
-- /library/Purk_spinyd/KC/HH_activation/A
-- /library/Purk_spinyd/KC/HH_activation/B
-- /library/Purk_spinyd/KC/HH_concentration
-- /library/Purk_spinyd/KC/HH_concentration/A
-- /library/Purk_spinyd/KC/HH_concentration/B
-- /library/Purk_spinyd/K2
-- /library/Purk_spinyd/K2/HH_activation
-- /library/Purk_spinyd/K2/HH_activation/A
-- /library/Purk_spinyd/K2/HH_activation/B
-- /library/Purk_spinyd/K2/HH_concentration
-- /library/Purk_spinyd/K2/HH_concentration/A
-- /library/Purk_spinyd/K2/HH_concentration/B
-- /library/Purk_spinyd/Ca_pool
-- /library/Purk_spinyd/Ca_nernst
 - /library/Purk_spinyd/CaT
 - /library/Purk_spinyd/CaT/HH_activation
 - /library/Purk_spinyd/CaT/HH_activation/A
