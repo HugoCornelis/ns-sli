@@ -146,7 +146,7 @@ my $test
 						  },
 
 						  {
-						   description => "Can we round down 3.66?",
+						   description => "Can we round up 3.66?",
 						   read => '4',
 						   write => 'echo {round 3.66}',
 						  },
