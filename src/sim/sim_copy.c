@@ -298,16 +298,20 @@ int		valid_index;
 int		i;
 int		status;
 int		do_autoindex;
+int		keep_prototype_traversal;
 
     repeat = 1;
     do_autoindex = 0;
-    initopt(argc, argv, "source-element dest-element -repeat # -autoindex");
+    keep_prototype_traversal = 0;
+    initopt(argc, argv, "source-element dest-element -repeat # -autoindex -keep-prototype-traversal");
     while ((status = G_getopt(argc, argv)) == 1)
       {
 	if (strcmp(G_optopt, "-repeat") == 0)
 	    repeat = atoi(optargv[1]);
 	if (strcmp(G_optopt, "-autoindex") == 0)
 	    do_autoindex = 1;
+	if (strcmp(G_optopt, "-keep-prototype-traversal") == 0)
+	    keep_prototype_traversal = 1;
       }
 
     if (status < 0)
@@ -343,7 +347,7 @@ int		do_autoindex;
     if(ppistSrc){
 
       
-      if( NSCopy(ppistSrc,dst) == 0){
+      if( NSCopy(ppistSrc, dst, keep_prototype_traversal) == 0){
 
 	Error();
 	printf("Can't perform copy on '%s'\n", dst);

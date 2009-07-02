@@ -538,7 +538,8 @@ struct symtab_HSolveListElement *add_compartment(int flags,char *name,char *link
 	    argv[0] = "c_do_copy";
 	    argv[1] = comptname;
 	    argv[2] = name;
-	    do_copy(3,argv);
+	    argv[3] = "-keep-prototype-traversal";
+	    do_copy(4,argv);
 	}
 
 /* 	PidinStackFree(ppistComp); */
