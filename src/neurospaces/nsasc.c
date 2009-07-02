@@ -77,21 +77,19 @@ int AscReset(struct ascfile_type *pasc)
 
     }
 
+    if(!OutputGeneratorInitiate(pasc->pog))
+    {
+
+	fprintf(stdout,
+		"Error: Cound open file \"%s\" for write in asc_file %s\n",
+		pasc->filename,
+		pasc->name);
+
+	return -1;
+
+    }
+
   }
-
-
-  if(!OutputGeneratorInitiate(pasc->pog))
-  {
-
-    fprintf(stdout,
-	    "Error: Cound open file \"%s\" for write in asc_file %s\n",
-	    pasc->filename,
-	    pasc->name);
-
-    return -1;
-
-  }
-
 
   return 1;
 }
