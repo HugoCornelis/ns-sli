@@ -101,7 +101,9 @@ int NSCreate( char* name,  char* pcParent, char* pcType){
      iResult = NSINTEGRATOR_NERNST;
 
    }
-   else if(!strcmp("synchan",pcType)){
+   else if(strcmp("synchan",pcType) == 0
+	   || strcmp("channelC2",pcType) == 0
+	   || strcmp("channelC3",pcType) == 0){
 
      phsleChild = SynChannelCalloc();
 

@@ -185,12 +185,10 @@ int iInModelContainer;
 
     //hack-------------------------------------------------------------------
     
-    int iModelContainerResult;
-    
     if(iInModelContainer==1)
     {
 
-      iModelContainerResult = NSCreate(name,pcParent,object_name);
+	int iModelContainerResult = NSCreate(name,pcParent,object_name);
 
       if(iModelContainerResult == -1){
 
@@ -419,6 +417,8 @@ int                   i,j = 0;
        !strcmp("compartment",type) ||
        !strcmp("Ca_concen",type) ||
        !strcmp("nernst",type) ||
+       !strcmp("channelC2",type) ||
+       !strcmp("channelC3",type) ||
        !strcmp("synchan",type) )
       iInModelContainer = 1;
 
