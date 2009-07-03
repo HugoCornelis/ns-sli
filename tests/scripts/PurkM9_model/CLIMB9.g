@@ -51,7 +51,7 @@ make_Purkinje_comps
 
 /* create the model and set up the run cell mode */
 // read cell date from .p file and make hsolve element
-readcell Purk2M9.p {cellpath} -hsolve
+readcell tests/scripts/PurkM9_model/Purk2M9.p {cellpath} -hsolve
 
 /* make climbing fiber presynaptic elements */
 create neutral {cellpath}/climb_presyn1
@@ -123,7 +123,8 @@ hstr={findsolvefield {cellpath} {cellpath}/b3s44[20]/K2 Ik}
 addmsg {cellpath} /output/plot_out SAVE {hstr}
 hstr={findsolvefield {cellpath} {cellpath}/b3s44[20]/KM Ik}
 addmsg {cellpath} /output/plot_out SAVE {hstr}
-setfield /output/plot_out filename {filename} initialize 1 append 1 leave_open 1
+// setfield /output/plot_out filename {filename} initialize 1 append 1 leave_open 1
+setfield /output/plot_out filename {filename} leave_open 1
 
 reset
 
