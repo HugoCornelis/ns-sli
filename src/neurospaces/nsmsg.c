@@ -885,16 +885,40 @@ int NSProcessMessages(struct neurospaces_integrator *pnsintegrator)
 	  double *pdValue
 	      = HeccerAddressVariable(ppheccer[0], iTarget, ppioMsg[i]->pcMsgName);
 
-	  if(!strcmp(ppioMsg[i]->pcMsgName,"activation")){
-	      //- add source to target
+	  if (pdValue)
+	  {
+	      if (!strcmp(ppioMsg[i]->pcMsgName,"activation"))
+	      {
+		  //- add source to target
 
-	      *pdValue += ppioMsg[i]->dValue * clock_value[0];
+		  *pdValue += ppioMsg[i]->dValue * clock_value[0];
+	      }
+	      else
+	      {
+		  Error();
+
+		  fprintf(stderr,
+			  "Error accessing numeric field %s, only activation is supported.\n",
+			  ppioMsg[i]->pcSourceField);
+
+		  return -1;
+	      }
 	  }
 	  else
+	  {
+	      Error();
+
+	      fprintf(stderr,
+		      "Error accessing numeric field %s, field not found in heccer.\n",
+		      ppioMsg[i]->pcSourceField);
+
 	      return -1;
+	  }
       }
       else
       {
+	  Error();
+
 	  fprintf(stderr,
 		  "Error accessing numeric field %s.\n",
 		  ppioMsg[i]->pcSourceField);
