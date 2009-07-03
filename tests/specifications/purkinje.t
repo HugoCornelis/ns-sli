@@ -212,9 +212,9 @@ my $test
 						   {
 						    comment => 'note the differences when using G2 tabchans, G3 ns-sli and plain G3',
 						    description => "What are the forestspace IDs for the segment b0s01[1] ?",
-						    disabled => 'working on the use of BIOCOMP_OPTION_NO_PROTOTYPE_TRAVERSAL',
-						    read => 'Traversal serial ID = 5551
-Principal serial ID = 5551 of 132457 Principal successors
+# 						    disabled => 'working on the use of BIOCOMP_OPTION_NO_PROTOTYPE_TRAVERSAL',
+						    read => 'Traversal serial ID = 2623
+Principal serial ID = 2623 of 56137 Principal successors
 ',
 						    # Mechanism serial ID = 649 of 12914 Mechanism successors
 						    # Segment  serial  ID = 72 of 4548  Segment  successors
@@ -237,7 +237,6 @@ Principal serial ID = 5551 of 132457 Principal successors
 
 						  {
 						   description => "Can we reduce the model ?",
-						   wait => 20,
 						   write => "reduce",
 						  },
 						  (
@@ -246,6 +245,7 @@ Principal serial ID = 5551 of 132457 Principal successors
 						     description => "After reducing, what is the capacitance of the soma ?",
 						     read => 'value = 0.0164
 ',
+						     timeout => 20,
 						     write => "printparameter /Purkinje/soma CM",
 						    },
 						    {
@@ -434,9 +434,9 @@ Principal serial ID = 5551 of 132457 Principal successors
 						    {
 						     comment => 'note the differences when using G2 tabchans, G3 ns-sli and plain G3',
 						     description => "After reducing, what are the forestspace IDs for the segment b0s01[1] ?",
-						     disabled => 'working on the use of BIOCOMP_OPTION_NO_PROTOTYPE_TRAVERSAL',
-						     read => 'Traversal serial ID = 5551
-Principal serial ID = 5551 of 132457 Principal successors
+# 						     disabled => 'working on the use of BIOCOMP_OPTION_NO_PROTOTYPE_TRAVERSAL',
+						    read => 'Traversal serial ID = 2623
+Principal serial ID = 2623 of 56137 Principal successors
 ',
 						     # Mechanism serial ID = 649 of 12914 Mechanism successors
 						     # Segment  serial  ID = 72 of 4548  Segment  successors
@@ -904,7 +904,7 @@ VM Membrane Potentials (pdVms[0]) : (-0.068)
 						   {
 						    description => 'Do we see the simulation time after the simulation has finished ?',
 						    read => 'time = 0.040000 ; step = 2000',
-						    wait => 20,
+						    timeout => 20,
 						   },
 						   {
 						    description => 'Quit the simulator.',
@@ -914,7 +914,7 @@ VM Membrane Potentials (pdVms[0]) : (-0.068)
 						   {
 						    comment => "The output file generated using Genesis 2.2.1 is not used for this test.",
 						    description => "Is the generated output correct ?",
-						    numerical_compare => 'small differences',
+						    numerical_compare => 'small differences between the output of different architectures',
 						    read => {
 							     application_output_file => "$::config->{core_directory}/results/PurkM9_main1_only_-0.1nA",
 							     expected_output_file => "$::config->{core_directory}/tests/specifications/strings/PurkM9_main1_only_-0.1nA",
@@ -937,6 +937,164 @@ VM Membrane Potentials (pdVms[0]) : (-0.068)
 					       sub
 					       {
 						   `rm "$::config->{core_directory}/results/PurkM9_main1_only_-0.1nA"`;
+						   `rmdir results`;
+					       },
+					      },
+			       },
+			       {
+				arguments => [
+					      "$::config->{core_directory}/tests/scripts/PurkM9_model/CURRENT9.g",
+					     ],
+				command => 'src/nsgenesis',
+				command_tests => [
+						  (
+						   {
+						    description => "Can the morphology be read ?",
+						    read => 'tests/scripts/PurkM9_model/Purk2M9.p read: 1600 compartments',
+						    timeout => 10,
+						   },
+						   {
+						    description => "Do we have all the segments?",
+						    read => 'Number of segments : 1600
+',
+						    write => 'segmentcount /Purkinje',
+						   },
+						   {
+						    description => "Wat is the unscaled capacitance of the segments in the library ?",
+						    read => '/library/Purk_soma->CM = 0.0164
+/library/Purk_maind->CM = 0.0164
+/library/Purk_axon->CM = 0.0164
+/library/Purk_thickd->CM = 0.0164
+/library/Purk_spinyd->CM = 0.0164
+',
+						    write => "printparameter /library/** CM",
+						   },
+						   {
+						    description => "What is the unscaled membrane resistance of the segments in the library ?",
+						    read => '/library/Purk_soma->RM = 1
+/library/Purk_maind->RM = 3
+/library/Purk_axon->RM = 3
+/library/Purk_thickd->RM = 3
+/library/Purk_spinyd->RM = 3
+',
+						    write => "printparameter /library/** RM",
+						   },
+						   {
+						    comment => 'Some of these values should be rounded',
+						    description => "What is the unscaled conductance of the membrane channels in the library ?",
+						    read => '/library/Purk_NaF->G_MAX = 1
+/library/Purk_NaP->G_MAX = 1
+/library/Purk_CaP->G_MAX = 1
+/library/Purk_CaT->G_MAX = 1
+/library/Purk_KA->G_MAX = 1
+/library/Purk_KC->G_MAX = 1
+/library/Purk_K2->G_MAX = 1
+/library/Purk_Kdr->G_MAX = 1
+/library/Purk_KM->G_MAX = 1
+/library/Purk_h1->G_MAX = 1
+/library/Purk_h2->G_MAX = 1
+/library/Purk_soma/NaF->G_MAX = 74999.9
+/library/Purk_soma/NaP->G_MAX = 9.99999
+/library/Purk_soma/CaT->G_MAX = 5
+/library/Purk_soma/KA->G_MAX = 150
+/library/Purk_soma/Kdr->G_MAX = 5999.99
+/library/Purk_soma/KM->G_MAX = 0.4
+/library/Purk_soma/h1->G_MAX = 3
+/library/Purk_soma/h2->G_MAX = 3
+/library/Purk_maind/CaT->G_MAX = 5
+/library/Purk_maind/KA->G_MAX = 20
+/library/Purk_maind/Kdr->G_MAX = 599.999
+/library/Purk_maind/KM->G_MAX = 0.0999999
+/library/Purk_maind/CaP->G_MAX = 45
+/library/Purk_maind/KC->G_MAX = 799.999
+/library/Purk_maind/K2->G_MAX = 3.9
+/library/Purk_thickd/CaT->G_MAX = 5
+/library/Purk_thickd/CaP->G_MAX = 45
+/library/Purk_thickd/KM->G_MAX = 0.13
+/library/Purk_thickd/KC->G_MAX = 799.999
+/library/Purk_thickd/K2->G_MAX = 3.9
+/library/Purk_spinyd/CaT->G_MAX = 5
+/library/Purk_spinyd/CaP->G_MAX = 45
+/library/Purk_spinyd/KM->G_MAX = 0.13
+/library/Purk_spinyd/KC->G_MAX = 799.999
+/library/Purk_spinyd/K2->G_MAX = 3.9
+',
+						    write => "printparameter /library/** G_MAX",
+						   },
+						   {
+						    description => "What are the parameters of one of the segments in the reconstructed morphology ?",
+						    read => '#!neurospacesparse
+// -*- NEUROSPACES -*-
+
+NEUROSPACES NDF
+
+IMPORT
+END IMPORT
+
+PRIVATE_MODELS
+END PRIVATE_MODELS
+
+PUBLIC_MODELS
+  ALIAS b3s46[0]::/Purk_thickd b3s46[0]
+    PARAMETERS
+      PARAMETER ( ELEAK = -0.08 ),
+      PARAMETER ( Vm_init = -0.068 ),
+      PARAMETER ( RM = 3 ),
+      PARAMETER ( CM = 0.0164 ),
+      PARAMETER ( SURFACE = 8.70133e-11 ),
+      PARAMETER ( rel_Z = 6.669e-06 ),
+      PARAMETER ( rel_Y = 0 ),
+      PARAMETER ( rel_X = 2.223e-06 ),
+      PARAMETER ( Z = 0.000218287 ),
+      PARAMETER ( Y = 3.6151e-05 ),
+      PARAMETER ( X = -7.66e-06 ),
+      PARAMETER ( LENGTH = 7.02974e-06 ),
+      PARAMETER ( DIA = 3.94e-06 ),
+      PARAMETER ( RA = 2.5 ),
+      PARAMETER ( PARENT = ../br3[16] ),
+    END PARAMETERS
+  END ALIAS
+END PUBLIC_MODELS
+',
+						    write => "export ndf STDOUT /Purkinje/b3s46[0]"
+						   },
+						   {
+						    description => 'Quit the model-container querymachine.',
+						    write => 'quit',
+						   },
+						   {
+						    description => 'Do we see the simulation time after the simulation has finished ?',
+						    read => 'time = 0.500060 ; step = 25003',
+						    timeout => 200,
+						   },
+						   {
+						    comment => "The output file generated using Genesis 2.2.1 is not used for this test.",
+						    description => "Is the generated output correct ?",
+						    numerical_compare => 'small differences between the output of different architectures',
+						    read => {
+							     application_output_file => "$::config->{core_directory}/results/PurkM9_soma_1.5nA",
+							     expected_output_file => "$::config->{core_directory}/tests/specifications/strings/PurkM9_soma_1.5nA.g3",
+							    },
+						    wait => 1,
+						   },
+						  ),
+						 ],
+				comment => 'This test uses the original scripts of the Purkinje cell model',
+				description => 'Running the full purkinje cell, active channels, current injections',
+				preparation => {
+						description => "Create the results directory",
+						preparer =>
+						sub
+						{
+						    `mkdir results`;
+						},
+					       },
+				reparation => {
+					       description => "Remove the generated output files in the results directory",
+					       reparer =>
+					       sub
+					       {
+# 						   `rm "$::config->{core_directory}/results/PurkM9_soma_1.5nA"`;
 						   `rmdir results`;
 					       },
 					      },

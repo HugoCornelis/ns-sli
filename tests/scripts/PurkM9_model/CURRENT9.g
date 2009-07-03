@@ -46,6 +46,8 @@ make_Purkinje_comps
 // read cell data from .p file and create hsolve element
 readcell tests/scripts/PurkM9_model/Purk2M9.p {cellpath} -hsolve
 
+call /model_container NEUROSPACES_QUERY
+
 /* Set the clocks */
 for (i = 0; i <= 8; i = i + 1)
     setclock {i} {dt}
@@ -79,18 +81,19 @@ addmsg {cellpath} /output/plot_out SAVE {hstr}
 hstr={findsolvefield {cellpath} {cellpath}/b3s44[20]/Ca_pool Ca}
 addmsg {cellpath} /output/plot_out SAVE {hstr}
 /* Output currents as in Fig. 4D: requires chanmode 4 */
-hstr={findsolvefield {cellpath} {cellpath}/b3s44[20]/CaP Ik}
-addmsg {cellpath} /output/plot_out SAVE {hstr}
-hstr={findsolvefield {cellpath} {cellpath}/b3s44[20]/CaT Ik}
-addmsg {cellpath} /output/plot_out SAVE {hstr}
-hstr={findsolvefield {cellpath} {cellpath}/b3s44[20]/KC Ik}
-addmsg {cellpath} /output/plot_out SAVE {hstr}
-hstr={findsolvefield {cellpath} {cellpath}/b3s44[20]/K2 Ik}
-addmsg {cellpath} /output/plot_out SAVE {hstr}
-hstr={findsolvefield {cellpath} {cellpath}/b3s44[20]/KM Ik}
-addmsg {cellpath} /output/plot_out SAVE {hstr}
+// hstr={findsolvefield {cellpath} {cellpath}/b3s44[20]/CaP Ik}
+// addmsg {cellpath} /output/plot_out SAVE {hstr}
+// hstr={findsolvefield {cellpath} {cellpath}/b3s44[20]/CaT Ik}
+// addmsg {cellpath} /output/plot_out SAVE {hstr}
+// hstr={findsolvefield {cellpath} {cellpath}/b3s44[20]/KC Ik}
+// addmsg {cellpath} /output/plot_out SAVE {hstr}
+// hstr={findsolvefield {cellpath} {cellpath}/b3s44[20]/K2 Ik}
+// addmsg {cellpath} /output/plot_out SAVE {hstr}
+// hstr={findsolvefield {cellpath} {cellpath}/b3s44[20]/KM Ik}
+// addmsg {cellpath} /output/plot_out SAVE {hstr}
 // setfield /output/plot_out filename {filename} initialize 1 append 1 leave_open 1
-setfield /output/plot_out filename {filename} append 1 leave_open 1
+// setfield /output/plot_out filename {filename} append 1 leave_open 1
+setfield /output/plot_out filename {filename} leave_open 1
 
 reset
 
@@ -98,7 +101,7 @@ reset
 step 0.10 -time
 hstr={findsolvefield {cellpath} {cellpath}/soma inject}
 setfield {cellpath} {hstr} {inject*1.e-9}
-step 1.0 -time
+step 0.3 -time
 setfield {cellpath} {hstr} 0.0
-step 0.2 -time
+step 0.1 -time
 quit
