@@ -57,28 +57,97 @@ readcell tests/scripts/PurkM9_model/Purk2M9.p {cellpath} -hsolve
 create neutral {cellpath}/climb_presyn1
 disable {cellpath}/climb_presyn1
 setfield {cellpath}/climb_presyn1 z 0
-addmsg {cellpath}/climb_presyn1 {cellpath}/main[0-2]/climb ACTIVATION z
+//addmsg {cellpath}/climb_presyn1 {cellpath}/main[0-2]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn1 {cellpath}/main[0]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn1 {cellpath}/main[1]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn1 {cellpath}/main[2]/climb ACTIVATION z
 create neutral {cellpath}/climb_presyn2
 disable {cellpath}/climb_presyn2
 setfield {cellpath}/climb_presyn2 z 0
-addmsg {cellpath}/climb_presyn2 {cellpath}/main[3-8]/climb ACTIVATION z
+//addmsg {cellpath}/climb_presyn2 {cellpath}/main[3-8]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn2 {cellpath}/main[3]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn2 {cellpath}/main[4]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn2 {cellpath}/main[5]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn2 {cellpath}/main[6]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn2 {cellpath}/main[7]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn2 {cellpath}/main[8]/climb ACTIVATION z
 create neutral {cellpath}/climb_presyn3
 disable {cellpath}/climb_presyn3
 setfield {cellpath}/climb_presyn3 z 0
-addmsg {cellpath}/climb_presyn3 {cellpath}/br1[0-6]/climb ACTIVATION z
-addmsg {cellpath}/climb_presyn3 {cellpath}/br2[0-6]/climb ACTIVATION z
+// addmsg {cellpath}/climb_presyn3 {cellpath}/br1[0-6]/climb ACTIVATION z
+// addmsg {cellpath}/climb_presyn3 {cellpath}/br2[0-6]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn3 {cellpath}/br1[0]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn3 {cellpath}/br1[1]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn3 {cellpath}/br1[2]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn3 {cellpath}/br1[3]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn3 {cellpath}/br1[4]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn3 {cellpath}/br1[5]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn3 {cellpath}/br1[6]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn3 {cellpath}/br2[0]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn3 {cellpath}/br2[1]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn3 {cellpath}/br2[2]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn3 {cellpath}/br2[3]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn3 {cellpath}/br2[4]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn3 {cellpath}/br2[5]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn3 {cellpath}/br2[6]/climb ACTIVATION z
 create neutral {cellpath}/climb_presyn4
 disable {cellpath}/climb_presyn4
 setfield {cellpath}/climb_presyn4 z 0
-addmsg {cellpath}/climb_presyn4 {cellpath}/br1[7-12]/climb ACTIVATION z
-addmsg {cellpath}/climb_presyn4 {cellpath}/br2[7-12]/climb ACTIVATION z
-addmsg {cellpath}/climb_presyn4 {cellpath}/br3[0-8]/climb ACTIVATION z
+// addmsg {cellpath}/climb_presyn4 {cellpath}/br1[7-12]/climb ACTIVATION z
+// addmsg {cellpath}/climb_presyn4 {cellpath}/br2[7-12]/climb ACTIVATION z
+// addmsg {cellpath}/climb_presyn4 {cellpath}/br3[0-8]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn4 {cellpath}/br1[7]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn4 {cellpath}/br1[8]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn4 {cellpath}/br1[9]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn4 {cellpath}/br1[10]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn4 {cellpath}/br1[11]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn4 {cellpath}/br1[12]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn4 {cellpath}/br2[7]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn4 {cellpath}/br2[8]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn4 {cellpath}/br2[9]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn4 {cellpath}/br2[10]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn4 {cellpath}/br2[11]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn4 {cellpath}/br2[12]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn4 {cellpath}/br3[0]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn4 {cellpath}/br3[1]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn4 {cellpath}/br3[2]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn4 {cellpath}/br3[3]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn4 {cellpath}/br3[4]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn4 {cellpath}/br3[5]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn4 {cellpath}/br3[6]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn4 {cellpath}/br3[7]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn4 {cellpath}/br3[8]/climb ACTIVATION z
 create neutral {cellpath}/climb_presyn5
 disable {cellpath}/climb_presyn5
 setfield {cellpath}/climb_presyn5 z 0
-addmsg {cellpath}/climb_presyn5 {cellpath}/br1[13-20]/climb ACTIVATION z
-addmsg {cellpath}/climb_presyn5 {cellpath}/br2[13-21]/climb ACTIVATION z
-addmsg {cellpath}/climb_presyn5 {cellpath}/br3[9-16]/climb ACTIVATION z
+// addmsg {cellpath}/climb_presyn5 {cellpath}/br1[13-20]/climb ACTIVATION z
+// addmsg {cellpath}/climb_presyn5 {cellpath}/br2[13-21]/climb ACTIVATION z
+// addmsg {cellpath}/climb_presyn5 {cellpath}/br3[9-16]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn5 {cellpath}/br1[13]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn5 {cellpath}/br1[14]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn5 {cellpath}/br1[15]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn5 {cellpath}/br1[16]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn5 {cellpath}/br1[17]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn5 {cellpath}/br1[18]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn5 {cellpath}/br1[19]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn5 {cellpath}/br1[20]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn5 {cellpath}/br2[13]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn5 {cellpath}/br2[14]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn5 {cellpath}/br2[15]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn5 {cellpath}/br2[16]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn5 {cellpath}/br2[17]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn5 {cellpath}/br2[18]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn5 {cellpath}/br2[19]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn5 {cellpath}/br2[20]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn5 {cellpath}/br2[21]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn5 {cellpath}/br3[9]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn5 {cellpath}/br3[10]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn5 {cellpath}/br3[11]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn5 {cellpath}/br3[12]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn5 {cellpath}/br3[13]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn5 {cellpath}/br3[14]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn5 {cellpath}/br3[15]/climb ACTIVATION z
+addmsg {cellpath}/climb_presyn5 {cellpath}/br3[16]/climb ACTIVATION z
 
 /* Set the clocks */
 for (i = 0; i <= 8; i = i + 1)
@@ -113,16 +182,16 @@ addmsg {cellpath} /output/plot_out SAVE {hstr}
 hstr={findsolvefield {cellpath} {cellpath}/b3s44[20]/Ca_pool Ca}
 addmsg {cellpath} /output/plot_out SAVE {hstr}
 /* Output currents as in Fig. 4D: requires chanmode 4 */
-hstr={findsolvefield {cellpath} {cellpath}/b3s44[20]/CaP Ik}
-addmsg {cellpath} /output/plot_out SAVE {hstr}
-hstr={findsolvefield {cellpath} {cellpath}/b3s44[20]/CaT Ik}
-addmsg {cellpath} /output/plot_out SAVE {hstr}
-hstr={findsolvefield {cellpath} {cellpath}/b3s44[20]/KC Ik}
-addmsg {cellpath} /output/plot_out SAVE {hstr}
-hstr={findsolvefield {cellpath} {cellpath}/b3s44[20]/K2 Ik}
-addmsg {cellpath} /output/plot_out SAVE {hstr}
-hstr={findsolvefield {cellpath} {cellpath}/b3s44[20]/KM Ik}
-addmsg {cellpath} /output/plot_out SAVE {hstr}
+// hstr={findsolvefield {cellpath} {cellpath}/b3s44[20]/CaP Ik}
+// addmsg {cellpath} /output/plot_out SAVE {hstr}
+// hstr={findsolvefield {cellpath} {cellpath}/b3s44[20]/CaT Ik}
+// addmsg {cellpath} /output/plot_out SAVE {hstr}
+// hstr={findsolvefield {cellpath} {cellpath}/b3s44[20]/KC Ik}
+// addmsg {cellpath} /output/plot_out SAVE {hstr}
+// hstr={findsolvefield {cellpath} {cellpath}/b3s44[20]/K2 Ik}
+// addmsg {cellpath} /output/plot_out SAVE {hstr}
+// hstr={findsolvefield {cellpath} {cellpath}/b3s44[20]/KM Ik}
+// addmsg {cellpath} /output/plot_out SAVE {hstr}
 // setfield /output/plot_out filename {filename} initialize 1 append 1 leave_open 1
 setfield /output/plot_out filename {filename} leave_open 1
 

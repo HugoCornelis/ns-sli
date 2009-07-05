@@ -909,8 +909,8 @@ int NSProcessMessages(struct neurospaces_integrator *pnsintegrator)
 	      Error();
 
 	      fprintf(stderr,
-		      "Error accessing numeric field %s, field not found in heccer.\n",
-		      ppioMsg[i]->pcSourceField);
+		      "Error processing message from %s to %s, %s field not found in heccer.\n",
+		      ppioMsg[i]->pcSourceField, ppioMsg[i]->pcMsgName, ppioMsg[i]->pcMsgName);
 
 	      return -1;
 	  }

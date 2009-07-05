@@ -1094,13 +1094,62 @@ END PUBLIC_MODELS
 					       reparer =>
 					       sub
 					       {
-# 						   `rm "$::config->{core_directory}/results/PurkM9_soma_1.5nA"`;
+ 						   `rm "$::config->{core_directory}/results/PurkM9_soma_1.5nA"`;
+						   `rmdir results`;
+					       },
+					      },
+			       },
+			       {
+				arguments => [
+					      "$::config->{core_directory}/tests/scripts/PurkM9_model/CLIMB9.g",
+					     ],
+				command => 'src/nsgenesis',
+				command_tests => [
+						  (
+						   {
+						    description => "Can the morphology be read ?",
+						    read => 'tests/scripts/PurkM9_model/Purk2M9.p read: 1600 compartments',
+						    timeout => 10,
+						   },
+						   {
+						    description => 'Do we see the simulation time after the simulation has finished ?',
+						    read => 'time = 0.301160 ; step = 15058',
+						    timeout => 200,
+						   },
+						   {
+						    comment => "The output file generated using Genesis 2.2.1 is not used for this test.",
+						    description => "Is the generated output correct ?",
+						    numerical_compare => 'small differences between the output of different architectures',
+						    read => {
+							     application_output_file => "$::config->{core_directory}/results/PurkM9_CS",
+							     expected_output_file => "$::config->{core_directory}/tests/specifications/strings/PurkM9_CS.g3",
+							    },
+						    wait => 1,
+						   },
+						  ),
+						 ],
+				comment => 'This test uses the original scripts of the Purkinje cell model',
+				description => 'Running the full purkinje cell, active channels, current injections',
+				preparation => {
+						description => "Create the results directory",
+						preparer =>
+						sub
+						{
+						    `mkdir results`;
+						},
+					       },
+				reparation => {
+					       description => "Remove the generated output files in the results directory",
+					       reparer =>
+					       sub
+					       {
+ 						   `rm "$::config->{core_directory}/results/PurkM9_CS"`;
 						   `rmdir results`;
 					       },
 					      },
 			       },
 			      ],
-       description => "EDS purkinje cell model simplification",
+       description => "EDS purkinje cell model simplification and simulations",
        name => 'purkinje.t',
       };
 

@@ -59,7 +59,7 @@
 #define MAX_ASCFILES 200
 
 
-#define NUMBER_OF_MESSAGES 20
+#define NUMBER_OF_MESSAGES 1000
 
 #define HARDCODED_ROOT "hardcoded_neutral"
 
