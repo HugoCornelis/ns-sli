@@ -73,7 +73,7 @@
 
 #include <stdlib.h>
 #include <string.h>	/* strchr */
-#include "result.h"
+#include "script/result.h"
 #include "shell_struct.h"
 
 /*

@@ -8,6 +8,7 @@
 
 %{
 #include "src/config.h"
+/* #include "src/shell/shell_func_ext.h" */
 %}
 
 %inline %{
@@ -59,7 +60,22 @@ double double_get(double *a, int i)
     return a[i];
 }
 
+int memusage () { return 0; }
+
+int IncludeG2Script(char *pcScript)
+{
+    extern int      IncludeScript();
+
+    char *argv[10];
+
+    argv[0] = pcScript;
+
+    return(IncludeScript(1, argv));
+}
+
+
 %}
 
 %include "src/config.h"
+/* %include "src/shell/shell_func_ext.h" */
 

@@ -94,7 +94,7 @@ case "$host_os" in
     PERLLIB_EXTENSION='dylib'
     AC_SUBST(PERLLIB_EXTENSION)
 
-    SWIGCOMPILELINKSFORPERL='-I$(srcdir)/../../.. 	-I$(top_builddir) 	-ffloat-store 	-I../../.. 	-include src/config.h 	-g 	-O0 	-dynamic 	-fPIC 	`perl -MExtUtils::Embed -e ccopts | perl -pe 's/\-arch\s\S+\s//g'`'
+    SWIGCOMPILELINKSFORPERL='-I$(srcdir)/../../.. 	-I$(top_builddir) 	-ffloat-store 	-I../../../src 	-include src/config.h 	-g 	-O0 	-dynamic 	-fPIC 	`perl -MExtUtils::Embed -e ccopts | perl -pe 's/\-arch\s\S+\s//g'`'
     AC_SUBST(SWIGCOMPILELINKSFORPERL)
 
     SWIGCOMPILECOMMAND_PERL='gcc         $(SWIGCOMPILELINKSFORPERL)         -c swiggable_sli_wrap.c'
@@ -102,8 +102,9 @@ case "$host_os" in
 
  
 
-    SWIGLDLINKSFORPERL='-L../../.. 	-lheccer -L../../../integrators  	-L/usr/local/lib/model-container 	-lneurospacesread 	-L/usr/local/lib/neurospaces/algorithms/symbol 	-lsymbol_algorithms 	-lncurses -lreadline 	-bundle 	-undefined suppress 	-flat_namespace'
+    SWIGLDLINKSFORPERL='-L../../.. 	-lheccer -L../../../integrators  	-L/usr/local/lib/model-container 	-lneurospacesread 	-L/usr/local/lib/neurospaces/algorithms/symbol 	-lsymbol_algorithms 	-lncurses -lreadline 	-bundle 	-undefined suppress 	-flat_namespace	$(shelldir)/shell_lib.o	$(simdir)/libsim.a	$(shelldir)/libshell.a	$(utildir)/libutil.a	$(scriptdir)/libscript.a	$(olfdir)/libolf.a	$(nsdir)/libneurospaces.a	-L${libdir}/model-container -lneurospacesread	-L${libdir}/neurospaces/algorithms/symbol -lsymbol_algorithms	-L${libdir}/heccer -lheccer	-L${libdir}/heccer -lhneurospaces	$(SYSLIBLINKS)'
     AC_SUBST(SWIGLDLINKSFORPERL)
+
 
     SWIGLINKCOMMAND_PERL='ld 	$(SWIGLDLINKSFORPERL) 	-o SwiggableSLI.$(PERLLIB_EXTENSION) 	swiggable_sli_wrap.o'
     AC_SUBST(SWIGLINKCOMMAND_PERL)
@@ -152,14 +153,14 @@ case "$host_os" in
     AC_SUBST(PERLLIB_EXTENSION)
 
 
-    SWIGCOMPILELINKSFORPERL='-I$(srcdir)/../../.. -I$(top_builddir) -ffloat-store -I../../.. -include src/config.h -g -O0 -fPIC `perl -MExtUtils::Embed -e ccopts`'
+    SWIGCOMPILELINKSFORPERL='-I$(srcdir)/../../.. -I$(top_builddir) -ffloat-store -I../../../src -include src/config.h -g -O0 -fPIC `perl -MExtUtils::Embed -e ccopts`'
     AC_SUBST(SWIGCOMPILELINKSFORPERL)
 
     SWIGCOMPILECOMMAND_PERL='gcc $(SWIGCOMPILELINKSFORPERL) -c swiggable_sli_wrap.c'
     AC_SUBST(SWIGCOMPILECOMMAND_PERL)
 
 
-    SWIGLDLINKSFORPERL='-g -shared swiggable_sli_wrap.o -L../../.. -lheccer -L../../../integrators -L/usr/local/lib/model-container -lneurospacesread -L/usr/local/lib/neurospaces/algorithms/symbol -lsymbol_algorithms -lncurses -lreadline -lhistory -fPIC'
+    SWIGLDLINKSFORPERL='-g -shared swiggable_sli_wrap.o -L../../.. -lheccer -L../../../integrators -L/usr/local/lib/model-container -lneurospacesread -L/usr/local/lib/neurospaces/algorithms/symbol -lsymbol_algorithms -lncurses -lreadline -lhistory -fPIC	$(shelldir)/shell_lib.o	$(simdir)/libsim.a	$(shelldir)/libshell.a	$(utildir)/libutil.a	$(scriptdir)/libscript.a	$(olfdir)/libolf.a	$(nsdir)/libneurospaces.a	-L${libdir}/model-container -lneurospacesread	-L${libdir}/neurospaces/algorithms/symbol -lsymbol_algorithms	-L${libdir}/heccer -lheccer	-L${libdir}/heccer -lhneurospaces	$(SYSLIBLINKS)'
     AC_SUBST(SWIGLDLINKSFORPERL)
 
     SWIGLINKCOMMAND_PERL='gcc $(SWIGLDLINKSFORPERL) -o SwiggableSLI.$(PERLLIB_EXTENSION)'

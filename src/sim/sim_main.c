@@ -161,6 +161,7 @@ static char rcsid[] = "$Id: sim_main.c,v 1.6 2005/10/16 20:48:35 svitak Exp $";
 #include <setjmp.h>
 #include "sim.h"
 #include "shell_func_ext.h"
+#include "sim_func_ext.h"
 #include "ss_func_ext.h"
 #include "system_deps.h"
 

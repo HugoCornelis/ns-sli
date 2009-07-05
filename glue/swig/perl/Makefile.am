@@ -1,5 +1,12 @@
 SUBDIRS = 
 
+utildir = $(top_srcdir)/src/util
+scriptdir = $(top_srcdir)/src/script
+shelldir = $(top_srcdir)/src/shell
+simdir = $(top_srcdir)/src/sim
+nsdir = $(top_srcdir)/src/neurospaces
+olfdir = $(top_srcdir)/src/olf
+
 
 #t the following rules are crap complete, would be good if a auto
 #t expert takes a look at it.
@@ -23,8 +30,6 @@ perl_DATA = sli_test.pm SwiggableSLI.pm SwiggableSLI.$(PERLLIB_EXTENSION)
 BUILT_SOURCES = \
 	SwiggableSLI.pm \
 	swiggable_sli_wrap.c
-
-#t the configuration should say if this depends on neurospaces or not
 
 SwiggableSLI.pm swiggable_sli_wrap.c: $(swig_DATA)
 	swig -I/usr/local/neurospaces/instrumentor -I$(srcdir)/../../.. -I$(top_builddir) -perl5 -makedefault -module SwiggableSLI -o swiggable_sli_wrap.c $(srcdir)/sli.i

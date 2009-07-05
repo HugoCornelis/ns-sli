@@ -37,11 +37,10 @@ use Data::Dumper;
 
 use SLI;
 
-use SwiggableSLI;
-
 
 print "SLI loaded\n";
 
+SLI::include_script("sli_test.g");
 
 print "Perl script finished\n";
 
