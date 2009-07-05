@@ -1129,7 +1129,7 @@ END PUBLIC_MODELS
 						  ),
 						 ],
 				comment => 'This test uses the original scripts of the Purkinje cell model',
-				description => 'Running the full purkinje cell, active channels, current injections',
+				description => 'Running the full purkinje cell, active channels, complex spike',
 				preparation => {
 						description => "Create the results directory",
 						preparer =>
