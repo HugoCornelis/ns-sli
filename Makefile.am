@@ -1,4 +1,6 @@
-SUBDIRS = src
+SUBDIRS = \
+	src \
+	glue
 
 
 EXTRA_DIST = \

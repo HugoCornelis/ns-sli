@@ -15,6 +15,7 @@ AC_CONFIG_HEADER(src/config.h)
 AM_INIT_AUTOMAKE(ns-sli, python-2)
 
 
+# Checks for programs.
 AC_PROG_CC
 AC_PROG_YACC
 AC_PROG_LEX
@@ -27,15 +28,46 @@ AC_PATH_PROGS(PERL, perl perl5)
 
 AC_PATH_PROGS(DOXYGEN,doxygen,["NULL"])
 
+dnl Check for Python and it's headers
+AM_PATH_PYTHON(,[],[
+   echo "Python is not installed."
+   exit -1
+])
+
+
+case $PYTHON_PREFIX in
+  *)   
+    PYTHON_PREFIX=`echo $PYTHON | sed -e "s,[[^/]]*$,,;s,/$,,;s,^$,.,"`
+    PYTHON_PREFIX=`echo $PYTHON_PREFIX | sed -e "s,[[^/]]*$,,;s,/$,,;s,^$,.,"`
+    PYTHONHOME=$PYTHON_PREFIX
+    AC_SUBST(PYTHON_PREFIX)
+    AC_SUBST(PYTHONHOME)
+				
+    AC_MSG_CHECKING([Python header location])
+    PYTHON_HEADERS='$(PYTHON_PREFIX)/include/python$(PYTHON_VERSION)'
+    AC_SUBST(PYTHON_HEADERS)
+    AC_MSG_RESULT([$PYTHON_PREFIX/include/python$PYTHON_VERSION])
+
+    PYTHON_EXE='$(PYTHON_PREFIX)/bin/python'
+    AC_SUBST(PYTHON_EXE)
+  ;;
+esac
+
+
+# Checks for header files.
+AC_HEADER_STDC
+AC_CHECK_HEADERS([float.h limits.h locale.h stdlib.h string.h])
+
+AC_CHECK_HEADERS([neurospaces/neurospaces.h],[],
+[echo "Error: neurospaces headers are not installed in standard location."])
+
 AC_CHECK_HEADERS([ heccer/heccer.h ],[],[
    echo "Error! Heccer header files not found in any standard location."
 ])
 
-#AC_CHECK_HEADERS([ neurospaces/pidinstack.h ],[],[
-#	echo "Error! Model Container header files not found in any standard location."
-#	exit -1
-#])
-
+# Checks for typedefs, structures, and compiler characteristics.
+AC_HEADER_STDBOOL
+AC_C_CONST
 
 
 AC_MSG_CHECKING([Checking OS])
@@ -44,6 +76,10 @@ case "$host_os" in
 
   darwin*)
 
+    #
+    # These are settings specific to MAC OS X.
+    #
+    dnl {{{{
     AC_MSG_CHECKING([Using libtool for MAC OS X.])
     AR=libtool
     ARFLAGS='-static -c -o'
@@ -55,30 +91,116 @@ case "$host_os" in
     SYSLIBLINKS=' -lncurses -lfl -lreadline -lm'
     AC_SUBST(SYSLIBLINKS)    
 
-  ;;
+    PERLLIB_EXTENSION='dylib'
+    AC_SUBST(PERLLIB_EXTENSION)
+
+    SWIGCOMPILELINKSFORPERL='-I/usr/local/neurospaces/instrumentor 	-I$(srcdir)/../../.. 	-I$(top_builddir) 	-ffloat-store 	-I../../.. 	-include src/config.h 	-g 	-O0 	-dynamic 	-fPIC 	`perl -MExtUtils::Embed -e ccopts | perl -pe 's/\-arch\s\S+\s//g'`'
+    AC_SUBST(SWIGCOMPILELINKSFORPERL)
+
+    SWIGCOMPILECOMMAND_PERL='gcc         $(SWIGCOMPILELINKSFORPERL)         -c swiggable_sli_wrap.c'
+    AC_SUBST(SWIGCOMPILECOMMAND_PERL)
+
+ 
+
+    SWIGLDLINKSFORPERL='-L../../.. 	-lheccer -L../../../integrators  	-L/usr/local/lib/model-container 	-lneurospacesread 	-L/usr/local/lib/neurospaces/algorithms/symbol 	-lsymbol_algorithms 	-lncurses -lreadline 	-bundle 	-undefined suppress 	-flat_namespace'
+    AC_SUBST(SWIGLDLINKSFORPERL)
+
+    SWIGLINKCOMMAND_PERL='ld 	$(SWIGLDLINKSFORPERL) 	-o SwiggableSLI.$(PERLLIB_EXTENSION) 	swiggable_sli_wrap.o'
+    AC_SUBST(SWIGLINKCOMMAND_PERL)
+
+
+
+
+    PYTHONLIB_EXTENSION='dylib'
+    AC_SUBST(PYHONLIB_EXTENSION)
+
+    SWIGCOMPILELINKSFORPYTHON='-I$(PYTHON_HEADERS) 	-I/usr/local/neurospaces/instrumentor 	-I.../../.. 	-I./../../.. 	-I.../../../hierarchy/output/symbols 	-I./../../../hierarchy/output/symbols/'
+    AC_SUBST(SWIGCOMPILELINKSFORPYTHON)
+
+    SWIGCOMPILECOMMAND_PYTHON='gcc         $(SWIGCOMPILELINKSFORPYTHON)         -c swiggable_sli_wrap.c'
+    AC_SUBST(SWIGCOMPILECOMMAND_PYTHON)
+
+    SWIGLDLINKSFORPYTHON='-L$(PYTHON_HEADERS)         -framework Python         -flat_namespace         -undefined suppress 	-bundle 	-bundle_loader $(PYTHON_EXE)'
+    AC_SUBST(SWIGLDLINKSFORPYTHON)
+
+    SWIGLINKCOMMAND_PYTHON='ld 	$(SWIGLDLINKSFORPYTHON) 	-o _SwiggableSLI.$(PERLLIB_EXTENSION) swiggable_sli_wrap.o'
+    AC_SUBST(SWIGLINKCOMMAND_PYTHON)
+
+    AC_MSG_RESULT([done.])
+    dnl }}} end MAC OS X settings
+    ;;
+
+
+
 
   *) #default settings (Linux 2.6)
 
+    dnl {{{
     AR=ar
     ARFLAGS='cru'
     AC_SUBST(AR)
     AC_SUBST(ARFLAGS)
+    AC_MSG_CHECKING([ranlib invocation ])
+    AC_MSG_RESULT([$AR $ARFLAGS])
 
     SYSLIBLINKS='-lfl -lreadline -lhistory -lm -lncurses'
     AC_SUBST(SYSLIBLINKS)
+
+    PERLLIB_EXTENSION='so'
+    AC_SUBST(PERLLIB_EXTENSION)
+
+
+    SWIGCOMPILELINKSFORPERL='-I/usr/local/neurospaces/instrumentor -I$(srcdir)/../../.. -I$(top_builddir) -ffloat-store -I../../.. -include src/config.h -g -O0 -fPIC `perl -MExtUtils::Embed -e ccopts`'
+    AC_SUBST(SWIGCOMPILELINKSFORPERL)
+
+    SWIGCOMPILECOMMAND_PERL='gcc $(SWIGCOMPILELINKSFORPERL) -c swiggable_sli_wrap.c'
+    AC_SUBST(SWIGCOMPILECOMMAND_PERL)
+
+
+    SWIGLDLINKSFORPERL='-g -shared swiggable_sli_wrap.o -L../../.. -lheccer -L../../../integrators -L/usr/local/lib/model-container -lneurospacesread -L/usr/local/lib/neurospaces/algorithms/symbol -lsymbol_algorithms -lncurses -lreadline -lhistory -fPIC'
+    AC_SUBST(SWIGLDLINKSFORPERL)
+
+    SWIGLINKCOMMAND_PERL='gcc $(SWIGLDLINKSFORPERL) -o SwiggableSLI.$(PERLLIB_EXTENSION)'
+    AC_SUBST(SWIGLINKCOMMAND_PERL)
+
+
+    PYTHONLIB_EXTENSION='so'
+    AC_SUBST(PYTHONLIB_EXTENSION)
+
+    SWIGCOMPILELINKSFORPYTHON='-g -DPRE_PROTO_TRAVERSAL -I$(PYTHON_HEADERS) -I/usr/local/neurospaces/instrumentor -I$(builddir)../../.. -I$(srcdir)/../../.. -I$(builddir)../../../hierarchy/output/symbols -I$(srcdir)/../../../hierarchy/output/symbols/ -fPIC -Xlinker -export-dynamic'
+    AC_SUBST(SWIGCOMPILELINKSFORPYTHON)
+
+   SWIGCOMPILECOMMAND_PYTHON='gcc $(SWIGCOMPILELINKSFORPYTHON) -c swiggable_sli_wrap.c'
+   AC_SUBST(SWIGCOMPILECOMMAND_PYTHON)
+
+    SWIGLDLINKSFORPYTHON='-g -shared swiggable_sli_wrap.o -L../../.. -lheccer -L../../../integrators -L/usr/local/lib/model-container -lneurospacesread -L/usr/local/lib/neurospaces/algorithms/symbol -lsymbol_algorithms -lncurses -lreadline -lhistory -fPIC -Xlinker -export-dynamic'
+    AC_SUBST(SWIGLDLINKSFORPYTHON)
+
+    SWIGLINKCOMMAND_PYTHON='gcc $(SWIGLDLINKSFORPYTHON) -o _SwiggableSLI.$(PYTHONLIB_EXTENSION)'
+    AC_SUBST(SWIGLINKCOMMAND_PYTHON)
+    dnl }}} End of General Settings
+
   ;;
 esac
 
 
+# determine the test library to install
+
+TEST_SPECIFICATION_FILES=`/bin/echo -n "tests/introduction.html " && find tests/specifications -name "*.t" | perl -pe 's/\n/ /g' && find tests/specifications/strings -name "*.txt" | perl -pe 's/\n/ /g' && find tests/data -name "*.yml" | perl -pe 's/\n/ /g'`
+AC_SUBST(TEST_SPECIFICATION_FILES)
+
+
 AC_OUTPUT(Makefile \
-	src/Makefile \
-	src/util/Makefile \
-	src/c2genesis/Makefile \
-	src/script/Makefile \
-	src/shell/Makefile \
-	src/olf/Makefile \
-	src/neurospaces/Makefile \
-	src/sim/Makefile 
+		glue/Makefile \
+                glue/swig/perl/Makefile \
+		src/Makefile \
+		src/util/Makefile \
+		src/c2genesis/Makefile \
+		src/script/Makefile \
+		src/shell/Makefile \
+		src/olf/Makefile \
+		src/neurospaces/Makefile \
+		src/sim/Makefile 
 )
 
 
