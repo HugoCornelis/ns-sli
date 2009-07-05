@@ -791,7 +791,7 @@ static int StoreMsg(char *pcSrcpath,
 
    piom->pcSourceSymbol = strdup(pcSrcpath);
 
-   piom->iSerial = INT_MAX;
+   piom->iTarget = INT_MAX;
 
    piom->pcMsgName = strdup(pcMsgName);
 
@@ -847,51 +847,51 @@ int NSProcessMessages(struct neurospaces_integrator *pnsintegrator)
     if(ppioMsg[i]->pcSourceSymbol)
     {
 
-      //- resolve source
+	//- resolve source
 
-      struct PidinStack *ppistSource
-	= PidinStackParse(ppioMsg[i]->pcSourceSymbol);
+	if (!ppioMsg[i]->ppistSource)
+	{
+	    ppioMsg[i]->ppistSource
+		= PidinStackParse(ppioMsg[i]->pcSourceSymbol);
 
-      struct symtab_HSolveListElement *phsleSource
-	= PidinStackLookupTopSymbol(ppistSource);
+	    ppioMsg[i]->phsleSource
+		= PidinStackLookupTopSymbol(ppioMsg[i]->ppistSource);
+	}
 
-      //- fetch value
+	//- fetch value
 
-      ppioMsg[i]->dValue
-	= SymbolParameterResolveValue(phsleSource, ppistSource, ppioMsg[i]->pcSourceField);
+	// \todo: this is still a slow operation for simulation time ...
+
+	ppioMsg[i]->dValue
+	    = SymbolParameterResolveValue(ppioMsg[i]->phsleSource, ppioMsg[i]->ppistSource, ppioMsg[i]->pcSourceField);
 
       if (ppioMsg[i]->dValue != FLT_MAX)
       {
 	  //- resolve target
 
-	  struct PidinStack *ppistTarget
-	      = PidinStackParse(ppioMsg[i]->pcTargetSymbol);
-
-	  PidinStackUpdateCaches(ppistTarget);
-
-
-	  int iTarget;
-
-	  if (ppioMsg[i]->iSerial == INT_MAX)
+	  if (ppioMsg[i]->iTarget == INT_MAX)
 	  {
-	      iTarget = PidinStackToSerial(ppistTarget);
-	      ppioMsg[i]->iSerial = iTarget;
+	      ppioMsg[i]->ppistTarget
+		  = PidinStackParse(ppioMsg[i]->pcTargetSymbol);
+
+	      PidinStackUpdateCaches(ppioMsg[i]->ppistTarget);
+
+	      ppioMsg[i]->iTarget = PidinStackToSerial(ppioMsg[i]->ppistTarget);
 	  }
-	  else
-	      iTarget = ppioMsg[i]->iSerial;
 
+	  if (!ppioMsg[i]->pdValue)
+	  {
+	      ppioMsg[i]->pdValue
+		  = HeccerAddressVariable(ppheccer[0], ppioMsg[i]->iTarget, ppioMsg[i]->pcMsgName);
+	  }
 
-      
-	  double *pdValue
-	      = HeccerAddressVariable(ppheccer[0], iTarget, ppioMsg[i]->pcMsgName);
-
-	  if (pdValue)
+	  if (ppioMsg[i]->pdValue)
 	  {
 	      if (!strcmp(ppioMsg[i]->pcMsgName,"activation"))
 	      {
 		  //- add source to target
 
-		  *pdValue += ppioMsg[i]->dValue * clock_value[0];
+		  *ppioMsg[i]->pdValue += ppioMsg[i]->dValue * clock_value[0];
 	      }
 	      else
 	      {

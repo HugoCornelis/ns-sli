@@ -117,37 +117,46 @@ struct ParameterMapper
  * A struct for storing parameters for a message to be processed after
  * performing a reset.
  */
-struct ioMsg{
+struct ioMsg
+{
+    /*! for an activation message to post process after a
+     *  reset: source element in the model container.
+     */
+
+    char *pcSourceSymbol;
+
+    struct PidinStack *ppistSource;
+    struct symtab_HSolveListElement *phsleSource;
+
+    char *pcTargetSymbol;
+
+    struct PidinStack *ppistTarget;
+    struct symtab_HSolveListElement *phsleTarget;
+
+    /*!
+     *  A serial ID for an actication message to post process after a reset. 
+     * synaptic activation messages
+     */
+    int iTarget;
+
+    /*!
+     * the target value in the solver
+     */
+
+    double *pdValue;
+
+    /*!
+     * field of activation message
+     */
+    char *pcSourceField;
 
 
-  /*!
-   *  A serial ID for an actication message to post process after a reset. 
-   * synaptic activation messages
-   */
-  int iSerial;
+    char *pcMsgName;
 
-
-
-  /*! for an activation message to post process after a
-   *  reset: source element in the model container.
-   */
-  char *pcSourceSymbol;
-
-
-  char *pcTargetSymbol;
-
-  /*!
-   * field of activation message
-   */
-  char *pcSourceField;
-
-
-  char *pcMsgName;
-
-  /*!
-   * the value of activation
-   */
-  double dValue;
+    /*!
+     * the value of activation
+     */
+    double dValue;
 
 };
 

@@ -160,12 +160,12 @@ static int SetupIOMessages( struct ioMsg **ppioMsg, int iIoMsgs,
 
       PidinStackUpdateCaches(ppist);
       
-      ppioMsg[i]->iSerial = PidinStackToSerial(ppist);
+      ppioMsg[i]->iTarget = PidinStackToSerial(ppist);
 
  
       double *pdValue
 	  = HeccerAddressVariable(pheccer, 
-				  ppioMsg[i]->iSerial, 
+				  ppioMsg[i]->iTarget, 
 				  ppioMsg[i]->pcSourceField);
 
       if (pdValue)
