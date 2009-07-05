@@ -94,7 +94,7 @@ case "$host_os" in
     PERLLIB_EXTENSION='dylib'
     AC_SUBST(PERLLIB_EXTENSION)
 
-    SWIGCOMPILELINKSFORPERL='-I/usr/local/neurospaces/instrumentor 	-I$(srcdir)/../../.. 	-I$(top_builddir) 	-ffloat-store 	-I../../.. 	-include src/config.h 	-g 	-O0 	-dynamic 	-fPIC 	`perl -MExtUtils::Embed -e ccopts | perl -pe 's/\-arch\s\S+\s//g'`'
+    SWIGCOMPILELINKSFORPERL='-I$(srcdir)/../../.. 	-I$(top_builddir) 	-ffloat-store 	-I../../.. 	-include src/config.h 	-g 	-O0 	-dynamic 	-fPIC 	`perl -MExtUtils::Embed -e ccopts | perl -pe 's/\-arch\s\S+\s//g'`'
     AC_SUBST(SWIGCOMPILELINKSFORPERL)
 
     SWIGCOMPILECOMMAND_PERL='gcc         $(SWIGCOMPILELINKSFORPERL)         -c swiggable_sli_wrap.c'
@@ -114,7 +114,9 @@ case "$host_os" in
     PYTHONLIB_EXTENSION='dylib'
     AC_SUBST(PYHONLIB_EXTENSION)
 
-    SWIGCOMPILELINKSFORPYTHON='-I$(PYTHON_HEADERS) 	-I/usr/local/neurospaces/instrumentor 	-I.../../.. 	-I./../../.. 	-I.../../../hierarchy/output/symbols 	-I./../../../hierarchy/output/symbols/'
+	# Mando: can you check why there are three dots in the include directive and explain here in a comment, it is a mystery to me.  This line comes from heccer's configure.ac
+
+    SWIGCOMPILELINKSFORPYTHON='-I$(PYTHON_HEADERS) 	-I.../../.. 	-I./../../.. 	-I.../../../hierarchy/output/symbols 	-I./../../../hierarchy/output/symbols/'
     AC_SUBST(SWIGCOMPILELINKSFORPYTHON)
 
     SWIGCOMPILECOMMAND_PYTHON='gcc         $(SWIGCOMPILELINKSFORPYTHON)         -c swiggable_sli_wrap.c'
@@ -150,7 +152,7 @@ case "$host_os" in
     AC_SUBST(PERLLIB_EXTENSION)
 
 
-    SWIGCOMPILELINKSFORPERL='-I/usr/local/neurospaces/instrumentor -I$(srcdir)/../../.. -I$(top_builddir) -ffloat-store -I../../.. -include src/config.h -g -O0 -fPIC `perl -MExtUtils::Embed -e ccopts`'
+    SWIGCOMPILELINKSFORPERL='-I$(srcdir)/../../.. -I$(top_builddir) -ffloat-store -I../../.. -include src/config.h -g -O0 -fPIC `perl -MExtUtils::Embed -e ccopts`'
     AC_SUBST(SWIGCOMPILELINKSFORPERL)
 
     SWIGCOMPILECOMMAND_PERL='gcc $(SWIGCOMPILELINKSFORPERL) -c swiggable_sli_wrap.c'
@@ -167,7 +169,7 @@ case "$host_os" in
     PYTHONLIB_EXTENSION='so'
     AC_SUBST(PYTHONLIB_EXTENSION)
 
-    SWIGCOMPILELINKSFORPYTHON='-g -DPRE_PROTO_TRAVERSAL -I$(PYTHON_HEADERS) -I/usr/local/neurospaces/instrumentor -I$(builddir)../../.. -I$(srcdir)/../../.. -I$(builddir)../../../hierarchy/output/symbols -I$(srcdir)/../../../hierarchy/output/symbols/ -fPIC -Xlinker -export-dynamic'
+    SWIGCOMPILELINKSFORPYTHON='-g -DPRE_PROTO_TRAVERSAL -I$(PYTHON_HEADERS) -I$(builddir)../../.. -I$(srcdir)/../../.. -I$(builddir)../../../hierarchy/output/symbols -I$(srcdir)/../../../hierarchy/output/symbols/ -fPIC -Xlinker -export-dynamic'
     AC_SUBST(SWIGCOMPILELINKSFORPYTHON)
 
    SWIGCOMPILECOMMAND_PYTHON='gcc $(SWIGCOMPILELINKSFORPYTHON) -c swiggable_sli_wrap.c'
