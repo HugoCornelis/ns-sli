@@ -13,10 +13,7 @@
 
 %inline %{
 
-/* void piC2m_set(struct Intermediary *pim, int *piC2m) */
-/* { */
-/*     pim->piC2m = piC2m; */
-/* } */
+/* #include <setjmp.h> */
 
 /// integer array handling
 
@@ -60,7 +57,19 @@ double double_get(double *a, int i)
     return a[i];
 }
 
+// \todo the implementation of the following functions is a work around for linker problems.
+
 int memusage () { return 0; }
+
+void sim_set_float_format () {}
+
+// \todo when I use jmp_buf, I get an incompatible types during
+// compilation, with an int it works, although that is obviously a
+// hack to get the work around to work.
+
+/* jmp_buf */ int main_context;
+
+float G_RNG () { return 0.0; }
 
 int IncludeG2Script(char *pcScript)
 {
