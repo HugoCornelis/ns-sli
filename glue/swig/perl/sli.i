@@ -57,7 +57,9 @@ double double_get(double *a, int i)
     return a[i];
 }
 
-// \todo the implementation of the following functions is a work around for linker problems.
+// \todo the implementation of the following functions is a work
+// around for linker problems.  A variant of the same hack is also
+// present in c2genesis.c, no idea why.
 
 int memusage () { return 0; }
 
