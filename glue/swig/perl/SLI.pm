@@ -15,9 +15,14 @@ sub include_script
 {
     my $script = shift;
 
+    # include the script, result is 1 for success, 0 for failure.
+
     my $result = SwiggableSLI::IncludeG2Script("$script");
 
-    print "include_script(): result is $result\n";
+    if (!$result)
+    {
+	print "include_script() failed\n";
+    }
 }
 
 
