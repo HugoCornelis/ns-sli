@@ -81,8 +81,35 @@ int IncludeG2Script(char *pcScript)
 
     argv[0] = pcScript;
 
-    return(IncludeScript(1, argv));
+    int iIncluded = IncludeScript(1, argv);
+
+    if (iIncluded)
+    {
+	Interpreter();
+    }
+
+    return(iIncluded);
 }
+
+
+/* int G2Initialize(char *pcOptionsOrSo) */
+/* { */
+/*     /// \note gosh, I had to do the same hack when integrating neurospaces */
+/*     /// \note with genesis2/hsolve. */
+
+/*     struct ParserContext *pacRoot = pneuro->pacRootContext; */
+
+/*     struct ImportedFile *pifRoot */
+/* 	= ParserContextGetImportedFile(pacRoot); */
+
+/*     /// \note depending on how the linking is done, there can be multiple */
+/*     /// \note instances of neurospaces around.  The following is a hack to */
+/*     /// \note enforce the singleton (a bit) */
+
+/* /*     fprintf(stdout, "HeccerConstruct(): root import is %p\n", ImportedFileGetRootImport()); * */
+
+/*     ImportedFileSetRootImport(pifRoot); */
+/* } */
 
 
 %}
