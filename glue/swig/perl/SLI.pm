@@ -26,6 +26,21 @@ sub include_script
 }
 
 
+sub include_model
+{
+    my $script = shift;
+
+    # include the script, result is 1 for success, 0 for failure.
+
+    my $result = SwiggableSLI::IncludeG2Model("$script");
+
+    if (!$result)
+    {
+	print "include_script() failed\n";
+    }
+}
+
+
 1;
 
 

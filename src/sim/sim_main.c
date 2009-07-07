@@ -213,6 +213,7 @@ char *s;
 #endif
 }
 
+
 int main (argc, argv,envp)
 int     argc;
 char   *argv[];
@@ -559,3 +560,11 @@ char simrc_name[256];
 
     return 0;
 }
+
+
+int sli_main(int argc, char **argv, char **envp)
+{
+    return(main(argc, argv, envp));
+}
+
+

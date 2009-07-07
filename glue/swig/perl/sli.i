@@ -61,9 +61,9 @@ double double_get(double *a, int i)
 // around for linker problems.  A variant of the same hack is also
 // present in c2genesis.c, no idea why.
 
-int memusage () { return 0; }
+/* int memusage () { return 0; } */
 
-void sim_set_float_format () {}
+/* void sim_set_float_format () {} */
 
 // \todo when I use jmp_buf, I get an incompatible types during
 // compilation, with an int it works, although that is obviously a
@@ -71,7 +71,29 @@ void sim_set_float_format () {}
 
 /* jmp_buf */ int main_context;
 
-float G_RNG () { return 0.0; }
+/* float G_RNG () { return 0.0; } */
+
+int IncludeG2Model(char *pcScript)
+{
+    // At first sight, it seems that envp is not used, so I pass a
+    // NULL pointer for it.
+
+    extern int sli_main(int argc, char **argv, char **envp);
+
+    char *argv[10];
+
+    argv[0] = pcScript;
+
+    int iIncluded = sli_main(1, argv, NULL);
+
+    if (iIncluded)
+    {
+	Interpreter();
+    }
+
+    return(iIncluded);
+}
+
 
 int IncludeG2Script(char *pcScript)
 {
