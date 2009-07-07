@@ -19,7 +19,6 @@ CLEANFILES = \
 	syntax.h \
 	lexical.c \
 	lex.yy.c
- 
 
 AM_LFLAGS = -l
 AM_YFLAGS = -dv
