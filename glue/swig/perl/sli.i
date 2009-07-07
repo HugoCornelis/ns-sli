@@ -84,15 +84,17 @@ int IncludeG2Model(char *pcScript)
 
     argv[0] = "nsgenesis";
 
-    argv[1] = "-altsimrc";
+    argv[1] = "-batch";
+
+    argv[2] = "-altsimrc";
 
     // \todo make this auto configurable
 
-    argv[2] = "/local_home/local_home/hugo/neurospaces_project/ns-genesis-SLI/source/snapshots/0/.simrc";
+    argv[3] = "/local_home/local_home/hugo/neurospaces_project/ns-genesis-SLI/source/snapshots/0/.simrc";
 
-    argv[3] = pcScript;
+    argv[4] = pcScript;
 
-    int iIncluded = sli_main(4, argv, NULL);
+    int iIncluded = sli_main(5, argv, NULL);
 
     if (iIncluded)
     {

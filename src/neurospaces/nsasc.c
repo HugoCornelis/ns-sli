@@ -81,7 +81,7 @@ int AscReset(struct ascfile_type *pasc)
     {
 
 	fprintf(stdout,
-		"Error: Cound open file \"%s\" for write in asc_file %s\n",
+		"Error: Cannot open file \"%s\" for write in asc_file %s\n",
 		pasc->filename,
 		pasc->name);
 
