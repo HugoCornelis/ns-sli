@@ -40,8 +40,11 @@ nsgenesis_LDADD = \
 	-L${libdir}/heccer -lhneurospaces \
 	$(SYSLIBLINKS)
 
-#nsgenesistestdir=$(prefix)/nsgenesis
-#nobase_dist_nsgenesistest_DATA=@TEST_SPECIFICATION_FILES@
+# add the tests/ directory because the TEST_SPECIFICATION_FILES has
+# $(top_srcdir) as prefix, which points to ../ compensating for tests/.
+
+nsgenesistestdir=$(prefix)/nsgenesis/tests
+nobase_dist_nsgenesistest_DATA=@TEST_SPECIFICATION_FILES@
 
 liblist: Makefile
 	@echo "# liblist - This file is generated automatically." > liblist

@@ -189,7 +189,7 @@ esac
 
 # determine the test library to install
 
-TEST_SPECIFICATION_FILES=`(/bin/echo -n "tests/introduction.html " && find tests/specifications -name "*.t" | perl -pe 's/\n/ /g' && find tests/specifications/strings -name "*.txt" | perl -pe 's/\n/ /g' && find tests/data -name "*.yml" | perl -pe 's/\n/ /g' && find tests/scripts -name "*.g" | perl -pe 's/\n/ /g' && find tests/scripts -name "*.p" | perl -pe 's/\n/ /g') | `
+TEST_SPECIFICATION_FILES=`(/bin/echo -n "tests/introduction.html " && find tests/specifications -name "*.t" && find tests/specifications/strings -name "*.txt" && find tests/scripts -name "*.g" && find tests/scripts -name "*.p") | perl -pe 's(^| )( \\$(top_srcdir)/)g' | perl -pe 's/\n/ /g' `
 AC_SUBST(TEST_SPECIFICATION_FILES)
 
 
