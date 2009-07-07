@@ -21,7 +21,7 @@ sub include_script
 
     if (!$result)
     {
-	print "include_script() failed\n";
+	print "$0: include_script() failed\n";
     }
 }
 
@@ -36,7 +36,7 @@ sub include_model
 
     if (!$result)
     {
-	print "include_script() failed\n";
+	print "$0: include_model() failed\n";
     }
 }
 
