@@ -1,12 +1,12 @@
 
 SUBDIRS = util script c2genesis shell neurospaces olf sim 
 
-utildir = $(top_srcdir)/src/util
-scriptdir = $(top_srcdir)/src/script
-shelldir = $(top_srcdir)/src/shell
-simdir = $(top_srcdir)/src/sim
-nsdir = $(top_srcdir)/src/neurospaces
-olfdir = $(top_srcdir)/src/olf
+utildir = $(top_builddir)/src/util
+scriptdir = $(top_builddir)/src/script
+shelldir = $(top_builddir)/src/shell
+simdir = $(top_builddir)/src/sim
+nsdir = $(top_builddir)/src/neurospaces
+olfdir = $(top_builddir)/src/olf
 
 EXTRA_DIST = \
 	libsh 
@@ -40,6 +40,8 @@ nsgenesis_LDADD = \
 	-L${libdir}/heccer -lhneurospaces \
 	$(SYSLIBLINKS)
 
+#nsgenesistestdir=$(prefix)/nsgenesis
+#nobase_dist_nsgenesistest_DATA=@TEST_SPECIFICATION_FILES@
 
 liblist: Makefile
 	@echo "# liblist - This file is generated automatically." > liblist

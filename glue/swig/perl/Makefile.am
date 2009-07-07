@@ -1,11 +1,11 @@
 SUBDIRS = 
 
-utildir = $(top_srcdir)/src/util
-scriptdir = $(top_srcdir)/src/script
-shelldir = $(top_srcdir)/src/shell
-simdir = $(top_srcdir)/src/sim
-nsdir = $(top_srcdir)/src/neurospaces
-olfdir = $(top_srcdir)/src/olf
+utildir = $(top_builddir)/src/util
+scriptdir = $(top_builddir)/src/script
+shelldir = $(top_builddir)/src/shell
+simdir = $(top_builddir)/src/sim
+nsdir = $(top_builddir)/src/neurospaces
+olfdir = $(top_builddir)/src/olf
 
 
 #t the following rules are crap complete, would be good if a auto

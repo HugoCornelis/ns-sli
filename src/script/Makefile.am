@@ -1,7 +1,9 @@
-sysdir = $(top_srcdir)/src/sys
-scriptdir = $(top_srcdir)/src/script
-shelldir = $(top_srcdir)/src/shell
-utildir = $(top_srcdir)/src/util
+sysdir = $(top_builddir)/src/sys
+scriptdir = $(top_builddir)/src/script
+shelldir = $(top_builddir)/src/shell
+utildir = $(top_builddir)/src/util
+
+# \todo these variables are relative to builddir, should be relative to srcdir
 
 INCLUDES = -I$(sysdir) -I$(scriptdir) -I$(shelldir) -I$(utildir) -I.
 

@@ -1,15 +1,17 @@
-shelldir = $(top_srcdir)/src/shell
-simdir = $(top_srcdir)/src/sim
-scriptdir = $(top_srcdir)/src/script
-utildir = $(top_srcdir)/src/util
-nsdir = $(top_srcdir)/src/neurospaces
+shelldir = $(top_builddir)/src/shell
+simdir = $(top_builddir)/src/sim
+scriptdir = $(top_builddir)/src/script
+utildir = $(top_builddir)/src/util
+nsdir = $(top_builddir)/src/neurospaces
 hierarchy = ${prefix}/neurospaces/instrumentor
 
-c2genesisdir = $(top_srcdir)/src/c2genesis
+c2genesisdir = $(top_builddir)/src/c2genesis
 c2genesis = $(c2genesisdir)/c2genesis
 makestructs = $(c2genesisdir)/makestructs
 makelib = $(c2genesisdir)/makelib
 
+
+# \todo these variables are relative to builddir, should be relative to srcdir
 
 INCLUDES = -I$(utildir) -I$(shelldir) -I$(simdir) -I$(scriptdir) -I$(nsdir) -I$(hierarchy)  -I${prefix}/neurospaces/instrumentor 
 

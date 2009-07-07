@@ -2,7 +2,6 @@ SUBDIRS = \
 	src \
 	glue
 
-
 EXTRA_DIST = \
 	doxygen.cfg \
 	docs	\

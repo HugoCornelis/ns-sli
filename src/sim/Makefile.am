@@ -1,16 +1,18 @@
-shelldir = $(top_srcdir)/src/shell
-scriptdir = $(top_srcdir)/src/script
-utildir = $(top_srcdir)/src/util
-pardir = $(top_srcdir)/src/par
-nsdir = $(top_srcdir)/src/neurospaces
+shelldir = $(top_builddir)/src/shell
+scriptdir = $(top_builddir)/src/script
+utildir = $(top_builddir)/src/util
+pardir = $(top_builddir)/src/par
+nsdir = $(top_builddir)/src/neurospaces
 hierarchy = ${prefix}/neurospaces/instrumentor
 
-c2genesisdir = $(top_srcdir)/src/c2genesis
+c2genesisdir = $(top_builddir)/src/c2genesis
 c2genesis = $(c2genesisdir)/c2genesis
 makestructs = $(c2genesisdir)/makestructs
 makefunc = $(c2genesisdir)/makefunc
 
 AM_CPPFLAGS = -DPRE_PROTO_TRAVERSAL
+
+# \todo these variables are relative to builddir, should be relative to srcdir
 
 INCLUDES = \
 	-I$(utildir) \

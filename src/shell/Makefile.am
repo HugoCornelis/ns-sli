@@ -1,8 +1,10 @@
-utildir = $(top_srcdir)/src/util
-scriptdir = $(top_srcdir)/src/script
-shelldir = $(top_srcdir)/src/shell
-simdir = $(top_srcdir)/src/sim
-c2genesis = $(top_srcdir)/src/c2genesis/c2genesis
+utildir = $(top_builddir)/src/util
+scriptdir = $(top_builddir)/src/script
+shelldir = $(top_builddir)/src/shell
+simdir = $(top_builddir)/src/sim
+c2genesis = $(top_builddir)/src/c2genesis/c2genesis
+
+# \todo these variables are relative to builddir, should be relative to srcdir
 
 INCLUDES = -I$(utildir) -I$(shelldir) -I$(simdir) -I$(scriptdir) -I$(top_srcdir)/src
 
