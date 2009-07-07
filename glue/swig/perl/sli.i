@@ -73,7 +73,7 @@ double double_get(double *a, int i)
 
 /* float G_RNG () { return 0.0; } */
 
-int IncludeG2Model(char *pcScript)
+int IncludeG2Model(char *pcMorphologyDirectory, char *pcScript)
 {
     // At first sight, it seems that envp is not used, so I pass a
     // NULL pointer for it.
@@ -86,15 +86,21 @@ int IncludeG2Model(char *pcScript)
 
     argv[1] = "-batch";
 
-    argv[2] = "-altsimrc";
+    argv[2] = "-notty";
+
+    argv[3] = "-altsimrc";
 
     // \todo make this auto configurable
 
-    argv[3] = "/local_home/local_home/hugo/neurospaces_project/ns-genesis-SLI/source/snapshots/0/.simrc";
+    argv[4] = "/local_home/local_home/hugo/neurospaces_project/ns-genesis-SLI/source/snapshots/0/.simrc";
 
-    argv[4] = pcScript;
+    argv[5] = "-morphology-directory";
 
-    int iIncluded = sli_main(5, argv, NULL);
+    argv[6] = pcMorphologyDirectory;
+
+    argv[7] = pcScript;
+
+    int iIncluded = sli_main(8, argv, NULL);
 
     if (iIncluded)
     {

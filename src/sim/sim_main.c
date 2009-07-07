@@ -276,6 +276,16 @@ char simrc_name[256];
 	if(arg_is("-notty")){
 	    SetTtyMode(0);
 	} else 
+	if(arg_is("-morphology-directory")){
+	    extern char pcMorphologyDirectory[];
+
+	    nxtarg++;
+	    if (nxtarg < argc){
+		strcpy(pcMorphologyDirectory, argv[nxtarg]);
+	    } else {
+		fprintf(stderr, "-morphology-directory option missing a directory name\n");
+	    }
+	} else 
 #ifdef STATUSLINE
 	if(arg_is("-status")){
 	    status_line = 1;

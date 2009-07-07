@@ -359,6 +359,9 @@ static int iNeurospacesAlgorithms = 0;
 #define LAMBDA_MIN_DEFAULT 0.01
 #define LAMBDA_MAX_DEFAULT 0.20
 
+/* standard location to look for morphology files */
+char pcMorphologyDirectory[NAMELEN] = "";
+
 /* cellname passed by read_cell call */
 static char *cellname;
 static char lbracket[2],rbracket[2];
@@ -1395,12 +1398,18 @@ void do_read_cell(argc,argv)
 		return;
 	}
 
-	if (!(fp = fopen(optargv[1],"r"))) {
-		fprintf(stderr,"can't open file '%s'\n",optargv[1]);
+	filename[0] = '\0';
+
+	strcpy(filename, pcMorphologyDirectory);
+
+	strcat(filename, "/");
+
+	strcat(filename, optargv[1]);
+
+	if (!(fp = fopen(filename,"r"))) {
+		fprintf(stderr,"can't open file '%s'\n",filename);
 		return;
 	}
-
-	strcpy(filename, optargv[1]);
 
 	X0=Y0=Z0=0.0;
 

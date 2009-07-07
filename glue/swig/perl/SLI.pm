@@ -30,9 +30,17 @@ sub include_model
 {
     my $script = shift;
 
-    # include the script, result is 1 for success, 0 for failure.
+    # set the directory where to find .p files
 
-    my $result = SwiggableSLI::IncludeG2Model("$script");
+    $script =~ m(^(.*)/);
+
+    my $morphology_directory = $1;
+
+    $morphology_directory = "/local_home/local_home/hugo/neurospaces_project/ns-genesis-SLI/source/snapshots/0";
+
+    # read the model, result is 1 for success, 0 for failure.
+
+    my $result = SwiggableSLI::IncludeG2Model("$morphology_directory", "$script");
 
     if (!$result)
     {
