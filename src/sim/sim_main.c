@@ -214,10 +214,7 @@ char *s;
 }
 
 
-int main (argc, argv,envp)
-int     argc;
-char   *argv[];
-char	**envp;
+int sli_main(int argc, char **argv, char **envp)
 {
 extern int LOAD_LIBRARIES();     
 short     nxtarg;
@@ -562,9 +559,9 @@ char simrc_name[256];
 }
 
 
-int sli_main(int argc, char **argv, char **envp)
+int main(int argc, char **argv, char **envp)
 {
-    return(main(argc, argv, envp));
+    return(sli_main(argc, argv, envp));
 }
 
 
