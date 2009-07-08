@@ -347,7 +347,17 @@ char**	argv;
 #ifdef T3E
     globalexit(0);
 #else
-    exit(0);
+
+    extern int GENOPT_ExitDisabled;
+
+    if (GENOPT_ExitDisabled)
+    {
+    }
+    else
+    {
+	exit(0);
+    }
+
 #endif
 }
 

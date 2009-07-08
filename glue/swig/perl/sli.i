@@ -90,7 +90,7 @@ int IncludeG2Model(char *pcMorphologyDirectory, char *pcScript)
 
     argv[3] = "-altsimrc";
 
-    // \todo make this auto configurable
+    // \todo make this auto configurable, install in a standard location
 
     argv[4] = "/local_home/local_home/hugo/neurospaces_project/ns-genesis-SLI/source/snapshots/0/.simrc";
 
@@ -98,9 +98,13 @@ int IncludeG2Model(char *pcMorphologyDirectory, char *pcScript)
 
     argv[6] = pcMorphologyDirectory;
 
-    argv[7] = pcScript;
+    argv[7] = "-no-exit";
 
-    int iIncluded = sli_main(8, argv, NULL);
+    argv[8] = "-no-interactive";
+
+    argv[9] = pcScript;
+
+    int iIncluded = sli_main(10, argv, NULL);
 
     if (iIncluded)
     {

@@ -113,6 +113,8 @@ jmp_buf main_context;
 
 float G_RNG () { return 0.0; }
 
+int GENOPT_ExitDisabled = 0;
+
 
 static void do_newclass(argc, argv)
 

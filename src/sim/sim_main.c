@@ -185,7 +185,8 @@ jmp_buf main_context;
 
 int	GENOPT_UseDefaultColor = 0;
 int	GENOPT_NoX = 0;
-
+int	GENOPT_ExitDisabled = 0;
+int	GENOPT_NoInteractive = 0;
 
 void DisplayHeader()
 {
@@ -275,6 +276,12 @@ char simrc_name[256];
 	} else 
 	if(arg_is("-notty")){
 	    SetTtyMode(0);
+	} else 
+	if(arg_is("-no-exit")){
+	    GENOPT_ExitDisabled = 1;
+	} else 
+	if(arg_is("-no-interactive")){
+	    GENOPT_NoInteractive = 1;
 	} else 
 	if(arg_is("-morphology-directory")){
 	    extern char pcMorphologyDirectory[];
@@ -555,10 +562,13 @@ char simrc_name[256];
 	** go to the interactive interpreter level
 	*/
     }
-    EnableHistory(1);
-    AlternatePrompt(NULL);
-    Interpreter();
 
+    if (!GENOPT_NoInteractive)
+    {
+	EnableHistory(1);
+	AlternatePrompt(NULL);
+	Interpreter();
+    }
 
     //x
     //x Disabling the Parallel library

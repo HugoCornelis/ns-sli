@@ -38,11 +38,11 @@ sub include_model
 
     $morphology_directory = "/local_home/local_home/hugo/neurospaces_project/ns-genesis-SLI/source/snapshots/0";
 
-    # read the model, result is 1 for success, 0 for failure.
+    # read the model, result is always 0 for some obscure reason.
 
     my $result = SwiggableSLI::IncludeG2Model("$morphology_directory", "$script");
 
-    if (!$result)
+    if ($result)
     {
 	print "$0: include_model() failed\n";
     }
