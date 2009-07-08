@@ -1398,17 +1398,22 @@ void do_read_cell(argc,argv)
 		return;
 	}
 
-	filename[0] = '\0';
+	strcpy(filename, optargv[1]);
 
-	strcpy(filename, pcMorphologyDirectory);
+	if (!(fp = fopen(filename,"r")))
+	{
+	    filename[0] = '\0';
 
-	strcat(filename, "/");
+	    strcpy(filename, pcMorphologyDirectory);
 
-	strcat(filename, optargv[1]);
+	    strcat(filename, "/");
 
-	if (!(fp = fopen(filename,"r"))) {
+	    strcat(filename, optargv[1]);
+
+	    if (!(fp = fopen(filename,"r"))) {
 		fprintf(stderr,"can't open file '%s'\n",filename);
 		return;
+	    }
 	}
 
 	X0=Y0=Z0=0.0;
