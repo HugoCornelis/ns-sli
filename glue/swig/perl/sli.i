@@ -73,12 +73,18 @@ double double_get(double *a, int i)
 
 /* float G_RNG () { return 0.0; } */
 
-int IncludeG2Model(char *pcMorphologyDirectory, char *pcScript)
+int IncludeG2Model(char *pcMorphologyDirectory, char *pcScript, void *pvNeurospaces)
 {
+    struct Neurospaces;
+
     // At first sight, it seems that envp is not used, so I pass a
     // NULL pointer for it.
 
-    extern int sli_main(int argc, char **argv, char **envp);
+    extern int sli_main(int argc, char **argv, char **envp, struct Neurospaces *pneuro);
+
+    //- the modeling service is neurospaces
+
+    struct Neurospaces *pneuro = (struct Neurospaces *)pvNeurospaces;
 
     char *argv[10];
 
@@ -104,7 +110,7 @@ int IncludeG2Model(char *pcMorphologyDirectory, char *pcScript)
 
     argv[9] = pcScript;
 
-    int iIncluded = sli_main(10, argv, NULL);
+    int iIncluded = sli_main(10, argv, NULL, pneuro);
 
     if (iIncluded)
     {

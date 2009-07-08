@@ -215,7 +215,7 @@ char *s;
 }
 
 
-int sli_main(int argc, char **argv, char **envp)
+int sli_main(int argc, char **argv, char **envp, struct Neurospaces *pneuro)
 {
 extern int LOAD_LIBRARIES();     
 short     nxtarg;
@@ -427,7 +427,7 @@ char simrc_name[256];
     /*
     ** initialization for the base simulator
     */
-    SimStartup();
+    SimStartup(pneuro);
 
     /*
     ** load the symbolic information for the rest of the libraries
@@ -581,7 +581,7 @@ char simrc_name[256];
 
 int main(int argc, char **argv, char **envp)
 {
-    return(sli_main(argc, argv, envp));
+    return(sli_main(argc, argv, envp, NULL));
 }
 
 

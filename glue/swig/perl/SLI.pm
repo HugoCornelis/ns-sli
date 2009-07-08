@@ -30,6 +30,8 @@ sub include_model
 {
     my $script = shift;
 
+    my $model_container = shift;
+
     # set the directory where to find .p files
 
     $script =~ m(^(.*)/);
@@ -40,7 +42,7 @@ sub include_model
 
     # read the model, result is always 0 for some obscure reason.
 
-    my $result = SwiggableSLI::IncludeG2Model("$morphology_directory", "$script");
+    my $result = SwiggableSLI::IncludeG2Model("$morphology_directory", "$script", $model_container->backend());
 
     if ($result)
     {

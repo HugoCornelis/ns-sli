@@ -23,7 +23,7 @@
  *   Initializes the pnsintegrator.
  */
 //------------------------------------------------------------------
-int NSGenesisInitialize(){
+int NSGenesisInitialize(struct Neurospaces *pneuro){
    
 
   struct neurospaces_integrator *pnsintegrator = 
@@ -46,30 +46,58 @@ int NSGenesisInitialize(){
 
    }
        
-   char *ppvArgs[] =
+   //- if no model container yet
+
+   if (!pneuro)
    {
-      "genesis-neurospaces-bridge",
-      "/usr/local/neurospaces/models/library/utilities/empty_model.ndf",
-      "empty_model.ndf",
-      NULL,
-      NULL,
-   };
+       //- create one with an empty model
 
-   
+       char *ppvArgs[] =
+	   {
+	       "genesis-neurospaces-bridge",
+	       "/usr/local/neurospaces/models/library/utilities/empty_model.ndf",
+	       "empty_model.ndf",
+	       NULL,
+	       NULL,
+	   };
 
-   //- set NEUROSPACES_MODELS variable to point to where the model can be found  
+       pnsintegrator->pelNeurospaces->pneuro
+	   = NeurospacesNewFromCmdLine(2, &ppvArgs[0]);
 
-   pnsintegrator->pelNeurospaces->pneuro = 
-       NeurospacesNewFromCmdLine(2, &ppvArgs[0]);
-
-   if (!pnsintegrator->pelNeurospaces->pneuro)
-   {
-       fprintf(stderr,
-          "Error initializing neurospaces model container\n");
-       return -1;
-
+       if (!pnsintegrator->pelNeurospaces->pneuro)
+       {
+	   fprintf(stderr,
+		   "Error initializing neurospaces model container\n");
+	   return -1;
+       }
    }
 
+   //- else
+
+   else
+   {
+       //- link the genesis element with the pre-existing model container
+
+       pnsintegrator->pelNeurospaces->pneuro = pneuro;
+
+       /// \note gosh, I had to do the same hack when integrating neurospaces
+       /// \note with genesis2/hsolve.
+
+       struct ParserContext *pacRoot = pneuro->pacRootContext;
+
+       struct ImportedFile *pifRoot
+	   = ParserContextGetImportedFile(pacRoot);
+
+       /// \note depending on how the linking is done, there can be multiple
+       /// \note instances of neurospaces around.  The following is a hack to
+       /// \note enforce the singleton (a bit)
+
+/*        fprintf(stdout, "HeccerConstruct(): root import is %p\n", ImportedFileGetRootImport()); */
+
+       ImportedFileSetRootImport(pifRoot);
+
+/*        fprintf(stdout, "HeccerConstruct(): root import is %p\n", ImportedFileGetRootImport()); */
+   }
 
 
    //- Now we cache the root context for easier referencing.

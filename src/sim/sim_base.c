@@ -65,6 +65,9 @@ static char rcsid[] = "$Id: sim_base.c,v 1.4 2005/07/01 10:03:08 svitak Exp $";
 #include "profile.h"
 #include "shell_func_ext.h"
 
+#include "neurospaces/neurospaces.h"
+
+
 static int sim_flags = 0;
 static Element *root_element;
 
@@ -191,7 +194,7 @@ void StartupElements()
     SetClock(0,1.0);
 }
 
-void SimStartup()
+void SimStartup(struct Neurospaces *pneuro)
 {
 extern int ElementReaper();
 extern void InitJobs();
@@ -278,13 +281,13 @@ extern void AddCommandCallback();
 
        LIBRARY_nsintegrator(); 
 
-       if( NSGenesisInitialize() < 0 ){ 
+       if( NSGenesisInitialize(pneuro) < 0 ){ 
 
- 	fprintf(stderr,"Error Initializing Neurospaces model container!\n"); 
- 	return; 
+	   fprintf(stderr,"Error initializing Neurospaces model container.\n"); 
+	   return;
        } 
        else 
- 	fprintf(stdout,"Neurospaces model container loaded!\n\n");
+	   fprintf(stdout,"Neurospaces model container initialized.\n");
       /**********************************************************************/
 
 
