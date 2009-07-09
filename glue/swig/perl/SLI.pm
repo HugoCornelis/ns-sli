@@ -44,7 +44,38 @@ sub include_model
 
     my $result = SwiggableSLI::IncludeG2Model("$morphology_directory", "$script", $model_container->backend());
 
-    if ($result)
+    if (!$result)
+    {
+	print "$0: include_model() failed\n";
+    }
+}
+
+
+sub interpreter
+{
+    SwiggableSLI::RunInterpreter(1);
+}
+
+
+sub run_model
+{
+    my $script = shift;
+
+    my $model_container = shift;
+
+    # set the directory where to find .p files
+
+    $script =~ m(^(.*)/);
+
+    my $morphology_directory = $1;
+
+    $morphology_directory = "/local_home/local_home/hugo/neurospaces_project/ns-genesis-SLI/source/snapshots/0";
+
+    # read the model, result is always 0 for some obscure reason.
+
+    my $result = SwiggableSLI::IncludeG2Model("$morphology_directory", "$script", $model_container->backend());
+
+    if (!$result)
     {
 	print "$0: include_model() failed\n";
     }

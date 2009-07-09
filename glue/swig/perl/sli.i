@@ -73,20 +73,17 @@ double double_get(double *a, int i)
 
 /* float G_RNG () { return 0.0; } */
 
+struct Neurospaces;
+
+extern int sli_main(int argc, char **argv, char **envp, struct Neurospaces *pneuro);
+
 int IncludeG2Model(char *pcMorphologyDirectory, char *pcScript, void *pvNeurospaces)
 {
-    struct Neurospaces;
-
-    // At first sight, it seems that envp is not used, so I pass a
-    // NULL pointer for it.
-
-    extern int sli_main(int argc, char **argv, char **envp, struct Neurospaces *pneuro);
-
     //- the modeling service is neurospaces
 
     struct Neurospaces *pneuro = (struct Neurospaces *)pvNeurospaces;
 
-    char *argv[10];
+    char *argv[20];
 
     argv[0] = "nsgenesis";
 
@@ -104,20 +101,20 @@ int IncludeG2Model(char *pcMorphologyDirectory, char *pcScript, void *pvNeurospa
 
     argv[6] = pcMorphologyDirectory;
 
-    argv[7] = "-no-exit";
+    argv[7] = "-models-only";
 
-    argv[8] = "-no-interactive";
+    argv[8] = "-no-exit";
 
-    argv[9] = pcScript;
+    argv[9] = "-no-interactive";
 
-    int iIncluded = sli_main(10, argv, NULL, pneuro);
+    argv[10] = pcScript;
 
-    if (iIncluded)
-    {
-	Interpreter();
-    }
+    // At first sight, it seems that envp is not used, so I pass a
+    // NULL pointer for it.
 
-    return(iIncluded);
+    int iFail = sli_main(11, argv, NULL, pneuro);
+
+    return(iFail == 0);
 }
 
 
@@ -131,12 +128,54 @@ int IncludeG2Script(char *pcScript)
 
     int iIncluded = IncludeScript(1, argv);
 
-    if (iIncluded)
-    {
-	Interpreter();
-    }
-
     return(iIncluded);
+}
+
+
+int RunG2Model(char *pcMorphologyDirectory, char *pcScript, void *pvNeurospaces)
+{
+    //- the modeling service is neurospaces
+
+    struct Neurospaces *pneuro = (struct Neurospaces *)pvNeurospaces;
+
+    char *argv[20];
+
+    argv[0] = "nsgenesis";
+
+    argv[1] = "-batch";
+
+    argv[2] = "-notty";
+
+    argv[3] = "-altsimrc";
+
+    // \todo make this auto configurable, install in a standard location
+
+    argv[4] = "/local_home/local_home/hugo/neurospaces_project/ns-genesis-SLI/source/snapshots/0/.simrc";
+
+    argv[5] = "-morphology-directory";
+
+    argv[6] = pcMorphologyDirectory;
+
+/*     argv[7] = "-models-only"; */
+
+    argv[7] = "-no-exit";
+
+    argv[8] = "-no-interactive";
+
+    argv[9] = pcScript;
+
+    // At first sight, it seems that envp is not used, so I pass a
+    // NULL pointer for it.
+
+    int iFail = sli_main(10, argv, NULL, pneuro);
+
+    return(iFail == 0);
+}
+
+
+int RunInterpreter(int iSomething)
+{
+    Interpreter();
 }
 
 

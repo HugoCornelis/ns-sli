@@ -247,17 +247,21 @@ int		status;
 	    duration = Atof(optargv[1]);
       }
 
+    extern int GENOPT_ModelsOnly;
 
-   
+    if (!GENOPT_ModelsOnly)
+    {
+	ActivateStep(mode,simulation_time,duration,nsteps,verbose); 
 
-     ActivateStep(mode,simulation_time,duration,nsteps,verbose); 
-     if(!bg){ 
+	if(!bg){ 
  	
- 	/** do the simulation on the spot */
+	    /** do the simulation on the spot */
        
- 	while(job != -1){ 
- 	    ExecuteJobs(); 
- 	} 
-     } 
+	    while(job != -1){ 
+		ExecuteJobs(); 
+	    }
+	}
+    }
+
     return(1);
 }

@@ -154,8 +154,12 @@ int			i;
 
 void do_reset()
 {     
+    extern int GENOPT_ModelsOnly;
 
-  SimReset(); 
+    if (!GENOPT_ModelsOnly)
+    {
+	SimReset(); 
+    }
 }
 
 
