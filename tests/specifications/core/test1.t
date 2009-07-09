@@ -14,7 +14,7 @@ my $test
 				command => 'src/nsgenesis',
 				command_tests => [
 						  {
-						   description => "Can we load a simple file into ns-genesis?",
+						   description => "Can we load a simple file into nsgenesis?",
 						   read => 'changing clock [0] from 1 to 1e-05
 
 ACTIVE CLOCKS
@@ -34,7 +34,7 @@ ACTIVE CLOCKS
 				command => 'src/nsgenesis',
 				command_tests => [
 						  {
-						   description => "Can we load a simple file into ns-genesis?",
+						   description => "Can we load a simple file into nsgenesis?",
 						   read => 'changing clock [0] from 1 to 1e-05',
 						   timeout => 2,
 						   write => 'setclock 0 1e-5

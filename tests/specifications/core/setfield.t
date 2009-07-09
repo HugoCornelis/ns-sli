@@ -14,7 +14,7 @@ my $test
 				command => 'src/nsgenesis',
 				command_tests => [
 						  {
-						   description => "Can we set a field on an object in ns-genesis?",
+						   description => "Can we set a field on an object in nsgenesis?",
 						   read => '[ /n ]
 x                    = 444
 y                    = 0
@@ -32,7 +32,7 @@ z                    = 0
 				command => 'src/nsgenesis',
 				command_tests => [
 						  {
-						   description => "Can we perform multiple set fields in ns-genesis?",
+						   description => "Can we perform multiple set fields in nsgenesis?",
 						   read => '[ /n ]
 x                    = 1
 y                    = 2

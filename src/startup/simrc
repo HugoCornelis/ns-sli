@@ -6,7 +6,7 @@
 //      SIMNOTES - default file for simulator notes
 //===========================================================================
 setenv SIMPATH . \
-		{getenv HOME}/neurospaces_project/ns-genesis-SLI/source/snapshots/0/src/startup
+		{getenv HOME}/neurospaces_project/ns-sli/source/snapshots/0/src/startup
 //		{getenv HOME}/genesis/source/updates/20060303/genesis-2.3/genesis/src/startup		\
 // 		{getenv HOME}/neurospaces_project/genesis/genesis/Scripts/neurokit   \
 // 		{getenv HOME}/neurospaces_project/genesis/genesis/Scripts/neurokit/prototypes

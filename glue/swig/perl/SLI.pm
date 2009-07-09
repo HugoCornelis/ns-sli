@@ -38,7 +38,7 @@ sub include_model
 
     my $morphology_directory = $1;
 
-    $morphology_directory = "/local_home/local_home/hugo/neurospaces_project/ns-genesis-SLI/source/snapshots/0";
+    $morphology_directory = "/local_home/local_home/hugo/neurospaces_project/ns-sli/source/snapshots/0";
 
     # read the model, result is always 0 for some obscure reason.
 
@@ -69,7 +69,7 @@ sub run_model
 
     my $morphology_directory = $1;
 
-    $morphology_directory = "/local_home/local_home/hugo/neurospaces_project/ns-genesis-SLI/source/snapshots/0";
+    $morphology_directory = "/local_home/local_home/hugo/neurospaces_project/ns-sli/source/snapshots/0";
 
     # read the model, result is always 0 for some obscure reason.
 

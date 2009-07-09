@@ -95,7 +95,7 @@ int IncludeG2Model(char *pcMorphologyDirectory, char *pcScript, void *pvNeurospa
 
     // \todo make this auto configurable, install in a standard location
 
-    argv[4] = "/local_home/local_home/hugo/neurospaces_project/ns-genesis-SLI/source/snapshots/0/.simrc";
+    argv[4] = "/local_home/local_home/hugo/neurospaces_project/ns-sli/source/snapshots/0/.simrc";
 
     argv[5] = "-morphology-directory";
 
@@ -150,7 +150,7 @@ int RunG2Model(char *pcMorphologyDirectory, char *pcScript, void *pvNeurospaces)
 
     // \todo make this auto configurable, install in a standard location
 
-    argv[4] = "/local_home/local_home/hugo/neurospaces_project/ns-genesis-SLI/source/snapshots/0/.simrc";
+    argv[4] = "/local_home/local_home/hugo/neurospaces_project/ns-sli/source/snapshots/0/.simrc";
 
     argv[5] = "-morphology-directory";
 
