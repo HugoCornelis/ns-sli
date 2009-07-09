@@ -102,7 +102,7 @@ case "$host_os" in
 
  
 
-    SWIGLDLINKSFORPERL='-L../../.. 	-lheccer -L../../../integrators  	-L/usr/local/lib/model-container 	-lneurospacesread 	-L/usr/local/lib/neurospaces/algorithms/symbol 	-lsymbol_algorithms 	-lncurses -lreadline 	-bundle 	-undefined suppress 	-flat_namespace	$(shelldir)/../loadlib.o $(shelldir)/shell_lib.o	$(simdir)/libsim.a	$(shelldir)/libshell.a	$(utildir)/libutil.a	$(scriptdir)/libscript.a	$(olfdir)/libolf.a	$(nsdir)/libneurospaces.a	-L${libdir}/model-container -lneurospacesread	-L${libdir}/neurospaces/algorithms/symbol -lsymbol_algorithms	-L${libdir}/heccer -lheccer	-L${libdir}/heccer -lhneurospaces	$(SYSLIBLINKS)'
+    SWIGLDLINKSFORPERL='-L../../.. 	-lheccer -L../../../integrators  	-L/usr/local/lib/model-container 	-lneurospacesread 	-L/usr/local/lib/neurospaces/algorithms/symbol 	-lsymbol_algorithms 	-lncurses -lreadline 	-bundle 	-undefined suppress 	-flat_namespace	$(shelldir)/../loadlib.o $(shelldir)/shell_lib.o	$(simdir)/libsim.a	$(shelldir)/libshell.a	$(utildir)/libutil.a	$(scriptdir)/libscript.a	$(olfdir)/libolf.a	$(nsdir)/libneurospaces.a	-L${libdir}/model-container -lneurospacesread	-L${libdir}/neurospaces/algorithms/symbol -lsymbol_algorithms	-L${libdir}/heccer -lheccer	-L${libdir}/heccer -lhneurospaces	-fPIC $(SYSLIBLINKS)'
     AC_SUBST(SWIGLDLINKSFORPERL)
 
 
@@ -123,7 +123,7 @@ case "$host_os" in
     SWIGCOMPILECOMMAND_PYTHON='gcc         $(SWIGCOMPILELINKSFORPYTHON)         -c swiggable_sli_wrap.c'
     AC_SUBST(SWIGCOMPILECOMMAND_PYTHON)
 
-    SWIGLDLINKSFORPYTHON='-L$(PYTHON_HEADERS)         -framework Python         -flat_namespace         -undefined suppress 	-bundle 	-bundle_loader $(PYTHON_EXE)'
+    SWIGLDLINKSFORPYTHON='-L$(PYTHON_HEADERS)         -framework Python         -flat_namespace         -undefined suppress 	-bundle 	-bundle_loader $(PYTHON_EXE) -fPIC '
     AC_SUBST(SWIGLDLINKSFORPYTHON)
 
     SWIGLINKCOMMAND_PYTHON='ld 	$(SWIGLDLINKSFORPYTHON) 	-o _SwiggableSLI.$(PERLLIB_EXTENSION) swiggable_sli_wrap.o'
@@ -160,7 +160,7 @@ case "$host_os" in
     AC_SUBST(SWIGCOMPILECOMMAND_PERL)
 
 
-    SWIGLDLINKSFORPERL='-g -shared swiggable_sli_wrap.o -L../../.. -lheccer -L../../../integrators -L/usr/local/lib/model-container -lneurospacesread -L/usr/local/lib/neurospaces/algorithms/symbol -lsymbol_algorithms -lncurses -lreadline -lhistory -fPIC	$(shelldir)/../loadlib.o $(shelldir)/shell_lib.o	$(simdir)/libsim.a	$(shelldir)/libshell.a	$(utildir)/libutil.a	$(scriptdir)/libscript.a	$(olfdir)/libolf.a	$(nsdir)/libneurospaces.a	-L${libdir}/model-container -lneurospacesread	-L${libdir}/neurospaces/algorithms/symbol -lsymbol_algorithms	-L${libdir}/heccer -lheccer	-L${libdir}/heccer -lhneurospaces	$(SYSLIBLINKS)'
+    SWIGLDLINKSFORPERL='-g -shared swiggable_sli_wrap.o -L../../.. -lheccer -L../../../integrators -L/usr/local/lib/model-container -lneurospacesread -L/usr/local/lib/neurospaces/algorithms/symbol -lsymbol_algorithms -lncurses -lreadline -lhistory -fPIC	$(shelldir)/../loadlib.o $(shelldir)/shell_lib.o	$(simdir)/libsim.a	$(shelldir)/libshell.a	$(utildir)/libutil.a	$(scriptdir)/libscript.a	$(olfdir)/libolf.a	$(nsdir)/libneurospaces.a	-L${libdir}/model-container -lneurospacesread	-L${libdir}/neurospaces/algorithms/symbol -lsymbol_algorithms	-L${libdir}/heccer -lheccer	-L${libdir}/heccer -lhneurospaces	-fPIC $(SYSLIBLINKS)'
     AC_SUBST(SWIGLDLINKSFORPERL)
 
     SWIGLINKCOMMAND_PERL='gcc $(SWIGLDLINKSFORPERL) -o SwiggableSLI.$(PERLLIB_EXTENSION)'
