@@ -398,9 +398,13 @@ Slot *slot;
 
     slot = (Slot *) MSGSLOT(msg_in);
 	/* do type checking here */
-	if ((ADDR)slot[slotno].func != (ADDR)StringMessageData)
-		return(NULL);
-	return(slot[slotno].data);
+
+    // \todo sim_msg.c: In function 'GetStringMsgData':
+    // sim_msg.c:401: warning: cast from pointer to integer of different size
+
+    if ((ADDR)slot[slotno].func != (ADDR)StringMessageData)
+	return(NULL);
+    return(slot[slotno].data);
 }
 
 /* Another Upi addition, used in olf/table.c. This function returns
@@ -412,6 +416,9 @@ int GetSlotType(slot,slotno)
     Slot    *slot;
     int     slotno;
 {
+    // \todo sim_msg.c: In function 'GetSlotType':
+    // sim_msg.c:415: warning: cast from pointer to integer of different size
+
     ADDR func = (ADDR)slot[slotno].func;
     if (func ==  (ADDR)DoubleMessageData) {
          return(DOUBLE);

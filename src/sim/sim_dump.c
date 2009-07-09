@@ -980,7 +980,11 @@ static ADDR dump_hash_function(key,table)
 	char	*key;
 	HASH	*table;
 {
-	return((((ADDR)key & 0xff) + ((ADDR)key >> 8)) % (ADDR)table->size);
+    // \todo sim_dump.c: In function 'dump_hash_function':
+    // sim_dump.c:983: warning: cast from pointer to integer of different size
+    // sim_dump.c:983: warning: cast from pointer to integer of different size
+
+    return((((ADDR)key & 0xff) + ((ADDR)key >> 8)) % (ADDR)table->size);
 }
 
 static ENTRY *dump_hash_find(key,table)
@@ -1074,9 +1078,13 @@ static void DumpMessages(fp,elist,do_all)
 		** hash table lots of extra room */
 		hash_table = hash_create(elist->nelements * 2);
 		for(i = 0; i < nelms; i++) {
-			entry.data = (char *)i;
-			entry.key = (char *)elist->element[i];
-			dump_hash_enter(&entry,hash_table);
+
+		    // \todo sim_dump.c: In function 'DumpMessages':
+		    // sim_dump.c:1077: warning: cast to pointer from integer of different size
+
+		    entry.data = (char *)i;
+		    entry.key = (char *)elist->element[i];
+		    dump_hash_enter(&entry,hash_table);
 		}
 		for(i = 0 ; i < elist->nelements; i++) {
 			elm = elist->element[i];

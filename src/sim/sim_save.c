@@ -81,6 +81,9 @@ size_t memsize;
 extern int edata;
     memsize = (ADDR)sbrk(0) - (ADDR)(&edata);
 #else
+    // \todo sim_save.c: In function 'memusage':
+    // sim_save.c:84: warning: cast from pointer to integer of different size
+
     memsize = (ADDR)sbrk(0);
 #endif
     return memsize;

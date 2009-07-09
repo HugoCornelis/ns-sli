@@ -113,7 +113,7 @@ int i;
 	/*
 	** get the name
 	*/
-	strncpy(tmp,field,(WORD)end-(WORD)field);
+	strncpy(tmp, field, end - field);
 	tmp[end-field] = '\0';
 	strcat(fullname,tmp);
 	/*
@@ -132,7 +132,7 @@ int i;
 	/*
 	** if there are more  fields then just do the first
 	*/
-	strncpy(tmp,field,(WORD)end-(WORD)field);
+	strncpy(tmp, field, end - field);
 	tmp[end-field] = '\0';
 	strcat(fullname,tmp);
     } else {
@@ -323,7 +323,7 @@ int mode;
 	/*
 	** copy the first component (up to the .) into tmp
 	*/
-	strncpy(tmp,field,(WORD)end-(WORD)field);
+	strncpy(tmp, field, end - field);
 	tmp[end-field] = '\0';
 	/*
 	** and append it to the full type string
@@ -335,7 +335,7 @@ int mode;
 	/*
 	** copy the first component (up to the -) into tmp
 	*/
-	strncpy(tmp,field,(WORD)end-(WORD)field);
+	strncpy(tmp, field, end - field);
 	tmp[end-field] = '\0';
 	/*
 	** and append it to the full type string
@@ -347,7 +347,7 @@ int mode;
 	/*
 	** copy the field name (up to the [) into tmp
 	*/
-	strncpy(tmp,field,(WORD)end-(WORD)field);
+	strncpy(tmp, field, end - field);
 	tmp[end-field] = '\0';
 	/*
 	** add the field name to the full type string
