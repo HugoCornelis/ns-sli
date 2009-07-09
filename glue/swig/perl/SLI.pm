@@ -73,7 +73,7 @@ sub run_model
 
     # read the model, result is always 0 for some obscure reason.
 
-    my $result = SwiggableSLI::IncludeG2Model("$morphology_directory", "$script", $model_container->backend());
+    my $result = SwiggableSLI::RunG2Model("$morphology_directory", "$script", $model_container->backend());
 
     if (!$result)
     {
