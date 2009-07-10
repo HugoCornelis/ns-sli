@@ -1,5 +1,6 @@
 Makefile$
 Makefile\.in$
+\.tab$
 \@\.[ch]
 ^aclocal\.m4$
 ^config.guess$

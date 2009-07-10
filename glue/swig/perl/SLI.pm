@@ -38,11 +38,18 @@ sub include_model
 
     my $morphology_directory = $1;
 
-    $morphology_directory = "/local_home/local_home/hugo/neurospaces_project/ns-sli/source/snapshots/0";
+    $morphology_directory = $ENV{HOME} . "neurospaces_project/ns-sli/source/snapshots/0";
 
     # read the model, result is always 0 for some obscure reason.
 
-    my $result = SwiggableSLI::IncludeG2Model("$morphology_directory", "$script", $model_container->backend());
+    my $result
+	= SwiggableSLI::IncludeG2Model
+	    (
+	     "$morphology_directory",
+	     "$script",
+	     $model_container->backend(),
+	     $ENV{HOME} . "neurospaces_project/ns-sli/source/snapshots/0/.simrc",
+	    );
 
     if (!$result)
     {
@@ -69,11 +76,18 @@ sub run_model
 
     my $morphology_directory = $1;
 
-    $morphology_directory = "/local_home/local_home/hugo/neurospaces_project/ns-sli/source/snapshots/0";
+    $morphology_directory = $ENV{HOME} . "neurospaces_project/ns-sli/source/snapshots/0";
 
     # read the model, result is always 0 for some obscure reason.
 
-    my $result = SwiggableSLI::RunG2Model("$morphology_directory", "$script", $model_container->backend());
+    my $result
+	= SwiggableSLI::RunG2Model
+	    (
+	     "$morphology_directory",
+	     "$script",
+	     $model_container->backend(),
+	     $ENV{HOME} . "neurospaces_project/ns-sli/source/snapshots/0/.simrc",
+	    );
 
     if (!$result)
     {

@@ -77,7 +77,7 @@ struct Neurospaces;
 
 extern int sli_main(int argc, char **argv, char **envp, struct Neurospaces *pneuro);
 
-int IncludeG2Model(char *pcMorphologyDirectory, char *pcScript, void *pvNeurospaces)
+int IncludeG2Model(char *pcMorphologyDirectory, char *pcScript, void *pvNeurospaces, char *pcSimrc)
 {
     //- the modeling service is neurospaces
 
@@ -93,9 +93,12 @@ int IncludeG2Model(char *pcMorphologyDirectory, char *pcScript, void *pvNeurospa
 
     argv[3] = "-altsimrc";
 
-    // \todo make this auto configurable, install in a standard location
+    if (!pcSimrc)
+    {
+	pcSimrc = "/local_home/local_home/hugo/neurospaces_project/ns-sli/source/snapshots/0/.simrc";
+    }
 
-    argv[4] = "/local_home/local_home/hugo/neurospaces_project/ns-sli/source/snapshots/0/.simrc";
+    argv[4] = pcSimrc;
 
     argv[5] = "-morphology-directory";
 
@@ -132,7 +135,7 @@ int IncludeG2Script(char *pcScript)
 }
 
 
-int RunG2Model(char *pcMorphologyDirectory, char *pcScript, void *pvNeurospaces)
+int RunG2Model(char *pcMorphologyDirectory, char *pcScript, void *pvNeurospaces, char *pcSimrc)
 {
     //- the modeling service is neurospaces
 
@@ -148,9 +151,12 @@ int RunG2Model(char *pcMorphologyDirectory, char *pcScript, void *pvNeurospaces)
 
     argv[3] = "-altsimrc";
 
-    // \todo make this auto configurable, install in a standard location
+    if (!pcSimrc)
+    {
+	pcSimrc = "/local_home/local_home/hugo/neurospaces_project/ns-sli/source/snapshots/0/.simrc";
+    }
 
-    argv[4] = "/local_home/local_home/hugo/neurospaces_project/ns-sli/source/snapshots/0/.simrc";
+    argv[4] = pcSimrc;
 
     argv[5] = "-morphology-directory";
 
