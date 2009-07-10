@@ -38,7 +38,7 @@ sub include_model
 
     my $morphology_directory = $1;
 
-    $morphology_directory = $ENV{HOME} . "neurospaces_project/ns-sli/source/snapshots/0";
+    $morphology_directory = $ENV{HOME} . "/neurospaces_project/ns-sli/source/snapshots/0";
 
     # read the model, result is always 0 for some obscure reason.
 
@@ -48,7 +48,7 @@ sub include_model
 	     "$morphology_directory",
 	     "$script",
 	     $model_container->backend(),
-	     $ENV{HOME} . "neurospaces_project/ns-sli/source/snapshots/0/.simrc",
+	     $ENV{HOME} . "/neurospaces_project/ns-sli/source/snapshots/0/.simrc",
 	    );
 
     if (!$result)
@@ -76,7 +76,7 @@ sub run_model
 
     my $morphology_directory = $1;
 
-    $morphology_directory = $ENV{HOME} . "neurospaces_project/ns-sli/source/snapshots/0";
+    $morphology_directory = $ENV{HOME} . "/neurospaces_project/ns-sli/source/snapshots/0";
 
     # read the model, result is always 0 for some obscure reason.
 
@@ -86,7 +86,7 @@ sub run_model
 	     "$morphology_directory",
 	     "$script",
 	     $model_container->backend(),
-	     $ENV{HOME} . "neurospaces_project/ns-sli/source/snapshots/0/.simrc",
+	     $ENV{HOME} . "/neurospaces_project/ns-sli/source/snapshots/0/.simrc",
 	    );
 
     if (!$result)
