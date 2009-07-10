@@ -181,7 +181,7 @@ int setParameter(struct PidinStack *ppist,
   {
       if (iType == 0)
       {
-	  fprintf(stdout, "changing type to SETPARA_GENESIS2 for %s\n", pcField);
+/* 	  fprintf(stdout, "changing type to SETPARA_GENESIS2 for %s\n", pcField); */
 
 	  iType = SETPARA_GENESIS2;
       }
@@ -223,7 +223,7 @@ int setParameter(struct PidinStack *ppist,
 /* 	  } */
 /* 	  else */
 	  {
-	      fprintf(stdout, "changing type to SETPARA_GENESIS2 for %s -- no parent segment found\n", pcField);
+/* 	      fprintf(stdout, "changing type to SETPARA_GENESIS2 for %s -- no parent segment found\n", pcField); */
 
 	      iType = SETPARA_GENESIS2;
 	  }
@@ -233,7 +233,7 @@ int setParameter(struct PidinStack *ppist,
   {
       if (iType == 0)
       {
-	  fprintf(stdout, "changing type to SETPARA_GENESIS2 for %s\n", pcField);
+/* 	  fprintf(stdout, "changing type to SETPARA_GENESIS2 for %s\n", pcField); */
 
 	  iType = SETPARA_GENESIS2;
       }
@@ -242,7 +242,7 @@ int setParameter(struct PidinStack *ppist,
   {
       if (iType == 0)
       {
-	  fprintf(stdout, "changing type to SETPARA_NUM for %s\n", pcField);
+/* 	  fprintf(stdout, "changing type to SETPARA_NUM for %s\n", pcField); */
 
 	  iType = SETPARA_NUM;
       }
