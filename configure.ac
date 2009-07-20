@@ -94,7 +94,7 @@ case "$host_os" in
     PERLLIB_EXTENSION='dylib'
     AC_SUBST(PERLLIB_EXTENSION)
 
-    SWIGCOMPILELINKSFORPERL='-I$(srcdir)/../../.. 	-I$(top_builddir) 	-ffloat-store 	-I../../../src 	-include src/config.h 	-g 	-O0 	-dynamic 	-fPIC 	`perl -MExtUtils::Embed -e ccopts | perl -pe 's/\-arch\s\S+\s//g'`'
+    SWIGCOMPILELINKSFORPERL='-I$(srcdir)/../../.. 	-I$(top_builddir) 	-ffloat-store 	-I../../../src 	-include src/config.h 	-g 	-O0 	-dynamic `perl -MExtUtils::Embed -e ccopts | perl -pe 's/\-arch\s\S+\s//g'`'
     AC_SUBST(SWIGCOMPILELINKSFORPERL)
 
     SWIGCOMPILECOMMAND_PERL='gcc         $(SWIGCOMPILELINKSFORPERL)         -c swiggable_sli_wrap.c'
@@ -102,7 +102,7 @@ case "$host_os" in
 
  
 
-    SWIGLDLINKSFORPERL='-L../../.. 	-lheccer -L../../../integrators  	-L/usr/local/lib/model-container 	-lneurospacesread 	-L/usr/local/lib/neurospaces/algorithms/symbol 	-lsymbol_algorithms 	-lncurses -lreadline 	-bundle 	-undefined suppress 	-flat_namespace	$(shelldir)/../loadlib.o $(shelldir)/shell_lib.o	$(simdir)/libsim.a	$(shelldir)/libshell.a	$(utildir)/libutil.a	$(scriptdir)/libscript.a	$(olfdir)/libolf.a	$(nsdir)/libneurospaces.a	-L${libdir}/model-container -lneurospacesread	-L${libdir}/neurospaces/algorithms/symbol -lsymbol_algorithms	-L${libdir}/heccer -lheccer	-L${libdir}/heccer -lhneurospaces	-fPIC $(SYSLIBLINKS)'
+    SWIGLDLINKSFORPERL='-L../../.. 	-lheccer -L../../../integrators  	-L/usr/local/lib/model-container 	-lneurospacesread 	-L/usr/local/lib/neurospaces/algorithms/symbol 	-lsymbol_algorithms 	-lncurses -lreadline 	-bundle 	-undefined suppress 	-flat_namespace	$(shelldir)/../loadlib.o $(shelldir)/shell_lib.o	$(simdir)/libsim.a	$(shelldir)/libshell.a	$(utildir)/libutil.a	$(scriptdir)/libscript.a	$(olfdir)/libolf.a	$(nsdir)/libneurospaces.a	-L${libdir}/model-container -lneurospacesread	-L${libdir}/neurospaces/algorithms/symbol -lsymbol_algorithms	-L${libdir}/heccer -lheccer	-L${libdir}/heccer -lhneurospaces $(SYSLIBLINKS)'
     AC_SUBST(SWIGLDLINKSFORPERL)
 
 
@@ -139,6 +139,27 @@ case "$host_os" in
   *) #default settings (Linux 2.6)
 
     dnl {{{
+
+
+
+    dnl -------------------------------------------
+    dnl A check for 64 bit to set appropriate flags.
+    dnl (can also put in other host_os specifics if needed)
+    dnl -------------------------------------------
+dnl     AC_MSG_CHECKING([checking for 64 bit])
+dnl     case "$host_os" in:
+dnl       *64*)
+dnl          AC_MSG_RESULT([yes])
+dnl          CFLAGS="-fPIC"
+dnl          ;;
+dnl 	 *)
+dnl 	 AC_MSG_RESULT([no])
+dnl          ;;
+dnl     esac
+    dnl -------------------------------------------
+
+
+
     AR=ar
     ARFLAGS='cru'
     AC_SUBST(AR)
@@ -185,6 +206,30 @@ case "$host_os" in
 
   ;;
 esac
+
+
+dnl -----------------------------------------------------
+dnl Set flags for specific cpus
+dnl -----------------------------------------------------
+AC_MSG_CHECKING([checking CPU])
+case "$host_cpu" in
+
+	i[[3456]]86|pentium)
+	  AC_MSG_RESULT([Intel based CPU])
+	;;
+	x86?64*)
+	  dnl
+	  dnl The test machine sorts an AMD 64 bit cpu
+	  dnl this need fPIC set globally for all compiled objects
+	  dnl for swig to work.
+	  AC_MSG_RESULT([AMD 64 based CPU])
+ 	  CFLAGS="-fPIC"
+	;;
+	*)
+	  AC_MSG_RESULT([Unknown CPU type])
+	;;
+esac
+
 
 
 # determine the test library to install
