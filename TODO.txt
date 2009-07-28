@@ -5,10 +5,6 @@ addmsg {cellpath}/climb_presyn4 {cellpath}/br3[0-8]/climb ACTIVATION z
 
 * Read in and implement a test for the morphology file tests/scripts/readcell/Purk2M9-nospines.p and tests/scripts/readcell/Purk2M9-spines.p
 
-
-* remove the need for "hardcoded_neutral" in the scripting language.
-
-
 * need to get showfield working, this should be trivial with the tools in nscomm.c
 
 * need to make nsgenesis seek out the neurospaces model enviroment variable upon startup.
