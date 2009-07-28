@@ -1,5 +1,8 @@
 -*- outline -*-
 
+* Add support for addmsg wildcards
+addmsg {cellpath}/climb_presyn4 {cellpath}/br3[0-8]/climb ACTIVATION z
+
 * One of the tests:
 *** Executing src/nsgenesis './/tests/scripts/heccer/springmass.g'
 *** Test: Does the application report that it writes its output?
