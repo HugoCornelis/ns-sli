@@ -23,7 +23,7 @@ perldir = $(prefix)/glue/swig/perl
 
 swig_DATA = sli.i
 
-perl_HEADERS = SLI.pm SLI/Integrators/Commands.pm
+nobase_perl_HEADERS = SLI.pm SLI/Integrators/Commands.pm
 
 perl_DATA = sli_test.pm SwiggableSLI.pm SwiggableSLI.$(PERLLIB_EXTENSION)
 
