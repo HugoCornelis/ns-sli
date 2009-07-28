@@ -3,59 +3,6 @@
 * Add support for addmsg wildcards
 addmsg {cellpath}/climb_presyn4 {cellpath}/br3[0-8]/climb ACTIVATION z
 
-* One of the tests:
-*** Executing src/nsgenesis './/tests/scripts/heccer/springmass.g'
-*** Test: Does the application report that it writes its output?
-Starting Genesis
-==========================================================================
-               Neurospaces Genesis Scripting Interface
-                          Based off of GENESIS 2.3
-
-                        This is version ns-sli-python-2
-Type "help" for help.
-==========================================================================
-
-Executable:         /local_home/local_home/hugo/neurospaces_project/ns-sli/source/snapshots/0/src/nsgenesis
-Neurospaces model container initialized.
-Startup script:     .simrc
-SIMPATH=. /local_home/local_home/hugo/neurospaces_project/ns-sli/source/snapshots/0/src/startup /local_home/local_home/hugo/neurospaces_project/ns-sli/source/snapshots/0/tests/scripts/PurkM9_model
-SIMNOTES=/local_home/local_home/hugo/.notes
-GENESIS_HELP=/local_home/local_home/hugo/neurospaces_project/genesis/genesis/Doc
-.simrc has been executed!
-Simulation Script:  .//tests/scripts/heccer/springmass.g
-changing clock [0] from 1 to 2e-07
-time = 0.000000 ; step = 0          
-<.//tests/scripts/heccer/springmass.g> line 53
-Error accessing numeric field z.
-** Error - <.//tests/scripts/heccer/springmass.g> line 53
-Error accessing numeric field z.
-** Error - <.//tests/scripts/heccer/springmass.g> line 53
-Error accessing numeric field z.
-** Error - <.//tests/scripts/heccer/springmass.g> line 53
-Error accessing numeric field z.
-** Error - <.//tests/scripts/heccer/springmass.g> line 53
-Error accessing numeric field z.
-** Error - time = 0.000001 ; step = 5          
-completed 5 steps in 0.000000 cpu seconds
-time = 0.000001 ; step = 6          
-completed 1 steps in 0.000000 cpu seconds
-time = 0.000002 ; step = 10          
-completed 4 steps in 0.000000 cpu seconds
-time = 0.000020 ; step = 100          
-completed 90 steps in 0.000000 cpu seconds
-time = 0.000200 ; step = 1000          
-completed 900 steps in 0.004000 cpu seconds
-time = 0.000400 ; step = 2000          
-completed 1000 steps in 0.004000 cpu seconds
-time = 0.002200 ; step = 11000          
-completed 9000 steps in 0.028002 cpu seconds
-time = 0.020200 ; step = 101000          
-completed 90000 steps in 0.236015 cpu seconds
-output written
-genesis #0 > *** Test: Can we perform a test using asc_file objects to write application output?
-*** Application output file: /tmp/a1
-*** Expected output file: .//tests/specifications/strings/a1.txt
-
 * Read in and implement a test for the morphology file tests/scripts/readcell/Purk2M9-nospines.p and tests/scripts/readcell/Purk2M9-spines.p
 
 
