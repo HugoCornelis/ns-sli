@@ -28,9 +28,6 @@ html-upload-prepare:
 html-upload: html-upload-prepare
 	scp -pr html/htdocs/* hcornelis,neurospaces@web.sourceforge.net:/home/groups/n/ne/neurospaces/htdocs/
 
-doxygen-upload: 
-	scp -r docs/nsgenesis docs@repo-genesis3.cbi.utsa.edu:~/doxygen
-
 
 doxygen: doxygen.cfg
 	$(DOXYGEN) doxygen.cfg
