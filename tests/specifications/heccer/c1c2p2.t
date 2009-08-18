@@ -21,7 +21,7 @@ my $test
 				arguments => [
 					         "$::config->{core_directory}/tests/scripts/heccer/c1c2p2.g",
 					     ],
-				command => 'src/nsgenesis',
+				command => 'src/ns-sli',
 				command_tests => [
 
 						  {

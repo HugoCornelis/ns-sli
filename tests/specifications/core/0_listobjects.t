@@ -15,7 +15,7 @@ my $test
 				  "$::config->{core_directory}/tests/scripts/basic-g/listobjects.g",
 					],
 
-				command => 'src/nsgenesis',
+				command => 'src/ns-sli',
 				command_tests => [
 						  {
 						   description =>  "Add a field to an object in genesis.",

@@ -23,7 +23,7 @@ my $test
 				arguments => [
 					         "$::config->{core_directory}/tests/scripts/heccer/table-nap.g",
 					     ],
-				command => 'src/nsgenesis',
+				command => 'src/ns-sli',
 				command_tests => [
 						  {
 						   description => "Are gates tabulated correctly, persistent sodium gates ?",
@@ -49,7 +49,7 @@ my $test
 
 					      "$::config->{core_directory}/tests/scripts/heccer/table-naf.g",
 					     ],
-				command => 'src/nsgenesis',
+				command => 'src/ns-sli',
 				command_tests => [
 						  {
 						   description => "Are gates tabulated correctly, simple sodium gates ?",
@@ -73,7 +73,7 @@ my $test
 
 					      "$::config->{core_directory}/tests/scripts/heccer/table-cat.g",
 					     ],
-				command => 'src/nsgenesis',
+				command => 'src/ns-sli',
 				command_tests => [
 						  {
 						  description => "Are gates tabulated correctly, calcium t-type gates ?",
@@ -103,7 +103,7 @@ my $test
 
 					      "$::config->{core_directory}/tests/scripts/heccer/table-cap.g",
 					     ],
-				command => 'src/nsgenesis',
+				command => 'src/ns-sli',
 				command_tests => [
 						  {
 						  description => "Are gates tabulated correctly, p type calcium gates ?",
@@ -132,7 +132,7 @@ my $test
 
 					      "$::config->{core_directory}/tests/scripts/heccer/table-ka.g",
 					     ],
-				command => 'src/nsgenesis',
+				command => 'src/ns-sli',
 				command_tests => [
 						  {
 						   description => "Are gates tabulated correctly, simple potassium gates ? (table-ka.g)",
@@ -160,7 +160,7 @@ my $test
 					       "$::config->{core_directory}/tests/scripts/heccer/table-km.g",
 
 					     ],
-				command => 'src/nsgenesis',
+				command => 'src/ns-sli',
 				command_tests => [
 						  {
 						   numerical_compare => 1,
@@ -185,7 +185,7 @@ my $test
 					        "$::config->{core_directory}/tests/scripts/heccer/table-kh.g",
 
 					     ],
-				command => 'src/nsgenesis',
+				command => 'src/ns-sli',
 				command_tests => [
 						  {
 						   numerical_compare => 1,
@@ -212,7 +212,7 @@ my $test
 
 					      "$::config->{core_directory}/tests/scripts/heccer/table-k2.g",
 					     ],
-				command => 'src/nsgenesis',
+				command => 'src/ns-sli',
 				command_tests => [
 						  {
 						   description => "Are gates tabulated correctly, K2 potassium gates ?",

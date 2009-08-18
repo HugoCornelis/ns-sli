@@ -21,7 +21,7 @@ my $test
 
 					      "$::config->{core_directory}/tests/scripts/heccer/table-kdr-nodump.g",
 					     ],
-				command => 'src/nsgenesis',
+				command => 'src/ns-sli',
 				command_tests => [
 
 
@@ -94,7 +94,7 @@ my $test
 				arguments => [
 					         "$::config->{core_directory}/tests/scripts/heccer/table-kdr.g",
 					     ],
-				command => 'src/nsgenesis',
+				command => 'src/ns-sli',
 				command_tests => [
 						  {
 						   numerical_compare => 1,

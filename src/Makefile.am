@@ -21,12 +21,12 @@ CLEANFILES = \
 	loadlib.c \
 	liblist
 
-bin_PROGRAMS = nsgenesis 
+bin_PROGRAMS = ns-sli 
 
-nsgenesis_SOURCES = \
+ns_sli_SOURCES = \
 	loadlib.c 
 
-nsgenesis_LDADD = \
+ns_sli_LDADD = \
 	$(shelldir)/shell_lib.o \
 	$(simdir)/libsim.a \
 	$(shelldir)/libshell.a \
@@ -43,8 +43,8 @@ nsgenesis_LDADD = \
 # add the tests/ directory because the TEST_SPECIFICATION_FILES has
 # $(top_srcdir) as prefix, which points to ../ compensating for tests/.
 
-nsgenesistestdir=$(prefix)/nsgenesis/tests
-nobase_dist_nsgenesistest_DATA=@TEST_SPECIFICATION_FILES@
+ns_slitestdir=$(prefix)/ns-sli/tests
+nobase_dist_ns_slitest_DATA=@TEST_SPECIFICATION_FILES@
 
 liblist: Makefile
 	@echo "# liblist - This file is generated automatically." > liblist

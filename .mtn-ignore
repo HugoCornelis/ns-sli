@@ -11,6 +11,7 @@ Makefile\.in$
 ^docs/latex
 ^docs/man
 ^docs/nsgenesis
+^docs/ns-sli
 ^docs/rtf
 ^glue/swig/perl/SwiggableSLI.pm$
 ^glue/swig/perl/swiggable_sli_wrap.c$
@@ -35,6 +36,7 @@ Makefile\.in$
 ^src/neurospaces/tmp_neurospaces_struct\.h
 ^src/neurospaces/tmp_nsintegrator_struct\.h
 ^src/nsgenesis
+^src/ns-sli
 ^src/olf/tmp_olf_struct\.h
 ^src/script/lex\.yy\.c
 ^src/script/lexical\.c

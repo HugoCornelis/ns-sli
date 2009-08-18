@@ -100,7 +100,7 @@ my $test
 				arguments => [
 					         "$::config->{core_directory}/tests/scripts/heccer/double.g",
 					     ],
-				command => 'src/nsgenesis',
+				command => 'src/ns-sli',
 				command_tests => [
 						  {
 						   description => "Can we add a message between compartments ?",

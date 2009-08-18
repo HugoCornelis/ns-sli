@@ -11,10 +11,10 @@ my $test
 				arguments => [
 					      "$::config->{core_directory}/tests/scripts/basic-g/setfield.g",
 					     ],
-				command => 'src/nsgenesis',
+				command => 'src/ns-sli',
 				command_tests => [
 						  {
-						   description => "Can we set a field on an object in nsgenesis?",
+						   description => "Can we set a field on an object in ns-sli?",
 						   read => '[ /n ]
 x                    = 444
 y                    = 0
@@ -29,10 +29,10 @@ z                    = 0
 			       {
 				arguments => [
 					     ],
-				command => 'src/nsgenesis',
+				command => 'src/ns-sli',
 				command_tests => [
 						  {
-						   description => "Can we perform multiple set fields in nsgenesis?",
+						   description => "Can we perform multiple set fields in ns-sli?",
 						   read => '[ /n ]
 x                    = 1
 y                    = 2

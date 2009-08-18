@@ -15,7 +15,7 @@ my $test
 				arguments => [
 					      "$::config->{core_directory}/tests/scripts/PurkM9_model/PASSIVE9-current1.g",
 					     ],
-				command => 'src/nsgenesis',
+				command => 'src/ns-sli',
 				command_tests => [
 						  {
 						   comment => "Also tests the cell reader *add_spines option",
@@ -34,7 +34,7 @@ my $test
 				arguments => [
 					      "$::config->{core_directory}/tests/scripts/PurkM9_model/PASSIVE9-current2.g",
 					     ],
-				command => 'src/nsgenesis',
+				command => 'src/ns-sli',
 				command_tests => [
 						  {
 						   comment => "Also tests the cell reader *add_spines option",

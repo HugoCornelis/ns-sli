@@ -11,7 +11,7 @@ my $test
 				arguments => [
 					      "$::config->{core_directory}/tests/scripts/PurkM9_model/purkinje_simplifying.g",
 					     ],
-				command => 'src/nsgenesis',
+				command => 'src/ns-sli',
 				command_tests => [
 						  (
 						   {
@@ -465,7 +465,7 @@ Principal serial ID = 2623 of 56137 Principal successors
 				arguments => [
 					      "$::config->{core_directory}/tests/scripts/PurkM9_model/ACTIVE-soma1.g",
 					     ],
-				command => 'src/nsgenesis',
+				command => 'src/ns-sli',
 				command_tests => [
 						  (
 						   {
@@ -873,7 +873,7 @@ VM Membrane Potentials (pdVms[0]) : (-0.068)
 				arguments => [
 					      "$::config->{core_directory}/tests/scripts/PurkM9_model/ACTIVE-main1.g",
 					     ],
-				command => 'src/nsgenesis',
+				command => 'src/ns-sli',
 				command_tests => [
 						  (
 						   {
@@ -945,7 +945,7 @@ VM Membrane Potentials (pdVms[0]) : (-0.068)
 				arguments => [
 					      "$::config->{core_directory}/tests/scripts/PurkM9_model/CURRENT9.g",
 					     ],
-				command => 'src/nsgenesis',
+				command => 'src/ns-sli',
 				command_tests => [
 						  (
 						   {
@@ -1103,7 +1103,7 @@ END PUBLIC_MODELS
 				arguments => [
 					      "$::config->{core_directory}/tests/scripts/PurkM9_model/CLIMB9.g",
 					     ],
-				command => 'src/nsgenesis',
+				command => 'src/ns-sli',
 				command_tests => [
 						  (
 						   {

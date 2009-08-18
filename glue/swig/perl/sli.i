@@ -85,7 +85,7 @@ int IncludeG2Model(char *pcMorphologyDirectory, char *pcScript, void *pvNeurospa
 
     char *argv[20];
 
-    argv[0] = "nsgenesis";
+    argv[0] = "ns-sli";
 
     argv[1] = "-batch";
 

@@ -8,7 +8,7 @@ my $test
     = {
        command_definitions => [
 			       {
-				command => 'src/nsgenesis',
+				command => 'src/ns-sli',
 				description => "prepare the check for version information",
 				side_effects => 'force a restart of the application before checking version numbers, the version information is in the header printed during startup.',
 			       },
@@ -16,7 +16,7 @@ my $test
 				arguments => [
 					     
 					     ],
-				command => 'src/nsgenesis',
+				command => 'src/ns-sli',
 				command_tests => [
 					
 						  {

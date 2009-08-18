@@ -11,10 +11,10 @@ my $test
 				arguments => [
 					      "$::config->{core_directory}/tests/scripts/basic-g/test1.g",
 					     ],
-				command => 'src/nsgenesis',
+				command => 'src/ns-sli',
 				command_tests => [
 						  {
-						   description => "Can we load a simple file into nsgenesis?",
+						   description => "Can we load a simple file into ns-sli?",
 						   read => 'changing clock [0] from 1 to 1e-05
 
 ACTIVE CLOCKS
@@ -31,10 +31,10 @@ ACTIVE CLOCKS
 			       {
 				arguments => [
 					     ],
-				command => 'src/nsgenesis',
+				command => 'src/ns-sli',
 				command_tests => [
 						  {
-						   description => "Can we load a simple file into nsgenesis?",
+						   description => "Can we load a simple file into ns-sli?",
 						   read => 'changing clock [0] from 1 to 1e-05',
 						   timeout => 2,
 						   write => 'setclock 0 1e-5

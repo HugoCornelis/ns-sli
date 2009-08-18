@@ -15,7 +15,7 @@ my $test
 				arguments => [
 					         "$::config->{core_directory}/tests/scripts/genesis-2/copy4.g",
 					     ],
-				command => 'src/nsgenesis',
+				command => 'src/ns-sli',
 				command_tests => [
 						  
 

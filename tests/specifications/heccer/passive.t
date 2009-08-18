@@ -19,7 +19,7 @@ my $test
 				arguments => [
 					      "$::config->{core_directory}/tests/scripts/passive/singlep.g",
 					     ],
-				command => 'src/nsgenesis',
+				command => 'src/ns-sli',
 				command_tests => [
 						  {
 						   description => "Is a single passive compartment solved correctly ?",
@@ -40,7 +40,7 @@ my $test
 				arguments => [
 					      "$::config->{core_directory}/tests/scripts/passive/double.g",
 					     ],
-				command => 'src/nsgenesis',
+				command => 'src/ns-sli',
 				command_tests => [
 						  {
 						   description => "Are two passive compartments solved correctly ?",
@@ -64,7 +64,7 @@ my $test
 				arguments => [
 					      "$::config->{core_directory}/tests/scripts/heccer/triple.g",
 					     ],
-				command => 'src/nsgenesis',
+				command => 'src/ns-sli',
 				command_tests => [
 						  {
 						   description => "Are three passive compartments solved correctly ?",
@@ -87,7 +87,7 @@ my $test
 				arguments => [
 					      "$::config->{core_directory}/tests/scripts/heccer/fork3p.g",
 					     ],
-				command => 'src/nsgenesis',
+				command => 'src/ns-sli',
 				command_tests => [
 						  {
 						   description => "Is a fork of three passive compartments solved correctly ?",
@@ -108,7 +108,7 @@ my $test
 				arguments => [
 					      "$::config->{core_directory}/tests/scripts/heccer/fork4p1.g",
 					      ],
-				command => 'src/nsgenesis',
+				command => 'src/ns-sli',
 				command_tests => [
 						  {
 						   description => "Is a fork of four passive compartments solved correctly, first alternative ?",
@@ -131,7 +131,7 @@ my $test
 				arguments => [
 					      "$::config->{core_directory}/tests/scripts/heccer/fork4p2.g",
 					     ],
-				command => 'src/nsgenesis',
+				command => 'src/ns-sli',
 				command_tests => [
 						  {
 						   description => "Is a fork of four passive compartments solved correctly, second alternative ?",
@@ -152,7 +152,7 @@ my $test
 				arguments => [
 					      "$::config->{core_directory}/tests/scripts/heccer/fork4p3.g",
 					     ],
-				command => 'src/nsgenesis',
+				command => 'src/ns-sli',
 				command_tests => [
 						  {
 						   description => "Is a fork of four passive compartments solved correctly, third alternative ?",
@@ -175,7 +175,7 @@ my $test
 				arguments => [
 					      "$::config->{core_directory}/tests/scripts/heccer/c1c2p1.g",
 					     ],
-				command => 'src/nsgenesis',
+				command => 'src/ns-sli',
 				command_tests => [
 						  {
 						   description => "Are two passive compartments with injected current solved correctly ?",
@@ -198,7 +198,7 @@ my $test
 				arguments => [
 					      "$::config->{core_directory}/tests/scripts/heccer/c1c2p2.g",
 					     ],
-				command => 'src/nsgenesis',
+				command => 'src/ns-sli',
 				command_tests => [
 						  {
 						   description => "Are two passive compartments with asymetric properties and injected current solved correctly ?",
@@ -221,7 +221,7 @@ my $test
 				arguments => [
 					      "$::config->{core_directory}/tests/scripts/heccer/tensizesp.g",
 					     ],
-				command => 'src/nsgenesis',
+				command => 'src/ns-sli',
 				command_tests => [
 						  {
 						   description => "Are ten passive compartments with different properties and injected current solved correctly ?",

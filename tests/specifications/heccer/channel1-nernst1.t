@@ -26,7 +26,7 @@ my $test
 				arguments => [
 					         "$::config->{core_directory}/tests/scripts/heccer/channel1-nernst1.g",
 					     ],
-				command => 'src/nsgenesis',
+				command => 'src/ns-sli',
 				command_tests => [
 						  {
 						   numerical_compare => 1,

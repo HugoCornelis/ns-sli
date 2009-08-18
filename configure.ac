@@ -116,8 +116,9 @@ case "$host_os" in
     AC_SUBST(PYHONLIB_EXTENSION)
 
 	# Mando: can you check why there are three dots in the include directive and explain here in a comment, it is a mystery to me.  This line comes from heccer's configure.ac
+	# Hugo: May be a typo, I removed the line and it seemed to compile fine.
 
-    SWIGCOMPILELINKSFORPYTHON='-I$(PYTHON_HEADERS) 	-I.../../.. 	-I./../../.. 	-I.../../../hierarchy/output/symbols 	-I./../../../hierarchy/output/symbols/'
+    SWIGCOMPILELINKSFORPYTHON='-I$(PYTHON_HEADERS)  -I.../../..	-I./../../.. 	-I.../../../hierarchy/output/symbols 	-I./../../../hierarchy/output/symbols/'
     AC_SUBST(SWIGCOMPILELINKSFORPYTHON)
 
     SWIGCOMPILECOMMAND_PYTHON='gcc         $(SWIGCOMPILELINKSFORPYTHON)         -c swiggable_sli_wrap.c'
@@ -253,15 +254,3 @@ AC_OUTPUT(Makefile \
 
 
 
-
-#DX_INIT_DOXYGEN(nsgenesis,dox.cfg,docs)
-#DX_DOXYGEN_FEATURE(ON)
-#DX_DOT_FEATURE(ON)
-#DX_HTML_FEATURE(ON)
-#DX_CHM_FEATURE(ON)
-#DX_CHI_FEATURE(ON)
-#DX_MAN_FEATURE(ON)
-#DX_RTF_FEATURE(ON)
-#DX_XML_FEATURE(ON)
-#DX_PDF_FEATURE(ON)
-#DX_PS_FEATURE(ON) 

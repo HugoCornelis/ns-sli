@@ -27,7 +27,7 @@ my $test
 				arguments => [
 					         "$::config->{core_directory}/tests/scripts/heccer/pool-feedback.g",
 					     ],
-				command => 'src/nsgenesis',
+				command => 'src/ns-sli',
 				command_tests => [
 						  {
 						   numerical_compare => 1,

@@ -20,7 +20,7 @@ my $test
 
 					      "$::config->{core_directory}/tests/scripts/heccer/table-kc-nodump.g",
 					     ],
-				command => 'src/nsgenesis',
+				command => 'src/ns-sli',
 				command_tests => [
 
 
@@ -128,7 +128,7 @@ my $test
 				arguments => [
 					         "$::config->{core_directory}/tests/scripts/heccer/table-kc.g",
 					     ],
-				command => 'src/nsgenesis',
+				command => 'src/ns-sli',
 				command_tests => [
 						  {
 						   description => "Are gates tabulated correctly, simple potassium gates ?",,

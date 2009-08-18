@@ -17,7 +17,7 @@ my $test
 				arguments => [
 					      "$::config->{core_directory}/tests/scripts/readcell/readcell_simple.g",
 					     ],
-				command => 'src/nsgenesis',
+				command => 'src/ns-sli',
 				command_tests => [
 						  {
 						   description => "Can we enter the querymachine ?",
@@ -192,7 +192,7 @@ cached coordinate z = 0.000128
 				arguments => [
 					      "$::config->{core_directory}/tests/scripts/readcell/readcell_simple.g",
 					     ],
-				command => 'src/nsgenesis',
+				command => 'src/ns-sli',
 				command_tests => [
 						  {
 						   description => "Is the soma CM correct ?",
@@ -747,7 +747,7 @@ cached coordinate z = 0.000128
 				arguments => [
 					      "$::config->{core_directory}/tests/scripts/readcell/readcell_reset.g",
 					     ],
-				command => 'src/nsgenesis',
+				command => 'src/ns-sli',
 				command_tests => [
 
 

@@ -16,7 +16,7 @@ CLEANFILES = \
 
 clean-local:
 	rm -rf $(top_srcdir)/docs/html
-	rm -rf $(top_srcdir)/docs/nsgenesis
+	rm -rf $(top_srcdir)/docs/ns-sli
 
 html-upload-prepare:
 	rm -fr html/htdocs/neurospaces_project/ns-sli

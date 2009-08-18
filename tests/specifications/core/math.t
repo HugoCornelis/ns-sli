@@ -17,7 +17,7 @@ my $test
 				arguments => [
 					      "",
 					     ],
-				command => 'src/nsgenesis',
+				command => 'src/ns-sli',
 				command_tests => [
 						  
 

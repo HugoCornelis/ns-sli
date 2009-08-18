@@ -3,7 +3,7 @@
 set args tests/scripts/readcell/purk2m9.g
 set args tests/scripts/PurkM9_model/ACTIVE-soma1.g
 # cd ..
-file src/nsgenesis
+file src/ns-sli
 break parsererror
 echo .gdbinit: Done .gdbinit\n
 

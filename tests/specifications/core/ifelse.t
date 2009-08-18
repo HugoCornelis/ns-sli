@@ -11,7 +11,7 @@ my $test
 				arguments => [
 					      "$::config->{core_directory}/tests/scripts/basic-g/ifelse.g",
 					     ],
-				command => 'src/nsgenesis',
+				command => 'src/ns-sli',
 				command_tests => [
 						  {
 						   description => "Perform a simple genesis script with control structures.",

@@ -27,7 +27,7 @@ my $test
 				arguments => [
 					         "$::config->{core_directory}/tests/scripts/heccer/pool1.g",
 					     ],
-				command => 'src/nsgenesis',
+				command => 'src/ns-sli',
 				command_tests => [
 						  {
 						   numerical_compare => 1,
@@ -52,7 +52,7 @@ my $test
 					      "$::config->{core_directory}/tests/scripts/heccer/pool2.g",
 					    
 					     ],
-				command => 'src/nsgenesis',
+				command => 'src/ns-sli',
 				command_tests => [
 						  {
 						    numerical_compare => 1,
@@ -74,7 +74,7 @@ my $test
 					      "$::config->{core_directory}/tests/scripts/heccer/pool-feedback.g",
 					    
 					     ],
-				command => 'src/nsgenesis',
+				command => 'src/ns-sli',
 				command_tests => [
 						  {
 						   description => "Is a pool integrated correctly, one compartment, one pool with a feedback loop ?",,

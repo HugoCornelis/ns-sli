@@ -20,7 +20,7 @@ my $test
 					         "$::config->{core_directory}/tests/scripts/heccer/channel2-nernst1.g",
 					
 					     ],
-				command => 'src/nsgenesis',
+				command => 'src/ns-sli',
 				command_tests => [
 						  {
 						   disabled => "It doesn't look like this test will have output that will line up with the heccer output without some hacky work. The script detects the two nernst instances, one in each compartment and produces output from it's function. This output is not present int he heccer expected output, so filtering of output must be done on the seen output rather than the expected. Even so, some of the numerical values are a bit off, most likely due to the presence of the nernst function calculations on the reversal potential.",

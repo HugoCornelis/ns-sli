@@ -14,7 +14,7 @@ my $test
 				arguments => [
 				  "$::config->{core_directory}/tests/scripts/basic-g/foreachloop.g",
 					],
-				command => 'src/nsgenesis',
+				command => 'src/ns-sli',
 				command_tests => [
 						  {
 						   description =>  "Does the foreach loop work?",
