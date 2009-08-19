@@ -133,7 +133,7 @@ my $test
 						  {
 						   description => "Are gates tabulated correctly, simple potassium gates ?",,
 						   read => (join '', `cat  /usr/local/heccer/tests/specifications/strings/table-kc.txt | perl -pe 's/unnamed test/$root_neutral/g'`),
-						   timeout => 5,
+						   timeout => 15,
 						   write => undef,
 						  },
 						 ],
@@ -148,7 +148,7 @@ my $test
 
 			      ],
        description => "Gate tabulation",
-       name => 'heccer/kdr2.t',
+       name => 'heccer/kc.t',
       };
 
 
