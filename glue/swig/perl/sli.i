@@ -143,7 +143,7 @@ int RunG2Model(char *pcMorphologyDirectory, char *pcScript, void *pvNeurospaces,
 
     char *argv[20];
 
-    argv[0] = "nsgenesis";
+    argv[0] = "ns-sli";
 
     argv[1] = "-batch";
 
