@@ -27,6 +27,9 @@ AC_PROG_CPP
 AC_PATH_PROGS(PERL, perl perl5)
 
 AC_PATH_PROGS(DOXYGEN,doxygen,["NULL"])
+AC_PATH_PROGS(DOT,dot,["NULL"])
+
+
 
 dnl Check for Python and it's headers
 AM_PATH_PYTHON(,[],[
