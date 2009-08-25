@@ -33,4 +33,5 @@ doxygen: doxygen.cfg
 	$(DOXYGEN) doxygen.cfg
 
 docs: html-upload-prepare doxygen
+	echo "Generated doxygen and regression tests."
 
