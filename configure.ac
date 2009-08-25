@@ -28,7 +28,7 @@ AC_PATH_PROGS(PERL, perl perl5)
 
 AC_PATH_PROGS(DOXYGEN,doxygen,["NULL"])
 AC_PATH_PROGS(DOT,dot,["NULL"])
-
+AC_PATH_PROGS(SOURCE_HIGHLIGHT,source-highlight,["NULL"])
 
 
 dnl Check for Python and it's headers
