@@ -21,9 +21,9 @@ my $test
 					
 						  {
 						   # $Format: "description => \"Does the version information match with ${package}-${label} ?\","$
-description => "Does the version information match with ns-sli-python-2 ?",
+description => "Does the version information match with ns-sli-userdocs-5 ?",
 						   # $Format: "read => \"${package}-${label}\","$
-read => "ns-sli-python-2",
+read => "ns-sli-userdocs-5",
 						   
 						  },
 						 ],
