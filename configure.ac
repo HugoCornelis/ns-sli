@@ -1,7 +1,7 @@
 
 
 # $Format: "AC_INIT(${package}, ${label}, ${email})"$
-AC_INIT(ns-sli, userdocs-5, hugo.cornelis@gmail.com)
+AC_INIT(ns-sli, userdocs-6, hugo.cornelis@gmail.com)
 
 dnl Obtain operating system information.
 AC_CANONICAL_TARGET
@@ -12,7 +12,7 @@ AC_CONFIG_HEADER(src/config.h)
 
 
 # $Format: "AM_INIT_AUTOMAKE(${package}, ${label})"$
-AM_INIT_AUTOMAKE(ns-sli, userdocs-5)
+AM_INIT_AUTOMAKE(ns-sli, userdocs-6)
 
 
 # Checks for programs.

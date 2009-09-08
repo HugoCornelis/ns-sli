@@ -3,4 +3,4 @@
 #define VERSIONSTR	"2.3"
 
 // $Format: "#define G3_VERSIONSTR \"${package}-${label}\""$
-#define G3_VERSIONSTR "ns-sli-userdocs-5"
+#define G3_VERSIONSTR "ns-sli-userdocs-6"
