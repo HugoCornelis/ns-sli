@@ -4,9 +4,7 @@ SUBDIRS = \
 
 EXTRA_DIST = \
 	doxygen.cfg \
-	docs	\
-	tests.config \
-	tests
+	tests.config
 
 TESTS = $(top_srcdir)/tests/neurospaces_harness
 
