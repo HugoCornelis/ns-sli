@@ -52,3 +52,7 @@ plot_out
 results$
 stamp-h1
 tar.gz$
+.log$
+.deb$
+.dsc$
+.changes$

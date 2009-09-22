@@ -1,0 +1,12 @@
+Source: ns-sli
+Section: Science 
+Priority: optional
+Maintainer: Hugo Cornelis [hugo.cornelis@gmail.com]
+Build-Depends: python2.5(>=2.5),libc6(>=2.3.6),libgcc1 (>=4.1.1)
+Homepage: http://www.neurospaces.org
+
+Package: ns-sli
+Architecture: any
+Depends: python2.5(>=2.5),libc6(>=2.3.6),libgcc1 (>=4.1.1)
+Suggests: gnuplot
+Description:  GENESIS 3 is backward compatible with GENESIS Release 2.3 for all functionality of Tutorial 9--The Purkinje Tutorial. In doing this, backward compatibility supports the major functionalities of the GENESIS Script Language Interpreter.  Importantly, backward compatibility is provided to enable GENESIS 2 scripts to be used in association with the reconfigured GENESIS. It is not designed to extend a pre-existing GENESIS 2 script with new functionality provided by GENESIS 3. Although this may be possible is some cases, the results are not currently guaranteed. Contact GENESIS Support if you require further details.
