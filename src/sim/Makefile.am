@@ -50,14 +50,14 @@ basic_f@.c:
 
 
 
-noinst_HEADERS = \
+EXTRA_libsim_a_SOURCES = \
 	sim_defs.h \
 	sim_ext.h \
 	sim_func_ext.h \
 	sim.h \
 	sim_struct.h \
-	sim_version.h \
-	basic_g@.h 
+	sim_version.h 
+
 
 libsim_a_SOURCES= \
 		sim_access.c \

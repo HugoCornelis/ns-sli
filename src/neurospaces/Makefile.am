@@ -15,7 +15,7 @@ INCLUDES = -I$(utildir) -I$(shelldir) -I$(simdir) -I$(scriptdir) -I$(olfdir) -I$
 
 AM_CPPFLAGS = -DPRE_PROTO_TRAVERSAL
 
-noinst_LIBRARIES = libneurospaces.a
+pkginclude_LIBRARIES = libneurospaces.a
 
 BUILT_SOURCES = \
 	ascfile_d@.c \
@@ -112,7 +112,7 @@ nsintegrator_l@.c:
 
 
 
-noinst_HEADERS = \
+pkginclude_HEADERS = \
 	ascfile_struct.h \
 	hsolve_struct.h \
 	neurospaces_defs.h \

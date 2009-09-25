@@ -44,7 +44,7 @@ olf_l@.c: olflib.g
 	$(makelib) olf -o olf_l@.c
 
 
-noinst_HEADERS = \
+pkginclude_HEADERS = \
 	olf_defs.h \
 	olf_ext.h 
 

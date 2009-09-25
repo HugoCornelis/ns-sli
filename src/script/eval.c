@@ -227,7 +227,7 @@ static char rcsid[] = "$Id: eval.c,v 1.7 2006/02/15 18:50:12 svitak Exp $";
 #include <string.h>
 #include <strings.h>	/* bcopy */
 #include "parse.h"
-#include "syntax.h" /* includes the renamed file for the syntax rules*/
+#include "y.tab.h" /* includes the renamed file for the syntax rules*/
 #include "symtab.h"
 /* mds3 changes */
 #include "shell_func_ext.h"

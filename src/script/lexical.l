@@ -79,7 +79,7 @@ static char lexrcsid[] = "$Id: script.l,v 1.2 2006/02/15 18:47:00 svitak Exp $";
 #include <string.h>
 #include "shell_func_ext.h"
 #include "parse.h"
-#include "syntax.h"
+#include "y.tab.h"
 
 #ifdef sgi
 extern void exit();

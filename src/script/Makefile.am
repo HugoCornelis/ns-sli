@@ -9,9 +9,11 @@ INCLUDES = -I$(sysdir) -I$(scriptdir) -I$(shelldir) -I$(utildir) -I.
 
 noinst_LIBRARIES = libscript.a 
 
+
+
 BUILT_SOURCES = \
-	syntax.c \
-	syntax.h \
+	y.tab.c \
+	y.tab.h \
 	lex.yy.c
 
 CLEANFILES = \
@@ -24,13 +26,8 @@ AM_LFLAGS = -l
 AM_YFLAGS = -dv
 
 
-noinst_HEADERS = 
-	parse.h \
-	printoptusage.h \
-	result.h \
-	ss_func_ext.h \
-	symtab.h \
-	syntax.h
+#noinst_HEADERS = 
+
 
 #
 # Target for generating the lexical analyzer code. 
@@ -42,14 +39,29 @@ lex.yy.c: lexical.l
 	echo Using \"`which $(LEX)` $(AM_LFLAGS)\" for lexical parsing
 	$(LEX) $(AM_LFLAGS) lexical.l
 
+y.tab.c: lex.yy.c
+	echo  Using\"`which $(YACC)` $(AM_YFLAGS)\" for syntax parsing
+	$(YACC) -dv syntax.y
+
+
+EXTRA_libscript_a_SOURCES = \
+	lexical.l \
+	syntax.y \
+	parse.h \
+	printoptusage.h \
+	result.h \
+	ss_func_ext.h \
+	symtab.h \
+	syntax.h
 
 libscript_a_SOURCES = \
 	eval.c \
 	parse.c \
 	strsave.c \
 	symtab.c \
-	yyless.c \
-	syntax.y 
+	y.tab.c \
+	yyless.c 
+
 
 
 

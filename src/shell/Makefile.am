@@ -6,7 +6,7 @@ c2genesis = $(top_builddir)/src/c2genesis/c2genesis
 
 # \todo these variables are relative to builddir, should be relative to srcdir
 
-INCLUDES = -I$(utildir) -I$(shelldir) -I$(simdir) -I$(scriptdir) -I$(top_srcdir)/src
+INCLUDES = -I$(utildir) -I$(shelldir) -I$(simdir) -I$(scriptdir) -I$(top_builddir)/src
 
 noinst_LIBRARIES = libshell.a
 
@@ -62,8 +62,7 @@ libshell_a_SOURCES =	\
 	shell_string.c \
 	shell_sys.c \
 	shell_tty.c \
-	shell_g@.c  
-
+	shell_g@.c 
 
 
 
