@@ -14,6 +14,9 @@ AM_CPPFLAGS = -DPRE_PROTO_TRAVERSAL
 
 # \todo these variables are relative to builddir, should be relative to srcdir
 
+EXTRA_DIST = \
+	simlib.g
+
 INCLUDES = \
 	-I$(utildir) \
 	-I$(shelldir) \
@@ -56,7 +59,8 @@ EXTRA_libsim_a_SOURCES = \
 	sim_func_ext.h \
 	sim.h \
 	sim_struct.h \
-	sim_version.h 
+	sim_version.h \
+	struct_defs.h
 
 
 libsim_a_SOURCES= \

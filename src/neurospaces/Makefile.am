@@ -17,6 +17,12 @@ AM_CPPFLAGS = -DPRE_PROTO_TRAVERSAL
 
 pkginclude_LIBRARIES = libneurospaces.a
 
+EXTRA_DIST = \
+	ascfilelib.g \
+	hsolvelib.g \
+	neurospaceslib.g \
+	nsintegratorlib.g
+
 BUILT_SOURCES = \
 	ascfile_d@.c \
 	ascfile_g@.c \
@@ -93,6 +99,7 @@ neurospaces_g@.c:
 neurospaces_l@.c:
 	$(makelib) neurospaces -o neurospaces_l@.c
 
+neurospaces_g@.h:
 
 
 nsintegrator_d@.c:

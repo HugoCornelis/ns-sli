@@ -36,11 +36,11 @@ AM_YFLAGS = -dv
 # 
 #
 lex.yy.c: lexical.l
-	echo Using \"`which $(LEX)` $(AM_LFLAGS)\" for lexical parsing
+	echo Using \" `which $(LEX)` $(AM_LFLAGS)\" for lexical parsing
 	$(LEX) $(AM_LFLAGS) lexical.l
 
 y.tab.c: lex.yy.c
-	echo  Using\"`which $(YACC)` $(AM_YFLAGS)\" for syntax parsing
+	echo  Using\" `which $(YACC)` $(AM_YFLAGS)\" for syntax parsing
 	$(YACC) -dv syntax.y
 
 
@@ -63,6 +63,8 @@ libscript_a_SOURCES = \
 	yyless.c 
 
 
+
+dist-hook: $(noinst_LIBRARIES)
 
 
 

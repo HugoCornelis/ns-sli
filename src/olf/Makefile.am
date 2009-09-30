@@ -17,6 +17,10 @@ INCLUDES = -I$(utildir) -I$(shelldir) -I$(simdir) -I$(scriptdir) -I$(nsdir) -I$(
 
 AM_CPPFLAGS = -DPRE_PROTO_TRAVERSAL
 
+EXTRA_DIST = \
+	olflib.g \
+	olf_struct.h
+
 noinst_LIBRARIES = libolf.a
 
 BUILT_SOURCES = \

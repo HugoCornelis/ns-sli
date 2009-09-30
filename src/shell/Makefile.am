@@ -10,14 +10,21 @@ INCLUDES = -I$(utildir) -I$(shelldir) -I$(simdir) -I$(scriptdir) -I$(top_builddi
 
 noinst_LIBRARIES = libshell.a
 
-AM_CFLAGS = -DBSD -DLinux -DNEW -DNLIST_BUG -DTERMIO -DDONT_USE_SIGIO
+
+# The include flags are only necessary for building the tarball.
+# needs to build c2genesis for built sources. 
+AM_CFLAGS = -DBSD -DLinux -DNEW -DNLIST_BUG -DTERMIO -DDONT_USE_SIGIO -I$(utildir) -I$(shelldir) -I$(simdir) -I$(scriptdir) -I$(top_builddir)/src
 
 BUILT_SOURCES = \
 	shell_g@.c \
 	shell_g@.h
 
-shell_g@.c:
-	$(c2genesis) shelllib.g shell_ext.h shell -novar
+EXTRA_DIST = \
+	shelllib.g
+
+shell_g@.c: $(c2genesis)
+	if [ -e $(c2genesis) ]; then $(c2genesis) shelllib.g shell_ext.h shell -novar; fi
+
 
 
 noinst_HEADERS = \
@@ -63,6 +70,7 @@ libshell_a_SOURCES =	\
 	shell_sys.c \
 	shell_tty.c \
 	shell_g@.c 
+
 
 
 

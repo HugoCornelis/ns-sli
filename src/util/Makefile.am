@@ -30,3 +30,4 @@ libutil_a_SOURCES = \
 	segv.c 
 
 
+dist-hook: $(noinst_LIBRARIES)
