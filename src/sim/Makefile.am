@@ -29,7 +29,8 @@ INCLUDES = \
 BUILT_SOURCES = \
 	basic_d@.c \
 	basic_f@.c \
-	basic_g@.c 
+	basic_g@.c \
+	basic_g@.h
 
 CLEANFILES = \
 	basic_d@.c \
@@ -46,6 +47,10 @@ basic_d@.c:
 	rm tmp_sim_struct.h
 
 basic_g@.c:
+	$(c2genesis) simlib.g sim_ext.h basic
+
+
+basic_g@.h:
 	$(c2genesis) simlib.g sim_ext.h basic
 
 basic_f@.c:
@@ -134,5 +139,10 @@ libsim_a_SOURCES= \
 	basic_f@.c \
 	basic_g@.c
 
+libsim_a_DEPENDENCIES = \
+	basic_d@.c \
+	basic_f@.c \
+	basic_g@.c \
+	basic_g@.h
 
 

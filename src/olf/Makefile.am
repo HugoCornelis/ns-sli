@@ -44,6 +44,9 @@ olf_d@.c: olflib.g
 olf_g@.c: olflib.g
 	$(c2genesis) olflib.g olf_ext.h olf
 
+olf_g@.h:
+	$(c2genesis) olflib.g olf_ext.h olf
+
 olf_l@.c: olflib.g
 	$(makelib) olf -o olf_l@.c
 
@@ -58,4 +61,12 @@ libolf_a_SOURCES = \
 	olf_d@.c \
 	olf_g@.c \
 	olf_l@.c 
+
+libolf_a_DEPENDENCIES = \
+	olf_d@.c \
+	olf_g@.c \
+	olf_g@.h \
+	olf_l@.c 
+
+dist-hook: $(libolf_a_DEPENDENCIES)
 

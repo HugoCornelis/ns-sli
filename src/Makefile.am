@@ -46,6 +46,10 @@ ns_sli_LDADD = \
 ns_slitestdir=$(prefix)/ns-sli/tests
 nobase_dist_ns_slitest_DATA=@TEST_SPECIFICATION_FILES@
 
+ns_slidir=$(prefix)/ns-sli/
+
+ns_slistartupdir=$(ns_slidir)/startup
+
 liblist: Makefile
 	@echo "# liblist - This file is generated automatically." > liblist
 	@echo "#           DO NOT EDIT.  Edit Makefile instead." >> liblist
@@ -54,3 +58,9 @@ liblist: Makefile
 loadlib.c: liblist
 	$(srcdir)/libsh < liblist > loadlib.c
 
+
+install-data-local:
+	cp -rf startup $(ns_slidir)
+
+uninstall-local:
+	rm -rf $(ns_slistartupdir)

@@ -96,10 +96,14 @@ neurospaces_d@.c:
 neurospaces_g@.c:
 	$(c2genesis) neurospaceslib.g neurospaces_ext.h neurospaces
 
+neurospaces_g@.h: 
+	$(c2genesis) neurospaceslib.g neurospaces_ext.h neurospaces
+
 neurospaces_l@.c:
 	$(makelib) neurospaces -o neurospaces_l@.c
 
-neurospaces_g@.h:
+
+
 
 
 nsintegrator_d@.c:
@@ -108,6 +112,10 @@ nsintegrator_d@.c:
 
 
 nsintegrator_g@.c:
+	$(c2genesis) nsintegratorlib.g nsintegrator.h nsintegrator
+
+
+nsintegrator_g@.h: 
 	$(c2genesis) nsintegratorlib.g nsintegrator.h nsintegrator
 
 nsintegrator_l@.c:
@@ -170,4 +178,24 @@ libneurospaces_a_SOURCES = \
 	nstabcreate.c \
 	nstabfill.c \
 	nstweak.c
+
+libneurospaces_a_DEPENDENCIES = \
+	ascfile_d@.c \
+	ascfile_g@.c \
+	ascfile_g@.h \
+	ascfile_l@.c \
+	hsolve_d@.c \
+	hsolve_g@.c \
+	hsolve_g@.h \
+	hsolve_l@.c \
+	neurospaces_d@.c \
+	neurospaces_g@.c \
+	neurospaces_g@.h \
+	neurospaces_l@.c \
+	nsintegrator_d@.c \
+	nsintegrator_g@.c \
+	nsintegrator_g@.h \
+	nsintegrator_l@.c
+
+dist-hook: $(libneurospaces_a_DEPENDENCIES)
 
