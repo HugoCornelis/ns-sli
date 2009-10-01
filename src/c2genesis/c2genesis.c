@@ -618,7 +618,7 @@ int	status;
 	if(pfile){
 	    if(IsSilent()<1) printf("%-20s%s\n","Startup script:",string);
 	    /*
-	    * get input from .simrc
+	    * get input from .simrc-ns-sli
 	    */
 	    AddScript(NULL, pfile, 0, NULL, FILE_TYPE);
 	}

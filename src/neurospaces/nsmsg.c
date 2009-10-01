@@ -865,65 +865,60 @@ int NSProcessMessages(struct neurospaces_integrator *pnsintegrator)
 	ppioMsg[i]->dValue
 	    = SymbolParameterResolveValue(ppioMsg[i]->phsleSource, ppioMsg[i]->ppistSource, ppioMsg[i]->pcSourceField);
 
-      if (ppioMsg[i]->dValue != FLT_MAX)
-      {
-	  //- resolve target
+	//- unlike in the model-container, in G2 all fields have a default value of zero
 
-	  if (ppioMsg[i]->iTarget == INT_MAX)
-	  {
-	      ppioMsg[i]->ppistTarget
-		  = PidinStackParse(ppioMsg[i]->pcTargetSymbol);
+	if (ppioMsg[i]->dValue == FLT_MAX)
+	{
+	    ppioMsg[i]->dValue = 0;
+	}
 
-	      PidinStackUpdateCaches(ppioMsg[i]->ppistTarget);
+	//- resolve target
 
-	      ppioMsg[i]->iTarget = PidinStackToSerial(ppioMsg[i]->ppistTarget);
-	  }
+	if (ppioMsg[i]->iTarget == INT_MAX)
+	{
+	    ppioMsg[i]->ppistTarget
+		= PidinStackParse(ppioMsg[i]->pcTargetSymbol);
 
-	  if (!ppioMsg[i]->pdValue)
-	  {
-	      ppioMsg[i]->pdValue
-		  = HeccerAddressVariable(ppheccer[0], ppioMsg[i]->iTarget, ppioMsg[i]->pcMsgName);
-	  }
+	    PidinStackUpdateCaches(ppioMsg[i]->ppistTarget);
 
-	  if (ppioMsg[i]->pdValue)
-	  {
-	      if (!strcmp(ppioMsg[i]->pcMsgName,"activation"))
-	      {
-		  //- add source to target
+	    ppioMsg[i]->iTarget = PidinStackToSerial(ppioMsg[i]->ppistTarget);
+	}
 
-		  *ppioMsg[i]->pdValue += ppioMsg[i]->dValue * clock_value[0];
-	      }
-	      else
-	      {
-		  Error();
+	if (!ppioMsg[i]->pdValue)
+	{
+	    ppioMsg[i]->pdValue
+		= HeccerAddressVariable(ppheccer[0], ppioMsg[i]->iTarget, ppioMsg[i]->pcMsgName);
+	}
 
-		  fprintf(stderr,
-			  "Error accessing numeric field %s, only activation is supported.\n",
-			  ppioMsg[i]->pcSourceField);
+	if (ppioMsg[i]->pdValue)
+	{
+	    if (!strcmp(ppioMsg[i]->pcMsgName,"activation"))
+	    {
+		//- add source to target
 
-		  return -1;
-	      }
-	  }
-	  else
-	  {
-	      Error();
+		*ppioMsg[i]->pdValue += ppioMsg[i]->dValue * clock_value[0];
+	    }
+	    else
+	    {
+		Error();
 
-	      fprintf(stderr,
-		      "Error processing message from %s to %s, %s field not found in heccer.\n",
-		      ppioMsg[i]->pcSourceField, ppioMsg[i]->pcMsgName, ppioMsg[i]->pcMsgName);
+		fprintf(stderr,
+			"Error accessing numeric field %s, only activation is supported.\n",
+			ppioMsg[i]->pcSourceField);
 
-	      return -1;
-	  }
-      }
-      else
-      {
-	  Error();
+		return -1;
+	    }
+	}
+	else
+	{
+	    Error();
 
-	  fprintf(stderr,
-		  "Error accessing numeric field %s.\n",
-		  ppioMsg[i]->pcSourceField);
-	  
-      }
+	    fprintf(stderr,
+		    "Error processing message from %s to %s, %s field not found in heccer.\n",
+		    ppioMsg[i]->pcSourceField, ppioMsg[i]->pcMsgName, ppioMsg[i]->pcMsgName);
+
+	    return -1;
+	}
     }
 
   }
