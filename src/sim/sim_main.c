@@ -247,7 +247,7 @@ char simrc_name[256];
 
     nxtarg = 0;
     use_simrc = 1;
-	strcpy(simrc_name,".simrc");
+	strcpy(simrc_name, ".simrc-ns-sli");
     global_envp = envp;
     pname = NULL;
     execdir = NULL;
@@ -377,8 +377,8 @@ char simrc_name[256];
 	    }
 	}
 	if(pfile == NULL){
-	    fprintf(stderr, "Cannot find a simrc file in the execdir/working or\n");
-	    fprintf(stderr, "home directories.  Copy one from startup/.simrc\n");
+	    fprintf(stderr, "Cannot find a simrc-ns-sli file in the execdir/working or\n");
+	    fprintf(stderr, "home directories.  Copy one from startup/.simrc-ns-sli\n");
 	    fprintf(stderr, "in the GENESIS installation directory and try\n");
 	    fprintf(stderr, "again or see the README in the same location.\n");
 	    return(1);
@@ -460,7 +460,7 @@ char simrc_name[256];
 
 	    if(IsSilent()<1) printf("%-20s%s\n","Startup script:",string);
 	    /*
-	    * get input from .simrc
+	    * get input from .simrc-ns-sli
 	    */
 	    /*
 	    AddScript(NULL, pfile, 0, NULL, FILE_TYPE);
@@ -472,7 +472,7 @@ char simrc_name[256];
 	    */
 	    if(setjmp(main_context) == 0){
 		ParseInit();
-		rc_argv[0] = string; /* simrc script name w/path */
+		rc_argv[0] = string; /* simrc-ns-sli script name w/path */
 		rc_argv[1] = NULL;
 		SetScript(NULL, pfile, 1, rc_argv, FILE_TYPE);
 		Interpreter();

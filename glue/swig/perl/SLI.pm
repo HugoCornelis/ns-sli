@@ -48,7 +48,7 @@ sub include_model
 	     "$morphology_directory",
 	     "$script",
 	     $model_container->backend(),
-	     $ENV{HOME} . "/neurospaces_project/ns-sli/source/snapshots/0/.simrc",
+	     $ENV{HOME} . "/neurospaces_project/ns-sli/source/snapshots/0/.simrc-ns-sli",
 	    );
 
     if (!$result)
@@ -86,7 +86,7 @@ sub run_model
 	     "$morphology_directory",
 	     "$script",
 	     $model_container->backend(),
-	     $ENV{HOME} . "/neurospaces_project/ns-sli/source/snapshots/0/.simrc",
+	     $ENV{HOME} . "/neurospaces_project/ns-sli/source/snapshots/0/.simrc-ns-sli",
 	    );
 
     if (!$result)

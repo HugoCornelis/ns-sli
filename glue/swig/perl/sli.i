@@ -95,7 +95,7 @@ int IncludeG2Model(char *pcMorphologyDirectory, char *pcScript, void *pvNeurospa
 
     if (!pcSimrc)
     {
-	pcSimrc = "/local_home/local_home/hugo/neurospaces_project/ns-sli/source/snapshots/0/.simrc";
+	pcSimrc = "/local_home/local_home/hugo/neurospaces_project/ns-sli/source/snapshots/0/.simrc-ns-sli";
     }
 
     argv[4] = pcSimrc;
@@ -153,7 +153,7 @@ int RunG2Model(char *pcMorphologyDirectory, char *pcScript, void *pvNeurospaces,
 
     if (!pcSimrc)
     {
-	pcSimrc = "/local_home/local_home/hugo/neurospaces_project/ns-sli/source/snapshots/0/.simrc";
+	pcSimrc = "/local_home/local_home/hugo/neurospaces_project/ns-sli/source/snapshots/0/.simrc-ns-sli";
     }
 
     argv[4] = pcSimrc;
