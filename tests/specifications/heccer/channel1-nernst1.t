@@ -30,7 +30,7 @@ my $test
 				command_tests => [
 						  {
 						   numerical_compare => 1,
-						   description => "Ca we set up a Nernst equation for a channel ?",,
+						   description => "Can we set up a Nernst equation for a channel ?",,
 						   read => (join '', `cat  /usr/local/heccer/tests/specifications/strings/channel1-nernst1.txt | perl -pe 's/unnamed test/$root_neutral/g'`),
 						   timeout => 10,
 						  },
