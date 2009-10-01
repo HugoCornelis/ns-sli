@@ -379,7 +379,7 @@ char simrc_name[256];
 	if(pfile == NULL){
 	    fprintf(stderr, "Cannot find a simrc-ns-sli file in the execdir/working or\n");
 	    fprintf(stderr, "home directories.  Copy one from startup/.simrc-ns-sli\n");
-	    fprintf(stderr, "in the GENESIS installation directory and try\n");
+	    fprintf(stderr, "in the ns-sli installation directory and try\n");
 	    fprintf(stderr, "again or see the README in the same location.\n");
 	    return(1);
 	}
