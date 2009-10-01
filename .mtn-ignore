@@ -1,3 +1,7 @@
+.changes$
+.deb$
+.dsc$
+.log$
 Makefile$
 Makefile\.in$
 \.tab$
@@ -10,8 +14,8 @@ Makefile\.in$
 ^docs/html
 ^docs/latex
 ^docs/man
-^docs/nsgenesis
 ^docs/ns-sli
+^docs/nsgenesis
 ^docs/rtf
 ^glue/swig/perl/SwiggableSLI.pm$
 ^glue/swig/perl/swiggable_sli_wrap.c$
@@ -35,13 +39,15 @@ Makefile\.in$
 ^src/neurospaces/tmp_hsolve_struct.h$
 ^src/neurospaces/tmp_neurospaces_struct\.h
 ^src/neurospaces/tmp_nsintegrator_struct\.h
-^src/nsgenesis
 ^src/ns-sli
+^src/nsgenesis
 ^src/olf/tmp_olf_struct\.h
 ^src/script/lex\.yy\.c
 ^src/script/lexical\.c
 ^src/script/syntax\.c
 ^src/script/syntax\.h
+^src/script/y.tab.c$
+^src/script/y.tab.h$
 ^tests/html
 ^ylwrap$
 config.log
@@ -52,7 +58,3 @@ plot_out
 results$
 stamp-h1
 tar.gz$
-.log$
-.deb$
-.dsc$
-.changes$
