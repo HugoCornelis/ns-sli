@@ -1,5 +1,5 @@
-// .simrc file to go in the home directory of all GENESIS users
-// .minsimrc version for minimal GENESIS without object libraries or XODUS
+// .simrc-ns-sli file to go in the home directory of all GENESIS users
+// .nxsimrc-ns-sli version to run GENESIS without XODUS
 //===========================================================================
 //                         environment variables
 //===========================================================================
@@ -13,8 +13,8 @@ setenv GENESIS_HELP /usr/genesis/Doc
 //===========================================================================
 //                             set up tables 
 //===========================================================================
-minschedule			// default simulation schedule
+schedule			// default simulation schedule
 
 include          escapelist      // setup macro keys for DEC and SUN keyboards
 // See /usr/genesis/startup/escapelist.g for macro definitions.  These allow
-// you to use cursor keys for the recall and editting of previous commands
+// you to use cursor keys for the recall and editing of previous commands

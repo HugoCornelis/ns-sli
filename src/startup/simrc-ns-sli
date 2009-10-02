@@ -1,4 +1,4 @@
-// .simrc file to go in the home directory of all GENESIS users
+// .simrc-ns-sli file to go in the home directory of all GENESIS users
 //===========================================================================
 //                         environment variables
 //===========================================================================
@@ -28,4 +28,4 @@ schedule			// default simulation schedule
 // you to use cursor keys for the recall and editing of previous commands
 include          escapelist      // setup macro keys for DEC and SUN keyboards
 
-echo .simrc has been executed! 
+echo .simrc-ns-sli has been executed! 
