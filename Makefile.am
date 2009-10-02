@@ -3,18 +3,19 @@ SUBDIRS = \
 	glue
 
 EXTRA_DIST = \
+	tests \
 	doxygen.cfg \
 	tests.config 
 
-TESTS = $(top_srcdir)/tests/neurospaces_harness
+TESTS = $(top_builddir)/tests/neurospaces_harness
 
 
 CLEANFILES = \
-	$(top_srcdir)/docs/doxygen.tag
+	$(top_builddir)/docs/doxygen.tag
 
 clean-local:
-	rm -rf $(top_srcdir)/docs/html
-	rm -rf $(top_srcdir)/docs/ns-sli
+	rm -rf $(top_builddir)/docs/html
+	rm -rf $(top_builddir)/docs/ns-sli
 
 html-upload-prepare:
 	rm -fr html/htdocs/neurospaces_project/ns-sli
