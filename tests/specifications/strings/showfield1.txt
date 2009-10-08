@@ -1,0 +1,26 @@
+tests/scripts/genesis-2/showfield1.g
+*proto {neutral}                        output {neutral}                        
+n/ {neutral}                            
+</Users/Abominous/neurospaces_project/ns-sli/source/snapshots/0/tests/scripts/genesis-2/showfield1.g> line 10
+** Error - setfield : cannot find field 'Eleak' on '/n/c'
+Checking each field one at a time
+
+[ /n/c ]
+Cm                   = 4.575369944e-11
+
+[ /n/c ]
+Rm                   = 358440992
+
+[ /n/c ]
+Ra                   = 360502
+
+[ /n/c ]
+len                  = 1
+
+[ /n/c ]
+dia                  = 1
+
+[ /n/c ]
+initVm               = -0.0680000037
+
+[ /n/c ]

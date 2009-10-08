@@ -77,6 +77,8 @@ static char rcsid[] = "$Id: sim_show.c,v 1.2 2005/06/27 19:01:09 svitak Exp $";
 #include "shell_func_ext.h"
 #include "sim_ext.h"
 
+#include "nsintegrator.h"
+
 #define field_is(S) (all || strcmp(field,"S") == 0 )
 
 void ShowObject(object)

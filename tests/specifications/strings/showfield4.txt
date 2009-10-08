@@ -1,0 +1,86 @@
+/Users/Abominous/neurospaces_project/ns-sli/source/snapshots/0/tests/scripts/genesis-2/showfield4.g> line 22
+** Error - executing ehco: code 32512
+
+[ /n/c ]
+
+object               = compartment
+datatype             = compartment_type
+function             = Compartment()
+class                = [ membrane ] [ segment ] 
+size                 = 144 bytes
+author               = M.Wilson Caltech 6/88
+
+VALID ACTIONS
+	RESTORE2  SAVE2  SET  CHECK  RESET  PROCESS  INIT  
+
+VALID MESSAGES
+	[6] EREST                : Em 
+	[3] INJECT               : inject 
+	[2] AXIAL                : Vm 
+	[1] RAXIAL               : Ra Vm 
+	[0] CHANNEL              : Gk Ek 
+
+FIELDS
+  (ro)       name            compartment 
+  (ro)       index           0          
+  (ro)       object          &14810640  
+  (hidden)   flags                      
+  (hidden)   nextfields                 
+  (hidden)   extfields                  
+             x               0          
+             y               0          
+             z               0          
+  (hidden)   nmsgin                     
+  (hidden)   msgin                      
+  (hidden)   msgintail                  
+  (hidden)   nmsgout                    
+  (hidden)   msgout                     
+  (hidden)   msgouttail                 
+  (hidden)   compositeobject            
+  (hidden)   componentof                
+  (hidden)   parent                     
+  (hidden)   child                      
+  (hidden)   next                       
+             x0              0          
+             y0              0          
+             z0              0          
+             activation      0          
+             Vm              0          compartment potential
+             previous_state  0          
+             Im              0          
+             Em              0          resting potential
+             Rm              1          membrane resistance
+             Cm              1          membrane capacitance
+             Ra              0          axial resistance
+             inject          0          injected current
+             dia             0          compartment diameter
+             len             0          
+             initVm          0          initial Vm value at reset
+
+DESCRIPTION
+	Axially asymmetric compartment. Ra is located on
+one side of the compartment. This is slightly more
+computationally efficient than the symmetric
+counterpart.
+
+x0y0z0     = ( 0.000000e+00 , 0.000000e+00 , 0.000000e+00 )
+xyz        = ( 0.000000e+00 , 0.000000e+00 , 0.000000e+00 )
+flags      = 0
+FUNCTIONAL
+Clock [ 0 ] = 1.000000e+00
+0 incoming messages
+0 outgoing messages
+-----------------------------------------------------
+activation           = 0
+Vm                   = 0
+previous_state       = 0
+Im                   = 0
+Em                   = 0
+Rm                   = 358440992
+Cm                   = 4.575369944e-11
+Ra                   = 360502
+inject               = 0
+dia                  = 1
+len                  = 1
+initVm               = -0.0680000037
+
