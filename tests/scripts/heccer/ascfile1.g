@@ -41,19 +41,14 @@ setfield /a1 \
 	flush 1 \
 	leave_open 1
 
-//addmsg /h a1 SAVE vm[0]
+addmsg /hardcoded_neutral/c2 a1 SAVE Vm
 
 call a1 RESET
 //resched
 
 reset
 
-//function showfields
 
-//	showfield h \
-//		vm[0] \
-//		vm[1]
-//end
 
 step 5
 
@@ -76,6 +71,8 @@ step 9000
 step 90000
 
 call a1 FINISH
+
+echo output written
 
 
 

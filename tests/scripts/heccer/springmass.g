@@ -39,9 +39,9 @@ setfield /a1 \
 	append 0 \
 	filename "/tmp/a1" \
 	flush 1 \
-	leave_open 1 
+	leave_open 1
 
-//addmsg /h a1 SAVE vm[0]
+addmsg /hardcoded_neutral/c2 a1 SAVE Vm
 
 call a1 RESET
 //resched

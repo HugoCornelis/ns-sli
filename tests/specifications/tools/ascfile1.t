@@ -9,7 +9,7 @@ my $test
        command_definitions => [
 			       {
 				arguments => [
-					      "$::config->{core_directory}/tests/scripts/heccer/springmass.g",
+					      "$::config->{core_directory}/tests/scripts/heccer/ascfile1.g",
 					     ],
 				command => 'src/ns-sli',
 				command_tests => [
@@ -17,7 +17,7 @@ my $test
 						   
 						   description => 'Does the application report that it writes its output?',
 						   read => 'output written',
-						    timeout => 200,
+						    timeout => 2000,
 						  },
 
 						  {
