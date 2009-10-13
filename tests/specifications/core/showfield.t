@@ -15,7 +15,7 @@ my $test
 
 			       {
 				arguments => [
-					         "$::config->{core_directory}/tests/scripts/showfield1.g",
+					         "$::config->{core_directory}/tests/scripts/genesis-2/showfield1.g",
 					     ],
 				command => 'src/ns-sli',
 				command_tests => [
@@ -65,7 +65,7 @@ Eleak	-8.000000e-02',
 
 			       {
 				arguments => [
-					         "$::config->{core_directory}/tests/scripts/showfield2.g",
+					         "$::config->{core_directory}/tests/scripts/genesis-2/showfield2.g",
 					     ],
 				command => 'src/ns-sli',
 				command_tests => [
