@@ -17,7 +17,7 @@ setfield /n/c \
    Eleak -0.080 
 
 
-echo "Checking each field one at a time"
+echo "Checking each field on one line"
 
 showfield /n/c Cm Rm Ra len dia initVm Eleak
 

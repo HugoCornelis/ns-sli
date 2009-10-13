@@ -64,13 +64,6 @@
 #define HARDCODED_ROOT "hardcoded_neutral"
 
 
-/*
- * flags used in nsshowfield.c 
- */
-#define SHOW_ALL ((int)(0x1<<0))
-#define SHOW_BASIC ((int)(0x1<<1))
-#define SHOW_DESCRIBE ((int)(0x1<<2))
-
 
 /*!
  * \struct SLI name to model-container mapper

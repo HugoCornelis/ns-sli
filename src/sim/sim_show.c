@@ -77,8 +77,6 @@ static char rcsid[] = "$Id: sim_show.c,v 1.2 2005/06/27 19:01:09 svitak Exp $";
 #include "shell_func_ext.h"
 #include "sim_ext.h"
 
-#include "nsintegrator.h"
-
 #define field_is(S) (all || strcmp(field,"S") == 0 )
 
 void ShowObject(object)
@@ -255,6 +253,24 @@ int		describe;
 
     nxtarg = 1;
     list = WildcardGetElement(pathname,0);
+
+
+
+    //i
+    //i
+    //i
+    int iResult = NSShowField(argc,argv);
+
+    if(iResult == 1)
+    {
+      return; 
+    }
+    else if(iResult == -1)
+    {
+      return;
+    }
+    // if it's not one of those two conditions then 
+    // we return and allow GENESIS to continue.
 
     /*
     ** if there are more than 2 arguments then assume that there is

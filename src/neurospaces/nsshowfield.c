@@ -9,7 +9,7 @@
 //------------------------------------------------------------------
 #include <stdio.h>
 #include <stdlib.h>
-
+#include "sim_ext.h"
 #include "shell_func_ext.h"
 
 #include <heccer/addressing.h>
@@ -19,26 +19,44 @@
 
 
 
+static int PrintParameterBasic(struct symtab_HSolveListElement *phsle,
+			       struct PidinStack *ppist,
+			       char *pcPar);
+
+
 /*!
  *
  * \return 1 on success, -1 on error, 0 on not found in model container.
  */
-int NSShowField(char *pcPathname, char *pcField,int iOptions)
+int NSShowField(int argc,char **argv)
 {
 
-  if(!pcPathname || !strcmp(pcPathname,""))
+  int iInModelContainer = 0;
+  int status = 0;
+  int all = 0;
+  int basic = 0;
+  int describe = 0;
+  initopt(argc, argv, "[path[:connections]] [field] ... -all -basic -describe");
+  while ((status = G_getopt(argc, argv)) == 1)
   {
-    return 0;
+    if (strcmp(G_optopt, "-all") == 0)
+      all = 1;
+    else if (strcmp(G_optopt, "-basic") == 0)
+      basic = 1;
+    else if (strcmp(G_optopt, "-describe") == 0)
+      describe = 1;
   }
 
-  //
-  // If there is no field set then don't bother. Let
-  // GENESIS report the error.
-  //
-  if(!pcPathname || !strcmp(pcPathname,""))
+  if (status < 0)
   {
-    return 0;
+    printoptusage(argc, argv);
+    return;
   }
+
+  
+  char *pcPathname;
+
+  pcPathname = optargv[1];
 
 
   struct PidinStack *ppist = PidinStackParse(pcPathname);
@@ -54,60 +72,80 @@ int NSShowField(char *pcPathname, char *pcField,int iOptions)
   {
     return 0;
   }
-
-
-  //
-  // Handling wildcards.  
-  //
-  if(!strcmp(pcField,"*"))
-  {
-    // if we have one star then we print all fields (parameters)
-   
-   
-    return 1;
-  }
-  else if(!strcmp(pcField,"**"))
-  {
-
-    // if we have two stars then we print all extended fields.
-
-
-    return 1;
-  }
   else
   {
+    iInModelContainer = 1;
+  }
+
+
+  {
     
-    // else we print a specific parameter.
 
-    struct symtab_Parameters *ppar = SymbolFindParameter(phsle, ppist, pcField);
-  
-    int bResult;
+    int i;
+    printf("\n[ %s ]\n",pcPathname);
 
-    if (ppar)
+    for( i=2; i < argc; i++)
     {
-      fprintf(stdout, "%s", "---\n");
 
-      int iResult = ParameterPrint(ppar,1,0,stdout);
+      if(argv[i]==NULL || 
+	 !strcmp(argv[i],"") )
+	break;
+      else if( argv[i][0] == '-')
+	continue;
 
-      if (!iResult)
-      {
-	bResult = 0;
-      }
-      else
-      {
-	fprintf(stdout, "parameter not found\n");
-      }
-    
+
+      PrintParameterBasic(phsle,ppist,argv[i]);
+      
+/*       if(all) */
+/*       { */
+
+/*       } */
+/*       else */
+/*       { */
+	
+/*       } */
+
+
     }
-    else 
-    {
-      fprintf(stdout, "parameter %s not found\n",pcField);
-      return 1;
-    }
+
 
 
   }
+
+  return 1;
 
 }
 
 
+
+/*
+ *
+ */
+static int PrintParameterBasic(struct symtab_HSolveListElement *phsle,
+			       struct PidinStack *ppist,
+			       char *pcPar)
+{
+
+
+  char *pcMappedPar = mapParameterString(pcPar);
+      
+  //struct symtab_Parameters *ppar = SymbolFindParameter(phsle, ppist, pcMappedPar);
+
+  double dValue = SymbolParameterResolveValue(phsle,ppist,pcMappedPar);
+
+  if (dValue != FLT_MAX)
+  {
+    //fprintf(stdout, "%s", "---\n");
+    
+    //ParameterPrint(ppar,1,0,stdout);
+    fprintf(stdout,"%s\t%e\n\n",pcPar,dValue);
+
+
+  }
+  else
+  {
+    fprintf(stdout,"Error: Object has no field called %s.\n",pcPar);
+    return -1;
+  }
+
+}
