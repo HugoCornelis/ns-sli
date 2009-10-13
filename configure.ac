@@ -61,8 +61,13 @@ esac
 AC_HEADER_STDC
 AC_CHECK_HEADERS([float.h limits.h locale.h stdlib.h string.h])
 
+SAVE_CPPFLAGS=$CPPFLAGS
+CPPFLAGS="-I/usr/local/neurospaces/instrumentor -DPRE_PROTO_TRAVERSAL"
+
 AC_CHECK_HEADERS([neurospaces/neurospaces.h],[],
 [echo "Error: neurospaces headers are not installed in standard location."])
+
+CPPFLAGS=$SAVE_CPPFLAGS
 
 AC_CHECK_HEADERS([ heccer/heccer.h ],[],[
    echo "Error! Heccer header files not found in any standard location."
