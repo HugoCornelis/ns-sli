@@ -1545,7 +1545,7 @@ void do_read_cell(argc,argv)
 		printf ("No current element for traverse cell\n");
 	} else {
 /* 		traverse_cell(elm, &ncompts,&nchans,&nshells,&nothers); */
-	    printf("traverse_cell() is not implemented\n");
+/* 	    printf("traverse_cell() is not implemented\n"); */
 	}
 /* 	if (flags & HSOLVE) { */
 /* 	    hsolve = (Hsolve *)(GetElement(cellname)); */
