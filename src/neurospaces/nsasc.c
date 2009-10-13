@@ -27,21 +27,21 @@ extern double			clock_value[NCLOCKS];
 
 
 
-//---------------------------------------------------------
+/* //--------------------------------------------------------- */
 
-//---------------------------------------------------------
+/* //--------------------------------------------------------- */
 
-int AscStep(struct ascfile_type *pasc)
-{
+/* int AscStep(struct ascfile_type *pasc) */
+/* { */
 
 
   
-  OutputGeneratorTimedStep(pasc->pog, simulation_time);
+/*   OutputGeneratorTimedStep(pasc->pog, simulation_time); */
 
 
-  return 1;
+/*   return 1; */
 
-}
+/* } */
 
 
 
