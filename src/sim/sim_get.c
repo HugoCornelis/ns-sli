@@ -152,6 +152,19 @@ char *do_getfield(argc,argv)
 	field = optargv[1];
       }
 
+
+    //
+    // check for the existance in the model container
+    // 
+    value = NSGetField(pathname,field);
+
+    if( (int)value != -1 )
+    { 
+
+	return value;
+      
+    }
+
     if((element = GetElement(pathname)) ==NULL){
 	Error();
 	printf("could not find '%s'\n",pathname);
@@ -164,6 +177,9 @@ char *do_getfield(argc,argv)
 	    printf("could not get the value for field '%s'\n",field);
 	    return(NULL);
 	}
+
+
+
 
     return(CopyString(value));
 }

@@ -176,6 +176,7 @@ libneurospaces_a_SOURCES = \
 	nssetfield.c \
 	nssetup.c \
 	nsshowfield.c \
+	nsgetfield.c \
 	nstabcreate.c \
 	nstabfill.c \
 	nstweak.c

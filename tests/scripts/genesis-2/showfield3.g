@@ -16,10 +16,7 @@ setfield /n/c \
    initVm -0.068 \ 
    Eleak -0.080 
 
-
-echo "Checking each field one at a time"
-
-ehco "Testing wildcard: display all fields"
+echo "Testing wildcard: display all fields"
 
 showfield /n/c *
 
