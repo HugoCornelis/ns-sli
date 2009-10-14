@@ -441,12 +441,12 @@ int		keep_prototype_traversal;
 	*/
        if (CopyAction(src_element,new_element)==0){
 	  DeleteElement(new_element);
-	  SetRecentElement(NULL);
+	  SetRecentElement("");
 	  FAILED();
 	  return;
 	}
     }
-    SetRecentElement(new_element);
+    SetRecentElement(Pathname(new_element));
     OK();
 }
 

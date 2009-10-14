@@ -23,12 +23,15 @@ static char rcsid[] = "$Id: sim_current.c,v 1.2 2005/06/27 19:00:58 svitak Exp $
 */
 
 #include <stdio.h>
+#include <string.h>
 #include "shell_func_ext.h"
 #include "sim_ext.h"
 
-static Element *recent_element;
+/* static Element *recent_element; */
 static Connection *recent_connection;
 static Element *working_element;
+
+static char recent_element_name[1000] = "";
 
 Element *WorkingElement()
 {
@@ -41,15 +44,15 @@ Element	*element;
     working_element = element;
 }
 
-void SetRecentElement(element)
-Element *element;
+void SetRecentElement(name)
+    char *name;
 {
-    recent_element = element;
+    strcpy(recent_element_name, name);
 }
 
 Element *RecentElement()
 {
-    return(recent_element);
+    return(GetElement(recent_element_name));
 }
 
 void SetRecentConnection(connection)
