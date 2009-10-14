@@ -511,10 +511,13 @@ int                   i,j = 0;
 
       //hack----------------------------------------------------------
       /*
-       * here check if create created a nscompartment
+       * here check if Create() created something in the model-container
        * return if it did.
        */
       if( (int)new_element == -1){
+
+	  SetRecentElement(parent_name, name);
+	  
 	OK();
 	return;
       }

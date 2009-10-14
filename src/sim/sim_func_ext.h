@@ -204,6 +204,7 @@ extern Element         *WorkingElement();
 extern void            SetWorkingElement();
 extern void            SetRecentElement();
 extern Element         *RecentElement();
+extern char            *RecentElementName();
 extern void            SetRecentConnection();
 extern Connection      *RecentConnection();
 extern void            FreeTree();

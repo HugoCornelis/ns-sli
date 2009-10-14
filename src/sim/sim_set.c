@@ -235,6 +235,11 @@ int		empty_ok = 0;
 
 /*     struct PidinStack *ppist = PidinStackParse(pathname); */
 
+    if (strcmp(pathname, "^") == 0)
+    {
+	pathname = RecentElementName();
+    }
+
     struct PidinStack *ppist = getRootedContext(pathname);
 
     struct symtab_HSolveListElement *phsle

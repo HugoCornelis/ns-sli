@@ -44,15 +44,29 @@ Element	*element;
     working_element = element;
 }
 
-void SetRecentElement(name)
-    char *name;
+void SetRecentElement(parent_name, recent_name)
+    char *parent_name;
+    char *recent_name;
 {
-    strcpy(recent_element_name, name);
+    if (parent_name)
+    {
+	strcpy(recent_element_name, parent_name);
+	strcat(recent_element_name, recent_name);
+    }
+    else
+    {
+	strcpy(recent_element_name, recent_name);
+    }
 }
 
 Element *RecentElement()
 {
     return(GetElement(recent_element_name));
+}
+
+char *RecentElementName()
+{
+    return(recent_element_name);
 }
 
 void SetRecentConnection(connection)
