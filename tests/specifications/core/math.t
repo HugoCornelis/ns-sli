@@ -115,14 +115,16 @@ my $test
 
 						  {
 						   description => "Can we get the min of two numbers?",
-						   read => '1',
+						   read => '1
+',
 						   write => 'echo {min 1 2}',
 						  },
 
 
 						  {
+						   comment => "Note how things get rounded by arithmetic floating point logic",
 						   description => "Can we get the min of two numbers that are the same (33.33)?",
-						   read => '33',
+						   read => '33.33',
 						   write => 'echo {min 33.33 33.33}',
 						  },
 
