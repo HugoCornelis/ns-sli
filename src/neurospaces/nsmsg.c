@@ -24,21 +24,6 @@
 #include "nsintegrator.h"
 
 
-
-static int AxialMsg(char *pcSrcpath, char *pcDstpath);
-static int ChannelMsg( char *pcSrcpath, char *pcDstpath);
-static int CalciumPoolMsg(char *pcSrcpath, char *pcDstpath);
-static int VoltageMsg(char *pcSrcpath, char *pcDstpath);
-static int ConcenMsg(char *pcSrcpath, char *pcDstpath);
-static int CinMsg(char *pcSrcpath, char *pcDstpath);
-static int EkMsg(char *pcSrcpath, char *pcDstpath);
-static int StoreMsg(char *pcSrcpath, char *pcDstpath,char *pcField,char *pcMsgName);
-
-static struct symtab_IOContainer *IOContainerFromList(char *ppcParmaters[], int iType[]);
-static struct symtab_IdentifierIndex * PidinQueueLookupTarget(char *pcSrcpath, 
-							      char *pcDstpath);
-
-
 //-------------------------------------------------------------------
 /*!
  *   \fn int NSmsg(char *pcSrcpath, char *pcDstpath, char *pcTypename)
@@ -143,7 +128,7 @@ int NSmsg(char *pcSrcpath, char *pcDstpath, char *pcTypename, char *pcField){
  *  reference.
  */
 //----------------------------------------------------------------
-static int AxialMsg(char *pcSrcpath, char *pcDstpath)
+int AxialMsg(char *pcSrcpath, char *pcDstpath)
 {
 
 
@@ -227,7 +212,7 @@ static int AxialMsg(char *pcSrcpath, char *pcDstpath)
  *  Creates a message between channels by way of bindables and bindings. 
  */
 //----------------------------------------------------------------------------
-static int ChannelMsg(char *pcSrcpath,char *pcDstpath)
+int ChannelMsg(char *pcSrcpath,char *pcDstpath)
 {
 
   struct PidinStack *ppistSrc = getRootedContext(pcSrcpath);
@@ -302,7 +287,7 @@ static int ChannelMsg(char *pcSrcpath,char *pcDstpath)
  *  Creates a message for a calcium pool via bindings and bindables.
  */
 //----------------------------------------------------------------------------
-static int CalciumPoolMsg(char *pcSrcpath, char *pcDstpath)
+int CalciumPoolMsg(char *pcSrcpath, char *pcDstpath)
 {
 
 
@@ -418,7 +403,7 @@ static int CalciumPoolMsg(char *pcSrcpath, char *pcDstpath)
  *  
  */
 //----------------------------------------------------------------------------
-static int VoltageMsg(char *pcSrcpath, char *pcDstpath)
+int VoltageMsg(char *pcSrcpath, char *pcDstpath)
 {
 
   struct PidinStack *ppistSrc = getRootedContext(pcSrcpath);
@@ -495,7 +480,7 @@ static int VoltageMsg(char *pcSrcpath, char *pcDstpath)
  *  in the destination element.
  */
 //----------------------------------------------------------------------------
-static int ConcenMsg(char *pcSrcpath, char *pcDstpath)
+int ConcenMsg(char *pcSrcpath, char *pcDstpath)
 {
 
 
@@ -582,7 +567,7 @@ static int ConcenMsg(char *pcSrcpath, char *pcDstpath)
  *  in a pool. 
  */
 //-------------------------------------------------------------------------
-static int CinMsg(char *pcSrcpath, char *pcDstpath)
+int CinMsg(char *pcSrcpath, char *pcDstpath)
 {
 
 
@@ -661,7 +646,7 @@ static int CinMsg(char *pcSrcpath, char *pcDstpath)
  *  \return 0 on error, 1 on success.
  */
 //-------------------------------------------------------------------------
-static int EkMsg(char *pcSrcpath, char *pcDstpath)
+int EkMsg(char *pcSrcpath, char *pcDstpath)
 {
 
 
@@ -733,10 +718,10 @@ static int EkMsg(char *pcSrcpath, char *pcDstpath)
 
 
 
-static int StoreMsg(char *pcSrcpath, 
-		  char *pcDstpath, 
-		  char *pcField,
-		  char *pcMsgName){
+int StoreMsg(char *pcSrcpath, 
+	     char *pcDstpath, 
+	     char *pcField,
+	     char *pcMsgName){
 
 
     //- do hsolve correction for fields

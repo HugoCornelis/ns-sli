@@ -997,30 +997,81 @@ void add_fspine(flags,phsleComp,ppistComp,name,spinenum,num,total)
     PidinStackFree(ppistSpine);
 }
 
-/* Element *add_channel(name,parent) */
-/* 	char	*name; */
-/* 	char	*parent; */
-/* { */
-/* 	char	*argv[10]; */
-/* 	Element	*elm; */
-/* 	static char	dest[NAMELEN]; */
-/* 	char	*oname; */
+struct symtab_HSolveListElement *add_channel(name,parent)
+	char	*name;
+	char	*parent;
+{
+	char	*argv[10];
+	static char	dest[NAMELEN];
+	char	*oname;
 
 /* 	if (!(elm = GetElement(name))) */
 /* 		return(NULL); */
 	
-/* 	sprintf (dest,"%s/%s[%d]",parent,elm->name,elm->index); */
-/* 	argv[0] = "c_do_copy"; */
-/* 	argv[1] = name; */
-/* 	argv[2] = dest; */
-/* 	do_copy(3,argv); */
+	struct PidinStack *ppist = getRootedContext(name);
+
+	struct symtab_HSolveListElement *phsle
+	    =  PidinStackLookupTopSymbol(ppist);
+
+	if (!phsle)
+	{
+	    char pc[1000];
+
+	    PidinStackString(ppist, pc, sizeof(pc));
+
+	    fprintf(stderr, "could not find element %s\n", pc);
+	    return(NULL);
+	}
+
+	sprintf (dest,"%s/%s[%d]",parent,SymbolGetName(phsle)); // elm->name,elm->index);
+	argv[0] = "c_do_copy";
+	argv[1] = name;
+	argv[2] = dest;
+	do_copy(3,argv);
 
 /* 	if (!(elm = GetElement(dest))) */
 /* 		return(NULL); */
 
+	struct PidinStack *ppistDest = getRootedContext(dest);
+
+	struct symtab_HSolveListElement *phsleDest
+	    =  PidinStackLookupTopSymbol(ppistDest);
+
+	if (!phsleDest)
+	{
+	    char pcDest[1000];
+
+	    PidinStackString(ppistDest, pcDest, sizeof(pcDest));
+
+	    fprintf(stderr, "could not create / find element %s\n", pcDest);
+	    return(NULL);
+	}
+
 /* 	abs_position(elm,elm->parent->x,elm->parent->y,elm->parent->z); */
 
 /* 	oname = BaseObject(elm)->name; */
+
+	oname = SymbolHSLETypeDescribe(phsleDest->iType);
+
+	// \todo we need a table that converts both ways.  See also
+	// NSCreate().
+
+	if (strcmp(oname, "CHANNEL") == 0)
+	{
+	    char pcDest[1000];
+
+	    PidinStackString(ppistDest, pcDest, sizeof(pcDest));
+
+	    char pc[1000];
+
+	    PidinStackString(ppist, pc, sizeof(pc));
+
+	    ChannelMsg(pc, pcDest);
+	    VoltageMsg(pcDest, pc);
+	}
+
+	PidinStackFree(ppistDest);
+	PidinStackFree(ppist);
 
 /* 	argv[0] = "c_do_add_msg"; */
 /* 	if (strcmp(oname,"channelC") == 0) { */
@@ -1074,8 +1125,8 @@ void add_fspine(flags,phsleComp,ppistComp,name,spinenum,num,total)
 /* 		argv[4] = "Vm"; */
 /* 		do_add_msg(5,argv); */
 /* 	} */
-/* 	return(elm); */
-/* } */
+	return(phsle);
+}
 
 void parse_compartment(int flags,char *name,char *parent,
 		       double x,double y,double z,
@@ -1238,16 +1289,19 @@ void parse_compartment(int flags,char *name,char *parent,
 				name,nlambda);
 	}
 
-/* 	for (j = 7,k=0 ; j < nargs ; j += 2,k++) { */
-/* 		sprintf(src,"/library/%s",ch[k]); */
-/* 		chanlist[k] = NULL; */
-/* 		if (!(elm = add_channel(src,name))) { */
+	for (j = 7,k=0 ; j < nargs ; j += 2,k++) {
+		sprintf(src,"/library/%s",ch[k]);
+		chanlist[k] = NULL;
+
+		struct symtab_HSolveListElement *phsleChannel = NULL;
+
+		if (!(phsleChannel = add_channel(src,name))) {
 /* 			set_compt_field(compt,ch[k],dens[k],len,d,flags); */
-/* 			continue; */
-/* 		} */
+			continue;
+		}
 /* 		chanlist[k] = elm; */
 /* 		scale_kids(elm,dens[k],val2,val3,d,len,&surf,&vol,flags); */
-/* 	} */
+	}
 /* 	argv[0] = "c_do_add_msg"; */
 /* 	for (j = 7,k=0 ; j < nargs ; j += 2,k++) { */
 /* 		if (!(elm = chanlist[k])) */
