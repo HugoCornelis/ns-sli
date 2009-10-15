@@ -344,4 +344,11 @@ int undo_findsolvefield(char **ppcElement, char **ppcField);
 
 //- -- Defined in nscall.c --
 
+
+//- -- Defined in nsgetfield.c --
+char* NSGetField(char *pcPathname,char *pcField);
+
+//- Defined in nsshowfield.c --
+int NSShowField(int argc,char **argv);
+
 #endif
