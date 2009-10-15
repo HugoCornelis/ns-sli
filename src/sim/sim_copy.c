@@ -446,7 +446,7 @@ int		keep_prototype_traversal;
 	  return;
 	}
     }
-    SetRecentElement(Pathname(new_element));
+    SetRecentElement(NULL, Pathname(new_element));
     OK();
 }
 

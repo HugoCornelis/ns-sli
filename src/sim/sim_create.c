@@ -527,7 +527,7 @@ int                   i,j = 0;
 	/* add the new element to the element hash table */
 	ElementHashPutTree(new_element);
 
-	SetRecentElement(Pathname(new_element));
+	SetRecentElement(NULL, Pathname(new_element));
 
     } else {
 	printf("unable to create '%s'\n",name);
