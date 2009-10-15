@@ -17,9 +17,8 @@ setfield /n/c \
    Eleak -0.080 
 
 
-echo "Checking each field one at a time"
 
-ehco "Testing wildcard: display extended listing of objects"
+echo "Testing wildcard: display extended listing of objects"
 
 showfield /n/c **
 

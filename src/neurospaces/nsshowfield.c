@@ -78,39 +78,72 @@ int NSShowField(int argc,char **argv)
   }
 
 
-  {
+  
     
 
-    int i;
-    printf("\n[ %s ]\n",pcPathname);
+  int i;
+  printf("\n[ %s ]\n",pcPathname);
 
-    for( i=2; i < argc; i++)
+  for( i=2; i < argc; i++)
+  {
+
+    if(argv[i]==NULL || 
+       !strcmp(argv[i],"") )
+      break;
+    else if( argv[i][0] == '-')
+      continue;
+
+
+    if(!strcmp(argv[i],"*"))
+    {
+      // displays all fields;
+
+    }
+    else if(!strcmp(argv[i],"**"))
     {
 
-      if(argv[i]==NULL || 
-	 !strcmp(argv[i],"") )
-	break;
-      else if( argv[i][0] == '-')
-	continue;
+      // displays an extended listing of the element
+      // contents, including a description of the
+      // object from which the element was created
 
+
+    }
+    else{
 
       PrintParameterBasic(phsle,ppist,argv[i]);
       
-/*       if(all) */
-/*       { */
-
-/*       } */
-/*       else */
-/*       { */
+      if(all)
+      {
+	  
 	
-/*       } */
+      }
+      else
+      {
+	  
+      }
 
 
     }
 
-
-
   }
+
+
+
+
+
+  return 1;
+
+}
+
+
+/*
+ *
+ */
+static int PrintParameterAll(struct symtab_HSolveListElement *phsle,
+			       struct PidinStack *ppist)
+{
+
+
 
   return 1;
 

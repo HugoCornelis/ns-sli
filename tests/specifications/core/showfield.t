@@ -21,7 +21,7 @@ my $test
 				command_tests => [
 
 						  {
-						   description => "Can we read fiels one at a time?",
+						   description => "Can we read fields one at a time?",
 						   read => 'Checking each field one at a time
 
 [ /n/c ]
