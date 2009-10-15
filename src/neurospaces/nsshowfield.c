@@ -96,6 +96,8 @@ int NSShowField(int argc,char **argv)
     if(!strcmp(argv[i],"*"))
     {
       // displays all fields;
+      PrintParameterTraversal(ppist);
+      return 1;
 
     }
     else if(!strcmp(argv[i],"**"))
