@@ -15,11 +15,12 @@ my $test
 				command_tests => [
 						  {
 						   description => "Can we set a field on an object in ns-sli?",
-						   read => '[ /n ]
-x                    = 444
-y                    = 0
-z                    = 0
-',
+						   read => '[ n ]
+x	4.440000e+02
+
+y	0.000000e+00
+
+z	0.000000e+00',
 						   timeout => 2,
 						   write => undef,
 						  },
@@ -33,10 +34,12 @@ z                    = 0
 				command_tests => [
 						  {
 						   description => "Can we perform multiple set fields in ns-sli?",
-						   read => '[ /n ]
-x                    = 1
-y                    = 2
-z                    = 3',
+						   read => '[ n ]
+x	1.000000e+00
+
+y	2.000000e+00
+
+z	3.000000e+00',
 						   timeout => 2,
 						   write => 'create neutral n
 setfield n x 1 y 2 z 3
