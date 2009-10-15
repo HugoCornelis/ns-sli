@@ -17,11 +17,10 @@
 #include "neurospaces/function.h"
 #include "neurospaces/pidinstack.h"
 
-
-
 static int PrintParameterBasic(struct symtab_HSolveListElement *phsle,
 			       struct PidinStack *ppist,
-			       char *pcPar);
+			       char *pcPar,int iAll);
+
 
 
 /*!
@@ -110,18 +109,7 @@ int NSShowField(int argc,char **argv)
     }
     else{
 
-      PrintParameterBasic(phsle,ppist,argv[i]);
-      
-      if(all)
-      {
-	  
-	
-      }
-      else
-      {
-	  
-      }
-
+      PrintParameterBasic(phsle,ppist,argv[i],all);
 
     }
 
@@ -136,19 +124,6 @@ int NSShowField(int argc,char **argv)
 }
 
 
-/*
- *
- */
-static int PrintParameterAll(struct symtab_HSolveListElement *phsle,
-			       struct PidinStack *ppist)
-{
-
-
-
-  return 1;
-
-}
-
 
 
 /*
@@ -156,13 +131,23 @@ static int PrintParameterAll(struct symtab_HSolveListElement *phsle,
  */
 static int PrintParameterBasic(struct symtab_HSolveListElement *phsle,
 			       struct PidinStack *ppist,
-			       char *pcPar)
+			       char *pcPar,int iAll)
 {
 
 
   char *pcMappedPar = mapParameterString(pcPar);
       
-  //struct symtab_Parameters *ppar = SymbolFindParameter(phsle, ppist, pcMappedPar);
+
+  if(iAll == 1)
+  {
+
+    struct symtab_Parameters *ppar = SymbolFindParameter(phsle, ppist, pcMappedPar);
+
+    ParameterPrintInfoRecursive(ppar, ppist, 0, stdout);
+
+    return 1;
+
+  }
 
   double dValue = SymbolParameterResolveValue(phsle,ppist,pcMappedPar);
 

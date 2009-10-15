@@ -100,6 +100,96 @@ Eleak	-8.000000e-02',
 
 
 
+
+
+
+
+
+			       {
+				arguments => [
+					         "$::config->{core_directory}/tests/scripts/genesis-2/showfield5.g",
+					     ],
+				command => 'src/ns-sli',
+				command_tests => [
+
+						  {
+						   description => "Can we print extended information for each field?",
+						   read => '[ /n/c ]
+\'parameter name\': CM
+type: function
+\'function name\': GENESIS2
+\'function parameters\':
+
+  -
+    \'parameter name\': scale
+    type: number
+    value: 1
+  -
+    \'parameter name\': value
+    type: number
+    value: 4.57537e-11
+
+[ /n/c ]
+\'parameter name\': RM
+type: function
+\'function name\': GENESIS2
+\'function parameters\':
+
+  -
+    \'parameter name\': scale
+    type: number
+    value: 1
+  -
+    \'parameter name\': value
+    type: number
+    value: 3.58441e+08
+
+[ /n/c ]
+\'parameter name\': RA
+type: function
+\'function name\': GENESIS2
+\'function parameters\':
+
+  -
+    \'parameter name\': scale
+    type: number
+    value: 1
+  -
+    \'parameter name\': value
+    type: number
+    value: 360502
+
+[ /n/c ]
+\'parameter name\': LENGTH
+type: number
+value: 1
+
+[ /n/c ]
+\'parameter name\': DIA
+type: number
+value: 1
+
+[ /n/c ]
+\'parameter name\': Vm_init
+type: number
+value: -0.068
+
+[ /n/c ]
+\'parameter name\': ELEAK
+type: number
+value: -0.08',
+						   timeout => 5,
+						   write => undef,
+						  },
+
+						 ],
+				description => "Can we print extended info for each field one at a time?",
+
+
+			       },
+
+
+
 			      ],
        description => "create a compartment, set its fields and then copy it ",
        name => 'core/showfield.t',
