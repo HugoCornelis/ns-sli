@@ -190,6 +190,97 @@ value: -0.08',
 
 
 
+
+
+
+			       {
+				arguments => [
+					         "$::config->{core_directory}/tests/scripts/genesis-2/showfield3.g",
+					     ],
+				command => 'src/ns-sli',
+				command_tests => [
+
+						  {
+						   description => "Can we print out using a wildcard for the element field?",
+						   read => 'Testing wildcard: display all fields
+
+[ /n/c ]
+---
+show_parameters:
+\'parameter name\': ELEAK
+type: number
+value: -0.08
+
+\'parameter name\': Vm_init
+type: number
+value: -0.068
+
+\'parameter name\': DIA
+type: number
+value: 1
+
+\'parameter name\': LENGTH
+type: number
+value: 1
+
+\'parameter name\': RA
+type: function
+\'function name\': GENESIS2
+\'function parameters\':
+
+  -
+    \'parameter name\': scale
+    type: number
+    value: 1
+  -
+    \'parameter name\': value
+    type: number
+    value: 360502
+
+\'parameter name\': RM
+type: function
+\'function name\': GENESIS2
+\'function parameters\':
+
+  -
+    \'parameter name\': scale
+    type: number
+    value: 1
+  -
+    \'parameter name\': value
+    type: number
+    value: 3.58441e+08
+
+\'parameter name\': CM
+type: function
+\'function name\': GENESIS2
+\'function parameters\':
+
+  -
+    \'parameter name\': scale
+    type: number
+    value: 1
+  -
+    \'parameter name\': value
+    type: number
+    value: 4.57537e-11',
+						   timeout => 5,
+						   write => undef,
+						  },
+
+						 ],
+				description => "Can we print from a wildcard?",
+
+
+			       },
+
+
+
+
+
+
+
+
 			      ],
        description => "create a compartment, set its fields and then copy it ",
        name => 'core/showfield.t',

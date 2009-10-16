@@ -103,10 +103,9 @@ int NSShowField(int argc,char **argv)
     else if(!strcmp(argv[i],"**"))
     {
 
-      // displays an extended listing of the element
-      // contents, including a description of the
-      // object from which the element was created
-
+      // just does the same as "*"
+      PrintParameterTraversal(ppist);
+      return 1;
 
     }
     else{
