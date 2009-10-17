@@ -51,6 +51,15 @@ void SetRecentElement(parent_name, recent_name)
     if (parent_name)
     {
 	strcpy(recent_element_name, parent_name);
+
+	if (strlen(recent_element_name))
+	{
+	    if (recent_element_name[strlen(recent_element_name) - 1] != '/')
+	    {
+		strcat(recent_element_name, "/");
+	    }
+	}
+
 	strcat(recent_element_name, recent_name);
     }
     else
