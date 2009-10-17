@@ -197,5 +197,12 @@ char* do_version(argc,argv)
 	int argc;
 	char **argv;
 {
+    if (argc > 1)
+    {
 	return(CopyString(G3_VERSIONSTR));
+    }
+    else
+    {
+	return(CopyString(VERSIONSTR));
+    }
 }

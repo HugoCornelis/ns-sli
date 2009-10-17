@@ -14,7 +14,6 @@ my $test
 			       },
 			       {
 				arguments => [
-					     
 					     ],
 				command => 'src/ns-sli',
 				command_tests => [
@@ -24,7 +23,18 @@ my $test
 description => "Does the version information match with ns-sli-userdocs-6 ?",
 						   # $Format: "read => \"${package}-${label}\","$
 read => "ns-sli-userdocs-6",
-						   
+						  },
+						  {
+						   description => "Is the interactive major run-time version information correct?",
+						   read => "3
+",
+						   write => "echo {version}",
+						  },
+						  {
+						   description => "Is the interactive minor run-time version information correct?",
+						   # $Format: "read => \"${package}-${label}\","$
+read => "ns-sli-userdocs-6",
+						   write => "echo {version minor}",
 						  },
 						 ],
 				description => "check version information",
