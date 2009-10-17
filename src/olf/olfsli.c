@@ -57,8 +57,8 @@ static void SetupGeneric(int argc,char **argv,int mode)
 	int status;
 
 	args[10]="3000";
-	args[11]="inf";
-	args[12]="inf";
+	args[11]="-0.10000000000000001";
+	args[12]="0.050000000000000003";
 
 	initopt(argc, argv, "channel-element gate AA AB AC AD AF BA BB BC BD BF -size n -range min max");
 	while ((status = G_getopt(argc, argv)) == 1)
