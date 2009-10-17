@@ -1023,7 +1023,7 @@ struct symtab_HSolveListElement *add_channel(name,parent)
 	    return(NULL);
 	}
 
-	sprintf (dest,"%s/%s[%d]",parent,SymbolGetName(phsle)); // elm->name,elm->index);
+	sprintf (dest,"%s/%s",parent,SymbolGetName(phsle)); // elm->name,elm->index);
 	argv[0] = "c_do_copy";
 	argv[1] = name;
 	argv[2] = dest;
