@@ -997,9 +997,8 @@ void add_fspine(flags,phsleComp,ppistComp,name,spinenum,num,total)
     PidinStackFree(ppistSpine);
 }
 
-struct symtab_HSolveListElement *add_channel(name,parent)
-	char	*name;
-	char	*parent;
+struct symtab_HSolveListElement *
+add_channel(char *name,char *parent)
 {
 	char	*argv[10];
 	static char	dest[NAMELEN];
@@ -1056,7 +1055,7 @@ struct symtab_HSolveListElement *add_channel(name,parent)
 	// \todo we need a table that converts both ways.  See also
 	// NSCreate().
 
-	if (strcmp(oname, "CHANNEL") == 0)
+	if (strcmp(oname, "T_sym_channel") == 0)
 	{
 	    char pcDest[1000];
 
@@ -1068,6 +1067,21 @@ struct symtab_HSolveListElement *add_channel(name,parent)
 
 	    ChannelMsg(pc, pcDest);
 	    VoltageMsg(pcDest, pc);
+
+	    //- fetch the gmax value, this should be fixed and unscaled
+
+	    double dG = SymbolParameterResolveValue(phsleDest, ppistDest, "G_MAX");
+
+	    if (dG != FLT_MAX)
+	    {
+		struct symtab_Parameters *pparG = ParameterNewFromNumber("G_MAX", dG);
+
+		BioComponentChangeParameter((struct symtab_BioComponent *)phsleDest, pparG);
+	    }
+	    else
+	    {
+		fprintf(stderr, "*** Warning: channel %s has no G_MAX defined\n", name);
+	    }
 	}
 
 	PidinStackFree(ppistDest);
