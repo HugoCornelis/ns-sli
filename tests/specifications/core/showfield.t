@@ -278,6 +278,35 @@ type: function
 
 
 
+			       {
+				arguments => [
+					         "$::config->{core_directory}/tests/scripts/heccer/springmass1.g",
+					     ],
+				command => 'src/ns-sli',
+				command_tests => [
+
+						  {
+						   description => "Can we read voltage potential from compartment 1 in springmass1.g?",
+						   read => '[ /hardcoded_neutral/c1 ]
+Vm	-7.916984e-02',
+						   timeout => 5,
+						   write => 'showfield /hardcoded_neutral/c1 Vm',
+						  },
+
+						  {
+						   description => "Can we read voltage potential from compartment 2 in springmass1.g?",
+						   read => '[ /hardcoded_neutral/c2 ]
+Vm	-7.916970e-02',
+						   timeout => 5,
+						   write => 'showfield /hardcoded_neutral/c2 Vm',
+						  },
+
+						 ],
+				description => "Can we show a field from a heccer solved variable?",
+
+
+			       },
+
 
 
 

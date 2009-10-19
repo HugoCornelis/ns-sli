@@ -43,6 +43,36 @@ my $test
 
 
 
+			       {
+				arguments => [
+					         "$::config->{core_directory}/tests/scripts/heccer/springmass1.g",
+					     ],
+				command => 'src/ns-sli',
+				command_tests => [
+
+						  {
+						   description => "Can we get the field for the voltage potential from compartment 1 in springmass1.?",
+						   read => '-0.0791698',
+						   timeout => 5,
+						   write => 'echo {getfield /hardcoded_neutral/c1 Vm}',
+						  },
+
+						  {
+						   description => "Can we read voltage potential from compartment 2 in springmass1.g?",
+						   read => '-0.0791697',
+						   timeout => 5,
+						   write => 'echo {getfield /hardcoded_neutral/c2 Vm}',
+						  },
+
+						 ],
+				description => "Can we perform a getfield from a heccer solved variable?",
+
+
+			       },
+
+
+
+
 
 			      ],
        description => "create a compartment, set its fields and then copy it ",

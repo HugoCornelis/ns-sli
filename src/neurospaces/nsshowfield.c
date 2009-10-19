@@ -29,8 +29,6 @@ static int PrintParameterBasic(struct symtab_HSolveListElement *phsle,
  */
 int NSShowField(int argc,char **argv)
 {
-
-  int iInModelContainer = 0;
   int status = 0;
   int all = 0;
   int basic = 0;
@@ -63,21 +61,7 @@ int NSShowField(int argc,char **argv)
   struct symtab_HSolveListElement *phsle = PidinStackLookupTopSymbol(ppist); 
 
 
-  //
-  // If no symbol if found then we exit and let GENESIS continue 
-  // to process the request.
-  //
-  if(!phsle)
-  {
-    return 0;
-  }
-  else
-  {
-    iInModelContainer = 1;
-  }
 
-
-  
     
 
   int i;
@@ -109,6 +93,12 @@ int NSShowField(int argc,char **argv)
 
     }
     else{
+
+      int iResult = PrintHeccerParameter(pcPathname,argv[i],all);
+      if( iResult > 0 )
+      {
+	return 1;
+      }
 
       PrintParameterBasic(phsle,ppist,argv[i],all);
 
@@ -168,3 +158,74 @@ static int PrintParameterBasic(struct symtab_HSolveListElement *phsle,
   }
 
 }
+
+
+
+
+
+
+
+
+//------------------------------------------------------------
+/*
+ * \return returns the number of items printed.
+ *
+ * Prints a parameter if present in any heccer instance.  
+ */
+//------------------------------------------------------------
+int PrintHeccerParameter(char *pcName,char *pcParameter,int iAll)
+{
+
+
+  int iItemsPrinted = 0;
+
+  struct neurospaces_integrator *pnsintegrator = getNsintegrator();
+  
+  
+  struct Heccer **ppheccer = pnsintegrator->ppheccer;
+  int iHeccers = pnsintegrator->iHeccers;
+
+
+  struct PidinStack *ppist = PidinStackParse(pcName);
+
+  PidinStackUpdateCaches(ppist);
+
+  int iSerial = PidinStackToSerial(ppist);
+
+  int i;
+  double *pdValue = NULL;
+
+  for(i=0;i<iHeccers;i++)
+  {
+
+    pdValue = (double *)HeccerAddressVariable(ppheccer[i],iSerial,pcParameter);
+
+    if(!pdValue)
+      continue;
+
+
+    if(iAll)
+    {
+      PrintIndent(0, stdout);
+      fprintf(stdout,"%s","type: solved variable\n");
+      PrintIndent(0,stdout);
+      fprintf(stdout,"heccer instance: %d\n", i);
+      PrintIndent(0, stdout);
+      fprintf(stdout,"heccer serial id: %d\n",iSerial);
+      PrintIndent(0, stdout);
+      fprintf(stdout, "value: %g\n", (*pdValue));
+      iItemsPrinted++;
+    }
+    else
+    {
+      fprintf(stdout,"%s\t%e\n\n",pcParameter,(*pdValue));
+      iItemsPrinted++;
+    }
+
+  }
+
+  return iItemsPrinted;
+}
+
+
+

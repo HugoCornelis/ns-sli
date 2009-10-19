@@ -302,9 +302,10 @@ struct PidinStack * lookupGate(char *pcName, char *pcField);
 struct PidinStack * getGateContext(char *pcName, char *pcField, char *pcAorB);
 struct symtab_InputOutput * CreateInputOutput(char *pcContext, int iType);
 struct neurospaces_integrator *getNsintegrator();
-
 char *getRootedPathname(char *pc);
 struct PidinStack *getRootedContext(char *pc);
+
+
 
 //- -- Defined in nscreate.c --
 struct symtab_HSolveListElement *
@@ -357,9 +358,10 @@ int StoreMsg(char *pcSrcpath, char *pcDstpath,char *pcField,char *pcMsgName);
 
 //- -- Defined in nsgetfield.c --
 char* NSGetField(char *pcPathname,char *pcField);
+char * GetHeccerParameter(char *pcName,char *pcParameter);
 
 //- Defined in nsshowfield.c --
 int NSShowField(int argc,char **argv);
-
+int PrintHeccerParameter(char *pcName,char *pcParameter,int iAll);
 
 #endif
