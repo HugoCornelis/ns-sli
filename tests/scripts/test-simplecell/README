@@ -1,0 +1,16 @@
+These are bare-bones versions of the simple two-compartment cell model in
+scripts Tutorials/cells/simplecell from the GENESIS Modeling Tutorials
+package.  They both use a prototype definition file and a cell parameter
+file to be read with readcell.
+
+simplecell-0.g - no spikegen or synchans - uses cell0.p and protodefs0.g
+simplecell-1.g - has spikegen and synchans - uses cell1.p and protodefs1.g
+
+They are designed to be run interactively, typing "quit" when finished.
+This allows the model to be explored after the 0.5 sec run is completed.
+
+
+The genesis/Scripts/neurokit/prototypes directory must be in the GENESIS 2
+or 3 SIMPATH in order to include the compartment and channel prototype
+scripts.
+
