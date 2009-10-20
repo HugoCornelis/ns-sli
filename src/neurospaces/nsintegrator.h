@@ -362,6 +362,6 @@ char * GetHeccerVariable(char *pcName,char *pcParameter);
 
 //- Defined in nsshowfield.c --
 int NSShowField(int argc,char **argv);
-int PrintHeccerParameter(char *pcName,char *pcParameter,int iAll);
+int PrintHeccerVariable(char *pcName,char *pcParameter,int iAll);
 
 #endif
