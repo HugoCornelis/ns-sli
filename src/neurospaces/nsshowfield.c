@@ -94,7 +94,7 @@ int NSShowField(int argc,char **argv)
     }
     else{
 
-      int iResult = PrintHeccerParameter(pcPathname,argv[i],all);
+      int iResult = PrintHeccerVariable(pcPathname,argv[i],all);
       if( iResult > 0 )
       {
 	return 1;
@@ -173,7 +173,7 @@ static int PrintParameterBasic(struct symtab_HSolveListElement *phsle,
  * Prints a parameter if present in any heccer instance.  
  */
 //------------------------------------------------------------
-int PrintHeccerParameter(char *pcName,char *pcParameter,int iAll)
+int PrintHeccerVariable(char *pcName,char *pcField,int iAll)
 {
 
 
@@ -198,7 +198,17 @@ int PrintHeccerParameter(char *pcName,char *pcParameter,int iAll)
   for(i=0;i<iHeccers;i++)
   {
 
-    pdValue = (double *)HeccerAddressVariable(ppheccer[i],iSerial,pcParameter);
+    if(!ppheccer[i])
+    {
+
+      if(!strcmp(pcField,"Vm"))
+      {
+	fprintf(stdout,"%s","Warning: No simulation has been run, Vm is not avaialble.\n\n");
+      }
+
+    }
+
+    pdValue = (double *)HeccerAddressVariable(ppheccer[i],iSerial,pcField);
 
     if(!pdValue)
       continue;
@@ -218,7 +228,7 @@ int PrintHeccerParameter(char *pcName,char *pcParameter,int iAll)
     }
     else
     {
-      fprintf(stdout,"%s\t%e\n\n",pcParameter,(*pdValue));
+      fprintf(stdout,"%s\t%e\n\n",pcField,(*pdValue));
       iItemsPrinted++;
     }
 

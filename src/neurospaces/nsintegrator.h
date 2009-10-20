@@ -358,7 +358,7 @@ int StoreMsg(char *pcSrcpath, char *pcDstpath,char *pcField,char *pcMsgName);
 
 //- -- Defined in nsgetfield.c --
 char* NSGetField(char *pcPathname,char *pcField);
-char * GetHeccerParameter(char *pcName,char *pcParameter);
+char * GetHeccerVariable(char *pcName,char *pcParameter);
 
 //- Defined in nsshowfield.c --
 int NSShowField(int argc,char **argv);

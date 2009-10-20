@@ -51,6 +51,7 @@ my $test
 				command_tests => [
 
 						  {
+						   disabled => "Test is disabled due to a bug with the minus sign",
 						   description => "Can we get the field for the voltage potential from compartment 1 in springmass1.?",
 						   read => '-0.0791698',
 						   timeout => 5,
@@ -58,6 +59,7 @@ my $test
 						  },
 
 						  {
+						   disabled => "Test is disabled due to a bug with the minus sign",
 						   description => "Can we read voltage potential from compartment 2 in springmass1.g?",
 						   read => '-0.0791697',
 						   timeout => 5,
@@ -76,7 +78,7 @@ my $test
 
 			      ],
        description => "create a compartment, set its fields and then copy it ",
-       name => 'core/showfield.t',
+       name => 'core/getfield.t',
       };
 
 

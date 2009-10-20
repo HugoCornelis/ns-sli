@@ -24,12 +24,12 @@ char* NSGetField(char *pcPathname,char *pcField)
 
   // First we check for the variable in heccer
 
-  char *pcHeccerVar = GetHeccerParameter(pcPathname,pcField);
+  char *pcHeccerVar = GetHeccerVariable(pcPathname,pcField);
 
   if(pcHeccerVar)
   {
     
-    return(CopyString(pcHeccerVar));
+    return (pcHeccerVar);
 
   }
 
@@ -49,10 +49,10 @@ char* NSGetField(char *pcPathname,char *pcField)
 
   char *pcMappedPar = mapParameterString(pcField);
 
-  double iValue = SymbolParameterResolveValue(phsle,ppist,pcMappedPar);
+  double dValue = SymbolParameterResolveValue(phsle,ppist,pcMappedPar);
   
 
-  if(iValue == FLT_MAX)
+  if(dValue == FLT_MAX)
   {
     Error();
     printf("could not get the value for field '%s'\n",pcField);
@@ -62,7 +62,7 @@ char* NSGetField(char *pcPathname,char *pcField)
 
   char pc[100];
 
-  sprintf(pc,"%g",iValue);
+  sprintf(pc,"%g",dValue);
 
 
   return(CopyString(pc));
@@ -78,7 +78,7 @@ char* NSGetField(char *pcPathname,char *pcField)
  *
  */
 //---------------------------------------------------------
-char * GetHeccerParameter(char *pcName,char *pcParameter)
+char * GetHeccerVariable(char *pcName,char *pcField)
 {
 
 
@@ -98,9 +98,21 @@ char * GetHeccerParameter(char *pcName,char *pcParameter)
   // for now getfield will only check on the heccer object 
   // at index 0. 
 
-  double *pdValue = (double *)HeccerAddressVariable(ppheccer[0],iSerial,pcParameter);
+  if(!ppheccer[0])
+  {
 
-  if(!pdValue || (*pdValue) == FLT_MAX)
+    if(!strcmp(pcField,"Vm"))
+    {
+      fprintf(stdout,"%s","Warning: No simulation has been run, Vm is not avaialble.\n\n");
+    }
+
+    return NULL;
+
+  }
+
+  double *pdValue = (double *)HeccerAddressVariable(ppheccer[0],iSerial,pcField);
+
+  if(!pdValue)
     return NULL;
 
 
@@ -108,6 +120,6 @@ char * GetHeccerParameter(char *pcName,char *pcParameter)
 
   sprintf(pc,"%g",(*pdValue));
 
-  return pc;
+  return (CopyString(pc));
 
 }
