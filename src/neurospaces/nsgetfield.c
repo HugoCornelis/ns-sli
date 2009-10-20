@@ -110,7 +110,7 @@ char * GetHeccerVariable(char *pcName,char *pcField)
 
   }
 
-  double *pdValue = (double *)HeccerAddressVariable(ppheccer[0],iSerial,pcField);
+  double *pdValue = HeccerAddressVariable(ppheccer[0],iSerial,pcField);
 
   if(!pdValue)
     return NULL;
