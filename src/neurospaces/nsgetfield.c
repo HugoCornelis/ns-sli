@@ -44,7 +44,7 @@ char* NSGetField(char *pcPathname,char *pcField)
   if(!phsle)
   {
     // in this case it's not in the model container.
-    return -1;
+    return (char*)-1;
   }
 
   char *pcMappedPar = mapParameterString(pcField);

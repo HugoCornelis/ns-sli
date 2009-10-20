@@ -58,6 +58,8 @@ static char rcsid[] = "$Id: sim_get.c,v 1.2 2005/06/27 19:01:07 svitak Exp $";
 #include "shell_func_ext.h"
 #include "sim_ext.h"
 
+#include "nsintegrator.h"
+
 Element *GetElement(pathname)
 char *pathname;
 {
