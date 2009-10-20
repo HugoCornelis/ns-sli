@@ -21,6 +21,17 @@
  */
 char* NSGetField(char *pcPathname,char *pcField)
 {
+    //- do hsolve correction for fields
+
+    if (undo_findsolvefield(&pcPathname, &pcField))
+    {
+    }
+    else
+    {
+	pcPathname = strdup(pcPathname);
+
+	pcField = strdup(pcField);
+    }
 
   // First we check for the variable in heccer
 
@@ -28,9 +39,10 @@ char* NSGetField(char *pcPathname,char *pcField)
 
   if(pcHeccerVar)
   {
+      free(pcPathname);
+      free(pcField);
     
-    return (pcHeccerVar);
-
+      return (pcHeccerVar);
   }
 
 
@@ -43,8 +55,12 @@ char* NSGetField(char *pcPathname,char *pcField)
 
   if(!phsle)
   {
-    // in this case it's not in the model container.
-    return (char*)-1;
+      //- in this case it's not in the model container.
+
+      free(pcPathname);
+      free(pcField);
+
+      return (char*)-1;
   }
 
   char *pcMappedPar = mapParameterString(pcField);
@@ -54,9 +70,13 @@ char* NSGetField(char *pcPathname,char *pcField)
 
   if(dValue == FLT_MAX)
   {
-    Error();
-    printf("could not get the value for field '%s'\n",pcField);
-    return(NULL);  
+      free(pcPathname);
+      free(pcField);
+
+      Error();
+      printf("could not get the value for field '%s'\n",pcField);
+
+      return(NULL);  
   }
 
 
@@ -64,6 +84,9 @@ char* NSGetField(char *pcPathname,char *pcField)
 
   sprintf(pc,"%g",dValue);
 
+
+  free(pcPathname);
+  free(pcField);
 
   return(CopyString(pc));
 
