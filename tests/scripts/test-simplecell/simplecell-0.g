@@ -48,7 +48,7 @@ end
 
 check
 reset
-// echo "Initial Vm = " {getfield /cell/soma Vm}
+echo "Initial Vm = " {getfield /cell/soma Vm}
 echo "Initial Na X = " {getfield /cell/soma/Na_hh_tchan X}
 echo "Initial Na Y = " {getfield /cell/soma/Na_hh_tchan Y}
 echo "Initial Na Z = " {getfield /cell/soma/Na_hh_tchan Z}
@@ -56,6 +56,6 @@ echo "Initial K X = " {getfield /cell/soma/K_hh_tchan X}
 echo "Initial K Y = " {getfield /cell/soma/K_hh_tchan Y}
 echo "Initial K Z = " {getfield /cell/soma/K_hh_tchan Z}
 step 0.5 -time
-// echo "Final Vm = " {getfield /cell/soma Vm}
+echo "Final Vm = " {getfield /cell/soma Vm}
 
 echo "Type quit to exit"
