@@ -1074,6 +1074,12 @@ add_channel(char *name,char *parent)
 
 	    if (dG != FLT_MAX)
 	    {
+		//- multiply the conductance to SI units
+
+		dG *= 1e9;
+
+		//- insert as new parameter
+
 		struct symtab_Parameters *pparG = ParameterNewFromNumber("G_MAX", dG);
 
 		BioComponentChangeParameter((struct symtab_BioComponent *)phsleDest, pparG);
