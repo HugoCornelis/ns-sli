@@ -73,10 +73,6 @@ int NSSetField(struct symtab_HSolveListElement *phsle,
 
 	if (pnsintegrator->iHeccers)
 	{
-/* 	    TraceScript(); */
-
-/* 	    fprintf(stdout, "Warning setting fields after a RESET has been done, double check your results.\n"); */
-
 	    //- lookup the heccer object using the pathname before findsolvefield correction
 
 	    struct Heccer *pheccer = LookupHeccerObject(pcOriginal);
