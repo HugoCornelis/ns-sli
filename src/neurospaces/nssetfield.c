@@ -97,7 +97,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 	    }
 	    else
 	    {
-		fprintf(stdout, "Warning cannot set field %s->%s after a RESET has been done, heccer does not know where it is in its memory.\n", pcPathname, pcField);
+		fprintf(stdout, "Warning cannot set field %s->%s after a RESET has been done, heccer cannot find it in its private memory.\n", pcPathname, pcField);
 	    }
 	}
     }
