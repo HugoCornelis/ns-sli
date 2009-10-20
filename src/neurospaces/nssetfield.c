@@ -47,10 +47,10 @@
  *  5. Generate a parameter from the numerical value.
 */
 //------------------------------------------------------------------
-int NeurospacesSetField(struct symtab_HSolveListElement *phsle, 
-			struct PidinStack *ppist,
-			char *pcPathname, char *pcField, char *pcValue){
-
+int NSSetField(struct symtab_HSolveListElement *phsle, 
+	       struct PidinStack *ppist,
+	       char *pcPathname, char *pcField, char *pcValue){
+    
     struct PidinStack *ppistWorking = NULL;
     struct symtab_HSolveListElement *phsleWorking = NULL;
  

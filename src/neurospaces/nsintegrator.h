@@ -47,6 +47,11 @@
 //! allow using different functions of the model container
 //! to be called. 
 //!
+
+int NSSetField(struct symtab_HSolveListElement *phsle, 
+	       struct PidinStack *ppist,
+	       char *pcPathname, char *pcField, char *pcValue);
+
 #define SETPARA_GENESIS2 2
 #define SETPARA_NUM 3
 #define SETPARA_STRING 4
