@@ -73,7 +73,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 
 	if (pnsintegrator->iHeccers)
 	{
-	    TraceScript();
+/* 	    TraceScript(); */
 
 /* 	    fprintf(stdout, "Warning setting fields after a RESET has been done, double check your results.\n"); */
 
