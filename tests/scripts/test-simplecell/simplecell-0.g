@@ -32,14 +32,9 @@ readcell tests/scripts/test-simplecell/cell0.p /cell
 
 setfield /cell/soma inject 0.5e-9
 
-// if ({version} == 3)
-// 	setfield /cell/soma/Na_hh_tchan/HH_activation state_init 0.05293248341
-// 	setfield /cell/soma/Na_hh_tchan/HH_inactivation state_init 0.5961207634
-
-// 	setfield /cell/soma/K_hh_tchan/HH_activation state_init 0.3176769097
-// end
-
 if ({version} == 3)
+	echo "Initializing gate states."
+
 	setfield /cell/soma/Na_hh_tchan X_init 0.05293248341
 	setfield /cell/soma/Na_hh_tchan Y_init 0.5961207634
 
