@@ -40,9 +40,7 @@ Element *WorkingElement()
     return(GetElement(working_element_name));
 }
 
-void SetWorkingElement(parent_name, element_name)
-    char *parent_name;
-    char *element_name;
+void SetWorkingElement(char *parent_name, char *element_name)
 {
     if (parent_name)
     {
@@ -64,9 +62,7 @@ void SetWorkingElement(parent_name, element_name)
     }
 }
 
-void SetRecentElement(parent_name, recent_name)
-    char *parent_name;
-    char *recent_name;
+void SetRecentElement(char *parent_name, char *recent_name)
 {
     if (parent_name)
     {
