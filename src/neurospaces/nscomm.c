@@ -353,34 +353,23 @@ int setParameterNumber(struct PidinStack *ppist,
 		       struct symtab_HSolveListElement *phsle,
 		       char *pcField, double dNumber)
 {
-
-
-      
   struct symtab_Parameters *pparTop = ParameterCalloc();
-  
 
   if(!pparTop)
-    return 0;
-
+      return 0;
 
   char *pcParameter = mapParameterString(pcField);
-  
 
   ParameterSetName(pparTop,pcParameter);
-		       
 
   pparTop->uValue.dNumber = dNumber;
   ParameterSetType(pparTop,TYPE_PARA_NUMBER);
 
-
   pparTop->pparFirst = pparTop;
-
 
   BioComponentChangeParameter((struct symtab_BioComponent *)phsle,pparTop);
   
   return 1;
-
-
 }
 
 
