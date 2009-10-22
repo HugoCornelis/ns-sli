@@ -1533,7 +1533,7 @@ void do_read_cell(argc,argv)
 		fprintf(stderr,"reading '%s'.... \n",filename);
 
 	cellname = optargv[2];
-	orig_working_elm_name = WorkingElementName();
+	orig_working_elm_name = strdup(WorkingElementName());
 	start_cell(cellname,&flags);
 
 	for (i = 1, endit = fgets(rawline,INPUT_LINELEN,fp); endit != NULL ;
@@ -1705,6 +1705,8 @@ void do_read_cell(argc,argv)
 	}
 
 	SetWorkingElement(NULL, orig_working_elm_name);
+
+	free(orig_working_elm_name);
 }
 
 
