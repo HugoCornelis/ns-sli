@@ -120,13 +120,16 @@ char *pathname;
 Element *element;
 
     if((element = GetElement(pathname)) != NULL){
-	SetWorkingElement(NULL, Pathname(element));
-    } else {
-	Error();
-	printf("cannot change to '%s' from '%s'\n",
-	pathname,
-	Pathname(WorkingElement()));
     }
+
+    SetWorkingElement(NULL, pathname);
+
+/*     } else { */
+/* 	Error(); */
+/* 	printf("cannot change to '%s' from '%s'\n", */
+/* 	pathname, */
+/* 	Pathname(WorkingElement())); */
+/*     } */
 }
 
 void ListElements(element,recursive,showtype)

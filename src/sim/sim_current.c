@@ -40,6 +40,11 @@ Element *WorkingElement()
     return(GetElement(working_element_name));
 }
 
+char *WorkingElementName()
+{
+    return(working_element_name);
+}
+
 void SetWorkingElement(char *parent_name, char *element_name)
 {
     if (parent_name)

@@ -77,7 +77,7 @@ void do_pushe(argc,argv)
 int 	argc;
 char 	**argv;
 {
-Element *element;
+    char *element_name;
 
     initopt(argc, argv, "[path]");
     if (G_getopt(argc, argv) != 0)
@@ -87,18 +87,18 @@ Element *element;
       }
 
     if(optargc > 1){
-	element = GetElement(optargv[1]);
-	if(element == NULL){
+	element_name = optargv[1];
+	if(element_name == NULL){
 	    printf("cant find element '%s'\n",optargv[1]);
 	    return;
 	}
     } else {
-	element = WorkingElement();
+	element_name = WorkingElementName();
     }
     push_element(WorkingElement());
-    SetWorkingElement(NULL, Pathname(element));
+    SetWorkingElement(NULL, element_name);
     if(IsSilent()<1)
-	printf("%s\n",Pathname(element));
+	printf("%s\n", element_name);
 }
 
 void do_pope(argc,argv)

@@ -201,6 +201,7 @@ extern int             CreateAction();
 extern Element         *Create();
 extern char            *CreateObject();
 extern Element         *WorkingElement();
+extern char *WorkingElementName();
 extern void            SetWorkingElement(char *, char *);
 extern void            SetRecentElement(char *, char *);
 extern Element         *RecentElement();
