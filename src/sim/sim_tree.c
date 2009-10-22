@@ -334,7 +334,7 @@ void do_pwe(argc,argv)
 int argc;
 char **argv;
 {
-    printf("%s\n", Pathname(WorkingElement()));
+    printf("%s\n", WorkingElementName()));
 }
 
 void do_list_elements(argc,argv)
