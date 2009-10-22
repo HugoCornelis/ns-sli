@@ -48,6 +48,9 @@ static char rcsid[] = "$Id: sim_tree.c,v 1.2 2005/06/27 19:01:12 svitak Exp $";
 #include "shell_func_ext.h"
 #include "sim_ext.h"
 
+#include "nsintegrator.h"
+
+
 int GetTreeCount(pathname, valid_index)
 char *pathname;
 int *valid_index;
@@ -117,19 +120,41 @@ char *pathname;
 void ChangeWorkingElement(pathname)
 char *pathname;
 {
-Element *element;
+    Element *element;
 
-    if((element = GetElement(pathname)) != NULL){
+    int iOk = 0;
+
+    if ((element = GetElement(pathname)) != NULL)
+    {
+	iOk = 1;
     }
 
-    SetWorkingElement(NULL, pathname);
+    if (!iOk)
+    {
+	struct PidinStack *ppist = getRootedContext(pathname);
 
-/*     } else { */
-/* 	Error(); */
-/* 	printf("cannot change to '%s' from '%s'\n", */
-/* 	pathname, */
-/* 	Pathname(WorkingElement())); */
-/*     } */
+	struct symtab_HSolveListElement *phsle
+	    = PidinStackLookupTopSymbol(ppist);
+
+	if (phsle)
+	{
+	    iOk = 1;
+	}
+
+	PidinStackFree(ppist);
+    }
+
+    if (iOk)
+    {
+	SetWorkingElement(NULL, pathname);
+    }
+    else
+    {
+	Error();
+	printf("cannot change to '%s' from '%s'\n",
+	       pathname,
+	       WorkingElementName());
+    }
 }
 
 void ListElements(element,recursive,showtype)
