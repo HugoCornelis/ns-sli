@@ -22,8 +22,6 @@ ACTIVE CLOCKS
 [0] : 1e-05
 [1] : 0.0001
 ',
-						   timeout => 2,
-						   write => undef,
 						  },
 						 ],
 				description => "simple script",
@@ -36,7 +34,6 @@ ACTIVE CLOCKS
 						  {
 						   description => "Can we load a simple file into ns-sli?",
 						   read => 'changing clock [0] from 1 to 1e-05',
-						   timeout => 2,
 						   write => 'setclock 0 1e-5
 ',
 						  },
