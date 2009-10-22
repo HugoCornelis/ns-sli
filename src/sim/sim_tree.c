@@ -120,7 +120,7 @@ char *pathname;
 Element *element;
 
     if((element = GetElement(pathname)) != NULL){
-	SetWorkingElement(element);
+	SetWorkingElement(NULL, Pathname(element));
     } else {
 	Error();
 	printf("cannot change to '%s' from '%s'\n",
@@ -408,7 +408,7 @@ char *name;
     ** get the element with the new index
     */
     if((element = GetChildElement(parent,name,count)) != NULL){
-	SetWorkingElement(element);
+	SetWorkingElement(NULL, Pathname(element));
     } else {
 	Error();
 	printf("could not find element '%s[%d]' \n",

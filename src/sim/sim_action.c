@@ -936,7 +936,7 @@ printf("CallScriptActionFunc:\n");
 	    yyerror("Can't call script action: Can't push onto element stack");
 	    /* No return */
 	  }
-	SetWorkingElement(element);
+	SetWorkingElement(NULL, Pathname(element));
 
 	status = ExecuteFunction(argc, argv);
 
@@ -948,7 +948,7 @@ printf("CallScriptActionFunc:\n");
 	    yyerror("Element stack empty after script action");
 	    /* No return */
 	  }
-	SetWorkingElement(element);
+	SetWorkingElement(NULL, Pathname(element));
 
 	if (freearg != 0)
 	    free(argv[freearg]);

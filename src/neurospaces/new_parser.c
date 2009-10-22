@@ -1704,7 +1704,7 @@ void do_read_cell(argc,argv)
 	    palgsActive = NULL;
 	}
 
-	SetWorkingElement(orig_working_elm);
+	SetWorkingElement(NULL, Pathname(orig_working_elm));
 }
 
 

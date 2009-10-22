@@ -114,7 +114,7 @@ Element*	element;
     ** change the current element to someplace safe
     */
     if(element == WorkingElement()){
-	SetWorkingElement(RootElement());
+	SetWorkingElement(NULL, Pathname(RootElement()));
     }
 
     /*

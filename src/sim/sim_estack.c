@@ -96,7 +96,7 @@ Element *element;
 	element = WorkingElement();
     }
     push_element(WorkingElement());
-    SetWorkingElement(element);
+    SetWorkingElement(NULL, Pathname(element));
     if(IsSilent()<1)
 	printf("%s\n",Pathname(element));
 }
@@ -109,7 +109,7 @@ Element *element;
 
     element = pop_element();
     if(element != NULL){
-	SetWorkingElement(element);
+	SetWorkingElement(NULL, Pathname(element));
 	if(IsSilent()<1)
 	    printf("%s\n",Pathname(element));
     }
