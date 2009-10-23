@@ -155,7 +155,6 @@ libneurospaces_a_SOURCES = \
 	neurospaces_d@.c \
 	neurospaces_g@.c \
 	neurospaces_l@.c \
-	neurospacesfield.c \
 	neurospacesmodel.c \
 	neurospacesquery.c \
 	new_parser.c \

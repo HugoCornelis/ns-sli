@@ -42,6 +42,16 @@ if ({version} == 3)
 end
 
 check
+
+create hsolve /cell/h
+
+setfield /cell/h \
+	path "../##[TYPE=compartment]" \
+	chanmode 4
+
+call /cell/h SETUP
+setmethod /cell/h 11
+
 reset
 echo "Initial Vm = " {getfield /cell/soma Vm}
 echo "Initial Na X = " {getfield /cell/soma/Na_hh_tchan X}
@@ -51,6 +61,6 @@ echo "Initial K X = " {getfield /cell/soma/K_hh_tchan X}
 echo "Initial K Y = " {getfield /cell/soma/K_hh_tchan Y}
 echo "Initial K Z = " {getfield /cell/soma/K_hh_tchan Z}
 step 0.5 -time
-echo "Final Vm = " {getfield /cell/soma Vm}
+echo "Final Vm = " {getfield /cell/h {findsolvefield /cell/h /cell/soma Vm}}
 
 echo "Type quit to exit"

@@ -266,7 +266,7 @@ extern void AddCommandCallback();
       */
       root_element = Create("neutral","Root",NULL,NULL,0);
       Enable(root_element);
-      SetWorkingElement(root_element);
+      SetWorkingElement(NULL, Pathname(root_element));
       SetRecentElement(NULL, Pathname(root_element));
       SetRecentConnection(NULL);
     }

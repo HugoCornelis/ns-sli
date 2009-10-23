@@ -48,6 +48,11 @@ static char rcsid[] = "$Id: sim_tree.c,v 1.2 2005/06/27 19:01:12 svitak Exp $";
 #include "shell_func_ext.h"
 #include "sim_ext.h"
 
+#include "neurospaces/querymachine.h"
+
+#include "nsintegrator.h"
+
+
 int GetTreeCount(pathname, valid_index)
 char *pathname;
 int *valid_index;
@@ -117,15 +122,40 @@ char *pathname;
 void ChangeWorkingElement(pathname)
 char *pathname;
 {
-Element *element;
+    Element *element;
 
-    if((element = GetElement(pathname)) != NULL){
-	SetWorkingElement(element);
-    } else {
+    int iOk = 0;
+
+    if ((element = GetElement(pathname)) != NULL)
+    {
+	iOk = 1;
+    }
+
+    if (!iOk)
+    {
+	struct PidinStack *ppist = getRootedContext(pathname);
+
+	struct symtab_HSolveListElement *phsle
+	    = PidinStackLookupTopSymbol(ppist);
+
+	if (phsle)
+	{
+	    iOk = 1;
+	}
+
+	PidinStackFree(ppist);
+    }
+
+    if (iOk)
+    {
+	SetWorkingElement(NULL, pathname);
+    }
+    else
+    {
 	Error();
 	printf("cannot change to '%s' from '%s'\n",
-	pathname,
-	Pathname(WorkingElement()));
+	       pathname,
+	       WorkingElementName());
     }
 }
 
@@ -331,7 +361,7 @@ void do_pwe(argc,argv)
 int argc;
 char **argv;
 {
-    printf("%s\n", Pathname(WorkingElement()));
+    printf("%s\n", WorkingElementName());
 }
 
 void do_list_elements(argc,argv)
@@ -342,8 +372,6 @@ Element 	*element;
 int		status;
 short 		recursive = 0;
 short 		showtype = 0;
-
-    element = WorkingElement();
 
     initopt(argc, argv, "[path] -recursive -types");
     while ((status = G_getopt(argc, argv)) == 1)
@@ -360,19 +388,80 @@ short 		showtype = 0;
 	return;
       }
 
-    if(optargc == 2)
-      {
-	/*
-	** check for a valid element
-	*/
-	if((element = GetElement(optargv[1])) == NULL){
-	    printf("cant find element '%s'\n",optargv[1]);
-	    return;
-        }
-      }
+    //- we assume not related to the model
 
-    ListElements(element,recursive,showtype);
+    int iModelContainer = 0;
+
+    if (optargc == 2)
+    {
+	struct PidinStack *ppist = getRootedContext(optargv[1]);
+
+	if (PidinStackLookupTopSymbol(ppist))
+	{
+	    iModelContainer = 1;
+	}
+
+	PidinStackFree(ppist);
+    }
+    else
+    {
+	struct PidinStack *ppist = getRootedContext(WorkingElementName());
+
+	if (PidinStackLookupTopSymbol(ppist))
+	{
+	    iModelContainer = 1;
+	}
+
+	PidinStackFree(ppist);
+    }
+
+    if (0 && iModelContainer)
+    {
+	char *pc;
+
+	if (optargc == 2)
+	{
+	    pc = getRootedPathname(optargv[1]);
+	}
+	else
+	{
+	    pc = getRootedPathname(".");
+	}
+
+	char pcQuery[1000];
+
+	sprintf(pcQuery, "expand %s", pc);
+
+/* 	QueryMachineHandle(NULL, pcQuery); */
+
+	printf("The element %s exists in the model-container, use the querymachine to query it\n", pc);
+
+	free(pc);
+    }
+    else
+    {
+	if(optargc == 2)
+	{
+	    /*
+	    ** check for a valid element
+	    */
+	    if((element = GetElement(optargv[1])) == NULL){
+		printf("cant find element '%s'\n",optargv[1]);
+		return;
+	    }
+	}
+	else
+	{
+	    element = WorkingElement();
+	}
+
+	if (element)
+	{
+	    ListElements(element,recursive,showtype);
+	}
+    }
 }
+
 
 #ifdef LATER
 void do_shift_element(argc,argv)
@@ -408,7 +497,7 @@ char *name;
     ** get the element with the new index
     */
     if((element = GetChildElement(parent,name,count)) != NULL){
-	SetWorkingElement(element);
+	SetWorkingElement(NULL, Pathname(element));
     } else {
 	Error();
 	printf("could not find element '%s[%d]' \n",

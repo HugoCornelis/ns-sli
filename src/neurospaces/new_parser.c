@@ -1414,7 +1414,7 @@ void do_read_cell(argc,argv)
 	FILE	*fp,*fopen();
 	char    filename[NAMELEN];
 	Element	*elm;
-	Element	*orig_working_elm;
+	char *orig_working_elm_name;
 	int	flags = SYN_DENS;
 	int	parse_mode = DATA_MODE;
 	double	GetScriptDouble();
@@ -1533,7 +1533,7 @@ void do_read_cell(argc,argv)
 		fprintf(stderr,"reading '%s'.... \n",filename);
 
 	cellname = optargv[2];
-	orig_working_elm = (Element*) WorkingElement();
+	orig_working_elm_name = strdup(WorkingElementName());
 	start_cell(cellname,&flags);
 
 	for (i = 1, endit = fgets(rawline,INPUT_LINELEN,fp); endit != NULL ;
@@ -1704,7 +1704,9 @@ void do_read_cell(argc,argv)
 	    palgsActive = NULL;
 	}
 
-	SetWorkingElement(orig_working_elm);
+	SetWorkingElement(NULL, orig_working_elm_name);
+
+	free(orig_working_elm_name);
 }
 
 

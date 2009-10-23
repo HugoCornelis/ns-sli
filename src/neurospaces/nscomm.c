@@ -353,34 +353,23 @@ int setParameterNumber(struct PidinStack *ppist,
 		       struct symtab_HSolveListElement *phsle,
 		       char *pcField, double dNumber)
 {
-
-
-      
   struct symtab_Parameters *pparTop = ParameterCalloc();
-  
 
   if(!pparTop)
-    return 0;
-
+      return 0;
 
   char *pcParameter = mapParameterString(pcField);
-  
 
   ParameterSetName(pparTop,pcParameter);
-		       
 
   pparTop->uValue.dNumber = dNumber;
   ParameterSetType(pparTop,TYPE_PARA_NUMBER);
 
-
   pparTop->pparFirst = pparTop;
-
 
   BioComponentChangeParameter((struct symtab_BioComponent *)phsle,pparTop);
   
   return 1;
-
-
 }
 
 
@@ -704,50 +693,35 @@ int ActivationStep(struct ioMsg *piom){
 //-------------------------------------------------------------------
 char *getRootedPathname(char *pc)
 {
+    char pcBuff[1024];
+    char *pcCurrentElement = NULL;
 
-  char pcBuff[1024];
-
-  char *pcCurrentElement = NULL;
-
-
-
-
-  if(pc[0] != '/')
-  {
-
-    Element *elmCurrentElement = GetElement(".");
-
-    pcCurrentElement = Pathname(elmCurrentElement);
-
-
-    strcpy(&pcBuff[0],pcCurrentElement);
-
-    //    pcCurrentElementPath = strdup(pcCurrentElement);
-
-    if(strcmp(pcCurrentElement,"/") != 0)
+    if(pc[0] != '/')
     {
+	pcCurrentElement = WorkingElementName();
 
-	strcat(pcBuff,"/");
-    }
+	strcpy(&pcBuff[0],pcCurrentElement);
 
+	//    pcCurrentElementPath = strdup(pcCurrentElement);
 
-    //char *pcName = strdup(pc);
+	if(strcmp(pcCurrentElement,"/") != 0)
+	{
+	    strcat(pcBuff,"/");
+	}
+
+	//char *pcName = strdup(pc);
     
-    strcat(pcBuff,pc);
+	strcat(pcBuff,pc);
 
-    return strdup(pcBuff);
-
-
-  }
-  else
-  {
-    //
-    // if rooted just return a copy
-    //
-    return strdup(pc);
-  }
-
-
+	return strdup(pcBuff);
+    }
+    else
+    {
+	//
+	// if rooted just return a copy
+	//
+	return strdup(pc);
+    }
 }
 
 

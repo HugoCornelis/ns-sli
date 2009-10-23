@@ -23,6 +23,7 @@ my $test
 						   write => 'call model_container NEUROSPACES_QUERY',
 						  },
 						  {
+						   comment => 'Note that for unknown reasons sometimes the HH_AB_Mult parameter has a minus sign, even if its value is zero',
 						   description => 'What does the model look like ?',
 						   read => '#!neurospacesparse
 // -*- NEUROSPACES -*-
@@ -96,7 +97,7 @@ PUBLIC_MODELS
               PARAMETER ( HH_AB_Offset_E = 0.027 ),
               PARAMETER ( HH_AB_Add = 1 ),
               PARAMETER ( HH_AB_Factor_Flag = -1 ),
-              PARAMETER ( HH_AB_Mult = 0 ),
+              PARAMETER ( HH_AB_Mult = -0 ),
               PARAMETER ( HH_AB_Scale = 1400 ),
             END PARAMETERS
           END gate_kinetic
@@ -150,6 +151,7 @@ END PUBLIC_MODELS
 						   write => 'reduce',
 						  },
 						  {
+						   comment => 'Note that for unknown reasons sometimes the HH_AB_Mult parameter has a minus sign, even if its value is zero',
 						   description => "Have reducible items been removed ?",
 						   read => '#!neurospacesparse
 // -*- NEUROSPACES -*-
@@ -200,7 +202,7 @@ PUBLIC_MODELS
               PARAMETER ( HH_AB_Offset_E = 0.027 ),
               PARAMETER ( HH_AB_Add = 1 ),
               PARAMETER ( HH_AB_Factor_Flag = -1 ),
-              PARAMETER ( HH_AB_Mult = 0 ),
+              PARAMETER ( HH_AB_Mult = -0 ),
               PARAMETER ( HH_AB_Scale = 1400 ),
             END PARAMETERS
           END gate_kinetic

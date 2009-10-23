@@ -47,6 +47,11 @@
 //! allow using different functions of the model container
 //! to be called. 
 //!
+
+int NSSetField(struct symtab_HSolveListElement *phsle, 
+	       struct PidinStack *ppist,
+	       char *pcPathname, char *pcField, char *pcValue);
+
 #define SETPARA_GENESIS2 2
 #define SETPARA_NUM 3
 #define SETPARA_STRING 4
@@ -340,6 +345,7 @@ int NSSetAscField(char *pcPathname, char *pcField, char *pcValue);
 int NSCopy(struct PidinStack *ppistSrc, char *pcDst, int iKeepPrototypeTraversal);
 
 //-- Defined in hsolveactor.c --
+char * do_findsolvefield();
 int undo_findsolvefield(char **ppcElement, char **ppcField);
 
 

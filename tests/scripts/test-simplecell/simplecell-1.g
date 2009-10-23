@@ -32,9 +32,24 @@ readcell tests/scripts/test-simplecell/cell1.p /cell
 
 setfield /cell/soma inject 0.5e-9
 
+if ({version} == 3)
+	echo "Initializing gate states."
+
+	setfield /cell/soma/Na_hh_tchan X_init 0.05293248341
+	setfield /cell/soma/Na_hh_tchan Y_init 0.5961207634
+
+	setfield /cell/soma/K_hh_tchan X_init 0.3176769097
+end
+
 check
 reset
 echo "Initial Vm = " {getfield /cell/soma Vm}
+echo "Initial Na X = " {getfield /cell/soma/Na_hh_tchan X}
+echo "Initial Na Y = " {getfield /cell/soma/Na_hh_tchan Y}
+echo "Initial Na Z = " {getfield /cell/soma/Na_hh_tchan Z}
+echo "Initial K X = " {getfield /cell/soma/K_hh_tchan X}
+echo "Initial K Y = " {getfield /cell/soma/K_hh_tchan Y}
+echo "Initial K Z = " {getfield /cell/soma/K_hh_tchan Z}
 step 0.5 -time
 echo "Final Vm = " {getfield /cell/soma Vm}
 

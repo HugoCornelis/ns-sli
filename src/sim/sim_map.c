@@ -75,6 +75,11 @@ static char rcsid[] = "$Id: sim_map.c,v 1.3 2005/07/01 10:03:09 svitak Exp $";
 #include "shell_func_ext.h"
 #include "sim_ext.h"
 
+#include "neurospaces/algorithmset.h"
+
+#include "nsintegrator.h"
+
+
 void do_create_map(argc,argv)
 int 	argc;
 char 	**argv;
@@ -194,7 +199,7 @@ int		status;
     /*
     ** make the map
     */
-    if(!CreateMap(parent,element,from_object,nx,ny,wdx,wdy,wxmin,wymin)){
+    if(!CreateMap(parentname, srcname, from_object, nx, ny, wdx, wdy, wxmin, wymin)){
 	Error();
 	printf("unable to create map\n");
 	return;
@@ -223,148 +228,112 @@ int i;
 /*
 ** create a 2 dimensional map of elements
 */
-int CreateMap(parent,element,composite,nx,ny,dx,dy,wxmin,wymin)
-Element *parent;
-Element *element;
-int composite;
-int nx,ny;
-double dx,dy;
-double wxmin,wymin;
+int CreateMap(char *parentname, char *srcname, int composite, int nx, int ny, double dx, double dy, double wxmin, double wymin)
 {
-Element *last_element;
-Element *new_element;
-int warn;
-int i,j,n;
+    Element *last_element;
+    Element *new_element;
+    int warn;
+    int i,j,n;
 
-    /*
-    ** check for valid parameters
-    */
-    if(element == NULL || parent == NULL || 
-    nx < 1 || ny < 1 || dx < 0 || dy < 0){
-	return(0);
+/* 		ALGORITHM Grid3D */
+/* 			GranuleGrid */
+/* 			PARAMETERS */
+/* 				PARAMETER ( PROTOTYPE = "Granule_cell" ), */
+/* 				PARAMETER ( X_COUNT = 3.0 ), */
+/* 				PARAMETER ( X_DISTANCE = 5e-05 ), */
+/* 				PARAMETER ( Y_COUNT = 2.0 ), */
+/* 				PARAMETER ( Y_DISTANCE = 3.75e-05 ), */
+/* 				PARAMETER ( Z_COUNT = 1.0 ), */
+/* 				PARAMETER ( Z_DISTANCE = 0.9 ), */
+/* 			END PARAMETERS */
+/* 		END ALGORITHM */
+
+
+    //- determine the target instance name
+
+    char pcInstanceTemplate[1000];
+
+    char *pcInstanceName = strrchr(srcname, '/');
+
+    if (pcInstanceName)
+    {
+	pcInstanceName++;
     }
-#ifdef LATER	/* add the map grid to the elements */
-    /*
-    ** create the map structure
-    */
-	struct map_type *map;
-    map = (struct map_type *)malloc(sizeof(struct map_type));
-    /*
-    ** fill in the map parameters
-    */
-    map->xmax = nx-1;
-    map->ymax = ny-1;
-    map->dx = dx;
-    map->dy = dy;
-    map->wxmin = wxmin;
-    map->wymin = wymin;
-    /*
-    ** allocate the grid
-    */
-    map->grid = CreateGrid(nx,ny);
-#endif
-
-    /*
-    ** check for and warn about overwrite of existing elements
-    */
-
-    warn = 0;
-    n = nx * ny;
-    last_element = NULL;
-    new_element = parent->child;
-    while (new_element != NULL){
-	Element*	next_element = new_element->next;
-
-	if (strcmp(new_element->name, element->name) == 0 &&
-						new_element->index < n) {
-	    ElementHashRemoveTree(new_element);
-
-	    if (last_element == NULL)
-		parent->child = next_element;
-	    else
-		last_element->next = next_element;
-
-	    new_element->next = NULL;
-	    FreeTree(new_element);
-	    warn = 1;
-	}
-	else
-	    last_element = new_element;
-
-	new_element = next_element;
+    else
+    {
+	pcInstanceName = srcname;
     }
 
-    if (warn){
-	Warning();
-	printf("createmap: overwriting existing element(s)\n");
+    sprintf(pcInstanceTemplate, "%s[%%i]", pcInstanceName);
+
+    // \todo wxmin and wymin should be used to set the coordinate of the parent element
+
+    struct symtab_ParContainer *pparc
+	= ParContainerNewFromList
+	  (ParameterNewFromString("PUBLIC_PROTOTYPE", srcname),
+	   ParameterNewFromString("INSTANCE_NAME", pcInstanceTemplate),
+	   ParameterNewFromNumber("X_COUNT", nx),
+	   ParameterNewFromNumber("X_DISTANCE", dx),
+	   ParameterNewFromNumber("Y_COUNT", ny),
+	   ParameterNewFromNumber("Y_DISTANCE", dy),
+	   ParameterNewFromNumber("Z_COUNT", 1),
+	   ParameterNewFromNumber("Z_DISTANCE", 1e10),
+	   NULL);
+
+    struct symtab_AlgorithmSymbol *palgs
+	= AlgorithmSymbolCalloc();
+
+    //t pparc is lost, memory leak
+
+    AlgorithmSymbolAssignParameters(palgs, pparc->ppars);
+
+    struct neurospaces_integrator *pnsintegrator
+	= getNsintegrator();
+
+    struct Neurospaces *pneuro = 
+	pnsintegrator->pelNeurospaces->pneuro;
+
+    struct AlgorithmInstance *palgi
+	= ParserAlgorithmImport
+	  (pneuro->pacRootContext,
+	   "Grid3D",
+	   "CreateMap()",
+	   NULL,
+	   pparc->ppars,
+	   palgs);
+
+    if (palgi)
+    {
+	AlgorithmSymbolSetAlgorithmInstance(palgs, palgi);
+
+	struct PidinStack *ppistParent = getRootedContext(parentname);
+
+	struct symtab_HSolveListElement *phsleParent
+	    = PidinStackLookupTopSymbol(ppistParent);
+
+	ParserContextSetActual(pneuro->pacRootContext, phsleParent);
+
+	//- call algorithm on current symbol
+
+	struct PidinStack *ppistTmp = ppistParent;
+
+	pneuro->pacRootContext->pist = *ppistParent;
+
+	ParserAlgorithmHandle
+	    (pneuro->pacRootContext,
+	     ParserContextGetActual(pneuro->pacRootContext),
+	     palgs->dealgs.palgi,
+	     "Grid3D",
+	     "CreateMap()",
+	     NULL);
+
+	SymbolRecalcAllSerials(NULL, NULL);
+
+	pneuro->pacRootContext->pist = *ppistTmp;
+
+	PidinStackFree(ppistParent);
     }
 
-    /*
-    ** fill the grid
-    */
-    for(i=0;i<ny;i++){
-	for(j=0;j<nx;j++){
-	    Element*	child;
-
-	    /*
-	    ** make a copy of the element and all its sub elements
-	    */
-	    new_element = CopyElementTree(element);
-
-	    if (composite)
-	      {
-		/*
-		** go through each child and make it a component of the
-		** root element of the object.
-		*/
-		child = new_element->child;
-		while (child != NULL)
-		  {
-		    child->componentof = new_element;
-		    child = child->next;
-		  }
-	      }
-
-	    /*
-	    ** set the default positions to the grid coordinates
-	    */
-	    PositionElement(new_element, j*dx + wxmin, i*dy + wymin,element->z);
-	    /*
-	    ** attach the new element to the parent
-	    ** this needs to be optimized
-	    */
-	    AttachToEnd(parent,last_element,new_element);
-	    if(i == 0 && j == 0){
-		new_element->index = 0;
-	    } else {
-		new_element->index = last_element->index+1;
-	    }
-	    last_element = new_element;
-	    /*
-	    ** copy the msgs between elements
-	    */
-	    CopyMsgs(element,new_element);
-
-	    if (composite)
-		CreateAction(new_element, element, NULL);
-	    else
-		CopyAction(element,new_element);
-
-            /* enter the new element(s) into the element hash table */
-            ElementHashPutTree(new_element);
-
-#ifdef LATER	/* add the map grid to the elements */
-	    /*
-	    ** place the element into the grid
-	    */
-	    map->grid[i][j] = new_element;
-	    /*
-	    ** attach the map to the element
-	    */
-	    new_element->map = map;
-#endif
-	}
-    }
     /*
     ** return 1 to indicate success
     */

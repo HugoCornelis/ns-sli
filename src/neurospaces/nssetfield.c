@@ -47,10 +47,10 @@
  *  5. Generate a parameter from the numerical value.
 */
 //------------------------------------------------------------------
-int NeurospacesSetField(struct symtab_HSolveListElement *phsle, 
-			struct PidinStack *ppist,
-			char *pcPathname, char *pcField, char *pcValue){
-
+int NSSetField(struct symtab_HSolveListElement *phsle, 
+	       struct PidinStack *ppist,
+	       char *pcPathname, char *pcField, char *pcValue){
+    
     struct PidinStack *ppistWorking = NULL;
     struct symtab_HSolveListElement *phsleWorking = NULL;
  
@@ -73,10 +73,6 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 
 	if (pnsintegrator->iHeccers)
 	{
-	    TraceScript();
-
-	    fprintf(stdout, "Warning setting fields after a RESET has been done, double check your results.\n");
-
 	    //- lookup the heccer object using the pathname before findsolvefield correction
 
 	    struct Heccer *pheccer = LookupHeccerObject(pcOriginal);
@@ -97,7 +93,7 @@ int NeurospacesSetField(struct symtab_HSolveListElement *phsle,
 	    }
 	    else
 	    {
-		fprintf(stdout, "Warning cannot set field %s->%s after a RESET has been done, heccer does not know where it is in its memory.\n", pcPathname, pcField);
+		fprintf(stdout, "Warning cannot set field %s->%s after a RESET has been done, heccer cannot find it in its private memory.\n", pcPathname, pcField);
 	    }
 	}
     }

@@ -29,24 +29,54 @@ static char rcsid[] = "$Id: sim_current.c,v 1.2 2005/06/27 19:00:58 svitak Exp $
 
 /* static Element *recent_element; */
 static Connection *recent_connection;
-static Element *working_element;
+/* static Element *working_element; */
 
 static char recent_element_name[1000] = "";
 
+static char working_element_name[1000] = "";
+
 Element *WorkingElement()
 {
-    return(working_element);
+    return(GetElement(working_element_name));
 }
 
-void SetWorkingElement(element)
-Element	*element;
+char *WorkingElementName()
 {
-    working_element = element;
+    return(working_element_name);
 }
 
-void SetRecentElement(parent_name, recent_name)
-    char *parent_name;
-    char *recent_name;
+void SetWorkingElement(char *parent_name, char *element_name)
+{
+    if (parent_name)
+    {
+	strcpy(working_element_name, parent_name);
+
+	if (strlen(working_element_name))
+	{
+	    if (working_element_name[strlen(working_element_name) - 1] != '/')
+	    {
+		strcat(working_element_name, "/");
+	    }
+	}
+
+	strcat(working_element_name, element_name);
+    }
+    else
+    {
+	strcpy(working_element_name, element_name);
+    }
+
+    if (working_element_name[0] != '/')
+    {
+	char pc[1000];
+
+	strcpy(pc, working_element_name);
+
+	sprintf(working_element_name, "/%s", pc);
+    }
+}
+
+void SetRecentElement(char *parent_name, char *recent_name)
 {
     if (parent_name)
     {
@@ -65,6 +95,15 @@ void SetRecentElement(parent_name, recent_name)
     else
     {
 	strcpy(recent_element_name, recent_name);
+    }
+
+    if (recent_element_name[0] != '/')
+    {
+	char pc[1000];
+
+	strcpy(pc, recent_element_name);
+
+	sprintf(recent_element_name, "/%s", pc);
     }
 }
 

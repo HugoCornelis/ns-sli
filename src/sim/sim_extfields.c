@@ -227,11 +227,11 @@ char*		value;
 
 		/* Get the indirect element relative to the current element */
 		cwe = WorkingElement();
-		SetWorkingElement(element);
+		SetWorkingElement(NULL, Pathname(element));
 		actElm = ActiveElement;
 		ActiveElement = element;
 		indElm = GetElement(indInfo->ind_elm);
-		SetWorkingElement(cwe);
+		SetWorkingElement(NULL, Pathname(cwe));
 		ActiveElement = actElm;
 
 		if (indElm == NULL)
@@ -302,7 +302,7 @@ char*		fieldname;
 
 		/* Get the indirect element relative to the current element */
 		cwe = WorkingElement();
-		SetWorkingElement(element);
+		SetWorkingElement(NULL, Pathname(element));
 		actElm = ActiveElement;
 		ActiveElement = element;
 		indElm = GetElement(indInfo->ind_elm);
@@ -317,7 +317,7 @@ char*		fieldname;
 		else
 		    result = ElmFieldValue(indElm, indInfo->ind_field);
 
-		SetWorkingElement(cwe);
+		SetWorkingElement(NULL, Pathname(cwe));
 		ActiveElement = actElm;
 	      }
 	    break;
@@ -444,11 +444,11 @@ Element*	element;
 
 			/* Get the indirect element relative to the element */
 			cwe = WorkingElement();
-			SetWorkingElement(element);
+			SetWorkingElement(NULL, Pathname(element));
 			actElm = ActiveElement;
 			ActiveElement = element;
 			indElm = GetElement(indInfo->ind_elm);
-			SetWorkingElement(cwe);
+			SetWorkingElement(NULL, Pathname(cwe));
 			ActiveElement = actElm;
 
 			if (indElm == NULL)
@@ -544,11 +544,11 @@ Slot *slot;
     ifa = (IndFieldAdr*) slot->data;
 
     cwe = WorkingElement();
-    SetWorkingElement(ifa->ifa_src);
+    SetWorkingElement(NULL, Pathname(ifa->ifa_src));
     actElm = ActiveElement;
     ActiveElement = ifa->ifa_src;
-	indElm = GetElement(ifa->ifa_info->ind_elm);
-    SetWorkingElement(cwe);
+    indElm = GetElement(ifa->ifa_info->ind_elm);
+    SetWorkingElement(NULL, Pathname(cwe));
     ActiveElement = actElm;
 
     if (indElm == NULL)
@@ -784,11 +784,11 @@ char**	argv;
 
 	    /* find indElement relative to element */
 	    cwe = WorkingElement();
-	    SetWorkingElement(element);
+	    SetWorkingElement(NULL, Pathname(element));
 	    actElm = ActiveElement;
 	    ActiveElement = element;
-		indElement = GetElement(indElmName);
-	    SetWorkingElement(cwe);
+	    indElement = GetElement(indElmName);
+	    SetWorkingElement(NULL, Pathname(cwe));
 	    ActiveElement = actElm;
 
 	    if (indElement == NULL)

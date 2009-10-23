@@ -7,10 +7,12 @@ create compartment /hardcoded_neutral/c
 
 le -t
 
+// note that Eleak does not exist in G2, but should really be Em
+
 setfield /hardcoded_neutral/c \ 
-   CM 4.57537e-11 \ 
-   RM 3.58441e+08 \ 
-   RA 360502 \ 
+   Cm 4.57537e-11 \ 
+   Rm 3.58441e+08 \ 
+   Ra 360502 \ 
    len 1 \ 
    dia 1 \ 
    initVm -0.068 \ 

@@ -24,6 +24,7 @@ struct hsolve_type
 
     char * findsolvefield;
 
+    char * path;
 };
 
 

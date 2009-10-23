@@ -8,7 +8,7 @@
 #include "neurospaces/neurospaces_ext.h"
 #include "neurospaces/pidinstack.h"
 
-int NSSetField(){
-  return 1;
+/* int NSSetField(){ */
+/*   return 1; */
 
-}
+/* } */

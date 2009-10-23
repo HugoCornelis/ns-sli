@@ -441,7 +441,7 @@ int		keep_prototype_traversal;
 	*/
        if (CopyAction(src_element,new_element)==0){
 	  DeleteElement(new_element);
-	  SetRecentElement("");
+	  SetRecentElement(NULL, "");
 	  FAILED();
 	  return;
 	}
