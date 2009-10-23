@@ -78,7 +78,7 @@ extern Element*	ElementHashFind();
     } else {
 	char	fullpath[300];
 
-	sprintf(fullpath, "%s/%s", Pathname(WorkingElement()), pathname);
+	sprintf(fullpath, "%s/%s", WorkingElementName()), pathname);
 	element = ElementHashFind(fullpath);
     }
 
