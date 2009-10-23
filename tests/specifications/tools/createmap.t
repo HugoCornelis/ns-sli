@@ -88,7 +88,7 @@ cached coordinate z = 0
 						   write => 'printcoordinates c / /m/c[5]',
 						  },
 						 ],
-				description => "simple test of the createmap command",
+				description => "simple test of the createmap command, case 1",
 			       },
 			       {
 				arguments => [
@@ -171,7 +171,7 @@ cached coordinate z = 0
 						   write => 'printcoordinates c / /m/c[5]',
 						  },
 						 ],
-				description => "simple test of the createmap command",
+				description => "simple test of the createmap command, case 2",
 			       },
 			       {
 				arguments => [
@@ -254,7 +254,7 @@ cached coordinate z = 0
 						   write => 'printcoordinates c / /m/c[5]',
 						  },
 						 ],
-				description => "simple test of the createmap command",
+				description => "simple test of the createmap command, case 3",
 			       },
 			       {
 				arguments => [
@@ -337,7 +337,7 @@ cached coordinate z = 0
 						   write => 'printcoordinates c / /m/c[5]',
 						  },
 						 ],
-				description => "simple test of the createmap command",
+				description => "simple test of the createmap command, case 4",
 			       },
 			      ],
        description => "createmap command tests",
