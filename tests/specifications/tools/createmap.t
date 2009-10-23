@@ -30,12 +30,12 @@ my $test
 - /hardcoded_neutral
 - /hardcoded_neutral/c
 - /m
-- /m/0
-- /m/1
-- /m/2
-- /m/3
-- /m/4
-- /m/5
+- /m/c[0]
+- /m/c[1]
+- /m/c[2]
+- /m/c[3]
+- /m/c[4]
+- /m/c[5]
 ',
 						   write => 'expand /**',
 						  },
@@ -45,7 +45,7 @@ my $test
 cached coordinate y = 0
 cached coordinate z = 0
 ',
-						   write => 'printcoordinates c / /m/0',
+						   write => 'printcoordinates c / /m/c[0]',
 						  },
 						  {
 						   description => "Are the coordinates correct of the element 1?",
@@ -53,7 +53,7 @@ cached coordinate z = 0
 cached coordinate y = 0
 cached coordinate z = 0
 ',
-						   write => 'printcoordinates c / /m/1',
+						   write => 'printcoordinates c / /m/c[1]',
 						  },
 						  {
 						   description => "Are the coordinates correct of the element 2?",
@@ -61,7 +61,7 @@ cached coordinate z = 0
 cached coordinate y = 1
 cached coordinate z = 0
 ',
-						   write => 'printcoordinates c / /m/2',
+						   write => 'printcoordinates c / /m/c[2]',
 						  },
 						  {
 						   description => "Are the coordinates correct of the element 3?",
@@ -69,7 +69,7 @@ cached coordinate z = 0
 cached coordinate y = 1
 cached coordinate z = 0
 ',
-						   write => 'printcoordinates c / /m/3',
+						   write => 'printcoordinates c / /m/c[3]',
 						  },
 						  {
 						   description => "Are the coordinates correct of the element 4?",
@@ -77,7 +77,7 @@ cached coordinate z = 0
 cached coordinate y = 2
 cached coordinate z = 0
 ',
-						   write => 'printcoordinates c / /m/4',
+						   write => 'printcoordinates c / /m/c[4]',
 						  },
 						  {
 						   description => "Are the coordinates correct of the element 5?",
@@ -85,7 +85,7 @@ cached coordinate z = 0
 cached coordinate y = 2
 cached coordinate z = 0
 ',
-						   write => 'printcoordinates c / /m/5',
+						   write => 'printcoordinates c / /m/c[5]',
 						  },
 						 ],
 				description => "simple test of the createmap command",
@@ -113,12 +113,12 @@ cached coordinate z = 0
 - /hardcoded_neutral
 - /hardcoded_neutral/c
 - /m
-- /m/0
-- /m/1
-- /m/2
-- /m/3
-- /m/4
-- /m/5
+- /m/c[0]
+- /m/c[1]
+- /m/c[2]
+- /m/c[3]
+- /m/c[4]
+- /m/c[5]
 ',
 						   write => 'expand /**',
 						  },
@@ -128,7 +128,7 @@ cached coordinate z = 0
 cached coordinate y = 0
 cached coordinate z = 0
 ',
-						   write => 'printcoordinates c / /m/0',
+						   write => 'printcoordinates c / /m/c[0]',
 						  },
 						  {
 						   description => "Are the coordinates correct of the element 1?",
@@ -136,7 +136,7 @@ cached coordinate z = 0
 cached coordinate y = 0
 cached coordinate z = 0
 ',
-						   write => 'printcoordinates c / /m/1',
+						   write => 'printcoordinates c / /m/c[1]',
 						  },
 						  {
 						   description => "Are the coordinates correct of the element 2?",
@@ -144,7 +144,7 @@ cached coordinate z = 0
 cached coordinate y = 1
 cached coordinate z = 0
 ',
-						   write => 'printcoordinates c / /m/2',
+						   write => 'printcoordinates c / /m/c[2]',
 						  },
 						  {
 						   description => "Are the coordinates correct of the element 3?",
@@ -152,7 +152,7 @@ cached coordinate z = 0
 cached coordinate y = 1
 cached coordinate z = 0
 ',
-						   write => 'printcoordinates c / /m/3',
+						   write => 'printcoordinates c / /m/c[3]',
 						  },
 						  {
 						   description => "Are the coordinates correct of the element 4?",
@@ -160,7 +160,7 @@ cached coordinate z = 0
 cached coordinate y = 2
 cached coordinate z = 0
 ',
-						   write => 'printcoordinates c / /m/4',
+						   write => 'printcoordinates c / /m/c[4]',
 						  },
 						  {
 						   description => "Are the coordinates correct of the element 5?",
@@ -168,7 +168,7 @@ cached coordinate z = 0
 cached coordinate y = 2
 cached coordinate z = 0
 ',
-						   write => 'printcoordinates c / /m/5',
+						   write => 'printcoordinates c / /m/c[5]',
 						  },
 						 ],
 				description => "simple test of the createmap command",
@@ -196,12 +196,12 @@ cached coordinate z = 0
 - /hardcoded_neutral
 - /hardcoded_neutral/c
 - /m
-- /m/0
-- /m/1
-- /m/2
-- /m/3
-- /m/4
-- /m/5
+- /m/c[0]
+- /m/c[1]
+- /m/c[2]
+- /m/c[3]
+- /m/c[4]
+- /m/c[5]
 ',
 						   write => 'expand /**',
 						  },
@@ -211,7 +211,7 @@ cached coordinate z = 0
 cached coordinate y = 0
 cached coordinate z = 0
 ',
-						   write => 'printcoordinates c / /m/0',
+						   write => 'printcoordinates c / /m/c[0]',
 						  },
 						  {
 						   description => "Are the coordinates correct of the element 1?",
@@ -219,7 +219,7 @@ cached coordinate z = 0
 cached coordinate y = 0
 cached coordinate z = 0
 ',
-						   write => 'printcoordinates c / /m/1',
+						   write => 'printcoordinates c / /m/c[1]',
 						  },
 						  {
 						   description => "Are the coordinates correct of the element 2?",
@@ -227,7 +227,7 @@ cached coordinate z = 0
 cached coordinate y = 1
 cached coordinate z = 0
 ',
-						   write => 'printcoordinates c / /m/2',
+						   write => 'printcoordinates c / /m/c[2]',
 						  },
 						  {
 						   description => "Are the coordinates correct of the element 3?",
@@ -235,7 +235,7 @@ cached coordinate z = 0
 cached coordinate y = 1
 cached coordinate z = 0
 ',
-						   write => 'printcoordinates c / /m/3',
+						   write => 'printcoordinates c / /m/c[3]',
 						  },
 						  {
 						   description => "Are the coordinates correct of the element 4?",
@@ -243,7 +243,7 @@ cached coordinate z = 0
 cached coordinate y = 2
 cached coordinate z = 0
 ',
-						   write => 'printcoordinates c / /m/4',
+						   write => 'printcoordinates c / /m/c[4]',
 						  },
 						  {
 						   description => "Are the coordinates correct of the element 5?",
@@ -251,7 +251,7 @@ cached coordinate z = 0
 cached coordinate y = 2
 cached coordinate z = 0
 ',
-						   write => 'printcoordinates c / /m/5',
+						   write => 'printcoordinates c / /m/c[5]',
 						  },
 						 ],
 				description => "simple test of the createmap command",
@@ -279,12 +279,12 @@ cached coordinate z = 0
 - /hardcoded_neutral
 - /hardcoded_neutral/c
 - /m
-- /m/0
-- /m/1
-- /m/2
-- /m/3
-- /m/4
-- /m/5
+- /m/c[0]
+- /m/c[1]
+- /m/c[2]
+- /m/c[3]
+- /m/c[4]
+- /m/c[5]
 ',
 						   write => 'expand /**',
 						  },
@@ -294,7 +294,7 @@ cached coordinate z = 0
 cached coordinate y = 0
 cached coordinate z = 0
 ',
-						   write => 'printcoordinates c / /m/0',
+						   write => 'printcoordinates c / /m/c[0]',
 						  },
 						  {
 						   description => "Are the coordinates correct of the element 1?",
@@ -302,7 +302,7 @@ cached coordinate z = 0
 cached coordinate y = 0
 cached coordinate z = 0
 ',
-						   write => 'printcoordinates c / /m/1',
+						   write => 'printcoordinates c / /m/c[1]',
 						  },
 						  {
 						   description => "Are the coordinates correct of the element 2?",
@@ -310,7 +310,7 @@ cached coordinate z = 0
 cached coordinate y = 1
 cached coordinate z = 0
 ',
-						   write => 'printcoordinates c / /m/2',
+						   write => 'printcoordinates c / /m/c[2]',
 						  },
 						  {
 						   description => "Are the coordinates correct of the element 3?",
@@ -318,7 +318,7 @@ cached coordinate z = 0
 cached coordinate y = 1
 cached coordinate z = 0
 ',
-						   write => 'printcoordinates c / /m/3',
+						   write => 'printcoordinates c / /m/c[3]',
 						  },
 						  {
 						   description => "Are the coordinates correct of the element 4?",
@@ -326,7 +326,7 @@ cached coordinate z = 0
 cached coordinate y = 2
 cached coordinate z = 0
 ',
-						   write => 'printcoordinates c / /m/4',
+						   write => 'printcoordinates c / /m/c[4]',
 						  },
 						  {
 						   description => "Are the coordinates correct of the element 5?",
@@ -334,7 +334,7 @@ cached coordinate z = 0
 cached coordinate y = 2
 cached coordinate z = 0
 ',
-						   write => 'printcoordinates c / /m/5',
+						   write => 'printcoordinates c / /m/c[5]',
 						  },
 						 ],
 				description => "simple test of the createmap command",
