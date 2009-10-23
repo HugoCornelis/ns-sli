@@ -3,7 +3,7 @@
 
 use strict;
 
-my $root_neutral = "hardcoded_neutral";
+my $root_neutral = "/hardcoded_neutral/";
 
 
 # slurp mode
@@ -132,7 +132,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Are gates tabulated correctly, simple potassium gates ?",,
-						   read => (join '', `cat  /usr/local/heccer/tests/specifications/strings/table-kc.txt | perl -pe 's/unnamed test/$root_neutral/g'`),
+						   read => (join '', `cat  /usr/local/heccer/tests/specifications/strings/table-kc.txt | perl -pe 's(unnamed test)($root_neutral)g'`),
 						   timeout => 15,
 						   write => undef,
 						  },

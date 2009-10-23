@@ -8,7 +8,7 @@ use strict;
 local $/;
 
 
-my $root_neutral = "hardcoded_neutral";
+my $root_neutral = "/hardcoded_neutral/";
 
 my $test
     = {
@@ -23,7 +23,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Is a single passive compartment solved correctly ?",
-						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/singlep.txt | perl -pe 's/unnamed test/$root_neutral/g'`),
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/singlep.txt | perl -pe 's(unnamed test)($root_neutral)g'`),
 						   timeout => 5,
 						   write => undef,
 						  },
@@ -44,7 +44,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Are two passive compartments solved correctly ?",
-						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/doublep.txt | perl -pe 's/unnamed test/$root_neutral/g'`),
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/doublep.txt | perl -pe 's(unnamed test)($root_neutral)g'`),
 						   timeout => 5,
 						   write => undef,
 						  },
@@ -68,7 +68,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Are three passive compartments solved correctly ?",
-						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/triplep.txt | perl -pe 's/unnamed test/$root_neutral/g'`),
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/triplep.txt | perl -pe 's(unnamed test)($root_neutral)g'`),
 						   timeout => 18,
 						   write => undef,
 						  },
@@ -91,7 +91,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Is a fork of three passive compartments solved correctly ?",
-						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/fork3p.txt | perl -pe 's/unnamed test/$root_neutral/g'`),
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/fork3p.txt | perl -pe 's(unnamed test)($root_neutral)g'`),
 						   timeout => 5,
 						   write => undef,
 						  },
@@ -112,7 +112,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Is a fork of four passive compartments solved correctly, first alternative ?",
-						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/fork4p1.txt | perl -pe 's/unnamed test/$root_neutral/g'`),
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/fork4p1.txt | perl -pe 's(unnamed test)($root_neutral)g'`),
 						   timeout => 8,
 						   write => undef,
 						  },
@@ -135,7 +135,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Is a fork of four passive compartments solved correctly, second alternative ?",
-						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/fork4p2.txt  | perl -pe 's/unnamed test/$root_neutral/g'`),
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/fork4p2.txt  | perl -pe 's(unnamed test)($root_neutral)g'`),
 						   timeout => 8,
 						   write => undef,
 						  },
@@ -156,7 +156,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Is a fork of four passive compartments solved correctly, third alternative ?",
-						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/fork4p3.txt | perl -pe 's/unnamed test/$root_neutral/g'`),
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/fork4p3.txt | perl -pe 's(unnamed test)($root_neutral)g'`),
 						   timeout => 8,
 						   write => undef,
 						  },
@@ -179,7 +179,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Are two passive compartments with injected current solved correctly ?",
-						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/c1c2p1.txt | perl -pe 's/unnamed test/$root_neutral/g'`),
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/c1c2p1.txt | perl -pe 's(unnamed test)($root_neutral)g'`),
 						   timeout => 5,
 						   write => undef,
 						  },
@@ -202,7 +202,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Are two passive compartments with asymetric properties and injected current solved correctly ?",
-						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/c1c2p2.txt  | perl -pe 's/unnamed test/$root_neutral/g'`),
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/c1c2p2.txt  | perl -pe 's(unnamed test)($root_neutral)g'`),
 						   timeout => 5,
 						   write => undef,
 						  },
@@ -225,7 +225,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Are ten passive compartments with different properties and injected current solved correctly ?",
-						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/tensizesp.txt  | perl -pe 's/unnamed test/$root_neutral/g'`),
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/tensizesp.txt  | perl -pe 's(unnamed test)($root_neutral)g'`),
 						   timeout => 18,
 						   write => undef,
 						  },

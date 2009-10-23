@@ -8,7 +8,7 @@ use strict;
 
 local $/;
 
-my $root_neutral = "hardcoded_neutral";
+my $root_neutral = "/hardcoded_neutral/";
 
 my $test
     = {
@@ -115,7 +115,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Are gates tabulated correctly, concentration dependent potassium gates ?",,
-						   read => (join '', `cat  /usr/local/heccer/tests/specifications/strings/table-kc.txt | perl -pe 's/unnamed test/$root_neutral/g'`),
+						   read => (join '', `cat  /usr/local/heccer/tests/specifications/strings/table-kc.txt | perl -pe 's(unnamed test)($root_neutral)g'`),
 						   timeout => 5,
 						   write => undef,
 						  },
