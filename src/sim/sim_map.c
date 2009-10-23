@@ -253,7 +253,7 @@ int CreateMap(char *parentname, char *srcname, int composite, int nx, int ny, do
 
     struct symtab_ParContainer *pparc
 	= ParContainerNewFromList
-	  (ParameterNewFromString("PROTOTYPE", parentname),
+	  (ParameterNewFromString("PUBLIC_PROTOTYPE", srcname),
 	   ParameterNewFromNumber("X_COUNT", nx),
 	   ParameterNewFromNumber("X_DISTANCE", dx),
 	   ParameterNewFromNumber("Y_COUNT", ny),
@@ -284,36 +284,37 @@ int CreateMap(char *parentname, char *srcname, int composite, int nx, int ny, do
 	   pparc->ppars,
 	   palgs);
 
-    AlgorithmSymbolSetAlgorithmInstance(palgs, palgi);
+    if (palgi)
+    {
+	AlgorithmSymbolSetAlgorithmInstance(palgs, palgi);
 
-    
+	struct PidinStack *ppistParent = getRootedContext(parentname);
 
-    struct PidinStack *ppistParent = getRootedContext(parentname);
+	struct symtab_HSolveListElement *phsleParent
+	    = PidinStackLookupTopSymbol(ppistParent);
 
-    struct symtab_HSolveListElement *phsleParent
-	= PidinStackLookupTopSymbol(ppistParent);
+	ParserContextSetActual(pneuro->pacRootContext, phsleParent);
 
-    ParserContextSetActual(pneuro->pacRootContext, phsleParent);
+	//- call algorithm on current symbol
 
-    //- call algorithm on current symbol
+	struct PidinStack *ppistTmp = ppistParent;
 
-    struct PidinStack *ppistTmp = ppistParent;
+	pneuro->pacRootContext->pist = *ppistParent;
 
-    pneuro->pacRootContext->pist = *ppistParent;
+	ParserAlgorithmHandle
+	    (pneuro->pacRootContext,
+	     ParserContextGetActual(pneuro->pacRootContext),
+	     palgs->dealgs.palgi,
+	     "Grid3D",
+	     "CreateMap()",
+	     NULL);
 
-    ParserAlgorithmHandle
-	(pneuro->pacRootContext,
-	 ParserContextGetActual(pneuro->pacRootContext),
-	 palgs->dealgs.palgi,
-	 "Grid3D",
-	 "CreateMap()",
-	 NULL);
+	SymbolRecalcAllSerials(NULL, NULL);
 
-    SymbolRecalcAllSerials(NULL, NULL);
+	pneuro->pacRootContext->pist = *ppistTmp;
 
-    pneuro->pacRootContext->pist = *ppistTmp;
-
-    PidinStackFree(ppistParent);
+	PidinStackFree(ppistParent);
+    }
 
     /*
     ** return 1 to indicate success
