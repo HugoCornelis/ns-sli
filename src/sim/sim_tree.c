@@ -48,6 +48,8 @@ static char rcsid[] = "$Id: sim_tree.c,v 1.2 2005/06/27 19:01:12 svitak Exp $";
 #include "shell_func_ext.h"
 #include "sim_ext.h"
 
+#include "neurospaces/querymachine.h"
+
 #include "nsintegrator.h"
 
 
@@ -371,8 +373,6 @@ int		status;
 short 		recursive = 0;
 short 		showtype = 0;
 
-    element = WorkingElement();
-
     initopt(argc, argv, "[path] -recursive -types");
     while ((status = G_getopt(argc, argv)) == 1)
       {
@@ -388,19 +388,80 @@ short 		showtype = 0;
 	return;
       }
 
-    if(optargc == 2)
-      {
-	/*
-	** check for a valid element
-	*/
-	if((element = GetElement(optargv[1])) == NULL){
-	    printf("cant find element '%s'\n",optargv[1]);
-	    return;
-        }
-      }
+    //- we assume not related to the model
 
-    ListElements(element,recursive,showtype);
+    int iModelContainer = 0;
+
+    if (optargc == 2)
+    {
+	struct PidinStack *ppist = getRootedContext(optargv[1]);
+
+	if (PidinStackLookupTopSymbol(ppist))
+	{
+	    iModelContainer = 1;
+	}
+
+	PidinStackFree(ppist);
+    }
+    else
+    {
+	struct PidinStack *ppist = getRootedContext(WorkingElementName());
+
+	if (PidinStackLookupTopSymbol(ppist))
+	{
+	    iModelContainer = 1;
+	}
+
+	PidinStackFree(ppist);
+    }
+
+    if (0 && iModelContainer)
+    {
+	char *pc;
+
+	if (optargc == 2)
+	{
+	    pc = getRootedPathname(optargv[1]);
+	}
+	else
+	{
+	    pc = getRootedPathname(".");
+	}
+
+	char pcQuery[1000];
+
+	sprintf(pcQuery, "expand %s", pc);
+
+/* 	QueryMachineHandle(NULL, pcQuery); */
+
+	printf("The element %s exists in the model-container, use the querymachine to query it\n", pc);
+
+	free(pc);
+    }
+    else
+    {
+	if(optargc == 2)
+	{
+	    /*
+	    ** check for a valid element
+	    */
+	    if((element = GetElement(optargv[1])) == NULL){
+		printf("cant find element '%s'\n",optargv[1]);
+		return;
+	    }
+	}
+	else
+	{
+	    element = WorkingElement();
+	}
+
+	if (element)
+	{
+	    ListElements(element,recursive,showtype);
+	}
+    }
 }
+
 
 #ifdef LATER
 void do_shift_element(argc,argv)

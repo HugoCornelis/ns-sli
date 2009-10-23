@@ -249,11 +249,29 @@ int CreateMap(char *parentname, char *srcname, int composite, int nx, int ny, do
 /* 		END ALGORITHM */
 
 
+    //- determine the target instance name
+
+    char pcInstanceTemplate[1000];
+
+    char *pcInstanceName = strrchr(srcname, '/');
+
+    if (pcInstanceName)
+    {
+	pcInstanceName++;
+    }
+    else
+    {
+	pcInstanceName = srcname;
+    }
+
+    sprintf(pcInstanceTemplate, "%s[%%i]", pcInstanceName);
+
     // \todo wxmin and wymin should be used to set the coordinate of the parent element
 
     struct symtab_ParContainer *pparc
 	= ParContainerNewFromList
 	  (ParameterNewFromString("PUBLIC_PROTOTYPE", srcname),
+	   ParameterNewFromString("INSTANCE_NAME", pcInstanceTemplate),
 	   ParameterNewFromNumber("X_COUNT", nx),
 	   ParameterNewFromNumber("X_DISTANCE", dx),
 	   ParameterNewFromNumber("Y_COUNT", ny),

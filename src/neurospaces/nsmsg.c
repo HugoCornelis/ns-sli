@@ -822,14 +822,19 @@ int NSProcessMessages(struct neurospaces_integrator *pnsintegrator)
   if(!ppioMsg)
     return -1;
 
-  for (i = 0 ; i < pnsintegrator->iIoMsgs ; i++) 
+  for (i = 0 ; i < pnsintegrator->iIoMsgs ; i++)
   {
 
-    if(!strcmp(ppioMsg[i]->pcMsgName,"save"))
-      continue;
-      
+      //- asc_out save messages
 
-    if(ppioMsg[i]->pcSourceSymbol)
+    if (!strcmp(ppioMsg[i]->pcMsgName,"save"))
+    {
+	//- are not processed overhere, so continue
+
+	continue;
+    }
+
+    if (ppioMsg[i]->pcSourceSymbol)
     {
 
 	//- resolve source

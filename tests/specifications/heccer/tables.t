@@ -8,7 +8,7 @@ use strict;
 
 local $/;
 
-my $root_neutral = "hardcoded_neutral";
+my $root_neutral = "/hardcoded_neutral/";
 
 
 my $test
@@ -27,7 +27,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Are gates tabulated correctly, persistent sodium gates ?",
-						   read => (join '', `cat  /usr/local/heccer/tests/specifications/strings/table-nap.txt | perl -pe 's/unnamed test/$root_neutral/g'`),
+						   read => (join '', `cat  /usr/local/heccer/tests/specifications/strings/table-nap.txt | perl -pe 's(unnamed test)($root_neutral)g'`),
 						   timeout => 5,
 						   write => undef,
 						  },
@@ -53,7 +53,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Are gates tabulated correctly, simple sodium gates ?",
-						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/table-naf.txt | perl -pe 's/unnamed test/$root_neutral/g'`),
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/table-naf.txt | perl -pe 's(unnamed test)($root_neutral)g'`),
 						   timeout => 5,
 						   write => undef,
 						  },
@@ -77,7 +77,7 @@ my $test
 				command_tests => [
 						  {
 						  description => "Are gates tabulated correctly, calcium t-type gates ?",
-						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/table-cat.txt | perl -pe 's/unnamed test/$root_neutral/g'`),
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/table-cat.txt | perl -pe 's(unnamed test)($root_neutral)g'`),
 						   timeout => 5,
 						   write => undef,
 						  },
@@ -107,7 +107,7 @@ my $test
 				command_tests => [
 						  {
 						  description => "Are gates tabulated correctly, p type calcium gates ?",
-						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/table-cap.txt | perl -pe 's/unnamed test/$root_neutral/g'`),
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/table-cap.txt | perl -pe 's(unnamed test)($root_neutral)g'`),
 						   numerical_compare => 'small arithmetic due to double to float conversions and vice versa',
 						   timeout => 5,
 						   write => undef,
@@ -136,7 +136,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Are gates tabulated correctly, simple potassium gates ? (table-ka.g)",
-						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/table-ka.txt | perl -pe 's/unnamed test/$root_neutral/g'`),
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/table-ka.txt | perl -pe 's(unnamed test)($root_neutral)g'`),
 
 						   numerical_compare => 'small arithmetic due to double to float conversions and vice versa',
 						   timeout => 5,
@@ -166,7 +166,7 @@ my $test
 						   numerical_compare => 1,
 						   description => "Are gates tabulated correctly, muscarinic potassium gates (table-km.g) ?",
 						  
-						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/table-km.txt | perl -pe 's/unnamed test/$root_neutral/g'`),
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/table-km.txt | perl -pe 's(unnamed test)($root_neutral)g'`),
 						   timeout => 5,
 						   write => undef,
 						  },
@@ -191,7 +191,7 @@ my $test
 						   numerical_compare => 1,
 						   description => "Are gates tabulated correctly, anomalous rectifier potassium gates (table-kh.g) ?",
 						   
-						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/table-kh.txt | perl -pe 's/unnamed test/$root_neutral/g'`),
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/table-kh.txt | perl -pe 's(unnamed test)($root_neutral)g'`),
 						   timeout => 5,
 						   write => undef,
 						  },
@@ -216,7 +216,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Are gates tabulated correctly, K2 potassium gates ?",
-						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/table-k2.txt | perl -pe 's/unnamed test/$root_neutral/g'`),
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/table-k2.txt | perl -pe 's(unnamed test)($root_neutral)g'`),
 						   timeout => 5,
 						   write => undef,
 						  },

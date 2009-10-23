@@ -60,27 +60,45 @@ static char rcsid[] = "$Id: sim_get.c,v 1.2 2005/06/27 19:01:07 svitak Exp $";
 
 #include "nsintegrator.h"
 
-Element *GetElement(pathname)
-char *pathname;
+Element *GetElement(pcOriginal)
+char *pcOriginal;
 {
-Element 	*element;
-char 		*tree_ptr;
-char 		*name;
-int		count;
-int		valid_index;
-char 		*GetTreeName();
-char 		*AdvancePathname();
-extern Element*	ElementHashFind();
+    Element 	*element;
+    char 		*tree_ptr;
+    char 		*name;
+    int		count;
+    int		valid_index;
+    char 		*GetTreeName();
+    char 		*AdvancePathname();
+    extern Element*	ElementHashFind();
+
+    char pathname[1000];
+
+    if (pcOriginal[0] == '/')
+    {
+	strcpy(pathname, pcOriginal);
+    }
+    else
+    {
+	if (strcmp(WorkingElementName(), "/") == 0)
+	{
+	    sprintf(pathname, "/%s", pcOriginal);
+	}
+	else
+	{
+	    sprintf(pathname, "%s/%s", WorkingElementName(), pcOriginal);
+	}
+    }
 
     /* Try to find element path in element hash table */
-    if (*pathname == '/') {
+/*     if (*pathname == '/') { */
 	element = ElementHashFind(pathname);
-    } else {
-	char	fullpath[300];
+/*     } else { */
+/* 	char	fullpath[300]; */
 
-	sprintf(fullpath, "%s/%s", WorkingElementName(), pathname);
-	element = ElementHashFind(fullpath);
-    }
+/* 	sprintf(fullpath, "%s/%s", WorkingElementName(), pathname); */
+/* 	element = ElementHashFind(fullpath); */
+/*     } */
 
     if (element != NULL)
 	return element;
@@ -88,13 +106,13 @@ extern Element*	ElementHashFind();
     /*
     ** start at the root?
     */
-    if(pathname[0] == '/') {
+/*     if(pathname[0] == '/') { */
 	element = RootElement();
 	tree_ptr = pathname+1;
-    } else {
-	element = WorkingElement();
-	tree_ptr = pathname;
-    }
+/*     } else { */
+/* 	element = WorkingElement(); */
+/* 	tree_ptr = pathname; */
+/*     } */
 
     while(*tree_ptr != '\0' && element != NULL){
 	name = GetTreeName(tree_ptr);
