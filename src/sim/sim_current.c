@@ -65,6 +65,15 @@ void SetWorkingElement(char *parent_name, char *element_name)
     {
 	strcpy(working_element_name, element_name);
     }
+
+    if (working_element_name[0] != '/')
+    {
+	char pc[1000];
+
+	strcpy(pc, working_element_name);
+
+	sprintf(working_element_name, "/%s", pc);
+    }
 }
 
 void SetRecentElement(char *parent_name, char *recent_name)
@@ -86,6 +95,15 @@ void SetRecentElement(char *parent_name, char *recent_name)
     else
     {
 	strcpy(recent_element_name, recent_name);
+    }
+
+    if (recent_element_name[0] != '/')
+    {
+	char pc[1000];
+
+	strcpy(pc, recent_element_name);
+
+	sprintf(recent_element_name, "/%s", pc);
     }
 }
 
