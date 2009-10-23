@@ -75,7 +75,7 @@ void SetUpFuncTable()
 	AddFunc("exit",				do_exit		,"void");
 	AddFunc("quit",				do_exit		,"void");
 	AddFunc("tset",				tset		,"void");
-	AddFunc("listcommands",			ShowFuncNames	,"void");
+	AddFunc("g2_listcommands",			ShowFuncNames	,"void");
 	AddFunc("printargs",			do_printargs	,"void");
 	AddFunc("silent",			do_silent	,"int");
 	AddFunc("setenv",			do_setenv	,"void");
