@@ -193,7 +193,7 @@ addfunc		version			do_version	char*
 addfunc		showmsg			do_show_msg
 addfunc		stop			SetBreakFlag
 
-addfunc		g2_listobjects		do_list_objects
+addfunc		listobjects		do_list_objects
 addfunc		showobject		do_show_object
 
 addfunc		listclasses		do_list_classes

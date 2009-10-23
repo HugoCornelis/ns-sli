@@ -13,6 +13,8 @@ use SLI;
 
 our $g3_commands
     = [
+       'sli_listcommands',
+       'sli_listobjects',
        'sli_load',
        'sli_load_help',
        'sli_run',
@@ -21,6 +23,17 @@ our $g3_commands
        'sli_script_help',
       ];
 
+
+sub sli_listobjects
+{
+  SLI::do_list_objects();
+}
+
+
+sub sli_listcommands
+{
+  SLI::ShowFuncNames();
+}
 
 sub sli_load
 {
