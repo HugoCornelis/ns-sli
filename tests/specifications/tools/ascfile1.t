@@ -14,20 +14,16 @@ my $test
 				command => 'src/ns-sli',
 				command_tests => [
 						  {
-						   
 						   description => 'Does the application report that it writes its output?',
 						   read => 'output written',
-						    timeout => 2000,
+						   timeout => 20,
 						  },
-
 						  {
 						   description => "Can we perform a test using asc_file objects to write application output?",
 						   read => {
-							     
 							    application_output_file => '/tmp/a1',
-							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/a1.txt" },
-						   timeout => 2,
-						   write => undef,
+							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/a1.txt"
+							   },
 						  },
 						 ],
 				description => "simple test of the asc_file object.",
