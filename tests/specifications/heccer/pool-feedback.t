@@ -8,7 +8,7 @@ use strict;
 
 local $/;
 
-my $root_neutral = "hardcoded_neutral";
+my $root_neutral = "/hardcoded_neutral/";
 
 my $text_expected =  `cat  /usr/local/heccer/tests/specifications/strings/pool1-feedback1.txt | perl -pe 's/unnamed test/$root_neutral/g' | perl -pe 's/.*iSmallTableSize.*149.*/Heccer Options (iSmallTableSize) : (3000)/g'`;
 

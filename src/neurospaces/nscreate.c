@@ -79,6 +79,11 @@ int NSCreate( char* name,  char* pcParent, char* pcType){
 
      iResult = NSINTEGRATOR_COMPARTMENT;
 
+     char *pcHeccerName = getRootedPathname(pcParent);
+
+     AttemptHeccerName(pcHeccerName);
+
+     free(pcHeccerName);
    }
    else if(!strcmp("tabchannel",pcType)){
 
@@ -184,6 +189,8 @@ int NSCreate( char* name,  char* pcParent, char* pcType){
 
    SymbolRecalcAllSerials(phsleParent, ppistParent);    
 
+
+   PidinStackFree(ppistParent);
 
    return iResult;
 

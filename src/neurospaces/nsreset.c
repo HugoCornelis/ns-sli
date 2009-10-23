@@ -75,22 +75,10 @@ int NSReset(){
     return -1;
 
 
-  //i
-  //i First create the heccer objects based on the crude heccer name
-  //i registry. 
-  //i
-  int i;
-  char **ppcHeccerNames = pnsintegrator->ppcHeccerNames;
-  int iHeccerNames = pnsintegrator->iHeccerNames;
-
-  for( i = 0; i < iHeccerNames; i++ )
+  if (!TranslateHeccerNames(pnsintegrator))
   {
-
-    InitHeccerObject(ppcHeccerNames[i]);
-
+      return -1;
   }
-
-
 
   //-
   //- Now add annotated variables since the heccer instance has
@@ -101,6 +89,9 @@ int NSReset(){
   struct Heccer **ppheccer = pnsintegrator->ppheccer; 
   int iIoMsgs = pnsintegrator->iIoMsgs;
   int iHeccers = pnsintegrator->iHeccers;
+
+  int i;
+
   for( i = 0; i < iHeccers; i++ )
   {
 

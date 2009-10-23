@@ -147,7 +147,7 @@ int NSGenesisInitialize(struct Neurospaces *pneuro){
    }
    else
    {
-     pnsintegrator->ppcHeccerNames[pnsintegrator->iHeccerNames++] = HARDCODED_ROOT;
+/*      pnsintegrator->ppcHeccerNames[pnsintegrator->iHeccerNames++] = HARDCODED_ROOT; */
    }
     
    
