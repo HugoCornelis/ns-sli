@@ -185,6 +185,21 @@ int RunInterpreter(int iSomething)
 }
 
 
+int ListObjects()
+{
+
+  do_list_objects();
+
+}
+
+int ListCommands()
+{
+
+  ShowFuncNames("listcommands",1);
+
+}
+
+
 /* int G2Initialize(char *pcOptionsOrSo) */
 /* { */
 /*     /// \note gosh, I had to do the same hack when integrating neurospaces */

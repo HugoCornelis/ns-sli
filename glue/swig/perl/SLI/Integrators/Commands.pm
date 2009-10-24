@@ -24,16 +24,21 @@ our $g3_commands
       ];
 
 
-sub sli_listobjects
-{
-  SLI::do_list_objects();
-}
-
 
 sub sli_listcommands
 {
-  SLI::ShowFuncNames();
+
+  SLI::ListCommands();
+
 }
+
+sub sli_listobjects
+{
+  SLI::ListObjects();
+}
+
+
+
 
 sub sli_load
 {

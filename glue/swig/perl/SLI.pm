@@ -11,6 +11,16 @@ use strict;
 use SwiggableSLI;
 
 
+sub sli_list_objects
+{
+  SwiggableSLI::ListObjects();
+}
+
+sub sli_list_commands
+{
+  SwiggableSLI::ListCommands();
+}
+
 sub include_script
 {
     my $script = shift;
