@@ -1,6 +1,6 @@
 setclock 0 2e-5
 
-create compartment hardcoded_neutral
+create neutral hardcoded_neutral
 
 create compartment /hardcoded_neutral/c
 
