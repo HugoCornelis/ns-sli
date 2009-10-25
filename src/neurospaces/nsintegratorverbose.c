@@ -56,11 +56,11 @@ int nsintegrator_dump(struct nsintegrator_type *pelnsintegrator, int iSelection,
 
     if (iSelection & 1)  
      {  
-        struct Heccer **ppheccer = pelnsintegrator->pnsintegrator->ppheccer;  
+/*         struct Heccer **ppheccer = pelnsintegrator->pnsintegrator->ppheccer;   */
 
         int i;  
-        for(i=0;i<pelnsintegrator->pnsintegrator->iHeccers;i++)  
-	  HeccerDump(ppheccer[i],stdout,heccer_dump_selection);  
+        for (i = 0 ; i < pelnsintegrator->pnsintegrator->iModelRegistrations ; i++)  
+	  HeccerDump(pelnsintegrator->pnsintegrator->psr[i].uSolver.pheccer, stdout, heccer_dump_selection);  
 
       }  
 

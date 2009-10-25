@@ -86,16 +86,16 @@ int NSReset(){
   //-
 
   struct ioMsg **ppioMsg = pnsintegrator->ppioMsg;
-  struct Heccer **ppheccer = pnsintegrator->ppheccer; 
+/*   struct Heccer **ppheccer = pnsintegrator->ppheccer;  */
   int iIoMsgs = pnsintegrator->iIoMsgs;
-  int iHeccers = pnsintegrator->iHeccers;
+  int iHeccers = pnsintegrator->iModelRegistrations;
 
   int i;
 
   for( i = 0; i < iHeccers; i++ )
   {
 
-    SetupIOMessages(ppioMsg,iIoMsgs,ppheccer[i]);
+    SetupIOMessages(ppioMsg, iIoMsgs, pnsintegrator->psr[i].uSolver.pheccer);
 
   }
 

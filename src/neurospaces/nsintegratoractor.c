@@ -98,45 +98,41 @@ int NeurospacesIntegratorActor(struct nsintegrator_type *pnsintegrator_type,
     case PROCESS:
       {
 
-	struct Heccer **ppheccer = pnsintegrator->ppheccer;
-
-	NSProcessMessages(pnsintegrator);
-
-	for(i=0;i<pnsintegrator->iHeccers;i++)
-	{
-
-
-
-	  // need to link to "double simulation_time" in sim_step.c
-          //	
-	  HeccerHeccs(ppheccer[i],simulation_time + clock_value[0]);
- 
- 
-
-	  if (iNSIntegratorVerbose == 1)
+	  if (pnsintegrator->iModelRegistrations > 0)
 	  {
-	    if(((GetCurrentStep()+1)%pnsintegrator_type->heccer_reporting_granularity) != 0)
-	      return iResult;
+	      NSProcessMessages(pnsintegrator);
 
-	    fprintf(stdout,"%s: time = %lf ; step = %lf          \n",
-		    ppheccer[i]->pcName,
-		    ppheccer[i]->dTime,
-		    ppheccer[i]->dStep);
+	      for (i = 0 ; i < pnsintegrator->iModelRegistrations ; i++)
+	      {
+		  // need to link to "double simulation_time" in sim_step.c
+		  //	
+		  HeccerHeccs(pnsintegrator->psr[i].uSolver.pheccer, simulation_time + clock_value[0]);
+ 
+		  if (iNSIntegratorVerbose == 1)
+		  {
+		      if(((GetCurrentStep() + 1) % pnsintegrator_type->heccer_reporting_granularity) != 0)
+			  return iResult;
+
+		      fprintf(stdout,"%s: time = %lf ; step = %lf          \n",
+			      pnsintegrator->psr[i].uSolver.pheccer->pcName,
+			      pnsintegrator->psr[i].uSolver.pheccer->dTime,
+			      pnsintegrator->psr[i].uSolver.pheccer->dStep);
+		  }
+
+		  if (iNSIntegratorVerbose == 2)
+		  {
+
+		      if(((GetCurrentStep()) % pnsintegrator_type->heccer_reporting_granularity) != 0)
+			  return iResult;
+
+		      nsintegrator_dump(pnsintegrator_type, 
+					1,
+					pnsintegrator_type->heccer_dump_selection);
+		  }
+	      }
 	  }
-
-	  if (iNSIntegratorVerbose == 2)
-	  {
-
-	    if(((GetCurrentStep())%pnsintegrator_type->heccer_reporting_granularity) != 0)
-	      return iResult;
-
-	    nsintegrator_dump(pnsintegrator_type, 
-			      1,
-			      pnsintegrator_type->heccer_dump_selection);
-	  }
-	}
 	
-	break;
+	  break;
       }
 
        

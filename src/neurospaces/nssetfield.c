@@ -71,7 +71,7 @@ int NSSetField(struct symtab_HSolveListElement *phsle,
 
 	struct neurospaces_integrator  *pnsintegrator = getNsintegrator();
 
-	if (pnsintegrator->iHeccers)
+/* 	if (pnsintegrator->iModelRegistrations) */
 	{
 	    //- lookup the heccer object using the pathname before findsolvefield correction
 

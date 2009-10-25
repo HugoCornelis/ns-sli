@@ -108,8 +108,8 @@ char * GetHeccerVariable(char *pcName,char *pcField)
   struct neurospaces_integrator *pnsintegrator = getNsintegrator();
   
   
-  struct Heccer **ppheccer = pnsintegrator->ppheccer;
-  int iHeccers = pnsintegrator->iHeccers;
+/*   struct Heccer **ppheccer = pnsintegrator->ppheccer; */
+/*   int iHeccers = pnsintegrator->iHeccers; */
 
 
   struct PidinStack *ppist = PidinStackParse(pcName);
@@ -121,7 +121,7 @@ char * GetHeccerVariable(char *pcName,char *pcField)
   // for now getfield will only check on the heccer object 
   // at index 0. 
 
-  if(!ppheccer[0])
+  if(!pnsintegrator->psr[0].uSolver.pheccer)
   {
 
     if(!strcmp(pcField,"Vm"))
@@ -133,7 +133,7 @@ char * GetHeccerVariable(char *pcName,char *pcField)
 
   }
 
-  double *pdValue = HeccerAddressVariable(ppheccer[0],iSerial,pcField);
+  double *pdValue = HeccerAddressVariable(pnsintegrator->psr[0].uSolver.pheccer, iSerial, pcField);
 
   if(!pdValue)
     return NULL;

@@ -182,8 +182,8 @@ int PrintHeccerVariable(char *pcName,char *pcField,int iAll)
   struct neurospaces_integrator *pnsintegrator = getNsintegrator();
   
   
-  struct Heccer **ppheccer = pnsintegrator->ppheccer;
-  int iHeccers = pnsintegrator->iHeccers;
+/*   struct Heccer **ppheccer = pnsintegrator->ppheccer; */
+/*   int iHeccers = pnsintegrator->iHeccers; */
 
 
   struct PidinStack *ppist = PidinStackParse(pcName);
@@ -195,20 +195,21 @@ int PrintHeccerVariable(char *pcName,char *pcField,int iAll)
   int i;
   double *pdValue = NULL;
 
-  for(i=0;i<iHeccers;i++)
+  for (i = 0 ; i < pnsintegrator->iModelRegistrations ; i++)
   {
 
-    if(!ppheccer[i])
+    if (!pnsintegrator->psr[i].uSolver.pheccer)
     {
 
       if(!strcmp(pcField,"Vm"))
       {
-	fprintf(stdout,"%s","Warning: No simulation has been run, Vm is not avaialble.\n\n");
+	fprintf(stdout,"%s","Warning: No simulation has been run, Vm is not available.\n\n");
       }
 
+      continue;
     }
 
-    pdValue = (double *)HeccerAddressVariable(ppheccer[i],iSerial,pcField);
+    pdValue = HeccerAddressVariable(pnsintegrator->psr[i].uSolver.pheccer, iSerial, pcField);
 
     if(!pdValue)
       continue;

@@ -644,7 +644,7 @@ int ActivationStep(struct ioMsg *piom){
 
     struct neurospaces_integrator *pnsintegrator = pelnsintegrator->pnsintegrator;
     
-    struct Heccer *pheccer = pnsintegrator->ppheccer[0];
+/*     struct Heccer *pheccer = pnsintegrator->ppheccer[0]; */
 
     // pdActivation = piom->pdActivation = HeccerAddressVariable(pheccer, piom->iSerial,"activation");
   

@@ -166,6 +166,36 @@ struct ioMsg
 };
 
 
+struct SolverRegistration
+{
+    /*!
+     * Name of this registration: pointer into the element namespace.
+     */
+
+    char *pcName;
+
+    /*!
+     * Has been disabled using the 'disable' command?
+     */
+
+    int iDisabled;
+
+    /*!
+     * Type of the solver.
+     */
+
+    int iType;
+
+    /*!
+     * Solver instance associated with this name, may be NULL.
+     */
+
+    union
+    {
+	struct Heccer *pheccer;
+    }
+	uSolver;
+};
 
 
 //---------------------------------------------------------------
@@ -226,16 +256,24 @@ struct neurospaces_integrator {
 
 
 
+    /*!
+     *  Number of registrations of models to be simulated.
+     */
+
+    int iModelRegistrations;
+
+    struct SolverRegistration *psr;
+
   /*!
    *    The number of Heccer instances in the ppheccer array
    */
-  int iHeccers; 
+/*   int iHeccers;  */
  
 
   /*!
    *   This is an array of Heccer structs.
    */
-  struct Heccer **ppheccer; 
+/*   struct Heccer **ppheccer;  */
    
 
 
@@ -243,7 +281,7 @@ struct neurospaces_integrator {
   /*!
    * The number of heccer names registered. 
    */
-  int iHeccerNames;
+/*   int iHeccerNames; */
 
 
   /*!
@@ -251,7 +289,7 @@ struct neurospaces_integrator {
    * objects bearing the same name as a neutral rooted object to be used in the 
    * model container.
    */
-  char **ppcHeccerNames;
+/*   char **ppcHeccerNames; */
 
 
 
@@ -281,7 +319,7 @@ int NSGenesisInitialize();
 //i -- Defined in heccercreate.c --
 int AttemptHeccerName(char *pcName);
 int TranslateHeccerNames(struct neurospaces_integrator *pnsintegrator);
-int HeccerCreate(char* idin);
+int InitHeccerObject(struct SolverRegistration *psr);
 struct Heccer *LookupHeccerObject(char *pcContext);
 
 

@@ -48,14 +48,13 @@ int AttemptHeccerName(char *pcName)
     //i first check to see if a heccer object with the same name exists.
     //i if so we don't register the name and exit.
     //i
-    int i;
-    char **ppcHeccerNames = pnsintegrator->ppcHeccerNames;
-    int iHeccerNames = pnsintegrator->iHeccerNames;
 
-    for (i = 0; i < iHeccerNames; i++)
+    int i;
+
+    for (i = 0 ; i < pnsintegrator->iModelRegistrations ; i++)
     {
     
-	if (!strncmp(pcName, ppcHeccerNames[i], strlen(ppcHeccerNames[i])))
+	if (!strncmp(pcName, pnsintegrator->psr[i].pcName, strlen(pnsintegrator->psr[i].pcName)))
 	    return 0;
 
     }
@@ -97,8 +96,19 @@ static int RegisterHeccerName(char *pcName)
 /*   } */
 /*   else */
   {
-      pnsintegrator->ppcHeccerNames[pnsintegrator->iHeccerNames++] = 
-	  strdup(pcName);
+      pnsintegrator->psr[pnsintegrator->iModelRegistrations].pcName
+	  = strdup(pcName);
+
+      pnsintegrator->psr[pnsintegrator->iModelRegistrations].uSolver.pheccer
+	  = NULL;
+
+      pnsintegrator->psr[pnsintegrator->iModelRegistrations].iType
+	  = 1;
+
+      pnsintegrator->psr[pnsintegrator->iModelRegistrations].iDisabled
+	  = 0;
+
+      pnsintegrator->iModelRegistrations++;
   }
 
   return 1;
@@ -132,12 +142,10 @@ int TranslateHeccerNames(struct neurospaces_integrator *pnsintegrator)
     //i
 
     int i;
-    char **ppcHeccerNames = pnsintegrator->ppcHeccerNames;
-    int iHeccerNames = pnsintegrator->iHeccerNames;
 
-    for( i = 0; i < iHeccerNames; i++ )
+    for (i = 0 ; i < pnsintegrator->iModelRegistrations ; i++)
     {
-	if (InitHeccerObject(ppcHeccerNames[i]) == -1)
+	if (InitHeccerObject(&pnsintegrator->psr[i]) == -1)
 	{
 	    iResult = 0;
 	}
@@ -171,11 +179,11 @@ struct Heccer *LookupHeccerObject(char *pcContext)
     struct neurospaces_integrator *pnsintegrator = getNsintegrator();
     int i;
 
-    for (i = 0; i < pnsintegrator->iHeccers; i++)
+    for (i = 0 ; i < pnsintegrator->iModelRegistrations ; i++)
     {
-	if (0 == strcmp(pcContext, pnsintegrator->ppheccer[i]->pcName))
+	if (0 == strcmp(pcContext, pnsintegrator->psr[i].pcName))
 	{
-	    return(pnsintegrator->ppheccer[i]);
+	    return(pnsintegrator->psr[i].uSolver.pheccer);
 	}
     }
 
@@ -196,7 +204,8 @@ struct Heccer *LookupHeccerObject(char *pcContext)
  *
  */
 //------------------------------------------------------------------
-int InitHeccerObject(char* pcContext){
+int InitHeccerObject(struct SolverRegistration *psr)
+{
 
 
 
@@ -212,12 +221,12 @@ int InitHeccerObject(char* pcContext){
   //! related to hardcoded_neutral ?  If so we need to discuss this
   //! because this 'hidden' logic can hide bugs easily.
 
-  struct PidinStack *ppist = getRootedContext(pcContext);
+  struct PidinStack *ppist = getRootedContext(psr->pcName);
   struct symtab_HSolveListElement *phsle = PidinStackLookupTopSymbol(ppist);
 
   if(!phsle)
   {
-      fprintf(stdout,"Warning: No neutral rooted object named %s for heccer.\n",pcContext);
+      fprintf(stdout, "Warning: No neutral rooted object named %s for heccer.\n", psr->pcName);
       return 0;
   }
 
@@ -230,15 +239,15 @@ int InitHeccerObject(char* pcContext){
   //i
 
   {
-      struct Heccer *pheccer = LookupHeccerObject(pcContext);
+/*       struct Heccer *pheccer = LookupHeccerObject(psr->pcName); */
 
-      if (pheccer)
+      if (psr->uSolver.pheccer)
       {
 	  fprintf(stdout,
 		  "Warning: Heccer object %s exists, resetting it instead.\n.",
-		  pheccer->pcName);
+		  psr->uSolver.pheccer->pcName);
 
-	  singleHeccerReset(pheccer);
+	  singleHeccerReset(psr->uSolver.pheccer);
 	  return 0;
       }
   }
@@ -246,10 +255,10 @@ int InitHeccerObject(char* pcContext){
 
 
 
-  struct Heccer *pheccer = HeccerNew(pcContext,NULL,NULL,NULL);
+  struct Heccer *pheccer = HeccerNew(psr->pcName, NULL, NULL, NULL);
 
   if(!pheccer){
-    fprintf(stderr,"Error allocating Heccer for Context %s\n",pcContext);
+    fprintf(stderr, "Error allocating Heccer for Context %s\n", psr->pcName);
     return -1;
   }
 
@@ -270,7 +279,7 @@ int InitHeccerObject(char* pcContext){
   pheccer->ho = pnsintegrator->pheccerOptions->ho;
 
   
-  HeccerConstruct(pheccer,(void *)pneuro,pcContext);
+  HeccerConstruct(pheccer, (void *)pneuro, psr->pcName);
 
   HeccerCompileP1(pheccer);
   HeccerCompileP2(pheccer);
@@ -283,9 +292,10 @@ int InitHeccerObject(char* pcContext){
 
   // \todo add boundary checking here.
 
-  pnsintegrator->ppheccer[pnsintegrator->iHeccers++] = 
-    pheccer;
-  
+/*   pnsintegrator->psr[pnsintegrator->iModelRegistrations++].uSolver.pheccer */
+/*       = pheccer; */
+
+  psr->uSolver.pheccer = pheccer;
 
   return 1;
 

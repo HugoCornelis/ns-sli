@@ -116,39 +116,38 @@ int NSGenesisInitialize(struct Neurospaces *pneuro){
    //- The heccer array is an array of pointers
    //- to heccer objects.
    //-
-   pnsintegrator->iHeccers = 0;
+   pnsintegrator->iModelRegistrations = 0;
 
-   pnsintegrator->ppheccer = 
-     (struct Heccer**)calloc(MAX_HECCERS,sizeof(struct Heccer*));
+   pnsintegrator->psr
+       = (struct SolverRegistration *)calloc(MAX_HECCERS,sizeof(struct SolverRegistration));
 
 
-   if( !pnsintegrator->ppheccer ){
-
-     fprintf(stderr,"Error initializing Heccer storage\n");
-     return -1;
-
+   if( !pnsintegrator->psr)
+   {
+       fprintf(stderr,"Error initializing SolverRegistration storage\n");
+       return -1;
    }
 
   
    //- Initialize the array for storing the heccer names.
    //- Allocate same number as the amount for heccer pointers.
 
-   pnsintegrator->iHeccerNames = 0;
+/*    pnsintegrator->iHeccerNames = 0; */
 
-   pnsintegrator->ppcHeccerNames = 
-     (char**)calloc(MAX_HECCERS,sizeof(char*));
+/*    pnsintegrator->ppcHeccerNames =  */
+/*      (char**)calloc(MAX_HECCERS,sizeof(char*)); */
 
 
-   if( !pnsintegrator->ppcHeccerNames ){
+/*    if( !pnsintegrator->ppcHeccerNames ){ */
 
-     fprintf(stderr,"Error initializing storage for Heccer names.\n");
-     return -1;
+/*      fprintf(stderr,"Error initializing storage for Heccer names.\n"); */
+/*      return -1; */
 
-   }
-   else
-   {
+/*    } */
+/*    else */
+/*    { */
 /*      pnsintegrator->ppcHeccerNames[pnsintegrator->iHeccerNames++] = HARDCODED_ROOT; */
-   }
+/*    } */
     
    
      char	*argvar2[5];  
