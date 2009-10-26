@@ -318,6 +318,7 @@ int NSGenesisInitialize();
 
 //i -- Defined in heccercreate.c --
 int AttemptHeccerName(char *pcName);
+int DisableHeccerName(char *pcName);
 int TranslateHeccerNames(struct neurospaces_integrator *pnsintegrator);
 int InitHeccerObject(struct SolverRegistration *psr);
 struct Heccer *LookupHeccerObject(char *pcContext);

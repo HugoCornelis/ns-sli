@@ -104,6 +104,11 @@ int NeurospacesIntegratorActor(struct nsintegrator_type *pnsintegrator_type,
 
 	      for (i = 0 ; i < pnsintegrator->iModelRegistrations ; i++)
 	      {
+		  if (pnsintegrator->psr[i].iDisabled)
+		  {
+		      continue;
+		  }
+
 		  // need to link to "double simulation_time" in sim_step.c
 		  //	
 		  HeccerHeccs(pnsintegrator->psr[i].uSolver.pheccer, simulation_time + clock_value[0]);

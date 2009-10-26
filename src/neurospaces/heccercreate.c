@@ -16,12 +16,11 @@
 
 //------------------------------------------------------------------
 /*
- *  Externals in sim_clock.c
+ *  External in sim_clock.c
  */
-extern short			nactive_clocks;
-extern short			clock_set[NCLOCKS];
-extern short			clock_active[NCLOCKS];
+
 extern double			clock_value[NCLOCKS];
+
 //------------------------------------------------------------------
 
 
@@ -53,13 +52,41 @@ int AttemptHeccerName(char *pcName)
 
     for (i = 0 ; i < pnsintegrator->iModelRegistrations ; i++)
     {
-    
 	if (!strncmp(pcName, pnsintegrator->psr[i].pcName, strlen(pnsintegrator->psr[i].pcName)))
+	{
 	    return 0;
-
+	}
     }
 
     return(RegisterHeccerName(pcName));
+}
+
+
+int DisableHeccerName(char *pcName)
+{
+    struct neurospaces_integrator *pnsintegrator = getNsintegrator();
+
+    //- make sure there is a registration for this entry
+
+    AttemptHeccerName(pcName);
+
+    //- search the registration
+
+    int i;
+
+    for (i = 0 ; i < pnsintegrator->iModelRegistrations ; i++)
+    {
+	if (!strncmp(pcName, pnsintegrator->psr[i].pcName, strlen(pnsintegrator->psr[i].pcName)))
+	{
+	    //- and disable it
+
+	    pnsintegrator->psr[i].iDisabled = 1;
+
+	    return 1;
+	}
+    }
+
+    return 1;
 }
 
 
@@ -145,6 +172,11 @@ int TranslateHeccerNames(struct neurospaces_integrator *pnsintegrator)
 
     for (i = 0 ; i < pnsintegrator->iModelRegistrations ; i++)
     {
+	if (pnsintegrator->psr[i].iDisabled)
+	{
+	    continue;
+	}
+
 	if (InitHeccerObject(&pnsintegrator->psr[i]) == -1)
 	{
 	    iResult = 0;

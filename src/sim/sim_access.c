@@ -34,6 +34,8 @@ static char rcsid[] = "$Id: sim_access.c,v 1.2 2005/06/27 19:00:57 svitak Exp $"
 #include "sim_ext.h"
 /* Modified '91, by Upi Bhalla to put in Hsolve related funcs */
 
+#include "nsintegrator.h"
+
 
 void Enable(element)
 Element *element;
@@ -126,6 +128,12 @@ Element		*element;
 	printoptusage(argc, argv);
 	return 0;
       }
+
+    char *pcName = getRootedPathname(optargv[1]);
+
+    DisableHeccerName(pcName);
+
+    free(pcName);
 
     if((element = GetElement(optargv[1])) == NULL){
 	Error();
