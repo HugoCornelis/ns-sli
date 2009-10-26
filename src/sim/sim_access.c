@@ -131,7 +131,7 @@ Element		*element;
 
     char *pcName = getRootedPathname(optargv[1]);
 
-    DisableHeccerName(pcName);
+    //DisableHeccerName(pcName);
 
     free(pcName);
 

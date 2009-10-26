@@ -26,7 +26,6 @@ extern double			clock_value[NCLOCKS];
 
 static int RegisterHeccerName(char *pcName);
 
-
 //------------------------------------------------------------------
 /*!
  *  \fn int AttemptHeccerName(char *pcName)
@@ -62,6 +61,11 @@ int AttemptHeccerName(char *pcName)
 }
 
 
+//------------------------------------------------------------------
+/*
+*
+*/
+//------------------------------------------------------------------
 int DisableHeccerName(char *pcName)
 {
     struct neurospaces_integrator *pnsintegrator = getNsintegrator();
@@ -132,8 +136,18 @@ static int RegisterHeccerName(char *pcName)
       pnsintegrator->psr[pnsintegrator->iModelRegistrations].iType
 	  = 1;
 
-      pnsintegrator->psr[pnsintegrator->iModelRegistrations].iDisabled
+      //!
+      //! Hardcoded check for any name prefixed with "/library"
+      //! if so when we disable it. Will most likely have to come 
+      //! up with a cleaner solution later.
+      //!
+      if(!strncmp("/library",pcName,strlen("/library")))
+	pnsintegrator->psr[pnsintegrator->iModelRegistrations].iDisabled
+	  = 1;
+      else
+	pnsintegrator->psr[pnsintegrator->iModelRegistrations].iDisabled
 	  = 0;
+
 
       pnsintegrator->iModelRegistrations++;
   }
@@ -240,6 +254,9 @@ int InitHeccerObject(struct SolverRegistration *psr)
 {
 
 
+
+  if(!psr || psr->iDisabled)
+    return;
 
   struct neurospaces_integrator *pnsintegrator = getNsintegrator();
 

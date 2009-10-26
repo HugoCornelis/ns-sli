@@ -104,6 +104,10 @@ int NeurospacesIntegratorActor(struct nsintegrator_type *pnsintegrator_type,
 
 	      for (i = 0 ; i < pnsintegrator->iModelRegistrations ; i++)
 	      {
+
+		  if(!pnsintegrator->psr[i].uSolver.pheccer)
+		    continue;
+
 		  if (pnsintegrator->psr[i].iDisabled)
 		  {
 		      continue;
