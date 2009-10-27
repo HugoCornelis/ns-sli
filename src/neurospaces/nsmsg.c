@@ -780,6 +780,8 @@ int StoreMsg(char *pcSrcpath,
 
    piom->pcMsgName = strdup(pcMsgName);
 
+   piom->iHeccerIndex = -1;
+
    //   piom->dValue = FLT_MAX;
 
    pnsintegrator->ppioMsg[pnsintegrator->iIoMsgs++] = piom;
@@ -874,10 +876,33 @@ int NSProcessMessages(struct neurospaces_integrator *pnsintegrator)
 	    ppioMsg[i]->iTarget = PidinStackToSerial(ppioMsg[i]->ppistTarget);
 	}
 
+	//
+	// Here we get the index to the solver which is
+	// rooted in the target object
+	//
+	if(ppioMsg[i]->iHeccerIndex == -1)
+	{
+
+	    ppioMsg[i]->iHeccerIndex = 
+		LookupHeccerIndex(ppioMsg[i]->pcTargetSymbol);
+	}
+
+
 	if (!ppioMsg[i]->pdValue)
 	{
-	    ppioMsg[i]->pdValue
-		= HeccerAddressVariable(pnsintegrator->psr[1].uSolver.pheccer, ppioMsg[i]->iTarget, ppioMsg[i]->pcMsgName);
+
+	    int iWorkingHeccerIndex = ppioMsg[i]->iHeccerIndex;
+
+	    //
+	    // If we have a cached index we use it, if not
+	    // we leave pdValue as null and let the regular error 
+	    // chacking catch it below.
+	    //
+	    if(iWorkingHeccerIndex != -1)
+		ppioMsg[i]->pdValue
+		    = HeccerAddressVariable(pnsintegrator->psr[iWorkingHeccerIndex].uSolver.pheccer, 
+					    ppioMsg[i]->iTarget, 
+					    ppioMsg[i]->pcMsgName);
 	}
 
 	if (ppioMsg[i]->pdValue)

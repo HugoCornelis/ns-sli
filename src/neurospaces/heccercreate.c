@@ -212,10 +212,7 @@ int TranslateHeccerNames(struct neurospaces_integrator *pnsintegrator)
  *
  *  Lookup a Heccer instace in the global Heccer array in
  *  pelnsintegrator.
- *
- * \note This function works with the heccer array, which is created
- * after a RESET.  So don't call this function before a RESET, but use
- * the function LookupHeccerName() instead.
+
  *
  */
 //------------------------------------------------------------------
@@ -235,6 +232,54 @@ struct Heccer *LookupHeccerObject(char *pcContext)
 
     return(NULL);
 }
+
+
+
+//------------------------------------------------------------------
+/*!
+ *  \fn int LookupHeccerIndex(char *pcContext)
+ *  \return The index which the heccer with the matching context is available at.
+ *  \param pcContext name of the Heccer to search
+ *  \sa neurospaces_integrator
+ *  \sa LookupHeccerObject
+ *
+ *  Lookup a Heccer instance in the global array and return its index. It
+ * will match according to the length of the heccers pcName in the heccer
+ * global array. If the heccer instance is disabled then it will not return
+ * a valid array index.
+ *
+ */
+//------------------------------------------------------------------
+int LookupHeccerIndex(char *pcContext)
+{
+
+  struct neurospaces_integrator *pnsintegrator = getNsintegrator();
+  int i;
+  
+
+  for (i = 0 ; i < pnsintegrator->iModelRegistrations ; i++)
+  {
+
+    if (!pnsintegrator->psr[i].pcName) 
+      continue; 
+
+    if (!strncmp(pcContext, pnsintegrator->psr[i].pcName, strlen(pnsintegrator->psr[i].pcName)) )
+    {
+
+      if(!pnsintegrator->psr[i].iDisabled)
+	return i;
+
+    }
+  }
+
+  return -1;
+
+}
+
+
+
+
+
 
 
 //------------------------------------------------------------------

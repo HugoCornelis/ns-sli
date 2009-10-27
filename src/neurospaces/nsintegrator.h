@@ -163,6 +163,9 @@ struct ioMsg
      */
     double dValue;
 
+    
+    int iHeccerIndex;
+
 };
 
 
