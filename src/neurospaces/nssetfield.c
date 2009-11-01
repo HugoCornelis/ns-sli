@@ -77,23 +77,35 @@ int NSSetField(struct symtab_HSolveListElement *phsle,
 
 	    struct Heccer *pheccer = LookupHeccerObject(pcOriginal);
 
-	    //- address the variable
+	    //- if there is a heccer for this variable
 
-	    char *pcParameter = mapParameterString(pcField);
+	    //! note that when the sli_load gshell command is used, it
+	    //! is possible that the heccer does not exist.
 
-	    int iSerial = PidinStackToSerial(ppistWorking);
-
-	    double *pd = HeccerAddressVariable(pheccer, iSerial, pcParameter);
-
-	    if (pd)
+	    if (pheccer)
 	    {
-		double d = atof(pcValue);
+		//- address the variable
 
-		*pd = d;
+		char *pcParameter = mapParameterString(pcField);
+
+		int iSerial = PidinStackToSerial(ppistWorking);
+
+		double *pd = HeccerAddressVariable(pheccer, iSerial, pcParameter);
+
+		if (pd)
+		{
+		    double d = atof(pcValue);
+
+		    *pd = d;
+		}
+		else
+		{
+		    fprintf(stdout, "Warning cannot set field %s->%s after a RESET has been done, heccer cannot find it in its private memory.\n", pcPathname, pcField);
+		}
 	    }
 	    else
 	    {
-		fprintf(stdout, "Warning cannot set field %s->%s after a RESET has been done, heccer cannot find it in its private memory.\n", pcPathname, pcField);
+		fprintf(stdout, "Warning cannot set field %s->%s after a RESET has been done, cannot find a solver for it.\n", pcPathname, pcField);
 	    }
 	}
     }
