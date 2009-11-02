@@ -70,11 +70,11 @@ char* NSGetField(char *pcPathname,char *pcField)
 
   if(dValue == FLT_MAX)
   {
+      Error();
+      printf("could not get the value for field '%s->%s'\n", pcPathname, pcField);
+
       free(pcPathname);
       free(pcField);
-
-      Error();
-      printf("could not get the value for field '%s'\n",pcField);
 
       return(NULL);  
   }
