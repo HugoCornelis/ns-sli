@@ -48,11 +48,12 @@ F			B
 //			Tabchan Na channel 
 //========================================================================
 
-function make_Na_hh_tchan(path)
-	str path
-	str chanpath = path
-
-	if (({exists {chanpath}}))
+function make_Na_hh_tchan
+	str chanpath = "Na_hh_tchan"
+        if ({argc} == 1)
+           chanpath = {argv 1}
+        end
+	if ({exists {chanpath}})
 		return
 	end
 
@@ -61,25 +62,26 @@ function make_Na_hh_tchan(path)
 		//	S
 		//	A
 		//	S
-		setfield {chanpath} Ek {ENA} Gbar {1.2e3*SOMA_A} Ik 0 Gk 0  \
+		setfield ^ Ek {ENA} Gbar {1.2e3*SOMA_A} Ik 0 Gk 0  \
 		    Xpower 3 Ypower 1 Zpower 0
 
 	setupalpha {chanpath} X {0.1e6*(0.025 + EREST_ACT)} -0.1e6  \
 	    -1.0 {-1.0*(0.025 + EREST_ACT)} -0.01  \
-	    4e3 0.0 0.0 {-1.0*EREST_ACT} 18e-3
+	    4e3 0.0 0.0 {-1.0*EREST_ACT} 18e-3 -size 50
 
 	setupalpha {chanpath} Y 70.0 0.0 0.0  \
 	    {-1.0*EREST_ACT} 0.02 1.0e3 0.0 1.0  \
-	    {-1.0*(0.030 + EREST_ACT)} -10.0e-3
+	    {-1.0*(0.030 + EREST_ACT)} -10.0e-3 -size 50
 end
 
 //========================================================================
 //			Tabchan version of K channel
 //========================================================================
-function make_K_hh_tchan(path)
-	str path
-	str chanpath = path
-
+function make_K_hh_tchan
+	str chanpath = "K_hh_tchan"
+        if ({argc} == 1)
+           chanpath = {argv 1}
+        end
 	if (({exists {chanpath}}))
 		return
 	end
@@ -89,10 +91,10 @@ function make_K_hh_tchan(path)
 		//	S
 		//	A
 		//	S
-		setfield {chanpath} Ek {EK} Gbar {360.0*SOMA_A} Ik 0 Gk 0  \
+		setfield ^ Ek {EK} Gbar {360.0*SOMA_A} Ik 0 Gk 0  \
 		    Xpower 4 Ypower 0 Zpower 0
 
 	setupalpha {chanpath} X {10e3*(0.01 + EREST_ACT)} -10.0e3  \
 	    -1.0 {-1.0*(0.01 + EREST_ACT)} -0.01 125.0 0.0 0.0  \
-	    {-1.0*EREST_ACT} 80.0e-3
+	    {-1.0*EREST_ACT} 80.0e-3 -size 50
 end
