@@ -49,23 +49,18 @@ my $test
 					     ],
 				command => 'src/ns-sli',
 				command_tests => [
-
 						  {
-						   disabled => "Test is disabled due to a bug with the minus sign",
 						   description => "Can we get the field for the voltage potential from compartment 1 in springmass1.?",
-						   read => '-0.0791698',
+						   read => 'Vm = -0.0791698',
 						   timeout => 5,
-						   write => 'echo {getfield /hardcoded_neutral/c1 Vm}',
+						   write => 'echo {"Vm = " @ {getfield /hardcoded_neutral/c1 Vm}}',
 						  },
-
 						  {
-						   disabled => "Test is disabled due to a bug with the minus sign",
 						   description => "Can we read voltage potential from compartment 2 in springmass1.g?",
-						   read => '-0.0791697',
+						   read => 'Vm = -0.0791697',
 						   timeout => 5,
-						   write => 'echo {getfield /hardcoded_neutral/c2 Vm}',
+						   write => 'echo {"Vm = " @ {getfield /hardcoded_neutral/c2 Vm}}',
 						  },
-
 						 ],
 				description => "Can we perform a getfield from a heccer solved variable?",
 
