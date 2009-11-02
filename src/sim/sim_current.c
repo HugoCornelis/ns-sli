@@ -74,6 +74,19 @@ void SetWorkingElement(char *parent_name, char *element_name)
 
 	sprintf(working_element_name, "/%s", pc);
     }
+
+    //- now remove redundant path entries such as './'
+
+    {
+	struct PidinStack *ppistWorking
+	    = PidinStackParse(working_element_name);
+
+	PidinStackCompress(ppistWorking);
+
+	PidinStackString(ppistWorking, working_element_name, sizeof(working_element_name));
+
+	PidinStackFree(ppistWorking);
+    }
 }
 
 void SetRecentElement(char *parent_name, char *recent_name)
@@ -101,9 +114,22 @@ void SetRecentElement(char *parent_name, char *recent_name)
     {
 	char pc[1000];
 
-	strcpy(pc, recent_element_name);
+	sprintf(pc, "%s/%s", working_element_name, recent_element_name);
 
-	sprintf(recent_element_name, "/%s", pc);
+	strcpy(recent_element_name, pc);
+    }
+
+    //- now remove redundant path entries such as './'
+
+    {
+	struct PidinStack *ppistRecent
+	    = PidinStackParse(recent_element_name);
+
+	PidinStackCompress(ppistRecent);
+
+	PidinStackString(ppistRecent, recent_element_name, sizeof(recent_element_name));
+
+	PidinStackFree(ppistRecent);
     }
 }
 
