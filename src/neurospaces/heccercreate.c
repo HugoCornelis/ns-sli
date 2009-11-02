@@ -259,13 +259,8 @@ int LookupHeccerIndex(char *pcContext)
 
   for (i = 0 ; i < pnsintegrator->iModelRegistrations ; i++)
   {
-
-    if (!pnsintegrator->psr[i].pcName) 
-      continue; 
-
     if (!strncmp(pcContext, pnsintegrator->psr[i].pcName, strlen(pnsintegrator->psr[i].pcName)) )
     {
-
       if(!pnsintegrator->psr[i].iDisabled)
 	return i;
 

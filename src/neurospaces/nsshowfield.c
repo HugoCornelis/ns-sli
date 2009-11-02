@@ -180,11 +180,6 @@ int PrintHeccerVariable(char *pcName,char *pcField,int iAll)
   int iItemsPrinted = 0;
 
   struct neurospaces_integrator *pnsintegrator = getNsintegrator();
-  
-  
-/*   struct Heccer **ppheccer = pnsintegrator->ppheccer; */
-/*   int iHeccers = pnsintegrator->iHeccers; */
-
 
   struct PidinStack *ppist = PidinStackParse(pcName);
 
