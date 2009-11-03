@@ -40,7 +40,7 @@
 #define NSINTEGRATOR_ASCFILE 70
 /* #define NSINTEGRATOR_ASCOUT 80 */
 #define NSINTEGRATOR_SPIKEGEN 90
-
+#define NSINTEGRATOR_PULSEGEN 100
 
 //!
 //! Used in nsetfield.c

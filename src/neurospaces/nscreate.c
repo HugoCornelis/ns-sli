@@ -136,6 +136,16 @@ int NSCreate( char* name,  char* pcParent, char* pcType){
 /*      iResult = NSINTEGRATOR_ASCOUT; */
 
 /*    } */
+
+   else if(!strcmp("pulsegen",pcType)){
+
+     // This is temporary until I finish the model container object.
+
+     phsleChild = (struct symtab_HSolveListElement *)CellCalloc();
+     
+     iResult = NSINTEGRATOR_PULSEGEN;
+
+   }
    else{
 
        // neutral, hsolve
