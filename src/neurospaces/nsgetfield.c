@@ -109,6 +109,13 @@ char * GetHeccerVariable(char *pcName,char *pcField)
   
   int i = LookupHeccerIndex(pcName);
 
+  if (i == -1)
+  {
+      fprintf(stdout, "%s", "Warning: No heccer found for %s->%s.\n\n", pcName, pcField);
+
+      return NULL;
+  }
+
   if(!pnsintegrator->psr[i].uSolver.pheccer)
   {
 
