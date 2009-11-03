@@ -421,7 +421,8 @@ int                   i,j = 0;
        !strcmp("channelC2",type) ||
        !strcmp("channelC3",type) ||
        !strcmp("synchan",type) ||
-       !strcmp("spikegen",type) )
+       !strcmp("spikegen",type) ||
+       !strcmp("pulsegen",type) )
       iInModelContainer = 1;
 
 
