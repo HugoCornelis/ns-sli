@@ -448,6 +448,8 @@ struct ParameterMapper * mapParameter(char *pcField){
 	{	    "x",	"x",	SLI_PARAMETER_NUMBER,	},
 	{	    "y",	"y",	SLI_PARAMETER_NUMBER,	},
 	{	    "z",	"z",	SLI_PARAMETER_NUMBER,	},
+	{	    "thresh",	"THRESHOLD",	SLI_PARAMETER_NUMBER,	},
+	{	    "abs_refract",	"REFRACTORY",	SLI_PARAMETER_NUMBER,	},
 	{	    NULL,	NULL,	0,	},
     };
 

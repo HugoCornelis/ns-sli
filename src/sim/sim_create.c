@@ -201,7 +201,8 @@ int iInModelContainer;
 	   iModelContainerResult == NSINTEGRATOR_TABCHANNEL ||
 	   iModelContainerResult == NSINTEGRATOR_POOL ||
 	   iModelContainerResult == NSINTEGRATOR_NERNST ||
-	   iModelContainerResult == NSINTEGRATOR_SYNCHAN){
+	   iModelContainerResult == NSINTEGRATOR_SYNCHAN ||
+	   iModelContainerResult == NSINTEGRATOR_SPIKEGEN){
 
 	  return (Element*)-1;
 
@@ -419,7 +420,8 @@ int                   i,j = 0;
        !strcmp("nernst",type) ||
        !strcmp("channelC2",type) ||
        !strcmp("channelC3",type) ||
-       !strcmp("synchan",type) )
+       !strcmp("synchan",type) ||
+       !strcmp("spikegen",type) )
       iInModelContainer = 1;
 
 
