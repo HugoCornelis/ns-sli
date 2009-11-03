@@ -8,7 +8,7 @@
 include protodefs0
 
 float tmax = 0.5		// simulation time in sec
-float dt = 0.00005		// simulation time step in sec
+float dt = 0.000005		// simulation time step in sec
 setclock  0  {dt}		// set the simulation clock
 
 // include any graphics functions
