@@ -13,6 +13,7 @@
 
 
  
+#include "neurospaces/components/attachment.h"
 #include "neurospaces/components/cell.h"
 #include "neurospaces/components/channel.h"
 #include "neurospaces/components/pool.h"
@@ -113,6 +114,16 @@ int NSCreate( char* name,  char* pcParent, char* pcType){
      phsleChild = SynChannelCalloc();
 
      iResult = NSINTEGRATOR_SYNCHAN;
+
+   }
+   else if(strcmp("spikegen",pcType) == 0){
+
+       phsleChild
+	   = (struct symtab_HSolveListElement *)AttachmentCalloc();
+
+     AttachmentSetType((struct symtab_Attachment *)phsleChild, TYPE_ATTACHMENT_OUTGOING);
+
+     iResult = NSINTEGRATOR_SPIKEGEN;
 
    }
    else if(!strcmp("asc_file",pcType)){

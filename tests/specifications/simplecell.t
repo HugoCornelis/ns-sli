@@ -42,7 +42,6 @@ my $test
 						 ],
 				comment => 'This test was derived from one of Dave Beeman\'s tutorial scripts',
 				description => "one of the simplest tutorial scripts",
-				disabled => "needs support for spikegen objects",
 			       },
 			       {
 				arguments => [
