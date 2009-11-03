@@ -10,7 +10,7 @@ setenv SIMPATH . \
 		{getenv HOME}/neurospaces_project/ns-sli/source/snapshots/0/tests/scripts/PurkM9_model \
 		{getenv HOME}/neurospaces_project/ns-sli/source/snapshots/0/tests/scripts/test-simplecell \
 		{getenv HOME}/neurospaces_project/ns-sli/source/snapshots/0/tests/scripts/g2-library \
-		{getenv HOME}/genesis/source/updates/20060303/genesis-2.3/genesis/Scripts/neurokit/prototypes
+		{getenv HOME}/neurospaces_project/ns-sli/source/snapshots/0/tests/scripts/g2-library/neurokit/prototypes
 //		{getenv HOME}/genesis/source/updates/20060303/genesis-2.3/genesis/src/startup		\
 // 		{getenv HOME}/neurospaces_project/genesis/genesis/Scripts/neurokit   \
 // 		{getenv HOME}/neurospaces_project/genesis/genesis/Scripts/neurokit/prototypes

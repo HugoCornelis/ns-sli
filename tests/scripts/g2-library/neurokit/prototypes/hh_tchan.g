@@ -67,11 +67,11 @@ function make_Na_hh_tchan
 
 	setupalpha {chanpath} X {0.1e6*(0.025 + EREST_ACT)} -0.1e6  \
 	    -1.0 {-1.0*(0.025 + EREST_ACT)} -0.01  \
-	    4e3 0.0 0.0 {-1.0*EREST_ACT} 18e-3 -size 50
+	    4e3 0.0 0.0 {-1.0*EREST_ACT} 18e-3
 
 	setupalpha {chanpath} Y 70.0 0.0 0.0  \
 	    {-1.0*EREST_ACT} 0.02 1.0e3 0.0 1.0  \
-	    {-1.0*(0.030 + EREST_ACT)} -10.0e-3 -size 50
+	    {-1.0*(0.030 + EREST_ACT)} -10.0e-3
 end
 
 //========================================================================
@@ -96,5 +96,5 @@ function make_K_hh_tchan
 
 	setupalpha {chanpath} X {10e3*(0.01 + EREST_ACT)} -10.0e3  \
 	    -1.0 {-1.0*(0.01 + EREST_ACT)} -0.01 125.0 0.0 0.0  \
-	    {-1.0*EREST_ACT} 80.0e-3 -size 50
+	    {-1.0*EREST_ACT} 80.0e-3
 end

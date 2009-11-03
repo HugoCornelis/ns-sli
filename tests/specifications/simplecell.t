@@ -19,7 +19,7 @@ my $test
 						  },
 						  {
 						   description => "Is the final somatic membrane potential correct ?",
-						   read => 'Final Vm =  -0.0740676',
+						   read => 'Final Vm =  -0.07105',
 						  },
 						 ],
 				comment => 'This test was derived from one of Dave Beeman\'s tutorial scripts',
@@ -37,7 +37,7 @@ my $test
 						  },
 						  {
 						   description => "Is the final somatic membrane potential correct ?",
-						   read => 'Final Vm =  -0.0740676',
+						   read => 'Final Vm =  -0.07105',
 						  },
 						 ],
 				comment => 'This test was derived from one of Dave Beeman\'s tutorial scripts',
@@ -55,7 +55,7 @@ my $test
 						  },
 						  {
 						   description => "Is the final somatic membrane potential correct ?",
-						   read => 'Final Vm =  -0.0740676',
+						   read => 'Final Vm =  -0.07105',
 						  },
 						 ],
 				comment => 'This test was derived from one of Dave Beeman\'s tutorial scripts',
@@ -73,7 +73,7 @@ my $test
 						  },
 						  {
 						   description => "Is the final somatic membrane potential correct ?",
-						   read => 'Final Vm =  -0.0740676',
+						   read => 'Final Vm =  -0.07105',
 						  },
 						 ],
 				comment => 'This test was derived from one of Dave Beeman\'s tutorial scripts',
