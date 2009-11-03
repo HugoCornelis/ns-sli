@@ -1,0 +1,177 @@
+test-simplecell-v3
+==================
+
+These are bare-bones versions of the simple two-compartment cell model in
+scripts Tutorials/cells/simplecell from the GENESIS Modeling Tutorials
+package.  They all use a prototype definition file and a cell parameter
+file to be read with readcell.  They use an asc_file object to output the
+soma membrane potential to Vm.out.
+
+The information on gshell errors is current as of Thu Oct 22 22:34:38 MDT 2009
+
+The genesis/Scripts/neurokit/prototypes directory must be in the GENESIS 2
+or 3 SIMPATH in order to include the compartment and channel prototype
+scripts.  For use with sli_load or sli_run in the gshell, and with
+GENESIS 2 installed in /usr/local/genesis-2.3, the included .simrc-ns-sli
+file should be copied anywhere that ns-sli may look for it.  Otherwise, it
+should first be edited to fix the path.
+
+Currently, it has to be in
+~/neurospaces_project/ns-sli/source/snapshots/0/.
+It is not sufficient to have it in the home directory or in the
+directory containing the scripts.
+
+Note on the gate initialization fix
+-----------------------------------
+
+According to Hugo:
+
+The state initialization for gate variables is calculated in G2 by the
+tabchan element.  G3 does not calculate them, right now a user must set
+them by hand.  This is a consequence of some of the design decisions of the
+past.  The fix involves the addition of a block:
+
+if ({version} == 3)
+	setfield /cell/soma/Na_hh_tchan X_init 0.05293248341
+   	setfield /cell/soma/Na_hh_tchan Y_init 0.5961207634
+
+        setfield /cell/soma/K_hh_tchan X_init 0.3176769097
+end
+
+Further explanation by Hugo:
+
+G2 had many problems with its initialization code of solved variables:
+
+1. It contains duplicate code distributed over the 'regular objects'
+and the hines solver.
+
+2. It is incomplete, ie. some initialization code is simply missing,
+for example for calcium dynamics.
+
+In G3, the initalization of gate states is currently done by setting a
+parameter.  This parameter has the name 'state_init' as an analogue to
+Vm_init and concen_init.  The suffix '_init' says that this is a hint
+for the initial value of a solved variable (but the solver may choose
+not to use it).	 A solver may choose to initialize its internal
+variables in an entirely different way, for instance from a file.
+This is done by the gshell command simulation_state_save and
+simulation_state_load.
+
+When Mando did the implementation of the gates for backward
+compatibility, he chose names that are different from 'state_init'.  I
+vaguely remember that there were good reasons to do so, but don't
+remember the exact reasons.
+
+I am aware that the current implementation gives problems for backward
+compatibility, I am not sure about the priority however.  I think we
+can solve the problem completely by instantiating the gates in the
+model container with their default initial state bound to an
+expression with Vm_init.  This requires a small addition of C code I
+think.  Let me know what you think.
+
+Last, the values that I inserted in the script were found by running
+the script using G2 and after a reset doing a showfield on the
+appropriate fields of the channels.
+
+[To be used when applying the fix to other channels.]
+
+Files:
+
+.simrc-ns-sli - assuming that GENESIS is installed in
+    /usr/local/genesis-2.3, this has the correct path to prototypes (e.g.
+    compartments.g) It should be copied anywhere that ns-sli may look for
+    it.
+
+These run under genesis-g3 sli_run:
+simplecell-passive.g - no channels at all - uses passive_cell.p, protodefs0.g
+
+simplecell-0.1.g - Hugo's simplecell-0.g with gate init fix and local
+    path to cell.p no spike or synchans - uses cell0.p, protodefs0.g
+
+simplecell-0.2.g - adds asc_file (100 usec intervals) and test of to see
+    if getfield returns computed field variables.  Note that the asc_file
+    is opened in append mode, so you will have to delete or rename old
+    files.
+
+simplecell-2.0.g - like simplecell-0.1.g but hsolve chanmode 4 and
+    echo of {getfield /cell/h {findsolvefield /cell/h /cell/soma Vm}}
+
+These my be run from the gshell with, for example,
+
+    genesis > sli_run simplecell-passive.g
+
+These cause errors under gshell:
+
+simplecell-1.0.g - Hugo's version from test-simplecell with spike and
+    synchans - with local cell1.p == cell.p and protodefs1.g = protodefs.g
+    Fails because spikegen not implemented
+
+simplecell-3.0.g - Has flags for graphics (GENESIS 2), output to file, and
+    batch mode.  It reads protodefs.g and cell3.p which has synchans, but no
+    spike.  For some reason, it gives errors after the same commands that
+    simplecell-0.2.g runs correctly. Defaults are graphics = 0,
+    file_out = 1, batch = 1.
+
+simplecell-3.0-g2.g - same as simplecell-3.0.g, but graphics = 1 for G2.
+
+simplecell-4.0-g2.g - This is a GENESIS 2 script written to be a target
+for G2 compatibiblity in the gshell.  It has flags to enable various
+operations and output.  The default values are:
+
+int batch = 1        // if (batch) then run a default simulation
+int graphics = 1     // display control panel, graphs
+int file_out = 1     // write output to a file
+int calc_ISIs = 1    // Record spike times in a table and calc ISIs
+int tune_params = 1  // Adjust cell and/or channel parameters
+
+This is a variation of simplecell that illustrates ways to "hand tune" or
+perform a manual parameter search to optimize the cell parameters.  Often,
+plots of experimentally measured firing frequency vs. injection current are
+relatively linear over a large region.  For adapting Regular Spiking cells
+(unlike simplecell, a non-adapting Fast Spiking cell), plots are made of
+the frequency of the first, second, third, etc.	 spike intervals.
+For this reason, it is useful to be able to calculate these frequencies,
+and adjust channel parameters or cell passive parameters for a
+satisfactory match to experiment.
+
+The script uses a table object in step_mode 4 (tab_spike) to capture the
+spike times of the action potentials, in order to calculate the intervals
+and frequencies. Tuning of the tabchannels is performed by scaletabchan.
+
+This example also illustrates the unsuitability of the squid giant axon
+channel parameters as a basis for a fast spiking interneuron.  As required
+by its function of reliably delivering impulses to the propulsion system,
+the firing rate of the axon is fairly resistant to change.
+
+With batch = 1, it clears the graph after 5 seconds and replots Vm with the
+time constant of all channel gated doubled.  It has not been tested with
+other values of the flags, or under gshell with sli_run.
+
+Note on hsolve versions:  
+------------------------
+
+Under gshell, simplecell-0.1.g and simplecell-2.0.g give essentially the
+same final Vm as simplecell-2.0.g under GENESIS 2.3.  However,
+simplecell-0.1.g gives a different result under GENESIS 2.3.
+
+Question:  Why are GENESIS 2 simplecell-0.1.g results different from
+    all the others?
+
+Hyothesis: Not using hsolve, they are simply less accurate with the
+   50 microsecond time step used.    When run with sli_run under G3,
+   hsolve is used implicitly, even when not specified.	I predict
+   that plots of outputs from asc_file at a short intervals would
+   show that the spike trains slowly diverge from the two simulations
+   as time goes on, and that reducing the time step will make them
+   closer.
+
+Files for the original G2 version with graphics:
+
+simplecell.g - original version - uses cell.p, protodefs.g and
+graphics.g - defines XODUS graphics functions - uses xtools.g
+xtools.g - commonly used functions for graphics scaling and overlay.
+    This is ugly GENESIS 1 code converted to G2.  It is used in
+    many GENESIS 2 tutorials, but the functionality should be
+    incorporated in new graph objects, instead of using this script.
+
+Dave Beeman - Fri Oct 23 19:36:21 MDT 2009
