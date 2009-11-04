@@ -13,12 +13,23 @@ use SwiggableSLI;
 
 sub sli_list_objects
 {
-  SwiggableSLI::ListObjects();
+  my $result = SwiggableSLI::ListObjects();
+
+  if (!$result)
+  {
+    print "$0: sli_list_objects() failed\n";
+  }
 }
 
 sub sli_list_commands
 {
-  SwiggableSLI::ListCommands();
+  my $result = SwiggableSLI::ListCommands();
+
+
+  if (!$result)
+  {
+    print "$0: sli_list_commands() failed\n";
+  }
 }
 
 sub include_script

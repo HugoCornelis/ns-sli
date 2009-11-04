@@ -28,13 +28,13 @@ our $g3_commands
 sub sli_listcommands
 {
 
-  SLI::ListCommands();
+  SLI::sli_list_commands();
 
 }
 
 sub sli_listobjects
 {
-  SLI::ListObjects();
+  SLI::sli_list_objects();
 }
 
 

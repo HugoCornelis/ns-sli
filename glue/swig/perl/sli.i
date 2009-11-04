@@ -195,7 +195,12 @@ int ListObjects()
 int ListCommands()
 {
 
-  ShowFuncNames("listcommands",1);
+
+  char *argv[2];
+
+  argv[0] = "listcommands";
+
+  ShowFuncNames(1,argv);
 
 }
 
