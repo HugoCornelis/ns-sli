@@ -18,6 +18,7 @@
 
 #include "heccer/heccer.h"
 #include "heccer/output.h"
+#include "heccer/neurospaces/heccer.h"
 #include "neurospaces_ext.h"
 #include "nsintegrator_struct.h"
 #include "neurospaces/symboltable.h"
