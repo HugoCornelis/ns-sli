@@ -310,6 +310,10 @@ int InitHeccerObject(struct SolverRegistration *psr)
   //! related to hardcoded_neutral ?  If so we need to discuss this
   //! because this 'hidden' logic can hide bugs easily.
 
+  //!
+  //! Hugo: Not exactly related to hardcoded neutral but it's just a check
+  //! to be sure that the rooted neutral is there. 
+
   struct PidinStack *ppist = getRootedContext(psr->pcName);
   struct symtab_HSolveListElement *phsle = PidinStackLookupTopSymbol(ppist);
 
@@ -368,7 +372,7 @@ int InitHeccerObject(struct SolverRegistration *psr)
   pheccer->ho = pnsintegrator->pheccerOptions->ho;
 
   
-  HeccerConstruct(pheccer, (void *)pneuro, psr->pcName);
+  HeccerConstruct(pheccer, (void *)pneuro, psr->pcName,NULL);
 
   HeccerCompileP1(pheccer);
   HeccerCompileP2(pheccer);
