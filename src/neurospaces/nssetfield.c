@@ -26,7 +26,7 @@
 
 //------------------------------------------------------------------
 /*!
- *  \fn int NeurospacesSetField(struct symtab_HSolveListElement *phsle, 
+ *  \fn int NSSetField(struct symtab_HSolveListElement *phsle, 
 			struct PidinStack *ppist,
 			char *pcPathname, char *field, char *value)
  *  \return 0 on error, 1 on success.

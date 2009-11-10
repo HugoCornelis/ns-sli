@@ -85,37 +85,45 @@ int IncludeG2Model(char *pcMorphologyDirectory, char *pcScript, void *pvNeurospa
 
     char *argv[20];
 
-    argv[0] = "ns-sli";
+    int argc = 0;
 
-    argv[1] = "-batch";
+    argv[argc++] = "ns-sli";
 
-    argv[2] = "-notty";
+    argv[argc++] = "-batch";
 
-    argv[3] = "-altsimrc";
+    argv[argc++] = "-notty";
+
+    argv[argc++] = "-altsimrc";
 
     if (!pcSimrc)
     {
 	pcSimrc = "/local_home/local_home/hugo/neurospaces_project/ns-sli/source/snapshots/0/.simrc-ns-sli";
     }
 
-    argv[4] = pcSimrc;
+    argv[argc++] = pcSimrc;
 
-    argv[5] = "-morphology-directory";
+    if (pcMorphologyDirectory)
+    {
+	argv[argc++] = "-morphology-directory";
 
-    argv[6] = pcMorphologyDirectory;
+	argv[argc++] = pcMorphologyDirectory;
+    }
 
-    argv[7] = "-models-only";
+    argv[argc++] = "-models-only";
 
-    argv[8] = "-no-exit";
+    argv[argc++] = "-no-exit";
 
-    argv[9] = "-no-interactive";
+    argv[argc++] = "-no-interactive";
 
-    argv[10] = pcScript;
+    if (pcScript)
+    {
+	argv[argc++] = pcScript;
+    }
 
     // At first sight, it seems that envp is not used, so I pass a
     // NULL pointer for it.
 
-    int iFail = sli_main(11, argv, NULL, pneuro);
+    int iFail = sli_main(argc, argv, NULL, pneuro);
 
     return(iFail == 0);
 }
@@ -143,37 +151,45 @@ int RunG2Model(char *pcMorphologyDirectory, char *pcScript, void *pvNeurospaces,
 
     char *argv[20];
 
-    argv[0] = "ns-sli";
+    int argc = 0;
 
-    argv[1] = "-batch";
+    argv[argc++] = "ns-sli";
 
-    argv[2] = "-notty";
+    argv[argc++] = "-batch";
 
-    argv[3] = "-altsimrc";
+    argv[argc++] = "-notty";
+
+    argv[argc++] = "-altsimrc";
 
     if (!pcSimrc)
     {
 	pcSimrc = "/local_home/local_home/hugo/neurospaces_project/ns-sli/source/snapshots/0/.simrc-ns-sli";
     }
 
-    argv[4] = pcSimrc;
+    argv[argc++] = pcSimrc;
 
-    argv[5] = "-morphology-directory";
+    if (pcMorphologyDirectory)
+    {
+	argv[argc++] = "-morphology-directory";
 
-    argv[6] = pcMorphologyDirectory;
+	argv[argc++] = pcMorphologyDirectory;
+    }
 
-/*     argv[7] = "-models-only"; */
+/*     argv[argc++] = "-models-only"; */
 
-    argv[7] = "-no-exit";
+    argv[argc++] = "-no-exit";
 
-    argv[8] = "-no-interactive";
+    argv[argc++] = "-no-interactive";
 
-    argv[9] = pcScript;
+    if (pcScript)
+    {
+	argv[argc++] = pcScript;
+    }
 
     // At first sight, it seems that envp is not used, so I pass a
     // NULL pointer for it.
 
-    int iFail = sli_main(10, argv, NULL, pneuro);
+    int iFail = sli_main(argc, argv, NULL, pneuro);
 
     return(iFail == 0);
 }

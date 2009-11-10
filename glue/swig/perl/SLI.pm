@@ -11,25 +11,37 @@ use strict;
 use SwiggableSLI;
 
 
+our $backend_initialized;
+
+
 sub sli_list_objects
 {
-  my $result = SwiggableSLI::ListObjects();
+    if (!$backend_initialized)
+    {
+	run_model(undef, $GENESIS3::model_container);
+    }
 
-  if (!$result)
-  {
-    print "$0: sli_list_objects() failed\n";
-  }
+    my $result = SwiggableSLI::ListObjects();
+
+    if (!$result)
+    {
+	print "$0: sli_list_objects() failed\n";
+    }
 }
 
 sub sli_list_commands
 {
-  my $result = SwiggableSLI::ListCommands();
+    if (!$backend_initialized)
+    {
+	run_model(undef, $GENESIS3::model_container);
+    }
 
+    my $result = SwiggableSLI::ListCommands();
 
-  if (!$result)
-  {
-    print "$0: sli_list_commands() failed\n";
-  }
+    if (!$result)
+    {
+	print "$0: sli_list_commands() failed\n";
+    }
 }
 
 sub include_script
@@ -76,6 +88,10 @@ sub include_model
     {
 	print "$0: include_model() failed\n";
     }
+    else
+    {
+	$backend_initialized = 'initialized from include_model()';
+    }
 }
 
 
@@ -93,26 +109,36 @@ sub run_model
 
     # set the directory where to find .p files
 
-    $script =~ m(^(.*)/);
+    my $morphology_directory;
 
-    my $morphology_directory = $1;
+    if (defined $script)
+    {
+	$script =~ m(^(.*)/);
 
-    $morphology_directory = $ENV{HOME} . "/neurospaces_project/ns-sli/source/snapshots/0";
+	$morphology_directory = $1;
+
+	$morphology_directory = $ENV{HOME} . "/neurospaces_project/ns-sli/source/snapshots/0";
+
+    }
 
     # read the model, result is always 0 for some obscure reason.
 
     my $result
 	= SwiggableSLI::RunG2Model
 	    (
-	     "$morphology_directory",
-	     "$script",
+	     (defined $morphology_directory ? "$morphology_directory" : undef),
+	     (defined $script ? "$script" : undef),
 	     $model_container->backend(),
 	     $ENV{HOME} . "/neurospaces_project/ns-sli/source/snapshots/0/.simrc-ns-sli",
 	    );
 
     if (!$result)
     {
-	print "$0: include_model() failed\n";
+	print "$0: run_model() failed\n";
+    }
+    else
+    {
+	$backend_initialized = 'initialized from run_model()';
     }
 }
 
