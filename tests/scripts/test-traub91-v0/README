@@ -1,0 +1,83 @@
+traub91/test-traub91-v0
+-----------------------
+
+These scripts illustrate a method of converting a cell model with a linear
+chain of symcompartments to one with asymmetric compartments.
+
+The examples are modifications of the 1991 Traub model of a hypocampal
+CA3 region pyramidal cell in the GENESIS 2 genesis/Scripts/traub91
+directory.   This uses symcompartments in the cell parameter file CA3.p.
+
+Summary of calculation:
+-----------------------
+
+Figure 2.3 in the BoG shows a GENESIS compartment, with the axial
+resistance to the left of the point where Vm is calculated from currents
+entering the compartment.  The transmembrane currents are given by a
+conductance density multiplied by the compartment surface area.  The other
+source of currents that affect Vm are the currents that enter through the
+axial resistance.  The axial resistance Ra is given in BoG Equation 5.6, as
+being equal to RA times the length of the compartment divided by the cross
+sectional area.  (Short fat wires have less resistance than long thin
+ones.)
+
+A symcompartment places the the point where transmembrane currents enter
+in the middle of Ra.  If this point were now taken to be the end of
+an asymmetric compartment, the axial resistance in Figure 2.3 would
+be composed of equal contributions from the original symcompartment, and
+the "child" compartment to the left.  By changing the dimensions of
+the compartment, the Ra of the new asymmetric can be changed to
+this equivalent value, while keeping the original value of RA.
+If this is done without changing the the surface area of the compartment,
+all the original transmembrane conductance densities can be used.
+
+The algorthim is:
+
+   (1) Keep the surface area the same, so that 1/Rm, Cm, channel gmax,
+       etc. all can use the same value per unit area.
+
+    new_len*new_dia = len*dia == a
+
+   (2) The axial resistance Ra is proportional to len/cross-sectional-area.
+       Ra of the asymmetric compartment = Ra/2 + Ra(child)/2,
+       where "child" is the compartment connected to the Ra of the
+       parent compartment.
+
+       new_len/(new_dia*new_dia) =
+           (len/(dia*dia)  + child_len/(child_dia*child_dia))/2.0
+
+   (3) Solve these for new_len and new_dia
+
+The script new_dim_calc.g does this for some hard-coded values taken from
+the Traub 1991 model cell parameter file CA3.p, which uses symcompartments.
+Of course, these values should be obtained automatically from getfield of
+model fields.  However, finding parent-child relationships in GENESIS 2 is
+tricky.
+
+These values were used to create CA3_asym.p, an equivalent cell parameter
+file with compartments.
+
+traub91.g  - original GENESIS 2.3 version using CA3.p
+traub91_asym.g - modification to use CA3_asym.p
+traub91_both.g - outputs/plots results of both.
+
+For injection currents less than 0.4 nA, the plots from the two versions
+are very close.  But, the differences grow for inj >= 0.4 nA.  This is a
+chaotic region where even the symmetric model shows great variation with
+step size.
+
+***** Yet TODO
+
+The analysis becomes much harder when there is a branch in the dendrite,
+and a symcompartment is connected to two others through their different
+axial resistances.  This will take (a) some drawing of figures and
+thinking about the problem, (b) examination of GENESIS 2.3
+genesis/src/segment/symcompart.c, (c) use of showmsg to examine the
+messages that exist when a branched symcompartment model is loaded
+with readcell.
+
+These scripts have not yet been modified to run under gshell.  The G3
+version should use code from test-simplecell to eliminate graphics,
+output to a file, and perform any needed gate intialization.
+
+-------------------------------------------------------------------------
