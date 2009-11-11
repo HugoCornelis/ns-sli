@@ -756,6 +756,43 @@ char**	argv;
 	    return 0;
 	  }
 
+	//- if we can find the affected path in the model container
+
+	int iModelContainer = 0;
+
+	struct PidinStack *ppist = NULL;
+
+	if (optargc == 2)
+	{
+	    ppist = getRootedContext(".");
+	}
+	else
+	{
+	    ppist = getRootedContext(optargv[1]);
+	}
+
+	if (PidinStackLookupTopSymbol(ppist))
+	{
+	    iModelContainer = 1;
+	}
+
+	if (iModelContainer)
+	{
+	    //- the model container always accepts new fields
+
+	    OK();
+
+	    //- free memory and return
+
+	    PidinStackFree(ppist);
+
+	    return 1;
+	}
+	else
+	{
+	    PidinStackFree(ppist);
+	}
+
 	if (optargc == 2)
 	    element = WorkingElement();
 	else /* optargc == 3 */
