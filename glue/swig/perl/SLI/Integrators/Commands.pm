@@ -44,6 +44,11 @@ sub sli_load
 {
     my $filename = shift;
 
+    if (!-e $filename)
+    {
+	$filename = "/usr/local/ns-sli/tests/scripts/$filename";
+    }
+
     SLI::include_model($filename, $GENESIS3::model_container);
 
     return "*** Ok: sli_load $filename";
@@ -64,6 +69,11 @@ sub sli_run
 {
     my $filename = shift;
 
+    if (!-e $filename)
+    {
+	$filename = "/usr/local/ns-sli/tests/scripts/$filename";
+    }
+
     SLI::run_model($filename, $GENESIS3::model_container);
 
     return "*** Ok: sli_run $filename";
@@ -83,6 +93,11 @@ sub sli_run_help
 sub sli_script
 {
     my $filename = shift;
+
+    if (!-e $filename)
+    {
+	$filename = "/usr/local/ns-sli/tests/scripts/$filename";
+    }
 
     SLI::include_script($filename);
 
