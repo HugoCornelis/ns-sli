@@ -407,12 +407,12 @@ static double calc_vol(double len,double dia);
 void add_spines();
 void add_fspine();
 void read_script();
-void unscale_kids();
-void scale_kids();
+/* void unscale_kids(); */
+void scale_kids(struct symtab_HSolveListElement *phsle, struct PidinStack *ppist, float dens, float dens2, float dens3, float dia, float length, double *surface, double *volume, int flags);
 /* void traverse_cell(); */
 /* void makeproto_func(); */
 /* void set_compt_field(); */
-void unscale_shells();
+/* void unscale_shells(); */
 
 
 int ncompts=0,nchans=0,nshells=0,nothers=0;
@@ -429,7 +429,7 @@ struct symtab_HSolveListElement *add_compartment(int flags,char *name,char *link
 void parse_compartment(int flags,char *name,char *parent,
 		       double x,double y,double z,
 		       double x00,double y00,double z00,
-		       double d,int nargs,char ch[][NAMELEN],double *dens);
+		       double d,int nargs,char ch[][NAMELEN],float *dens);
 
 
 
@@ -1151,7 +1151,7 @@ add_channel(char *name,char *parent)
 void parse_compartment(int flags,char *name,char *parent,
 		       double x,double y,double z,
 		       double x00,double y00,double z00,
-		       double d,int nargs,char ch[][NAMELEN],double * dens)
+		       double d,int nargs,char ch[][NAMELEN],float * dens)
 {
 	double   nlambda = 0.0;
 	char	*ch_name = NULL;
@@ -1320,7 +1320,11 @@ void parse_compartment(int flags,char *name,char *parent,
 			continue;
 		}
 /* 		chanlist[k] = elm; */
-/* 		scale_kids(elm,dens[k],val2,val3,d,len,&surf,&vol,flags); */
+		struct PidinStack *ppistChannel = getRootedContext(name);
+
+		PidinStackPushSymbol(ppistChannel, phsleChannel);
+
+		scale_kids(phsleChannel, ppistChannel, dens[k], val2, val3, d, len, &surf, &vol, flags);
 	}
 /* 	argv[0] = "c_do_add_msg"; */
 /* 	for (j = 7,k=0 ; j < nargs ; j += 2,k++) { */
@@ -1771,7 +1775,7 @@ int read_data(line,lineno,flags)
 	float	x,y,z,d, x0, y0, z0;
 	float	r,theta,phi, r0, theta0, phi0;
 	static char	ch[MAX_NCHANS][NAMELEN];
-	double	dens[MAX_NCHANS];
+	float	dens[MAX_NCHANS];
     float   dp,lp,xp,yp,zp;
 	static char	prevname[NAMELEN];
     char    randname[NAMELEN];
@@ -2526,18 +2530,19 @@ static char *chomp_leading_spaces(line)
 /* 	} */
 /* } */
 
-/* void scale_kids(elm,dens,dens2,dens3,dia,length,surface,volume,flags) */
-/* 	Element	*elm; */
-/* 	float	dens,dens2,dens3; */
-/* 	float	dia,length,*surface,*volume; */
-/* 	int	flags; */
-/* { */
-/* 	char	*oname; */
+void scale_kids(struct symtab_HSolveListElement *phsle, struct PidinStack *ppist, float dens, float dens2, float dens3, float dia, float length, double *surface, double *volume, int flags)
+{
+	char	*oname;
 /* 	struct Ca_concen_type *shell; */
 /* 	int scale_shells(); */
 /* 	Mpump	*mpump; */
 
+	double dValue = FLT_MAX;
+
 /* 	oname = BaseObject(elm)->name; */
+
+	oname = SymbolHSLETypeDescribe(phsle->iType);
+
 /* 	if (strcmp(oname,"hh_channel") == 0) { */
 /* 		if (dens < 0.0) */
 /* 			((struct hh_channel_type *)elm)->Gbar = -1.0 * dens; */
@@ -2607,13 +2612,51 @@ static char *chomp_leading_spaces(line)
 /* 		((struct spike_type *)elm)->thresh = dens; */
 /* 	} else if (strcmp(oname,"spikegen") == 0) { */
 /* 		((struct Spikegen_type *)elm)->thresh = dens; */
-/* 	} else if (strcmp(oname,"Ca_concen") == 0) { */
-/*         	shell = (struct Ca_concen_type *)elm; */
-/*         	if (dens < 0.0) */
-/*          		shell->B = -1.0 * dens; */
-/*         	else */
-/*        			shell->B = dens / calc_shell_vol(length,dia,shell->thick); */
-/* 	} else if ((strcmp(oname,"difshell") == 0) || */
+/* 	} else */
+	if (strcmp(oname, "T_sym_pool") == 0)
+	{
+/* 	    char pcB[100]; */
+
+	    if (dens < 0.0)
+	    {
+		double B = -1.0 * dens;
+
+/* 		sprintf(pcB, "%g", B); */
+
+		dValue = B;
+	    }
+	    else
+	    {
+		double dThickness = SymbolParameterResolveValue(phsle, ppist, "THICKNESS");
+
+		double B = dens / calc_shell_vol(length, dia, dThickness);
+
+/* 		sprintf(pcB, "%g", B); */
+
+		dValue = B;
+	    }
+
+	    int iBase = 1;
+
+	    struct PidinStack *ppistRoot = PidinStackParse("/");
+
+	    struct symtab_HSolveListElement *phsleRoot
+		= PidinStackLookupTopSymbol(ppistRoot);
+
+	    struct PidinStack *ppistBase
+		= SymbolPrincipalSerial2Context(phsleRoot, ppistRoot, iBase);
+
+	    struct symtab_HSolveListElement *phsleBase
+		= PidinStackLookupTopSymbol(ppistBase);
+
+	    int iParameterSymbol = PidinStackToSerial(ppist) - iBase;
+
+	    struct symtab_Parameters *pparBeta
+		= SymbolCacheParameterDouble(phsleBase, iParameterSymbol, "BETA", dValue);
+
+/* 	    setParameter(ppist, phsle, "B", pcB, SETPARA_GENESIS2); */
+	}
+/* 	else if ((strcmp(oname,"difshell") == 0) || */
 /* 			   (strcmp(oname,"difbuffer") == 0) || */
 /* 			   (strcmp(oname,"concpool") == 0)) { */
 /* 		if (scale_shells(elm,dens,dia,length,dens,dens2,dens3)) { */
@@ -2637,7 +2680,7 @@ static char *chomp_leading_spaces(line)
 /* 		/* positive values are handled by scale_shells, negative */
 /* 		** ones are changed by RESET action * */
 /* 	} */
-/* } */
+}
 
 /* int scale_shells(elm,number,dia,length,shdia,shlen,shthick) */
 /* /* boolean: if true elm does not exist and needs to be deleted, otherwise */
