@@ -80,7 +80,7 @@ int NSShowField(int argc,char **argv)
     if(!strcmp(argv[i],"*"))
     {
       // displays all fields;
-      PrintParameterTraversal(ppist);
+      SymbolPrintParameterTraversal(NULL,ppist);
       return 1;
 
     }
@@ -88,7 +88,7 @@ int NSShowField(int argc,char **argv)
     {
 
       // just does the same as "*"
-      PrintParameterTraversal(ppist);
+      SymbolPrintParameterTraversal(NULL,ppist);
       return 1;
 
     }
