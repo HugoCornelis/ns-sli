@@ -2636,7 +2636,7 @@ void scale_kids(struct symtab_HSolveListElement *phsle, struct PidinStack *ppist
 		dValue = B;
 	    }
 
-	    int iBase = 1;
+/* 	    int iBase = 1; */
 
 	    struct PidinStack *ppistRoot = PidinStackParse("/");
 
@@ -2644,12 +2644,27 @@ void scale_kids(struct symtab_HSolveListElement *phsle, struct PidinStack *ppist
 		= PidinStackLookupTopSymbol(ppistRoot);
 
 	    struct PidinStack *ppistBase
-		= SymbolPrincipalSerial2Context(phsleRoot, ppistRoot, iBase);
+		= PidinStackDuplicate(ppist);
+/* 		= SymbolPrincipalSerial2Context(phsleRoot, ppistRoot, iBase); */
+
+	    //- pop concen element
+
+	    PidinStackPop(ppistBase);
+
+	    //- pop compartment
+
+	    PidinStackPop(ppistBase);
 
 	    struct symtab_HSolveListElement *phsleBase
 		= PidinStackLookupTopSymbol(ppistBase);
 
+	    int iBase = PidinStackToSerial(ppistBase);
+
+	    PidinStackUpdateCaches(ppist);
+
 	    int iParameterSymbol = PidinStackToSerial(ppist) - iBase;
+
+	    // \todo attach to a G2 function to prevent scaling.
 
 	    struct symtab_Parameters *pparBeta
 		= SymbolCacheParameterDouble(phsleBase, iParameterSymbol, "BETA", dValue);
