@@ -341,6 +341,7 @@ struct neurospaces_symbol * NeurospacesGetSymbol(char *pcname);
 //- -- Defined in nscomm.c --
 char * mapParameterString(char *pcfield);
 struct ParameterMapper * mapParameter(char *pcfield);
+struct symtab_Parameters *newParameter(char *pcValue, int iType);
 int setParameter(struct PidinStack *ppist,
 		 struct symtab_HSolveListElement *phsle,
 		 char *pcField, char *pcValue,int iFlag);

@@ -2638,13 +2638,12 @@ void scale_kids(struct symtab_HSolveListElement *phsle, struct PidinStack *ppist
 
 /* 	    int iBase = 1; */
 
-	    struct PidinStack *ppistRoot = PidinStackParse("/");
+/* 	    struct PidinStack *ppistRoot = PidinStackParse("/"); */
 
-	    struct symtab_HSolveListElement *phsleRoot
-		= PidinStackLookupTopSymbol(ppistRoot);
+/* 	    struct symtab_HSolveListElement *phsleRoot */
+/* 		= PidinStackLookupTopSymbol(ppistRoot); */
 
-	    struct PidinStack *ppistBase
-		= PidinStackDuplicate(ppist);
+	    struct PidinStack *ppistBase = PidinStackDuplicate(ppist);
 /* 		= SymbolPrincipalSerial2Context(phsleRoot, ppistRoot, iBase); */
 
 	    //- pop concen element

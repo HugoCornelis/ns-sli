@@ -138,43 +138,127 @@ int setStateInit(struct PidinStack *ppist){
 
 //----------------------------------------------------------------------------
 /*!
+ *  \fn int newParameter(char *pcValue, int iType)
+ *
+ * The newParameter() function allocates a parameter and associates a
+ * value with it.  Depending on the type, the parameter can be fixed,
+ * scalable or have other properties.  The mapParameter() function
+ * defines the essential properties of the parameters.  See the code
+ * for more details.
+ *
+ */
+//----------------------------------------------------------------------------
+
+struct symtab_Parameters *newParameter(char *pcValue, int iType)
+{
+    //- set default result: failure
+
+    struct symtab_Parameters *pparResult = NULL;
+
+    if (iType == SETPARA_GENESIS2)
+    {
+	struct symtab_Parameters *pparScale = ParameterNewFromNumber("scale", 1.0);
+
+	double dValue = atof(pcValue);
+
+	struct symtab_Parameters *pparValue = ParameterNewFromNumber("value", dValue);
+
+	//- link parameters into a list
+
+	pparScale->pparFirst = pparScale;
+	pparScale->pparNext = pparValue;
+
+	pparValue->pparFirst = pparScale;
+	pparValue->pparNext = NULL;
+
+	struct symtab_Function *pfun = FunctionCalloc();
+
+	FunctionSetName(pfun, "GENESIS2");
+	FunctionAssignParameters(pfun, pparScale);
+
+	//- assign the scaling function to the parameter pparResult 
+
+	pparResult = ParameterCalloc();
+
+	pparResult->uValue.pfun = pfun;
+
+	ParameterSetType(pparResult, TYPE_PARA_FUNCTION);
+    }
+    else if( iType == SETPARA_HERE )
+    {
+	pparResult = ParameterCalloc();
+  
+	pparResult->uValue.dNumber = FLT_MAX; /* dHere; */
+	ParameterSetType(pparResult,TYPE_PARA_NUMBER);
+
+    }
+    else if( iType == SETPARA_NUM )
+    {
+	pparResult = ParameterCalloc();
+
+	double dValue = strtod(pcValue,NULL);
+
+	pparResult->uValue.dNumber = dValue;
+	ParameterSetType(pparResult,TYPE_PARA_NUMBER);
+
+    }
+    else if( iType == SETPARA_FIELD )
+    {
+	pparResult = ParameterCalloc();
+
+	struct PidinStack *ppistValue  = PidinStackParse(pcValue);
+
+	struct symtab_IdentifierIndex *pidinValue = 
+	    PidinStackToPidinQueue(ppistValue);
+
+	pparResult->uValue.pidin = pidinValue;
+	ParameterSetType(pparResult,TYPE_PARA_FIELD);
+
+    }
+    else
+    {
+	pparResult = ParameterCalloc();
+
+	pparResult->uValue.pcString = pcValue;
+	ParameterSetType(pparResult,TYPE_PARA_STRING);
+
+    }
+
+
+    //- return result
+
+    return(pparResult);
+}
+
+
+//----------------------------------------------------------------------------
+/*!
  *  \fn int setParameter(struct PidinStack *ppist,
  *		 struct symtab_HSolveListElement *phsle,
  *		 char *pcField, char *pcValue,int iType)
  *
- * The setParameter() function gets called for SLI parameters and for
- * model-container parameters.  That is a bit awkward, but that is the
- * way it is right now.
+ * The setParameter() function associates both SLI fields and model
+ * container parameters with values.  The mapParameter() function is
+ * called to convert SLI field names to model container parameter
+ * names.  A model container parameter is allocated using
+ * newParameter() and attached to the symbol using
+ * BioComponentChangeParameter().
+ *
  */
 //----------------------------------------------------------------------------
 int setParameter(struct PidinStack *ppist,
 		 struct symtab_HSolveListElement *phsle,
 		 char *pcField, char *pcValue,int iType){
 
- 
-       
-  struct symtab_Parameters *pparTop = ParameterCalloc();
-  
-
-  if(!pparTop)
-    return 0;
-
-
-  struct ParameterMapper *ppm = mapParameter(pcField);
-
   int iFlags = 0;
 
   double dHere = FLT_MAX;
 
+  struct ParameterMapper *ppm = mapParameter(pcField);
+
   if (ppm)
   {
-      ParameterSetName(pparTop, ppm->pcModelContainer);
-
       iFlags = ppm->iFlags;
-  }
-  else
-  {
-      ParameterSetName(pparTop, strdup(pcField));
   }
 
   if (iFlags & SLI_PARAMETER_SCALED)
@@ -252,79 +336,21 @@ int setParameter(struct PidinStack *ppist,
   //- check for the GENESIS2 flag, if on then
   //- we mut allocate and set a GEN2 function parameter.
   //-
-  if( iType == SETPARA_GENESIS2 )
+
+  struct symtab_Parameters *pparTop = NULL;
+
+/*   if( iType == SETPARA_GENESIS2 ) */
   {
-	  
-    struct symtab_Parameters *pparScale = 
-      ParameterNewFromNumber("scale",1.0);
-
-
-    double dValue = atof(pcValue);
-    struct symtab_Parameters *pparValue = 
-      ParameterNewFromNumber("value",dValue);
-
-
-    //i 
-    //i The neurospaces data struct parameters are in a linked
-    //i list and must be connected otherwise the parameter lookup will fail.
-    //i
-    pparScale->pparFirst = pparScale;
-    pparScale->pparNext = pparValue;
-
-    pparValue->pparFirst = pparScale;
-    pparValue->pparNext = NULL;
-
-    
-    struct symtab_Function *pfun = FunctionCalloc();
-
-    FunctionSetName(pfun,"GENESIS2");
-    FunctionAssignParameters(pfun,pparScale);
-
-
-    //-
-    //- Here we assign the scaling function to the parameter pparTop 
-    //-
-    pparTop->uValue.pfun = pfun;
-
-    ParameterSetType(pparTop,TYPE_PARA_FUNCTION);
-
+      pparTop = newParameter(pcValue, iType);
   } 
-  else if( iType == SETPARA_HERE )
+
+  if (ppm)
   {
-
-
-    pparTop->uValue.dNumber = dHere;
-    ParameterSetType(pparTop,TYPE_PARA_NUMBER);
-
-  }
-  else if( iType == SETPARA_NUM )
-  {
-
-
-    double dValue = strtod(pcValue,NULL);
-
-    pparTop->uValue.dNumber = dValue;
-    ParameterSetType(pparTop,TYPE_PARA_NUMBER);
-
-  }
-  else if( iType == SETPARA_FIELD )
-  {
-
-    struct PidinStack *ppistValue  = PidinStackParse(pcValue);
-
-    struct symtab_IdentifierIndex *pidinValue = 
-      PidinStackToPidinQueue(ppistValue);
-
-    pparTop->uValue.pidin = pidinValue;
-    ParameterSetType(pparTop,TYPE_PARA_FIELD);
-
+      ParameterSetName(pparTop, ppm->pcModelContainer);
   }
   else
   {
-
-    pparTop->uValue.pcString = pcValue;
-    ParameterSetType(pparTop,TYPE_PARA_STRING);
-
+      ParameterSetName(pparTop, strdup(pcField));
   }
 
 
@@ -421,7 +447,7 @@ char * mapParameterString(char *pcField){
 //----------------------------------------------------------------------------
 struct ParameterMapper * mapParameter(char *pcField){
 
-    struct ParameterMapper ppm[] =
+    static struct ParameterMapper ppm[] =
     {
 	{	    "Cm",	"CM",	SLI_PARAMETER_SCALED_TO_COMPARTMENT_SURFACE | SLI_PARAMETER_NUMBER,	},
 	{	    "Rm",	"RM",	SLI_PARAMETER_SCALED_TO_COMPARTMENT_SURFACE | SLI_PARAMETER_NUMBER,	},
