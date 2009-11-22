@@ -394,6 +394,20 @@ struct symtab_HSolveListElement * CreateHHGate(
 		 &pgatkBackward->bio.ioh.iol.hsle);
 
 
+  //- allocate a parameter for state_init
+
+  // steady state is forward over backward steady states.
+
+/*   struct symtab_Parameters *pparVmInit */
+/*       = newParameter("..->Vm_init", SETPARA_FIELD); */
+
+  struct symtab_Parameters *pparStateInit
+      = newParameter("-1", SETPARA_NUM);
+
+  ParameterSetName(pparStateInit, "state_init");
+
+  BioComponentChangeParameter(&pgathh->bio, pparStateInit);
+
   return (struct symtab_HSolveListElement *)pgathh;
 
 }
@@ -467,6 +481,20 @@ struct symtab_HSolveListElement * CreateConcGate(
 
   SymbolAddChild(&pgathh->bio.ioh.iol.hsle,
 		 &pconcgatkBackward->bio.ioh.iol.hsle);
+
+  //- allocate a parameter for state_init
+
+  // steady state is forward over backward steady states.
+
+/*   struct symtab_Parameters *pparVmInit */
+/*       = newParameter("..->Vm_init", SETPARA_FIELD); */
+
+  struct symtab_Parameters *pparStateInit
+      = newParameter("-1", SETPARA_NUM);
+
+  ParameterSetName(pparStateInit, "state_init");
+
+  BioComponentChangeParameter(&pgathh->bio, pparStateInit);
 
 
   return (struct symtab_HSolveListElement *)pgathh;
