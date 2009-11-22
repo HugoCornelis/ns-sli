@@ -128,6 +128,7 @@ static char rcsid[] = "$Id: sim_extfields.c,v 1.3 2005/07/01 10:03:09 svitak Exp
 #include <stdio.h>
 #include "shell_func_ext.h"
 #include "sim_ext.h"
+#include "nsintegrator.h"
 
 int AddExtField(element)
 

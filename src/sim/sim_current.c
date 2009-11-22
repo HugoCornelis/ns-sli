@@ -27,6 +27,8 @@ static char rcsid[] = "$Id: sim_current.c,v 1.2 2005/06/27 19:00:58 svitak Exp $
 #include "shell_func_ext.h"
 #include "sim_ext.h"
 
+#include "neurospaces/pidinstack.h"
+
 /* static Element *recent_element; */
 static Connection *recent_connection;
 /* static Element *working_element; */
