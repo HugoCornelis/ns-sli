@@ -2663,10 +2663,20 @@ void scale_kids(struct symtab_HSolveListElement *phsle, struct PidinStack *ppist
 
 	    int iParameterSymbol = PidinStackToSerial(ppist) - iBase;
 
-	    // \todo attach to a G2 function to prevent scaling.
+	    //- attach the parameter to a G2 function to prevent scaling.
+
+	    char pcValue[100];
+
+	    sprintf(pcValue, "%g", dValue);
 
 	    struct symtab_Parameters *pparBeta
-		= SymbolCacheParameterDouble(phsleBase, iParameterSymbol, "BETA", dValue);
+		= newParameter(pcValue, SETPARA_GENESIS2);
+
+	    ParameterSetName(pparBeta, "BETA");
+
+	    //- cache this value for the target element
+
+	    SymbolCacheParameter(phsleBase, iParameterSymbol, pparBeta);
 
 /* 	    setParameter(ppist, phsle, "B", pcB, SETPARA_GENESIS2); */
 	}
