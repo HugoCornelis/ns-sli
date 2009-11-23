@@ -90,6 +90,7 @@ PUBLIC_MODELS
             PARAMETER ( HH_NUMBER_OF_TABLE_ENTRIES = 3.40282e+38 ),
             PARAMETER ( state_init = 0.0837136 ),
             PARAMETER ( POWER = 4 ),
+            PARAMETER ( state_init = -1 ),
           END PARAMETERS
           gate_kinetic "A"
             PARAMETERS
@@ -117,6 +118,7 @@ PUBLIC_MODELS
             PARAMETER ( HH_NUMBER_OF_TABLE_ENTRIES = 3.40282e+38 ),
             PARAMETER ( state_init = 0.747485 ),
             PARAMETER ( POWER = 1 ),
+            PARAMETER ( state_init = -1 ),
           END PARAMETERS
           gate_kinetic "A"
             PARAMETERS
@@ -195,6 +197,7 @@ PUBLIC_MODELS
           PARAMETERS
             PARAMETER ( state_init = 0.0837136 ),
             PARAMETER ( POWER = 4 ),
+            PARAMETER ( state_init = -1 ),
           END PARAMETERS
           gate_kinetic "A"
             PARAMETERS
@@ -221,6 +224,7 @@ PUBLIC_MODELS
           PARAMETERS
             PARAMETER ( state_init = 0.747485 ),
             PARAMETER ( POWER = 1 ),
+            PARAMETER ( state_init = -1 ),
           END PARAMETERS
           gate_kinetic "A"
             PARAMETERS
