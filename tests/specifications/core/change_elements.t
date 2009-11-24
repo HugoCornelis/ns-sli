@@ -13,6 +13,13 @@ my $test
 				command => 'src/ns-sli',
 				command_tests => [
 						  {
+						   description => "What is the initial working element?",
+						   read => "
+/
+",
+						   write => 'pwe',
+						  },
+						  {
 						   description => "Can we create a neutral element?",
 						   write => 'create neutral /foo',
 						  },
@@ -29,8 +36,19 @@ my $test
 						   write => 'ce /foo/compartment',
 						  },
 						  {
-						   description => "Can we print the current element to the screen?",
+						   description => "Can we print the current element to the screen (1)?",
 						   read => '/foo/compartment
+',
+						   write => 'pwe',
+						  },
+						  {
+						   description => "Can we change to the parent element?",
+						   write => 'ce ..',
+						  },
+						  {
+						   description => "Can we print the current element to the screen (2)?",
+						   disabled => "this one does not work yet, working on it",
+						   read => '/foo
 ',
 						   write => 'pwe',
 						  },
@@ -52,7 +70,7 @@ my $test
 				description => "a simple script that changes the current element, then prints it to the screen",
 			       },
 			      ],
-       description => "current working element",
+       description => "changing and obtaining the current working element",
        name => 'core/change_elements.t',
       };
 
