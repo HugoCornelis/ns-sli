@@ -94,9 +94,14 @@ int NSReset(){
 
   for( i = 0; i < iHeccers; i++ )
   {
+      // when can this heccer be NULL?
+      // in any simple scripts seems, but only the first entry in the array.
+      // \todo that is a mystery.
 
-    SetupIOMessages(ppioMsg, iIoMsgs, pnsintegrator->psr[i].uSolver.pheccer);
-
+      if (pnsintegrator->psr[i].uSolver.pheccer)
+      {
+	  SetupIOMessages(ppioMsg, iIoMsgs, pnsintegrator->psr[i].uSolver.pheccer);
+      }
   }
 
   return 1;
