@@ -141,7 +141,7 @@ int NSSetupAlpha( char *pcName, char *pcField, char **pcArgs,
 
     double dMult2 = - strtod(pcArgs[6], (char **)NULL);
     char pcMult2[100];
-    sprintf(pcMult2, "-(%g)", dMult2);
+    sprintf(pcMult2, "%g", dMult2);
 
     setParameter(ppistBackward, phsleBackward,"HH_AB_Scale",pcArgs[5],SETPARA_NUM);
     setParameter(ppistBackward, phsleBackward,"HH_AB_Mult",pcMult2,SETPARA_NUM);
@@ -262,7 +262,7 @@ int NSSetupAlpha( char *pcName, char *pcField, char **pcArgs,
 
     double dMult2 = - strtod(pcArgs[6], (char **)NULL);
     char pcMult2[100];
-    sprintf(pcMult2, "-(%g)", dMult2);
+    sprintf(pcMult2, "%g", dMult2);
 
     setParameter(ppistBackward, phsleBackward,"HH_AB_Scale",pcArgs[5],SETPARA_NUM);
     setParameter(ppistBackward, phsleBackward,"HH_AB_Mult",pcMult2,SETPARA_NUM);
