@@ -23,7 +23,7 @@ my $test
 						   write => 'call model_container NEUROSPACES_QUERY',
 						  },
 						  {
-						   comment => 'Note that for unknown reasons sometimes the HH_AB_Mult parameter has a minus sign, even if its value is zero',
+						   comment => 'It may be that the HH_AB_Mult parameter has a minus sign, even if its value is zero, this is due to the specific implementation details of NSSetupAlpha().',
 						   description => 'What does the model look like ?',
 						   read => '#!neurospacesparse
 // -*- NEUROSPACES -*-

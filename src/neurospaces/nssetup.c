@@ -222,7 +222,7 @@ int NSSetupAlpha( char *pcName, char *pcField, char **pcArgs,
 
     double dMult = - strtod(pcArgs[1], (char **)NULL);
     char pcMult[100];
-    sprintf(pcMult, "-(%g)", dMult);
+    sprintf(pcMult, "%g", dMult);
 
     setParameter(ppistForward, phsleForward,"HH_AB_Scale",pcArgs[0],SETPARA_NUM);
     setParameter(ppistForward, phsleForward,"HH_AB_Mult",pcMult,SETPARA_NUM);
