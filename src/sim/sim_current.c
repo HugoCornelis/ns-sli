@@ -65,7 +65,14 @@ void SetWorkingElement(char *parent_name, char *element_name)
     }
     else
     {
-	strcpy(working_element_name, element_name);
+	if (element_name[0] == '/')
+	{
+	    strcpy(working_element_name, element_name);
+	}
+	else
+	{
+	    strcat(working_element_name, element_name);
+	}
     }
 
     if (working_element_name[0] != '/')
