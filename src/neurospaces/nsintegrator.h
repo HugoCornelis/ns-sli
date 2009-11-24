@@ -161,6 +161,12 @@ struct ioMsg
     char *pcMsgName;
 
     /*!
+     * has this message been integrated in the run-time
+     */
+
+    int iRunTime;
+
+    /*!
      * the value of activation
      */
     double dValue;

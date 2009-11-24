@@ -121,6 +121,16 @@ static int SetupIOMessages( struct ioMsg **ppioMsg, int iIoMsgs,
 
     if(!strcmp(ppioMsg[i]->pcMsgName,"save"))
     {
+	//- every reset triggers this function, so may be
+
+	//- if this message is already integrated in the run-time
+
+	if (ppioMsg[i]->iRunTime)
+	{
+	    //- skip
+
+	    continue;
+	}
 
       struct ascfile_type *pasc = 
 	(struct ascfile_type*)GetElement(ppioMsg[i]->pcTargetSymbol);
@@ -173,6 +183,11 @@ static int SetupIOMessages( struct ioMsg **ppioMsg, int iIoMsgs,
 	       "Error: cannot find output fields for asc_file %s\n",
 	       pasc->name);
       }
+
+
+      //- register that this message was integrated in the run-time
+
+      ppioMsg[i]->iRunTime = 1;
 
     }
 
