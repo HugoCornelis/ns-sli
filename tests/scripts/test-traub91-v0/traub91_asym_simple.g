@@ -117,9 +117,16 @@ end
 //         Main Script
 //===============================
 // Build the cell from a parameter file using the cell reader
-readcell tests/scripts/test-traub91-v0/CA3_asym.p /cell
+readcell tests/scripts/test-traub91-v0/CA3_asym_simple.p /cell
 
-setfield /cell/soma inject {injcurr}
+setfield /cell/apical_19 inject {injcurr}
+
+/* Create the output element */
+create asc_file /output/plot_out
+// useclock /output/plot_out 9
+addmsg /cell/apical_19 /output/plot_out SAVE Vm
+addmsg /cell/apical_18 /output/plot_out SAVE Vm
+setfield /output/plot_out filename "/tmp/traub91_asym"
 
 // // make the control panel
 // make_control
@@ -141,12 +148,6 @@ if (hflag)
     reset
     echo "Using hsolve"
 end
-
-/* Create the output element */
-create asc_file /output/plot_out
-// useclock /output/plot_out 9
-addmsg /cell/soma /output/plot_out SAVE Vm
-setfield /output/plot_out filename "/tmp/traub91_asym"
 
 //check
 reset
