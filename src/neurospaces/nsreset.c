@@ -110,12 +110,8 @@ int NSReset(){
 static int SetupIOMessages( struct ioMsg **ppioMsg, int iIoMsgs,
 			  struct Heccer *pheccer)
 {
-
-
-  if(!ppioMsg || !pheccer)
-    return -1;
-
   int i;
+
   for(i = 0; i < iIoMsgs; i++)
   {
 
@@ -134,12 +130,6 @@ static int SetupIOMessages( struct ioMsg **ppioMsg, int iIoMsgs,
 
       struct ascfile_type *pasc = 
 	(struct ascfile_type*)GetElement(ppioMsg[i]->pcTargetSymbol);
-
-      // I guess that if this test evaluates to true, it is an
-      // internal error?
-
-/*       if(!pasc) */
-/* 	continue; */
 
       //- if the asc object did not receive a RESET yet, it did not
       //- create the output generator, which can be detected overhere.
