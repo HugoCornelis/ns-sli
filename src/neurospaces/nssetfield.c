@@ -639,8 +639,101 @@ int NSSetField(struct symtab_HSolveListElement *phsle,
 
 	    return(iResult);
 	}
+	else if(!strcmp(pcField,"instant"))
+	{
+	    //- set default result: success
 
+	    int iResult = 1;
 
+	    //- return is it's just zero, not sure if this is right
+
+	    int iValue = atoi(pcValue);
+
+	    if (iValue == 0.0)
+	    {
+		return 1;
+	    }
+
+	    //- if it sets the instantaneous mode for the X gate
+
+	    if (iValue & 1)
+	    {
+		//
+		// A bit dangerous since I'm not making sure that HH_activation
+		// has been created first. Will safty check it later.
+		//
+
+		struct PidinStack *ppistGate = PidinStackDuplicate(ppistWorking);
+
+		struct symtab_HSolveListElement *phsleGate
+		    = PidinStackPushStringAndLookup(ppistGate,"HH_activation");
+   
+		if (!phsleGate)
+		{
+		    return 0;
+		}
+
+		//- set the corresponding parameter
+
+		iResult = iResult && setParameter(ppistGate, phsleGate, "instantaneous", "yes", SETPARA_STRING);
+
+		PidinStackFree(ppistGate);
+	    }
+
+	    //- if it sets the instantaneous mode for the Y gate
+
+	    if (iValue & 2)
+	    {
+		//
+		// A bit dangerous since I'm not making sure that HH_activation
+		// has been created first. Will safty check it later.
+		//
+
+		struct PidinStack *ppistGate = PidinStackDuplicate(ppistWorking);
+
+		struct symtab_HSolveListElement *phsleGate
+		    = PidinStackPushStringAndLookup(ppistGate,"HH_inactivation");
+   
+		if (!phsleGate)
+		{
+		    return 0;
+		}
+
+		//- set the corresponding parameter
+
+		iResult = iResult && setParameter(ppistGate, phsleGate, "instantaneous", "yes", SETPARA_STRING);
+
+		PidinStackFree(ppistGate);
+	    }
+
+	    //- if it sets the instantaneous mode for the Z gate
+
+	    if (iValue & 4)
+	    {
+		//
+		// A bit dangerous since I'm not making sure that HH_activation
+		// has been created first. Will safty check it later.
+		//
+
+		struct PidinStack *ppistGate = PidinStackDuplicate(ppistWorking);
+
+		struct symtab_HSolveListElement *phsleGate
+		    = PidinStackPushStringAndLookup(ppistGate,"HH_concentration");
+   
+		if (!phsleGate)
+		{
+		    return 0;
+		}
+
+		//- set the corresponding parameter
+
+		iResult = iResult && setParameter(ppistGate, phsleGate, "instantaneous", "yes", SETPARA_STRING);
+
+		PidinStackFree(ppistGate);
+	    }
+
+	    return(iResult);
+	}
     }
     else if (instanceof_segment(phsleWorking))
     {
