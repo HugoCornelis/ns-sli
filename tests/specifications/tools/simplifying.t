@@ -126,7 +126,7 @@ PUBLIC_MODELS
               PARAMETER ( HH_AB_Offset_E = 0.05 ),
               PARAMETER ( HH_AB_Add = 1 ),
               PARAMETER ( HH_AB_Factor_Flag = -1 ),
-              PARAMETER ( HH_AB_Mult = 0 ),
+              PARAMETER ( HH_AB_Mult = -0 ),
               PARAMETER ( HH_AB_Scale = 17.5 ),
             END PARAMETERS
           END gate_kinetic
@@ -232,7 +232,7 @@ PUBLIC_MODELS
               PARAMETER ( HH_AB_Offset_E = 0.05 ),
               PARAMETER ( HH_AB_Add = 1 ),
               PARAMETER ( HH_AB_Factor_Flag = -1 ),
-              PARAMETER ( HH_AB_Mult = 0 ),
+              PARAMETER ( HH_AB_Mult = -0 ),
               PARAMETER ( HH_AB_Scale = 17.5 ),
             END PARAMETERS
           END gate_kinetic
