@@ -121,6 +121,12 @@ readcell tests/scripts/test-traub91-v0/CA3_asym.p /cell
 
 setfield /cell/soma inject {injcurr}
 
+/* Create the output element */
+create asc_file /output/plot_out
+// useclock /output/plot_out 9
+addmsg /cell/soma /output/plot_out SAVE Vm
+setfield /output/plot_out filename "/tmp/traub91_asym"
+
 // // make the control panel
 // make_control
 
@@ -142,14 +148,8 @@ if (hflag)
     echo "Using hsolve"
 end
 
-/* Create the output element */
-create asc_file /output/plot_out
-// useclock /output/plot_out 9
-addmsg /cell/soma /output/plot_out SAVE Vm
-setfield /output/plot_out filename "/tmp/traub91_asym"
-
 //check
 reset
 
-step 100
+step 3000
 
