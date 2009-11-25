@@ -152,5 +152,5 @@ end
 //check
 reset
 
-step 10000
+step 3000
 

@@ -15,7 +15,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Does the script run a simulation ?",
-						   read => 'time = 0.500000 ; step = 10000',
+						   read => 'time = 0.150000 ; step = 3000',
 						  },
 						  {
 						   description => 'Quit the simulator.',
