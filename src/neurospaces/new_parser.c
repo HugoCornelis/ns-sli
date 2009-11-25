@@ -2539,6 +2539,8 @@ void scale_kids(struct symtab_HSolveListElement *phsle, struct PidinStack *ppist
 
 	double dValue = FLT_MAX;
 
+	int iScaling = 1;
+
 /* 	oname = BaseObject(elm)->name; */
 
 	oname = SymbolHSLETypeDescribe(phsle->iType);
@@ -2548,13 +2550,54 @@ void scale_kids(struct symtab_HSolveListElement *phsle, struct PidinStack *ppist
 /* 			((struct hh_channel_type *)elm)->Gbar = -1.0 * dens; */
 /* 		else */
 /* 			((struct hh_channel_type *)elm)->Gbar = dens * *surface; */
-/* 	} else if ((strcmp(oname,"tabchannel") == 0) || */
-/* 	           (strcmp(oname,"tab2Dchannel") == 0)) { */
-/* 		if (dens < 0.0)  */
-/* 			((struct tab_channel_type *)elm)->Gbar = -1.0 * dens; */
-/* 		else */
-/* 			((struct tab_channel_type *)elm)->Gbar = dens * *surface; */
-/* 		((struct tab_channel_type *)elm)->surface = *surface; */
+/* 	} else */
+	if ((strcmp(oname,"T_sym_channel") == 0))
+	{
+	    if (dens < 0.0)
+	    {
+		dValue = -1.0 * dens;
+
+		iScaling = 0;
+	    }
+	    else
+	    {
+		dValue = dens;
+	    }
+
+	    struct PidinStack *ppistBase = PidinStackDuplicate(ppist);
+
+	    //- pop concen element: gives compartment on top
+
+	    PidinStackPop(ppistBase);
+
+	    //- pop compartment: gives cell on top
+
+	    PidinStackPop(ppistBase);
+
+	    struct symtab_HSolveListElement *phsleBase
+		= PidinStackLookupTopSymbol(ppistBase);
+
+	    int iBase = PidinStackToSerial(ppistBase);
+
+	    PidinStackUpdateCaches(ppist);
+
+	    int iParameterSymbol = PidinStackToSerial(ppist) - iBase;
+
+	    //- attach the parameter to a G2 function to prevent scaling.
+
+	    char pcValue[100];
+
+	    sprintf(pcValue, "%g", dValue);
+
+	    struct symtab_Parameters *ppar
+		= newParameter(pcValue, SETPARA_NUM);
+
+	    ParameterSetName(ppar, "G_MAX");
+
+	    //- cache this value for the target element
+
+	    SymbolCacheParameter(phsleBase, iParameterSymbol, ppar);
+
 /* 	} else if (strcmp(oname,"tabcurrent") == 0) { */
 /* 		if (dens < 0.0)  */
 /* 			((struct tab_current_type *)elm)->Gbar = -1.0 * dens; */
@@ -2612,45 +2655,29 @@ void scale_kids(struct symtab_HSolveListElement *phsle, struct PidinStack *ppist
 /* 		((struct spike_type *)elm)->thresh = dens; */
 /* 	} else if (strcmp(oname,"spikegen") == 0) { */
 /* 		((struct Spikegen_type *)elm)->thresh = dens; */
-/* 	} else */
-	if (strcmp(oname, "T_sym_pool") == 0)
+	}
+	else if (strcmp(oname, "T_sym_pool") == 0)
 	{
-/* 	    char pcB[100]; */
-
 	    if (dens < 0.0)
 	    {
-		double B = -1.0 * dens;
+		dValue = -1.0 * dens;
 
-/* 		sprintf(pcB, "%g", B); */
-
-		dValue = B;
+		iScaling = 0;
 	    }
 	    else
 	    {
 		double dThickness = SymbolParameterResolveValue(phsle, ppist, "THICKNESS");
 
-		double B = dens / calc_shell_vol(length, dia, dThickness);
-
-/* 		sprintf(pcB, "%g", B); */
-
-		dValue = B;
+		dValue = dens / calc_shell_vol(length, dia, dThickness);
 	    }
 
-/* 	    int iBase = 1; */
-
-/* 	    struct PidinStack *ppistRoot = PidinStackParse("/"); */
-
-/* 	    struct symtab_HSolveListElement *phsleRoot */
-/* 		= PidinStackLookupTopSymbol(ppistRoot); */
-
 	    struct PidinStack *ppistBase = PidinStackDuplicate(ppist);
-/* 		= SymbolPrincipalSerial2Context(phsleRoot, ppistRoot, iBase); */
 
-	    //- pop concen element
+	    //- pop concen element: gives compartment on top
 
 	    PidinStackPop(ppistBase);
 
-	    //- pop compartment
+	    //- pop compartment: gives cell on top
 
 	    PidinStackPop(ppistBase);
 
@@ -2669,16 +2696,14 @@ void scale_kids(struct symtab_HSolveListElement *phsle, struct PidinStack *ppist
 
 	    sprintf(pcValue, "%g", dValue);
 
-	    struct symtab_Parameters *pparBeta
+	    struct symtab_Parameters *ppar
 		= newParameter(pcValue, SETPARA_GENESIS2);
 
-	    ParameterSetName(pparBeta, "BETA");
+	    ParameterSetName(ppar, "BETA");
 
 	    //- cache this value for the target element
 
-	    SymbolCacheParameter(phsleBase, iParameterSymbol, pparBeta);
-
-/* 	    setParameter(ppist, phsle, "B", pcB, SETPARA_GENESIS2); */
+	    SymbolCacheParameter(phsleBase, iParameterSymbol, ppar);
 	}
 /* 	else if ((strcmp(oname,"difshell") == 0) || */
 /* 			   (strcmp(oname,"difbuffer") == 0) || */
