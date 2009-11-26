@@ -7,7 +7,16 @@ $files = {
 ',
                                                 'fname' => 'tests/neurospaces_harness',
                                                 'type' => 'user',
-                                                'line' => '763'
+                                                'line' => 763
+                                              },
+                                              {
+                                                'expr' => undef,
+                                                'value' => '1',
+                                                'text' => '    while (scalar @$numbers1 > scalar @$numbers2)
+',
+                                                'fname' => 'tests/neurospaces_harness',
+                                                'type' => 'user',
+                                                'line' => '1344'
                                               },
                                               {
                                                 'expr' => undef,
@@ -16,7 +25,7 @@ $files = {
 ',
                                                 'fname' => 'tests/neurospaces_harness',
                                                 'type' => 'user',
-                                                'line' => '620'
+                                                'line' => 620
                                               },
                                               {
                                                 'expr' => undef,
