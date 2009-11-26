@@ -8,7 +8,7 @@ set args tests/scripts/PurkM9_model/ACTIVE-soma1.g
 set args tests/scripts/test-simplecell/simplecell-0.g
 set args tests/scripts/test-traub91-v0/traub91_asym.g
 # set args tests/scripts/test-traub91-v0/traub91_asym_simple.g
-set args tests/scripts/test-traub91-v0/traub91_asym_simple2.g
+# set args tests/scripts/test-traub91-v0/traub91_asym_simple2.g
 # set args tests/scripts/test-traub91-v0/traub91_asym_simple3.g
 # cd ..
 file src/ns-sli
