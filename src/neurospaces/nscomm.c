@@ -341,7 +341,7 @@ int setParameter(struct PidinStack *ppist,
 
 /*   if( iType == SETPARA_GENESIS2 ) */
   {
-      pparTop = newParameter(pcValue, iType);
+      pparTop = newParameter(strdup(pcValue), iType);
   } 
 
   if (ppm)

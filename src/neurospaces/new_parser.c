@@ -1344,7 +1344,7 @@ void parse_compartment(int flags,char *name,char *parent,
 	    for (i = 1; 1; i++)
 	    {
 		char varname[20];
-		char * varvalue;
+		char * varvalue = NULL;
 
 		sprintf(varname, "addmsg%d", i);
 
@@ -1366,7 +1366,10 @@ void parse_compartment(int flags,char *name,char *parent,
 		    struct symtab_Parameters *pparMsg
 			= SymbolFindParameter(phsleChannel, ppistChannel, varname);
 
-		    varvalue = ParameterGetString(pparMsg);
+		    if (pparMsg)
+		    {
+			varvalue = ParameterGetString(pparMsg);
+		    }
 		}
 
 		if (varvalue == NULL)
