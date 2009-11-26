@@ -403,7 +403,7 @@ static float	calc_dia(),calc_len();
 static double calc_surf(double len,double dia);
 static double calc_vol(double len,double dia);
 
-/* int		fill_arglist(); */
+int fill_arglist(char **argv, char *line);
 void add_spines();
 void add_fspine();
 void read_script();
@@ -1154,7 +1154,6 @@ void parse_compartment(int flags,char *name,char *parent,
 		       double d,int nargs,char ch[][NAMELEN],float * dens)
 {
 	double   nlambda = 0.0;
-	char	*ch_name = NULL;
 	float	tx,ty,tz;
 	int 	i,j,k;
 	float	len = 0.0;
@@ -1162,7 +1161,7 @@ void parse_compartment(int flags,char *name,char *parent,
 	float	val2 = 0.;    /* MUST initialize */
 	float	val3 = 0.;    /* MUST initialize */
 	Element	*elm, *compt = NULL, *parent_compt;
-	Element *chanlist[MAX_NCHANS];
+	struct PidinStack *chanlist[MAX_NCHANS];
 	char	src[MAX_LINELEN];
 	char	dest[MAX_LINELEN];
 	char	*argv[10];
@@ -1319,41 +1318,78 @@ void parse_compartment(int flags,char *name,char *parent,
 /* 			set_compt_field(compt,ch[k],dens[k],len,d,flags); */
 			continue;
 		}
-/* 		chanlist[k] = elm; */
 		struct PidinStack *ppistChannel = getRootedContext(name);
+
+		chanlist[k] = ppistChannel;
 
 		PidinStackPushSymbol(ppistChannel, phsleChannel);
 
 		scale_kids(phsleChannel, ppistChannel, dens[k], val2, val3, d, len, &surf, &vol, flags);
 	}
-/* 	argv[0] = "c_do_add_msg"; */
-/* 	for (j = 7,k=0 ; j < nargs ; j += 2,k++) { */
-/* 		if (!(elm = chanlist[k])) */
-/* 			continue; */
-/* 		ch_name = ch[k]; */
-/* 		for (i = 1; 1; i++) { */
-/* 		    char	varname[20]; */
-/* 		    char*	varvalue; */
 
-/* 		    sprintf(varname, "addmsg%d", i); */
-/* 		    varvalue = GetExtField(elm, varname); */
-/* 		    if (varvalue == NULL) { */
-/* 			    sprintf(varname, "sendmsg%d", i); */
-/* 			    varvalue = GetExtField(elm, varname); */
-/* 		    } */
+	argv[0] = "c_do_add_msg";
+	for (j = 7,k=0 ; j < nargs ; j += 2,k++)
+	{
+	    struct PidinStack *ppistChannel = chanlist[k];
 
-/* 		    if (varvalue == NULL) */
-/* 			break; */
+	    if (!ppistChannel)
+	    {
+		continue;
+	    }
 
-/* 		    /* since the zeroth argv is already filled * */
-/* 		    argc = fill_arglist(argv + 1,varvalue)+1; */
-/* 		    sprintf(src,"%s/%s/%s",name,ch_name,argv[1]); */
-/* 		    sprintf(dest,"%s/%s/%s",name,ch_name,argv[2]); */
-/* 		    argv[1] = src; */
-/* 		    argv[2] = dest; */
-/* 		    do_add_msg(argc,argv); */
-/* 		} */
-/* 	} */
+	    char pcChannel[1000];
+
+	    PidinStackString(ppistChannel, pcChannel, sizeof(pcChannel));
+
+	    for (i = 1; 1; i++)
+	    {
+		char varname[20];
+		char * varvalue;
+
+		sprintf(varname, "addmsg%d", i);
+
+		struct symtab_HSolveListElement *phsleChannel
+		    = PidinStackLookupTopSymbol(ppistChannel);
+
+		struct symtab_Parameters *pparMsg
+		    = SymbolFindParameter(phsleChannel, ppistChannel, varname);
+
+		if (pparMsg)
+		{
+		    varvalue = ParameterGetString(pparMsg);
+		}
+
+		if (varvalue == NULL)
+		{
+		    sprintf(varname, "sendmsg%d", i);
+
+		    struct symtab_Parameters *pparMsg
+			= SymbolFindParameter(phsleChannel, ppistChannel, varname);
+
+		    varvalue = ParameterGetString(pparMsg);
+		}
+
+		if (varvalue == NULL)
+		{
+		    break;
+		}
+
+		/* since the zeroth argv is already filled */
+		argc = fill_arglist(argv + 1, varvalue);
+		argc++;
+
+/* 		sprintf(src, "%s/%s/%s", name, pcChannel, argv[1]); */
+/* 		sprintf(dest, "%s/%s/%s", name, pcChannel, argv[2]); */
+
+		sprintf(src, "%s/%s", /* name,  */pcChannel, argv[1]);
+		sprintf(dest, "%s/%s", /* name,  */pcChannel, argv[2]);
+
+		argv[1] = src;
+		argv[2] = dest;
+
+		do_add_msg(argc,argv);
+	    }
+	}
 }
 
 void append_to_cell(name,flags)
@@ -2912,31 +2948,29 @@ void scale_kids(struct symtab_HSolveListElement *phsle, struct PidinStack *ppist
 /* 	return(0); */
 /* } */
 
-/* int fill_arglist(argv,line) */
-/* /* parses a message of the form "src dst type var1 var2 ..." */
-/* ** into separate arguments * */
-/* 	char	**argv; */
-/* 	char	*line; */
-/* { */
-/* 	int nargs = 0; */
-/* 	static char	str[INPUT_LINELEN]; */
-/* 	char	*s; */
-/* 	int		new=1; */
+int fill_arglist(char **argv, char *line)
+/* parses a message of the form "src dst type var1 var2 ..."
+** into separate arguments */
+{
+	int nargs = 0;
+	static char	str[INPUT_LINELEN];
+	char	*s;
+	int		new=1;
 
-/* 	strcpy(str,line); */
+	strcpy(str,line);
 
-/* 	for (s=str;*s;s++) { */
-/* 		if (*s == ' ' || *s == '\t') { */
-/* 			*s = '\0'; */
-/* 			new = 1; */
-/* 		} else if (new) { */
-/* 			argv[nargs] = s; */
-/* 			nargs++; */
-/* 			new = 0; */
-/* 		} */
-/* 	} */
-/* 	return(nargs); */
-/* } */
+	for (s=str;*s;s++) {
+		if (*s == ' ' || *s == '\t') {
+			*s = '\0';
+			new = 1;
+		} else if (new) {
+			argv[nargs] = s;
+			nargs++;
+			new = 0;
+		}
+	}
+	return(nargs);
+}
 
 /* void do_paste_channel(argc,argv) */
 /* 	int argc; */
