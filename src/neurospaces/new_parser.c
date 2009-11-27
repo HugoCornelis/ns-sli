@@ -2578,7 +2578,36 @@ void scale_kids(struct symtab_HSolveListElement *phsle, struct PidinStack *ppist
 
 	double dValue = FLT_MAX;
 
+	char *pcParameterName = NULL;
+
+	//- by default parameters should be scaled by the model container
+
 	int iScaling = 1;
+
+	//- create a context for the cell being read
+
+	struct PidinStack *ppistBase = PidinStackDuplicate(ppist);
+
+	//- pop concen element: gives compartment on top
+
+	PidinStackPop(ppistBase);
+
+	//- pop compartment: gives cell on top
+
+	PidinStackPop(ppistBase);
+
+	//- get serial number for the cell
+
+	struct symtab_HSolveListElement *phsleBase
+	    = PidinStackLookupTopSymbol(ppistBase);
+
+	int iBase = PidinStackToSerial(ppistBase);
+
+	PidinStackUpdateCaches(ppist);
+
+	//- get serial number of symbol for this parameter
+
+	int iParameterSymbol = PidinStackToSerial(ppist) - iBase;
 
 /* 	oname = BaseObject(elm)->name; */
 
@@ -2603,39 +2632,7 @@ void scale_kids(struct symtab_HSolveListElement *phsle, struct PidinStack *ppist
 		dValue = dens;
 	    }
 
-	    struct PidinStack *ppistBase = PidinStackDuplicate(ppist);
-
-	    //- pop concen element: gives compartment on top
-
-	    PidinStackPop(ppistBase);
-
-	    //- pop compartment: gives cell on top
-
-	    PidinStackPop(ppistBase);
-
-	    struct symtab_HSolveListElement *phsleBase
-		= PidinStackLookupTopSymbol(ppistBase);
-
-	    int iBase = PidinStackToSerial(ppistBase);
-
-	    PidinStackUpdateCaches(ppist);
-
-	    int iParameterSymbol = PidinStackToSerial(ppist) - iBase;
-
-	    //- attach the parameter to a G2 function to prevent scaling.
-
-	    char pcValue[100];
-
-	    sprintf(pcValue, "%g", dValue);
-
-	    struct symtab_Parameters *ppar
-		= newParameter(pcValue, SETPARA_NUM);
-
-	    ParameterSetName(ppar, "G_MAX");
-
-	    //- cache this value for the target element
-
-	    SymbolCacheParameter(phsleBase, iParameterSymbol, ppar);
+	    pcParameterName = "G_MAX";
 
 /* 	} else if (strcmp(oname,"tabcurrent") == 0) { */
 /* 		if (dens < 0.0)  */
@@ -2707,42 +2704,15 @@ void scale_kids(struct symtab_HSolveListElement *phsle, struct PidinStack *ppist
 	    {
 		double dThickness = SymbolParameterResolveValue(phsle, ppist, "THICKNESS");
 
+		// \todo figure out if this is correct, seems like
+		// double scaling: once overhere, once by the
+		// model-container.
+
 		dValue = dens / calc_shell_vol(length, dia, dThickness);
 	    }
 
-	    struct PidinStack *ppistBase = PidinStackDuplicate(ppist);
+	    pcParameterName = "BETA";
 
-	    //- pop concen element: gives compartment on top
-
-	    PidinStackPop(ppistBase);
-
-	    //- pop compartment: gives cell on top
-
-	    PidinStackPop(ppistBase);
-
-	    struct symtab_HSolveListElement *phsleBase
-		= PidinStackLookupTopSymbol(ppistBase);
-
-	    int iBase = PidinStackToSerial(ppistBase);
-
-	    PidinStackUpdateCaches(ppist);
-
-	    int iParameterSymbol = PidinStackToSerial(ppist) - iBase;
-
-	    //- attach the parameter to a G2 function to prevent scaling.
-
-	    char pcValue[100];
-
-	    sprintf(pcValue, "%g", dValue);
-
-	    struct symtab_Parameters *ppar
-		= newParameter(pcValue, SETPARA_GENESIS2);
-
-	    ParameterSetName(ppar, "BETA");
-
-	    //- cache this value for the target element
-
-	    SymbolCacheParameter(phsleBase, iParameterSymbol, ppar);
 	}
 /* 	else if ((strcmp(oname,"difshell") == 0) || */
 /* 			   (strcmp(oname,"difbuffer") == 0) || */
@@ -2768,6 +2738,30 @@ void scale_kids(struct symtab_HSolveListElement *phsle, struct PidinStack *ppist
 /* 		/* positive values are handled by scale_shells, negative */
 /* 		** ones are changed by RESET action * */
 /* 	} */
+
+	//- if setting new parameters is required
+
+	if (pcParameterName)
+	{
+	    //- attach the parameter to a G2 function
+
+	    char pcValue[100];
+
+	    sprintf(pcValue, "%g", dValue);
+
+	    struct symtab_Parameters *ppar
+		= newParameter(pcValue, iScaling ? SETPARA_NUM : SETPARA_GENESIS2);
+
+	    ParameterSetName(ppar, pcParameterName);
+
+	    //- cache this value for the target element
+
+	    SymbolCacheParameter(phsleBase, iParameterSymbol, ppar);
+	}
+
+	//- free allocated memory
+
+	PidinStackFree(ppistBase);
 }
 
 /* int scale_shells(elm,number,dia,length,shdia,shlen,shthick) */
