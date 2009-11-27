@@ -30,13 +30,13 @@ str compt_name
 */
 
 
-compt_name = "apical_18"
-len = 120
-dia = 5.78
-child_len = 120
-child_dia = 5.78
+function calc_dims(compt_name, len, dia, child_len, child_dia)
+str compt_name
+float len
+float dia
+float child_len
+float child_dia
 
-function calc_dims
     echo
     echo "---------------"
     echo {compt_name}
@@ -54,23 +54,11 @@ function calc_dims
     echo "---------------"
 end
 
-calc_dims
+calc_dims "apical_18" 120 5.78 120 5.78
 
 // for apical_10 parent of soma
-compt_name = "apical_10"
-//soma
-len = 120
-dia = 5.78
-child_len = 125
-child_dia = 8.46
-calc_dims
+calc_dims "apical_10" 120 5.78 125 8.46
 
 // for soma parent of basal_8
-compt_name = "soma"
-// soma
-len = 125
-dia = 8.46
-// basal_8
-child_len = 110
-child_dia = 4.84
-calc_dims
+calc_dims "soma" 125 8.46 110 4.84
+
