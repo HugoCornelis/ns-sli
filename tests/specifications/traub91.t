@@ -9,6 +9,52 @@ my $test
        command_definitions => [
 			       {
 				arguments => [
+					      "$::config->{core_directory}/tests/scripts/test-traub91-v0/new_dim_calc.g",
+					     ],
+				command => 'src/ns-sli',
+				command_tests => [
+						  {
+						   description => "Does the script compute correct new diameter and length for apical_18 ?",
+						   read => '
+apical_18
+original len*dia =  693.6
+a =  693.6
+b =  3.591911016
+len =  120  new_len =  119.9999886
+dia =  5.78  new_dia =  5.78000055
+new_len*new_dia =  693.6
+',
+						  },
+						  {
+						   description => "Does the script compute correct new diameter and length for apical_10 ?",
+						   read => '
+apical_10
+original len*dia =  693.6
+a =  693.6
+b =  2.66920691
+len =  120  new_len =  108.6926392
+dia =  5.78  new_dia =  6.381296883
+new_len*new_dia =  693.6
+',
+						  },
+						  {
+						   description => "Does the script compute correct new diameter and length for soma ?",
+						   read => '
+soma
+original len*dia =  1057.5
+a =  1057.5
+b =  3.221110154
+len =  125  new_len =  153.2929163
+dia =  8.46  new_dia =  6.898557518
+new_len*new_dia =  1057.5
+',
+						  },
+						 ],
+				comment => 'This test was derived from one of Dave Beeman\'s tutorial scripts, does not use the G2 generated file.',
+				description => "a very small subset of the traub91 model (3)",
+			       },
+			       {
+				arguments => [
 					      "$::config->{core_directory}/tests/scripts/test-traub91-v0/traub91_asym_simple3.g",
 					     ],
 				command => 'src/ns-sli',
