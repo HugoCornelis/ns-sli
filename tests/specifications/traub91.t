@@ -102,6 +102,7 @@ my $test
 						  },
 						  {
 						   description => "Is the application output file correct ?",
+						   numerical_compare => 'small differences on the tester machine.',
 						   read => {
 							    application_output_file => "/tmp/traub91_asym",
 							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/traub91_asym.txt",
@@ -109,7 +110,7 @@ my $test
 						  },
 						 ],
 				comment => 'This test was derived from one of Dave Beeman\'s tutorial scripts.',
-				description => "a very small subset of the traub91 model",
+				description => "the traub91 model, asymmetric compartment version.",
 			       },
 			      ],
        description => "the traub91 model",
