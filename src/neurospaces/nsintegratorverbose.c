@@ -61,8 +61,8 @@ int nsintegrator_dump(struct nsintegrator_type *pelnsintegrator, int iSelection,
         int i;  
         for (i = 0 ; i < pelnsintegrator->pnsintegrator->iModelRegistrations ; i++)
 	{
-	  if(pelnsintegrator->pnsintegrator->psr[i].uSolver.pheccer)
-	    HeccerDump(pelnsintegrator->pnsintegrator->psr[i].uSolver.pheccer, stdout, heccer_dump_selection);  
+	  if(pelnsintegrator->pnsintegrator->psr[i].uSolver.si.pheccer)
+	    HeccerDump(pelnsintegrator->pnsintegrator->psr[i].uSolver.si.pheccer, stdout, heccer_dump_selection);  
 
 	}
 

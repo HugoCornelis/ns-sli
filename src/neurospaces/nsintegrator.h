@@ -177,6 +177,20 @@ struct ioMsg
 };
 
 
+/*!
+ * \struct SolverInstance
+ *
+ * a solver instance with the options used to instantiate it.
+ */
+
+struct SolverInstance
+{
+    int iOptions;
+
+    struct Heccer *pheccer;
+};
+
+
 struct SolverRegistration
 {
     /*!
@@ -203,7 +217,7 @@ struct SolverRegistration
 
     union
     {
-	struct Heccer *pheccer;
+	struct SolverInstance si;
     }
 	uSolver;
 };
@@ -329,6 +343,7 @@ int NSGenesisInitialize();
 
 //i -- Defined in heccercreate.c --
 int AttemptHeccerName(char *pcName);
+int SetSolverOptions(char *pcName, int iOptions);
 int DisableHeccerName(char *pcName);
 int TranslateHeccerNames(struct neurospaces_integrator *pnsintegrator);
 int InitHeccerObject(struct SolverRegistration *psr);

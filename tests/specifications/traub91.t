@@ -158,6 +158,34 @@ new_len*new_dia =  1057.5
 				comment => 'This test was derived from one of Dave Beeman\'s tutorial scripts.',
 				description => "the traub91 model, asymmetric compartment version.",
 			       },
+			       {
+				arguments => [
+					      "$::config->{core_directory}/tests/scripts/test-traub91-v0/traub91.g",
+					     ],
+				command => 'src/ns-sli',
+				command_tests => [
+						  {
+						   description => "Does the script run a simulation ?",
+						   read => 'time = 0.150000 ; step = 3000',
+						  },
+						  {
+						   description => 'Quit the simulator.',
+						   wait => 1,
+						   write => 'quit',
+						  },
+						  {
+						   description => "Is the application output file correct ?",
+						   numerical_compare => 'small differences on the tester machine.',
+						   read => {
+							    application_output_file => "/tmp/traub91_sym",
+							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/traub91_asym.txt",
+							   },
+						  },
+						 ],
+				comment => 'This test was derived from one of Dave Beeman\'s tutorial scripts.',
+				description => "the traub91 model, symmetric compartment version.",
+				numerical_compare => 'uses the same expected output as for the asymmetric test model',
+			       },
 			      ],
        description => "the traub91 model",
        name => 'traub91.t',

@@ -116,7 +116,7 @@ char * GetHeccerVariable(char *pcName,char *pcField)
       return NULL;
   }
 
-  if(!pnsintegrator->psr[i].uSolver.pheccer)
+  if(!pnsintegrator->psr[i].uSolver.si.pheccer)
   {
 
     if(!strcmp(pcField,"Vm"))
@@ -134,7 +134,7 @@ char * GetHeccerVariable(char *pcName,char *pcField)
 
   int iSerial = PidinStackToSerial(ppist);
 
-  double *pdValue = HeccerAddressVariable(pnsintegrator->psr[i].uSolver.pheccer, iSerial, pcField);
+  double *pdValue = HeccerAddressVariable(pnsintegrator->psr[i].uSolver.si.pheccer, iSerial, pcField);
 
   if(!pdValue)
     return NULL;

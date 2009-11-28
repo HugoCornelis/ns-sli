@@ -193,7 +193,7 @@ int PrintHeccerVariable(char *pcName,char *pcField,int iAll)
   for (i = 0 ; i < pnsintegrator->iModelRegistrations ; i++)
   {
 
-    if (!pnsintegrator->psr[i].uSolver.pheccer)
+    if (!pnsintegrator->psr[i].uSolver.si.pheccer)
     {
 
       if(!strcmp(pcField,"Vm"))
@@ -204,7 +204,7 @@ int PrintHeccerVariable(char *pcName,char *pcField,int iAll)
       continue;
     }
 
-    pdValue = HeccerAddressVariable(pnsintegrator->psr[i].uSolver.pheccer, iSerial, pcField);
+    pdValue = HeccerAddressVariable(pnsintegrator->psr[i].uSolver.si.pheccer, iSerial, pcField);
 
     if(!pdValue)
       continue;

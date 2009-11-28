@@ -10,6 +10,7 @@ set args tests/scripts/test-simplecell/simplecell-1.g
 # set args tests/scripts/test-traub91-v0/traub91_asym_simple.g
 # set args tests/scripts/test-traub91-v0/traub91_asym_simple2.g
 # set args tests/scripts/test-traub91-v0/traub91_asym_simple3.g
+set args tests/scripts/test-traub91-v0/traub91.g
 # cd ..
 file src/ns-sli
 break parsererror

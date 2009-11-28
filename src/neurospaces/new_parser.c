@@ -2321,11 +2321,18 @@ void read_script(line,lineno,flags)
 			*flags &= ~SPHERICAL;
 		else if (strncmp(command,"*distribute_spines",17) == 0)
 			*flags |= DISTSPINE;
-		else if (strcmp(command,"*symmetric") == 0) {
-			if (strcmp(comptname,"/library/compartment") == 0)
-				strcpy(comptname,"/library/symcompartment");
-			*flags |= SYMMETRIC;
-		} else if (strcmp(command,"*asymmetric") == 0) {
+		else if (strcmp(command,"*symmetric") == 0)
+		{
+		    if (strcmp(comptname,"/library/compartment") == 0)
+		    {
+			strcpy(comptname,"/library/symcompartment");
+		    }
+
+		    *flags |= SYMMETRIC;
+
+		    SetSolverOptions(cellname, HECCER_OPTION_ENABLE_LINEAR_MODE);
+		}
+		else if (strcmp(command,"*asymmetric") == 0) {
 			if (strcmp(comptname,"/library/symcompartment") == 0)
 				strcpy(comptname,"/library/compartment");
 			*flags &= ~SYMMETRIC;

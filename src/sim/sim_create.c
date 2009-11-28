@@ -416,6 +416,7 @@ int                   i,j = 0;
        !strcmp("hsolve", type) ||
        !strcmp("tabchannel",type) ||
        !strcmp("compartment",type) ||
+       !strcmp("symcompartment",type) ||
        !strcmp("Ca_concen",type) ||
        !strcmp("nernst",type) ||
        !strcmp("channelC2",type) ||

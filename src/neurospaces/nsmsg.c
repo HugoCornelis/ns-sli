@@ -900,7 +900,7 @@ int NSProcessMessages(struct neurospaces_integrator *pnsintegrator)
 	    //
 	    if(iWorkingHeccerIndex != -1)
 		ppioMsg[i]->pdValue
-		    = HeccerAddressVariable(pnsintegrator->psr[iWorkingHeccerIndex].uSolver.pheccer, 
+		    = HeccerAddressVariable(pnsintegrator->psr[iWorkingHeccerIndex].uSolver.si.pheccer, 
 					    ppioMsg[i]->iTarget, 
 					    ppioMsg[i]->pcMsgName);
 	}

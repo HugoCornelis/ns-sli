@@ -122,16 +122,22 @@ readcell tests/scripts/test-traub91-v0/CA3.p /cell
 
 setfield /cell/soma inject {injcurr}
 
-// make the control panel
-make_control
+/* Create the output element */
+create asc_file /output/plot_out
+// useclock /output/plot_out 9
+addmsg /cell/soma /output/plot_out SAVE Vm
+setfield /output/plot_out filename "/tmp/traub91_sym"
 
-// make the graph to display soma Vm and pass messages to the graph
-make_Vmgraph
-addmsg /cell/soma /data/voltage PLOT Vm *volts *red
+// // make the control panel
+// make_control
 
-/* comment out the two lines below to disable the cell display (faster)  */
-make_xcell // create and display the xcell
-xcolorscale hot
+// // make the graph to display soma Vm and pass messages to the graph
+// make_Vmgraph
+// addmsg /cell/soma /data/voltage PLOT Vm *volts *red
+
+// /* comment out the two lines below to disable the cell display (faster)  */
+// make_xcell // create and display the xcell
+// xcolorscale hot
 
 if (hflag)
     create hsolve /cell/solve
@@ -145,3 +151,6 @@ end
 
 //check
 reset
+
+step 3000
+

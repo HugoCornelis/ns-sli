@@ -73,9 +73,9 @@ int NSCreate( char* name,  char* pcParent, char* pcType){
      }
 
 
-   if(!strcmp("compartment",pcType)){
-
-       
+   if(strcmp("compartment",pcType) == 0
+      || strcmp("symcompartment", pcType) == 0)
+   {
      phsleChild = (struct symtab_HSolveListElement *)SegmentCalloc();
 
      iResult = NSINTEGRATOR_COMPARTMENT;

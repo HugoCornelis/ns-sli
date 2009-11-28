@@ -98,9 +98,9 @@ int NSReset(){
       // in any simple scripts seems, but only the first entry in the array.
       // \todo that is a mystery.
 
-      if (pnsintegrator->psr[i].uSolver.pheccer)
+      if (pnsintegrator->psr[i].uSolver.si.pheccer)
       {
-	  SetupIOMessages(ppioMsg, iIoMsgs, pnsintegrator->psr[i].uSolver.pheccer);
+	  SetupIOMessages(ppioMsg, iIoMsgs, pnsintegrator->psr[i].uSolver.si.pheccer);
       }
   }
 

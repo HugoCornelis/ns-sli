@@ -62,6 +62,48 @@ int AttemptHeccerName(char *pcName)
 
 
 //------------------------------------------------------------------
+/*!
+ *  \fn int SetSolverOptions(char *pcName)
+ *
+ *  \return -1 on error, 1 on success, 0 for no operation.
+ *
+ *  Set options to use when creating this solver.
+ */
+
+//------------------------------------------------------------------
+int SetSolverOptions(char *pcName, int iOptions)
+{
+    struct neurospaces_integrator *pnsintegrator = getNsintegrator();
+
+    //i
+    //i first check to see if a heccer object with the same name exists.
+    //i if so we don't register the name and exit.
+    //i
+
+    int i;
+
+    for (i = 0 ; i < pnsintegrator->iModelRegistrations ; i++)
+    {
+	if (strncmp(pcName, pnsintegrator->psr[i].pcName, strlen(pnsintegrator->psr[i].pcName)) == 0)
+	{
+	    break;
+	}
+    }
+
+    if (i < pnsintegrator->iModelRegistrations)
+    {
+	pnsintegrator->psr[i].uSolver.si.iOptions |= iOptions;
+
+	return 1;
+    }
+    else
+    {
+	return -1;
+    }
+}
+
+
+//------------------------------------------------------------------
 /*
 *
 */
@@ -130,7 +172,7 @@ static int RegisterHeccerName(char *pcName)
       pnsintegrator->psr[pnsintegrator->iModelRegistrations].pcName
 	  = strdup(pcName);
 
-      pnsintegrator->psr[pnsintegrator->iModelRegistrations].uSolver.pheccer
+      pnsintegrator->psr[pnsintegrator->iModelRegistrations].uSolver.si.pheccer
 	  = NULL;
 
       pnsintegrator->psr[pnsintegrator->iModelRegistrations].iType
@@ -226,7 +268,7 @@ struct Heccer *LookupHeccerObject(char *pcContext)
     {
 	if (0 == strcmp(pcContext, pnsintegrator->psr[i].pcName))
 	{
-	    return(pnsintegrator->psr[i].uSolver.pheccer);
+	    return(pnsintegrator->psr[i].uSolver.si.pheccer);
 	}
     }
 
@@ -334,13 +376,13 @@ int InitHeccerObject(struct SolverRegistration *psr)
   {
 /*       struct Heccer *pheccer = LookupHeccerObject(psr->pcName); */
 
-      if (psr->uSolver.pheccer)
+      if (psr->uSolver.si.pheccer)
       {
 	  fprintf(stdout,
 		  "Warning: Heccer object %s exists, resetting it instead.\n.",
-		  psr->uSolver.pheccer->pcName);
+		  psr->uSolver.si.pheccer->pcName);
 
-	  singleHeccerReset(psr->uSolver.pheccer);
+	  singleHeccerReset(psr->uSolver.si.pheccer);
 	  return 0;
       }
   }
@@ -365,18 +407,25 @@ int InitHeccerObject(struct SolverRegistration *psr)
      pnsintegrator->pelNeurospaces->pneuro;
 
 
-  //-
-  //- Here we copy over the heccer options parsed from
-  //- a setup if present.
-  //-
+  //- copy default heccer options
+
   pheccer->ho = pnsintegrator->pheccerOptions->ho;
 
-  
+  //- and overwrite them with specific options for this instance
+
+  pheccer->ho.iOptions |= psr->uSolver.si.iOptions;
+
+  //- construct the heccer
+
   HeccerConstruct(pheccer, (void *)pneuro, psr->pcName,NULL);
+
+  //- compile the model
 
   HeccerCompileP1(pheccer);
   HeccerCompileP2(pheccer);
   HeccerCompileP3(pheccer);
+
+  //- load initial values
 
   HeccerInitiate(pheccer);
 
@@ -385,10 +434,10 @@ int InitHeccerObject(struct SolverRegistration *psr)
 
   // \todo add boundary checking here.
 
-/*   pnsintegrator->psr[pnsintegrator->iModelRegistrations++].uSolver.pheccer */
+/*   pnsintegrator->psr[pnsintegrator->iModelRegistrations++].uSolver.si.pheccer */
 /*       = pheccer; */
 
-  psr->uSolver.pheccer = pheccer;
+  psr->uSolver.si.pheccer = pheccer;
 
   return 1;
 

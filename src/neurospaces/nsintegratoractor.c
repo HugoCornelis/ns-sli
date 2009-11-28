@@ -105,7 +105,7 @@ int NeurospacesIntegratorActor(struct nsintegrator_type *pnsintegrator_type,
 	      for (i = 0 ; i < pnsintegrator->iModelRegistrations ; i++)
 	      {
 
-		  if(!pnsintegrator->psr[i].uSolver.pheccer)
+		  if(!pnsintegrator->psr[i].uSolver.si.pheccer)
 		    continue;
 
 		  if (pnsintegrator->psr[i].iDisabled)
@@ -115,7 +115,7 @@ int NeurospacesIntegratorActor(struct nsintegrator_type *pnsintegrator_type,
 
 		  // need to link to "double simulation_time" in sim_step.c
 		  //	
-		  HeccerHeccs(pnsintegrator->psr[i].uSolver.pheccer, simulation_time + clock_value[0]);
+		  HeccerHeccs(pnsintegrator->psr[i].uSolver.si.pheccer, simulation_time + clock_value[0]);
  
 		  if (iNSIntegratorVerbose == 1)
 		  {
@@ -123,9 +123,9 @@ int NeurospacesIntegratorActor(struct nsintegrator_type *pnsintegrator_type,
 			  return iResult;
 
 		      fprintf(stdout,"%s: time = %lf ; step = %lf          \n",
-			      pnsintegrator->psr[i].uSolver.pheccer->pcName,
-			      pnsintegrator->psr[i].uSolver.pheccer->dTime,
-			      pnsintegrator->psr[i].uSolver.pheccer->dStep);
+			      pnsintegrator->psr[i].uSolver.si.pheccer->pcName,
+			      pnsintegrator->psr[i].uSolver.si.pheccer->dTime,
+			      pnsintegrator->psr[i].uSolver.si.pheccer->dStep);
 		  }
 
 		  if (iNSIntegratorVerbose == 2)
