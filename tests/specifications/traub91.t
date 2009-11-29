@@ -178,7 +178,7 @@ new_len*new_dia =  1057.5
 						   numerical_compare => 'small differences on the tester machine.',
 						   read => {
 							    application_output_file => "/tmp/traub91_sym",
-							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/traub91_asym.txt",
+							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/traub91_sym.txt",
 							   },
 						  },
 						 ],
