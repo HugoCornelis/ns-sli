@@ -22,6 +22,267 @@
 
 
 
+static struct symtab_GateKinetic *CreateGateKinetic(char *pcDirection);
+static
+struct symtab_HSolveListElement * CreateHHGate(
+		 struct symtab_HSolveListElement *phsleChannel, 
+		 char *pcName);
+static struct symtab_ConcentrationGateKinetic *CreateConcGateKinetic(char *pcDirection);
+static
+struct symtab_HSolveListElement * CreateConcGate(
+		 struct symtab_HSolveListElement *phsleChannel, 
+		 char *pcName);
+
+
+
+//------------------------------------------------------------------
+/*!
+ *  \fn struct symtab_HSolveListElemen *CreateHHGate(
+                 struct symtab_HSolveListElement *phsleChannel, 
+		 char *pcName)
+ *  \param phsleChannel Pointer to the Channel to attach gates.
+ *  \param pcName A name for the HH gate.
+ *  \return A pointer to an HSolveListElement which had been appended to phsleChannel
+ */
+//------------------------------------------------------------------
+static
+struct symtab_HSolveListElement * CreateHHGate(
+		 struct symtab_HSolveListElement *phsleChannel, 
+		 char *pcName){
+
+
+  //i
+  //i Allocate an HH gate and set its parent to phsleTabChannel.
+  //i
+  struct symtab_HHGate *pgathh = HHGateCalloc();
+
+
+  if(!pgathh)
+    return NULL;
+
+
+
+
+
+  struct symtab_IdentifierIndex *pidinHHGate = 
+    IdinNewFromChars(pcName);
+
+
+
+  if(!pidinHHGate)
+    return NULL;
+
+
+  SymbolSetName(&pgathh->bio.ioh.iol.hsle,pidinHHGate);
+
+  SymbolAddChild(phsleChannel,&pgathh->bio.ioh.iol.hsle);
+
+  
+  //i
+  //i Need to add a name for the forward and backward gate kinetics.
+  //i "forward" and "backward" respectively, then make these
+  //i the children of the HH Gate pgathh.
+  //i
+  struct symtab_GateKinetic *pgatkForward = 
+    CreateGateKinetic("A");
+
+  if(!pgatkForward)
+    return NULL;
+
+  SymbolAddChild(&pgathh->bio.ioh.iol.hsle,
+		 &pgatkForward->bio.ioh.iol.hsle);
+  
+
+
+  struct symtab_GateKinetic *pgatkBackward = 
+    CreateGateKinetic("B");
+
+  if(!pgatkBackward)
+    return NULL;
+
+  SymbolAddChild(&pgathh->bio.ioh.iol.hsle,
+		 &pgatkBackward->bio.ioh.iol.hsle);
+
+
+  //- allocate a parameter for state_init
+
+  // steady state is forward over backward steady states.
+
+/*   struct symtab_Parameters *pparVmInit */
+/*       = newParameter("..->Vm_init", SETPARA_FIELD); */
+
+  struct symtab_Parameters *pparStateInit
+      = newParameter("-1", SETPARA_NUM);
+
+  ParameterSetName(pparStateInit, "state_init");
+
+  BioComponentChangeParameter(&pgathh->bio, pparStateInit);
+
+  return (struct symtab_HSolveListElement *)pgathh;
+
+}
+
+
+
+//------------------------------------------------------------------
+/*!
+ *  \fn struct symtab_HSolveListElement *CreateConcGate(
+                 struct symtab_HSolveListElement *phsleChannel, 
+		 char *pcName)
+ *  \param phsleChannel Pointer to the Channel to attach gates.
+ *  \param pcName  A name for the concentration gate.
+ *  \return A pointer to an HSolveListElement which had been appended to phsleChannel
+ *
+ */
+//------------------------------------------------------------------
+static
+struct symtab_HSolveListElement * CreateConcGate(
+		 struct symtab_HSolveListElement *phsleChannel, 
+		 char *pcName){
+
+
+  //i
+  //i Allocate an HH gate and set its parent to phsleTabChannel.
+  //i
+  struct symtab_HHGate *pgathh = HHGateCalloc();
+
+
+  if(!pgathh)
+    return NULL;
+
+
+
+  struct symtab_IdentifierIndex *pidinHHGate = 
+    IdinNewFromChars(pcName);
+
+
+
+  if(!pidinHHGate)
+    return NULL;
+
+
+  SymbolSetName(&pgathh->bio.ioh.iol.hsle,pidinHHGate);
+
+  SymbolAddChild(phsleChannel,&pgathh->bio.ioh.iol.hsle);
+
+  
+  //i
+  //i Need to add a name for the forward and backward gate kinetics.
+  //i "forward" and "backward" respectively, then make these
+  //i the children of the HH Gate pgathh.
+  //i
+  struct symtab_ConcentrationGateKinetic *pconcgatkForward = 
+    CreateConcGateKinetic("A");
+
+  if(!pconcgatkForward)
+    return NULL;
+
+  SymbolAddChild(&pgathh->bio.ioh.iol.hsle,
+		 &pconcgatkForward->bio.ioh.iol.hsle);
+  
+
+
+  struct symtab_ConcentrationGateKinetic *pconcgatkBackward = 
+    CreateConcGateKinetic("B");
+
+  if(!pconcgatkBackward)
+    return NULL;
+
+  SymbolAddChild(&pgathh->bio.ioh.iol.hsle,
+		 &pconcgatkBackward->bio.ioh.iol.hsle);
+
+  //- allocate a parameter for state_init
+
+  // steady state is forward over backward steady states.
+
+/*   struct symtab_Parameters *pparVmInit */
+/*       = newParameter("..->Vm_init", SETPARA_FIELD); */
+
+  struct symtab_Parameters *pparStateInit
+      = newParameter("-1", SETPARA_NUM);
+
+  ParameterSetName(pparStateInit, "state_init");
+
+  BioComponentChangeParameter(&pgathh->bio, pparStateInit);
+
+
+  return (struct symtab_HSolveListElement *)pgathh;
+
+}
+
+
+//------------------------------------------------------------------
+/*
+ * \fn static struct symtab_GateKinetic *CreateGateKinetic(char *pcDirection)
+ */
+//------------------------------------------------------------------
+static struct symtab_GateKinetic *CreateGateKinetic(char *pcDirection){
+
+
+  struct symtab_GateKinetic *pgatk;
+
+
+  struct symtab_IdentifierIndex *pidinDirection;
+
+  
+ 
+  pidinDirection = IdinNewFromChars(pcDirection);
+
+
+  if(!pidinDirection)
+    return NULL;
+
+
+  pgatk = GateKineticCalloc();
+
+  if(!pgatk)
+    return NULL;
+
+
+  SymbolSetName(&pgatk->bio.ioh.iol.hsle,pidinDirection);
+
+  return pgatk;
+
+}
+
+
+
+
+
+//------------------------------------------------------------------
+/*
+ * \fn static struct symtab_GateKinetic *CreateConcGateKinetic(char *pcDirection)
+ */
+//------------------------------------------------------------------
+static struct symtab_ConcentrationGateKinetic *CreateConcGateKinetic(char *pcDirection){
+
+
+  struct symtab_ConcentrationGateKinetic *pconcgatk;
+
+
+  struct symtab_IdentifierIndex *pidinDirection;
+
+  
+ 
+  pidinDirection = IdinNewFromChars(pcDirection);
+
+
+  if(!pidinDirection)
+    return NULL;
+
+
+  pconcgatk =  ConcentrationGateKineticCalloc();
+
+  if(!pconcgatk)
+    return NULL;
+
+
+  SymbolSetName(&pconcgatk->bio.ioh.iol.hsle,pidinDirection);
+
+  return pconcgatk;
+
+}
+
 
 
 //------------------------------------------------------------------

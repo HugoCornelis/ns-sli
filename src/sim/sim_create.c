@@ -408,24 +408,9 @@ int                   i,j = 0;
 	*ptr = '\0';
     }
 
+    //- determine if this type is handled by the model-container
 
-
-    int iInModelContainer = 0;
-
-    if(!strcmp("neutral",type) ||
-       !strcmp("hsolve", type) ||
-       !strcmp("tabchannel",type) ||
-       !strcmp("compartment",type) ||
-       !strcmp("symcompartment",type) ||
-       !strcmp("Ca_concen",type) ||
-       !strcmp("nernst",type) ||
-       !strcmp("channelC2",type) ||
-       !strcmp("channelC3",type) ||
-       !strcmp("synchan",type) ||
-       !strcmp("spikegen",type) ||
-       !strcmp("pulsegen",type) )
-      iInModelContainer = 1;
-
+    int iInModelContainer = NSFilterCreate(type);
 
     //-
     //- here is the check for the parent element.

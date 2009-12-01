@@ -146,6 +146,7 @@ libneurospaces_a_SOURCES = \
 	ascfile_g@.h \
 	ascfile_l@.c \
 	ascfileactor.c \
+	filters.c \
 	heccercreate.c \
 	hsolve_d@.c \
 	hsolve_g@.c \
@@ -163,6 +164,7 @@ libneurospaces_a_SOURCES = \
 	nscomm.c \
 	nscopy.c \
 	nscreate.c \
+	nsgetfield.c \
 	nsintegrator.c \
 	nsintegrator_d@.c \
 	nsintegrator_g@.c \
@@ -175,7 +177,6 @@ libneurospaces_a_SOURCES = \
 	nssetfield.c \
 	nssetup.c \
 	nsshowfield.c \
-	nsgetfield.c \
 	nstabcreate.c \
 	nstabfill.c \
 	nstweak.c

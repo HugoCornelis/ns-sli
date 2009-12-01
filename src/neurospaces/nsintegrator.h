@@ -337,6 +337,10 @@ struct neurospaces_integrator {
 
 
 
+//i -- Defined in filters.c --
+int NSFilterCreate(char *pcType);
+
+
 //i -- Defined in nsintegrator.c --
 int NSGenesisInitialize();
 
@@ -381,15 +385,7 @@ struct PidinStack *getRootedContext(char *pc);
 
 
 //- -- Defined in nscreate.c --
-struct symtab_HSolveListElement *
-CreateHHGate
-(struct symtab_HSolveListElement *phsleChannel, 
- char *pcName);
-
-struct symtab_HSolveListElement *
-CreateConcGate
-(struct symtab_HSolveListElement *phsleChannel, 
- char *pcName);
+int NSCreate( char* name,  char* pcParent, char* pcType);
 
 //- -- Defined in nssetup.c --
 int NSSetupAlpha( char *pcName, char *pcField, char **pcArgs, 
