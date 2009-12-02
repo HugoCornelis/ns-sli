@@ -89,6 +89,7 @@ int NSCreate( char* name,  char* pcParent, char* pcType){
        "asc_file", NSINTEGRATOR_ASCFILE,
        "pulsegen", NSINTEGRATOR_PULSEGEN,
        (char *)-1, NSINTEGRATOR_NEUTRAL,
+       NULL, NULL,
    };
 
 

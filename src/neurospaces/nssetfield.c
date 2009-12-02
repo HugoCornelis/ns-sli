@@ -359,6 +359,11 @@ GateSetField
     //- if zero, no need to create a gate.
     double dNumber = strtod(pcValue, NULL);
 
+    // \note: if these lines are removed, the settings of the channel
+    // can become unrecognizable by heccer.  For example, the channel
+    // can have an empty inactivation gate, but that will corrupt the
+    // CHANNEL_TYPE parameter.
+
     if(dNumber == 0.0)
 	return 1;
 
