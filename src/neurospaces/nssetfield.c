@@ -417,7 +417,54 @@ TableSetField
  char *pcValue,
  char *pcGateName)
 {
-    return 0;
+    //- check the field to see if it begins with 'Z'
+    //- which indicates a concentration table.
+    //-
+    //- Then we check to see if we need to add the table to the
+    //- A or B kinetic.
+
+
+    //- fetch the forward / backward kinetic
+
+    struct PidinStack *ppistKinetic = PidinStackDuplicate(ppist);
+
+
+    //- we must look up the concentration gate
+
+    struct symtab_HSolveListElement *phsleGate
+	= PidinStackPushStringAndLookup(ppistKinetic, pcGateName);
+  
+    if (!phsleGate)
+    {
+	phsleGate = CreateGate(phsle, pcGateName);
+    }
+
+    char pcKinetic[10];
+
+    pcKinetic[0] = pcField[2];
+    pcKinetic[1] = '\0';
+
+    struct symtab_HSolveListElement *phsleKinetic
+	= PidinStackPushStringAndLookup(ppistKinetic, pcKinetic);
+    
+    if (!phsleKinetic)
+    {
+	Error();
+	fprintf(stdout,
+		"Could not find %s gate kinetic for %s\n",
+		pcKinetic,
+		pcPathname);
+
+	PidinStackFree(ppistKinetic);
+
+	return 0;
+    }
+
+    int iResult = setParameter(ppistKinetic, phsleKinetic, &pcField[5], pcValue, SETPARA_NUM);
+
+    PidinStackFree(ppistKinetic);
+
+    return(iResult);
 }
 
 static
@@ -487,163 +534,21 @@ ChannelSetField
     {
 	return(GateSetField(phsleWorking, ppistWorking, pcPathname, pcField, pcValue, "HH_concentration"));
     }
-    else if( strncmp(pcField,"Z_A->table",10) == 0 ){
-
-	//-
-	//- We're checking the field to see if it begins with 'Z'
-	//- which indicates a concentration table.
-	//-
-	//- Then we check to see if we need to add the table to the
-	//- A or B kinetic.
-	//-
-
-
-	//- fetch the forward gate
-	struct PidinStack *ppistA = PidinStackDuplicate(ppistWorking);
-
-
-	//- we must look up the concentration gate
-	struct symtab_HSolveListElement *phsleConc
-	    = PidinStackPushStringAndLookup(ppistA, "HH_concentration");
-  
-	if(!phsleConc){
-	    struct symtab_HSolveListElement *phsleWorking
-		= PidinStackLookupTopSymbol(ppistWorking);
-
-	    struct symtab_HSolveListElement *phsleGate
-		= CreateGate(phsleWorking, "HH_concentration");
-	}
-
-
-	struct symtab_HSolveListElement *phsleA = 
-	    PidinStackPushStringAndLookup(ppistA,"A");
-    
-	if(!phsleA){
-	    Error();
-	    fprintf(stdout,
-		    "Could not find forward gate kinetic for %s\n",
-		    pcPathname);
-
-	    PidinStackFree(ppistA);
-
-	    return 0;
-	}
-
-	int iResult = setParameter(ppistA, phsleA,&pcField[5],pcValue,SETPARA_NUM);
-
-	PidinStackFree(ppistA);
-
-	return(iResult);
-
+    else if( strncmp(pcField,"Z_A->table",10) == 0 )
+    {
+	return(TableSetField(phsleWorking, ppistWorking, pcPathname, pcField, pcValue, "HH_concentration"));
     }
-    else if( strncmp(pcField,"Z_B->table",10) == 0 ){
-
-
-	struct PidinStack *ppistB = PidinStackDuplicate(ppistWorking);
-
-
-	//- we must look up the concentration gate
-	struct symtab_HSolveListElement *phsleConc
-	    = PidinStackPushStringAndLookup(ppistB, "HH_concentration");
-  
-	if(!phsleConc){
-	    struct symtab_HSolveListElement *phsleWorking
-		= PidinStackLookupTopSymbol(ppistWorking);
-
-	    struct symtab_HSolveListElement *phsleGate
-		= CreateGate(phsleWorking, "HH_concentration");
-	}
-
-
-	struct symtab_HSolveListElement *phsleB = 
-	    PidinStackPushStringAndLookup(ppistB,"B");
-    
-	if(!phsleB){
-	    Error();
-	    fprintf(stdout,
-		    "Could not find backward gate kinetic for %s\n",
-		    pcPathname);
-	    return 0;
-	}
-
-	int iResult = setParameter(ppistB, phsleB,&pcField[5],pcValue,SETPARA_NUM);
-
-	PidinStackFree(ppistB);
-
-	return(iResult);
+    else if( strncmp(pcField,"Z_B->table",10) == 0 )
+    {
+	return(TableSetField(phsleWorking, ppistWorking, pcPathname, pcField, pcValue, "HH_concentration"));
     }
-    else if( strncmp(pcField,"X_B->table",10) == 0 ){
-
-
-	struct PidinStack *ppistB = PidinStackDuplicate(ppistWorking);
-
-	
-	//- we must look up the HH gate
-	struct symtab_HSolveListElement *phsleActivation
-	    = PidinStackPushStringAndLookup(ppistB, "HH_activation");
-  
-	if(!phsleActivation){
-	    struct symtab_HSolveListElement *phsleWorking
-		= PidinStackLookupTopSymbol(ppistWorking);
-
-	    struct symtab_HSolveListElement *phsleGate
-		= CreateGate(phsleWorking, "HH_activation");
-	}
-
-
-	struct symtab_HSolveListElement *phsleB = 
-	    PidinStackPushStringAndLookup(ppistB,"B");
-
-	if(!phsleB){
-	    Error();
-	    fprintf(stdout,
-		    "Could not find backward gate kinetic for %s\n",
-		    pcPathname);
-	    return 0;
-	}
-
-	int iResult = setParameter(ppistB, phsleB,&pcField[5],pcValue,SETPARA_NUM);
-
-	PidinStackFree(ppistB);
-
-	return(iResult);
+    else if( strncmp(pcField,"X_B->table",10) == 0 )
+    {
+	return(TableSetField(phsleWorking, ppistWorking, pcPathname, pcField, pcValue, "HH_activation"));
     }
-    else if( strncmp(pcField,"X_A->table",10) == 0 ){
-
-
-	struct PidinStack *ppistA = PidinStackDuplicate(ppistWorking);
-
-
-	//- we must look up the HH gate
-	struct symtab_HSolveListElement *phsleActivation
-	    = PidinStackPushStringAndLookup(ppistA, "HH_activation");
-  
-	if(!phsleActivation){
-	    struct symtab_HSolveListElement *phsleWorking
-		= PidinStackLookupTopSymbol(ppistWorking);
-
-	    struct symtab_HSolveListElement *phsleGate
-		= CreateGate(phsleWorking, "HH_activation");
-	}
-
-
-
-	struct symtab_HSolveListElement *phsleA = 
-	    PidinStackPushStringAndLookup(ppistA,"A");
-    
-	if(!phsleA){
-	    Error();
-	    fprintf(stdout,
-		    "Could not find forward gate kinetic for %s\n",
-		    pcPathname);
-	    return 0;
-	}
-
-	int iResult = setParameter(ppistA, phsleA,&pcField[5],pcValue,SETPARA_NUM);
-
-	PidinStackFree(ppistA);
-
-	return(iResult);
+    else if( strncmp(pcField,"X_A->table",10) == 0 )
+    {
+	return(TableSetField(phsleWorking, ppistWorking, pcPathname, pcField, pcValue, "HH_activation"));
     }
 
     else if( strncmp(pcField,"Y_B->table",10) == 0 ){
