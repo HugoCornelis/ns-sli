@@ -445,7 +445,7 @@ int NSSetField(struct symtab_HSolveListElement *phsle,
 
     if (instanceof_group(phsleWorking))
     {
-	return(setParameter(ppistWorking, phsleWorking,pcField,pcValue,SETPARA_NUM))
+	return(setParameter(ppistWorking, phsleWorking,pcField,pcValue,SETPARA_NUM));
     }
     else if (instanceof_channel(phsleWorking))
     {
@@ -470,6 +470,32 @@ ChannelSetField
  char *pcField,
  char *pcValue)
 {
+
+    struct channel_field_mapper
+    {
+	char *pcG2;
+	int iLength;
+	int (*ChannelMapField)(int);
+    };
+
+    static struct channel_field_mapper pcfm[] =
+    {
+	"Xpower", -1, NULL,
+	"Ypower", -1, NULL,
+	"Zpower", -1, NULL,
+	"Z_A->table", 10, NULL,
+	"Z_B->table", 10, NULL,
+	"X_B->table", 10, NULL,
+	"X_A->table", 10, NULL,
+	"Y_B->table", 10, NULL,
+	"Y_A->table", 10, NULL,
+	"X_init", -1, NULL,
+	"Y_init", -1, NULL,
+	"Z_init", -1, NULL,
+	"instant", -1, NULL,
+	NULL, -1, NULL,
+    };
+
     //-
     //- The HHGate is only allocated when we see an Xpower value 
     //- Greater than zero. 
