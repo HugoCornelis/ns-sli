@@ -326,8 +326,6 @@ static struct symtab_ConcentrationGateKinetic *CreateConcGateKinetic(char *pcDir
  *  5. Generate a parameter from the numerical value.
 */
 //------------------------------------------------------------------
-/* refactor */
-
 int NSSetField(struct symtab_HSolveListElement *phsle, 
 	       struct PidinStack *ppist,
 	       char *pcPathname, char *pcField, char *pcValue){
@@ -1051,9 +1049,6 @@ SegmentSetField
  char *pcField,
  char *pcValue)
 {
-
-/* 	struct symtab_Parameters *pparSurface = NULL; */
-
 	if (strcmp(pcField, "len") == 0)
 	{
 	    double d = strtod(pcValue, NULL);
@@ -1066,20 +1061,7 @@ SegmentSetField
 	    {
 		SymbolSetOptions(phsleWorking, SymbolGetOptions(phsleWorking) & ~(FLAG_SEGMENTER_SPHERICAL));
 	    }
-
-/* 	    pparSurface = SymbolGetParameter(phsleWorking, ppistWorking, "SURFACE"); */
 	}
-	else if (strcmp(pcField, "dia") == 0)
-	{
-/* 	    pparSurface = SymbolGetParameter(phsleWorking, ppistWorking, "SURFACE"); */
-	}
-
-/* 	if (pparSurface) */
-/* 	{ */
-/* 	    double dSurface = SegmentGetSurface((struct symtab_Segment *)phsleWorking, ppistWorking); */
-
-/* 	    pparSurface->uValue.dNumber = dSurface; */
-/* 	} */
 
     return setParameter(ppistWorking, phsleWorking, pcField, pcValue, 0);
 }
