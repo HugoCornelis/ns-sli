@@ -380,15 +380,14 @@ GateSetField
     }
     else
     {
-	//- we create the HH gate. Function creates
-	//- the gate, sets it as a child to phsle,
-	//- and returns a pointer to the gate.
+	//- create the HH gate, sets it as a child to phsle,
+	//- and returns a pointer to it.
 
 	phsleGate = CreateGate(phsle, pcGateName);
 
 	if (strcmp(pcGateName, "HH_concentration") == 0)
 	{
-	    //- Here we set the state_init parameter. 
+	    //- set the state_init parameter. 
 
 	    struct symtab_HSolveListElement *phsleConc
 		= PidinStackPushStringAndLookup(ppist, pcGateName);
@@ -498,7 +497,7 @@ ChannelSetField
 	    return 1;
 
 	struct PidinStack *ppistGate
-	    = lookupGate(pcPathname,"Zpower"); 
+	    = lookupGate(pcPathname, pcField); 
 
 	struct symtab_HSolveListElement *phsleGate
 	    = PidinStackLookupTopSymbol(ppistGate);
@@ -508,8 +507,8 @@ ChannelSetField
 
 	    double dPower = SymbolParameterResolveValue(phsleGate, ppistGate, "POWER"); 
 
-	    printf("Warning: Field \"Zpower\" for '%s' has already been set to %i, new value is %s.\n",  
-		   pcPathname,(int)dPower, pcValue);
+	    printf("Warning: Field \"%s\" for '%s' has already been set to %i, new value is %s.\n",  
+		   pcField, pcPathname,(int)dPower, pcValue);
 	} 
 	else
 	{
