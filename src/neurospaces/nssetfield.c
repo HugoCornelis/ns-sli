@@ -1049,19 +1049,19 @@ SegmentSetField
  char *pcField,
  char *pcValue)
 {
-	if (strcmp(pcField, "len") == 0)
-	{
-	    double d = strtod(pcValue, NULL);
+    if (strcmp(pcField, "len") == 0)
+    {
+	double d = strtod(pcValue, NULL);
 
-	    if (d == 0.0)
-	    {
-		SymbolSetOptions(phsleWorking, FLAG_SEGMENTER_SPHERICAL);
-	    }
-	    else
-	    {
-		SymbolSetOptions(phsleWorking, SymbolGetOptions(phsleWorking) & ~(FLAG_SEGMENTER_SPHERICAL));
-	    }
+	if (d == 0.0)
+	{
+	    SymbolSetOptions(phsleWorking, FLAG_SEGMENTER_SPHERICAL);
 	}
+	else
+	{
+	    SymbolSetOptions(phsleWorking, SymbolGetOptions(phsleWorking) & ~(FLAG_SEGMENTER_SPHERICAL));
+	}
+    }
 
     return setParameter(ppistWorking, phsleWorking, pcField, pcValue, 0);
 }
