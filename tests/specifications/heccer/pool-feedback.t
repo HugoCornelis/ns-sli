@@ -33,7 +33,7 @@ my $test
 						   numerical_compare => 1,
 						   description => "Is a pool integrated correctly, one compartment, one pool with a feedback loop ?",
 						   read => (join '', $text_expected),
-						   timeout => 7,
+						   timeout => 10,
 						   write => undef,
 						  },
 						 ],
