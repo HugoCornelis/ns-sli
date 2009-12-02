@@ -40,12 +40,13 @@ SegmentSetField
  char *pcValue);
 
 
-static struct symtab_GateKinetic *CreateGateKinetic(char *pcDirection);
 static
 struct symtab_HSolveListElement * CreateGate(
 		 struct symtab_HSolveListElement *phsleChannel, 
 		 char *pcName);
-static struct symtab_ConcentrationGateKinetic *CreateConcGateKinetic(char *pcDirection);
+static
+struct symtab_HSolveListElement *
+CreateGateKinetic(char *pcDirection, int iConcentration);
 
 
 //------------------------------------------------------------------
@@ -101,23 +102,16 @@ struct symtab_HSolveListElement * CreateGate(
 
   if (strcmp(pcName, "HH_concentration") == 0)
   {
-      struct symtab_ConcentrationGateKinetic *pconcgatkForward = 
-	  CreateConcGateKinetic("A");
-
-      if(!pconcgatkForward)
-	  return NULL;
-
-      phsleForward = (struct symtab_HSolveListElement *)pconcgatkForward;
+      phsleForward = CreateGateKinetic("A", 1);
   }
   else
   {
-      struct symtab_GateKinetic *pgatkForward = 
-	  CreateGateKinetic("A");
+      phsleForward = CreateGateKinetic("A", 0);
+  }
 
-      if(!pgatkForward)
-	  return NULL;
-
-      phsleForward = (struct symtab_HSolveListElement *)pgatkForward;
+  if (!phsleForward)
+  {
+      return(NULL);
   }
 
   SymbolAddChild(&pgathh->bio.ioh.iol.hsle, phsleForward);
@@ -126,23 +120,16 @@ struct symtab_HSolveListElement * CreateGate(
 
   if (strcmp(pcName, "HH_concentration") == 0)
   {
-      struct symtab_ConcentrationGateKinetic *pconcgatkBackward = 
-	  CreateConcGateKinetic("B");
-
-      if(!pconcgatkBackward)
-	  return NULL;
-
-      phsleBackward = (struct symtab_HSolveListElement *)pconcgatkBackward;
+      phsleBackward = CreateGateKinetic("B", 1);
   }
   else
   {
-      struct symtab_GateKinetic *pgatkBackward = 
-	  CreateGateKinetic("B");
+      phsleBackward = CreateGateKinetic("B", 0);
+  }
 
-      if(!pgatkBackward)
-	  return NULL;
-
-      phsleBackward = (struct symtab_HSolveListElement *)pgatkBackward;
+  if (!phsleBackward)
+  {
+      return(NULL);
   }
 
   SymbolAddChild(&pgathh->bio.ioh.iol.hsle, phsleBackward);
@@ -167,76 +154,35 @@ struct symtab_HSolveListElement * CreateGate(
 }
 
 
-//------------------------------------------------------------------
-/*
- * \fn static struct symtab_GateKinetic *CreateGateKinetic(char *pcDirection)
- */
-//------------------------------------------------------------------
-static struct symtab_GateKinetic *CreateGateKinetic(char *pcDirection){
+static
+struct symtab_HSolveListElement *
+CreateGateKinetic
+(char *pcDirection, int iConcentration)
+{
+    struct symtab_HSolveListElement *phsle;
+    struct symtab_IdentifierIndex *pidinDirection
+	= IdinNewFromChars(pcDirection);
 
+    if (!pidinDirection)
+	return NULL;
 
-  struct symtab_GateKinetic *pgatk;
+    if (iConcentration)
+    {
+	phsle = (struct symtab_HSolveListElement *)ConcentrationGateKineticCalloc();
+    }
+    else
+    {
+	phsle = (struct symtab_HSolveListElement *)GateKineticCalloc();
+    }
 
+    if (!phsle)
+    {
+	return NULL;
+    }
 
-  struct symtab_IdentifierIndex *pidinDirection;
+    SymbolSetName(phsle, pidinDirection);
 
-  
- 
-  pidinDirection = IdinNewFromChars(pcDirection);
-
-
-  if(!pidinDirection)
-    return NULL;
-
-
-  pgatk = GateKineticCalloc();
-
-  if(!pgatk)
-    return NULL;
-
-
-  SymbolSetName(&pgatk->bio.ioh.iol.hsle,pidinDirection);
-
-  return pgatk;
-
-}
-
-
-
-
-
-//------------------------------------------------------------------
-/*
- * \fn static struct symtab_GateKinetic *CreateConcGateKinetic(char *pcDirection)
- */
-//------------------------------------------------------------------
-static struct symtab_ConcentrationGateKinetic *CreateConcGateKinetic(char *pcDirection){
-
-
-  struct symtab_ConcentrationGateKinetic *pconcgatk;
-
-
-  struct symtab_IdentifierIndex *pidinDirection;
-
-  
- 
-  pidinDirection = IdinNewFromChars(pcDirection);
-
-
-  if(!pidinDirection)
-    return NULL;
-
-
-  pconcgatk =  ConcentrationGateKineticCalloc();
-
-  if(!pconcgatk)
-    return NULL;
-
-
-  SymbolSetName(&pconcgatk->bio.ioh.iol.hsle,pidinDirection);
-
-  return pconcgatk;
-
+    return(phsle);
 }
 
 
