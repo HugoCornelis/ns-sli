@@ -384,21 +384,20 @@ GateSetField
 	//- and returns a pointer to it.
 
 	phsleGate = CreateGate(phsle, pcGateName);
-
-	if (strcmp(pcGateName, "HH_concentration") == 0)
-	{
-	    //- set the state_init parameter. 
-
-	    struct symtab_HSolveListElement *phsleConc
-		= PidinStackPushStringAndLookup(ppist, pcGateName);
-
-	    setStateInit(ppist);
-	}
     }
-
 
     if(!phsleGate)
 	return 0;
+
+    if (strcmp(pcGateName, "HH_concentration") == 0)
+    {
+	//- set the state_init parameter.
+
+	struct symtab_HSolveListElement *phsleConc
+	    = PidinStackPushStringAndLookup(ppist, pcGateName);
+
+	setStateInit(ppist);
+    }
 
     int iResult = setParameter(ppistGate, phsleGate,pcField,pcValue,SETPARA_NUM);
 
@@ -486,52 +485,7 @@ ChannelSetField
     }
     else if(strcmp(pcField,"Zpower") == 0)
     {
-/* 	return(GateSetField(phsleWorking, ppistWorking, pcPathname, pcField, pcValue, "HH_concentration")); */
-
-
-
-	//- if zero, no need to create a gate.
-	double dNumber = strtod(pcValue,NULL);
-
-	if(dNumber == 0.0)
-	    return 1;
-
-	struct PidinStack *ppistGate
-	    = lookupGate(pcPathname, pcField); 
-
-	struct symtab_HSolveListElement *phsleGate
-	    = PidinStackLookupTopSymbol(ppistGate);
-
-	if(phsleGate) 
-	{ 
-
-	    double dPower = SymbolParameterResolveValue(phsleGate, ppistGate, "POWER"); 
-
-	    printf("Warning: Field \"%s\" for '%s' has already been set to %i, new value is %s.\n",  
-		   pcField, pcPathname,(int)dPower, pcValue);
-	} 
-	else
-	{
-	    phsleGate = 
-		CreateGate(phsleWorking, "HH_concentration");
-	}
-
-	if(!phsleGate)
-	    return 0;
-
-	struct symtab_HSolveListElement *phsleConc
-	    = PidinStackPushStringAndLookup(ppistWorking, "HH_concentration");
-
-	//- Here we set the state_init parameter. 
-	setStateInit(ppistWorking);
-
-	int iResult = setParameter(ppistGate, phsleGate,pcField,pcValue,SETPARA_NUM);
-
-	PidinStackFree(ppistGate);
-
-	return(iResult);
-
-
+	return(GateSetField(phsleWorking, ppistWorking, pcPathname, pcField, pcValue, "HH_concentration"));
     }
     else if( strncmp(pcField,"Z_A->table",10) == 0 ){
 
