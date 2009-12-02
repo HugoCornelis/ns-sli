@@ -373,10 +373,10 @@ GateSetField
     if(phsleGate) 
     { 
 
-	double dPower = SymbolParameterResolveValue(phsleGate, ppistGate, "POWER"); 
+	double dField = SymbolParameterResolveValue(phsleGate, ppistGate, pcField);
 
-	printf("Warning: Field \"%s\" for '%s' has already been set to %i, new value is %s.\n",  
-	       pcField, pcPathname,(int)dPower, pcValue);
+	printf("Warning: Field \"%s\" for '%s' has already been set to %g, new value is %s.\n",  
+	       pcField, pcPathname, dField, pcValue);
     }
     else
     {
@@ -558,93 +558,17 @@ ChannelSetField
     {
 	return(TableSetField(phsleWorking, ppistWorking, pcPathname, pcField, pcValue, "HH_inactivation"));
     }
-
-
-
     else if(!strcmp(pcField,"X_init"))
     {
-
-
-	//- Return is it's just zero, not sure if this is right
-	double dNumber = strtod(pcValue,NULL);
-
-	if(dNumber == 0.0)
-	    return 1;
-
-	//
-	// A bit dangerous since I'm not making sure that HH_activation
-	// has been created first. Will safty check it later.
-	//
-	struct PidinStack *ppistGate = PidinStackDuplicate(ppistWorking);
-
-	struct symtab_HSolveListElement *phsleGate = 
-	    PidinStackPushStringAndLookup(ppistGate,"HH_activation");
-   
-	if(!phsleGate)
-	    return 0;
-
-	int iResult = setParameter(ppistGate, phsleGate,"state_init",pcValue,SETPARA_NUM);
-
-	PidinStackFree(ppistGate);
-
-	return(iResult);
+	return(GateSetField(phsleWorking, ppistWorking, pcPathname, pcField, pcValue, "HH_activation"));
     }
     else if(!strcmp(pcField,"Y_init"))
     {
-
-
-	//- Return is it's just zero, not sure if this is right
-	double dNumber = strtod(pcValue,NULL);
-
-	if(dNumber == 0.0)
-	    return 1;
-
-	//
-	// A bit dangerous since I'm not making sure that HH_activation
-	// has been created first. Will safty check it later.
-	//
-	struct PidinStack *ppistGate = PidinStackDuplicate(ppistWorking);
-
-	struct symtab_HSolveListElement *phsleGate = 
-	    PidinStackPushStringAndLookup(ppistGate,"HH_inactivation");
-
-	if(!phsleGate)
-	    return 0;
-
-	int iResult = setParameter(ppistGate, phsleGate,"state_init",pcValue,SETPARA_NUM);
-
-	PidinStackFree(ppistGate);
-
-	return(iResult);
+	return(GateSetField(phsleWorking, ppistWorking, pcPathname, pcField, pcValue, "HH_inactivation"));
     }
     else if(!strcmp(pcField,"Z_init"))
     {
-
-
-	//- Return is it's just zero, not sure if this is right
-	double dNumber = strtod(pcValue,NULL);
-
-	if(dNumber == 0.0)
-	    return 1;
-
-	//
-	// A bit dangerous since I'm not making sure that HH_activation
-	// has been created first. Will safty check it later.
-	//
-	struct PidinStack *ppistGate = PidinStackDuplicate(ppistWorking);
-
-	struct symtab_HSolveListElement *phsleGate = 
-	    PidinStackPushStringAndLookup(ppistGate,"HH_concentration");
-   
-
-	if(!phsleGate)
-	    return 0;
-
-	int iResult = setParameter(ppistGate, phsleGate,"state_init",pcValue,SETPARA_NUM);
-
-	PidinStackFree(ppistGate);
-
-	return(iResult);
+	return(GateSetField(phsleWorking, ppistWorking, pcPathname, pcField, pcValue, "HH_concentration"));
     }
     else if(!strcmp(pcField,"instant"))
     {

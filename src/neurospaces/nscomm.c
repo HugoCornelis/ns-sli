@@ -464,6 +464,9 @@ struct ParameterMapper * mapParameter(char *pcField){
 	{	    "Xpower",	"POWER",	SLI_PARAMETER_NUMBER,	},
 	{	    "Ypower",	"POWER",	SLI_PARAMETER_NUMBER,	},
 	{	    "Zpower",	"POWER",	SLI_PARAMETER_NUMBER,	},
+	{	    "X_init",	"state_init",	SLI_PARAMETER_NUMBER,	},
+	{	    "Y_init",	"state_init",	SLI_PARAMETER_NUMBER,	},
+	{	    "Z_init",	"state_init",	SLI_PARAMETER_NUMBER,	},
 	{	    "tau",	"TAU",	SLI_PARAMETER_NUMBER,	},
 	{	    "tau1",	"TAU1",	SLI_PARAMETER_NUMBER,	},
 	{	    "tau2",	"TAU2",	SLI_PARAMETER_NUMBER,	},
@@ -514,41 +517,32 @@ struct ParameterMapper * mapParameter(char *pcField){
 //------------------------------------------------------------------
 struct PidinStack * lookupGate(char *pcName, char *pcField)
 {
+    struct PidinStack *ppistResult  = getRootedContext(pcName); //PidinStackParse(pcName);
 
+    // \todo the mapping Xpower -> HH_activation is coded here and in NeurospacesSetField().
 
-  struct PidinStack *ppistResult  = getRootedContext(pcName); //PidinStackParse(pcName);
+    if (strcmp(pcField, "X") == 0
+	|| strcmp(pcField, "Xpower") == 0
+	|| strcmp(pcField, "X_init") == 0)
+    {
+	PidinStackPushString(ppistResult, "HH_activation");
+    }
+    else if (strcmp(pcField, "Y") == 0
+	     || strcmp(pcField, "Ypower") == 0
+	     || strcmp(pcField, "Y_init") == 0)
+    {
+	// \todo the mapping Ypower -> HH_inactivation is coded here and in NeurospacesSetField().
 
-
-
-  // \todo the mapping Xpower -> HH_activation is coded here and in NeurospacesSetField().
-  if(strcmp(pcField,"X") == 0
-     || strcmp(pcField,"Xpower") == 0)
-  {
-
-      PidinStackPushString(ppistResult,"HH_activation");
-
-
-  }
-  else if(strcmp(pcField,"Y") == 0
-	  || strcmp(pcField,"Ypower") == 0)
-  {
-      // \todo the mapping Ypower -> HH_inactivation is coded here and in NeurospacesSetField().
-      PidinStackPushString(ppistResult,"HH_inactivation");
-    
-
-  }
-  else if(strcmp(pcField,"Z") == 0
-	  || strcmp(pcField,"Zpower") == 0)
-  {
-
-      PidinStackPushString(ppistResult,"HH_concentration");
-    
-
-  }
+	PidinStackPushString(ppistResult, "HH_inactivation");
+    }
+    else if (strcmp(pcField, "Z") == 0
+	     || strcmp(pcField, "Zpower") == 0
+	     || strcmp(pcField, "Z_init") == 0)
+    {
+	PidinStackPushString(ppistResult, "HH_concentration");
+    }
   
-  return ppistResult;
-
-
+    return ppistResult;
 }
 
 
