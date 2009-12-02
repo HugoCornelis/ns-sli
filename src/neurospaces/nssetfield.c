@@ -437,22 +437,17 @@ int NSSetField(struct symtab_HSolveListElement *phsle,
 	return 1;
     }
 
-    //! is this related to nernst elements ?
-
-    if(instanceof_group(phsleWorking))
-    {
-  
-	setParameter(ppistWorking, phsleWorking,pcField,pcValue,SETPARA_NUM);
-	return 1;
-    }
-
-    //-
     //- Check the type on the phsleWorking object passed. For certain types
     //- we must add parameters to the child objects rather than the object
     //- itself.
-    //-
 
-    if (instanceof_channel(phsleWorking))
+    //! is this related to nernst elements ?
+
+    if (instanceof_group(phsleWorking))
+    {
+	return(setParameter(ppistWorking, phsleWorking,pcField,pcValue,SETPARA_NUM))
+    }
+    else if (instanceof_channel(phsleWorking))
     {
 	return(ChannelSetField(phsleWorking, ppistWorking, pcPathname, pcField, pcValue));
     }
