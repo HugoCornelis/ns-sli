@@ -33,8 +33,8 @@ ChannelSetField
 static
 int
 SegmentSetField
-(struct symtab_HSolveListElement *phsleWorking,
- struct PidinStack *ppistWorking,
+(struct symtab_HSolveListElement *phsle,
+ struct PidinStack *ppist,
  char *pcPathname,
  char *pcField,
  char *pcValue);
@@ -42,7 +42,7 @@ SegmentSetField
 
 static struct symtab_GateKinetic *CreateGateKinetic(char *pcDirection);
 static
-struct symtab_HSolveListElement * CreateHHGate(
+struct symtab_HSolveListElement * CreateGate(
 		 struct symtab_HSolveListElement *phsleChannel, 
 		 char *pcName);
 static struct symtab_ConcentrationGateKinetic *CreateConcGateKinetic(char *pcDirection);
@@ -64,7 +64,7 @@ struct symtab_HSolveListElement * CreateConcGate(
  */
 //------------------------------------------------------------------
 static
-struct symtab_HSolveListElement * CreateHHGate(
+struct symtab_HSolveListElement * CreateGate(
 		 struct symtab_HSolveListElement *phsleChannel, 
 		 char *pcName){
 
@@ -101,25 +101,56 @@ struct symtab_HSolveListElement * CreateHHGate(
   //i "forward" and "backward" respectively, then make these
   //i the children of the HH Gate pgathh.
   //i
-  struct symtab_GateKinetic *pgatkForward = 
-    CreateGateKinetic("A");
 
-  if(!pgatkForward)
-    return NULL;
+  struct symtab_HSolveListElement *phsleForward = NULL;
 
-  SymbolAddChild(&pgathh->bio.ioh.iol.hsle,
-		 &pgatkForward->bio.ioh.iol.hsle);
+  if (strcmp(pcName, "HH_concentration") == 0)
+  {
+      struct symtab_ConcentrationGateKinetic *pconcgatkForward = 
+	  CreateConcGateKinetic("A");
+
+      if(!pconcgatkForward)
+	  return NULL;
+
+      phsleForward = (struct symtab_HSolveListElement *)pconcgatkForward;
+  }
+  else
+  {
+      struct symtab_GateKinetic *pgatkForward = 
+	  CreateGateKinetic("A");
+
+      if(!pgatkForward)
+	  return NULL;
+
+      phsleForward = (struct symtab_HSolveListElement *)pgatkForward;
+  }
+
+  SymbolAddChild(&pgathh->bio.ioh.iol.hsle, phsleForward);
   
+  struct symtab_HSolveListElement *phsleBackward = NULL;
 
+  if (strcmp(pcName, "HH_concentration") == 0)
+  {
+      struct symtab_ConcentrationGateKinetic *pconcgatkBackward = 
+	  CreateConcGateKinetic("B");
 
-  struct symtab_GateKinetic *pgatkBackward = 
-    CreateGateKinetic("B");
+      if(!pconcgatkBackward)
+	  return NULL;
 
-  if(!pgatkBackward)
-    return NULL;
+      phsleBackward = (struct symtab_HSolveListElement *)pconcgatkBackward;
+  }
+  else
+  {
+      struct symtab_GateKinetic *pgatkBackward = 
+	  CreateGateKinetic("B");
 
-  SymbolAddChild(&pgathh->bio.ioh.iol.hsle,
-		 &pgatkBackward->bio.ioh.iol.hsle);
+      if(!pgatkBackward)
+	  return NULL;
+
+      phsleBackward = (struct symtab_HSolveListElement *)pgatkBackward;
+  }
+
+  SymbolAddChild(&pgathh->bio.ioh.iol.hsle, phsleBackward);
 
 
   //- allocate a parameter for state_init
@@ -458,8 +489,85 @@ int NSSetField(struct symtab_HSolveListElement *phsle,
 
     return setParameter(ppistWorking, phsleWorking, pcField, pcValue, 0);
 
+    // \todo memory leak on ppistWorking
 }
 
+
+static
+int
+GateSetField
+(struct symtab_HSolveListElement *phsle,
+ struct PidinStack *ppist,
+ char *pcPathname,
+ char *pcField,
+ char *pcValue,
+ char *pcGateName)
+{
+    //- if zero, no need to create a gate.
+    double dNumber = strtod(pcValue,NULL);
+
+    if(dNumber == 0.0)
+	return 1;
+
+
+    struct PidinStack *ppistGate
+	= lookupGate(pcPathname, pcField); 
+
+    struct symtab_HSolveListElement *phsleGate
+	= PidinStackLookupTopSymbol(ppistGate);
+
+
+    if(phsleGate) 
+    { 
+
+	double dPower = SymbolParameterResolveValue(phsleGate, ppistGate, "POWER"); 
+
+	printf("Warning: Field \"%s\" for '%s' has already been set to %i, new value is %s.\n",  
+	       pcField, pcPathname,(int)dPower, pcValue);
+    }
+    else
+    {
+	//- we create the HH gate. Function creates
+	//- the gate, sets it as a child to phsle,
+	//- and returns a pointer to the gate.
+
+	phsleGate = CreateGate(phsle, pcGateName);
+
+	if (strcmp(pcGateName, "HH_concentration") == 0)
+	{
+	    //- Here we set the state_init parameter. 
+
+	    struct symtab_HSolveListElement *phsleConc
+		= PidinStackPushStringAndLookup(ppist, pcGateName);
+
+	    setStateInit(ppist);
+	}
+    }
+
+
+    if(!phsleGate)
+	return 0;
+
+    int iResult = setParameter(ppistGate, phsleGate,pcField,pcValue,SETPARA_NUM);
+
+    PidinStackFree(ppistGate);
+
+    return(iResult);
+
+}
+
+static
+int
+TableSetField
+(struct symtab_HSolveListElement *phsle,
+ struct PidinStack *ppist,
+ char *pcPathname,
+ char *pcField,
+ char *pcValue,
+ char *pcGateName)
+{
+    return 0;
+}
 
 static
 int
@@ -470,29 +578,36 @@ ChannelSetField
  char *pcField,
  char *pcValue)
 {
-
     struct channel_field_mapper
     {
 	char *pcG2;
 	int iLength;
-	int (*ChannelMapField)(int);
+	int (*ChannelMapField)
+	    (struct symtab_HSolveListElement *phsle,
+	     struct PidinStack *ppist,
+	     char *pcPathname,
+	     char *pcField,
+	     char *pcValue,
+	     char *pcGateName);
     };
 
     static struct channel_field_mapper pcfm[] =
     {
-	"Xpower", -1, NULL,
-	"Ypower", -1, NULL,
-	"Zpower", -1, NULL,
-	"Z_A->table", 10, NULL,
-	"Z_B->table", 10, NULL,
-	"X_B->table", 10, NULL,
-	"X_A->table", 10, NULL,
-	"Y_B->table", 10, NULL,
-	"Y_A->table", 10, NULL,
-	"X_init", -1, NULL,
-	"Y_init", -1, NULL,
-	"Z_init", -1, NULL,
-	"instant", -1, NULL,
+	"X_init", -1, GateSetField,
+	"Xpower", -1, GateSetField,
+	"Y_init", -1, GateSetField,
+	"Ypower", -1, GateSetField,
+	"Z_init", -1, GateSetField,
+	"Zpower", -1, GateSetField,
+	"instant", -1, GateSetField,
+
+	"X_A->table", 10, TableSetField,
+	"X_B->table", 10, TableSetField,
+	"Y_A->table", 10, TableSetField,
+	"Y_B->table", 10, TableSetField,
+	"Z_A->table", 10, TableSetField,
+	"Z_B->table", 10, TableSetField,
+
 	NULL, -1, NULL,
     };
 
@@ -509,95 +624,18 @@ ChannelSetField
     //- is the order we must traverse the stack to get to the object.. 
     //-
 
-    if (strcmp(pcField, "Xpower") == 0){
-
-	//- if zero, no need to create a gate.
-	double dNumber = strtod(pcValue,NULL);
-
-	if(dNumber == 0.0)
-	    return 1;
-
-
-	struct PidinStack *ppistGate
-	    = lookupGate(pcPathname,"Xpower"); 
-
-	struct symtab_HSolveListElement *phsleGate
-	    = PidinStackLookupTopSymbol(ppistGate);
-
-
-	if(phsleGate) 
-	{ 
-
-	    double dPower = SymbolParameterResolveValue(phsleGate, ppistGate, "POWER"); 
-
-	    printf("Warning: Field \"Xpower\" for '%s' has already been set to %i, new value is %s.\n",  
-		   pcPathname,(int)dPower, pcValue);
-	}
-	else
-	{
-	    //-
-	    //- we create our HH gate. Function creates
-	    //- the gate, sets it as a child to phsleWorking,
-	    //- and returns a pointer to the gate.
-
-	    phsleGate = 
-		CreateHHGate(phsleWorking, "HH_activation");
-	}
-
-
-	if(!phsleGate)
-	    return 0;
-
-	int iResult = setParameter(ppistGate, phsleGate,pcField,pcValue,SETPARA_NUM);
-
-	PidinStackFree(ppistGate);
-
-	return(iResult);
-
+    if (strcmp(pcField, "Xpower") == 0)
+    {
+	return(GateSetField(phsleWorking, ppistWorking, pcPathname, pcField, pcValue, "HH_activation"));
     }
-    else if (strcmp(pcField, "Ypower") == 0){
-
-
-	//- if zero, no need to create a gate.
-	double dNumber = strtod(pcValue,NULL);
-
-	if(dNumber == 0.0)
-	    return 1;
-      
-
-
-	struct PidinStack *ppistGate
-	    = lookupGate(pcPathname,"Ypower"); 
-
-	struct symtab_HSolveListElement *phsleGate
-	    = PidinStackLookupTopSymbol(ppistGate);
-
-	if(phsleGate) 
-	{ 
-
-	    double dPower = SymbolParameterResolveValue(phsleGate, ppistGate, "POWER"); 
-
-	    printf("Warning: Field \"Ypower\" for '%s' has already been set to %i, new value is %s.\n",  
-		   pcPathname,(int)dPower, pcValue);
-	}
-	else
-	{
-	    phsleGate = 
-		CreateHHGate(phsleWorking, "HH_inactivation");
-	}
-
-	if(!phsleGate)
-	    return 0;
-
-	int iResult = setParameter(ppistGate, phsleGate,pcField,pcValue,SETPARA_NUM);
-
-	PidinStackFree(ppistGate);
-
-	return(iResult);
-
-
+    else if (strcmp(pcField, "Ypower") == 0)
+    {
+	return(GateSetField(phsleWorking, ppistWorking, pcPathname, pcField, pcValue, "HH_inactivation"));
     }
-    else if(strcmp(pcField,"Zpower") == 0){ 
+    else if(strcmp(pcField,"Zpower") == 0)
+    {
+/* 	return(GateSetField(phsleWorking, ppistWorking, pcPathname, pcField, pcValue, "HH_concentration")); */
+
 
 
 	//- if zero, no need to create a gate.
@@ -623,7 +661,7 @@ ChannelSetField
 	else
 	{
 	    phsleGate = 
-		CreateConcGate(phsleWorking, "HH_concentration");
+		CreateGate(phsleWorking, "HH_concentration");
 	}
 
 	if(!phsleGate)
@@ -743,7 +781,7 @@ ChannelSetField
 		= PidinStackLookupTopSymbol(ppistWorking);
 
 	    struct symtab_HSolveListElement *phsleGate
-		= CreateHHGate(phsleWorking, "HH_activation");
+		= CreateGate(phsleWorking, "HH_activation");
 	}
 
 
@@ -779,7 +817,7 @@ ChannelSetField
 		= PidinStackLookupTopSymbol(ppistWorking);
 
 	    struct symtab_HSolveListElement *phsleGate
-		= CreateHHGate(phsleWorking, "HH_activation");
+		= CreateGate(phsleWorking, "HH_activation");
 	}
 
 
@@ -816,7 +854,7 @@ ChannelSetField
 		= PidinStackLookupTopSymbol(ppistWorking);
 
 	    struct symtab_HSolveListElement *phsleGate
-		= CreateHHGate(phsleWorking, "HH_inactivation");
+		= CreateGate(phsleWorking, "HH_inactivation");
 	}
 
 
@@ -852,7 +890,7 @@ ChannelSetField
 		= PidinStackLookupTopSymbol(ppistWorking);
 
 	    struct symtab_HSolveListElement *phsleGate
-		= CreateHHGate(phsleWorking, "HH_inactivation");
+		= CreateGate(phsleWorking, "HH_inactivation");
 	}
   
 
@@ -1064,8 +1102,8 @@ ChannelSetField
 static
 int
 SegmentSetField
-(struct symtab_HSolveListElement *phsleWorking,
- struct PidinStack *ppistWorking,
+(struct symtab_HSolveListElement *phsle,
+ struct PidinStack *ppist,
  char *pcPathname,
  char *pcField,
  char *pcValue)
@@ -1076,14 +1114,14 @@ SegmentSetField
 
 	if (d == 0.0)
 	{
-	    SymbolSetOptions(phsleWorking, FLAG_SEGMENTER_SPHERICAL);
+	    SymbolSetOptions(phsle, FLAG_SEGMENTER_SPHERICAL);
 	}
 	else
 	{
-	    SymbolSetOptions(phsleWorking, SymbolGetOptions(phsleWorking) & ~(FLAG_SEGMENTER_SPHERICAL));
+	    SymbolSetOptions(phsle, SymbolGetOptions(phsle) & ~(FLAG_SEGMENTER_SPHERICAL));
 	}
     }
 
-    return setParameter(ppistWorking, phsleWorking, pcField, pcValue, 0);
+    return setParameter(ppist, phsle, pcField, pcValue, 0);
 }
 
