@@ -550,77 +550,13 @@ ChannelSetField
     {
 	return(TableSetField(phsleWorking, ppistWorking, pcPathname, pcField, pcValue, "HH_activation"));
     }
-
-    else if( strncmp(pcField,"Y_B->table",10) == 0 ){
-
-      
-	struct PidinStack *ppistB = PidinStackDuplicate(ppistWorking);
-
-	//- we must look up the HH gate
-	struct symtab_HSolveListElement *phsleInactivation
-	    = PidinStackPushStringAndLookup(ppistB, "HH_inactivation");
-  
-	if(!phsleInactivation){
-	    struct symtab_HSolveListElement *phsleWorking
-		= PidinStackLookupTopSymbol(ppistWorking);
-
-	    struct symtab_HSolveListElement *phsleGate
-		= CreateGate(phsleWorking, "HH_inactivation");
-	}
-
-
-	struct symtab_HSolveListElement *phsleB = 
-	    PidinStackPushStringAndLookup(ppistB,"B");
-    
-	if(!phsleB){
-	    Error();
-	    fprintf(stdout,
-		    "Could not find backward gate kinetic for %s\n",
-		    pcPathname);
-	    return 0;
-	}
-
-	int iResult = setParameter(ppistB, phsleB,&pcField[5],pcValue,SETPARA_NUM);
-
-	PidinStackFree(ppistB);
-
-	return(iResult);
+    else if( strncmp(pcField,"Y_B->table",10) == 0 )
+    {
+	return(TableSetField(phsleWorking, ppistWorking, pcPathname, pcField, pcValue, "HH_inactivation"));
     }
-    else if( strncmp(pcField,"Y_A->table",10) == 0 ){
-
-      
-	struct PidinStack *ppistA = PidinStackDuplicate(ppistWorking);
-
-
-	//- we must look up the HH gate
-	struct symtab_HSolveListElement *phsleInactivation
-	    = PidinStackPushStringAndLookup(ppistA, "HH_inactivation");
-  
-	if(!phsleInactivation){
-	    struct symtab_HSolveListElement *phsleWorking
-		= PidinStackLookupTopSymbol(ppistWorking);
-
-	    struct symtab_HSolveListElement *phsleGate
-		= CreateGate(phsleWorking, "HH_inactivation");
-	}
-  
-
-	struct symtab_HSolveListElement *phsleA = 
-	    PidinStackPushStringAndLookup(ppistA,"A");
-    
-	if(!phsleA){
-	    Error();
-	    fprintf(stdout,
-		    "Could not find forward gate kinetic for %s\n",
-		    pcPathname);
-	    return 0;
-	}
-
-	int iResult = setParameter(ppistA, phsleA,&pcField[5],pcValue,SETPARA_NUM);
-
-	PidinStackFree(ppistA);
-
-	return(iResult);
+    else if( strncmp(pcField,"Y_A->table",10) == 0 )
+    {
+	return(TableSetField(phsleWorking, ppistWorking, pcPathname, pcField, pcValue, "HH_inactivation"));
     }
 
 
