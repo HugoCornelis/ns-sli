@@ -357,26 +357,25 @@ GateSetField
  char *pcGateName)
 {
     //- if zero, no need to create a gate.
-    double dNumber = strtod(pcValue,NULL);
+    double dNumber = strtod(pcValue, NULL);
 
     if(dNumber == 0.0)
 	return 1;
 
 
     struct PidinStack *ppistGate
-	= lookupGate(pcPathname, pcField); 
+	= PidinStackDuplicate(ppist);
 
     struct symtab_HSolveListElement *phsleGate
-	= PidinStackLookupTopSymbol(ppistGate);
+	= PidinStackPushStringAndLookup(ppistGate, pcGateName);
 
 
-    if(phsleGate) 
-    { 
+    if (phsleGate) 
+    {
+/* 	double dField = SymbolParameterResolveValue(phsleGate, ppistGate, pcField); */
 
-	double dField = SymbolParameterResolveValue(phsleGate, ppistGate, pcField);
-
-	printf("Warning: Field \"%s\" for '%s' has already been set to %g, new value is %s.\n",  
-	       pcField, pcPathname, dField, pcValue);
+/* 	printf("Warning: Field \"%s\" for '%s' has already been set to %g, new value is %s.\n",   */
+/* 	       pcField, pcPathname, dField, pcValue); */
     }
     else
     {
@@ -393,13 +392,10 @@ GateSetField
     {
 	//- set the state_init parameter.
 
-	struct symtab_HSolveListElement *phsleConc
-	    = PidinStackPushStringAndLookup(ppist, pcGateName);
-
-	setStateInit(ppist);
+	setStateInit(ppistGate);
     }
 
-    int iResult = setParameter(ppistGate, phsleGate,pcField,pcValue,SETPARA_NUM);
+    int iResult = setParameter(ppistGate, phsleGate, pcField, pcValue, SETPARA_NUM);
 
     PidinStackFree(ppistGate);
 
@@ -530,47 +526,47 @@ ChannelSetField
     {
 	return(GateSetField(phsleWorking, ppistWorking, pcPathname, pcField, pcValue, "HH_inactivation"));
     }
-    else if(strcmp(pcField,"Zpower") == 0)
+    else if(strcmp(pcField, "Zpower") == 0)
     {
 	return(GateSetField(phsleWorking, ppistWorking, pcPathname, pcField, pcValue, "HH_concentration"));
     }
-    else if( strncmp(pcField,"Z_A->table", 10) == 0 )
+    else if( strncmp(pcField, "Z_A->table", 10) == 0 )
     {
 	return(TableSetField(phsleWorking, ppistWorking, pcPathname, pcField, pcValue, "HH_concentration"));
     }
-    else if( strncmp(pcField,"Z_B->table", 10) == 0 )
+    else if( strncmp(pcField, "Z_B->table", 10) == 0 )
     {
 	return(TableSetField(phsleWorking, ppistWorking, pcPathname, pcField, pcValue, "HH_concentration"));
     }
-    else if( strncmp(pcField,"X_B->table", 10) == 0 )
+    else if( strncmp(pcField, "X_B->table", 10) == 0 )
     {
 	return(TableSetField(phsleWorking, ppistWorking, pcPathname, pcField, pcValue, "HH_activation"));
     }
-    else if( strncmp(pcField,"X_A->table", 10) == 0 )
+    else if( strncmp(pcField, "X_A->table", 10) == 0 )
     {
 	return(TableSetField(phsleWorking, ppistWorking, pcPathname, pcField, pcValue, "HH_activation"));
     }
-    else if( strncmp(pcField,"Y_B->table", 10) == 0 )
+    else if( strncmp(pcField, "Y_B->table", 10) == 0 )
     {
 	return(TableSetField(phsleWorking, ppistWorking, pcPathname, pcField, pcValue, "HH_inactivation"));
     }
-    else if( strncmp(pcField,"Y_A->table", 10) == 0 )
+    else if( strncmp(pcField, "Y_A->table", 10) == 0 )
     {
 	return(TableSetField(phsleWorking, ppistWorking, pcPathname, pcField, pcValue, "HH_inactivation"));
     }
-    else if(!strcmp(pcField,"X_init"))
+    else if(!strcmp(pcField, "X_init"))
     {
 	return(GateSetField(phsleWorking, ppistWorking, pcPathname, pcField, pcValue, "HH_activation"));
     }
-    else if(!strcmp(pcField,"Y_init"))
+    else if(!strcmp(pcField, "Y_init"))
     {
 	return(GateSetField(phsleWorking, ppistWorking, pcPathname, pcField, pcValue, "HH_inactivation"));
     }
-    else if(!strcmp(pcField,"Z_init"))
+    else if(!strcmp(pcField, "Z_init"))
     {
 	return(GateSetField(phsleWorking, ppistWorking, pcPathname, pcField, pcValue, "HH_concentration"));
     }
-    else if(!strcmp(pcField,"instant"))
+    else if(!strcmp(pcField, "instant"))
     {
 	//- set default result: success
 
