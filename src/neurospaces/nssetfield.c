@@ -534,27 +534,27 @@ ChannelSetField
     {
 	return(GateSetField(phsleWorking, ppistWorking, pcPathname, pcField, pcValue, "HH_concentration"));
     }
-    else if( strncmp(pcField,"Z_A->table",10) == 0 )
+    else if( strncmp(pcField,"Z_A->table", 10) == 0 )
     {
 	return(TableSetField(phsleWorking, ppistWorking, pcPathname, pcField, pcValue, "HH_concentration"));
     }
-    else if( strncmp(pcField,"Z_B->table",10) == 0 )
+    else if( strncmp(pcField,"Z_B->table", 10) == 0 )
     {
 	return(TableSetField(phsleWorking, ppistWorking, pcPathname, pcField, pcValue, "HH_concentration"));
     }
-    else if( strncmp(pcField,"X_B->table",10) == 0 )
+    else if( strncmp(pcField,"X_B->table", 10) == 0 )
     {
 	return(TableSetField(phsleWorking, ppistWorking, pcPathname, pcField, pcValue, "HH_activation"));
     }
-    else if( strncmp(pcField,"X_A->table",10) == 0 )
+    else if( strncmp(pcField,"X_A->table", 10) == 0 )
     {
 	return(TableSetField(phsleWorking, ppistWorking, pcPathname, pcField, pcValue, "HH_activation"));
     }
-    else if( strncmp(pcField,"Y_B->table",10) == 0 )
+    else if( strncmp(pcField,"Y_B->table", 10) == 0 )
     {
 	return(TableSetField(phsleWorking, ppistWorking, pcPathname, pcField, pcValue, "HH_inactivation"));
     }
-    else if( strncmp(pcField,"Y_A->table",10) == 0 )
+    else if( strncmp(pcField,"Y_A->table", 10) == 0 )
     {
 	return(TableSetField(phsleWorking, ppistWorking, pcPathname, pcField, pcValue, "HH_inactivation"));
     }
