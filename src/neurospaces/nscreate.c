@@ -47,6 +47,7 @@ static struct symtab_HSolveListElement * SynChannelCalloc();
  *  otherwise.
  */
 //--------------------------------------------------------------------
+
 int NSCreate( char* name,  char* pcParent, char* pcType){
 
    struct symtab_HSolveListElement *phsleChild = NULL;
@@ -66,6 +67,29 @@ int NSCreate( char* name,  char* pcParent, char* pcType){
 
        return 1;
      }
+
+
+   struct g2_g3_element_mapper
+   {
+       char *pcG2;
+       int iG3;
+   };
+
+   struct g2_g3_element_mapper pggem[] =
+   {
+       "compartment", NSINTEGRATOR_COMPARTMENT,
+       "symcompartment", NSINTEGRATOR_COMPARTMENT,
+       "tabchannel", NSINTEGRATOR_TABCHANNEL,
+       "Ca_concen", NSINTEGRATOR_POOL,
+       "nernst",  NSINTEGRATOR_NERNST,
+       "synchan", NSINTEGRATOR_SYNCHAN,
+       "channelC2", NSINTEGRATOR_SYNCHAN,
+       "channelC3", NSINTEGRATOR_SYNCHAN,
+       "spikegen", NSINTEGRATOR_SPIKEGEN,
+       "asc_file", NSINTEGRATOR_ASCFILE,
+       "pulsegen", NSINTEGRATOR_PULSEGEN,
+       (char *)-1, NSINTEGRATOR_NEUTRAL,
+   };
 
 
    if(strcmp("compartment",pcType) == 0
