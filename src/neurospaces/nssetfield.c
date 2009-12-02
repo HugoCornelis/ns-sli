@@ -46,11 +46,6 @@ struct symtab_HSolveListElement * CreateGate(
 		 struct symtab_HSolveListElement *phsleChannel, 
 		 char *pcName);
 static struct symtab_ConcentrationGateKinetic *CreateConcGateKinetic(char *pcDirection);
-static
-struct symtab_HSolveListElement * CreateConcGate(
-		 struct symtab_HSolveListElement *phsleChannel, 
-		 char *pcName);
-
 
 
 //------------------------------------------------------------------
@@ -166,94 +161,6 @@ struct symtab_HSolveListElement * CreateGate(
   ParameterSetName(pparStateInit, "state_init");
 
   BioComponentChangeParameter(&pgathh->bio, pparStateInit);
-
-  return (struct symtab_HSolveListElement *)pgathh;
-
-}
-
-
-
-//------------------------------------------------------------------
-/*!
- *  \fn struct symtab_HSolveListElement *CreateConcGate(
-                 struct symtab_HSolveListElement *phsleChannel, 
-		 char *pcName)
- *  \param phsleChannel Pointer to the Channel to attach gates.
- *  \param pcName  A name for the concentration gate.
- *  \return A pointer to an HSolveListElement which had been appended to phsleChannel
- *
- */
-//------------------------------------------------------------------
-static
-struct symtab_HSolveListElement * CreateConcGate(
-		 struct symtab_HSolveListElement *phsleChannel, 
-		 char *pcName){
-
-
-  //i
-  //i Allocate an HH gate and set its parent to phsleTabChannel.
-  //i
-  struct symtab_HHGate *pgathh = HHGateCalloc();
-
-
-  if(!pgathh)
-    return NULL;
-
-
-
-  struct symtab_IdentifierIndex *pidinHHGate = 
-    IdinNewFromChars(pcName);
-
-
-
-  if(!pidinHHGate)
-    return NULL;
-
-
-  SymbolSetName(&pgathh->bio.ioh.iol.hsle,pidinHHGate);
-
-  SymbolAddChild(phsleChannel,&pgathh->bio.ioh.iol.hsle);
-
-  
-  //i
-  //i Need to add a name for the forward and backward gate kinetics.
-  //i "forward" and "backward" respectively, then make these
-  //i the children of the HH Gate pgathh.
-  //i
-  struct symtab_ConcentrationGateKinetic *pconcgatkForward = 
-    CreateConcGateKinetic("A");
-
-  if(!pconcgatkForward)
-    return NULL;
-
-  SymbolAddChild(&pgathh->bio.ioh.iol.hsle,
-		 &pconcgatkForward->bio.ioh.iol.hsle);
-  
-
-
-  struct symtab_ConcentrationGateKinetic *pconcgatkBackward = 
-    CreateConcGateKinetic("B");
-
-  if(!pconcgatkBackward)
-    return NULL;
-
-  SymbolAddChild(&pgathh->bio.ioh.iol.hsle,
-		 &pconcgatkBackward->bio.ioh.iol.hsle);
-
-  //- allocate a parameter for state_init
-
-  // steady state is forward over backward steady states.
-
-/*   struct symtab_Parameters *pparVmInit */
-/*       = newParameter("..->Vm_init", SETPARA_FIELD); */
-
-  struct symtab_Parameters *pparStateInit
-      = newParameter("-1", SETPARA_NUM);
-
-  ParameterSetName(pparStateInit, "state_init");
-
-  BioComponentChangeParameter(&pgathh->bio, pparStateInit);
-
 
   return (struct symtab_HSolveListElement *)pgathh;
 
@@ -705,7 +612,7 @@ ChannelSetField
 		= PidinStackLookupTopSymbol(ppistWorking);
 
 	    struct symtab_HSolveListElement *phsleGate
-		= CreateConcGate(phsleWorking, "HH_concentration");
+		= CreateGate(phsleWorking, "HH_concentration");
 	}
 
 
@@ -745,7 +652,7 @@ ChannelSetField
 		= PidinStackLookupTopSymbol(ppistWorking);
 
 	    struct symtab_HSolveListElement *phsleGate
-		= CreateConcGate(phsleWorking, "HH_concentration");
+		= CreateGate(phsleWorking, "HH_concentration");
 	}
 
 
