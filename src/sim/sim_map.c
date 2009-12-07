@@ -311,6 +311,29 @@ int CreateMap(char *parentname, char *srcname, int composite, int nx, int ny, do
 	struct symtab_HSolveListElement *phsleParent
 	    = PidinStackLookupTopSymbol(ppistParent);
 
+	if (!phsleParent)
+	{
+	    char *argv[10];
+
+	    argv[0] = "CreateMap()";
+	    argv[1] = "neutral";
+	    argv[2] = parentname;
+	    argv[3] = NULL;
+
+	    do_create(3, argv);
+
+	    phsleParent = PidinStackLookupTopSymbol(ppistParent);
+	}
+
+	if (!phsleParent)
+	{
+	    Error();
+
+	    printf("could not find element '%s' after trying to create it\n", parentname);
+
+	    return(0);
+	}
+
 	ParserContextSetActual(pneuro->pacRootContext, phsleParent);
 
 	//- call algorithm on current symbol
