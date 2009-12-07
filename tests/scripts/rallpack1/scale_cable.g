@@ -69,6 +69,9 @@ setfield /proto/compartment Ra {RA*len/Xarea} Rm {RM/area} Cm {CM*area}  \
 int i, n1, n2
 
 	n1 = {sqrt {incompts}}
+
+	echo {"n1 = " @ n1}
+
 	n2 = n1 + incompts - (n1*n1)
 	createmap /proto/compartment /low {n1} 1
 	/* Setting up the inter-compartment communications */
@@ -163,4 +166,4 @@ call /output/# PROCESS
 rms $3.out0 ref_cable.0
 rms $3.outx ref_cable.x
 
-quit
+// quit
