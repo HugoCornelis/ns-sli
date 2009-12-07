@@ -42,6 +42,8 @@ static char rcsid[] = "$Id: sim_move.c,v 1.2 2005/06/27 19:01:08 svitak Exp $";
 #include <stdio.h>
 #include "shell_func_ext.h"
 #include "sim_ext.h"
+#include "nsintegrator.h"
+
 
 /*
 ** check to see whether dst is a child of src
@@ -85,64 +87,140 @@ char		*ptr;
     dst = optargv[2];
     new_name = NULL;
 
+
+    struct PidinStack *ppistSrc
+	= getRootedContext(src);
+
+    struct symtab_HSolveListElement *phsleSrc
+	= PidinStackLookupTopSymbol(ppistSrc);
+
+    int iInModelContainer = (phsleSrc != NULL);
+
     if((src_element = GetElement(src)) == NULL){
-	Error();
-	printf("could not find src element '%s'\n",src);
-	return;
-    }
-    if((dst_element = GetElement(dst)) == NULL){
-	/*
-	** try and find the parent and use the base as the
-	** name of the copy
-	*/
-	if(strlen(dst_path = GetParentComponent(dst)) == 0){
-	    dst_path = ".";
-	}
-	if((dst_element = GetElement(dst_path)) == NULL){
+	if (!iInModelContainer)
+	{
 	    Error();
-	    printf("invalid copy destination '%s'\n",dst);
+	    printf("could not find src element '%s'\n",src);
+	    return;
+	}
+    }
+
+    if (src_element)
+    {
+	if((dst_element = GetElement(dst)) == NULL){
+	    /*
+	    ** try and find the parent and use the base as the
+	    ** name of the copy
+	    */
+	    if(strlen(dst_path = GetParentComponent(dst)) == 0){
+		dst_path = ".";
+	    }
+	    if((dst_element = GetElement(dst_path)) == NULL){
+		Error();
+		printf("invalid copy destination '%s'\n",dst);
+		return;
+	    }
+	    /*
+	    ** if the parent was found then use the base as the
+	    ** new name of the copy
+	    */
+	    new_name = GetBaseComponent(dst);
+	    new_index = GetTreeCount(new_name, &valid_index);
+	    if (!valid_index){
+		Error();
+		printf("missing or bad element index in move destination path '%s'\n", dst);
+		return;
+	    }
+	    if ((ptr = strchr(new_name,'['))) {
+		*ptr = '\0';
+	    }
+	}
+	if(!ValidHierarchy(src_element,dst_element)){
+	    Error();
+	    printf("can't move an element into itself\n");
 	    return;
 	}
 	/*
-	** if the parent was found then use the base as the
-	** new name of the copy
+	** detach the element from its current parent
 	*/
-	new_name = GetBaseComponent(dst);
-	new_index = GetTreeCount(new_name, &valid_index);
-	if (!valid_index){
+	ElementHashRemoveTree(src_element);
+	if(!DetachElement(src_element)){
 	    Error();
-	    printf("missing or bad element index in move destination path '%s'\n", dst);
+	    printf("could not move %s to %s\n",src,dst);
 	    return;
 	}
-	if ((ptr = strchr(new_name,'['))) {
-	    *ptr = '\0';
+	/*
+	** assign the new name
+	*/
+	if(new_name){
+	    Name(src_element,new_name);
+	    src_element->index = new_index;
 	}
+	/*
+	** attach the new element to the destination
+	*/
+	Attach(dst_element,src_element);
+	ElementHashPutTree(src_element);
     }
-    if(!ValidHierarchy(src_element,dst_element)){
-	Error();
-	printf("can't move an element into itself\n");
-	return;
+
+    if (iInModelContainer)
+    {
+	struct PidinStack *ppistDst
+	    = getRootedContext(dst);
+
+	if (!ppistDst)
+	{
+	    PidinStackFree(ppistSrc);
+
+	    Error();
+	    printf("could not move %s to %s in the neurospaces model container, destination not found\n",src,dst);
+	    return;
+	}
+
+	PidinStackPop(ppistSrc);
+
+	struct symtab_HSolveListElement *phsleParent
+	    = PidinStackLookupTopSymbol(ppistSrc);
+
+	SymbolDeleteChild(phsleParent, phsleSrc);
+	
+	if (new_name)
+	{
+	    char pc[100];
+
+	    if (new_index != 0)
+	    {
+		sprintf(pc, "%s[%i]", new_name, new_index);
+
+		SymbolSetName(phsleSrc, IdinNewFromChars(strdup(pc)));
+	    }
+	    else
+	    {
+		SymbolSetName(phsleSrc, IdinNewFromChars(strdup(new_name)));
+	    }
+
+	    PidinStackPop(ppistDst);
+	}
+
+	struct symtab_HSolveListElement *phsleDst
+	    = PidinStackLookupTopSymbol(ppistDst);
+
+	if (!phsleDst)
+	{
+	    PidinStackFree(ppistSrc);
+	    PidinStackFree(ppistDst);
+
+	    Error();
+	    printf("could not move %s to %s in the neurospaces model container, destination symbol not found\n",src,dst);
+	    return;
+	}
+
+	SymbolAddChild(phsleDst, phsleSrc);
+
+	PidinStackFree(ppistDst);
     }
-    /*
-    ** detach the element from its current parent
-    */
-    ElementHashRemoveTree(src_element);
-    if(!DetachElement(src_element)){
-	Error();
-	printf("could not move %s to %s\n",src,dst);
-	return;
-    }
-    /*
-    ** assign the new name
-    */
-    if(new_name){
-	Name(src_element,new_name);
-	src_element->index = new_index;
-    }
-    /*
-    ** attach the new element to the destination
-    */
-    Attach(dst_element,src_element);
-    ElementHashPutTree(src_element);
+
+    PidinStackFree(ppistSrc);
+
     OK();
 }
