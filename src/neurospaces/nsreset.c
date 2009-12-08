@@ -120,7 +120,7 @@ static int SetupIOMessages( struct ioMsg **ppioMsg, int iIoMsgs,
   for(i = 0; i < iIoMsgs; i++)
   {
 
-    if(!strcmp(ppioMsg[i]->pcMsgName,"save"))
+    if(!strcmp(ppioMsg[i]->pcMsgName, "SAVE"))
     {
 	//- every reset triggers this function, so may be
 

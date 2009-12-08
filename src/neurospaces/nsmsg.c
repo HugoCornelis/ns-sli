@@ -54,23 +54,23 @@ int NSmsg(char *pcSrcpath, char *pcDstpath, char *pcTypename, char *pcField){
     struct g2_g3_message_mapper
     {
 	char *pcG2;
-	char *pcG3;
+
 	int (*MsgProcess)(char *pcSource, char *pcDestination, char *pcField, char *pcMessage);
     };	
 
     struct g2_g3_message_mapper pggmm[] =
     {
-	"RAXIAL", NULL, (int (*)(char *pcSource, char *pcDestination, char *pcField, char *pcMessage))1,
-	"AXIAL", NULL, AxialMsg,
-	"I_Ca", NULL, CalciumPoolMsg,
-	"VOLTAGE", NULL, VoltageMsg,
-	"CHANNEL", NULL, ChannelMsg,
-	"CONCEN", NULL, ConcenMsg,
-	"CIN", NULL, CinMsg,
-	"EK", NULL, EkMsg,
-	"ACTIVATION", "activation", StoreMsg,
-	"SAVE", "save", StoreMsg,
-	NULL, NULL, NULL,
+	"RAXIAL", (int (*)(char *pcSource, char *pcDestination, char *pcField, char *pcMessage))1,
+	"AXIAL", AxialMsg,
+	"I_Ca", CalciumPoolMsg,
+	"VOLTAGE", VoltageMsg,
+	"CHANNEL", ChannelMsg,
+	"CONCEN", ConcenMsg,
+	"CIN", CinMsg,
+	"EK", EkMsg,
+	"ACTIVATION", StoreMsg,
+	"SAVE", StoreMsg,
+	NULL, NULL,
     };
 
     int i;
@@ -88,7 +88,7 @@ int NSmsg(char *pcSrcpath, char *pcDstpath, char *pcTypename, char *pcField){
 		return 1;
 	    }
 
-	    return pggmm[i].MsgProcess(pcSrcpath, pcDstpath, pcField, pggmm[i].pcG3);
+	    return pggmm[i].MsgProcess(pcSrcpath, pcDstpath, pcField, pggmm[i].pcG2);
 	}
     }
 
@@ -811,7 +811,7 @@ int NSProcessMessages(struct neurospaces_integrator *pnsintegrator)
 
       //- asc_out save messages
 
-    if (!strcmp(ppioMsg[i]->pcMsgName,"save"))
+    if (!strcmp(ppioMsg[i]->pcMsgName, "SAVE"))
     {
 	//- are not processed overhere, so continue
 
@@ -889,7 +889,7 @@ int NSProcessMessages(struct neurospaces_integrator *pnsintegrator)
 
 	if (ppioMsg[i]->pdValue)
 	{
-	    if (!strcmp(ppioMsg[i]->pcMsgName,"activation"))
+	    if (!strcmp(ppioMsg[i]->pcMsgName, "ACTIVATION"))
 	    {
 		//- add source to target
 
