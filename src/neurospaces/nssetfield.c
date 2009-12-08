@@ -477,7 +477,7 @@ ChannelSetField
  char *pcField,
  char *pcValue)
 {
-    struct channel_field_mapper
+    struct g2_g3_channel_field_mapper
     {
 	char *pcG2;
 	int iLength;
@@ -490,7 +490,7 @@ ChannelSetField
 	     char *pcGateName);
     };
 
-    static struct channel_field_mapper pcfm[] =
+    static struct g2_g3_channel_field_mapper pggcfm[] =
     {
 	"X_init", -1, GateSetField,
 	"Xpower", -1, GateSetField,

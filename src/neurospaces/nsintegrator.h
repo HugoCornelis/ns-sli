@@ -417,14 +417,6 @@ int undo_findsolvefield(char **ppcElement, char **ppcField);
 
 //-- Defined in nsmsg.c --
 int NSmsg(char *pcSrcpath, char *pcDstpath, char *pcTypename, char *pcField);
-int AxialMsg(char *pcSrcpath, char *pcDstpath);
-int ChannelMsg( char *pcSrcpath, char *pcDstpath);
-int CalciumPoolMsg(char *pcSrcpath, char *pcDstpath);
-int VoltageMsg(char *pcSrcpath, char *pcDstpath);
-int ConcenMsg(char *pcSrcpath, char *pcDstpath);
-int CinMsg(char *pcSrcpath, char *pcDstpath);
-int EkMsg(char *pcSrcpath, char *pcDstpath);
-int StoreMsg(char *pcSrcpath, char *pcDstpath,char *pcField,char *pcMsgName);
 
 //- -- Defined in nsgetfield.c --
 char* NSGetField(char *pcPathname,char *pcField);

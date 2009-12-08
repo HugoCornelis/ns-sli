@@ -1065,8 +1065,8 @@ add_channel(char *name,char *parent)
 
 	    PidinStackString(ppist, pc, sizeof(pc));
 
-	    ChannelMsg(pc, pcDest);
-	    VoltageMsg(pcDest, pc);
+	    NSmsg(pc, pcDest, "CHANNEL", NULL);
+	    NSmsg(pcDest, pc, "VOLTAGE", NULL);
 
 	    //- fetch the gmax value, this should be fixed and unscaled
 

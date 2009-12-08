@@ -24,6 +24,16 @@
 #include "nsintegrator.h"
 
 
+static int AxialMsg(char *pcSrcpath, char *pcDstpath, char *pcField, char *pcMsgName);
+static int CalciumPoolMsg(char *pcSrcpath, char *pcDstpath, char *pcField, char *pcMsgName);
+static int ChannelMsg( char *pcSrcpath, char *pcDstpath, char *pcField, char *pcMsgName);
+static int CinMsg(char *pcSrcpath, char *pcDstpath, char *pcField, char *pcMsgName);
+static int ConcenMsg(char *pcSrcpath, char *pcDstpath, char *pcField, char *pcMsgName);
+static int EkMsg(char *pcSrcpath, char *pcDstpath, char *pcField, char *pcMsgName);
+static int StoreMsg(char *pcSrcpath, char *pcDstpath, char *pcField, char *pcMsgName);
+static int VoltageMsg(char *pcSrcpath, char *pcDstpath, char *pcField, char *pcMsgName);
+
+
 //-------------------------------------------------------------------
 /*!
  *   \fn int NSmsg(char *pcSrcpath, char *pcDstpath, char *pcTypename)
@@ -38,79 +48,51 @@
 int NSmsg(char *pcSrcpath, char *pcDstpath, char *pcTypename, char *pcField){
 
 
+
     // model structure messages
 
-  //-
-  //- If the user tries to perform a mesage using Reverse Axial 
-  //- then we return as success since we're ignoring this case.
-  //-
-  if(strcmp(pcTypename,"RAXIAL") == 0)
-    return 1;
+    struct g2_g3_message_mapper
+    {
+	char *pcG2;
+	char *pcG3;
+	int (*MsgProcess)(char *pcSource, char *pcDestination, char *pcField, char *pcMessage);
+    };	
 
+    struct g2_g3_message_mapper pggmm[] =
+    {
+	"RAXIAL", NULL, (int (*)(char *pcSource, char *pcDestination, char *pcField, char *pcMessage))1,
+	"AXIAL", NULL, AxialMsg,
+	"I_Ca", NULL, CalciumPoolMsg,
+	"VOLTAGE", NULL, VoltageMsg,
+	"CHANNEL", NULL, ChannelMsg,
+	"CONCEN", NULL, ConcenMsg,
+	"CIN", NULL, CinMsg,
+	"EK", NULL, EkMsg,
+	"ACTIVATION", "activation", StoreMsg,
+	"SAVE", "save", StoreMsg,
+	NULL, NULL, NULL,
+    };
 
-  
+    int i;
 
-  if (strcmp(pcTypename, "AXIAL") == 0)
-  {
+    for (i = 0 ; pggmm[i].pcG2 ; i++)
+    {
+	if (strcmp(pcTypename, pggmm[i].pcG2) == 0)
+	{
+	    if ((int)pggmm[i].MsgProcess == 0)
+	    {
+	    }
 
-    return  AxialMsg(pcSrcpath,pcDstpath);
+	    if ((int)pggmm[i].MsgProcess == 1)
+	    {
+		return 1;
+	    }
 
-  }
-  else if(strcmp(pcTypename,"I_Ca") == 0){
+	    return pggmm[i].MsgProcess(pcSrcpath, pcDstpath, pcField, pggmm[i].pcG3);
+	}
+    }
 
-    //!
-    //! Create a calcium pool.
-    //!
-
-    return CalciumPoolMsg(pcSrcpath, pcDstpath);
-
-  }
-  else if (strcmp(pcTypename, "VOLTAGE") == 0){
-
-    return VoltageMsg(pcSrcpath,pcDstpath);
-
-  }
-  else if(strcmp(pcTypename,"CHANNEL") == 0){
-
-
-    return ChannelMsg(pcSrcpath,pcDstpath);
-
-  }
-  else if(strcmp(pcTypename,"CONCEN") == 0){
-
-    return ConcenMsg(pcSrcpath,pcDstpath);
-
-  }
-  else if(strcmp(pcTypename,"CIN") == 0){
-
-    return CinMsg(pcSrcpath,pcDstpath);
-
-  }
-  else if(strcmp(pcTypename,"EK") == 0){
-
-    return EkMsg(pcSrcpath,pcDstpath);
-
-  }
-
-
-  // input messages
-
-  else if(strcmp(pcTypename,"ACTIVATION") == 0){
-
-    return StoreMsg(pcSrcpath,pcDstpath,pcField,"activation");
-
-  }
-
-  // output messages
-
-  else if(strcmp(pcTypename,"SAVE") == 0){
-
-    return StoreMsg(pcSrcpath,pcDstpath,pcField,"save");
-  }
-
-
-
-  return 0;
+    return 0;
 }
 
 
@@ -128,7 +110,7 @@ int NSmsg(char *pcSrcpath, char *pcDstpath, char *pcTypename, char *pcField){
  *  reference.
  */
 //----------------------------------------------------------------
-int AxialMsg(char *pcSrcpath, char *pcDstpath)
+static int AxialMsg(char *pcSrcpath, char *pcDstpath, char *pcField, char *pcMsgName)
 {
 
 
@@ -212,7 +194,7 @@ int AxialMsg(char *pcSrcpath, char *pcDstpath)
  *  Creates a message between channels by way of bindables and bindings. 
  */
 //----------------------------------------------------------------------------
-int ChannelMsg(char *pcSrcpath,char *pcDstpath)
+static int ChannelMsg(char *pcSrcpath, char *pcDstpath, char *pcField, char *pcMsgName)
 {
 
   struct PidinStack *ppistSrc = getRootedContext(pcSrcpath);
@@ -287,7 +269,7 @@ int ChannelMsg(char *pcSrcpath,char *pcDstpath)
  *  Creates a message for a calcium pool via bindings and bindables.
  */
 //----------------------------------------------------------------------------
-int CalciumPoolMsg(char *pcSrcpath, char *pcDstpath)
+static int CalciumPoolMsg(char *pcSrcpath, char *pcDstpath, char *pcField, char *pcMsgName)
 {
 
 
@@ -403,7 +385,7 @@ int CalciumPoolMsg(char *pcSrcpath, char *pcDstpath)
  *  
  */
 //----------------------------------------------------------------------------
-int VoltageMsg(char *pcSrcpath, char *pcDstpath)
+static int VoltageMsg(char *pcSrcpath, char *pcDstpath, char *pcField, char *pcMsgName)
 {
 
   struct PidinStack *ppistSrc = getRootedContext(pcSrcpath);
@@ -480,7 +462,7 @@ int VoltageMsg(char *pcSrcpath, char *pcDstpath)
  *  in the destination element.
  */
 //----------------------------------------------------------------------------
-int ConcenMsg(char *pcSrcpath, char *pcDstpath)
+static int ConcenMsg(char *pcSrcpath, char *pcDstpath, char *pcField, char *pcMsgName)
 {
 
 
@@ -567,7 +549,7 @@ int ConcenMsg(char *pcSrcpath, char *pcDstpath)
  *  in a pool. 
  */
 //-------------------------------------------------------------------------
-int CinMsg(char *pcSrcpath, char *pcDstpath)
+static int CinMsg(char *pcSrcpath, char *pcDstpath, char *pcField, char *pcMsgName)
 {
 
 
@@ -646,7 +628,7 @@ int CinMsg(char *pcSrcpath, char *pcDstpath)
  *  \return 0 on error, 1 on success.
  */
 //-------------------------------------------------------------------------
-int EkMsg(char *pcSrcpath, char *pcDstpath)
+static int EkMsg(char *pcSrcpath, char *pcDstpath, char *pcField, char *pcMsgName)
 {
 
 
@@ -718,10 +700,10 @@ int EkMsg(char *pcSrcpath, char *pcDstpath)
 
 
 
-int StoreMsg(char *pcSrcpath, 
-	     char *pcDstpath, 
-	     char *pcField,
-	     char *pcMsgName){
+static int StoreMsg(char *pcSrcpath, 
+		    char *pcDstpath, 
+		    char *pcField,
+		    char *pcMsgName){
 
 
     //- do hsolve correction for fields
