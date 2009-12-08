@@ -124,15 +124,34 @@ char *pathname;
 {
     Element *element;
 
+    //- default: we assume the pathname is invalid
+
     int iOk = 0;
 
-    if ((element = GetElement(pathname)) != NULL)
+    //- if the pathame is based on the recent element
+
+    if (strcmp(pathname, "^") == 0)
     {
+	//- ok
+
 	iOk = 1;
     }
 
+    //- if the path is valid in the G2 namespaces
+
+    if (!iOk && (element = GetElement(pathname)) != NULL)
+    {
+	//- ok
+
+	iOk = 1;
+    }
+
+    //- if not ok
+
     if (!iOk)
     {
+	//- figure out if the path exists in the model-container
+
 	struct PidinStack *ppist = getRootedContext(pathname);
 
 	struct symtab_HSolveListElement *phsle

@@ -354,6 +354,8 @@ int		keep_prototype_traversal;
 	return;
       }
 
+      SetRecentElement(NULL, dst);
+
       PidinStackFree(ppistSrc);
 
       return;
