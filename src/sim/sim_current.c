@@ -49,29 +49,36 @@ char *WorkingElementName()
 
 void SetWorkingElement(char *parent_name, char *element_name)
 {
-    if (parent_name)
+    if (strcmp(element_name, "^") == 0)
     {
-	strcpy(working_element_name, parent_name);
-
-	if (strlen(working_element_name))
-	{
-	    if (working_element_name[strlen(working_element_name) - 1] != '/')
-	    {
-		strcat(working_element_name, "/");
-	    }
-	}
-
-	strcat(working_element_name, element_name);
+	strcpy(working_element_name, recent_element_name);
     }
     else
     {
-	if (element_name[0] == '/')
+	if (parent_name)
 	{
-	    strcpy(working_element_name, element_name);
+	    strcpy(working_element_name, parent_name);
+
+	    if (strlen(working_element_name))
+	    {
+		if (working_element_name[strlen(working_element_name) - 1] != '/')
+		{
+		    strcat(working_element_name, "/");
+		}
+	    }
+
+	    strcat(working_element_name, element_name);
 	}
 	else
 	{
-	    strcat(working_element_name, element_name);
+	    if (element_name[0] == '/')
+	    {
+		strcpy(working_element_name, element_name);
+	    }
+	    else
+	    {
+		strcat(working_element_name, element_name);
+	    }
 	}
     }
 

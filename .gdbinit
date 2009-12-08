@@ -12,7 +12,7 @@ set args tests/scripts/test-simplecell/simplecell-1.g
 # set args tests/scripts/test-traub91-v0/traub91_asym_simple3.g
 # set args tests/scripts/test-traub91-v0/traub91.g
 #     $genesis -nox -altsimrc $simrc -batch -notty scale_cable $timestep 1000 cable
-set args -nox -batch -notty tests/scripts/rallpack1/scale_cable 500 1000 tests/scripts/rallpack1/cable
+set args -nox tests/scripts/rallpack1/scale_cable 500 1000 tests/scripts/rallpack1/cable
 # cd ..
 file src/ns-sli
 break parsererror

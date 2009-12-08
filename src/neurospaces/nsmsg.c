@@ -144,7 +144,7 @@ int AxialMsg(char *pcSrcpath, char *pcDstpath)
   if(!phsleSrc){
 
     Error();
-    printf("source %s of msg is not found in the Model Container.", pcSrcpath);
+    printf("source %s of axial msg is not found in the Model Container.\n", pcSrcpath);
     return 0;
 
   }
@@ -152,7 +152,7 @@ int AxialMsg(char *pcSrcpath, char *pcDstpath)
   if(!phsleDst){ 
 
     Error(); 
-    printf("dest %s of msg is not found in the Model Container.", pcDstpath); 
+    printf("dest %s of axial msg is not found in the Model Container.", pcDstpath);
     return 0; 
     
   } 
