@@ -32,11 +32,33 @@ sub sli_listcommands
 
 }
 
+
+
+sub sli_listcommands_help
+{
+    print "description: list all avaialable ns-sli commands.\n";
+
+    print "synopsis: sli_listcommands\n";
+
+    return "*** Ok";
+}
+
+
 sub sli_listobjects
 {
   SLI::sli_list_objects();
 }
 
+
+
+sub sli_listobjects_help
+{
+    print "description: list all available ns-sli objects.\n";
+
+    print "synopsis: sli_load <filename.g>\n";
+
+    return "*** Ok";
+}
 
 
 
