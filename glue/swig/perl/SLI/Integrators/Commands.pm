@@ -14,7 +14,9 @@ use SLI;
 our $g3_commands
     = [
        'sli_listcommands',
+       'sli_listcommands_help',
        'sli_listobjects',
+       'sli_listobjects_help',
        'sli_load',
        'sli_load_help',
        'sli_run',
