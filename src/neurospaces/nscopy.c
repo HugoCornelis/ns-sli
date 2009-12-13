@@ -65,13 +65,24 @@ int NSCopy(struct PidinStack *ppistSrc, char *pcDst, int iKeepPrototypeTraversal
 
     char pc[1000];
 
-    
     PidinStackString(ppistSrc, pc, sizeof(pc));
     fprintf(stderr, "Cannot find %s\n", pc);
     return 0;
 
   }
 
+
+  if (instanceof_segment(phsleSrc))
+  {
+      char pc[1000];
+
+      PidinStackString(ppistSrc, pc, sizeof(pc));
+
+      if (AttemptHeccerName(pc) == -1)
+      {
+	  return(0);
+      }
+  }
 
   struct PidinStack *ppistDst = NULL;
 

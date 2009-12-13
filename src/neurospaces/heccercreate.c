@@ -42,10 +42,16 @@ int AttemptHeccerName(char *pcName)
 {
     struct neurospaces_integrator *pnsintegrator = getNsintegrator();
 
-    //i
-    //i first check to see if a heccer object with the same name exists.
-    //i if so we don't register the name and exit.
-    //i
+    //- if this name is in the proto library
+
+    if (strncmp(pcName, "/proto", strlen("/proto")) == 0)
+    {
+	//- this is assumed to be disabled, so return success
+
+	return 0;
+    }
+
+    //- if a heccer object with the same name exists.
 
     int i;
 
@@ -53,6 +59,8 @@ int AttemptHeccerName(char *pcName)
     {
 	if (!strncmp(pcName, pnsintegrator->psr[i].pcName, strlen(pnsintegrator->psr[i].pcName)))
 	{
+	    //- if so we don't register the name and exit with success.
+
 	    return 0;
 	}
     }
