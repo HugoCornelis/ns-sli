@@ -95,9 +95,9 @@ int i, n1, n2
 
 	/* Linking up the groups */
 	for (i = 1; i < n1; i = i + 1)
-		addmsg /cable/low[{i - 1}/compartment[{n1 - 1}]  \
+		addmsg /cable/low[{i - 1}]/compartment[{n1 - 1}]  \
 		    /cable/low[{i}]/compartment[0] RAXIAL Ra Vm
-		addmsg /cable/low[{i}/compartment[0]  \
+		addmsg /cable/low[{i}]/compartment[0]  \
 		    /cable/low[{i - 1}]/compartment[{n1 - 1}] AXIAL Vm
 	end
 
