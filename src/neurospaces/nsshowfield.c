@@ -80,7 +80,7 @@ int NSShowField(int argc,char **argv)
     if(!strcmp(argv[i],"*"))
     {
       // displays all fields;
-      SymbolPrintParameterTraversal(NULL,ppist);
+      SymbolPrintParameterTraversal(phsle, ppist);
       return 1;
 
     }
@@ -88,19 +88,19 @@ int NSShowField(int argc,char **argv)
     {
 
       // just does the same as "*"
-      SymbolPrintParameterTraversal(NULL,ppist);
+      SymbolPrintParameterTraversal(phsle, ppist);
       return 1;
 
     }
     else{
 
-      int iResult = PrintHeccerVariable(pcPathname,argv[i],all);
+      int iResult = PrintHeccerVariable(pcPathname, argv[i], all);
       if( iResult > 0 )
       {
 	return 1;
       }
 
-      PrintParameterBasic(phsle,ppist,argv[i],all);
+      PrintParameterBasic(phsle, ppist, argv[i], all);
 
     }
 
