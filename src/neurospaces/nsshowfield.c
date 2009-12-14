@@ -47,7 +47,7 @@ int NSShowField(int argc,char **argv)
   if (status < 0)
   {
     printoptusage(argc, argv);
-    return;
+    return(-1);
   }
 
   
@@ -62,7 +62,9 @@ int NSShowField(int argc,char **argv)
 
   if (!phsle)
   {
-      fprintf(stdout, "element not found\n");
+/*       fprintf(stdout, "element not found\n"); */
+
+      return(0);
   }
    
 

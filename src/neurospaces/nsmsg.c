@@ -778,7 +778,7 @@ static int StoreMsg(char *pcSrcpath,
 
    return 1;
 
-};
+}
 
 
 
