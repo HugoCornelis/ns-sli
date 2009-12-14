@@ -1035,7 +1035,7 @@ PRIVATE_MODELS
 END PRIVATE_MODELS
 
 PUBLIC_MODELS
-  ALIAS "b3s46[0]::/Purk_thickd" "b3s46[0]"
+  ALIAS "/Purkinje/b3s46[0]::/Purk_thickd" "b3s46[0]"
     PARAMETERS
       PARAMETER ( ELEAK = -0.08 ),
       PARAMETER ( Vm_init = -0.068 ),

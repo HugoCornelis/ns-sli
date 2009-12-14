@@ -7,7 +7,7 @@ use strict;
 my $previous_library;
 
 
-my $root_neutral = "/hardcoded_neutral/";
+my $root_neutral = "/hardcoded_neutral";
 
 
 

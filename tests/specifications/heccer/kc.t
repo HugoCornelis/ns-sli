@@ -3,7 +3,7 @@
 
 use strict;
 
-my $root_neutral = "/hardcoded_neutral/";
+my $root_neutral = "/hardcoded_neutral";
 
 
 # slurp mode

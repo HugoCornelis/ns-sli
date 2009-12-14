@@ -163,10 +163,6 @@ static int RegisterHeccerName(char *pcName)
 
   struct neurospaces_integrator *pnsintegrator = getNsintegrator();
 
-  if(!pnsintegrator)
-      return -1;
-
-
   //- register the name of the heccer object
 
   if (pnsintegrator->iModelRegistrations >= MAX_HECCERS)
@@ -177,6 +173,14 @@ static int RegisterHeccerName(char *pcName)
   {
       pnsintegrator->psr[pnsintegrator->iModelRegistrations].pcName
 	  = strdup(pcName);
+
+      // \note this should may be done inside the function
+      // GetParentComponent() called above?
+
+      if (pnsintegrator->psr[pnsintegrator->iModelRegistrations].pcName[strlen(pnsintegrator->psr[pnsintegrator->iModelRegistrations].pcName) - 1] == '/')
+      {
+	  pnsintegrator->psr[pnsintegrator->iModelRegistrations].pcName[strlen(pnsintegrator->psr[pnsintegrator->iModelRegistrations].pcName) - 1] = '\0';
+      }
 
       pnsintegrator->psr[pnsintegrator->iModelRegistrations].uSolver.si.pheccer
 	  = NULL;
