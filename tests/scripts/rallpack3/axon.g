@@ -135,9 +135,9 @@ int i, n1, n2
 
 	/* Linking up the groups */
 	for (i = 1; i < n1; i = i + 1)
-		addmsg /axon/low[{i - 1}/compartment[{n1 - 1}]  \
+		addmsg /axon/low[{i - 1}]/compartment[{n1 - 1}]  \
 		    /axon/low[{i}]/compartment[0] RAXIAL Ra Vm
-		addmsg /axon/low[{i}/compartment[0]  \
+		addmsg /axon/low[{i}]/compartment[0]  \
 		    /axon/low[{i - 1}]/compartment[{n1 - 1}] AXIAL Vm
 	end
 
@@ -199,6 +199,10 @@ reset
 // call /axon/#/# RESET
 
 step {runtime} -time
-setfield /output/# flush 1 leave_open 0
-call /output/# PROCESS
-quit
+// setfield /output/# flush 1 leave_open 0
+// call /output/# PROCESS
+setfield /output/out0 flush 1 leave_open 0
+setfield /output/outx flush 1 leave_open 0
+call /output/out0 PROCESS
+call /output/outx PROCESS
+// quit
