@@ -886,6 +886,11 @@ PathInfo	pinfo;
 	path++;
     } else {
 	element = WorkingElement();
+
+	if (!element)
+	{
+	    return parentlist;
+	}
     }
     childlist = CreateElementList(10);
     /*

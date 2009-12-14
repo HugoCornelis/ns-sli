@@ -56,7 +56,7 @@ int NSShowField(int argc,char **argv)
   pcPathname = optargv[1];
 
 
-  struct PidinStack *ppist = PidinStackParse(pcPathname);
+  struct PidinStack *ppist = getRootedContext(pcPathname);
 
   struct symtab_HSolveListElement *phsle = PidinStackLookupTopSymbol(ppist); 
 
