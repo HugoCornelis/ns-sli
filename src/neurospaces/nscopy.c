@@ -51,144 +51,109 @@
  *
  */
 //-------------------------------------------------------------------
-int NSCopy(struct PidinStack *ppistSrc, char *pcDst, int iKeepPrototypeTraversal){
+int NSCopy(struct PidinStack *ppistSrc, char *pcDst, int iKeepPrototypeTraversal)
+{
+    struct symtab_HSolveListElement *phsleDst = NULL;
 
+    struct symtab_HSolveListElement * phsleSrc
+	= PidinStackLookupTopSymbol(ppistSrc);
 
-  struct symtab_HSolveListElement *phsleDst = NULL;
-
-
-  struct symtab_HSolveListElement * phsleSrc  = 
-    PidinStackLookupTopSymbol(ppistSrc);
-
-
-  if(!phsleSrc){
-
-    char pc[1000];
-
-    PidinStackString(ppistSrc, pc, sizeof(pc));
-    fprintf(stderr, "Cannot find %s\n", pc);
-    return 0;
-
-  }
-
-
-  if (instanceof_segment(phsleSrc))
-  {
-      char pc[1000];
-
-      PidinStackString(ppistSrc, pc, sizeof(pc));
-
-      if (AttemptHeccerName(pc) == -1)
-      {
-	  return(0);
-      }
-  }
-
-  struct PidinStack *ppistDst = NULL;
-
-
-
-  //i
-  //i If the destination is not rooted then we must root it to the 
-  //i current working element.
-  //i
-  if(pcDst[0] != '/')
-  {
-    Element *elmCurrentElement = GetElement(".");
-
-    char *pcCurrentElement = Pathname(elmCurrentElement);
-
-    char pcNewDst[1000];
-
-    strcpy(pcNewDst, pcCurrentElement);
-
-
-    //i
-    //i If current working element is NOT "/" then we
-    //i need to add a slash.
-    //i 
-    if(strcmp(pcCurrentElement,"/") != 0)
+    if (!phsleSrc)
     {
+	char pc[1000];
 
-      strcat(pcNewDst,"/");
+	PidinStackString(ppistSrc, pc, sizeof(pc));
 
+	fprintf(stderr, "Cannot find %s\n", pc);
+
+	return 0;
     }
 
-    strcat(pcNewDst,pcDst);
+    //- create destination context
 
-    ppistDst = PidinStackParse(pcNewDst);
+    struct PidinStack *ppistDst = getRootedContext(pcDst);
 
-  }
-  else
-  {
+    struct symtab_IdentifierIndex *pidinDst = PidinStackPop(ppistDst);
 
-    ppistDst = PidinStackParse(pcDst);
-
-  }
-
-  struct symtab_IdentifierIndex *pidinDst = PidinStackPop(ppistDst);
-
-  if(!pidinDst){
-
-    fprintf(stderr,"Could not create pidin %s\n",pcDst);
-    return 0;
-
-  }
-
-
-  if (PidinStackIsRooted(ppistDst))
+    if (!pidinDst)
     {
+	fprintf(stderr, "Could not create pidin %s\n", pcDst);
 
-      //t copy /h/c /i/d
-     
+	return 0;
     }
-  else
+
+    //- if making a copy of a segment
+
+    if (instanceof_segment(phsleSrc))
     {
-      //t copy /h/c /h/d
-      //t ce /h ; cp c d
-      PidinStackPushCompact(ppistDst,pidinDst);
+	//- try to register the parent for simulation
+
+	char pc[1000];
+
+	PidinStackString(ppistDst, pc, sizeof(pc));
+
+	if (AttemptHeccerName(pc) == -1)
+	{
+	    return(0);
+	}
     }
-  
-   
-/*   char *pcDstname = strdup(pcDst); */
-/*   pidinDst = IdinNewFromChars(pcDstname); */
 
+    //- if the destination is at the root
 
-  char *pcName = strdup(pcDst);
+    if (PidinStackIsRooted(ppistDst))
+    {
+	//t copy /h/c /i/d
+    }
 
-  phsleDst = SymbolCreateAlias(phsleSrc,pcName,pidinDst);
- 
+    //- else
 
-  if (instanceof_bio_comp(phsleDst))
-  {
-      struct symtab_BioComponent *pbioDst
-	  = (struct symtab_BioComponent *)phsleDst;
+    else
+    {
+	//- the destination container is the full pathname
 
-      //- if the original has no children yet
+	//t copy /h/c /h/d
+	//t ce /h ; cp c d
 
-      int iHasChildren = (SymbolGetPrincipalNumOfSuccessors(phsleSrc) != 0);
+	PidinStackPushCompact(ppistDst, pidinDst);
+    }
 
-      if (!iHasChildren
-	  && !iKeepPrototypeTraversal)
-      {
-	  //- prevent traversal over the alias to see the children of
-	  //- the original
+    //- create the copy
 
-	  SymbolSetOptions
-	      (phsleDst, (SymbolGetOptions(phsleDst) | BIOCOMP_OPTION_NO_PROTOTYPE_TRAVERSAL));
-      }
-  }
+    // \note: pcName used for namespace, \todo this is subject to
+    // removal for reason of efficiency
 
-  //t
-  //t Will only copy to the parent of the Src.
-  //t
-  struct symtab_HSolveListElement *phsleDstParent = 
-    PidinStackLookupTopSymbol(ppistDst);
+    char *pcName = getRootedPathname(pcDst);
 
+    phsleDst = SymbolCreateAlias(phsleSrc, pcName, pidinDst);
 
-  SymbolAddChild(phsleDstParent,phsleDst);
+    if (instanceof_bio_comp(phsleDst))
+    {
+	struct symtab_BioComponent *pbioDst
+	    = (struct symtab_BioComponent *)phsleDst;
 
-  PidinStackFree(ppistDst);
+	//- if the original has no children yet
 
-  return 1;
+	int iHasChildren = (SymbolGetPrincipalNumOfSuccessors(phsleSrc) != 0);
+
+	if (!iHasChildren
+	    && !iKeepPrototypeTraversal)
+	{
+	    //- prevent traversal over the alias to see the children of
+	    //- the original
+
+	    SymbolSetOptions
+		(phsleDst, (SymbolGetOptions(phsleDst) | BIOCOMP_OPTION_NO_PROTOTYPE_TRAVERSAL));
+	}
+    }
+
+    //- copy to the destination location
+
+    struct symtab_HSolveListElement *phsleDstParent
+	= PidinStackLookupTopSymbol(ppistDst);
+
+    SymbolAddChild(phsleDstParent, phsleDst);
+
+    PidinStackFree(ppistDst);
+
+    return 1;
 }

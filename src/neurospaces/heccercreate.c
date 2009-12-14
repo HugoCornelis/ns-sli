@@ -169,13 +169,11 @@ static int RegisterHeccerName(char *pcName)
 
   //- register the name of the heccer object
 
-/*   if (pnsintegrator->iHeccerNames == 0 */
-/*       && strcmp(pnsintegrator->ppcHeccerNames[pnsintegrator->iHeccerNames], HARDCODED_ROOT)) */
-/*   { */
-/*       pnsintegrator->ppcHeccerNames[pnsintegrator->iHeccerNames] =  */
-/* 	  strdup(pcName); */
-/*   } */
-/*   else */
+  if (pnsintegrator->iModelRegistrations >= MAX_HECCERS)
+  {
+      fprintf(stdout, "Error: to many heccers in RegisterHeccerName() at %s.\n", pcName);
+  }
+  else
   {
       pnsintegrator->psr[pnsintegrator->iModelRegistrations].pcName
 	  = strdup(pcName);
@@ -186,18 +184,19 @@ static int RegisterHeccerName(char *pcName)
       pnsintegrator->psr[pnsintegrator->iModelRegistrations].iType
 	  = 1;
 
-      //!
       //! Hardcoded check for any name prefixed with "/library"
-      //! if so when we disable it. Will most likely have to come 
-      //! up with a cleaner solution later.
-      //!
-      if(!strncmp("/library",pcName,strlen("/library")))
-	pnsintegrator->psr[pnsintegrator->iModelRegistrations].iDisabled
-	  = 1;
-      else
-	pnsintegrator->psr[pnsintegrator->iModelRegistrations].iDisabled
-	  = 0;
+      //! if so when we disable it.
 
+      if (!strncmp("/library", pcName, strlen("/library")))
+      {
+	  pnsintegrator->psr[pnsintegrator->iModelRegistrations].iDisabled
+	      = 1;
+      }
+      else
+      {
+	  pnsintegrator->psr[pnsintegrator->iModelRegistrations].iDisabled
+	      = 0;
+      }
 
       pnsintegrator->iModelRegistrations++;
   }
