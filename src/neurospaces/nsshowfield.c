@@ -60,9 +60,11 @@ int NSShowField(int argc,char **argv)
 
   struct symtab_HSolveListElement *phsle = PidinStackLookupTopSymbol(ppist); 
 
-
-
-    
+  if (!phsle)
+  {
+      fprintf(stdout, "element not found\n");
+  }
+   
 
   int i;
   printf("\n[ %s ]\n",pcPathname);
