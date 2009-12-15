@@ -63,11 +63,6 @@ int NSTweakTau(char *pcName, char *pcField){
   PidinStackPop(ppistGate);
   setStateInit(ppistGate);
 
-  //!!
-  //!! There is a '- 1' following a call to getting the number of table entries because 
-  //!! of a glitch in the model container which causes it to return the number of entries+1.
-  //!!
-
   struct symtab_HSolveListElement *phsleA = PidinStackLookupTopSymbol(ppistA);
   struct symtab_HSolveListElement *phsleB = PidinStackLookupTopSymbol(ppistB);
 
