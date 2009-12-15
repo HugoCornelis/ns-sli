@@ -112,69 +112,46 @@ int NSmsg(char *pcSrcpath, char *pcDstpath, char *pcTypename, char *pcField){
 //----------------------------------------------------------------
 static int AxialMsg(char *pcSrcpath, char *pcDstpath, char *pcField, char *pcMsgName)
 {
-
-
-  struct PidinStack *ppistSrc = getRootedContext(pcSrcpath);
+    struct PidinStack *ppistSrc = getRootedContext(pcSrcpath);
   
-  struct PidinStack *ppistDst = getRootedContext(pcDstpath);
+    struct PidinStack *ppistDst = getRootedContext(pcDstpath);
 
-  struct symtab_HSolveListElement *phsleSrc = PidinStackLookupTopSymbol(ppistSrc);
+    struct symtab_HSolveListElement *phsleSrc = PidinStackLookupTopSymbol(ppistSrc);
 
-  struct symtab_HSolveListElement *phsleDst = PidinStackLookupTopSymbol(ppistDst);
+    struct symtab_HSolveListElement *phsleDst = PidinStackLookupTopSymbol(ppistDst);
 
+    if (!phsleSrc)
+    {
+	Error();
+	printf("source %s of axial msg is not found in the Model Container.\n", pcSrcpath);
+	return 0;
+    }
 
-  if(!phsleSrc){
+    if (!phsleDst)
+    {
+	Error(); 
+	printf("dest %s of axial msg is not found in the Model Container.", pcDstpath);
+	return 0;
+    } 
 
-    Error();
-    printf("source %s of axial msg is not found in the Model Container.\n", pcSrcpath);
-    return 0;
+    struct PidinStack *ppistParent
+	= PidinStackSubtract(ppistSrc, ppistDst);
 
-  }
+    PidinStackCompress(ppistParent);
 
-  if(!phsleDst){
+    struct symtab_IdentifierIndex *pidinParent
+	= PidinStackToPidinQueue(ppistParent);
 
-    Error(); 
-    printf("dest %s of axial msg is not found in the Model Container.", pcDstpath);
-    return 0;
-    
-  } 
+    struct symtab_Parameters *ppar
+	= ParameterNewFromPidinQueue("PARENT", pidinParent, TYPE_PARA_SYMBOLIC);
 
+    BioComponentChangeParameter((struct symtab_BioComponent *)phsleDst, ppar);
 
-  struct symtab_IdentifierIndex *pidinSrc
-      = IdinNewFromChars(SymbolGetName(phsleSrc));
+    PidinStackFree(ppistSrc);
 
+    PidinStackFree(ppistDst);
 
-  struct symtab_IdentifierIndex *pidinThis
-      = IdinNewFromChars("..");
-
-  //- link pidins into a queue
-  
-  //! we assume that AXIAL is the somatofugal direction
-  //! while PARENT points to the somatopetal direction
-  //!
-  //! that is why here we reverse the direction
-
-  pidinSrc->pidinRoot = pidinThis;
-  pidinThis->pidinRoot = pidinThis;
-
-  pidinThis->pidinNext = pidinSrc;
-
-  //h
-  //h Here we prepare a function pointer and parameter
-  //h for the parent HSolve element to label it a
-  //h PARENT element.
-  //h
-
-  struct symtab_Parameters *ppar
-    = ParameterNewFromPidinQueue("PARENT", pidinThis, TYPE_PARA_SYMBOLIC);
-
-  BioComponentChangeParameter((struct symtab_BioComponent *)phsleDst, ppar);
-
-  PidinStackFree(ppistSrc);
-
-  PidinStackFree(ppistDst);
-
-  return 1;
+    return 1;
 }
 
 
@@ -329,20 +306,20 @@ static int CalciumPoolMsg(char *pcSrcpath, char *pcDstpath, char *pcField, char 
   //! ----------------------------------------------------------------
   struct PidinStack *ppist = PidinStackParse(pcTarget);
 
-  struct symtab_IdentifierIndex *idinTarget = PidinStackToPidinQueue(ppist);
+  struct symtab_IdentifierIndex *pidinTarget = PidinStackToPidinQueue(ppist);
   
   
   //! create 'I'
-  struct symtab_IdentifierIndex *idinI = IdinNewFromChars("I");
+  struct symtab_IdentifierIndex *pidinI = IdinNewFromChars("I");
 
 
-  idinI->pidinRoot = idinTarget;
-  idinI->iFlags = FLAG_IDENTINDEX_FIELD;
+  pidinI->pidinRoot = pidinTarget;
+  pidinI->iFlags = FLAG_IDENTINDEX_FIELD;
 
-  struct symtab_IdentifierIndex *idin;
-  for(idin = idinTarget; idin->pidinNext ;idin = idin->pidinNext);
+  struct symtab_IdentifierIndex *pidin;
+  for(pidin = pidinTarget; pidin->pidinNext ;pidin = pidin->pidinNext);
   
-  idin->pidinNext = idinI;
+  pidin->pidinNext = pidinI;
 
 
   struct symtab_InputOutput *pio = InputOutputNewForType(INPUT_TYPE_INPUT);
@@ -353,7 +330,7 @@ static int CalciumPoolMsg(char *pcSrcpath, char *pcDstpath, char *pcField, char 
   }
 
 
-  pio->pidinField = idinTarget;
+  pio->pidinField = pidinTarget;
 
   //! ---------------- end inserted code ------------------------------
 
