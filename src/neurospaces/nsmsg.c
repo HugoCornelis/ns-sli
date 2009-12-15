@@ -796,27 +796,23 @@ static int StoreMsg(char *pcSrcpath,
  */
 int NSProcessMessages(struct neurospaces_integrator *pnsintegrator)
 {
-
   int i;
 
   struct ioMsg **ppioMsg = pnsintegrator->ppioMsg;
-
-/*   struct Heccer **ppheccer = pnsintegrator->ppheccer; */
-
-  if(!ppioMsg)
-    return -1;
 
   for (i = 0 ; i < pnsintegrator->iIoMsgs ; i++)
   {
 
       //- asc_out save messages
 
-    if (!strcmp(ppioMsg[i]->pcMsgName, "SAVE"))
-    {
-	//- are not processed overhere, so continue
+      if (!strcmp(ppioMsg[i]->pcMsgName, "SAVE"))
+      {
+	  //- are not processed overhere, so continue
 
-	continue;
-    }
+	  // \todo useful comment above ... where again were they processed?
+
+	  continue;
+      }
 
     if (ppioMsg[i]->pcSourceSymbol)
     {
