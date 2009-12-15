@@ -41,6 +41,8 @@ int NSFilterCreate(char *pcType)
 	if (strcmp(ppcCreate[i], pcType) == 0)
 	{
 	    iInModelContainer = 1;
+
+	    break;
 	}
     }
 

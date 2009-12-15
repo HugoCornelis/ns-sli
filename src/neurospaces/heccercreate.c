@@ -57,13 +57,27 @@ int AttemptHeccerName(char *pcName)
 
     for (i = 0 ; i < pnsintegrator->iModelRegistrations ; i++)
     {
-	if (!strncmp(pcName, pnsintegrator->psr[i].pcName, strlen(pnsintegrator->psr[i].pcName)))
+	if (strncmp(pcName, pnsintegrator->psr[i].pcName, strlen(pnsintegrator->psr[i].pcName)) == 0)
 	{
 	    //- if so we don't register the name and exit with success.
 
 	    return 0;
 	}
+
+	if (strncmp(pnsintegrator->psr[i].pcName, pcName, strlen(pcName)) == 0)
+	{
+	    //- or we overwrite the existing entry with a name that
+	    //- catches more of the model
+
+	    free(pnsintegrator->psr[i].pcName);
+
+	    pnsintegrator->psr[i].pcName = strdup(pcName);
+
+	    return 0;
+	}
     }
+
+    //- no heccer with that name, so register a new one
 
     return(RegisterHeccerName(pcName));
 }
@@ -157,10 +171,6 @@ int DisableHeccerName(char *pcName)
 //------------------------------------------------------------------
 static int RegisterHeccerName(char *pcName)
 {
-
-  if(!pcName)
-    return -1;
-
   struct neurospaces_integrator *pnsintegrator = getNsintegrator();
 
   //- register the name of the heccer object

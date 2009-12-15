@@ -88,6 +88,7 @@ int NSCreate( char* name,  char* pcParent, char* pcType){
        "spikegen", NSINTEGRATOR_SPIKEGEN,
        "asc_file", NSINTEGRATOR_ASCFILE,
        "pulsegen", NSINTEGRATOR_PULSEGEN,
+       "hsolve", NSINTEGRATOR_PULSEGEN,
        (char *)-1, NSINTEGRATOR_NEUTRAL,
        NULL, -1,
    };
@@ -157,7 +158,7 @@ int NSCreate( char* name,  char* pcParent, char* pcType){
 
 /*    } */
 
-   else if(!strcmp("pulsegen",pcType)){
+   else if (!strcmp("pulsegen",pcType)){
 
      // This is temporary until I finish the model container object.
 
@@ -166,7 +167,22 @@ int NSCreate( char* name,  char* pcParent, char* pcType){
      iResult = NSINTEGRATOR_PULSEGEN;
 
    }
-   else{
+   else if (strcmp("hsolve", pcType) == 0)
+   {
+       phsleChild = (struct symtab_HSolveListElement *)CellCalloc();
+     
+       iResult = NSINTEGRATOR_NEUTRAL;
+
+       char *pcHeccerName = getRootedPathname(pcParent);
+
+       AttemptHeccerName(pcHeccerName);
+
+       free(pcHeccerName);
+   }
+   else
+   {
+       // \todo if one of the parents is already registered as a
+       // heccer name, then it must be a group rather than a cell.
 
        // neutral, hsolve
 
@@ -190,8 +206,6 @@ int NSCreate( char* name,  char* pcParent, char* pcType){
    pidinChild = IdinNewFromChars(pcChild);
    SymbolSetName(phsleChild, pidinChild); 
    
-
-   //i
    //i Retrieves the parent pathname from
    //i the argument or from an Element in the GENESIS
    //i namespace.
@@ -199,15 +213,8 @@ int NSCreate( char* name,  char* pcParent, char* pcType){
    //i are rooted in neutral objects that also reside in the GENESIS
    //i namespace.
    //i ex: /neutral/compartment
-   //i
 
    ppistParent = getRootedContext(pcParent);
-
-/*    if(!strcmp(pcParent,".")) */
-/*      ppistParent = PidinStackParse("/"); */
-/*    else */
-/*      ppistParent = PidinStackParse(pcParent); */
-  
 
    if( !ppistParent ){
 
