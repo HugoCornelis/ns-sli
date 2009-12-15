@@ -141,14 +141,11 @@ static int AxialMsg(char *pcSrcpath, char *pcDstpath, char *pcField, char *pcMsg
 
 
   struct symtab_IdentifierIndex *pidinSrc
-    = IdinNewFromChars(SymbolGetName(phsleSrc));
-
-  PidinStackFree(ppistSrc);
-
+      = IdinNewFromChars(SymbolGetName(phsleSrc));
 
 
   struct symtab_IdentifierIndex *pidinThis
-    = IdinNewFromChars("..");
+      = IdinNewFromChars("..");
 
   //- link pidins into a queue
   
@@ -171,13 +168,13 @@ static int AxialMsg(char *pcSrcpath, char *pcDstpath, char *pcField, char *pcMsg
   struct symtab_Parameters *ppar
     = ParameterNewFromPidinQueue("PARENT", pidinThis, TYPE_PARA_SYMBOLIC);
 
+  BioComponentChangeParameter((struct symtab_BioComponent *)phsleDst, ppar);
 
-  BioComponentChangeParameter(
-			      (struct symtab_BioComponent *)phsleDst, ppar);
+  PidinStackFree(ppistSrc);
+
+  PidinStackFree(ppistDst);
 
   return 1;
-
-
 }
 
 
