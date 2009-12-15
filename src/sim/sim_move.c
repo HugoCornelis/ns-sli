@@ -184,20 +184,28 @@ char		*ptr;
 
 	SymbolDeleteChild(phsleParent, phsleSrc);
 	
+	char pc[100];
+
+	char *pcNameDst = SymbolGetName(phsleSrc);
+
 	if (new_name)
 	{
-	    char pc[100];
+	    struct symtab_IdentifierIndex *pidinDst = NULL;
 
 	    if (new_index != 0)
 	    {
 		sprintf(pc, "%s[%i]", new_name, new_index);
 
-		SymbolSetName(phsleSrc, IdinNewFromChars(strdup(pc)));
+		pcNameDst = pc;
 	    }
 	    else
 	    {
-		SymbolSetName(phsleSrc, IdinNewFromChars(strdup(new_name)));
+		pcNameDst = new_name;
 	    }
+
+	    pidinDst = IdinNewFromChars(strdup(pcNameDst));
+
+	    SymbolSetName(phsleSrc, pidinDst);
 
 	    PidinStackPop(ppistDst);
 	}
@@ -215,6 +223,14 @@ char		*ptr;
 	    return;
 	}
 
+	//- create an alias of the destination such that new children
+	//- can be added to the alias after the move operation has
+	//- completed
+
+	phsleSrc = SymbolCreateAlias(phsleSrc, strdup(pcNameDst), IdinNewFromChars(SymbolGetName(phsleSrc)));
+
+	//- add the alias as new child to the source of the move
+
 	SymbolAddChild(phsleDst, phsleSrc);
 
 	struct nsintegrator_type *pelnsintegrator
@@ -230,3 +246,5 @@ char		*ptr;
 
     OK();
 }
+
+

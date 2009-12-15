@@ -131,21 +131,35 @@ int NSCopy(struct PidinStack *ppistSrc, char *pcDst, int iKeepPrototypeTraversal
 	struct symtab_BioComponent *pbioDst
 	    = (struct symtab_BioComponent *)phsleDst;
 
-	//- if the original has no children yet
+	//- if explicit request was made to keep prototype children visible
 
-	int iHasChildren = (SymbolGetPrincipalNumOfSuccessors(phsleSrc) != 0);
-
-	if (!iHasChildren
-	    && !iKeepPrototypeTraversal)
+	if (iKeepPrototypeTraversal)
 	{
-	    //- we assume there is a possibility that the source will
-	    //- get children in the future, so ...
+	}
 
-	    //- ... prevent a traversal over the alias to see the
-	    //- children of the original
+	//- else
 
-	    SymbolSetOptions
-		(phsleDst, (SymbolGetOptions(phsleDst) | BIOCOMP_OPTION_NO_PROTOTYPE_TRAVERSAL));
+	else
+	{
+	    //- if the original has no children yet
+
+	    int iHasChildren = (SymbolGetPrincipalNumOfSuccessors(phsleSrc) != 0);
+
+	    if (!iHasChildren)
+	    {
+		//- we assume there is a possibility that the source will
+		//- get children in the future, so ...
+
+		//- ... prevent a traversal over the alias to see the
+		//- children of the original
+
+		SymbolSetOptions
+		    (phsleDst, (SymbolGetOptions(phsleDst) | BIOCOMP_OPTION_NO_PROTOTYPE_TRAVERSAL));
+	    }
+	    else
+	    {
+		int iBreak = 1;
+	    }
 	}
     }
 
