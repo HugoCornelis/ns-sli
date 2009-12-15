@@ -138,8 +138,11 @@ int NSCopy(struct PidinStack *ppistSrc, char *pcDst, int iKeepPrototypeTraversal
 	if (!iHasChildren
 	    && !iKeepPrototypeTraversal)
 	{
-	    //- prevent traversal over the alias to see the children of
-	    //- the original
+	    //- we assume there is a possibility that the source will
+	    //- get children in the future, so ...
+
+	    //- ... prevent a traversal over the alias to see the
+	    //- children of the original
 
 	    SymbolSetOptions
 		(phsleDst, (SymbolGetOptions(phsleDst) | BIOCOMP_OPTION_NO_PROTOTYPE_TRAVERSAL));
@@ -157,3 +160,5 @@ int NSCopy(struct PidinStack *ppistSrc, char *pcDst, int iKeepPrototypeTraversal
 
     return 1;
 }
+
+
