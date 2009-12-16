@@ -200,7 +200,7 @@ void DisplayHeader()
 
 printf("==========================================================================\n");
 printf("               Neurospaces Genesis Scripting Interface\n");
-printf("                          Based off of GENESIS %s\n\n", VERSIONSTR);
+printf("                          Based off of GENESIS 2.3\n\n", VERSIONSTR);
 printf("                        This is version %s\n",pcVersion);
 printf("Type \"help\" for help.\n");
 printf("==========================================================================\n\n");
