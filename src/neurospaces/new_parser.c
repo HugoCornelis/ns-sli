@@ -647,6 +647,11 @@ struct symtab_HSolveListElement *add_compartment(int flags,char *name,char *link
 
 	      char *pcParent = getRootedPathname(link);
 	      char *pcName = getRootedPathname(name);
+
+	      extern iFromTheCellReader;
+
+	      iFromTheCellReader = 1;
+
 	      argv[0] = "c_do_add_msg";
 	      argv[1] = pcParent;
 	      argv[2] = pcName;
@@ -661,6 +666,9 @@ struct symtab_HSolveListElement *add_compartment(int flags,char *name,char *link
 	      argv[5] = "previous_state";
 	      //    for (i=1; i<=TAILWEIGHT; i+=1) {
 	      do_add_msg(6,argv);
+
+	      iFromTheCellReader = 0;
+
 	      //}
 /* 		} else if (strcmp(BaseObject(compt)->name,"symcompartment")==0) { */
 /* 		/* Check shape of parent compartment, if not found will default  */

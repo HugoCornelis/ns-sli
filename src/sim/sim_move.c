@@ -236,8 +236,7 @@ char		*ptr;
 	struct nsintegrator_type *pelnsintegrator
 	    = (struct nsintegrator_type *)GetElement("/neurospaces_integrator");
 
-	SymbolRecalcAllSerials(pelnsintegrator->pnsintegrator->phsleCachedRoot, 
-			       pelnsintegrator->pnsintegrator->ppistCachedRoot);
+	SymbolRecalcAllSerials(NULL, NULL);
 
 	PidinStackFree(ppistDst);
     }

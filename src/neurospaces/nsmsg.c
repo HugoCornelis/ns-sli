@@ -24,6 +24,9 @@
 #include "nsintegrator.h"
 
 
+int iFromTheCellReader = 0;
+
+
 static int AxialMsg(char *pcSrcpath, char *pcDstpath, char *pcField, char *pcMsgName);
 static int CalciumPoolMsg(char *pcSrcpath, char *pcDstpath, char *pcField, char *pcMsgName);
 static int ChannelMsg( char *pcSrcpath, char *pcDstpath, char *pcField, char *pcMsgName);
@@ -115,6 +118,19 @@ static int AxialMsg(char *pcSrcpath, char *pcDstpath, char *pcField, char *pcMsg
     struct PidinStack *ppistSrc = getRootedContext(pcSrcpath);
   
     struct PidinStack *ppistDst = getRootedContext(pcDstpath);
+
+    // \todo: this should not be: performance, and because it is
+    // currently required, this means that the system is in an
+    // inconsistent state.  This needs more investigation, likely the
+    // best solution is to have a gateway that monitors more closely
+    // what is going on in the model-container and calls
+    // SymbolRecalcAllSerials() at the correct times and with the
+    // correct arguments.
+
+    if (!iFromTheCellReader)
+    {
+	SymbolRecalcAllSerials(NULL, NULL);
+    }
 
     struct symtab_HSolveListElement *phsleSrc = PidinStackLookupTopSymbol(ppistSrc);
 
