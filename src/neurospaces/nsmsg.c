@@ -148,7 +148,9 @@ static int AxialMsg(char *pcSrcpath, char *pcDstpath, char *pcField, char *pcMsg
 	Error(); 
 	printf("dest %s of axial msg is not found in the Model Container.", pcDstpath);
 	return 0;
-    } 
+    }
+
+    //- construct the parent parameter
 
     struct PidinStack *ppistParent
 	= PidinStackSubtract(ppistSrc, ppistDst);
@@ -158,10 +160,46 @@ static int AxialMsg(char *pcSrcpath, char *pcDstpath, char *pcField, char *pcMsg
     struct symtab_IdentifierIndex *pidinParent
 	= PidinStackToPidinQueue(ppistParent);
 
-    struct symtab_Parameters *ppar
+    struct symtab_Parameters *pparParentNew
 	= ParameterNewFromPidinQueue("PARENT", pidinParent, TYPE_PARA_SYMBOLIC);
 
-    BioComponentChangeParameter((struct symtab_BioComponent *)phsleDst, ppar);
+    //- if this symbol already has a parent parameter
+
+    struct symtab_Parameters *pparParentOld
+	= SymbolFindParameter(phsleDst, ppistDst, "PARENT");
+
+    if (pcSrcpath[0] == '/' || pcDstpath[0] == '/')
+    {
+	//- use parameter caches
+
+	int iSerialDst = PidinStackToSerial(ppistDst);
+
+	if (iSerialDst == INT_MAX)
+	{
+	    Error(); 
+	    printf("dest %s of axial msg cannot be converted to its serial.", pcDstpath);
+
+	    PidinStackFree(ppistSrc);
+
+	    PidinStackFree(ppistDst);
+
+	    return 0;
+	}
+
+	struct neurospaces_integrator *pnsintegrator
+	    = getNsintegrator();
+
+	SymbolCacheParameter(pnsintegrator->phsleCachedRoot, PidinStackToSerial(ppistDst), pparParentNew);
+    }
+
+    //- else
+
+    else
+    {
+	//- attach it to the symbol
+
+	BioComponentChangeParameter((struct symtab_BioComponent *)phsleDst, pparParentNew);
+    }
 
     PidinStackFree(ppistSrc);
 
