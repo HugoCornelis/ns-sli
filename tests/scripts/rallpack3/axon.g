@@ -163,8 +163,8 @@ end
 
 create asc_file /output/out0
 create asc_file /output/outx
-setfield /output/out0 filename axon.out0 leave_open 1 flush 0
-setfield /output/outx filename axon.outx leave_open 1 flush 0
+setfield /output/out0 filename /tmp/axon.out0 leave_open 1 flush 0
+setfield /output/outx filename /tmp/axon.outx leave_open 1 flush 0
 addmsg /axon/low[0]/compartment[0] /output/out0 SAVE Vm
 addmsg /axon/low[{n1 - 1}]/compartment[{n2 - 1}] /output/outx SAVE Vm
 
