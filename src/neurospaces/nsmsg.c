@@ -168,7 +168,9 @@ static int AxialMsg(char *pcSrcpath, char *pcDstpath, char *pcField, char *pcMsg
     struct symtab_Parameters *pparParentOld
 	= SymbolFindParameter(phsleDst, ppistDst, "PARENT");
 
-    if (pcSrcpath[0] == '/' || pcDstpath[0] == '/')
+    if (pcSrcpath[0] == '/'
+	&& pcDstpath[0] == '/'
+	&& !iFromTheCellReader)
     {
 	//- use parameter caches
 
