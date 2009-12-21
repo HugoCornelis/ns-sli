@@ -833,6 +833,7 @@ VM Axial Resistances (pdResults[0]) : (0)
 VM Axial Resistances (pdResults[1]) : (0)
 VM Membrane Potentials (pdVms[0]) : (-0.068)
 ',
+						    timeout => 7,
 						   },
 						   {
 						    description => 'Quit the simulator.',
