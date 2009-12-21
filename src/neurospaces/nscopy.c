@@ -47,7 +47,7 @@
  *   used by the cell reader.
  *
  *   Also note that the default behaviour of aliasses and aliassees in
- *   the model container if full coupling.
+ *   the model container is full coupling.
  *
  */
 //-------------------------------------------------------------------

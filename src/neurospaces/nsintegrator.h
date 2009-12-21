@@ -408,6 +408,9 @@ int NSSetAscField(char *pcPathname, char *pcField, char *pcValue);
 //-- Defined in nscopy.c --
 int NSCopy(struct PidinStack *ppistSrc, char *pcDst, int iKeepPrototypeTraversal);
 
+//-- Defined in nscopy.c --
+int NSMove(struct PidinStack *ppistSrc, char *pcDst, char *pcName, int iIndex);
+
 //-- Defined in hsolveactor.c --
 char * do_findsolvefield();
 int undo_findsolvefield(char **ppcElement, char **ppcField);
