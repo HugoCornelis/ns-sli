@@ -86,7 +86,7 @@ int i, n1, n2
 	for (i = 1; i < n1; i = i + 1)
 		addmsg /cable/low[{i - 1}/compartment[{n1 - 1}]  \
 		    /cable/low[{i}]/compartment[0] RAXIAL Ra Vm
-		addmsg /cable/low[{i}/compartment[0]  \
+		addmsg /cable/low[{i}]/compartment[0]  \
 		    /cable/low[{i - 1}]/compartment[{n1 - 1}] AXIAL Vm
 	end
 
@@ -112,8 +112,8 @@ end
 
 create asc_file /output/out0
 create asc_file /output/outx
-setfield /output/out0 filename cable.out0 leave_open 1 flush 0
-setfield /output/outx filename cable.outx leave_open 1 flush 0
+setfield /output/out0 filename /tmp/cable.out0 leave_open 1 flush 0
+setfield /output/outx filename /tmp/cable.outx leave_open 1 flush 0
 addmsg /cable/low[0]/compartment[0] /output/out0 SAVE Vm
 addmsg /cable/low[{n1 - 1}]/compartment[{n2 - 1}] /output/outx SAVE Vm
 
@@ -147,4 +147,4 @@ call /cable/solve SETUP
 reset
 step {runtime} -time
 
-quit
+// quit
