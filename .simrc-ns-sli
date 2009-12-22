@@ -29,7 +29,7 @@ setenv GENESIS_HELP {getenv HOME}/neurospaces_project/genesis/genesis/Doc
 //===========================================================================
 schedule			// default simulation schedule
 
-// See /home/mando/neurospaces_project/genesis/genesis/startup/escapelist.g for macro definitions.  These allow
+// See ~/neurospaces_project/genesis/genesis/startup/escapelist.g for macro definitions.  These allow
 // you to use cursor keys for the recall and editing of previous commands
 include          escapelist      // setup macro keys for DEC and SUN keyboards
 

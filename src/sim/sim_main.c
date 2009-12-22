@@ -227,13 +227,13 @@ char	*execdir;
 int	file_arg = 0;
 short catch = 1;
 char *home;
-char string[256];
+char string[1024];
 char *getenv();
 #ifdef STATUSLINE
 int status_line=0;
 #endif
 int use_simrc;
-char simrc_name[256];
+char simrc_name[1024];
 
 #ifdef sgi
     mallopt(M_KEEP, 1);
@@ -358,24 +358,46 @@ char simrc_name[256];
    
     pfile = NULL;
     if(use_simrc){
-	/*
-	** first try and find it locally in execdir if given else in
-	** current working directory
-	*/
-	if (execdir != NULL)
+
+        
+      /*
+       * First we try and find the .simrc file in a standard location
+       * on the machine with the genesis installation. 
+       */
+        pfile=fopen("/usr/local/ns-sli/startup/simrc-ns-sli","r");
+  
+
+    /*
+     * If the file isn't in the "standard" location then
+     * we look in the home directory and executable directory.
+     */
+        if(pfile == NULL) 
+	{
+
+	  fprintf(stderr,"%s","*** The simrc file was not found in /usr/local/ns-sli/startup\n");
+	  fprintf(stderr,"%s","*** Searching elsewhere\n\n");
+
+	  if (execdir != NULL)
 	    sprintf(string, "%s/%s", execdir, simrc_name);
-	else
+	  else
 	    strcpy(string,simrc_name);
 
-	if((pfile=fopen(string,"r")) == NULL){
+	  if((pfile=fopen(string,"r")) == NULL){
 	    /*
 	    ** else try and find it in the home directory
 	    */
 	    if ((home = getenv("HOME"))) {
-		sprintf(string,"%s/%s",home,simrc_name);
-		pfile=fopen(string,"r");
+	      sprintf(string,"%s/%s",home,simrc_name);
+	      pfile=fopen(string,"r");
 	    }
+	  }
+
 	}
+	else
+	{
+	  fprintf(stdout,"%s","*** simrc file was found in /usr/local/ns-sli/startup.\n");
+	}
+
 	if(pfile == NULL){
 	    fprintf(stderr, "Cannot find a simrc-ns-sli file in the execdir/working or\n");
 	    fprintf(stderr, "home directories.  Copy one from startup/.simrc-ns-sli\n");
