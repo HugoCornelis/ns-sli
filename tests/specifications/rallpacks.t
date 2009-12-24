@@ -42,6 +42,7 @@ my $test
 			       },
 			      ],
        description => "the rallpacks benchmarks",
+       disabled => 'not working yet',
        name => 'rallpacks.t',
       };
 
