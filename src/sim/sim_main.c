@@ -356,6 +356,15 @@ char simrc_name[1024];
     */
     
    
+    //i
+    //i The current order for checking which simrc-ns-sli to use
+    //i is:
+    //i    first: /usr/local/ns-sli/startup/simrc-ns-sli
+    //i    second: Current executable directory. 
+    //i    third: home directory
+    //i
+    //i May possibly need to be reversed is users are going to add
+    //i their own paths. 
     pfile = NULL;
     if(use_simrc){
 
@@ -395,6 +404,7 @@ char simrc_name[1024];
 	}
 	else
 	{
+	  strcpy(string,"/usr/local/ns-sli/startup/simrc-ns-sli");
 	  fprintf(stdout,"%s","*** simrc file was found in /usr/local/ns-sli/startup.\n");
 	}
 

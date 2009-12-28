@@ -59,7 +59,7 @@ loadlib.c: liblist
 	$(srcdir)/libsh < liblist > loadlib.c
 
 
-install-data-local:
+install-data-local: uninstall-local
 	cp -rf startup $(ns_slidir)
 
 uninstall-local:
