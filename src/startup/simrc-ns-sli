@@ -8,7 +8,8 @@
 setenv SIMPATH . \
 		{getenv HOME}/neurospaces_project/ns-sli/source/snapshots/0/src/startup \
 		{getenv HOME}/neurospaces_project/ns-sli/source/snapshots/0/tests/scripts/PurkM9_model \
-	        {getenv HOME}/neurospaces_project/ns-sli/source/snapshots/0/tests/scripts/test-traub91-v0
+	        {getenv HOME}/neurospaces_project/ns-sli/source/snapshots/0/tests/scripts/test-traub91-v0 \
+                {getenv HOME}/neurospaces_project/ns-sli/source/snapshots/0/scripts/test-simplecell-v3/
 
 // 		{getenv HOME}/neurospaces_project/genesis/genesis/Scripts/neurokit   \
 // 		{getenv HOME}/neurospaces_project/genesis/genesis/Scripts/neurokit/prototypes
