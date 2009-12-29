@@ -1,0 +1,44 @@
+// NOTE: this file is located in the '0' directory for the purpose of running
+// tests. The ns-sli searches for simrc files in the following locations:
+//
+//   1. /usr/local/ns-sli/startup
+//   2. Current directory
+//   3. Home directory
+//
+// If you need to add custom paths to a simrc file, add the paths to the first
+// file that ns-sli finds. ns-sli will output which startup simrc was loaded
+// when the program is started. 
+//
+// .simrc-ns-sli file to go in the home directory of all GENESIS users
+//===========================================================================
+//                         environment variables
+//===========================================================================
+//      SIMPATH - path to search for scripts (includes the startup path)
+//      SIMNOTES - default file for simulator notes
+//===========================================================================
+setenv SIMPATH . \
+	{getenv HOME}/neurospaces_project/ns-sli/source/snapshots/0/src/startup \
+	{getenv HOME}/neurospaces_project/ns-sli/source/snapshots/0/tests/scripts/PurkM9_model \
+	{getenv HOME}/neurospaces_project/ns-sli/source/snapshots/0/tests/scripts/test-traub91-v0 \	
+	{getenv HOME}/neurospaces_project/ns-sli/source/snapshots/0/tests/scripts/test-simplecell-v3 \
+	{getenv HOME}/neurospaces_project/ns-sli/source/snapshots/0/tests/scripts/g2-library/neurokit \
+	{getenv HOME}/neurospaces_project/ns-sli/source/snapshots/0/tests/scripts/g2-library/neurokit/prototypes
+
+// This adds the Xodus 1 compatability library directory to the
+// SIMPATH.  If you are not expecting to use X1compat, you can
+// comment out the following line.
+//setenv SIMPATH {getenv SIMPATH}/Scripts/X1compat
+
+setenv SIMNOTES {getenv HOME}/.notes
+setenv GENESIS_HELP {getenv HOME}/neurospaces_project/genesis/genesis/Doc
+
+//===========================================================================
+//                             set up tables 
+//===========================================================================
+schedule			// default simulation schedule
+
+// See /home/mando/neurospaces_project/genesis/genesis/startup/escapelist.g for macro definitions.  These allow
+// you to use cursor keys for the recall and editing of previous commands
+include          escapelist      // setup macro keys for DEC and SUN keyboards
+
+echo .simrc-ns-sli has been executed! 
