@@ -6,14 +6,14 @@ directory ~/neurospaces_project/model-container/source/snapshots/0/hierarchy/out
 set args tests/scripts/readcell/purk2m9.g
 set args tests/scripts/PurkM9_model/ACTIVE-soma1.g
 set args tests/scripts/test-simplecell/simplecell-1.g
-# set args tests/scripts/test-traub91-v0/traub91_asym.g
+set args tests/scripts/test-traub91-v0/traub91_asym.g
 # set args tests/scripts/test-traub91-v0/traub91_asym_simple.g
 # set args tests/scripts/test-traub91-v0/traub91_asym_simple2.g
 # set args tests/scripts/test-traub91-v0/traub91_asym_simple3.g
 # set args tests/scripts/test-traub91-v0/traub91.g
 #     $genesis -nox -altsimrc $simrc -batch -notty scale_cable $timestep 1000 cable
-set args -nox tests/scripts/rallpack1/scale_cable 500 1000 tests/scripts/rallpack1/cable
-set args -nox tests/scripts/rallpack1/cable 500 1000 tests/scripts/rallpack3/axon
+# set args -nox tests/scripts/rallpack1/scale_cable 500 1000 tests/scripts/rallpack1/cable
+# set args -nox tests/scripts/rallpack1/cable 500 1000 tests/scripts/rallpack3/axon
 # set args -nox tests/scripts/rallpack3/axon 500 1000 tests/scripts/rallpack3/axon
 # cd ..
 file src/ns-sli

@@ -450,13 +450,7 @@ int InitHeccerObject(struct SolverRegistration *psr)
 
   HeccerInitiate(pheccer);
 
-  // \todo add this heccer to the global list come up with a function
-  // for adding later.
-
-  // \todo add boundary checking here.
-
-/*   pnsintegrator->psr[pnsintegrator->iModelRegistrations++].uSolver.si.pheccer */
-/*       = pheccer; */
+  //- register the heccer in the solver mapper
 
   psr->uSolver.si.pheccer = pheccer;
 
