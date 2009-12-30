@@ -61,7 +61,7 @@ loadlib.c: liblist
 
 install-data-local: 
 	echo "*** Installing startup scripts to $(ns_slidir)"
-	sudo cp -rf startup $(ns_slidir)
+	cp -rf startup $(ns_slidir)
 
 uninstall-local:
 	rm -rf $(ns_slistartupdir)
