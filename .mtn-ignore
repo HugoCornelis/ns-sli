@@ -31,6 +31,7 @@ Makefile\.in$
 ^src/c2genesis/makelib$
 ^src/c2genesis/makestructs$
 ^src/config.h
+^src/config.h.in
 ^src/liblist
 ^src/liblist\.c
 ^src/loadlib\.c

@@ -114,12 +114,6 @@ case "$host_os" in
     AC_SUBST(SWIGLDLINKSFORPERL)
 
 
-    SWIGLINKCOMMAND_PERL='ld 	$(SWIGLDLINKSFORPERL) 	-o SwiggableSLI.$(PERLLIB_EXTENSION) 	swiggable_sli_wrap.o'
-    AC_SUBST(SWIGLINKCOMMAND_PERL)
-
-
-
-
     PYTHONLIB_EXTENSION='dylib'
     AC_SUBST(PYHONLIB_EXTENSION)
 
@@ -135,8 +129,30 @@ case "$host_os" in
     SWIGLDLINKSFORPYTHON='-L$(PYTHON_HEADERS)         -framework Python         -flat_namespace         -undefined suppress 	-bundle 	-bundle_loader $(PYTHON_EXE) -fPIC '
     AC_SUBST(SWIGLDLINKSFORPYTHON)
 
-    SWIGLINKCOMMAND_PYTHON='ld 	$(SWIGLDLINKSFORPYTHON) 	-o _SwiggableSLI.$(PERLLIB_EXTENSION) swiggable_sli_wrap.o'
-    AC_SUBST(SWIGLINKCOMMAND_PYTHON)
+
+
+
+    dnl Here the SWIG linking is set. 
+    case "$host_os" in
+       *darwin10.2.0)
+           dnl this is snow leopard
+          SWIGLINKCOMMAND_PERL='ld 	$(SWIGLDLINKSFORPERL) 	-o SwiggableSLI.$(PERLLIB_EXTENSION)  /usr/lib/bundle1.o swiggable_sli_wrap.o'
+          AC_SUBST(SWIGLINKCOMMAND_PERL)
+
+	  SWIGLINKCOMMAND_PYTHON='ld 	$(SWIGLDLINKSFORPYTHON) 	-o _SwiggableSLI.$(PERLLIB_EXTENSION)  /usr/lib/bundle1.o swiggable_sli_wrap.o'
+          AC_SUBST(SWIGLINKCOMMAND_PYTHON)
+       ;;
+       *)
+	  dnl All other mac versions. 
+          dnl note: Leopard is i386-apple-darwin9.8.0
+          SWIGLINKCOMMAND_PERL='ld 	$(SWIGLDLINKSFORPERL) 	-o SwiggableSLI.$(PERLLIB_EXTENSION) 	swiggable_sli_wrap.o'
+          AC_SUBST(SWIGLINKCOMMAND_PERL)
+
+	  SWIGLINKCOMMAND_PYTHON='ld 	$(SWIGLDLINKSFORPYTHON) 	-o _SwiggableSLI.$(PERLLIB_EXTENSION) swiggable_sli_wrap.o'
+          AC_SUBST(SWIGLINKCOMMAND_PYTHON)
+       ;;
+    esac
+
 
     AC_MSG_RESULT([done.])
     dnl }}} end MAC OS X settings
