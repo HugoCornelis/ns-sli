@@ -11,11 +11,11 @@
 #include <stdio.h>
 #include "shell_func_ext.h"
 
-
  
 #include "neurospaces/components/attachment.h"
 #include "neurospaces/components/cell.h"
 #include "neurospaces/components/channel.h"
+#include "neurospaces/components/equationexponential.h"
 #include "neurospaces/components/pool.h"
 #include "neurospaces/components/segment.h"
 #include "neurospaces/function.h"
