@@ -23,6 +23,9 @@ CLEANFILES = \
 
 bin_PROGRAMS = ns-sli 
 
+
+ns_sli_INCLUDES = -I$(utildir) -I$(shelldir) -I$(simdir) -I$(scriptdir) -I$(olfdir) -I(nsdir) -I${prefix}/neurospaces/instrumentor
+
 ns_sli_SOURCES = \
 	loadlib.c 
 
