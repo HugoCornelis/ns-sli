@@ -146,7 +146,7 @@ PUBLIC_MODELS
   END CELL
 END PUBLIC_MODELS
 ',
-						   write => 'export ndf STDOUT /hardcoded_neutral/**',
+						   write => 'export no ndf STDOUT /hardcoded_neutral/**',
 						  },
 						  {
 						   description => "Can we ask the model-container to reduce the model ?",
@@ -252,7 +252,7 @@ PUBLIC_MODELS
   END CELL
 END PUBLIC_MODELS
 ',
-						   write => 'export ndf STDOUT /hardcoded_neutral/**',
+						   write => 'export no ndf STDOUT /hardcoded_neutral/**',
 						  },
 						 ],
 				description => "simplifying model parameters of a small model",

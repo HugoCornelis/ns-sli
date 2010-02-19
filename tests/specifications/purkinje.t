@@ -1036,7 +1036,7 @@ PRIVATE_MODELS
 END PRIVATE_MODELS
 
 PUBLIC_MODELS
-  ALIAS /Purkinje/b3s46[0]::/Purk_thickd b3s46[0]
+  ALIAS Purk_thickd b3s46[0]
     PARAMETERS
       PARAMETER ( ELEAK = -0.08 ),
       PARAMETER ( Vm_init = -0.068 ),
@@ -1057,7 +1057,7 @@ PUBLIC_MODELS
   END ALIAS
 END PUBLIC_MODELS
 ',
-						    write => "export ndf STDOUT /Purkinje/b3s46[0]"
+						    write => "export no ndf STDOUT /Purkinje/b3s46[0]"
 						   },
 						   {
 						    description => 'Quit the model-container querymachine.',
