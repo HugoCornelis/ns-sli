@@ -1069,12 +1069,19 @@ add_channel(char *name,char *parent)
 
 	    PidinStackString(ppistDest, pcDest, sizeof(pcDest));
 
-	    char pc[1000];
+	    struct PidinStack *ppistComp
+		= PidinStackDuplicate(ppistDest);
 
-	    PidinStackString(ppist, pc, sizeof(pc));
+	    PidinStackPop(ppistComp);
 
-	    NSmsg(pc, pcDest, "CHANNEL", NULL);
-	    NSmsg(pcDest, pc, "VOLTAGE", NULL);
+	    char pcComp[1000];
+
+	    PidinStackString(ppistComp, pcComp, sizeof(pcComp));
+
+	    NSmsg(pcComp, pcDest, "CHANNEL", NULL);
+	    NSmsg(pcDest, pcComp, "VOLTAGE", NULL);
+
+	    PidinStackFree(ppistComp);
 
 	    //- fetch the gmax value, this should be fixed and unscaled
 
