@@ -37,8 +37,8 @@ PRIVATE_MODELS
 END PRIVATE_MODELS
 
 PUBLIC_MODELS
-  CELL hardcoded_neutral
-    SEGMENT c
+  CELL "hardcoded_neutral"
+    SEGMENT "c"
       BINDINGS
         INPUT ka->I,
       END BINDINGS
@@ -66,7 +66,7 @@ PUBLIC_MODELS
                 PARAMETER ( value = 4.57537e-11 ),
             ), ),
       END PARAMETERS
-      CHANNEL ka
+      CHANNEL "ka"
         BINDABLES
           INPUT Vm,
           OUTPUT G,
@@ -85,14 +85,14 @@ PUBLIC_MODELS
               ), ),
           PARAMETER ( Erev = -0.085 ),
         END PARAMETERS
-        HH_GATE HH_activation
+        HH_GATE "HH_activation"
           PARAMETERS
             PARAMETER ( HH_NUMBER_OF_TABLE_ENTRIES = 3.40282e+38 ),
             PARAMETER ( state_init = 0.0837136 ),
             PARAMETER ( POWER = 4 ),
             PARAMETER ( state_init = -1 ),
           END PARAMETERS
-          gate_kinetic A
+          gate_kinetic "A"
             PARAMETERS
               PARAMETER ( HH_AB_Tau = -0.012 ),
               PARAMETER ( HH_AB_Offset_E = 0.027 ),
@@ -102,7 +102,7 @@ PUBLIC_MODELS
               PARAMETER ( HH_AB_Scale = 1400 ),
             END PARAMETERS
           END gate_kinetic
-          gate_kinetic B
+          gate_kinetic "B"
             PARAMETERS
               PARAMETER ( HH_AB_Tau = 0.004 ),
               PARAMETER ( HH_AB_Offset_E = 0.03 ),
@@ -113,14 +113,14 @@ PUBLIC_MODELS
             END PARAMETERS
           END gate_kinetic
         END HH_GATE
-        HH_GATE HH_inactivation
+        HH_GATE "HH_inactivation"
           PARAMETERS
             PARAMETER ( HH_NUMBER_OF_TABLE_ENTRIES = 3.40282e+38 ),
             PARAMETER ( state_init = 0.747485 ),
             PARAMETER ( POWER = 1 ),
             PARAMETER ( state_init = -1 ),
           END PARAMETERS
-          gate_kinetic A
+          gate_kinetic "A"
             PARAMETERS
               PARAMETER ( HH_AB_Tau = 0.008 ),
               PARAMETER ( HH_AB_Offset_E = 0.05 ),
@@ -130,7 +130,7 @@ PUBLIC_MODELS
               PARAMETER ( HH_AB_Scale = 17.5 ),
             END PARAMETERS
           END gate_kinetic
-          gate_kinetic B
+          gate_kinetic "B"
             PARAMETERS
               PARAMETER ( HH_AB_Tau = -0.01 ),
               PARAMETER ( HH_AB_Offset_E = 0.013 ),
@@ -167,8 +167,8 @@ PRIVATE_MODELS
 END PRIVATE_MODELS
 
 PUBLIC_MODELS
-  CELL hardcoded_neutral
-    SEGMENT c
+  CELL "hardcoded_neutral"
+    SEGMENT "c"
       BINDINGS
         INPUT ka->I,
       END BINDINGS
@@ -180,7 +180,7 @@ PUBLIC_MODELS
         PARAMETER ( Vm_init = -0.068 ),
         PARAMETER ( ELEAK = -0.08 ),
       END PARAMETERS
-      CHANNEL ka
+      CHANNEL "ka"
         BINDABLES
           INPUT Vm,
           OUTPUT G,
@@ -193,13 +193,13 @@ PUBLIC_MODELS
           PARAMETER ( G_MAX = 150 ),
           PARAMETER ( Erev = -0.085 ),
         END PARAMETERS
-        HH_GATE HH_activation
+        HH_GATE "HH_activation"
           PARAMETERS
             PARAMETER ( state_init = 0.0837136 ),
             PARAMETER ( POWER = 4 ),
             PARAMETER ( state_init = -1 ),
           END PARAMETERS
-          gate_kinetic A
+          gate_kinetic "A"
             PARAMETERS
               PARAMETER ( HH_AB_Tau = -0.012 ),
               PARAMETER ( HH_AB_Offset_E = 0.027 ),
@@ -209,7 +209,7 @@ PUBLIC_MODELS
               PARAMETER ( HH_AB_Scale = 1400 ),
             END PARAMETERS
           END gate_kinetic
-          gate_kinetic B
+          gate_kinetic "B"
             PARAMETERS
               PARAMETER ( HH_AB_Tau = 0.004 ),
               PARAMETER ( HH_AB_Offset_E = 0.03 ),
@@ -220,13 +220,13 @@ PUBLIC_MODELS
             END PARAMETERS
           END gate_kinetic
         END HH_GATE
-        HH_GATE HH_inactivation
+        HH_GATE "HH_inactivation"
           PARAMETERS
             PARAMETER ( state_init = 0.747485 ),
             PARAMETER ( POWER = 1 ),
             PARAMETER ( state_init = -1 ),
           END PARAMETERS
-          gate_kinetic A
+          gate_kinetic "A"
             PARAMETERS
               PARAMETER ( HH_AB_Tau = 0.008 ),
               PARAMETER ( HH_AB_Offset_E = 0.05 ),
@@ -236,7 +236,7 @@ PUBLIC_MODELS
               PARAMETER ( HH_AB_Scale = 17.5 ),
             END PARAMETERS
           END gate_kinetic
-          gate_kinetic B
+          gate_kinetic "B"
             PARAMETERS
               PARAMETER ( HH_AB_Tau = -0.01 ),
               PARAMETER ( HH_AB_Offset_E = 0.013 ),
