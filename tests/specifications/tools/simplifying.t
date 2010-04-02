@@ -37,7 +37,7 @@ PRIVATE_MODELS
 END PRIVATE_MODELS
 
 PUBLIC_MODELS
-  CELL "hardcoded_neutral"
+  GROUP "hardcoded_neutral"
     SEGMENT "c"
       BINDINGS
         INPUT ka->I,
@@ -143,7 +143,7 @@ PUBLIC_MODELS
         END HH_GATE
       END CHANNEL
     END SEGMENT
-  END CELL
+  END GROUP
 END PUBLIC_MODELS
 ',
 						   write => 'export no ndf STDOUT /hardcoded_neutral/**',
@@ -167,7 +167,7 @@ PRIVATE_MODELS
 END PRIVATE_MODELS
 
 PUBLIC_MODELS
-  CELL "hardcoded_neutral"
+  GROUP "hardcoded_neutral"
     SEGMENT "c"
       BINDINGS
         INPUT ka->I,
@@ -249,7 +249,7 @@ PUBLIC_MODELS
         END HH_GATE
       END CHANNEL
     END SEGMENT
-  END CELL
+  END GROUP
 END PUBLIC_MODELS
 ',
 						   write => 'export no ndf STDOUT /hardcoded_neutral/**',

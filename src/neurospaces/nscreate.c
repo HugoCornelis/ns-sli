@@ -186,7 +186,7 @@ int NSCreate( char* name,  char* pcParent, char* pcType){
 
        // neutral, hsolve
 
-       phsleChild = (struct symtab_HSolveListElement *)CellCalloc();
+       phsleChild = (struct symtab_HSolveListElement *)GroupCalloc();
 
        iResult = NSINTEGRATOR_NEUTRAL;
    }
