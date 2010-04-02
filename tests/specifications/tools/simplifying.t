@@ -92,7 +92,7 @@ PUBLIC_MODELS
             PARAMETER ( POWER = 4 ),
             PARAMETER ( state_init = -1 ),
           END PARAMETERS
-          gate_kinetic "A"
+          GATE_KINETIC "A"
             PARAMETERS
               PARAMETER ( HH_AB_Tau = -0.012 ),
               PARAMETER ( HH_AB_Offset_E = 0.027 ),
@@ -101,8 +101,8 @@ PUBLIC_MODELS
               PARAMETER ( HH_AB_Mult = -0 ),
               PARAMETER ( HH_AB_Scale = 1400 ),
             END PARAMETERS
-          END gate_kinetic
-          gate_kinetic "B"
+          END GATE_KINETIC
+          GATE_KINETIC "B"
             PARAMETERS
               PARAMETER ( HH_AB_Tau = 0.004 ),
               PARAMETER ( HH_AB_Offset_E = 0.03 ),
@@ -111,7 +111,7 @@ PUBLIC_MODELS
               PARAMETER ( HH_AB_Mult = -0 ),
               PARAMETER ( HH_AB_Scale = 490 ),
             END PARAMETERS
-          END gate_kinetic
+          END GATE_KINETIC
         END HH_GATE
         HH_GATE "HH_inactivation"
           PARAMETERS
@@ -120,7 +120,7 @@ PUBLIC_MODELS
             PARAMETER ( POWER = 1 ),
             PARAMETER ( state_init = -1 ),
           END PARAMETERS
-          gate_kinetic "A"
+          GATE_KINETIC "A"
             PARAMETERS
               PARAMETER ( HH_AB_Tau = 0.008 ),
               PARAMETER ( HH_AB_Offset_E = 0.05 ),
@@ -129,8 +129,8 @@ PUBLIC_MODELS
               PARAMETER ( HH_AB_Mult = -0 ),
               PARAMETER ( HH_AB_Scale = 17.5 ),
             END PARAMETERS
-          END gate_kinetic
-          gate_kinetic "B"
+          END GATE_KINETIC
+          GATE_KINETIC "B"
             PARAMETERS
               PARAMETER ( HH_AB_Tau = -0.01 ),
               PARAMETER ( HH_AB_Offset_E = 0.013 ),
@@ -139,7 +139,7 @@ PUBLIC_MODELS
               PARAMETER ( HH_AB_Mult = -0 ),
               PARAMETER ( HH_AB_Scale = 1300 ),
             END PARAMETERS
-          END gate_kinetic
+          END GATE_KINETIC
         END HH_GATE
       END CHANNEL
     END SEGMENT
@@ -199,7 +199,7 @@ PUBLIC_MODELS
             PARAMETER ( POWER = 4 ),
             PARAMETER ( state_init = -1 ),
           END PARAMETERS
-          gate_kinetic "A"
+          GATE_KINETIC "A"
             PARAMETERS
               PARAMETER ( HH_AB_Tau = -0.012 ),
               PARAMETER ( HH_AB_Offset_E = 0.027 ),
@@ -208,8 +208,8 @@ PUBLIC_MODELS
               PARAMETER ( HH_AB_Mult = -0 ),
               PARAMETER ( HH_AB_Scale = 1400 ),
             END PARAMETERS
-          END gate_kinetic
-          gate_kinetic "B"
+          END GATE_KINETIC
+          GATE_KINETIC "B"
             PARAMETERS
               PARAMETER ( HH_AB_Tau = 0.004 ),
               PARAMETER ( HH_AB_Offset_E = 0.03 ),
@@ -218,7 +218,7 @@ PUBLIC_MODELS
               PARAMETER ( HH_AB_Mult = -0 ),
               PARAMETER ( HH_AB_Scale = 490 ),
             END PARAMETERS
-          END gate_kinetic
+          END GATE_KINETIC
         END HH_GATE
         HH_GATE "HH_inactivation"
           PARAMETERS
@@ -226,7 +226,7 @@ PUBLIC_MODELS
             PARAMETER ( POWER = 1 ),
             PARAMETER ( state_init = -1 ),
           END PARAMETERS
-          gate_kinetic "A"
+          GATE_KINETIC "A"
             PARAMETERS
               PARAMETER ( HH_AB_Tau = 0.008 ),
               PARAMETER ( HH_AB_Offset_E = 0.05 ),
@@ -235,8 +235,8 @@ PUBLIC_MODELS
               PARAMETER ( HH_AB_Mult = -0 ),
               PARAMETER ( HH_AB_Scale = 17.5 ),
             END PARAMETERS
-          END gate_kinetic
-          gate_kinetic "B"
+          END GATE_KINETIC
+          GATE_KINETIC "B"
             PARAMETERS
               PARAMETER ( HH_AB_Tau = -0.01 ),
               PARAMETER ( HH_AB_Offset_E = 0.013 ),
@@ -245,7 +245,7 @@ PUBLIC_MODELS
               PARAMETER ( HH_AB_Mult = -0 ),
               PARAMETER ( HH_AB_Scale = 1300 ),
             END PARAMETERS
-          END gate_kinetic
+          END GATE_KINETIC
         END HH_GATE
       END CHANNEL
     END SEGMENT
