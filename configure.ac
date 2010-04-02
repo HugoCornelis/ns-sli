@@ -142,6 +142,14 @@ case "$host_os" in
 	  SWIGLINKCOMMAND_PYTHON='ld 	$(SWIGLDLINKSFORPYTHON) 	-o _SwiggableSLI.$(PERLLIB_EXTENSION)  /usr/lib/bundle1.o swiggable_sli_wrap.o'
           AC_SUBST(SWIGLINKCOMMAND_PYTHON)
        ;;
+       *darwin10.3.0)
+           dnl this is also snow leopard
+          SWIGLINKCOMMAND_PERL='ld 	$(SWIGLDLINKSFORPERL) 	-o SwiggableSLI.$(PERLLIB_EXTENSION)  /usr/lib/bundle1.o swiggable_sli_wrap.o'
+          AC_SUBST(SWIGLINKCOMMAND_PERL)
+
+	  SWIGLINKCOMMAND_PYTHON='ld 	$(SWIGLDLINKSFORPYTHON) 	-o _SwiggableSLI.$(PERLLIB_EXTENSION)  /usr/lib/bundle1.o swiggable_sli_wrap.o'
+          AC_SUBST(SWIGLINKCOMMAND_PYTHON)
+       ;;
        *)
 	  dnl All other mac versions. 
           dnl note: Leopard is i386-apple-darwin9.8.0
