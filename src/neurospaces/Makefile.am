@@ -171,6 +171,7 @@ libneurospaces_a_SOURCES = \
 	nsintegrator_l@.c \
 	nsintegratoractor.c \
 	nsintegratorverbose.c \
+	nslistcommands.c \
 	nsmove.c \
 	nsmsg.c \
 	nsreset.c \

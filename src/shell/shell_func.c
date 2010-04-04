@@ -125,6 +125,44 @@ char		*com;
 #endif
 }
 
+
+
+
+/*********************************************
+ *
+ * Returns the list of commands in an array.
+ * Putting this here since the variables which hold the data 
+ * are static. 
+ * 
+ * Note: need to remember to free the memory.
+ **********************************************/
+char ** GetFuncNames()
+{
+
+
+  char ** ppcNameList;
+
+  if(nfuncs < 1)
+  { 
+    return;
+  }
+   
+  ppcNameList = (char **)malloc((nfuncs + 1)*sizeof(char *));
+
+  int i;
+  for(i=0;i<nfuncs;i++)
+  {
+    ppcNameList[i] = func_table[i].name;
+    
+  }
+   
+  ppcNameList[i] = NULL;
+  return ppcNameList;
+
+}
+//-----------------------------------------------
+
+
 void ShowFuncNames(argc, argv)
 
 int	argc;
