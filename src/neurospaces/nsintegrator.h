@@ -425,9 +425,6 @@ int NSmsg(char *pcSrcpath, char *pcDstpath, char *pcTypename, char *pcField);
 char* NSGetField(char *pcPathname,char *pcField);
 char * GetHeccerVariable(char *pcName,char *pcParameter);
 
-//- Defined in nslistcommands.c --
-void NSListCommands();
-
 //- Defined in nsshowfield.c --
 int NSShowField(int argc,char **argv);
 int PrintHeccerVariable(char *pcName,char *pcParameter,int iAll);

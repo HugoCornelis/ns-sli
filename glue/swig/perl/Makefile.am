@@ -55,7 +55,6 @@ CLEANFILES = \
 	swiggable_sli_wrap.o \
 	SwiggableSLI.$(PERLLIB_EXTENSION)
 
-
 #TESTS = sli_test.pm
 
 test: check
