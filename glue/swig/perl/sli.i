@@ -227,6 +227,11 @@ int ListCommands()
 
 }
 
+int PrintCommandList()
+{
+  NSListCommands();
+}
+
 
 /* int G2Initialize(char *pcOptionsOrSo) */
 /* { */

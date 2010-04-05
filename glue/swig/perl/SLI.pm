@@ -44,6 +44,21 @@ sub sli_list_commands
     }
 }
 
+sub sli_print_command_list
+{
+    if (!$backend_initialized)
+    {
+	run_model(undef, $GENESIS3::model_container);
+    }
+
+    my $result = SwiggableSLI::PrintCommandList();
+
+    if (!$result)
+    {
+	print "$0: sli_print_command_list() failed\n";
+    }
+}
+
 sub include_script
 {
     my $script = shift;

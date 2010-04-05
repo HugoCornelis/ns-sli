@@ -1,3 +1,4 @@
+#include "nsintegrator.h"
 
 #include <stdlib.h>	/* malloc */
 #include "shell_ext.h"
