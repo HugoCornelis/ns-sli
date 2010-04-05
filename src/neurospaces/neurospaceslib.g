@@ -15,6 +15,7 @@ addaction	NEUROSPACES_READ	20001
 addaction	NEUROSPACES_QUERY	20002
 addaction	NEUROSPACES_SETUP	20003
 addaction	NEUROSPACES_REDUCE	20004
+addaction	NEUROSPACES_COMMAND	20005
 
 
 // addfunc neurospaces neurospaces_read_model int
@@ -35,6 +36,6 @@ addaction	NEUROSPACES_REDUCE	20004
 object	neurospaces	neurospaces_type  NeuroSpacesActor	genesis3	\
 	-author 	"Hugo Cornelis" 				\
 	-actions	CREATE RESET NEUROSPACES_READ NEUROSPACES_QUERY	\
-		NEUROSPACES_SETUP NEUROSPACES_REDUCE			\
+		NEUROSPACES_SETUP NEUROSPACES_REDUCE NEUROSPACES_COMMAND\
 	-description	"Neurospaces interface"
 
