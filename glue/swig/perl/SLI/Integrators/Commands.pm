@@ -19,6 +19,7 @@ our $g3_commands
        'sli_listobjects_help',
        'sli_load',
        'sli_load_help',
+       'sli_printcommandlist',
        'sli_run',
        'sli_run_help',
        'sli_script',
@@ -88,6 +89,14 @@ sub sli_load_help
     return "*** Ok";
 }
 
+
+
+sub sli_printcommandlist
+{
+
+  SLI::sli_print_command_list();
+
+}
 
 sub sli_run
 {
