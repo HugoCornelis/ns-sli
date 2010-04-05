@@ -216,6 +216,8 @@ int NSCreate( char* name,  char* pcParent, char* pcType){
 
    ppistParent = getRootedContext(pcParent);
 
+   //t compare with /proto and /library
+
    if( !ppistParent ){
 
      fprintf(stderr,"Error creating symbol: %s\n", name);

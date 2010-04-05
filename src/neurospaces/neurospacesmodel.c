@@ -126,6 +126,16 @@ int NeuroSpacesActor(struct neurospaces_type *pneuro,Action *action)
 	//- RESET
 	//- query
 
+	case NEUROSPACES_COMMAND:
+	{
+	    //- do a single query
+
+	    extern struct Neurospaces *pneuroGlobal;
+
+	    int bEOF = QueryMachineHandle(pneuroGlobal, action->argv[0]);
+	    break;
+	}
+
 	case NEUROSPACES_QUERY:
 	{
 	    //- start query machine
