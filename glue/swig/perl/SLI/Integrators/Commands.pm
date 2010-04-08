@@ -98,6 +98,16 @@ sub sli_printcommandlist
 
 }
 
+sub sli_printcommandlist_help
+{
+    print "description: outputs a list of available GENESIS 2 command into a YAML structure.\n";
+
+    print "synopsis: sli_printcommandlist";
+
+    return "*** Ok";
+}
+
+
 sub sli_run
 {
     my $filename = shift;
