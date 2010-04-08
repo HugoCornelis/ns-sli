@@ -20,6 +20,7 @@ our $g3_commands
        'sli_load',
        'sli_load_help',
        'sli_printcommandlist',
+       'sli_printcommandlist_help',
        'sli_run',
        'sli_run_help',
        'sli_script',
