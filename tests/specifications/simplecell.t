@@ -572,6 +572,7 @@ PUBLIC_MODELS
           INPUT ..->I,
         END BINDINGS
         PARAMETERS
+          PARAMETER ( Erev = 0.045 ),
           PARAMETER ( G_MAX = 1200 ),
         END PARAMETERS
         HH_GATE "HH_activation"
@@ -632,6 +633,7 @@ PUBLIC_MODELS
           INPUT ..->I,
         END BINDINGS
         PARAMETERS
+          PARAMETER ( Erev = -0.082 ),
           PARAMETER ( G_MAX = 360 ),
         END PARAMETERS
         HH_GATE "HH_activation"
@@ -1439,6 +1441,7 @@ PUBLIC_MODELS
           INPUT ..->I,
         END BINDINGS
         PARAMETERS
+          PARAMETER ( Erev = 0.045 ),
           PARAMETER ( G_MAX = 1200 ),
         END PARAMETERS
         HH_GATE "HH_activation"
@@ -1499,6 +1502,7 @@ PUBLIC_MODELS
           INPUT ..->I,
         END BINDINGS
         PARAMETERS
+          PARAMETER ( Erev = -0.082 ),
           PARAMETER ( G_MAX = 360 ),
         END PARAMETERS
         HH_GATE "HH_activation"
@@ -1529,6 +1533,10 @@ PUBLIC_MODELS
         END HH_GATE
       END CHANNEL
       ATTACHMENT "spike"
+        PARAMETERS
+          PARAMETER ( THRESHOLD = 0 ),
+          PARAMETER ( REFRACTORY = 0.01 ),
+        END PARAMETERS
       END ATTACHMENT
     END SEGMENT
     SEGMENT "dend"
@@ -1557,6 +1565,7 @@ PUBLIC_MODELS
           INPUT ..->I,
         END BINDINGS
         PARAMETERS
+          PARAMETER ( Erev = 0.045 ),
           PARAMETER ( G_MAX = 50 ),
         END PARAMETERS
         EQUATION_EXPONENTIAL "eq2"
@@ -1573,6 +1582,7 @@ PUBLIC_MODELS
           INPUT ..->I,
         END BINDINGS
         PARAMETERS
+          PARAMETER ( Erev = -0.082 ),
           PARAMETER ( G_MAX = 50 ),
         END PARAMETERS
         EQUATION_EXPONENTIAL "eq2"
@@ -2169,6 +2179,7 @@ PUBLIC_MODELS
           INPUT ..->I,
         END BINDINGS
         PARAMETERS
+          PARAMETER ( Erev = 0.045 ),
           PARAMETER ( G_MAX = 1200 ),
         END PARAMETERS
         HH_GATE "HH_activation"
@@ -2229,6 +2240,7 @@ PUBLIC_MODELS
           INPUT ..->I,
         END BINDINGS
         PARAMETERS
+          PARAMETER ( Erev = -0.082 ),
           PARAMETER ( G_MAX = 360 ),
         END PARAMETERS
         HH_GATE "HH_activation"
@@ -3051,6 +3063,7 @@ PUBLIC_MODELS
           INPUT ..->I,
         END BINDINGS
         PARAMETERS
+          PARAMETER ( Erev = 0.045 ),
           PARAMETER ( G_MAX = 1200 ),
         END PARAMETERS
         HH_GATE "HH_activation"
@@ -3111,6 +3124,7 @@ PUBLIC_MODELS
           INPUT ..->I,
         END BINDINGS
         PARAMETERS
+          PARAMETER ( Erev = -0.082 ),
           PARAMETER ( G_MAX = 360 ),
         END PARAMETERS
         HH_GATE "HH_activation"
@@ -3141,6 +3155,10 @@ PUBLIC_MODELS
         END HH_GATE
       END CHANNEL
       ATTACHMENT "spike"
+        PARAMETERS
+          PARAMETER ( THRESHOLD = 0 ),
+          PARAMETER ( REFRACTORY = 0.01 ),
+        END PARAMETERS
       END ATTACHMENT
     END SEGMENT
     SEGMENT "dend"
@@ -3169,6 +3187,7 @@ PUBLIC_MODELS
           INPUT ..->I,
         END BINDINGS
         PARAMETERS
+          PARAMETER ( Erev = 0.045 ),
           PARAMETER ( G_MAX = 50 ),
         END PARAMETERS
         EQUATION_EXPONENTIAL "eq2"
@@ -3185,6 +3204,7 @@ PUBLIC_MODELS
           INPUT ..->I,
         END BINDINGS
         PARAMETERS
+          PARAMETER ( Erev = -0.082 ),
           PARAMETER ( G_MAX = 50 ),
         END PARAMETERS
         EQUATION_EXPONENTIAL "eq2"
