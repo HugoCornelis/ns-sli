@@ -6,7 +6,7 @@
 void NSListCommands()
 {
 
-  char **ppcCommands = GetFuncNames();
+  char **ppcCommands = (char**)GetFuncNames();
 
 
   int i = 0;
