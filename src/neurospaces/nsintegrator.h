@@ -432,4 +432,8 @@ void NSListCommands();
 int NSShowField(int argc,char **argv);
 int PrintHeccerVariable(char *pcName,char *pcParameter,int iAll);
 
+//- -- Defined in sim_main.c --
+int sli_main(int argc, char **argv, char **envp, struct Neurospaces *pneuro);
+
+
 #endif
