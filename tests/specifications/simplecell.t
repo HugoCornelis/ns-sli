@@ -1373,8 +1373,8 @@ PUBLIC_MODELS
       END PARAMETERS
       EQUATION_EXPONENTIAL "eq2"
         PARAMETERS
-          PARAMETER ( TAU1 = ..->TAU1 ),
-          PARAMETER ( TAU2 = ..->TAU2 ),
+          PARAMETER ( TAU2 = 0.003 ),
+          PARAMETER ( TAU1 = 0.003 ),
         END PARAMETERS
       END EQUATION_EXPONENTIAL
       ATTACHMENT "synapse"
@@ -1399,8 +1399,8 @@ PUBLIC_MODELS
       END PARAMETERS
       EQUATION_EXPONENTIAL "eq2"
         PARAMETERS
-          PARAMETER ( TAU1 = ..->TAU1 ),
-          PARAMETER ( TAU2 = ..->TAU2 ),
+          PARAMETER ( TAU2 = 0.02 ),
+          PARAMETER ( TAU1 = 0.02 ),
         END PARAMETERS
       END EQUATION_EXPONENTIAL
       ATTACHMENT "synapse"
@@ -1570,8 +1570,8 @@ PUBLIC_MODELS
         END PARAMETERS
         EQUATION_EXPONENTIAL "eq2"
           PARAMETERS
-            PARAMETER ( TAU1 = ..->TAU1 ),
-            PARAMETER ( TAU2 = ..->TAU2 ),
+            PARAMETER ( TAU2 = 0.003 ),
+            PARAMETER ( TAU1 = 0.003 ),
           END PARAMETERS
         END EQUATION_EXPONENTIAL
         ATTACHMENT "synapse"
@@ -1587,8 +1587,8 @@ PUBLIC_MODELS
         END PARAMETERS
         EQUATION_EXPONENTIAL "eq2"
           PARAMETERS
-            PARAMETER ( TAU1 = ..->TAU1 ),
-            PARAMETER ( TAU2 = ..->TAU2 ),
+            PARAMETER ( TAU2 = 0.02 ),
+            PARAMETER ( TAU1 = 0.02 ),
           END PARAMETERS
         END EQUATION_EXPONENTIAL
         ATTACHMENT "synapse"
@@ -2995,8 +2995,8 @@ PUBLIC_MODELS
       END PARAMETERS
       EQUATION_EXPONENTIAL "eq2"
         PARAMETERS
-          PARAMETER ( TAU1 = ..->TAU1 ),
-          PARAMETER ( TAU2 = ..->TAU2 ),
+          PARAMETER ( TAU2 = 0.003 ),
+          PARAMETER ( TAU1 = 0.003 ),
         END PARAMETERS
       END EQUATION_EXPONENTIAL
       ATTACHMENT "synapse"
@@ -3021,8 +3021,8 @@ PUBLIC_MODELS
       END PARAMETERS
       EQUATION_EXPONENTIAL "eq2"
         PARAMETERS
-          PARAMETER ( TAU1 = ..->TAU1 ),
-          PARAMETER ( TAU2 = ..->TAU2 ),
+          PARAMETER ( TAU2 = 0.02 ),
+          PARAMETER ( TAU1 = 0.02 ),
         END PARAMETERS
       END EQUATION_EXPONENTIAL
       ATTACHMENT "synapse"
@@ -3192,8 +3192,8 @@ PUBLIC_MODELS
         END PARAMETERS
         EQUATION_EXPONENTIAL "eq2"
           PARAMETERS
-            PARAMETER ( TAU1 = ..->TAU1 ),
-            PARAMETER ( TAU2 = ..->TAU2 ),
+            PARAMETER ( TAU2 = 0.003 ),
+            PARAMETER ( TAU1 = 0.003 ),
           END PARAMETERS
         END EQUATION_EXPONENTIAL
         ATTACHMENT "synapse"
@@ -3209,8 +3209,8 @@ PUBLIC_MODELS
         END PARAMETERS
         EQUATION_EXPONENTIAL "eq2"
           PARAMETERS
-            PARAMETER ( TAU1 = ..->TAU1 ),
-            PARAMETER ( TAU2 = ..->TAU2 ),
+            PARAMETER ( TAU2 = 0.02 ),
+            PARAMETER ( TAU1 = 0.02 ),
           END PARAMETERS
         END EQUATION_EXPONENTIAL
         ATTACHMENT "synapse"
