@@ -52,9 +52,18 @@ WORD size;
 {
 HASH *hash_table;
 
-	hash_table = (HASH *)calloc(size,sizeof(HASH));
+//	hash_table = (HASH *)calloc(size,sizeof(HASH));
+	hash_table = (HASH *)calloc(1,sizeof(HASH));
 	hash_table->size = size;
 	hash_table->entry = (ENTRY *)calloc(size+1,sizeof(ENTRY));
+
+	int i;
+	for(i = 0;i < size; i++)
+	{
+	  hash_table->entry[i].key = NULL;
+	  hash_table->entry[i].data = NULL;
+	}
+
 	return(hash_table);
 }
 
