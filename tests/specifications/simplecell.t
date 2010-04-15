@@ -68,7 +68,7 @@ PUBLIC_MODELS
       END PARAMETERS
       HH_GATE "HH_activation"
         PARAMETERS
-          PARAMETER ( HH_NUMBER_OF_TABLE_ENTRIES = 3.40282e+38 ),
+          PARAMETER ( HH_NUMBER_OF_TABLE_ENTRIES = 1.79769e+308 ),
           PARAMETER ( POWER = 3 ),
           PARAMETER ( state_init = -1 ),
         END PARAMETERS
@@ -95,7 +95,7 @@ PUBLIC_MODELS
       END HH_GATE
       HH_GATE "HH_inactivation"
         PARAMETERS
-          PARAMETER ( HH_NUMBER_OF_TABLE_ENTRIES = 3.40282e+38 ),
+          PARAMETER ( HH_NUMBER_OF_TABLE_ENTRIES = 1.79769e+308 ),
           PARAMETER ( POWER = 1 ),
           PARAMETER ( state_init = -1 ),
         END PARAMETERS
@@ -138,7 +138,7 @@ PUBLIC_MODELS
       END PARAMETERS
       HH_GATE "HH_activation"
         PARAMETERS
-          PARAMETER ( HH_NUMBER_OF_TABLE_ENTRIES = 3.40282e+38 ),
+          PARAMETER ( HH_NUMBER_OF_TABLE_ENTRIES = 1.79769e+308 ),
           PARAMETER ( POWER = 4 ),
           PARAMETER ( state_init = -1 ),
         END PARAMETERS
@@ -752,7 +752,7 @@ PUBLIC_MODELS
       END PARAMETERS
       HH_GATE "HH_activation"
         PARAMETERS
-          PARAMETER ( HH_NUMBER_OF_TABLE_ENTRIES = 3.40282e+38 ),
+          PARAMETER ( HH_NUMBER_OF_TABLE_ENTRIES = 1.79769e+308 ),
           PARAMETER ( POWER = 3 ),
           PARAMETER ( state_init = -1 ),
         END PARAMETERS
@@ -779,7 +779,7 @@ PUBLIC_MODELS
       END HH_GATE
       HH_GATE "HH_inactivation"
         PARAMETERS
-          PARAMETER ( HH_NUMBER_OF_TABLE_ENTRIES = 3.40282e+38 ),
+          PARAMETER ( HH_NUMBER_OF_TABLE_ENTRIES = 1.79769e+308 ),
           PARAMETER ( POWER = 1 ),
           PARAMETER ( state_init = -1 ),
         END PARAMETERS
@@ -822,7 +822,7 @@ PUBLIC_MODELS
       END PARAMETERS
       HH_GATE "HH_activation"
         PARAMETERS
-          PARAMETER ( HH_NUMBER_OF_TABLE_ENTRIES = 3.40282e+38 ),
+          PARAMETER ( HH_NUMBER_OF_TABLE_ENTRIES = 1.79769e+308 ),
           PARAMETER ( POWER = 4 ),
           PARAMETER ( state_init = -1 ),
         END PARAMETERS
@@ -1665,7 +1665,7 @@ PUBLIC_MODELS
       END PARAMETERS
       HH_GATE "HH_activation"
         PARAMETERS
-          PARAMETER ( HH_NUMBER_OF_TABLE_ENTRIES = 3.40282e+38 ),
+          PARAMETER ( HH_NUMBER_OF_TABLE_ENTRIES = 1.79769e+308 ),
           PARAMETER ( POWER = 3 ),
           PARAMETER ( state_init = -1 ),
         END PARAMETERS
@@ -1692,7 +1692,7 @@ PUBLIC_MODELS
       END HH_GATE
       HH_GATE "HH_inactivation"
         PARAMETERS
-          PARAMETER ( HH_NUMBER_OF_TABLE_ENTRIES = 3.40282e+38 ),
+          PARAMETER ( HH_NUMBER_OF_TABLE_ENTRIES = 1.79769e+308 ),
           PARAMETER ( POWER = 1 ),
           PARAMETER ( state_init = -1 ),
         END PARAMETERS
@@ -1735,7 +1735,7 @@ PUBLIC_MODELS
       END PARAMETERS
       HH_GATE "HH_activation"
         PARAMETERS
-          PARAMETER ( HH_NUMBER_OF_TABLE_ENTRIES = 3.40282e+38 ),
+          PARAMETER ( HH_NUMBER_OF_TABLE_ENTRIES = 1.79769e+308 ),
           PARAMETER ( POWER = 4 ),
           PARAMETER ( state_init = -1 ),
         END PARAMETERS
@@ -2364,7 +2364,7 @@ PUBLIC_MODELS
       END PARAMETERS
       HH_GATE "HH_activation"
         PARAMETERS
-          PARAMETER ( HH_NUMBER_OF_TABLE_ENTRIES = 3.40282e+38 ),
+          PARAMETER ( HH_NUMBER_OF_TABLE_ENTRIES = 1.79769e+308 ),
           PARAMETER ( POWER = 3 ),
           PARAMETER ( state_init = -1 ),
         END PARAMETERS
@@ -2391,7 +2391,7 @@ PUBLIC_MODELS
       END HH_GATE
       HH_GATE "HH_inactivation"
         PARAMETERS
-          PARAMETER ( HH_NUMBER_OF_TABLE_ENTRIES = 3.40282e+38 ),
+          PARAMETER ( HH_NUMBER_OF_TABLE_ENTRIES = 1.79769e+308 ),
           PARAMETER ( POWER = 1 ),
           PARAMETER ( state_init = -1 ),
         END PARAMETERS
@@ -2434,7 +2434,7 @@ PUBLIC_MODELS
       END PARAMETERS
       HH_GATE "HH_activation"
         PARAMETERS
-          PARAMETER ( HH_NUMBER_OF_TABLE_ENTRIES = 3.40282e+38 ),
+          PARAMETER ( HH_NUMBER_OF_TABLE_ENTRIES = 1.79769e+308 ),
           PARAMETER ( POWER = 4 ),
           PARAMETER ( state_init = -1 ),
         END PARAMETERS

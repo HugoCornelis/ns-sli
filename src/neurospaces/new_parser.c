@@ -1087,7 +1087,7 @@ add_channel(char *name,char *parent)
 
 	    double dG = SymbolParameterResolveValue(phsleDest, ppistDest, "G_MAX");
 
-	    if (dG != FLT_MAX)
+	    if (dG != DBL_MAX)
 	    {
 		//- multiply the conductance to SI units
 
@@ -2598,7 +2598,7 @@ void scale_kids(struct symtab_HSolveListElement *phsle, struct PidinStack *ppist
 /* 	int scale_shells(); */
 /* 	Mpump	*mpump; */
 
-	double dValue = FLT_MAX;
+	double dValue = DBL_MAX;
 
 	char *pcParameterName = NULL;
 

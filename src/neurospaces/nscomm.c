@@ -188,7 +188,7 @@ struct symtab_Parameters *newParameter(char *pcValue, int iType)
     {
 	pparResult = ParameterCalloc();
   
-	pparResult->uValue.dNumber = FLT_MAX; /* dHere; */
+	pparResult->uValue.dNumber = DBL_MAX; /* dHere; */
 	ParameterSetType(pparResult,TYPE_PARA_NUMBER);
 
     }
@@ -252,7 +252,7 @@ int setParameter(struct PidinStack *ppist,
 
   int iFlags = 0;
 
-  double dHere = FLT_MAX;
+  double dHere = DBL_MAX;
 
   struct ParameterMapper *ppm = mapParameter(pcField);
 
@@ -290,7 +290,7 @@ int setParameter(struct PidinStack *ppist,
 
 /* 	      double dSurface = SymbolParameterResolveValue(phsleComp, ppistComp, "SURFACE"); */
 
-/* 	      if (dSurface != FLT_MAX) */
+/* 	      if (dSurface != DBL_MAX) */
 /* 	      { */
 /* 		  dHere = atof(pcValue); */
 
