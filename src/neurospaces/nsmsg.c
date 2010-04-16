@@ -794,7 +794,7 @@ static int StoreMsg(char *pcSrcpath,
 
    piom->iHeccerIndex = -1;
 
-   //   piom->dValue = FLT_MAX;
+   //   piom->dValue = DBL_MAX;
 
    pnsintegrator->ppioMsg[pnsintegrator->iIoMsgs++] = piom;
 
@@ -867,7 +867,7 @@ int NSProcessMessages(struct neurospaces_integrator *pnsintegrator)
 
 	//- unlike in the model-container, in G2 all fields have a default value of zero
 
-	if (ppioMsg[i]->dValue == FLT_MAX)
+	if (ppioMsg[i]->dValue == DBL_MAX)
 	{
 	    ppioMsg[i]->dValue = 0;
 	}

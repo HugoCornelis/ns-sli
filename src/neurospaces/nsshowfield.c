@@ -146,7 +146,7 @@ static int PrintParameterBasic(struct symtab_HSolveListElement *phsle,
 
   double dValue = SymbolParameterResolveValue(phsle,ppist,pcMappedPar);
 
-  if (dValue != FLT_MAX)
+  if (dValue != DBL_MAX)
   {
     //fprintf(stdout, "%s", "---\n");
     

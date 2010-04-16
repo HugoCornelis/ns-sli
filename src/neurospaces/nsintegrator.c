@@ -200,7 +200,7 @@ int NSGenesisInitialize(struct Neurospaces *pneuro){
 
 /*    pheccer->ho.dConcentrationGateStart = HECCER_DEFAULT_INTERVAL_END; */
 
-/*    pheccer->ho.dConcentrationGateEnd =  FLT_MAX;  */
+/*    pheccer->ho.dConcentrationGateEnd =  DBL_MAX;  */
 
 /*    pheccer->ho.iIntervalEntries = HECCER_DEFAULT_INTERVAL_ENTRIES;	  */
 

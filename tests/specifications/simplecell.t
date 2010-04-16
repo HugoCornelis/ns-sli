@@ -68,7 +68,7 @@ PUBLIC_MODELS
       END PARAMETERS
       HH_GATE "HH_activation"
         PARAMETERS
-          PARAMETER ( HH_NUMBER_OF_TABLE_ENTRIES = 3.40282e+38 ),
+          PARAMETER ( HH_NUMBER_OF_TABLE_ENTRIES = 1.79769e+308 ),
           PARAMETER ( POWER = 3 ),
           PARAMETER ( state_init = -1 ),
         END PARAMETERS
@@ -95,7 +95,7 @@ PUBLIC_MODELS
       END HH_GATE
       HH_GATE "HH_inactivation"
         PARAMETERS
-          PARAMETER ( HH_NUMBER_OF_TABLE_ENTRIES = 3.40282e+38 ),
+          PARAMETER ( HH_NUMBER_OF_TABLE_ENTRIES = 1.79769e+308 ),
           PARAMETER ( POWER = 1 ),
           PARAMETER ( state_init = -1 ),
         END PARAMETERS
@@ -138,7 +138,7 @@ PUBLIC_MODELS
       END PARAMETERS
       HH_GATE "HH_activation"
         PARAMETERS
-          PARAMETER ( HH_NUMBER_OF_TABLE_ENTRIES = 3.40282e+38 ),
+          PARAMETER ( HH_NUMBER_OF_TABLE_ENTRIES = 1.79769e+308 ),
           PARAMETER ( POWER = 4 ),
           PARAMETER ( state_init = -1 ),
         END PARAMETERS
@@ -752,7 +752,7 @@ PUBLIC_MODELS
       END PARAMETERS
       HH_GATE "HH_activation"
         PARAMETERS
-          PARAMETER ( HH_NUMBER_OF_TABLE_ENTRIES = 3.40282e+38 ),
+          PARAMETER ( HH_NUMBER_OF_TABLE_ENTRIES = 1.79769e+308 ),
           PARAMETER ( POWER = 3 ),
           PARAMETER ( state_init = -1 ),
         END PARAMETERS
@@ -779,7 +779,7 @@ PUBLIC_MODELS
       END HH_GATE
       HH_GATE "HH_inactivation"
         PARAMETERS
-          PARAMETER ( HH_NUMBER_OF_TABLE_ENTRIES = 3.40282e+38 ),
+          PARAMETER ( HH_NUMBER_OF_TABLE_ENTRIES = 1.79769e+308 ),
           PARAMETER ( POWER = 1 ),
           PARAMETER ( state_init = -1 ),
         END PARAMETERS
@@ -822,7 +822,7 @@ PUBLIC_MODELS
       END PARAMETERS
       HH_GATE "HH_activation"
         PARAMETERS
-          PARAMETER ( HH_NUMBER_OF_TABLE_ENTRIES = 3.40282e+38 ),
+          PARAMETER ( HH_NUMBER_OF_TABLE_ENTRIES = 1.79769e+308 ),
           PARAMETER ( POWER = 4 ),
           PARAMETER ( state_init = -1 ),
         END PARAMETERS
@@ -1665,7 +1665,7 @@ PUBLIC_MODELS
       END PARAMETERS
       HH_GATE "HH_activation"
         PARAMETERS
-          PARAMETER ( HH_NUMBER_OF_TABLE_ENTRIES = 3.40282e+38 ),
+          PARAMETER ( HH_NUMBER_OF_TABLE_ENTRIES = 1.79769e+308 ),
           PARAMETER ( POWER = 3 ),
           PARAMETER ( state_init = -1 ),
         END PARAMETERS
@@ -1692,7 +1692,7 @@ PUBLIC_MODELS
       END HH_GATE
       HH_GATE "HH_inactivation"
         PARAMETERS
-          PARAMETER ( HH_NUMBER_OF_TABLE_ENTRIES = 3.40282e+38 ),
+          PARAMETER ( HH_NUMBER_OF_TABLE_ENTRIES = 1.79769e+308 ),
           PARAMETER ( POWER = 1 ),
           PARAMETER ( state_init = -1 ),
         END PARAMETERS
@@ -1735,7 +1735,7 @@ PUBLIC_MODELS
       END PARAMETERS
       HH_GATE "HH_activation"
         PARAMETERS
-          PARAMETER ( HH_NUMBER_OF_TABLE_ENTRIES = 3.40282e+38 ),
+          PARAMETER ( HH_NUMBER_OF_TABLE_ENTRIES = 1.79769e+308 ),
           PARAMETER ( POWER = 4 ),
           PARAMETER ( state_init = -1 ),
         END PARAMETERS
@@ -2364,7 +2364,7 @@ PUBLIC_MODELS
       END PARAMETERS
       HH_GATE "HH_activation"
         PARAMETERS
-          PARAMETER ( HH_NUMBER_OF_TABLE_ENTRIES = 3.40282e+38 ),
+          PARAMETER ( HH_NUMBER_OF_TABLE_ENTRIES = 1.79769e+308 ),
           PARAMETER ( POWER = 3 ),
           PARAMETER ( state_init = -1 ),
         END PARAMETERS
@@ -2391,7 +2391,7 @@ PUBLIC_MODELS
       END HH_GATE
       HH_GATE "HH_inactivation"
         PARAMETERS
-          PARAMETER ( HH_NUMBER_OF_TABLE_ENTRIES = 3.40282e+38 ),
+          PARAMETER ( HH_NUMBER_OF_TABLE_ENTRIES = 1.79769e+308 ),
           PARAMETER ( POWER = 1 ),
           PARAMETER ( state_init = -1 ),
         END PARAMETERS
@@ -2434,7 +2434,7 @@ PUBLIC_MODELS
       END PARAMETERS
       HH_GATE "HH_activation"
         PARAMETERS
-          PARAMETER ( HH_NUMBER_OF_TABLE_ENTRIES = 3.40282e+38 ),
+          PARAMETER ( HH_NUMBER_OF_TABLE_ENTRIES = 1.79769e+308 ),
           PARAMETER ( POWER = 4 ),
           PARAMETER ( state_init = -1 ),
         END PARAMETERS
@@ -3230,6 +3230,53 @@ END PUBLIC_MODELS
 						 ],
 				comment => 'This test was derived from one of Dave Beeman\'s tutorial scripts',
 				description => "one of the simplest tutorial scripts, version with hsolve, with synchans and spikegens",
+			       },
+			       {
+				arguments => [
+					      "$::config->{core_directory}/tests/scripts/test-simplecell/simplecell-1.g",
+					     ],
+				command => 'src/ns-sli',
+				command_tests => [
+						  {
+						   description => "Does the script run a simulation ?",
+						   read => 'time = 0.500005 ; step = 100001',
+						  },
+						  {
+						   description => "Is the final somatic membrane potential correct ?",
+						   read => 'Final Vm =  -0.07105',
+						  },
+						  {
+						   description => "Can we save the model as an NDF file ?",
+						   wait => 2,
+						   write => 'call model_container NEUROSPACES_COMMAND "export all ndf /tmp/all0.ndf /cell/**"',
+						  },
+						 ],
+				comment => 'This test was derived from one of Dave Beeman\'s tutorial scripts',
+				description => "preparing to run the converted model with SSP",
+			       },
+			       {
+				arguments => [
+					      '--cell',
+					      '/tmp/all0.ndf',
+					      '--model-name',
+					      'cell',
+					      '--output-fields',
+					      "'/cell/soma->Vm'",
+# 					      "--emit-schedules",
+					     ],
+				command => '/usr/local/bin/ssp',
+				command_tests => [
+						  {
+						   description => 'Can we run the converted file from SSP ?',
+						   read => {
+							    application_output_file => "$::config->{core_directory}/output/cell.out",
+							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/simplecell1-ssp.txt",
+							   },
+						   wait => 10,
+						  },
+						 ],
+				comment => 'This test was derived from one of Dave Beeman\'s tutorial scripts',
+				description => "running the converted model with SSP to see if the conversion was done correctly",
 			       },
 			      ],
        description => "one of the simplest tutorial scripts",

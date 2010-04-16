@@ -68,7 +68,7 @@ char* NSGetField(char *pcPathname,char *pcField)
   double dValue = SymbolParameterResolveValue(phsle,ppist,pcMappedPar);
   
 
-  if(dValue == FLT_MAX)
+  if(dValue == DBL_MAX)
   {
       Error();
       printf("could not get the value for field '%s->%s'\n", pcPathname, pcField);

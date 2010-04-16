@@ -655,14 +655,14 @@
 /*     //- get parameters */
 
 /*     pparRate = SymbolGetParameter(phsle,"RATE",ppist); */
-/*     dRate = pparRate ? ParameterResolveValue(pparRate,ppist) : FLT_MAX ; */
+/*     dRate = pparRate ? ParameterResolveValue(pparRate,ppist) : DBL_MAX ; */
 
 /*     pparRefr = SymbolGetParameter(phsle,"REFRACTORY",ppist); */
-/*     dRefr = pparRefr ? ParameterResolveValue(pparRefr,ppist) : FLT_MAX ; */
+/*     dRefr = pparRefr ? ParameterResolveValue(pparRefr,ppist) : DBL_MAX ; */
 
 /*     //- if problems with parameters */
 
-/*     if (dRate == FLT_MAX || dRefr == FLT_MAX) */
+/*     if (dRate == DBL_MAX || dRefr == FLT_MAX) */
 /*     { */
 /* 	//- give diagnostics */
 
