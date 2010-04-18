@@ -12,8 +12,7 @@
 #if defined(__APPLE__)
 #include <crt_externs.h>
   //char** environ = *_NSGetEnviron();
-#define environ (*_NSGetEnviron())
-#define _environ (*_NSGetEnviron())
+
 #endif
 
 %}
