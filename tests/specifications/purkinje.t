@@ -145,11 +145,11 @@ my $test
 # 						   write => "printparameter /Purkinje/segments TOTALLENGTH",
 # 						  },
 						   {
-						    comment => "even without spines, this value is very different from the value in table 2 of the Rapp paper, this is due to shrinkage correction, yet there is an unexplained anomaly in the difference for surface and volume.",
+						    comment => "even without spines, this value is very different from the value in table 2 of the Rapp paper, this is due to shrinkage correction, yet there is an unexplained anomaly in the difference for surface and volume.  This value changed from value = 2.61092e-07 to 2.60908e-07 after float to double accommodations in the model-container.",
 						    description => "What is the total surface of the purkinje cell ?",
 						    # 						   disabled => "the value by the model container is value = 6.89649e-08, the difference may be due to the soma, to be sorted out",
 						    numerical_compare => 'small arithmetic differences between G3 (reports 2.61206e-07) and G2 because GENESIS 2 use of float values',
-						    read => 'value = 2.61092e-07',
+						    read => 'value = 2.60908e-07',
 						    write => "printparameter /Purkinje TOTALSURFACE",
 						   },
 # 						  {
@@ -367,11 +367,11 @@ Principal serial ID = 2623 of 56137 Principal successors
 # 						   write => "printparameter /Purkinje/segments TOTALLENGTH",
 # 						  },
 						    {
-						     comment => "even without spines, this value is very different from the value in table 2 of the Rapp paper, this is due to shrinkage correction, yet there is an unexplained anomaly in the difference for surface and volume.",
+						    comment => "even without spines, this value is very different from the value in table 2 of the Rapp paper, this is due to shrinkage correction, yet there is an unexplained anomaly in the difference for surface and volume.  This value changed from value = 2.61092e-07 to 2.60908e-07 after float to double accommodations in the model-container.",
 						     description => "After reducing, what is the total surface of the purkinje cell ?",
 # 						   disabled => "the value by the model container is value = 6.89649e-08, the difference may be due to the soma, to be sorted out",
 						     numerical_compare => 'small arithmetic differences between G3 (reports 2.61206e-07) and G2 because GENESIS 2 use of float values',
-						     read => 'value = 2.61092e-07',
+						     read => 'value = 2.60908e-07',
 						     write => "printparameter /Purkinje TOTALSURFACE",
 						    },
 # 						  {
@@ -1074,7 +1074,7 @@ END PUBLIC_MODELS
 						    numerical_compare => 'small differences between the output of different architectures',
 						    read => {
 							     application_output_file => "$::config->{core_directory}/results/PurkM9_soma_1.5nA",
-							     expected_output_file => "$::config->{core_directory}/tests/specifications/strings/PurkM9_soma_1.5nA.g3",
+							     expected_output_file => "$::config->{core_directory}/tests/specifications/strings/PurkM9_soma_1.5nA.g3-double",
 							    },
 						    wait => 1,
 						   },
@@ -1123,7 +1123,7 @@ END PUBLIC_MODELS
 						    numerical_compare => 'small differences between the output of different architectures',
 						    read => {
 							     application_output_file => "$::config->{core_directory}/results/PurkM9_CS",
-							     expected_output_file => "$::config->{core_directory}/tests/specifications/strings/PurkM9_CS.g3",
+							     expected_output_file => "$::config->{core_directory}/tests/specifications/strings/PurkM9_CS.g3-double",
 							    },
 						    wait => 1,
 						   },
