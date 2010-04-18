@@ -3247,7 +3247,7 @@ END PUBLIC_MODELS
 						  },
 						  {
 						   description => "Can we save the model as an NDF file ?",
-						   wait => 2,
+						   wait => 1,
 						   write => 'call model_container NEUROSPACES_COMMAND "export all ndf /tmp/all0.ndf /cell/**"',
 						  },
 						 ],
@@ -3261,8 +3261,7 @@ END PUBLIC_MODELS
 					      '--model-name',
 					      'cell',
 					      '--output-fields',
-					      "'/cell/soma->Vm'",
-# 					      "--emit-schedules",
+					      "/cell/soma->Vm",
 					     ],
 				command => '/usr/local/bin/ssp',
 				command_tests => [
@@ -3272,11 +3271,28 @@ END PUBLIC_MODELS
 							    application_output_file => "$::config->{core_directory}/output/cell.out",
 							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/simplecell1-ssp.txt",
 							   },
-						   wait => 10,
+						   wait => 2,
 						  },
 						 ],
 				comment => 'This test was derived from one of Dave Beeman\'s tutorial scripts',
 				description => "running the converted model with SSP to see if the conversion was done correctly",
+				preparation => {
+						description => "Create the output/ directory",
+						preparer =>
+						sub
+						{
+						    `mkdir output`;
+						},
+					       },
+				reparation => {
+					       description => "Remove the generated output files in the output/ directory",
+					       reparer =>
+					       sub
+					       {
+ 						   `rm "$::config->{core_directory}/output/cell.out"`;
+						   `rmdir output`;
+					       },
+					      },
 			       },
 			      ],
        description => "one of the simplest tutorial scripts",
