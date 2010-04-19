@@ -765,6 +765,11 @@ Principal serial ID = 2623 of 56137 Principal successors
 						    write => 'quit',
 						   },
 						   {
+						    description => 'Can we wait for a second and get back to the genesis prompt ?',
+						    wait => 1,
+						    read => 'genesis',
+						   },
+						   {
 						    description => "Is the model correctly compiled by heccer ?",
 						    read => 'Heccer (pcName) : (/Purkinje)
 Heccer (iStatus) : (20)
@@ -833,7 +838,12 @@ VM Axial Resistances (pdResults[0]) : (0)
 VM Axial Resistances (pdResults[1]) : (0)
 VM Membrane Potentials (pdVms[0]) : (-0.068)
 ',
+ 						    write => 'call /neurospaces_integrator NSINTEGRATOR_DUMP',
 						    timeout => 7,
+						   },
+						   {
+						    description => 'Can we do 2000 simulation steps ?',
+						    write => 'step 2000',
 						   },
 						   {
 						    description => 'Quit the simulator.',
