@@ -65,9 +65,9 @@ my $test
 		      reparer =>
 		      sub
 		      {
-# 			  `rm "$::config->{core_directory}/results/PurkM9_inject_1e-6_none_Hz_i_none_Hz"`;
-# 			  `rm "$::config->{core_directory}/results/PurkM9_inject_1e-6_none_Hz_i_none_Hz"`;
-# 			  `rmdir results`;
+			  `rm "$::config->{core_directory}/results/PurkM9_inject_1e-6_none_Hz_i_none_Hz"`;
+			  `rm "$::config->{core_directory}/results/PurkM9_inject_1e-6_none_Hz_i_none_Hz"`;
+			  `rmdir results`;
 		      },
 		     },
       };
