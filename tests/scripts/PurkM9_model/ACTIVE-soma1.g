@@ -105,9 +105,9 @@ setfield /neurospaces_integrator heccer_dump_selection { HECCER_DUMP_VM_COMPARTM
 				     			HECCER_DUMP_VM_MECHANISM_OPERATIONS + \
 				     			HECCER_DUMP_VM_SUMMARY }
 
-call /neurospaces_integrator NSINTEGRATOR_DUMP
+// call /neurospaces_integrator NSINTEGRATOR_DUMP
 
-step 2000
+// step 2000
 // step 0.10 -time
 // hstr={findsolvefield {cellpath} {cellpath}/soma inject}
 // setfield {cellpath} {hstr} {inject*1.e-9}
