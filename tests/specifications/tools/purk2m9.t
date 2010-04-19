@@ -23,7 +23,7 @@ my $test
 						   numerical_compare => 'tiny differences expected at the end of the file',
 						   read => {
 							    application_output_file => "$::config->{core_directory}/results/PurkM9_inject_1e-6_none_Hz_i_none_Hz",
-							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/PurkM9_inject_1e-6_none_Hz_i_none_Hz",
+							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/PurkM9_inject_1e-6_none_Hz_i_none_Hz-double",
 							   },
 						   wait => 10,
 						  },
@@ -42,7 +42,7 @@ my $test
 						   numerical_compare => 'tiny differences expected at the end of the file',
 						   read => {
 							    application_output_file => "$::config->{core_directory}/results/PurkM9_inject_1e-6_none_Hz_i_none_Hz",
-							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/PurkM9_inject_1e-6_none_Hz_i_none_Hz",
+							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/PurkM9_inject_1e-6_none_Hz_i_none_Hz-double",
 							   },
 						   wait => 10,
 						  },
@@ -65,9 +65,9 @@ my $test
 		      reparer =>
 		      sub
 		      {
-			  `rm "$::config->{core_directory}/results/PurkM9_inject_1e-6_none_Hz_i_none_Hz"`;
-			  `rm "$::config->{core_directory}/results/PurkM9_inject_1e-6_none_Hz_i_none_Hz"`;
-			  `rmdir results`;
+# 			  `rm "$::config->{core_directory}/results/PurkM9_inject_1e-6_none_Hz_i_none_Hz"`;
+# 			  `rm "$::config->{core_directory}/results/PurkM9_inject_1e-6_none_Hz_i_none_Hz"`;
+# 			  `rmdir results`;
 		      },
 		     },
       };
