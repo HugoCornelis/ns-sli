@@ -10,7 +10,7 @@
    another cell.
 */
 
-str cellfile = "traub94.p"
+str cellfile = "tests/scripts/test-traub94cell-v0/traub94.p"
 str cellpath = "/cell"
 // Define the places for current injection and synaptic input
 str injectpath = {cellpath} @ "/soma"  // Use '@' to concatenate strings
@@ -149,7 +149,7 @@ end
 
 // Include the functions used to build the GUI
 if (graphics)
-    include graphics1.g
+    include tests/scripts/test-traub94cell-v0/graphics1.g
     // make the control panel
     make_control
     // make the graph to display soma Vm and pass messages to the graph

@@ -1,7 +1,7 @@
 // genesis - prototype definitions
 
 /* file for 1994 Traub model channels */
-include traub94chans.g
+include tests/scripts/test-traub94cell-v0/traub94chans.g
 
 /* Make channel prototypes */
 
