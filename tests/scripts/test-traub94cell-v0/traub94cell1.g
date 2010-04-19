@@ -18,7 +18,7 @@ str injectpath = {cellpath} @ "/soma"  // Use '@' to concatenate strings
 str synpath = ""
 //str synpath = {cellpath} @ "/apical1/AMPA_pyr"
 
-str outfile = "traub94_Vm.out"
+str outfile = "output/traub94_Vm.out"
 
 /* Some Booleans indicating the type of calculations or output */
 int batch = 1        // if (batch) run simulation with default injcurrent, tmax
