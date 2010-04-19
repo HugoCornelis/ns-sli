@@ -30,15 +30,6 @@ ChannelSetField
  char *pcField,
  char *pcValue);
 
-static
-int
-SegmentSetField
-(struct symtab_HSolveListElement *phsle,
- struct PidinStack *ppist,
- char *pcPathname,
- char *pcField,
- char *pcValue);
-
 
 static
 struct symtab_HSolveListElement * CreateGate(
@@ -334,10 +325,6 @@ int NSSetField(struct symtab_HSolveListElement *phsle,
     else if (instanceof_channel(phsleWorking))
     {
 	return(ChannelSetField(phsleWorking, ppistWorking, pcPathname, pcField, pcValue));
-    }
-    else if (instanceof_segment(phsleWorking))
-    {
-	return(SegmentSetField(phsleWorking, ppistWorking, pcPathname, pcField, pcValue));
     }
 
     return setParameter(ppistWorking, phsleWorking, pcField, pcValue, 0);
@@ -670,30 +657,4 @@ ChannelSetField
     return setParameter(ppistWorking, phsleWorking, pcField, pcValue, 0);
 }
 
-
-static
-int
-SegmentSetField
-(struct symtab_HSolveListElement *phsle,
- struct PidinStack *ppist,
- char *pcPathname,
- char *pcField,
- char *pcValue)
-{
-    if (strcmp(pcField, "len") == 0)
-    {
-	double d = strtod(pcValue, NULL);
-
-	if (d == 0.0)
-	{
-	    SymbolSetOptions(phsle, FLAG_SEGMENTER_SPHERICAL);
-	}
-	else
-	{
-	    SymbolSetOptions(phsle, SymbolGetOptions(phsle) & ~(FLAG_SEGMENTER_SPHERICAL));
-	}
-    }
-
-    return setParameter(ppist, phsle, pcField, pcValue, 0);
-}
 
