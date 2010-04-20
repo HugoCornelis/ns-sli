@@ -93,7 +93,7 @@ my $test
 					       sub
 					       {
  						   `rm "$::config->{core_directory}/output/traub94_Vm.out"`;
-						   `rmdir output`;
+# 						   `rmdir output`;
 					       },
 					      },
 			       },
