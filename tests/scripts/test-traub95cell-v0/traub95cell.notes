@@ -1,0 +1,949 @@
+Wed Mar 10 23:03:16 MST 2010
+
+This is a version of Traub's 51-compartment hippocampal interneuron
+
+Updating the scripts in ~/Scripts/celltut/traub95 to have
+menschik_finkel_1998.pdf  protodefs_traub95.g  setcolors3.g   traub95.g
+Notes.2002		  README	       traub95cell.g  traub95.p
+mv traub95cell.g traub95cell-orig.g
+
+Next I'll make traub95cell0.g, based on deep_pyrcell1.g
+with flags for
+
+int batch = 1        // if (batch) then run a default simulation
+int graphics = 0     // display control panel, graphs
+int file_out = 1     // write output to a file
+int hflag = 1    // use hsolve if hflag = 1
+int chanmode = 3 // hsolve mode for GENESIS 2
+
+deep_pyrcell1.g 
+includes protodefs1.g, which includes the chans, and then makes the
+prototypes
+
+traub95cell-orig.g
+include protodefs_traub95.g - then make them in main script
+
+I'll want a traub95chans0.g taken from protodefs_traub95.g
+and a protodefs0.g made from protodefs_traub95.g and traub95cell-orig.g
+
+In fact protodefs_traub95.g is nothing but channel defs.  I'll copy it
+to traub95chans0.g and maybe change some comments.
+
+OK, it works.  The next step will be version 1 with
+traub95chans1.g, having instant flag for tabchan.
+
+Then I can test with G3.
+
+----------------------------------------------------------------------------
+
+Mon Mar 22 12:30:31 MDT 2010 - finally cleanup of traub95cell0.g
+This and all subsequent versions (including traub94, mitral) will have
+default flags:
+
+/* Some Booleans indicating the type of calculations or output */
+int batch = 1 // if (batch) run simulation with default injcurrent, tmax
+int graphics = 0     // display control panel, graphs
+int file_out = 1     // write output to a file
+int hflag = 1	 // use hsolve if hflag = 1
+int chanmode = 3 // hsolve mode for GENESIS 2
+
+and customized strings, e.g.:
+str cellfile = "traub95.p"
+str outfile = "traub95_Vm.out"
+str graphlabel = "Traub 1995 interneuron: " @ {cellfile}
+
+I'll name the interactive versions (graphics and no batch)
+traub95cell0-gr.g, etc.
+
+A previous run with graphics and no batch:
+   93829 2010-03-10 23:36 traub95_Vm.out.sav
+looks very different from default run:
+93736 2010-03-22 12:32 traub95_Vm.out
+But, I verified that traub95_Vm.out is reporducible with or w/o graphics.
+0.3 nA is too much injection, though.  I'll set the default to 0.1.
+
+Evidently, I had hsolve = 0 before, because <traub95cell0.g> line 144
+** Error - during SETUP of /cell/solve: unknown element type vdep_channel.
+
+OK, I'll take hsolve out for traub95cell0.g and traub95cell0-gr.g
+
+traub95_Vm.out  --> traub95-default_Vm.out
+93801 2010-03-22 12:49 traub95-default_Vm.out
+
+----------------------------------------------------------------
+NOW, I can start on traub95cell1-gr.g
+
+I'll leave hsolve = 0 at first.   The difference will be in
+traub95cell1-gr.g - includes protodefs1.g
+protodefs1.g includes traub95chans1.g
+
+Next, edit traub95chans1.g by comparing with my traub91 versions
+(K_C-comp.xxx)
+
+[Note:  I should redo the test-traub91-v1 scripts to be like these, with
+boolean flags.]
+
+<traub95chans1.g> line 227
+... <protodefs1.g> line 4
+... <traub95cell1-gr.g> line 47
+** Error - syntax error
+   226          create  tabchannel    K_C_int
+   227                  setfield        ^       \
+   228 Ek {EK} \
+   229                  Gbar		{ 100.0 * SOMA_A }      \
+   230                  Ik		0       \
+   231            	Gk       	0
+
+What's the matter with this?  All the other functions use
+"setfield ^".
+
+The original was:
+
+                setfield ^ Ek {E_K} gbar {100.0*INT_SOMA_A} Ik 0 Gk 0
+
+Maybe it is the continued line 220 which needs INT_SOMA_A
+OK, that was the problem, not the setfield ^
+
+Now it runs, but spikes much too fast
+
+showmsg /cell/soma/K_C_int
+OUTGOING MESSAGES
+MSG 0 to '/cell/soma' type [0] 'CHANNEL' < Gk = 0 > < Ek = 0 > 
+
+Ok isn't right - 
+
+setfield           ^                    \
+                Ek              {EK}    \
+should be
+                Ek              {E_K}    \
+
+genesis #8 > echo {E_K}
+-0.085
+
+Now the plots agree, although the files are not exactly identical:
+
+93801 2010-03-22 12:49 traub95-default_Vm.out
+0.4998 -0.0580838 
+0.4999 -0.0580042 
+
+93812 2010-03-23 11:35 traub95_Vm.out
+0.4998 -0.0580952 
+0.4999 -0.0580158 
+
+I'll consider this correct, and set hflag = 1.
+
+93812 2010-03-23 11:43 traub95_Vm.out
+0.4998 -0.0633909 
+0.4999 -0.0633163 
+
+A lot different! The plots look different also.  But, this could mean that
+hsolve is really needed.
+
+mv traub95_Vm.out traub95-hsolve_Vm.out
+Compare with a run of traub95cell0-gr.g with dt = 10 usec
+
+plotVm traub95_Vm.out traub95-hsolve_Vm.out
+--- still looks different
+
+plotVm traub95_Vm.out traub95-hsolve_Vm.out
+--- also looks different
+
+traub95_Vm.out
+0.4998 -0.0615266 
+0.4999 -0.0614718 
+
+mv traub95_Vm.out traub95-dt10_Vm.out
+plotVm traub95-default_Vm.out traub95-dt10_Vm.out traub95-hsolve_Vm.out
+
+I'll try hsolve with 10  --> traub95-hsolvedt10_Vm.out 
+
+$ plotVm traub95-hsolve_Vm.out traub95-hsolvedt10_Vm.out
+very close - tiny diff at end.  I believe that 20 usec is good for hsolve.
+
+One more run of traub95cell0-gr.g no hsolve, dt = 5 usec:
+$ plotVm traub95-dt5_Vm.out traub95-dt10_Vm.out traub95-hsolve_Vm.out
+
+dt = 5 usec is closer to hsolve, but still is out of phase by one AP by the
+end.  I thing that hsolve will be needed for this model.
+
+The original traub95.g version used
+
+float dt = 25e-6 
+
+int hflag = 1    // use hsolve if hflag = 1
+int chanmode = 1
+float injcurr = 0.3e-9		// default injection
+
+Because hsolve supports chanmode1.
+
+So I, should compare to output of a modified traub95cell0-hsolve1-gr.g
+with chanmode = 1, and dt = 20 usec. --> traub95-hsolve1_Vm.out
+
+plotVm traub95-hsolve1_Vm.out traub95-hsolve_Vm.out
+extremely close, with barely noticeable diff at end
+
+traub95-hsolve1_Vm.out -- vdep_channel and chanmode 1
+0.4998 -0.0629784 
+0.4999 -0.062908 
+
+traub95-hsolve_Vm.out tabchannel with instand Z gate, chanmode 3
+0.4998 -0.0633909 
+0.4999 -0.0633163 
+
+Conclusion:  20 usec seems like an adequate time step with hsolve chanmode 3.
+
+traub95cell1-gr.g --> traub95cell1.g - batch and no graphics.
+
+Do I want a cellview with graphics? Maybe so - I'll try this
+From traub95cell-orig.g
+
+function make_xcell
+    create xform /cellform [620,50,400,400]
+    create xdraw /cellform/draw [0,0,100%,100%]
+    setfield /cellform/draw xmin -0.00025 xmax 0.00025 ymin -15e-5 ymax 35e-5 \
+        zmin -5e-4 zmax 9e-4 vx 10 vy -15 vz 7\
+        transform o3d
+    xshow /cellform
+    echo creating xcell
+    create xcell /cellform/draw/cell
+    setfield /cellform/draw/cell colmin -0.1 colmax 0.1 diarange -30 \
+        path /cell/##[TYPE=compartment] field Vm \
+        script "echo <w> <v>"
+end
+
+move the form 
+  Absolute upper-left X:  25
+  Absolute upper-left Y:  449
+
+create xform /cellform [10,425,400,400]
+
+/* uncomment the two lines below to create a cell display (slower)  */
+make_xcell // create and display the xcell
+xcolorscale hot
+
+----------------
+
+How about g3?
+
+genesis > sli_run traub95cell1.g
+
+*** Warning: zero initial value for the concentration of the following:
+/cell/soma/Ca_conc_int
+*** Warning: zero initial value for the concentration of the following:
+/cell/a5_1/Ca_conc_int
+*** Warning: zero initial value for the concentration of the following:
+/cell/a5_2/Ca_conc_int
+
+....
+
+Heccer the hecc: extracting the model from the model-container at
+/cell/axonIS/spike [cellsolver_getmathcomponents() returned error code (-6,
+unresolvable parameters: the model container does not associate a numerical
+value with one of the parameters), last processed mathcomponent is 245,
+external error return is 0.]
+
+
+3 errors for context: /cell/axonIS/spike
+	Unresolvable Parameter: REFRACTORY
+	Unresolvable Parameter: THRESHOLD
+	Error: Number of model math components during processing does not
+match with number during typing.
+<traub95cell1.g> line 148
+** Error - Error: cannot find output fields for asc_file plot_out
+Using hsolve
+time = 0.000000 ; step = 0          
+Warning: Heccer object /cell exists, resetting it instead.
+
+34441 2010-03-23 13:17 traub95_Vm.out -- has times, no Vm
+
+Oh crap.  I can get rid of the warnings by commenting out the check,
+or fixing traub95chans1.g to set Ca_base 0.1
+
+what is the problem with /cell/axonIS/spike?  
+
+The spikegen "spike" is in axonIS instead of soma, but shouldn't matter.
+It isn't used.
+
+protodefs1.g has:
+
+create spikegen spike
+
+with no initialization.  I should fix this in all versions.  The default
+under g2 is
+
+thresh               = 0
+output_amp           = 1
+abs_refract          = 0
+
+The simplecell variants all use
+genesis/Scripts/neurokit/prototypes/protospike.g
+        setfield spike \
+                thresh  0.00 \         // V
+                abs_refract     10e-3 \ // sec
+                output_amp      1
+
+This is a rather large abs_refract - how wide are the spikes?
+
+
+<traub95cell1.g> line 148
+   142  if (hflag)
+   143      create hsolve /cell/solve
+   144      setfield /cell/solve path "/cell/##[][TYPE=compartment]"
+   145      setmethod 11
+   146	    setfield /cell/solve chanmode {chanmode}
+   147      call /cell/solve SETUP
+   148	    reset
+   149	    echo "Using hsolve"
+   150	end
+
+I thought that hsolve is ignored?
+
+if (file_out)
+    create asc_file /output/plot_out
+    setclock 1 {out_dt}
+    useclock /output/plot_out 1
+    addmsg {cellpath}/soma /output/plot_out SAVE Vm
+    setfield /output/plot_out filename {outfile}
+end
+
+Did this get called before hsolve?  No, it shouldn't be a problem.
+
+Time to compare to traub91 and simplecell
+
+--------------
+
+Using the zoom to rectangle capability of matplotlib makes it easy to draw
+a rectangle around a spike, and read off coordinates of the cursor on the
+navigation toolbar.
+
+0.0168731
+0.0164242  --> 0.45 msec
+
+What about traub91 -
+g2-Scripts/traub91/test-traub91-v1 
+$ plotVm traub91_sym-g2 traub91_sym-g3
+
+1st spike:
+
+0.0180152
+0.0175481  around 0.5 msec.
+
+But, the middle spikes in the burst have a max/min amplitude of
+-0.0218 / -0.0378  -- so this makes setting the threshold a little tricky.
+
+-0.03 is a good choice for traub91, and will be OK for traub95
+
+It is worth looking at some other results.
+pyrcell/deep_pyr1-g2_Vm.txt 
+
+Peaks are about +22 mV, and minima around -60
+If I take -0.03 for thresh, width is 
+
+0.01323859
+0.01313519  1 msec.
+
+protodefs1.g
+/* make a spike generator */
+create spikegen spike
+setfield spike  thresh 0.00  abs_refract 1.0e-3  output_amp 1
+
+This is what I used for ACnet, and it is appropriate.
+
+How fast can traub95cell spike?  I can give it about 3 nA before I see
+signs of overdriving it.  Then, the ISI is 0.0356 - 0.0276 = 8 msec.
+or 125 Hz.
+
+I will leave pyrcell the way it is in ACnet.  For the default in
+the traub variants, I will use (in protodefs)
+
+create spikegen spike
+setfield spike  thresh -0.03  abs_refract 2.0e-3  output_amp 1
+
+Now try genesis-g3
+
+Warning: Tabchannel parameter xmin has already been set to 0.000000 for
+K_C_int
+Warning: Tabchannel parameter xmax has already been set to 1000.000000 for
+K_C_int
+
+
+warning: cell found during solver_mathcomponent_typer()
+warning:     /cell/solve
+warning: cell found during solver_mathcomponent_processor()
+warning:     /cell/solve
+warning: cell found during solver_mathcomponent_finalizer()
+warning:     /cell/solve
+Using hsolve
+time = 0.000000 ; step = 0          
+Warning: Heccer object /cell exists, resetting it instead.
+
+plotVm traub95_Vm.out traub95-hsolve_Vm.out
+
+A little difference on the final spike, but good enough.
+
+-->  traub95_Vm-Ca-base0.1.out
+This was with Ca_base 0.1 to avoid warnings.  I'll set it back to 0.0
+plotVm traub95_Vm.out traub95_Vm-Ca-base0.1.out
+Not much difference in the results, but I get the warnings, which I can
+live with.  This shouldn't give a warning in g3 though.
+
+==================================================================================
+
+
+***** digression on synchans
+
+
+While I'm doing it right, I should add some synchans.  What does Kerstin
+do?
+
+~/plans/gentut/GENESIS/UGTD/Tutorials/networks/hippo2/SIMULATION 
+
+12 -rw-r--r--. 1 dbeeman 10932 2002-02-19 06:03 CA3_chan041.p
+ 8 -rw-r--r--. 1 dbeeman  7278 2002-02-19 06:03 fbsyn41.p
+ 8 -rw-r--r--. 1 dbeeman  7274 2002-02-19 06:03 ffsyn.p
+
+
+CA3_chan041.p
+
+// cell parameter file for the 1994 Traub CA3 hippocampal cell
+// "phi" parameter reduced by e-3
+// addition of synaptically activated channels;
+// distribution of synapses taken from
+// Cellular mechanisms of 4-aminopyridine-induced synchronized after-
+// discharge in the rat hippocampal slice, Traub et al., 1995, Journal of
+// Physiology, 489.1, pp.127-140
+
+Every compt has all 4 types of channels, but often with zero density.
+
+AMPA 0 NMDA 0 GABA_B 0 GABA_A 20
+AMPA 100.0   NMDA 20.0   GABA_B 20.0 GABA_A 0  
+
+The four bas3_1 - bas3-4 dendrites off the some have
+AMPA 100.0   NMDA 20.0     GABA_A 70.0 GABA_B 0
+
+The other basal dendrites have
+AMPA 0 NMDA 0  GABA_A 0 GABA_B 0
+
+There are synchans all over the apical dendrites  - this will take some
+thought.
+
+What about the feedforward and feedback interneurons
+fbsyn41.p and ffsyn.p differ in the density of AMPA, the only channel used.
+
+// cell descriptor file for feed forward inhibitory interneurons receiving
+// afferent input; incorportation of synaptically activated channels
+//
+// data taken from: Pyramidal Cell-to-Inhibitory Cell Spike Transduction
+// Explicable by Active Dendritic Conductances in Inhibitory Cell;
+R.D.Traub,
+// R. Miles; (1995) Journal of Computational Neuroscience, 2, 291-298
+// information about synapses from:
+// Cellular mechanisms of 4-aminopyridine-induced synchronized after-
+// discharge in the rat hippocampal slice, Traub et al., 1995, Journal of
+// Physiology, 489.1, pp.127-140 
+// and
+// On the Mechanisms of the gamma->beta Frequency Shift in Neuronal 
+// Oscillations Induced in Rat Hippocampal Slices by Tetanic Stimulation
+// Traub et al, 1999, The Journal of Neuroscience, 19(3), pp. 1088-1105
+//
+[The second ref isn't in Menschik version
+
+She has comment
+*spherical
+//soma is a sphere (in paper: cylinder); radius adjusted to have
+//same area
+
+soma none 0 0 20 17.4 Ca_concsi -24.0e12 Na 1000   Ca 10   
+  K_DRi 1350   K_AHPsi 0.1   K_Csi 200   K_Ai 5  				
+
+Menschik has
+soma none 0 0 20 15 Ca_conc_int -61e12 Ca_int 10 Na_int 1000
+ K_DR_int 1350 K_C_int 200 K_A_int 5 K_AHP_int 0.1	
+
+
+Most dendrites have AMPA
+
+AMPA 20.0, 0.0 or 1.0
+
+It is interesting that she doesn't allow for inhibition of the interneurons
+by each other.  Is that typical of CA3 networks?
+
+This is getting complicated.  I should pick some representative places
+to put them in my version.
+
+What about the channel defs?
+
+AMPA_chan.g taken from granule cell model of cerebellar granular layer by
+  Reinoud Maex, University of Antwerp
+	create synchan2 AMPA    	
+    	setfield AMPA Ek {E_AMPA} tau2 {0.09e-3  / Q10_synapse} \
+                              tau1 {1.5e-3   / Q10_synapse} \
+                              gmax {G_AMPA} \
+                              frequency {AMPA_frequency} \
+			      normalize_weights 1
+end
+
+constants41.g:float Q10_synapse =  1.0 //  3.0
+float G_AMPA = 750.0 (can't be in right units, but will be replaced by
+something reasonable.
+
+float E_GABAA = -0.075 // Volt    
+float G_GABAA = 70.0   //  Siemens*m^-2
+float E_NMDA = 0.0     //  equilibrium potentials and gmax-values for 
+float G_NMDA =  20.0    //  synchan elements
+float E_AMPA = 0.0 // maximum conductance of synchan elements is defined
+float G_AMPA = 750.0    //   by values in cell descriptor files
+float E_GABAB = -0.080
+float G_GABAB = 20.0     // 
+float GABAA_frequency = 0 // 3; provides input for synchan elements in case
+float GABAB_frequency = 0 // 3
+float AMPA_frequency = 5  // 5; there are no incoming SPIKE messages
+float NMDA_frequency = 5 // 5
+
+-----------------
+
+GABA_A_chan.g 
+// prototype GABA_A channel for pyramidal cells 
+// taken from granule cell model of cerebellar granular layer by
+// Reinoud Maex, University of Antwerp
+
+    	setfield GABA_A Ek {E_GABAA} tau1 {0.93e-3  / Q10_synapse} \
+                                tau2 {26.50e-3 / Q10_synapse} \
+                                gmax {G_GABAA} 
+GABA_B_chan.g
+// prototype GABA_B channel for pyramidal cells 
+// taken from granule cell model of cerebellar granular layer by
+// Reinoud Maex, University of Antwerp
+
+
+//=============================================================
+// GABA_B channel, using a dual exponential function with time 
+// constants of 80	and 40 msec as in Suarez, Koch and Douglas 
+// 1995 (J. Neurosci. 15,6700-1719; cat visual cortex).  
+// A more detailed model can be found in Otis, De Koninck and Mody 1993
+// (J. Physiol. 463, 391-407; rat hippocampal slices; this model uses
+// 4th power exponential activation and dual exponential inactivation).
+// See also Benardo 1994 (J. Physiol. 476.2, 203-215; slice rat 
+// neocortex) and Connors, Malenka and Silva 1988 (J. Physiol. 406,
+// 443-468; slice rat and cat visual cortex.
+//================================================================
+
+More from Reinoud Maex
+    	setfield GABA_B Ek {E_GABAB} tau1 {0.080 / Q10_synapse} \
+                                tau2 {0.040 / Q10_synapse} \
+                                gmax {G_GABAB} frequency {0.0} \
+			        frequency {GABAB_frequency} \
+
+NMDA_chan.g
+// prototype NMDA channel for pyramidal cells 
+// taken from granule cell model of cerebellar granular layer by
+// Reinoud Maex, University of Antwerp
+
+//=============================================================
+// NMDA channel made by CP 
+// From Gabbiani et al. (model) 1994 
+//=============================================================
+float CMg = 1.2
+float eta = 0.2801
+float gamma = 62
+float offset = - 0.01
+eta = eta * {exp {- gamma * offset}}
+
+        setfield NMDA Ek {E_NMDA} tau2 {3e-3  / Q10_synapse} \
+                                  tau1 {40e-3 / Q10_synapse} \
+                                  gmax {G_NMDA} \
+				  frequency {NMDA_frequency} \
+				  normalize_weights 1
+                create Mg_block NMDA/Mg_BLOCK
+         setfield NMDA/Mg_BLOCK CMg {CMg}  \
+            KMg_A {1/eta} \ \\ *({exp {EREST_ACT*gamma}})} \ 
+            KMg_B {1.0/gamma}
+
+I should compare with my ACnet NMDA and the traub papers.  I think I'll
+leave this for later.
+
+=============================================================================
+Tue Mar 23 16:09:48 MDT 2010
+
+
+I'll do a final repacking of test-traub95cell-v0
+with a README and a README.testing.  I don't need the vdep versions
+traub95cell0*.g, but I want traub95cell1.g and traub95cell1-gr.g
+
+
+I'll rename
+traub95chans1.g traub95chans.g
+protodefs1.g protodefs.g
+now, and edit files referencing them
+
+These are good to go:
+
+But, I also want a version with pulsegen.
+
+--------------
+[dbeeman@chuck traub95]$ diff protodefs1.g protodefs0.g
+< include traub95chans1.g
+---
+> include traub95chans0.g
+
+diff traub95chans1.g traub95chans0.g -- huge diffs because of vdep_channels
+
+In test-traub95cell-v0 these can be renamed to traub95chans.g and
+protodefs.g
+
+
+graphics1.g uses alternate versions of functions inj_toggle and
+set_injection with a steady injection instead of a pulsegen.  The control
+panel has dialogs to set pulse parameters, but only the injection level has
+any effect.
+
+Note that traub95cell1.g defines function
+function make_inject_pulse, but it isn't called, and is OK with g-3
+
+/* Uncomment the function call below to use a pulsegen instead of a
+constant
+   current source.
+
+make_inject_pulse
+*/
+
+// use this instead for a constant injection
+setfield {injectpath} inject {injcurrent}
+
+So, it should be easy to make the version with pulsegen from
+the ones without.
+
+plotVm traub95_Vm.out traub95-default_Vm.out
+
+There are no visible differences, but the output files are not exactly the
+same.  It could be that the scheduling causes the injection pulse to
+be applied after the first time step.  I guess I'll make this be
+the default output.
+
+Now I can put things in  test-traub95cell-v0/
+I now have:
+
+traub95cell.g - main script - batch mode, no graphics
+traub95cell-gr.g - interactive version with XODUS graphics
+graphics.g - graphics functions to be included if graphics flag is set
+protodefs.g - creates prototype channels and elements in /library
+traub95chans.g - function defs to create the channels, included by protodefs
+traub95.p - cell parameter file with 51 asymmetric compartments
+traub95-default_Vm.out - soma Vm with default simulation parameters
+
+These versions of the files replace the pulsgen with a constant injection
+
+traub95cell1.g - main script - batch mode, no graphics
+traub95cell1-gr.g - interactive version with XODUS graphics
+graphics1.g - graphics functions to be included if graphics flag is set
+
+------------
+Tue Mar 23 17:17:33 MDT 2010
+
+Now, I see that I don't have a way to change dt - there is no set_tmax
+or change_runtime.  In fact, none of these simplecell variants, including
+pyr4cell.g have a change in tmax
+
+
+Damn, I'd better add this also.  Before I wrap it up and go on to traub94,
+I should go back to pyrcell, and merge the changes in flags, GUI, etc.
+
+* add change_runtime to graphics.g and graphics1.g  -- DONE
+
+Tue Mar 23 20:40:39 MDT 2010
+~/info/PGENESIS/Scripts/ACnet/ACnet2/ACnet2-2-Work2010/graphics2-2.g 
+
+function change_runtime(dialog)
+   str dialog
+   tmax =  {getfield {dialog} value}
+   setfield /data/voltage xmax {tmax}
+   setfield /data/Inh_voltage xmax {tmax}
+   setfield /MGBv_Vm/voltage xmax {tmax}    // from input_graphics.g
+   setfield /EPSCform/EPSC_sum xmax {tmax}  // from ACnet2-1.g
+end
+
+function make_control
+...
+    create xdialog stepsize -title "dt (sec)" -value {dt} \
+                -script "change_stepsize <widget>"
+    create xdialog runtime -title "runtime (sec)" -value {tmax} \
+                -script "change_runtime <widget>"
+
+So, I'll have to customize it to set the graph scales - not a big deal in
+this case.  All of this series can use:
+
+function change_runtime(dialog)
+   str dialog
+   tmax =  {getfield {dialog} value}
+   // set xmax for any graphs
+   setfield /data/voltage xmax {tmax}
+end
+
+
+YET TODO
+--------
+
+* Update README and make README.testing
+
+-------------------------------------------------------------------------
+
+Wed Mar 24 16:50:19 MDT 2010
+
+I made g2-Scripts/traub94/traub94cell1.g and compared g2 and g3 sli_run
+plots, finding large differences:
+
+plotVm traub94_Vm.out traub94-default_Vm.out
+traub94_g3-g2.png with
+traub94_Vm.out (black) - g3 with sli_run
+traub94-default_Vm.out (red) - g2
+
+it is not just that tricky end of burst behavior, but the shape of the APs
+are all wrong during the burst.
+
+I did a rerun of traub95cell1.g and got similar warnings
+Warning: Tabchannel parameter xmin has already been set to 0.000000 for
+K_C_int
+Warning: Tabchannel parameter xmax has already been set to 1000.000000 for
+K_C_int
+
+It is the one that is just like K_C.
+
+Then, the initial value warnings for the concens
+
+plotVm traub95_Vm.out traub95-default_Vm.out
+--> traub95_g3-g2.png
+
+A barely perciptible difference at the end.  But, this is a very regular
+firing cell with just a little adaptation due to Ca-dependence, rather
+than strong bursting.  Burst firing cells are a real challenge.
+
+-----------------------------------------------------------------------------------
+Mon Mar 29 15:50:34 MDT 2010
+
+I made fancier version of make_xcell in graphics.g and graphics1.g, based
+on mitral/new_mit/cellview.g, and incorporating a function set_drawrange to
+roughly scale the range of the draw widget to fit the cell.  These were
+applied to traub94, traub95, and mitral cells.  See notes in
+mitral/mitralcells.notes.
+
+I've also updated the README for traub94 and traub95.
+
+Next TODO - README.testing.
+
+Run the simulation again and mv traub95_Vm.out traub95-g3_Vm.out
+
+
+warning: cell found during solver_mathcomponent_typer()
+warning:     /cell/solve
+*** Warning: zero initial value for the concentration of the following:
+/cell/soma/Ca_conc_int
+*** Warning: zero initial value for the concentration of the following:
+...
+
+*** Warning: zero initial value for the concentration of the following:
+/cell/b1_1/Ca_conc_int
+*** Warning: zero initial value for the concentration of the following:
+/cell/b1_2/Ca_conc_int
+
+
+Explanation:
+
+This model has channels that are nearly the same as the traub91 model, with
+a Ca-dependent K channel K_C_int, and Ca_concen element Ca_conc_int.
+function make_Ca_conc_int in explicitly sets Ca_base to 0.0 zero, and G3
+evidently doesn't like it.  If i set it to a non-zero value, the warning
+disappears.
+
+$ plotVm traub95-g3_Vm.out traub95-default_Vm.out
+
+The resulting plot was saved in traub95_g3-g2.png, and shows only a tiny
+difference between the G2 and G3 Vm.
+
+Using the zoom to rectangle capability of matplotlib makes it easy to draw
+a rectangle around one or two action potentials, zoom in, and then read off the
+coordinates of the cursor on the navigation toolbar.  This shows that
+the final action potential comes about 0.7 msec later with G3.
+
+I consider the agreement "good enough" but still a mystery of why it
+is not exact.
+
+README.testing is GEFN - traub94 will be harder.
+
+--------------
+Tue Mar 30 11:12:48 MDT 2010
+
+Unresolved - why am I no longer getting Warnings:
+
+Warning: Tabchannel parameter xmin has already been set to 0.000000 for
+K_C_int
+Warning: Tabchannel parameter xmax has already been set to 1000.000000 for
+K_C_int
+
+Tue Mar 30 09:25:33 MDT 2010
+I ran traub95cell1.g under sli_run  with 93813 2010-03-23 versions of files:
+rw-r--r--. 1 dbeeman  8136 2010-03-23 20:50 graphics1.g
+ 8 -rw-r--r--. 1 dbeeman  7568 2010-03-23 20:53 graphics.g
+ 4 drwxrwxr-x. 4 dbeeman  4096 2010-03-30 09:24 _Inline
+ 4 -rw-r--r--. 1 dbeeman   521 2010-03-23 16:33 protodefs.g
+ 8 -rw-r--r--. 1 dbeeman  5065 2010-03-23 16:34 traub95cell1.g
+ 8 -rw-r--r--. 1 dbeeman  5065 2010-03-23 16:34 traub95cell1-gr.g
+ 8 -rw-r--r--. 1 dbeeman  5067 2010-03-23 16:42 traub95cell.g
+ 8 -rw-r--r--. 1 dbeeman  5067 2010-03-23 16:41 traub95cell-gr.g
+16 -rw-r--r--. 1 dbeeman 15416 2010-03-23 14:49 traub95chans.g
+92 -rw-rw-r--. 1 dbeeman 93813 2010-03-23 16:48 traub95-default_Vm.out
+ 8 -rw-r--r--. 1 dbeeman  6980 2002-02-22 23:31 traub95.p
+
+And got the warnings about xmin/xmax - I also got it with recent versions.
+Did I simply miss seeing them before?  Maybe I didn't scroll back to the
+very start:
+
+.simrc-ns-sli has been executed!
+Simulation Script:  traub95cell1.g
+/library
+Warning: Tabchannel parameter xmin has already been set to 0.000000 for
+K_C_int
+Warning: Tabchannel parameter xmax has already been set to 1000.000000 for
+K_C_int
+/
+changing clock [0] from 1 to 2e-05
+reading 'traub95.p'.... 
+traub95.p read: 51 compartments
+Crank-Nicolson. Note : applies only to hsolve elements
+time = 0.000000 ; step = 0          
+warning: cell found during solver_mathcomponent_typer()
+warning:     /cell/solve
+*** Warning: zero initial value for the concentration of the following:
+/cell/soma/Ca_conc_int
+...
+
+OK, it happens early on, before the cell reader - clearly during the
+execution of protodefs.g and construction of channels in /library
+
+make_Ca_int -- setupalpha
+make_Ca_conc_int -- set tau, B, Ca-base of Ca_concen
+make_K_AHP_int -- 
+  float xmin = 0.0        float xmax = 1000.0        int xdivs = 50
+  TABCREATE Z {xdivs} {xmin} {xmax}, fill in loop,
+  call K_AHP_int TABFILL Z 3000 0
+
+make_K_C_int --  float   xmin = -0.1;   float xmax = 0.05;  int xdivs = 49
+TABCREATE X {xdivs} {xmin} {xmax}, fill in loop, TABFILL
+   and same for Z gate with xmin = 0.0, xmax = 1000.0, xdivs = 50
+
+make_Na_int -- all the rest use setupalpha
+make_K_DR_int
+make_K_A_int
+make_Na_int_axon
+make_K_DR_int_axon
+
+
+--------------------------------------------------------
+
+Notes from src/olf/tabchannel.c:
+
+/*
+** Cengiz Gunay - January 2006
+** Added a Z_conc flag indicating that the Z gate is concentration
+dependent.
+** If Z_conc is 0 then it is voltage-dependent. Both the hines solver and
+** the original code is modified to handle these cases. Hines chanmodes
+** 1 and 4 tested and validated.
+*/
+
+I should check this flag
+
+    case CREATE:
+      channel->Z_conc = 1; /* By default, the Z gate is concentration dependent */
+
+OK, not a problem.
+
+    case TABCREATE:
+X, Y, Z are handled separately - only restriction is that A and B tables
+use the same xdivs, xmin, xmax, e.g.:
+	if (strcmp(field,"X") == 0) {
+		channel->X_A = create_interpol(xdivs,xmin,xmax);
+		channel->X_B = create_interpol(xdivs,xmin,xmax);
+
+    case TABFILL:
+uses function  fill_table(channel->X_A,xdivs,fill_mode) and X_B for X,
+similar for Y or Z.  This is defined in new_interp.c.
+
+------------
+While I'm at it, take some notes on tab2channel.c 
+
+    case TABCREATE: no apparant requirement that xdivs be the same as
+ydivs, or that they be the same for all gates.  It only requires the
+A and B tables to have the same.  I'll have to recreate my attempt to
+implement the mitral cell channel with a tab2Dchannel.
+
+There is no TABFILL - interpolation is automatically provided.
+
+----------------------------------------------------------------------------------
+
+Tue Mar 30 11:49:22 MDT 2010
+
+Next, go back to traub94 and look at the greater number of errors there.
+
+
+I'd like to do some debugging under G3, but I had problems testing pyrcell
+under G3 with     int xdivs = {getfield K_hh_tchan X_A->xdivs}
+
+See traub94cell.notes - as expected, G3 wouldn't let me do
+float xmax = {getfield /library/K_AHPs Z_A->xmax}
+
+** Error - could not get the value for field '/library/K_AHPs->Z_A->xmax'
+
+Does K_AHPs->Z_A->xmax properly correspond to '/library/K_AHPs Z_A->xmax'?
+
+If I give a relative path, e.g.
+
+    pushe /library
+    float xmax = {getfield K_AHPs Z_A->xmax}
+
+Then it can't find the channel:
+** Error - could not find 'K_AHPs'
+
+I'll now revisit traub91 and test for these warnings.
+
+Yes - They occur for K_C (and NOT K_AHP), but the results seem OK
+In all these cases, it seems that the first time a TABCREATE/TABFILL is
+done, there is no warning.
+
+See notes in g2-Scripts/traub91/traubcell.notes
+
+------------------------------------------------------------------------------
+Thu Apr  1 13:32:30 MDT 2010
+
+* add timing to step_tmax
+
+function step_tmax
+    echo "START: "{getdate}
+    step {tmax} -time
+    echo "END: "{getdate}
+
+Test with traub95 under g3 to be sure getdate works
+ added to traub95cell1.g
+
+G2: reading 'traub95.p'.... 
+traub95.p read: 51 compartments, 206 channels, 0 shells, 48 others
+Crank-Nicolson. Note : applies only to hsolve elements
+time = 0.000000 ; step = 0          
+Using hsolve
+time = 0.000000 ; step = 0          
+START: Thu Apr  1 13:29:23 2010
+END: Thu Apr  1 13:29:24 2010
+
+[dbeeman@chuck traub95]$ genesis-g3
+Welcome to the GENESIS 3 shell
+genesis > sli_run traub95cell1.g
+
+Usual warnings, then
+.START: Thu Apr  1 13:33:53 2010
+END: Thu Apr  1 13:33:54 2010
+
+Note enough precision to make a difference.  What is a good G3-compatible
+way to time a simulation?  I'll leave it in, anyway.
+
+-------------------------------------------------------------------------
+
+

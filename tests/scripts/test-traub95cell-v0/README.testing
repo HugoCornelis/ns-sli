@@ -1,0 +1,79 @@
+This directory contains versions of the cell simulation for testing of the
+cell model that is described in README.
+
+The files are:
+
+traub95cell.g - the main script, using a pulsegen
+traub95cell1.g - a version for G3 testing without the pulsegen
+traub95cell1-gr.g - interactive mode with batch=0, graphics=1.
+graphics.g - graphics functions to be included if graphics flag is set
+graphics1.g - graphics functions to be used without the pulsgen
+protodefs.g - creates prototype channels and elements in /library
+traub95chans.g - function defs to create the channels, included by protodefs
+traub95.p - cell parameter file with 51 asymmetric compartments
+traub95-default_Vm.out - soma Vm using default simulation parameters
+
+traub95cell.notes - notes taken while developing and testing the scripts
+
+The default version of the script uses the flags:
+
+int batch = 1 // if (batch) run simulation with default injcurrent, tmax
+int graphics = 0     // display control panel, graphs
+int file_out = 1     // write output to a file
+int hflag = 1	 // GENESIS 2 - use hsolve if hflag = 1
+int chanmode = 3 // hsolve mode for GENESIS 2
+
+The result of running the script traub95cell1.g under GENESIS version 2.2
+is in the file traub95-default_Vm.out.
+
+
+These are results obtained by running the script under genesis-g3 with
+"sli_run":
+
+
+----------------------------------------------------
+
+Date of g3 install: 2010-02-17
+
+$ genesis-g3
+Welcome to the GENESIS 3 shell
+genesis > sli_run traub95cell1.g
+
+warning: cell found during solver_mathcomponent_typer()
+warning:     /cell/solve
+*** Warning: zero initial value for the concentration of the following:
+/cell/soma/Ca_conc_int
+*** Warning: zero initial value for the concentration of the following:
+
+... (many more like this)
+
+*** Warning: zero initial value for the concentration of the following:
+/cell/b1_1/Ca_conc_int
+*** Warning: zero initial value for the concentration of the following:
+/cell/b1_2/Ca_conc_int
+
+
+Explanation:
+
+This model has channels that are nearly the same as the traub91 model, with
+a Ca-dependent K channel K_C_int, and Ca_concen element Ca_conc_int.
+function make_Ca_conc_int in explicitly sets Ca_base to 0.0 zero, and G3
+evidently doesn't like it.  If i set it to a non-zero value, the warning
+disappears.
+
+$ plotVm traub95-g3_Vm.out traub95-default_Vm.out
+
+The resulting plot was saved in traub95_g3-g2.png, and shows only a tiny
+difference between the G2 and G3 Vm.
+
+Using the zoom to rectangle capability of matplotlib makes it easy to draw
+a rectangle around one or two action potentials, zoom in, and then read off
+the
+coordinates of the cursor on the navigation toolbar.  This shows that
+the final action potential comes about 0.7 msec later with G3.
+
+I consider the agreement "good enough" but still a mystery of why it
+is not exact.
+
+-------------------------------------------------------------------------------
+

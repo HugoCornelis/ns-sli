@@ -1,0 +1,63 @@
+
+This is an updated version of the cells/traub95 simulation scripts found at
+genesis-sim.org in the Models archives, and within the "Ultimate GENESIS
+Tutorial Distribution".  The cell is model of a fast spiking hippocampal
+interneuron, using 51 asymmetric compartments.
+
+The K_C conductance has now been modified to use a tabchannel, and some
+changes have been made to allow it to run without graphics under GENESIS 3.
+The default simulation applies a 0.5 second current injection pulse to the
+soma of the cell, and outputs the soma membrane potential to a file.
+
+The files are:
+
+traub95cell.g - the main script
+graphics.g - graphics functions to be included if graphics flag is set
+protodefs.g - creates prototype channels and elements in /library
+traub95chans.g - function defs to create the channels, included by protodefs
+traub95.p - cell parameter file with 51 asymmetric compartments
+traub95-default_Vm.out - soma Vm using default simulation parameters (GENESIS 2)
+
+These are the default definitions at the beginning of the main script,
+which can be modified:
+
+str outfile = "traub95_Vm.out"
+int batch = 1 // if (batch) run simulation with default injcurrent, tmax
+int graphics = 0     // display control panel, graphs
+int file_out = 1     // write output to a file
+int hflag = 1    // GENESIS 2 - use hsolve if hflag = 1
+int chanmode = 3 // hsolve mode for GENESIS 2
+
+Dave Beeman
+Mon Mar 29 11:35:19 MDT 2010
+
+The original README file follows:
+
+-----------------------------------------------------------------------------
+
+This is a version of Traub's 51-compartment hippocampal interneuron,
+contributed by Eliot Menschik.  This, and the traub94 model pyramidal
+cell are described in the papers:
+
+Menschik, E. D. and Finkel, L. H. (1998) Neuromodulatory control of
+hippocampal function: Towards a model of Alzheimer's disease. Artificial
+Intelligence in Medicine 13:99-121.
+
+Menschik, E.D. and Finkel, L.H. (1999) Cholinergic neuromodulation and
+Alzheimer's disease: from single cells to network simulations. Progress in
+Brain Research, 121:19-45.
+
+The files are:
+
+traub95.p - the cell parameter file
+protodefs_traub95.g - file containing the channel definitions
+
+Note, this cell, like the Traub94 cell still suffers from the fact
+that the K_C current depends on using the vdep_object which is not
+supported by hsolve in other than chanmodes 0 and 1.  Ideally, the
+implementation of this current should be modified to use the GENESIS
+2.2 tabchannel "instant" field as was done in
+genesis/Scripts/traub91/traub91proto.g.
+
+If you carry out this relatively simple modification (which will speed up
+the simulation), please contribute it to BABEL.
