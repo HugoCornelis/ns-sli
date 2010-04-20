@@ -26,6 +26,7 @@ my $test
 						  {
 						   comment => 'small deviations from the G-2 generated output file',
 						   description => "Is the generated output file correct ?",
+						   numerical_compare => 'small differences on the automated tester machine',
 						   read => {
 							    application_output_file => "output/traub94_Vm.out.soma",
 							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/traub94_Vm.out.soma.g3",
@@ -71,6 +72,7 @@ my $test
 						  {
 						   comment => 'small deviations from the G-2 generated output file',
 						   description => "Is the generated output file correct ?",
+						   numerical_compare => 'small differences on the automated tester machine',
 						   read => {
 							    application_output_file => "output/traub94_Vm.out",
 							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/traub94_Vm.out.g3",
