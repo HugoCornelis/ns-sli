@@ -1,0 +1,4622 @@
+Initiated
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (0)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (-0.068)
+-------
+Iteration 0
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (0.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 1
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (1)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 2
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (1.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 3
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (2)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 4
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (2.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 5
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (3)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 6
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (3.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 7
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (4)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 8
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (4.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 9
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 10
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (5.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (50)
+-------
+Iteration 11
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (6)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (50)
+-------
+Iteration 12
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (6.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (50)
+-------
+Iteration 13
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (7)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (50)
+-------
+Iteration 14
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (7.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (50)
+-------
+Iteration 15
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (8)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (50)
+-------
+Iteration 16
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (8.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 17
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (9)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 18
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (9.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 19
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (10)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 20
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (10.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 21
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (11)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 22
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (11.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 23
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (12)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 24
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (12.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 25
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (13)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 26
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (13.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (-20)
+-------
+Iteration 27
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (14)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (-20)
+-------
+Iteration 28
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (14.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (-20)
+-------
+Iteration 29
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (15)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (-20)
+-------
+Iteration 30
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (15.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (-20)
+-------
+Iteration 31
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (16)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (-20)
+-------
+Iteration 32
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (16.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (-20)
+-------
+Iteration 33
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (17)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (-20)
+-------
+Iteration 34
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (17.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (-20)
+-------
+Iteration 35
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (18)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (-20)
+-------
+Iteration 36
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (18.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 37
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (19)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 38
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (19.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 39
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (20)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 40
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (20.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 41
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (21)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 42
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (21.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 43
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (22)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 44
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (22.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 45
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (23)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 46
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (23.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (50)
+-------
+Iteration 47
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (24)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (50)
+-------
+Iteration 48
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (24.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (50)
+-------
+Iteration 49
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (25)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (50)
+-------
+Iteration 50
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (25.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (50)
+-------
+Iteration 51
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (26)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (50)
+-------
+Iteration 52
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (26.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 53
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (27)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 54
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (27.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 55
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (28)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 56
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (28.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 57
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (29)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 58
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (29.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 59
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (30)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 60
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (30.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 61
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (31)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 62
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (31.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (-20)
+-------
+Iteration 63
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (32)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (-20)
+-------
+Iteration 64
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (32.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (-20)
+-------
+Iteration 65
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (33)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (-20)
+-------
+Iteration 66
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (33.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (-20)
+-------
+Iteration 67
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (34)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (-20)
+-------
+Iteration 68
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (34.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (-20)
+-------
+Iteration 69
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (35)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (-20)
+-------
+Iteration 70
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (35.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (-20)
+-------
+Iteration 71
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (36)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (-20)
+-------
+Iteration 72
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (36.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 73
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (37)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 74
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (37.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 75
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (38)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 76
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (38.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 77
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (39)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 78
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (39.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 79
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (40)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 80
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (40.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 81
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (41)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 82
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (41.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (50)
+-------
+Iteration 83
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (42)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (50)
+-------
+Iteration 84
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (42.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (50)
+-------
+Iteration 85
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (43)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (50)
+-------
+Iteration 86
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (43.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (50)
+-------
+Iteration 87
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (44)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (50)
+-------
+Iteration 88
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (44.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 89
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (45)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 90
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (45.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 91
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (46)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 92
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (46.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 93
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (47)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 94
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (47.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 95
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (48)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 96
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (48.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 97
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (49)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 98
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (49.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (-20)
+-------
+Iteration 99
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (50)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (-20)
+-------
+Iteration 100
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (50.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (-20)
+-------
+Iteration 101
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (51)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (-20)
+-------
+Iteration 102
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (51.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (-20)
+-------
+Iteration 103
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (52)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (-20)
+-------
+Iteration 104
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (52.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (-20)
+-------
+Iteration 105
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (53)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (-20)
+-------
+Iteration 106
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (53.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (-20)
+-------
+Iteration 107
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (54)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (-20)
+-------
+Iteration 108
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (54.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 109
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (55)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 110
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (55.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 111
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (56)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 112
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (56.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 113
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (57)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 114
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (57.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 115
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (58)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 116
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (58.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 117
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (59)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 118
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (59.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (50)
+-------
+Iteration 119
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (60)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (50)
+-------
+Iteration 120
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (60.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (50)
+-------
+Iteration 121
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (61)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (50)
+-------
+Iteration 122
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (61.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (50)
+-------
+Iteration 123
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (62)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (50)
+-------
+Iteration 124
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (62.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 125
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (63)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 126
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (63.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 127
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (64)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 128
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (64.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 129
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (65)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 130
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (65.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 131
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (66)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 132
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (66.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 133
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (67)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 134
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (67.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (-20)
+-------
+Iteration 135
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (68)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (-20)
+-------
+Iteration 136
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (68.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (-20)
+-------
+Iteration 137
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (69)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (-20)
+-------
+Iteration 138
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (69.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (-20)
+-------
+Iteration 139
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (70)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (-20)
+-------
+Iteration 140
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (70.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (-20)
+-------
+Iteration 141
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (71)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (-20)
+-------
+Iteration 142
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (71.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (-20)
+-------
+Iteration 143
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (72)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (-20)
+-------
+Iteration 144
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (72.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 145
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (73)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 146
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (73.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 147
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (74)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 148
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (74.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 149
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (75)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 150
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (75.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 151
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (76)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 152
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (76.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 153
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (77)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 154
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (77.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (50)
+-------
+Iteration 155
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (78)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (50)
+-------
+Iteration 156
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (78.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (50)
+-------
+Iteration 157
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (79)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (50)
+-------
+Iteration 158
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (79.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (50)
+-------
+Iteration 159
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (80)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (50)
+-------
+Iteration 160
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (80.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 161
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (81)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 162
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (81.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 163
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (82)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 164
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (82.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 165
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (83)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 166
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (83.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 167
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (84)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 168
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (84.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 169
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (85)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 170
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (85.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (-20)
+-------
+Iteration 171
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (86)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (-20)
+-------
+Iteration 172
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (86.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (-20)
+-------
+Iteration 173
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (87)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (-20)
+-------
+Iteration 174
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (87.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (-20)
+-------
+Iteration 175
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (88)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (-20)
+-------
+Iteration 176
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (88.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (-20)
+-------
+Iteration 177
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (89)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (-20)
+-------
+Iteration 178
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (89.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (-20)
+-------
+Iteration 179
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (90)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (-20)
+-------
+Iteration 180
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (90.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 181
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (91)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 182
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (91.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 183
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (92)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 184
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (92.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 185
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (93)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 186
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (93.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 187
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (94)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 188
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (94.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 189
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (95)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 190
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (95.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (50)
+-------
+Iteration 191
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (96)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (50)
+-------
+Iteration 192
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (96.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (50)
+-------
+Iteration 193
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (97)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (50)
+-------
+Iteration 194
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (97.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (50)
+-------
+Iteration 195
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (98)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (50)
+-------
+Iteration 196
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (98.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 197
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (99)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 198
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (99.5)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)
+-------
+Iteration 199
+Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (100)
+Heccer (dStep) : (0.5)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -2.23189e-10 0 5.46404e+09 16.2439
+00001 :: FINISH
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Membrane Potentials (pdVms[0]) : (10)

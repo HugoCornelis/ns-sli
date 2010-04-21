@@ -16,14 +16,15 @@
  */
 //-------------------------------------------------------------------
 
+#include "ascfile_struct.h"
 #include "heccer/heccer.h"
 #include "heccer/output.h"
+#include "heccer/pulsegen.h"
 #include "heccer/neurospaces/heccer.h"
+#include "hsolve_struct.h"
 #include "neurospaces_ext.h"
 #include "nsintegrator_struct.h"
 #include "neurospaces/symboltable.h"
-#include "ascfile_struct.h"
-#include "hsolve_struct.h"
 #ifndef NSINTEGRATOR_H
 #define NSINTEGRATOR_H
 
