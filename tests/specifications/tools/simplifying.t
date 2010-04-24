@@ -87,7 +87,6 @@ PUBLIC_MODELS
         END PARAMETERS
         HH_GATE "HH_activation"
           PARAMETERS
-            PARAMETER ( HH_NUMBER_OF_TABLE_ENTRIES = 1.79769e+308 ),
             PARAMETER ( state_init = 0.0837136 ),
             PARAMETER ( POWER = 4 ),
           END PARAMETERS
@@ -114,7 +113,6 @@ PUBLIC_MODELS
         END HH_GATE
         HH_GATE "HH_inactivation"
           PARAMETERS
-            PARAMETER ( HH_NUMBER_OF_TABLE_ENTRIES = 1.79769e+308 ),
             PARAMETER ( state_init = 0.747485 ),
             PARAMETER ( POWER = 1 ),
           END PARAMETERS
