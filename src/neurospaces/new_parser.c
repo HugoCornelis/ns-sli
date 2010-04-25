@@ -441,15 +441,31 @@ void Gabs_position(struct symtab_HSolveListElement *phsle,
 		   double x0,double y0,double z0,
 		   double x,double y,double z){
 
-  double x1,y1,z1,dx,dy,dz;
+    if (!BioComponentSetAtXYZ((struct symtab_BioComponent *)phsle, x, y, z, FLAG_PARA_DERIVED))
+    {
+	fprintf(stderr, "cannot put %s at its correct location in 3D space", SymbolGetName(phsle));
+    }
 
-  SymbolSetParameterDouble(phsle, "X",x);
-  SymbolSetParameterDouble(phsle, "Y",y);
-  SymbolSetParameterDouble(phsle, "Z",z);
-  
-  SymbolSetParameterDouble(phsle, "rel_X",x - x0);
-  SymbolSetParameterDouble(phsle, "rel_Y",y - y0);
-  SymbolSetParameterDouble(phsle, "rel_Z",z - z0);
+    {
+	struct symtab_Parameters *ppar
+	    = SymbolSetParameterDouble(phsle, "rel_X", x - x0);
+
+/* 	ppar->iFlags |= FLAG_PARA_DERIVED; */
+    }
+
+    {
+	struct symtab_Parameters *ppar
+	    = SymbolSetParameterDouble(phsle, "rel_Y", y - y0);
+
+/* 	ppar->iFlags |= FLAG_PARA_DERIVED; */
+    }
+
+    {
+	struct symtab_Parameters *ppar
+	    = SymbolSetParameterDouble(phsle, "rel_Z", z - z0);
+
+/* 	ppar->iFlags |= FLAG_PARA_DERIVED; */
+    }
 
 }
 
