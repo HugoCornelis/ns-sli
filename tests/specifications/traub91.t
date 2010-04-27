@@ -62,6 +62,7 @@ new_len*new_dia =  1057.5
 						  {
 						   description => "Does the script run a simulation (3) ?",
 						   read => 'time = 0.150000 ; step = 3000',
+						   timeout => 10,
 						  },
 						  {
 						   description => 'Quit the simulator (3).',
@@ -88,6 +89,7 @@ new_len*new_dia =  1057.5
 						  {
 						   description => "Does the script run a simulation (2) ?",
 						   read => 'time = 0.150000 ; step = 3000',
+						   timeout => 10,
 						  },
 						  {
 						   description => 'Quit the simulator (2).',
@@ -114,6 +116,7 @@ new_len*new_dia =  1057.5
 						  {
 						   description => "Does the script run a simulation (1) ?",
 						   read => 'time = 0.150000 ; step = 3000',
+						   timeout => 10,
 						  },
 						  {
 						   description => 'Quit the simulator (1).',
@@ -140,6 +143,7 @@ new_len*new_dia =  1057.5
 						  {
 						   description => "Does the script run a simulation ?",
 						   read => 'time = 0.150000 ; step = 3000',
+						   timeout => 10,
 						  },
 						  {
 						   description => 'Quit the simulator.',
@@ -167,6 +171,7 @@ new_len*new_dia =  1057.5
 						  {
 						   description => "Does the script run a simulation ?",
 						   read => 'time = 0.150000 ; step = 3000',
+						   timeout => 10,
 						  },
 						  {
 						   description => 'Quit the simulator.',
