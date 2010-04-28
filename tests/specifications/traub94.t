@@ -16,7 +16,7 @@ my $test
 						  {
 						   description => "Does the script run a simulation ?",
 						   read => 'END:',
-						   timeout => 15,
+						   timeout => 25,
 						  },
 						  {
 						   description => "Can we quit the simulator such that output is flushed ?",
@@ -62,7 +62,7 @@ my $test
 						  {
 						   description => "Does the script run a simulation ?",
 						   read => 'END:',
-						   timeout => 15,
+						   timeout => 25,
 						  },
 						  {
 						   description => "Can we quit the simulator such that output is flushed ?",
