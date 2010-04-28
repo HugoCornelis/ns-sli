@@ -15,7 +15,8 @@ AM_CPPFLAGS = -DPRE_PROTO_TRAVERSAL
 # \todo these variables are relative to builddir, should be relative to srcdir
 
 EXTRA_DIST = \
-	simlib.g
+	simlib.g \
+	simfuncs
 
 INCLUDES = \
 	-I$(utildir) \

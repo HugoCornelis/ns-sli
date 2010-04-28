@@ -9,7 +9,8 @@ nsdir = $(top_builddir)/src/neurospaces
 olfdir = $(top_builddir)/src/olf
 
 EXTRA_DIST = \
-	libsh 
+	libsh \
+	startup
 
 AM_CLAGS=-DPLAINTERM
 
