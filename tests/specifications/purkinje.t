@@ -17,7 +17,7 @@ my $test
 						   {
 						    description => "Can the morphology be read ?",
 						    read => 'tests/scripts/PurkM9_model/Purk2M9.p read: 1600 compartments',
-						    timeout => 10,
+						    timeout => 20,
 						   },
 
 						   (
@@ -471,7 +471,7 @@ Principal serial ID = 2623 of 56137 Principal successors
 						   {
 						    description => "Can the morphology be read ?",
 						    read => 'tests/scripts/PurkM9_model/Purk2M9_soma.p read: 1 compartments',
-						    timeout => 10,
+						    timeout => 20,
 						   },
 						   {
 						    description => "Are the prototype library and the cell correctly constructed ?",
@@ -890,7 +890,7 @@ VM Membrane Potentials (pdVms[0]) : (-0.068)
 						   {
 						    description => "Can the morphology be read ?",
 						    read => 'tests/scripts/PurkM9_model/Purk2M9_main1.p read: 10 compartments',
-						    timeout => 10,
+						    timeout => 20,
 						   },
 						   {
 						    description => "Is the cell constructed correctly ?",
@@ -962,7 +962,7 @@ VM Membrane Potentials (pdVms[0]) : (-0.068)
 						   {
 						    description => "Can the morphology be read ?",
 						    read => 'tests/scripts/PurkM9_model/Purk2M9.p read: 1600 compartments',
-						    timeout => 10,
+						    timeout => 20,
 						   },
 						   {
 						    description => "Do we have all the segments?",
@@ -1117,7 +1117,7 @@ END PUBLIC_MODELS
 						   {
 						    description => "Can the morphology be read ?",
 						    read => 'tests/scripts/PurkM9_model/Purk2M9.p read: 1600 compartments',
-						    timeout => 10,
+						    timeout => 20,
 						   },
 						   {
 						    description => 'Do we see the simulation time after the simulation has finished ?',
