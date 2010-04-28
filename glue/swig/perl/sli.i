@@ -9,11 +9,7 @@
 %{
 #include "src/config.h"
 /* #include "src/shell/shell_func_ext.h" */
-#if defined(__APPLE__)
-#include <crt_externs.h>
-  //char** environ = *_NSGetEnviron();
 
-#endif
 
 %}
 
