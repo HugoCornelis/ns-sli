@@ -3162,9 +3162,14 @@ END PUBLIC_MODELS
 						   read => 'Final Vm =  -0.07105',
 						  },
 						  {
-						   description => "Can we save the model as an NDF file ?",
+						   description => "Can we save the model as an NDF file -- all ?",
 						   wait => 1,
 						   write => 'call model_container NEUROSPACES_COMMAND "export all ndf /tmp/all0.ndf /cell/**"',
+						  },
+						  {
+						   description => "Can we save the model as an NDF file -- library ?",
+						   wait => 1,
+						   write => 'call model_container NEUROSPACES_COMMAND "export all ndf /tmp/all1.ndf /cell/**"',
 						  },
 						 ],
 				comment => 'This test was derived from one of Dave Beeman\'s tutorial scripts',
@@ -3182,12 +3187,52 @@ END PUBLIC_MODELS
 				command => '/usr/local/bin/ssp',
 				command_tests => [
 						  {
-						   description => 'Can we run the converted file from SSP ?',
+						   description => 'Can we run the converted file from SSP -- all ?',
 						   read => {
 							    application_output_file => "$::config->{core_directory}/output/cell.out",
 							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/simplecell1-ssp.txt",
 							   },
-						   wait => 2,
+						   wait => 3,
+						  },
+						 ],
+				comment => 'This test was derived from one of Dave Beeman\'s tutorial scripts',
+				description => "running the converted model with SSP to see if the conversion was done correctly",
+				preparation => {
+						description => "Create the output/ directory",
+						preparer =>
+						sub
+						{
+						    `mkdir output`;
+						},
+					       },
+				reparation => {
+					       description => "Remove the generated output files in the output/ directory",
+					       reparer =>
+					       sub
+					       {
+ 						   `rm "$::config->{core_directory}/output/cell.out"`;
+						   `rmdir output`;
+					       },
+					      },
+			       },
+			       {
+				arguments => [
+					      '--cell',
+					      '/tmp/all1.ndf',
+					      '--model-name',
+					      'cell',
+					      '--output-fields',
+					      "/cell/soma->Vm",
+					     ],
+				command => '/usr/local/bin/ssp',
+				command_tests => [
+						  {
+						   description => 'Can we run the converted file from SSP -- library ?',
+						   read => {
+							    application_output_file => "$::config->{core_directory}/output/cell.out",
+							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/simplecell1-ssp.txt",
+							   },
+						   wait => 3,
 						  },
 						 ],
 				comment => 'This test was derived from one of Dave Beeman\'s tutorial scripts',
