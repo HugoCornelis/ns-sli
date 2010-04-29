@@ -1067,7 +1067,7 @@ static void DumpMessages(fp,elist,do_all)
 		}
 	} else {
 	/* here we check each msg->src to see if it is on the elist */
-		HASH *hash_table,*hash_create();
+		HASH *hash_table;
 		ENTRY	entry;
 		ENTRY	*tempentry;
 		ENTRY	*dump_hash_find(), *dump_hash_enter();

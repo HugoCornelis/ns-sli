@@ -228,7 +228,20 @@ void InfoHashInit()
     /*
     ** create the hash table
     */
-    info_hash_table = hash_create(HASH_SIZE);
+    //info_hash_table = hash_create(HASH_SIZE);
+
+  int size = HASH_SIZE;
+  info_hash_table = (HASH *)calloc(1,sizeof(HASH));
+  info_hash_table->size = size;
+  info_hash_table->entry = (ENTRY *)calloc(size+1,sizeof(ENTRY));
+  
+  int i;
+  for(i = 0;i < size; i++)
+  {
+    info_hash_table->entry[i].key = NULL;
+    info_hash_table->entry[i].data = NULL;
+  }
+
 }
 
 void InfoHashPut(info)
@@ -267,7 +280,18 @@ void FieldHashInit()
 	/*
 	* create the table
 	*/
-	field_hash_table = hash_create(HASH_SIZE);
+	//field_hash_table = hash_create(HASH_SIZE);
+  int size = HASH_SIZE;
+  field_hash_table = (HASH *)calloc(1,sizeof(HASH));
+  field_hash_table->size = size;
+  field_hash_table->entry = (ENTRY *)calloc(size+1,sizeof(ENTRY));
+  
+  int i;
+  for(i = 0;i < size; i++)
+  {
+    field_hash_table->entry[i].key = NULL;
+    field_hash_table->entry[i].data = NULL;
+  }
 }
 
 /*
@@ -313,18 +337,20 @@ void FuncAdrHashInit()
 	/*
 	* create the table
 	*/
-	func_adr_hash_table = hash_create(HASH_SIZE);
+  //	func_adr_hash_table = hash_create(HASH_SIZE);
 
-	int i = 0;
-	int size = func_adr_hash_table->size;
-	ENTRY tmp;
-
-	for(i = 0;i < size;i++)
-	{
-	  bzero((void*)&func_adr_hash_table->entry[i],sizeof(ENTRY));
-	}
-
-	int k = 1;
+  int size = HASH_SIZE;
+  func_adr_hash_table = (HASH *)calloc(1,sizeof(HASH));
+  //	hash_table = (HASH *)calloc(1,sizeof(HASH));
+  func_adr_hash_table->size = size;
+  func_adr_hash_table->entry = (ENTRY *)calloc(size+1,sizeof(ENTRY));
+  
+  int i;
+  for(i = 0;i < size; i++)
+  {
+    func_adr_hash_table->entry[i].key = NULL;
+    func_adr_hash_table->entry[i].data = NULL;
+  }
 }
 
 char *FieldHashFindAndCopy(type)
@@ -413,7 +439,19 @@ void FuncNameHashInit()
 	/*
 	* create the table
 	*/
-	func_name_hash_table = hash_create(HASH_SIZE);
+	//func_name_hash_table = hash_create(HASH_SIZE);
+  int size = HASH_SIZE;
+  func_name_hash_table = (HASH *)calloc(1,sizeof(HASH));
+  func_name_hash_table->size = size;
+  func_name_hash_table->entry = (ENTRY *)calloc(size+1,sizeof(ENTRY));
+  
+  int i;
+  for(i = 0;i < size; i++)
+  {
+    func_name_hash_table->entry[i].key = NULL;
+    func_name_hash_table->entry[i].data = NULL;
+  }
+
 }
 
 void FuncNameHashPut(func)

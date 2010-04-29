@@ -54,12 +54,24 @@ char 		*name;
 */
 void NameHashInit()
 {
-HASH *hash_create();
+  //HASH *hash_create();
 
     /*
     ** create the table
     */
-    name_hash_table = hash_create(2000);
+    //name_hash_table = hash_create(2000);
+  int size = 2000;
+  name_hash_table = (HASH *)calloc(1,sizeof(HASH));
+  name_hash_table->size = size;
+  name_hash_table->entry = (ENTRY *)calloc(size+1,sizeof(ENTRY));
+  
+  int i;
+  for(i = 0;i < size; i++)
+  {
+    name_hash_table->entry[i].key = NULL;
+    name_hash_table->entry[i].data = NULL;
+  }
+
 }
 
 int AddName(name)
