@@ -94,12 +94,23 @@ int factor = 1;
 */
 void ElementHashInit()
 {
-HASH *hash_create();
 
 	/*
 	* create the table
 	*/
-	element_hash_table = hash_create(10007);
+//	element_hash_table = hash_create(10007);
+  int size = 10007;
+  element_hash_table = (HASH *)calloc(size,sizeof(HASH));
+  //	hash_table = (HASH *)calloc(1,sizeof(HASH));
+  element_hash_table->size = size;
+  element_hash_table->entry = (ENTRY *)calloc(size+1,sizeof(ENTRY));
+  
+  int i;
+  for(i = 0;i < size; i++)
+  {
+    element_hash_table->entry[i].key = NULL;
+    element_hash_table->entry[i].data = NULL;
+  }
 }
 
 int ElementHashPut(elm)

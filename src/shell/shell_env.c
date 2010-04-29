@@ -26,6 +26,10 @@ static char rcsid[] = "$Id: shell_env.c,v 1.2 2005/06/26 08:25:37 svitak Exp $";
 
 #include "shell_ext.h"
 
+#ifdef __APPLE__
+#include <crt_externs.h>
+#endif
+
 /*
 show_envp()
 {
@@ -41,7 +45,12 @@ extern char **global_envp;
 void show_environ()
 {
 int i = 0;
-extern char **environ;
+
+#ifdef __APPLE__
+#define environ (*_NSGetEnviron())
+#else
+ extern char **environ;
+#endif
 
     while(environ[i] != NULL){
 	printf("%s\n",environ[i++]);
