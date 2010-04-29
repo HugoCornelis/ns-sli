@@ -25,7 +25,6 @@ Makefile\.in$
 ^html/htdocs/neurospaces_project/ns-sli/
 ^installed
 ^missing$
-^src/.gdbinit
 ^src/c2genesis/c2genesis$
 ^src/c2genesis/makefunc$
 ^src/c2genesis/makelib$

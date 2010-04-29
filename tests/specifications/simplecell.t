@@ -3169,7 +3169,7 @@ END PUBLIC_MODELS
 						  {
 						   description => "Can we save the model as an NDF file -- library ?",
 						   wait => 1,
-						   write => 'call model_container NEUROSPACES_COMMAND "export all ndf /tmp/all1.ndf /cell/**"',
+						   write => 'call model_container NEUROSPACES_COMMAND "export library ndf /tmp/all1.ndf /cell/**"',
 						  },
 						 ],
 				comment => 'This test was derived from one of Dave Beeman\'s tutorial scripts',
