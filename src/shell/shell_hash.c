@@ -82,10 +82,10 @@ static char rcsid[] = "$Id: shell_hash.c,v 1.5 2005/06/29 16:42:39 svitak Exp $"
 #include <unistd.h>
 #endif
 
-static HASH *info_hash_table;
-static HASH *func_name_hash_table;
-static HASH *func_adr_hash_table;
-static HASH *field_hash_table;
+HASH *info_hash_table;
+HASH *func_name_hash_table;
+HASH *func_adr_hash_table;
+HASH *field_hash_table;
 
 /*
 ** A prime HASH_SIZE should fix issues with keys getting hashed to a
@@ -314,6 +314,17 @@ void FuncAdrHashInit()
 	* create the table
 	*/
 	func_adr_hash_table = hash_create(HASH_SIZE);
+
+	int i = 0;
+	int size = func_adr_hash_table->size;
+	ENTRY tmp;
+
+	for(i = 0;i < size;i++)
+	{
+	  bzero((void*)&func_adr_hash_table->entry[i],sizeof(ENTRY));
+	}
+
+	int k = 1;
 }
 
 char *FieldHashFindAndCopy(type)

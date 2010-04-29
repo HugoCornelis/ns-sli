@@ -25,6 +25,6 @@ typedef struct hash_type {
 } HASH;
 
 WORD   hash_function();
-HASH  *hash_create();
+HASH  *hash_create(WORD size);
 ENTRY *hash_find();
 ENTRY *hash_enter();

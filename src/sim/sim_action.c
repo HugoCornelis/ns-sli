@@ -104,7 +104,7 @@ static char rcsid[] = "$Id: sim_action.c,v 1.2 2005/06/27 19:00:57 svitak Exp $"
 #include "shell_func_ext.h"
 #include "ss_func_ext.h"
 
-HASH *action_hash_table;
+HASH *action_hash_table = NULL;
 
 Element*	ActiveElement = NULL;
 GenesisObject*	ActiveObject = NULL;
@@ -117,12 +117,26 @@ extern int yyerror();
 */
 void ActionHashInit()
 {
-HASH *hash_create();
-
     /*
     ** create the table
     */
-    action_hash_table = hash_create(1000);
+//  action_hash_table = hash_create(1000);
+
+  int size = 1000;
+ action_hash_table = (HASH *)calloc(size,sizeof(HASH));
+	//	hash_table = (HASH *)calloc(1,sizeof(HASH));
+ action_hash_table->size = size;
+ action_hash_table->entry = (ENTRY *)calloc(size+1,sizeof(ENTRY));
+
+ int i;
+ for(i = 0;i < size; i++)
+ {
+   action_hash_table->entry[i].key = NULL;
+   action_hash_table->entry[i].data = NULL;
+ }
+
+ return((HASH *)action_hash_table);
+
 }
 
 int ActionHashPut(key,action)

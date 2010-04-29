@@ -79,12 +79,25 @@ HASH *object_hash_table;
 */
 void ObjectHashInit()
 {
-HASH *hash_create();
+  //HASH *hash_create();
 
     /*
     ** create the table
     */
-    object_hash_table = hash_create(2000);
+    //object_hash_table = hash_create(2000);
+  int size = 2000;
+  object_hash_table = (HASH *)calloc(1,sizeof(HASH));
+  //	hash_table = (HASH *)calloc(1,sizeof(HASH));
+  object_hash_table->size = size;
+  object_hash_table->entry = (ENTRY *)calloc(size+1,sizeof(ENTRY));
+  
+  int i;
+  for(i = 0;i < size; i++)
+  {
+    object_hash_table->entry[i].key = NULL;
+    object_hash_table->entry[i].data = NULL;
+  }
+
 }
 
 

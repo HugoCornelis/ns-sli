@@ -54,7 +54,7 @@ static char rcsid[] = "$Id: sim_class.c,v 1.2 2005/06/27 19:00:58 svitak Exp $";
 #include "sim_ext.h"
 #include "hash.h"
 
-HASH *class_hash_table;
+HASH *class_hash_table = NULL;
 
 int CheckClass(element,id)
 Element *element;
@@ -139,12 +139,27 @@ ClassList*	list2;
 */
 void ClassHashInit()
 {
-HASH *hash_create();
+  //HASH *hash_create();
 
     /*
     ** create the table
     */
-    class_hash_table = hash_create(100);
+//class_hash_table = (HASH*)hash_create(100);
+
+ int size = 100;
+
+ class_hash_table = (HASH *)calloc(size,sizeof(HASH));
+ class_hash_table->size = size;
+ class_hash_table->entry = (ENTRY *)calloc(size+1,sizeof(ENTRY));
+
+ int i;
+ for(i = 0;i < size; i++)
+ {
+     class_hash_table->entry[i].key = NULL;
+     class_hash_table->entry[i].data = NULL;
+ }
+
+ i = 1;
 }
 
 int ClassHashPut(key,class)
