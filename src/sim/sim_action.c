@@ -135,7 +135,7 @@ void ActionHashInit()
    action_hash_table->entry[i].data = NULL;
  }
 
- return((HASH *)action_hash_table);
+/*  return((HASH *)action_hash_table); */
 
 }
 
