@@ -104,6 +104,8 @@ set_nsintegrator_verbose_level 2
 
 echo Initiated
 
+setfield /neurospaces_integrator heccer_dump_selection { HECCER_DUMP_ALL_EXTENDED }
+
 call neurospaces_integrator NSINTEGRATOR_DUMP
 
 echo -------

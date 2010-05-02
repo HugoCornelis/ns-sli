@@ -3,12 +3,13 @@
 
 use strict;
 
+my $root_neutral = "/hardcoded_neutral";
+
 
 # slurp mode
 
 local $/;
 
-my $root_neutral = "/hardcoded_neutral";
 
 my $test
     = {
@@ -25,6 +26,13 @@ my $test
 
 
 
+						  {
+						  
+						   description => "Is Z_A->table[1] set ?",
+						   read => '60.1562',
+						   write => 'printparameter /hardcoded_neutral/c2/kc/HH_concentration/A table[1]',
+						  
+						  },
 
 
 
@@ -116,12 +124,10 @@ my $test
 						  {
 						   description => "Are gates tabulated correctly, concentration dependent potassium gates ?",,
 						   read => (join '', `cat  /usr/local/heccer/tests/specifications/strings/table-kc.txt | perl -pe 's(unnamed test)($root_neutral)g'`),
-						   timeout => 5,
-						   write => undef,
+						   timeout => 15,
 						  },
 						 ],
 				description => "Calcium dependent potassium gate tabulation",
-				#numerical_compare => 'small arithmetic due to double to float conversions and vice versa',
 			       },
 
 

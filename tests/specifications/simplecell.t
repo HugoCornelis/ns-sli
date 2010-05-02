@@ -1558,6 +1558,70 @@ END PUBLIC_MODELS
 ',
 						   write => 'call model_container NEUROSPACES_COMMAND "export all ndf STDOUT /**"',
 						  },
+						  {
+						   description => "Can we set the options for the DUMP command ?",
+						   read => 'genesis',
+						   write => 'setfield /neurospaces_integrator heccer_dump_selection { HECCER_DUMP_VM_COMPARTMENT_MATRIX + HECCER_DUMP_VM_COMPARTMENT_DATA + HECCER_DUMP_VM_COMPARTMENT_OPERATIONS + HECCER_DUMP_VM_CHANNEL_POOL_FLUXES + HECCER_DUMP_VM_MECHANISM_DATA + HECCER_DUMP_VM_MECHANISM_OPERATIONS + HECCER_DUMP_VM_SUMMARY }',
+						  },
+						  {
+						   description => "Can we dump the model from heccer ?",
+						   read => 'Heccer (pcName) : (/cell)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (0.500005)
+Heccer (dStep) : (5e-06)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (3)
+Compartment operations
+-----
+00000 :: FORWARD_ELIMINATION    0
+00001 :: FINISH
+00002 :: BACKWARD_SUBSTITUTION    2
+00003 :: FINISH_ROW
+00004 :: FINISH
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -1.31948e-10 0 397887 1.04242
+00001 :: INITIALIZECHANNEL 0.045 4.53047e-07
+00002 :: SPRINGMASS -1 (nil) -1 0 0							 -1 0 0
+00003 :: UPDATECOMPARTMENTCURRENT
+00004 :: INITIALIZECHANNEL -0.082 3.39786e-08
+00005 :: SPRINGMASS -1 (nil) -1 1 0							 -1 0 0
+00006 :: UPDATECOMPARTMENTCURRENT
+00007 :: COMPARTMENT							 -5.03854e-10 5e-10 88419.4 1.01001
+00008 :: INITIALIZECHANNEL 0.045 3.39292e-06
+00009 :: LOADVOLTAGETABLE
+00010 :: CONCEPTGATE 0 3 (nil)							 0.0436651
+00011 :: CONCEPTGATE 1 1 (nil)							 0.356333
+00012 :: UPDATECOMPARTMENTCURRENT
+00013 :: INITIALIZECHANNEL -0.082 1.01788e-06
+00014 :: LOADVOLTAGETABLE
+00015 :: CONCEPTGATE 2 4 (nil)							 0.466239
+00016 :: UPDATECOMPARTMENTCURRENT
+00017 :: EVENTGENERATE (dVm) 0 0.01 2147483647							 0.003515 0
+00018 :: FINISH
+VM Diagonals (pdDiagonals[0]) : (1.04242)
+VM Diagonals (pdDiagonals[1]) : (1.01001)
+VM Axial Resistances (pdAxres[0]) : (-0.00925926)
+VM Axial Resistances (pdAxres[1]) : (-0.0416667)
+VM Axial Resistances (pdAxres[2]) : (-0.0416667)
+VM Axial Resistances (pdResults[0]) : (-0.0711828)
+VM Axial Resistances (pdResults[1]) : (1.04242)
+VM Axial Resistances (pdResults[2]) : (-0.0710563)
+VM Axial Resistances (pdResults[3]) : (1.01427)
+VM Membrane Potentials (pdVms[0]) : (-0.0711767)
+VM Membrane Potentials (pdVms[1]) : (-0.07105)
+',
+						   write => 'call /neurospaces_integrator NSINTEGRATOR_DUMP',
+						  },
 						 ],
 				comment => 'This test was derived from one of Dave Beeman\'s tutorial scripts',
 				description => "one of the simplest tutorial scripts, version without hsolve, with synchans and spikegens",
@@ -3162,14 +3226,92 @@ END PUBLIC_MODELS
 						   read => 'Final Vm =  -0.07105',
 						  },
 						  {
+						   description => "Can we wait for the genesis prompt ?",
+						   read => 'genesis',
+						  },
+						  {
 						   description => "Can we save the model as an NDF file -- all ?",
-						   wait => 1,
+						   read => 'genesis',
 						   write => 'call model_container NEUROSPACES_COMMAND "export all ndf /tmp/all0.ndf /cell/**"',
 						  },
 						  {
 						   description => "Can we save the model as an NDF file -- library ?",
-						   wait => 1,
+						   read => 'genesis',
 						   write => 'call model_container NEUROSPACES_COMMAND "export library ndf /tmp/all1.ndf /cell/**"',
+						  },
+						  {
+						   description => "Can we set the options for the DUMP command ?",
+						   read => 'genesis',
+						   write => 'setfield /neurospaces_integrator heccer_dump_selection { HECCER_DUMP_VM_COMPARTMENT_MATRIX + HECCER_DUMP_VM_COMPARTMENT_DATA + HECCER_DUMP_VM_COMPARTMENT_OPERATIONS + HECCER_DUMP_VM_CHANNEL_POOL_FLUXES + HECCER_DUMP_VM_MECHANISM_DATA + HECCER_DUMP_VM_MECHANISM_OPERATIONS + HECCER_DUMP_VM_SUMMARY }',
+						  },
+						  {
+						   description => "Can we compile the model ?",
+						   read => 'genesis',
+						   write => 'reset',
+						  },
+						  {
+						   description => "Can we compile the model ?",
+						   read => 'genesis',
+						   write => 'set_nsintegrator_verbose_level 2',
+						  },
+						  {
+						   description => "Can we dump the model from heccer ?",
+						   read => 'Heccer (pcName) : (/cell)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (0)
+Heccer (dStep) : (5e-06)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (3)
+Compartment operations
+-----
+00000 :: FORWARD_ELIMINATION    0
+00001 :: FINISH
+00002 :: BACKWARD_SUBSTITUTION    2
+00003 :: FINISH_ROW
+00004 :: FINISH
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -1.31948e-10 0 397887 1.04242
+00001 :: INITIALIZECHANNEL 0.045 4.53047e-07
+00002 :: SPRINGMASS -1 (nil) -1 0 0							 -1 0 0
+00003 :: UPDATECOMPARTMENTCURRENT
+00004 :: INITIALIZECHANNEL -0.082 3.39786e-08
+00005 :: SPRINGMASS -1 (nil) -1 1 0							 -1 0 0
+00006 :: UPDATECOMPARTMENTCURRENT
+00007 :: COMPARTMENT							 -5.03854e-10 5e-10 88419.4 1.01001
+00008 :: INITIALIZECHANNEL 0.045 3.39292e-06
+00009 :: LOADVOLTAGETABLE
+00010 :: CONCEPTGATE 0 3 (nil)							 0.0436651
+00011 :: CONCEPTGATE 1 1 (nil)							 0.356333
+00012 :: UPDATECOMPARTMENTCURRENT
+00013 :: INITIALIZECHANNEL -0.082 1.01788e-06
+00014 :: LOADVOLTAGETABLE
+00015 :: CONCEPTGATE 2 4 (nil)							 0.466239
+00016 :: UPDATECOMPARTMENTCURRENT
+00017 :: EVENTGENERATE (dVm) 0 0.01 2147483647							 0.003515 0
+00018 :: FINISH
+VM Diagonals (pdDiagonals[0]) : (1.04242)
+VM Diagonals (pdDiagonals[1]) : (1.01001)
+VM Axial Resistances (pdAxres[0]) : (-0.00925926)
+VM Axial Resistances (pdAxres[1]) : (-0.0416667)
+VM Axial Resistances (pdAxres[2]) : (-0.0416667)
+VM Axial Resistances (pdResults[0]) : (-0.0711828)
+VM Axial Resistances (pdResults[1]) : (1.04242)
+VM Axial Resistances (pdResults[2]) : (-0.0710563)
+VM Axial Resistances (pdResults[3]) : (1.01427)
+VM Membrane Potentials (pdVms[0]) : (-0.0711767)
+VM Membrane Potentials (pdVms[1]) : (-0.07105)
+',
+						   write => 'call /neurospaces_integrator NSINTEGRATOR_DUMP',
 						  },
 						 ],
 				comment => 'This test was derived from one of Dave Beeman\'s tutorial scripts',
@@ -3177,6 +3319,10 @@ END PUBLIC_MODELS
 			       },
 			       {
 				arguments => [
+# 					      '--cell',
+# 					      'tests/cells/singlep.ndf',
+# 					      '--dump',
+
 					      '--cell',
 					      '/tmp/all0.ndf',
 					      '--model-name',
