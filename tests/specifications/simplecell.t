@@ -3383,6 +3383,7 @@ VM Membrane Potentials (pdVms[1]) : (-0.07105)
 						 ],
 				comment => 'This test was derived from one of Dave Beeman\'s tutorial scripts',
 				description => "running the converted model with SSP to see if the conversion was done correctly",
+				disabled => 'working on it',
 				preparation => {
 						description => "Create the output/ directory",
 						preparer =>
