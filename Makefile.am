@@ -7,7 +7,7 @@ EXTRA_DIST = \
 	doxygen.cfg \
 	tests.config 
 
-TESTS = $(top_builddir)/tests/neurospaces_harness
+TESTS = /usr/local/bin/neurospaces_harness
 
 
 CLEANFILES = \
