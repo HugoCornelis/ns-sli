@@ -3369,6 +3369,121 @@ VM Membrane Potentials (pdVms[1]) : (-0.07105)
 					      'cell',
 					      '--output-fields',
 					      "/cell/soma->Vm",
+					      '--dump',
+					      '--time',
+					      '0',
+					     ],
+				command => '/usr/local/bin/ssp',
+				command_tests => [
+						  {
+						   description => 'Can we run the converted file from SSP -- library ?',
+						   read => 'Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (0)
+Heccer (dStep) : (2e-05)
+Intermediary (iCompartments) : (2)
+Compartment (mc.iType) : (1)
+Compartment (iParent) : (-1)
+Compartment (dCm) : (2.82743e-11)
+Compartment (dEm) : (-0.0594)
+Compartment (dInitVm) : (-0.07)
+Compartment (dInject) : (5e-10)
+Compartment (dRa) : (12732.4)
+Compartment (dRm) : (1.17892e+08)
+Compartment (mc.iType) : (1)
+Compartment (iParent) : (0)
+Compartment (dCm) : (6.28319e-12)
+Compartment (dEm) : (-0.07)
+Compartment (dInitVm) : (-0.07)
+Compartment (dInject) : (0)
+Compartment (dRa) : (9.5493e+06)
+Compartment (dRm) : (5.30511e+08)
+MinimumDegree (iEntries) : (2)
+MinimumDegree (piChildren[0]) : (1)
+MinimumDegree (piChildren[0][0]) : (1)
+MinimumDegree (piChildren[1]) : (0)
+MinimumDegree (piForward[0]) : (1)
+MinimumDegree (piForward[1]) : (0)
+MinimumDegree (piBackward[0]) : (1)
+MinimumDegree (piBackward[1]) : (0)
+Tables (iTabulatedGateCount) : (3)
+Tabulated gate 0, interval (dStart) : (-0.1)
+Tabulated gate 0, interval (dEnd) : (0.05)
+Tabulated gate 0, interval (dStep) : (5e-05)
+Tabulated gate 0, interpolation (iShape) : (0)
+Tabulated gate 0, (iEntries) : (3000)
+Tabulated gate 1, interval (dStart) : (-0.1)
+Tabulated gate 1, interval (dEnd) : (0.05)
+Tabulated gate 1, interval (dStep) : (5e-05)
+Tabulated gate 1, interpolation (iShape) : (0)
+Tabulated gate 1, (iEntries) : (3000)
+Tabulated gate 2, interval (dStart) : (-0.1)
+Tabulated gate 2, interval (dEnd) : (0.05)
+Tabulated gate 2, interval (dStep) : (5e-05)
+Tabulated gate 2, interpolation (iShape) : (0)
+Tabulated gate 2, (iEntries) : (3000)
+Compartment operations
+-----
+00000 :: FORWARD_ELIMINATION    0
+00001 :: FINISH
+00002 :: BACKWARD_SUBSTITUTION    2
+00003 :: FINISH_ROW
+00004 :: FINISH
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -1.31948e-10 0 1.59155e+06 1.16967
+00001 :: INITIALIZECHANNEL 0.045 2.84658e-05
+00002 :: SPRINGMASS -1 (nil) -1 0 0							 -1 0 0
+00003 :: UPDATECOMPARTMENTCURRENT
+00004 :: INITIALIZECHANNEL -0.082 4.26987e-06
+00005 :: SPRINGMASS -1 (nil) -1 1 0							 -1 0 0
+00006 :: UPDATECOMPARTMENTCURRENT
+00007 :: COMPARTMENT							 -5.03853e-10 5e-10 353678 1.04004
+00008 :: INITIALIZECHANNEL 0.045 3.39292e-06
+00009 :: LOADVOLTAGETABLE
+00010 :: CONCEPTGATE 0 3 (nil)							 0.0526213
+00011 :: CONCEPTGATE 1 1 (nil)							 0.597868
+00012 :: UPDATECOMPARTMENTCURRENT
+00013 :: INITIALIZECHANNEL -0.082 1.01788e-06
+00014 :: LOADVOLTAGETABLE
+00015 :: CONCEPTGATE 2 4 (nil)							 0.316911
+00016 :: UPDATECOMPARTMENTCURRENT
+00017 :: EVENTGENERATE (dVm) 0 0.01 2147483647							 -1 0
+00018 :: FINISH
+VM Diagonals (pdDiagonals[0]) : (1.16967)
+VM Diagonals (pdDiagonals[1]) : (1.04004)
+VM Axial Resistances (pdAxres[0]) : (-0.0370371)
+VM Axial Resistances (pdAxres[1]) : (-0.166667)
+VM Axial Resistances (pdAxres[2]) : (-0.166667)
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Axial Resistances (pdResults[2]) : (0)
+VM Axial Resistances (pdResults[3]) : (0)
+VM Membrane Potentials (pdVms[0]) : (-0.07)
+VM Membrane Potentials (pdVms[1]) : (-0.07)
+',
+						   wait => 3,
+						  },
+						 ],
+				comment => 'This test was derived from one of Dave Beeman\'s tutorial scripts',
+				description => "compiling the converted model with SSP to see if the conversion was done correctly",
+			       },
+			       {
+				arguments => [
+					      '--cell',
+					      '/tmp/all1.ndf',
+					      '--model-name',
+					      'cell',
+					      '--output-fields',
+					      "/cell/soma->Vm",
 					     ],
 				command => '/usr/local/bin/ssp',
 				command_tests => [
@@ -3383,7 +3498,6 @@ VM Membrane Potentials (pdVms[1]) : (-0.07105)
 						 ],
 				comment => 'This test was derived from one of Dave Beeman\'s tutorial scripts',
 				description => "running the converted model with SSP to see if the conversion was done correctly",
-				disabled => 'working on it',
 				preparation => {
 						description => "Create the output/ directory",
 						preparer =>

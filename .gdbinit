@@ -15,7 +15,7 @@ set args tests/scripts/test-simplecell/simplecell-1.g
 # set args -nox tests/scripts/rallpack1/scale_cable 500 1000 tests/scripts/rallpack1/cable
 # set args -nox tests/scripts/rallpack1/cable 500 1000 tests/scripts/rallpack3/axon
 # set args -nox tests/scripts/rallpack3/axon 500 1000 tests/scripts/rallpack3/axon
-set args tests/scripts/test-traub94cell-v0/traub94cell1.g 
+# set args tests/scripts/test-traub94cell-v0/traub94cell1.g 
 # cd ..
 file src/ns-sli
 break parsererror

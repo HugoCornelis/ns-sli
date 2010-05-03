@@ -41,8 +41,21 @@ setfield /cell/soma inject 0.5e-9
 // 	setfield /cell/soma/K_hh_tchan X_init 0.3176769097
 // end
 
+str filename = "output/simplecell-1-" @ {0.5e-9} @"nA"
+
+/* Create the output element */
+create asc_file /output/plot_out
+useclock /output/plot_out 0
+
+addmsg /cell/soma /output/plot_out SAVE Vm
+
+setfield /output/plot_out filename {filename} leave_open 1
+
+
 check
 reset
+
+
 echo "Initial Vm = " {getfield /cell/soma Vm}
 echo "Initial Na X = " {getfield /cell/soma/Na_hh_tchan X}
 echo "Initial Na Y = " {getfield /cell/soma/Na_hh_tchan Y}
