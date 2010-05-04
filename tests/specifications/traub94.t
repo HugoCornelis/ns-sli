@@ -24,7 +24,7 @@ my $test
 						   write => 'quit',
 						  },
 						  {
-						   comment => 'small deviations from the G-2 generated output file',
+						   comment => 'there are serious deviations from the G-2 generated output file, unclear why, but it maybe related to float and double precision number (in)accuracies.',
 						   description => "Is the generated output file correct ?",
 						   numerical_compare => 'small differences on the automated tester machine',
 						   read => {
