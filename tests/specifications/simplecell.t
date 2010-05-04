@@ -3953,6 +3953,16 @@ PRIVATE_MODELS
   CHILD "dend_37_1" "dend_inserted_37"
   END CHILD
   GROUP "cell_23_0"
+    FORWARDPARAMETERS
+      PARAMETER ( NAME_0 = "/cell/dend/Inh_channel" ),
+      PARAMETER ( VALUE_0 = 0.397888 ),
+      PARAMETER ( NAME_1 = "/cell/dend/Ex_channel" ),
+      PARAMETER ( VALUE_1 = 0.795775 ),
+      PARAMETER ( NAME_2 = "/cell/soma/K_hh_tchan" ),
+      PARAMETER ( VALUE_2 = 360 ),
+      PARAMETER ( NAME_3 = "/cell/soma/Na_hh_tchan" ),
+      PARAMETER ( VALUE_3 = 1200 ),
+    END FORWARDPARAMETERS
     CHILD "soma_inserted_24" "soma"
     END CHILD
     CHILD "dend_inserted_37" "dend"
