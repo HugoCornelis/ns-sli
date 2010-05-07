@@ -3234,6 +3234,11 @@ END PUBLIC_MODELS
 						   read => 'genesis',
 						   write => 'call model_container NEUROSPACES_COMMAND "export all ndf /tmp/all0.ndf /cell/**"',
 						  },
+# 						  {
+# 						   description => "Can we reduce the model ?",
+# 						   read => 'genesis',
+# 						   write => 'call model_container NEUROSPACES_COMMAND "reduce"',
+# 						  },
 						  {
 						   description => "Can we save the model as an NDF file -- library ?",
 						   read => 'genesis',
@@ -3331,15 +3336,15 @@ VM Membrane Potentials (pdVms[1]) : (-0.07105)
 NEUROSPACES NDF
 
 PRIVATE_MODELS
-  GROUP "proto_1_0"
+  GROUP "proto_3_0"
   END GROUP
-  CHILD "proto_1_0" "proto_inserted_1"
+  CHILD "proto_3_0" "proto_inserted_3"
   END CHILD
-  GROUP "output_2_0"
+  GROUP "output_4_0"
   END GROUP
-  CHILD "output_2_0" "output_inserted_2"
+  CHILD "output_4_0" "output_inserted_4"
   END CHILD
-  SEGMENT "compartment_4_0"
+  SEGMENT "compartment_6_0"
     PARAMETERS
       PARAMETER ( RA = 0.3 ),
       PARAMETER ( RM = 0.33333 ),
@@ -3350,9 +3355,9 @@ PRIVATE_MODELS
       PARAMETER ( ELEAK = -0.07 ),
     END PARAMETERS
   END SEGMENT
-  CHILD "compartment_4_0" "compartment_inserted_4"
+  CHILD "compartment_6_0" "compartment_inserted_6"
   END CHILD
-  GATE_KINETIC "A_7_0"
+  GATE_KINETIC "A_9_0"
     PARAMETERS
       PARAMETER ( HH_AB_Tau = -0.01 ),
       PARAMETER ( HH_AB_Offset_E = 0.045 ),
@@ -3362,9 +3367,9 @@ PRIVATE_MODELS
       PARAMETER ( HH_AB_Scale = -4500 ),
     END PARAMETERS
   END GATE_KINETIC
-  CHILD "A_7_0" "A_inserted_7"
+  CHILD "A_9_0" "A_inserted_9"
   END CHILD
-  GATE_KINETIC "B_8_0"
+  GATE_KINETIC "B_10_0"
     PARAMETERS
       PARAMETER ( HH_AB_Tau = 0.018 ),
       PARAMETER ( HH_AB_Offset_E = 0.07 ),
@@ -3374,21 +3379,21 @@ PRIVATE_MODELS
       PARAMETER ( HH_AB_Scale = 4000 ),
     END PARAMETERS
   END GATE_KINETIC
-  CHILD "B_8_0" "B_inserted_8"
+  CHILD "B_10_0" "B_inserted_10"
   END CHILD
-  HH_GATE "HH_activation_6_0"
+  HH_GATE "HH_activation_8_0"
     PARAMETERS
       PARAMETER ( POWER = 3 ),
       PARAMETER ( state_init = -1 ),
     END PARAMETERS
-    CHILD "A_7_0" "A"
+    CHILD "A_9_0" "A"
     END CHILD
-    CHILD "B_8_0" "B"
+    CHILD "B_10_0" "B"
     END CHILD
   END HH_GATE
-  CHILD "HH_activation_6_0" "HH_activation_inserted_6"
+  CHILD "HH_activation_8_0" "HH_activation_inserted_8"
   END CHILD
-  GATE_KINETIC "A_10_0"
+  GATE_KINETIC "A_12_0"
     PARAMETERS
       PARAMETER ( HH_AB_Tau = 0.02 ),
       PARAMETER ( HH_AB_Offset_E = 0.07 ),
@@ -3398,9 +3403,9 @@ PRIVATE_MODELS
       PARAMETER ( HH_AB_Scale = 70 ),
     END PARAMETERS
   END GATE_KINETIC
-  CHILD "A_10_0" "A_inserted_10"
+  CHILD "A_12_0" "A_inserted_12"
   END CHILD
-  GATE_KINETIC "B_11_0"
+  GATE_KINETIC "B_13_0"
     PARAMETERS
       PARAMETER ( HH_AB_Tau = -0.01 ),
       PARAMETER ( HH_AB_Offset_E = 0.04 ),
@@ -3410,21 +3415,21 @@ PRIVATE_MODELS
       PARAMETER ( HH_AB_Scale = 1000 ),
     END PARAMETERS
   END GATE_KINETIC
-  CHILD "B_11_0" "B_inserted_11"
+  CHILD "B_13_0" "B_inserted_13"
   END CHILD
-  HH_GATE "HH_inactivation_9_0"
+  HH_GATE "HH_inactivation_11_0"
     PARAMETERS
       PARAMETER ( POWER = 1 ),
       PARAMETER ( state_init = -1 ),
     END PARAMETERS
-    CHILD "A_10_0" "A"
+    CHILD "A_12_0" "A"
     END CHILD
-    CHILD "B_11_0" "B"
+    CHILD "B_13_0" "B"
     END CHILD
   END HH_GATE
-  CHILD "HH_inactivation_9_0" "HH_inactivation_inserted_9"
+  CHILD "HH_inactivation_11_0" "HH_inactivation_inserted_11"
   END CHILD
-  CHANNEL "Na_hh_tchan_5_0"
+  CHANNEL "Na_hh_tchan_7_0"
     BINDABLES
       INPUT Vm,
       OUTPUT G,
@@ -3439,14 +3444,14 @@ PRIVATE_MODELS
           ), ),
       PARAMETER ( Erev = 0.045 ),
     END PARAMETERS
-    CHILD "HH_activation_6_0" "HH_activation"
+    CHILD "HH_activation_8_0" "HH_activation"
     END CHILD
-    CHILD "HH_inactivation_9_0" "HH_inactivation"
+    CHILD "HH_inactivation_11_0" "HH_inactivation"
     END CHILD
   END CHANNEL
-  CHILD "Na_hh_tchan_5_0" "Na_hh_tchan_inserted_5"
+  CHILD "Na_hh_tchan_7_0" "Na_hh_tchan_inserted_7"
   END CHILD
-  GATE_KINETIC "A_14_0"
+  GATE_KINETIC "A_16_0"
     PARAMETERS
       PARAMETER ( HH_AB_Tau = -0.01 ),
       PARAMETER ( HH_AB_Offset_E = 0.06 ),
@@ -3456,9 +3461,9 @@ PRIVATE_MODELS
       PARAMETER ( HH_AB_Scale = -600 ),
     END PARAMETERS
   END GATE_KINETIC
-  CHILD "A_14_0" "A_inserted_14"
+  CHILD "A_16_0" "A_inserted_16"
   END CHILD
-  GATE_KINETIC "B_15_0"
+  GATE_KINETIC "B_17_0"
     PARAMETERS
       PARAMETER ( HH_AB_Tau = 0.08 ),
       PARAMETER ( HH_AB_Offset_E = 0.07 ),
@@ -3468,21 +3473,21 @@ PRIVATE_MODELS
       PARAMETER ( HH_AB_Scale = 125 ),
     END PARAMETERS
   END GATE_KINETIC
-  CHILD "B_15_0" "B_inserted_15"
+  CHILD "B_17_0" "B_inserted_17"
   END CHILD
-  HH_GATE "HH_activation_13_0"
+  HH_GATE "HH_activation_15_0"
     PARAMETERS
       PARAMETER ( POWER = 4 ),
       PARAMETER ( state_init = -1 ),
     END PARAMETERS
-    CHILD "A_14_0" "A"
+    CHILD "A_16_0" "A"
     END CHILD
-    CHILD "B_15_0" "B"
+    CHILD "B_17_0" "B"
     END CHILD
   END HH_GATE
-  CHILD "HH_activation_13_0" "HH_activation_inserted_13"
+  CHILD "HH_activation_15_0" "HH_activation_inserted_15"
   END CHILD
-  CHANNEL "K_hh_tchan_12_0"
+  CHANNEL "K_hh_tchan_14_0"
     BINDABLES
       INPUT Vm,
       OUTPUT G,
@@ -3497,24 +3502,24 @@ PRIVATE_MODELS
           ), ),
       PARAMETER ( Erev = -0.082 ),
     END PARAMETERS
-    CHILD "HH_activation_13_0" "HH_activation"
+    CHILD "HH_activation_15_0" "HH_activation"
     END CHILD
   END CHANNEL
-  CHILD "K_hh_tchan_12_0" "K_hh_tchan_inserted_12"
+  CHILD "K_hh_tchan_14_0" "K_hh_tchan_inserted_14"
   END CHILD
-  EQUATION_EXPONENTIAL "eq2_17_0"
+  EQUATION_EXPONENTIAL "eq2_19_0"
     PARAMETERS
       PARAMETER ( TAU2 = 0.003 ),
       PARAMETER ( TAU1 = 0.003 ),
     END PARAMETERS
   END EQUATION_EXPONENTIAL
-  CHILD "eq2_17_0" "eq2_inserted_17"
+  CHILD "eq2_19_0" "eq2_inserted_19"
   END CHILD
-  ATTACHMENT "synapse_18_0"
+  ATTACHMENT "synapse_20_0"
   END ATTACHMENT
-  CHILD "synapse_18_0" "synapse_inserted_18"
+  CHILD "synapse_20_0" "synapse_inserted_20"
   END CHILD
-  CHANNEL "Ex_channel_16_0"
+  CHANNEL "Ex_channel_18_0"
     BINDABLES
       INPUT Vm,
       OUTPUT G,
@@ -3531,26 +3536,26 @@ PRIVATE_MODELS
       PARAMETER ( TAU1 = 0.003 ),
       PARAMETER ( Erev = 0.045 ),
     END PARAMETERS
-    CHILD "eq2_17_0" "eq2"
+    CHILD "eq2_19_0" "eq2"
     END CHILD
-    CHILD "synapse_18_0" "synapse"
+    CHILD "synapse_20_0" "synapse"
     END CHILD
   END CHANNEL
-  CHILD "Ex_channel_16_0" "Ex_channel_inserted_16"
+  CHILD "Ex_channel_18_0" "Ex_channel_inserted_18"
   END CHILD
-  EQUATION_EXPONENTIAL "eq2_20_0"
+  EQUATION_EXPONENTIAL "eq2_22_0"
     PARAMETERS
       PARAMETER ( TAU2 = 0.02 ),
       PARAMETER ( TAU1 = 0.02 ),
     END PARAMETERS
   END EQUATION_EXPONENTIAL
-  CHILD "eq2_20_0" "eq2_inserted_20"
+  CHILD "eq2_22_0" "eq2_inserted_22"
   END CHILD
-  ATTACHMENT "synapse_21_0"
+  ATTACHMENT "synapse_23_0"
   END ATTACHMENT
-  CHILD "synapse_21_0" "synapse_inserted_21"
+  CHILD "synapse_23_0" "synapse_inserted_23"
   END CHILD
-  CHANNEL "Inh_channel_19_0"
+  CHANNEL "Inh_channel_21_0"
     BINDABLES
       INPUT Vm,
       OUTPUT G,
@@ -3567,111 +3572,63 @@ PRIVATE_MODELS
       PARAMETER ( TAU1 = 0.02 ),
       PARAMETER ( Erev = -0.082 ),
     END PARAMETERS
-    CHILD "eq2_20_0" "eq2"
+    CHILD "eq2_22_0" "eq2"
     END CHILD
-    CHILD "synapse_21_0" "synapse"
+    CHILD "synapse_23_0" "synapse"
     END CHILD
   END CHANNEL
-  CHILD "Inh_channel_19_0" "Inh_channel_inserted_19"
+  CHILD "Inh_channel_21_0" "Inh_channel_inserted_21"
   END CHILD
-  ATTACHMENT "spike_22_0"
+  ATTACHMENT "spike_24_0"
     PARAMETERS
       PARAMETER ( output_amp = "1" ),
       PARAMETER ( REFRACTORY = 0.01 ),
       PARAMETER ( THRESHOLD = 0 ),
     END PARAMETERS
   END ATTACHMENT
-  CHILD "spike_22_0" "spike_inserted_22"
+  CHILD "spike_24_0" "spike_inserted_24"
   END CHILD
-  GROUP "library_3_0"
-    CHILD "compartment_4_0" "compartment"
+  GROUP "library_5_0"
+    CHILD "compartment_6_0" "compartment"
     END CHILD
-    CHILD "Na_hh_tchan_5_0" "Na_hh_tchan"
+    CHILD "Na_hh_tchan_7_0" "Na_hh_tchan"
     END CHILD
-    CHILD "K_hh_tchan_12_0" "K_hh_tchan"
+    CHILD "K_hh_tchan_14_0" "K_hh_tchan"
     END CHILD
-    CHILD "Ex_channel_16_0" "Ex_channel"
+    CHILD "Ex_channel_18_0" "Ex_channel"
     END CHILD
-    CHILD "Inh_channel_19_0" "Inh_channel"
+    CHILD "Inh_channel_21_0" "Inh_channel"
     END CHILD
-    CHILD "spike_22_0" "spike"
+    CHILD "spike_24_0" "spike"
     END CHILD
   END GROUP
-  CHILD "library_3_0" "library_inserted_3"
+  CHILD "library_5_0" "library_inserted_5"
   END CHILD
-  GATE_KINETIC "A_27_0"
-    PARAMETERS
-      PARAMETER ( HH_AB_Tau = -0.01 ),
-      PARAMETER ( HH_AB_Offset_E = 0.045 ),
-      PARAMETER ( HH_AB_Add = -1 ),
-      PARAMETER ( HH_AB_Factor_Flag = -1 ),
-      PARAMETER ( HH_AB_Mult = 100000 ),
-      PARAMETER ( HH_AB_Scale = -4500 ),
-    END PARAMETERS
-  END GATE_KINETIC
-  CHILD "A_27_0" "A_inserted_27"
-  END CHILD
-  GATE_KINETIC "B_28_0"
-    PARAMETERS
-      PARAMETER ( HH_AB_Tau = 0.018 ),
-      PARAMETER ( HH_AB_Offset_E = 0.07 ),
-      PARAMETER ( HH_AB_Add = 0 ),
-      PARAMETER ( HH_AB_Factor_Flag = -1 ),
-      PARAMETER ( HH_AB_Mult = -0 ),
-      PARAMETER ( HH_AB_Scale = 4000 ),
-    END PARAMETERS
-  END GATE_KINETIC
-  CHILD "B_28_0" "B_inserted_28"
-  END CHILD
-  HH_GATE "HH_activation_26_0"
+  HH_GATE "HH_activation_8_0"
     PARAMETERS
       PARAMETER ( POWER = 3 ),
       PARAMETER ( state_init = -1 ),
     END PARAMETERS
-    CHILD "A_27_0" "A"
+    CHILD "A_9_0" "A"
     END CHILD
-    CHILD "B_28_0" "B"
+    CHILD "B_10_0" "B"
     END CHILD
   END HH_GATE
-  CHILD "HH_activation_26_0" "HH_activation_inserted_26"
+  CHILD "HH_activation_8_0" "HH_activation_inserted_8"
   END CHILD
-  GATE_KINETIC "A_30_0"
-    PARAMETERS
-      PARAMETER ( HH_AB_Tau = 0.02 ),
-      PARAMETER ( HH_AB_Offset_E = 0.07 ),
-      PARAMETER ( HH_AB_Add = 0 ),
-      PARAMETER ( HH_AB_Factor_Flag = -1 ),
-      PARAMETER ( HH_AB_Mult = -0 ),
-      PARAMETER ( HH_AB_Scale = 70 ),
-    END PARAMETERS
-  END GATE_KINETIC
-  CHILD "A_30_0" "A_inserted_30"
-  END CHILD
-  GATE_KINETIC "B_31_0"
-    PARAMETERS
-      PARAMETER ( HH_AB_Tau = -0.01 ),
-      PARAMETER ( HH_AB_Offset_E = 0.04 ),
-      PARAMETER ( HH_AB_Add = 1 ),
-      PARAMETER ( HH_AB_Factor_Flag = -1 ),
-      PARAMETER ( HH_AB_Mult = -0 ),
-      PARAMETER ( HH_AB_Scale = 1000 ),
-    END PARAMETERS
-  END GATE_KINETIC
-  CHILD "B_31_0" "B_inserted_31"
-  END CHILD
-  HH_GATE "HH_inactivation_29_0"
+  HH_GATE "HH_inactivation_11_0"
     PARAMETERS
       PARAMETER ( POWER = 1 ),
       PARAMETER ( state_init = -1 ),
     END PARAMETERS
-    CHILD "A_30_0" "A"
+    CHILD "A_12_0" "A"
     END CHILD
-    CHILD "B_31_0" "B"
+    CHILD "B_13_0" "B"
     END CHILD
   END HH_GATE
-  CHILD "HH_inactivation_29_0" "HH_inactivation_inserted_29"
+  CHILD "HH_inactivation_11_0" "HH_inactivation_inserted_11"
   END CHILD
-  CHANNEL "Na_hh_tchan_25_0"
+  CHANNEL "Na_hh_tchan_7_0"
     BINDABLES
       INPUT Vm,
       OUTPUT G,
@@ -3686,12 +3643,12 @@ PRIVATE_MODELS
           ), ),
       PARAMETER ( Erev = 0.045 ),
     END PARAMETERS
-    CHILD "HH_activation_26_0" "HH_activation"
+    CHILD "HH_activation_8_0" "HH_activation"
     END CHILD
-    CHILD "HH_inactivation_29_0" "HH_inactivation"
+    CHILD "HH_inactivation_11_0" "HH_inactivation"
     END CHILD
   END CHANNEL
-  CHILD "Na_hh_tchan_25_0" "Na_hh_tchan_25_1"
+  CHILD "Na_hh_tchan_7_0" "Na_hh_tchan_7_1"
     BINDINGS
       INPUT ..->I,
     END BINDINGS
@@ -3701,45 +3658,21 @@ PRIVATE_MODELS
       PARAMETER ( G_MAX = 1200 ),
     END PARAMETERS
   END CHILD
-  CHILD "Na_hh_tchan_25_1" "Na_hh_tchan_inserted_25"
+  CHILD "Na_hh_tchan_7_1" "Na_hh_tchan_inserted_7"
   END CHILD
-  GATE_KINETIC "A_34_0"
-    PARAMETERS
-      PARAMETER ( HH_AB_Tau = -0.01 ),
-      PARAMETER ( HH_AB_Offset_E = 0.06 ),
-      PARAMETER ( HH_AB_Add = -1 ),
-      PARAMETER ( HH_AB_Factor_Flag = -1 ),
-      PARAMETER ( HH_AB_Mult = 10000 ),
-      PARAMETER ( HH_AB_Scale = -600 ),
-    END PARAMETERS
-  END GATE_KINETIC
-  CHILD "A_34_0" "A_inserted_34"
-  END CHILD
-  GATE_KINETIC "B_35_0"
-    PARAMETERS
-      PARAMETER ( HH_AB_Tau = 0.08 ),
-      PARAMETER ( HH_AB_Offset_E = 0.07 ),
-      PARAMETER ( HH_AB_Add = 0 ),
-      PARAMETER ( HH_AB_Factor_Flag = -1 ),
-      PARAMETER ( HH_AB_Mult = -0 ),
-      PARAMETER ( HH_AB_Scale = 125 ),
-    END PARAMETERS
-  END GATE_KINETIC
-  CHILD "B_35_0" "B_inserted_35"
-  END CHILD
-  HH_GATE "HH_activation_33_0"
+  HH_GATE "HH_activation_15_0"
     PARAMETERS
       PARAMETER ( POWER = 4 ),
       PARAMETER ( state_init = -1 ),
     END PARAMETERS
-    CHILD "A_34_0" "A"
+    CHILD "A_16_0" "A"
     END CHILD
-    CHILD "B_35_0" "B"
+    CHILD "B_17_0" "B"
     END CHILD
   END HH_GATE
-  CHILD "HH_activation_33_0" "HH_activation_inserted_33"
+  CHILD "HH_activation_15_0" "HH_activation_inserted_15"
   END CHILD
-  CHANNEL "K_hh_tchan_32_0"
+  CHANNEL "K_hh_tchan_14_0"
     BINDABLES
       INPUT Vm,
       OUTPUT G,
@@ -3754,10 +3687,10 @@ PRIVATE_MODELS
           ), ),
       PARAMETER ( Erev = -0.082 ),
     END PARAMETERS
-    CHILD "HH_activation_33_0" "HH_activation"
+    CHILD "HH_activation_15_0" "HH_activation"
     END CHILD
   END CHANNEL
-  CHILD "K_hh_tchan_32_0" "K_hh_tchan_32_1"
+  CHILD "K_hh_tchan_14_0" "K_hh_tchan_14_1"
     BINDINGS
       INPUT ..->I,
     END BINDINGS
@@ -3767,24 +3700,24 @@ PRIVATE_MODELS
       PARAMETER ( G_MAX = 360 ),
     END PARAMETERS
   END CHILD
-  CHILD "K_hh_tchan_32_1" "K_hh_tchan_inserted_32"
+  CHILD "K_hh_tchan_14_1" "K_hh_tchan_inserted_14"
   END CHILD
-  ATTACHMENT "spike_36_0"
+  ATTACHMENT "spike_24_0"
     PARAMETERS
       PARAMETER ( output_amp = "1" ),
       PARAMETER ( REFRACTORY = 0.01 ),
       PARAMETER ( THRESHOLD = 0 ),
     END PARAMETERS
   END ATTACHMENT
-  CHILD "spike_36_0" "spike_36_1"
+  CHILD "spike_24_0" "spike_24_1"
     PARAMETERS
       PARAMETER ( THRESHOLD = 0 ),
       PARAMETER ( REFRACTORY = 0.01 ),
     END PARAMETERS
   END CHILD
-  CHILD "spike_36_1" "spike_inserted_36"
+  CHILD "spike_24_1" "spike_inserted_24"
   END CHILD
-  SEGMENT "compartment_24_0"
+  SEGMENT "compartment_6_0"
     PARAMETERS
       PARAMETER ( RA = 0.3 ),
       PARAMETER ( RM = 0.33333 ),
@@ -3795,7 +3728,7 @@ PRIVATE_MODELS
       PARAMETER ( ELEAK = -0.07 ),
     END PARAMETERS
   END SEGMENT
-  CHILD "compartment_24_0" "soma_24_1"
+  CHILD "compartment_6_0" "soma_6_1"
     BINDINGS
       INPUT Na_hh_tchan->Vm,
       INPUT K_hh_tchan->Vm,
@@ -3814,28 +3747,28 @@ PRIVATE_MODELS
       PARAMETER ( DIA = 3e-05 ),
       PARAMETER ( RA = 0.3 ),
     END PARAMETERS
-    CHILD "Na_hh_tchan_inserted_25" "Na_hh_tchan"
+    CHILD "Na_hh_tchan_inserted_7" "Na_hh_tchan"
     END CHILD
-    CHILD "K_hh_tchan_inserted_32" "K_hh_tchan"
+    CHILD "K_hh_tchan_inserted_14" "K_hh_tchan"
     END CHILD
-    CHILD "spike_inserted_36" "spike"
+    CHILD "spike_inserted_24" "spike"
     END CHILD
   END CHILD
-  CHILD "soma_24_1" "soma_inserted_24"
+  CHILD "soma_6_1" "soma_inserted_6"
   END CHILD
-  EQUATION_EXPONENTIAL "eq2_39_0"
+  EQUATION_EXPONENTIAL "eq2_19_0"
     PARAMETERS
       PARAMETER ( TAU2 = 0.003 ),
       PARAMETER ( TAU1 = 0.003 ),
     END PARAMETERS
   END EQUATION_EXPONENTIAL
-  CHILD "eq2_39_0" "eq2_inserted_39"
+  CHILD "eq2_19_0" "eq2_inserted_19"
   END CHILD
-  ATTACHMENT "synapse_40_0"
+  ATTACHMENT "synapse_20_0"
   END ATTACHMENT
-  CHILD "synapse_40_0" "synapse_inserted_40"
+  CHILD "synapse_20_0" "synapse_inserted_20"
   END CHILD
-  CHANNEL "Ex_channel_38_0"
+  CHANNEL "Ex_channel_18_0"
     BINDABLES
       INPUT Vm,
       OUTPUT G,
@@ -3852,12 +3785,12 @@ PRIVATE_MODELS
       PARAMETER ( TAU1 = 0.003 ),
       PARAMETER ( Erev = 0.045 ),
     END PARAMETERS
-    CHILD "eq2_39_0" "eq2"
+    CHILD "eq2_19_0" "eq2"
     END CHILD
-    CHILD "synapse_40_0" "synapse"
+    CHILD "synapse_20_0" "synapse"
     END CHILD
   END CHANNEL
-  CHILD "Ex_channel_38_0" "Ex_channel_38_1"
+  CHILD "Ex_channel_18_0" "Ex_channel_18_1"
     BINDINGS
       INPUT ..->I,
     END BINDINGS
@@ -3867,21 +3800,21 @@ PRIVATE_MODELS
       PARAMETER ( G_MAX = 50 ),
     END PARAMETERS
   END CHILD
-  CHILD "Ex_channel_38_1" "Ex_channel_inserted_38"
+  CHILD "Ex_channel_18_1" "Ex_channel_inserted_18"
   END CHILD
-  EQUATION_EXPONENTIAL "eq2_42_0"
+  EQUATION_EXPONENTIAL "eq2_22_0"
     PARAMETERS
       PARAMETER ( TAU2 = 0.02 ),
       PARAMETER ( TAU1 = 0.02 ),
     END PARAMETERS
   END EQUATION_EXPONENTIAL
-  CHILD "eq2_42_0" "eq2_inserted_42"
+  CHILD "eq2_22_0" "eq2_inserted_22"
   END CHILD
-  ATTACHMENT "synapse_43_0"
+  ATTACHMENT "synapse_23_0"
   END ATTACHMENT
-  CHILD "synapse_43_0" "synapse_inserted_43"
+  CHILD "synapse_23_0" "synapse_inserted_23"
   END CHILD
-  CHANNEL "Inh_channel_41_0"
+  CHANNEL "Inh_channel_21_0"
     BINDABLES
       INPUT Vm,
       OUTPUT G,
@@ -3898,12 +3831,12 @@ PRIVATE_MODELS
       PARAMETER ( TAU1 = 0.02 ),
       PARAMETER ( Erev = -0.082 ),
     END PARAMETERS
-    CHILD "eq2_42_0" "eq2"
+    CHILD "eq2_22_0" "eq2"
     END CHILD
-    CHILD "synapse_43_0" "synapse"
+    CHILD "synapse_23_0" "synapse"
     END CHILD
   END CHANNEL
-  CHILD "Inh_channel_41_0" "Inh_channel_41_1"
+  CHILD "Inh_channel_21_0" "Inh_channel_21_1"
     BINDINGS
       INPUT ..->I,
     END BINDINGS
@@ -3913,9 +3846,9 @@ PRIVATE_MODELS
       PARAMETER ( G_MAX = 50 ),
     END PARAMETERS
   END CHILD
-  CHILD "Inh_channel_41_1" "Inh_channel_inserted_41"
+  CHILD "Inh_channel_21_1" "Inh_channel_inserted_21"
   END CHILD
-  SEGMENT "compartment_37_0"
+  SEGMENT "compartment_6_0"
     PARAMETERS
       PARAMETER ( RA = 0.3 ),
       PARAMETER ( RM = 0.33333 ),
@@ -3926,7 +3859,7 @@ PRIVATE_MODELS
       PARAMETER ( ELEAK = -0.07 ),
     END PARAMETERS
   END SEGMENT
-  CHILD "compartment_37_0" "dend_37_1"
+  CHILD "compartment_6_0" "dend_6_1"
     BINDINGS
       INPUT Ex_channel->Vm,
       INPUT Inh_channel->Vm,
@@ -3945,40 +3878,40 @@ PRIVATE_MODELS
       PARAMETER ( RA = 0.3 ),
       PARAMETER ( PARENT = ../soma ),
     END PARAMETERS
-    CHILD "Ex_channel_inserted_38" "Ex_channel"
+    CHILD "Ex_channel_inserted_18" "Ex_channel"
     END CHILD
-    CHILD "Inh_channel_inserted_41" "Inh_channel"
+    CHILD "Inh_channel_inserted_21" "Inh_channel"
     END CHILD
   END CHILD
-  CHILD "dend_37_1" "dend_inserted_37"
+  CHILD "dend_6_1" "dend_inserted_6"
   END CHILD
-  GROUP "cell_23_0"
+  GROUP "cell_25_0"
     FORWARDPARAMETERS
-      PARAMETER ( NAME_0 = "/cell/dend/Inh_channel" ),
+      PARAMETER ( NAME_0 = "/cell/dend/Inh_channel->G_MAX" ),
       PARAMETER ( VALUE_0 = 0.397888 ),
-      PARAMETER ( NAME_1 = "/cell/dend/Ex_channel" ),
+      PARAMETER ( NAME_1 = "/cell/dend/Ex_channel->G_MAX" ),
       PARAMETER ( VALUE_1 = 0.795775 ),
-      PARAMETER ( NAME_2 = "/cell/soma/K_hh_tchan" ),
+      PARAMETER ( NAME_2 = "/cell/soma/K_hh_tchan->G_MAX" ),
       PARAMETER ( VALUE_2 = 360 ),
-      PARAMETER ( NAME_3 = "/cell/soma/Na_hh_tchan" ),
+      PARAMETER ( NAME_3 = "/cell/soma/Na_hh_tchan->G_MAX" ),
       PARAMETER ( VALUE_3 = 1200 ),
     END FORWARDPARAMETERS
-    CHILD "soma_inserted_24" "soma"
+    CHILD "soma_inserted_6" "soma"
     END CHILD
-    CHILD "dend_inserted_37" "dend"
+    CHILD "dend_inserted_6" "dend"
     END CHILD
   END GROUP
-  CHILD "cell_23_0" "cell_inserted_23"
+  CHILD "cell_25_0" "cell_inserted_25"
   END CHILD
 END PRIVATE_MODELS
 PUBLIC_MODELS
-  CHILD "proto_1_0" "proto"
+  CHILD "proto_3_0" "proto"
   END CHILD
-  CHILD "output_2_0" "output"
+  CHILD "output_4_0" "output"
   END CHILD
-  CHILD "library_3_0" "library"
+  CHILD "library_5_0" "library"
   END CHILD
-  CHILD "cell_23_0" "cell"
+  CHILD "cell_25_0" "cell"
   END CHILD
 END PUBLIC_MODELS
 ',
@@ -4115,10 +4048,10 @@ Compartment operations
 Mechanism operations
 -----
 00000 :: COMPARTMENT							 -1.31948e-10 0 397887 1.04242
-00001 :: INITIALIZECHANNEL 0.045 2.84658e-05
+00001 :: INITIALIZECHANNEL 0.045 4.53047e-07
 00002 :: SPRINGMASS -1 (nil) -1 0 0							 -1 0 0
 00003 :: UPDATECOMPARTMENTCURRENT
-00004 :: INITIALIZECHANNEL -0.082 4.26987e-06
+00004 :: INITIALIZECHANNEL -0.082 3.39786e-08
 00005 :: SPRINGMASS -1 (nil) -1 1 0							 -1 0 0
 00006 :: UPDATECOMPARTMENTCURRENT
 00007 :: COMPARTMENT							 -5.03853e-10 5e-10 88419.5 1.01001
