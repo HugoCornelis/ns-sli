@@ -464,101 +464,6 @@ ChannelSetField
  char *pcField,
  char *pcValue)
 {
-    struct g2_g3_channel_field_mapper
-    {
-	char *pcG2;
-	int iLength;
-	int (*ChannelMapField)
-	    (struct symtab_HSolveListElement *phsle,
-	     struct PidinStack *ppist,
-	     char *pcPathname,
-	     char *pcField,
-	     char *pcValue,
-	     char *pcGateName);
-    };
-
-    static struct g2_g3_channel_field_mapper pggcfm[] =
-    {
-	"X_init", -1, GateSetField,
-	"Xpower", -1, GateSetField,
-	"Y_init", -1, GateSetField,
-	"Ypower", -1, GateSetField,
-	"Z_init", -1, GateSetField,
-	"Zpower", -1, GateSetField,
-	"instant", -1, GateSetField,
-
-	"X_A->table", 10, TableSetField,
-	"X_B->table", 10, TableSetField,
-	"Y_A->table", 10, TableSetField,
-	"Y_B->table", 10, TableSetField,
-	"Z_A->table", 10, TableSetField,
-	"Z_B->table", 10, TableSetField,
-
-	NULL, -1, NULL,
-    };
-
-    //-
-    //- The HHGate is only allocated when we see an Xpower value 
-    //- Greater than zero. 
-    //- 
-    //- Parameter Xpower is set in the HH gate object, which is
-    //- nexted in the Channel.
-    //- 
-    //-    Channel -> 
-    //-               HH_gate -parameter-> Xpower
-    //-
-    //- is the order we must traverse the stack to get to the object.. 
-    //-
-
-    if (strcmp(pcField, "Xpower") == 0)
-    {
-	return(GateSetField(phsleWorking, ppistWorking, pcPathname, pcField, pcValue, "HH_activation"));
-    }
-    else if (strcmp(pcField, "Ypower") == 0)
-    {
-	return(GateSetField(phsleWorking, ppistWorking, pcPathname, pcField, pcValue, "HH_inactivation"));
-    }
-    else if(strcmp(pcField, "Zpower") == 0)
-    {
-	return(GateSetField(phsleWorking, ppistWorking, pcPathname, pcField, pcValue, "HH_concentration"));
-    }
-    else if( strncmp(pcField, "Z_A->table", 10) == 0 )
-    {
-	return(TableSetField(phsleWorking, ppistWorking, pcPathname, pcField, pcValue, "HH_concentration"));
-    }
-    else if( strncmp(pcField, "Z_B->table", 10) == 0 )
-    {
-	return(TableSetField(phsleWorking, ppistWorking, pcPathname, pcField, pcValue, "HH_concentration"));
-    }
-    else if( strncmp(pcField, "X_B->table", 10) == 0 )
-    {
-	return(TableSetField(phsleWorking, ppistWorking, pcPathname, pcField, pcValue, "HH_activation"));
-    }
-    else if( strncmp(pcField, "X_A->table", 10) == 0 )
-    {
-	return(TableSetField(phsleWorking, ppistWorking, pcPathname, pcField, pcValue, "HH_activation"));
-    }
-    else if( strncmp(pcField, "Y_B->table", 10) == 0 )
-    {
-	return(TableSetField(phsleWorking, ppistWorking, pcPathname, pcField, pcValue, "HH_inactivation"));
-    }
-    else if( strncmp(pcField, "Y_A->table", 10) == 0 )
-    {
-	return(TableSetField(phsleWorking, ppistWorking, pcPathname, pcField, pcValue, "HH_inactivation"));
-    }
-    else if(!strcmp(pcField, "X_init"))
-    {
-	return(GateSetField(phsleWorking, ppistWorking, pcPathname, pcField, pcValue, "HH_activation"));
-    }
-    else if(!strcmp(pcField, "Y_init"))
-    {
-	return(GateSetField(phsleWorking, ppistWorking, pcPathname, pcField, pcValue, "HH_inactivation"));
-    }
-    else if(!strcmp(pcField, "Z_init"))
-    {
-	return(GateSetField(phsleWorking, ppistWorking, pcPathname, pcField, pcValue, "HH_concentration"));
-    }
-    else if(!strcmp(pcField, "instant"))
     {
 	//- set default result: success
 
@@ -652,6 +557,80 @@ ChannelSetField
 	}
 
 	return(iResult);
+    }
+
+
+    {
+	struct g2_g3_channel_field_mapper
+	{
+	    char *pcG2;
+	    int iLength;
+	    char *pcGateName;
+	    int (*ChannelMapField)
+		(struct symtab_HSolveListElement *phsle,
+		 struct PidinStack *ppist,
+		 char *pcPathname,
+		 char *pcField,
+		 char *pcValue,
+		 char *pcGateName);
+	};
+
+	static struct g2_g3_channel_field_mapper pggcfm[] =
+	    {
+		"X_init", -1, "HH_activation", GateSetField,
+		"Xpower", -1, "HH_activation", GateSetField,
+		"Y_init", -1, "HH_inactivation", GateSetField,
+		"Ypower", -1, "HH_inactivation", GateSetField,
+		"Z_init", -1, "HH_concentration", GateSetField,
+		"Zpower", -1, "HH_concentration", GateSetField,
+		"instant", -1, NULL, GateSetField,
+
+		"X_A->table", 10, "HH_activation", TableSetField,
+		"X_B->table", 10, "HH_activation", TableSetField,
+		"Y_A->table", 10, "HH_inactivation", TableSetField,
+		"Y_B->table", 10, "HH_inactivation", TableSetField,
+		"Z_A->table", 10, "HH_concentration", TableSetField,
+		"Z_B->table", 10, "HH_concentration", TableSetField,
+
+		"X_A->calc_mode", 14, "HH_activation", TableSetField,
+		"X_B->calc_mode", 14, "HH_activation", TableSetField,
+		"Y_A->calc_mode", 14, "HH_inactivation", TableSetField,
+		"Y_B->calc_mode", 14, "HH_inactivation", TableSetField,
+		"Z_A->calc_mode", 14, "HH_concentration", TableSetField,
+		"Z_B->calc_mode", 14, "HH_concentration", TableSetField,
+
+		NULL, -1, NULL, NULL,
+	    };
+
+	//-
+	//- The HHGate is only allocated when we see an Xpower value 
+	//- Greater than zero. 
+	//- 
+	//- Parameter Xpower is set in the HH gate object, which is
+	//- nexted in the Channel.
+	//- 
+	//-    Channel -> 
+	//-               HH_gate -parameter-> Xpower
+	//-
+	//- is the order we must traverse the stack to get to the object.. 
+	//-
+
+	int i;
+
+	for ( i = 0 ; pggcfm[i].pcG2 ; i++)
+	{
+	    int iLength = pggcfm[i].iLength;
+
+	    if (iLength == -1)
+	    {
+		iLength = strlen(pggcfm[i].pcG2);
+	    }
+
+	    if (strncmp(pcField, pggcfm[i].pcG2, iLength) == 0)
+	    {
+		return(pggcfm[i].ChannelMapField(phsleWorking, ppistWorking, pcPathname, pcField, pcValue, pggcfm[i].pcGateName));
+	    }
+	}
     }
 
     return setParameter(ppistWorking, phsleWorking, pcField, pcValue, 0);
