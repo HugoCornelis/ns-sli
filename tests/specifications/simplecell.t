@@ -3232,7 +3232,7 @@ END PUBLIC_MODELS
 						  {
 						   description => "Can we save the model as an NDF file -- all ?",
 						   read => 'genesis',
-						   write => 'call model_container NEUROSPACES_COMMAND "export all ndf /tmp/all0.ndf /cell/**"',
+						   write => 'call model_container NEUROSPACES_COMMAND "export all ndf /tmp/simplecell-all.ndf /cell/**"',
 						  },
 # 						  {
 # 						   description => "Can we reduce the model ?",
@@ -3242,7 +3242,7 @@ END PUBLIC_MODELS
 						  {
 						   description => "Can we save the model as an NDF file -- library ?",
 						   read => 'genesis',
-						   write => 'call model_container NEUROSPACES_COMMAND "export library ndf /tmp/all1.ndf /cell/**"',
+						   write => 'call model_container NEUROSPACES_COMMAND "export library ndf /tmp/simplecell-library.ndf /cell/**"',
 						  },
 						  {
 						   description => "Can we set the options for the DUMP command ?",
@@ -3324,7 +3324,7 @@ VM Membrane Potentials (pdVms[1]) : (-0.07105)
 			       },
 			       {
 				arguments => [
-					      '/tmp/all1.ndf',
+					      '/tmp/simplecell-library.ndf',
 					     ],
 				command => '/bin/cat',
 				command_tests => [
@@ -3928,7 +3928,7 @@ END PUBLIC_MODELS
 # 					      '--time-step',
 # 					      '5e-6',
 					      '--cell',
-					      '/tmp/all0.ndf',
+					      '/tmp/simplecell-all.ndf',
 					      '--model-name',
 					      'cell',
 					      '--output-fields',
@@ -3972,7 +3972,7 @@ END PUBLIC_MODELS
 					      '--time-step',
 					      '5e-6',
 					      '--cell',
-					      '/tmp/all1.ndf',
+					      '/tmp/simplecell-library.ndf',
 					      '--model-name',
 					      'cell',
 					      '--output-fields',
@@ -4091,7 +4091,7 @@ VM Membrane Potentials (pdVms[1]) : (-0.07)
 # 					      '--time-step',
 # 					      '5e-6',
 					      '--cell',
-					      '/tmp/all1.ndf',
+					      '/tmp/simplecell-library.ndf',
 					      '--model-name',
 					      'cell',
 					      '--output-fields',
