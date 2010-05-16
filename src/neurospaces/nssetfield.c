@@ -464,6 +464,7 @@ ChannelSetField
  char *pcField,
  char *pcValue)
 {
+    if(!strcmp(pcField, "instant"))
     {
 	//- set default result: success
 
