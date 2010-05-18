@@ -24,6 +24,13 @@ clean-local:
 	$(RM) -f $(top_builddir)build_rpm.log
 	$(RM) -f ns-sli*.tar.gz
 
+show-release-labels:
+	echo "Release information (major-minor-micro): $(RELEASE_MAJOR).$(RELEASE_MINOR)-$(RELEASE_MICRO)"
+
+dist-keywords:
+	release-expand ns-sli $(RELEASE_MAJOR) $(RELEASE_MINOR) $(RELEASE_MICRO) $(RELEASE_MAJOR).$(RELEASE_MINOR) hugo.cornelis@gmail.com --verbose
+
+
 html-upload-prepare:
 	rm -fr html/htdocs/neurospaces_project/ns-sli
 	mkdir -p html/htdocs/neurospaces_project/ns-sli
