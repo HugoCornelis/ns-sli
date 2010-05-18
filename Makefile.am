@@ -14,14 +14,14 @@ CLEANFILES = \
 	$(top_builddir)/docs/doxygen.tag
 
 clean-local:
-	rm -rf $(top_builddir)/docs/html
-	rm -rf $(top_builddir)/docs/ns-sli
-	rm -f $(top_builddir)/*.dsc
-	rm -f $(top_builddir)/*.changes
-	rm -f $(top_builddir)/*.deb
-	rm -rf $(top_builddir)/RPM_BUILD
-	rm -f $(top_builddir)/build_debian.log
-	rm -f $(top_builddir)build_rpm.log
+	$(RM) -rf $(top_builddir)/docs/html
+	$(RM) -rf $(top_builddir)/docs/ns-sli
+	$(RM) -f $(top_builddir)/*.dsc
+	$(RM) -f $(top_builddir)/*.changes
+	$(RM) -f $(top_builddir)/*.deb
+	$(RM) -rf $(top_builddir)/RPM_BUILD
+	$(RM) -f $(top_builddir)/build_debian.log
+	$(RM) -f $(top_builddir)build_rpm.log
 
 html-upload-prepare:
 	rm -fr html/htdocs/neurospaces_project/ns-sli
