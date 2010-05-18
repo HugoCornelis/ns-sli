@@ -22,6 +22,7 @@ clean-local:
 	$(RM) -rf $(top_builddir)/RPM_BUILD
 	$(RM) -f $(top_builddir)/build_debian.log
 	$(RM) -f $(top_builddir)build_rpm.log
+	$(RM) -f ns-sli*.tar.gz
 
 html-upload-prepare:
 	rm -fr html/htdocs/neurospaces_project/ns-sli
