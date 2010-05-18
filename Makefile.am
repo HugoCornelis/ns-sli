@@ -16,10 +16,12 @@ CLEANFILES = \
 clean-local:
 	rm -rf $(top_builddir)/docs/html
 	rm -rf $(top_builddir)/docs/ns-sli
-	rm 
-	rm -rf $(top_srcdir)/RPM_BUILD
-	rm -f $(top_srcdir)/build_debian.log
-	rm -f $(top_srcdir)build_rpm.log
+	rm -f $(top_builddir)/*.dsc
+	rm -f $(top_builddir)/*.changes
+	rm -f $(top_builddir)/*.deb
+	rm -rf $(top_builddir)/RPM_BUILD
+	rm -f $(top_builddir)/build_debian.log
+	rm -f $(top_builddir)build_rpm.log
 
 html-upload-prepare:
 	rm -fr html/htdocs/neurospaces_project/ns-sli
