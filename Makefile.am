@@ -16,6 +16,10 @@ CLEANFILES = \
 clean-local:
 	rm -rf $(top_builddir)/docs/html
 	rm -rf $(top_builddir)/docs/ns-sli
+	rm 
+	rm -rf $(top_srcdir)/RPM_BUILD
+	rm -f $(top_srcdir)/build_debian.log
+	rm -f $(top_srcdir)build_rpm.log
 
 html-upload-prepare:
 	rm -fr html/htdocs/neurospaces_project/ns-sli
@@ -54,3 +58,7 @@ TMP_DIR = tmp
 # Create a deb package
 pkg-deb: dist
 	nspkg-deb $(TMP_DIR) $(PACKAGE) $(VERSION)
+
+# Create an rpm package
+pkg-rpm: dist
+	nspkg-rpm $(PACKAGE) $(VERSION)
