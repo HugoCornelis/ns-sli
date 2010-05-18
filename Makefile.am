@@ -13,6 +13,12 @@ TESTS = /usr/local/bin/neurospaces_harness
 CLEANFILES = \
 	$(top_builddir)/docs/doxygen.tag
 
+
+
+RELEASE_MAJOR=`release-extract --major`
+RELEASE_MINOR=`release-extract --minor`
+RELEASE_MICRO=`release-extract --micro`
+
 clean-local:
 	$(RM) -rf $(top_builddir)/docs/html
 	$(RM) -rf $(top_builddir)/docs/ns-sli
