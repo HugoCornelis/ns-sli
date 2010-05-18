@@ -30,6 +30,8 @@ show-release-labels:
 dist-keywords:
 	release-expand ns-sli $(RELEASE_MAJOR) $(RELEASE_MINOR) $(RELEASE_MICRO) $(RELEASE_MAJOR).$(RELEASE_MINOR) hugo.cornelis@gmail.com --verbose
 
+dist-hook: dist-keywords
+	echo "Building source dist"
 
 html-upload-prepare:
 	rm -fr html/htdocs/neurospaces_project/ns-sli
