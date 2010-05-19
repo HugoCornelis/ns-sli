@@ -99,7 +99,7 @@ my $test
 					      },
 			       },
 			      ],
-       description => "one of the simplest tutorial scripts",
+       description => "the traub95 model",
        name => 'traub95.t',
       };
 
