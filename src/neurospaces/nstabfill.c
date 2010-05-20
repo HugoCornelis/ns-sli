@@ -27,9 +27,6 @@
  */
 int NSTabFill(char *pcName, char *pcField, char *pcNumTabEntries)
 {
-
-  
-
   struct PidinStack * ppistA = getGateContext(pcName,pcField,"A");
 
   struct PidinStack * ppistB = getGateContext(pcName,pcField,"B");
@@ -38,26 +35,16 @@ int NSTabFill(char *pcName, char *pcField, char *pcNumTabEntries)
 
   struct symtab_HSolveListElement * phsleB = PidinStackLookupTopSymbol(ppistB);
 
-
   if(!phsleA || !phsleB)
   {
       Error();
-    printf("TABFILL Error: Field %s is not known for %s\n",pcField,pcName);
-    return 0;
-
+      printf("TABFILL Error: cannot find gate kinetic elements of %s\n", pcName);
+      return 0;
   }
 
+  int iNumTabEntriesA = SymbolParameterResolveValue(phsleA, ppistA,"HH_NUMBER_OF_TABLE_ENTRIES");
 
-  //!!
-  //!! There is a '- 1' following a call to getting the number of table entries because 
-  //!! of a glitch in the model container which causes it to return the number of entries+1.
-  //!!
-  int iNumTabEntriesA = 
-    (int)SymbolParameterResolveValue(phsleA, ppistA,"HH_NUMBER_OF_TABLE_ENTRIES");
-
-  
-  int iNumTabEntriesB = 
-    (int)SymbolParameterResolveValue(phsleB, ppistB,"HH_NUMBER_OF_TABLE_ENTRIES");
+  int iNumTabEntriesB = SymbolParameterResolveValue(phsleB, ppistB,"HH_NUMBER_OF_TABLE_ENTRIES");
 
 
   if( iNumTabEntriesA != iNumTabEntriesB )
