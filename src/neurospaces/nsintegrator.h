@@ -54,6 +54,14 @@
 //! to be called. 
 //!
 
+int
+ChannelSetField
+(struct symtab_HSolveListElement *phsleWorking,
+ struct PidinStack *ppistWorking,
+ char *pcPathname,
+ char *pcField,
+ char *pcValue);
+
 int NSSetField(struct symtab_HSolveListElement *phsle, 
 	       struct PidinStack *ppist,
 	       char *pcPathname, char *pcField, char *pcValue);

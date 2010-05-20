@@ -21,7 +21,6 @@
 
 
 
-static
 int
 ChannelSetField
 (struct symtab_HSolveListElement *phsleWorking,
@@ -455,7 +454,6 @@ TableSetField
     return(iResult);
 }
 
-static
 int
 ChannelSetField
 (struct symtab_HSolveListElement *phsleWorking,
