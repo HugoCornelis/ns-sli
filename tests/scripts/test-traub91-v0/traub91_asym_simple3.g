@@ -126,7 +126,7 @@ create asc_file /output/plot_out
 // useclock /output/plot_out 9
 addmsg /cell/apical_19 /output/plot_out SAVE Vm
 addmsg /cell/apical_18 /output/plot_out SAVE Vm
-setfield /output/plot_out filename "/tmp/traub91_asym"
+setfield /output/plot_out filename "/tmp/traub91_asym_simple3"
 
 // // make the control panel
 // make_control
@@ -151,6 +151,10 @@ end
 
 //check
 reset
+
+setfield /neurospaces_integrator heccer_dump_selection { HECCER_DUMP_ALL_EXTENDED }
+
+call /neurospaces_integrator NSINTEGRATOR_DUMP
 
 step 3000
 
