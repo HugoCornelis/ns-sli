@@ -36,7 +36,7 @@ show-release-labels:
 dist-keywords:
 	release-expand ns-sli $(RELEASE_MAJOR) $(RELEASE_MINOR) $(RELEASE_MICRO) $(RELEASE_MAJOR).$(RELEASE_MINOR) hugo.cornelis@gmail.com --verbose
 
-dist-hook: dist-keywords
+dist-hook: 
 	echo "Building source dist"
 
 html-upload-prepare:
