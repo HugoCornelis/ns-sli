@@ -126,7 +126,7 @@ create asc_file /output/plot_out
 // useclock /output/plot_out 9
 addmsg /cell/apical_19 /output/plot_out SAVE Vm
 addmsg /cell/apical_18 /output/plot_out SAVE Vm
-setfield /output/plot_out filename "/tmp/traub91_asym"
+setfield /output/plot_out filename "/tmp/traub91_asym_simple2"
 
 // // make the control panel
 // make_control
