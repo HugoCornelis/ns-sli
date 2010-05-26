@@ -50,7 +50,7 @@ new_len*new_dia =  1057.5
 ',
 						  },
 						 ],
-				comment => 'This test was derived from one of Dave Beeman\'s tutorial scripts, does not use the G2 generated file.',
+				comment => 'This test was derived from one of Dave Beeman\'s tutorial scripts.',
 				description => "a very small subset of the traub91 model (3)",
 			       },
 			       {

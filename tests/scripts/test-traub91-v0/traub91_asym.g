@@ -2,7 +2,7 @@
 // hsolvable tab2Dchannel for K_C current
 
 int hflag = 1    // use hsolve if hflag = 1
-int chanmode = 3
+int chanmode = 4
 
 /* chanmodes 0 and 3 allow outgoing messages to non-hsolved elements.
    chanmode 3 is fastest.
