@@ -60,7 +60,7 @@ new_len*new_dia =  1057.5
 				command => 'src/ns-sli',
 				command_tests => [
 						  {
-						   description => "Do we see the dumped model from heccer ?",
+						   description => "Do we see the dumped model from heccer, traub91_asym_simple3 ?",
 						   read => (join '', `cat "$::config->{core_directory}/tests/specifications/strings/traub91_asym_simple3.dump"`),
 						   timeout => 20,
 						  },
@@ -302,6 +302,11 @@ VM Membrane Potentials (pdVms[1]) : (-0.06)
 				command => 'src/ns-sli',
 				command_tests => [
 						  {
+						   description => "Do we see the dumped model from heccer, traub91_asym_simple2 ?",
+						   read => (join '', `cat "$::config->{core_directory}/tests/specifications/strings/traub91_asym_simple2.dump"`),
+						   timeout => 20,
+						  },
+						  {
 						   description => "Does the script run a simulation (2) ?",
 						   read => 'time = 0.150000 ; step = 3000',
 						   timeout => 10,
@@ -326,6 +331,158 @@ VM Membrane Potentials (pdVms[1]) : (-0.06)
 						 ],
 				comment => 'This test was derived from one of Dave Beeman\'s tutorial scripts, does not use the G2 generated file.',
 				description => "a very small subset of the traub91 model (2)",
+			       },
+			       {
+				arguments => [
+					      '--time',
+					      '0.15',
+					      '--time-step',
+					      '5e-5',
+					      '--cell',
+					      '/tmp/traub91_simple2.ndf',
+					      '--model-name',
+					      'cell',
+					      '--output-fields',
+					      "/cell/apical_19->Vm",
+					      '--output-fields',
+					      "/cell/apical_18->Vm",
+					      '--optimize',
+					      '--verbose',
+					      '--dump',
+					     ],
+				command => '/usr/local/bin/ssp',
+				command_tests => [
+						  {
+						   description => 'Can we compile the converted model description from SSP, traub91_asym_simple2.ndf ?',
+						   read => 'Heccer (pcName) : (unnamed test)
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (0)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dConcentrationGateStart) : (4e-05)
+Heccer Options (dConcentrationGateEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (0)
+Heccer (dStep) : (5e-05)
+Intermediary (iCompartments) : (2)
+Compartment (mc.iType) : (1)
+Compartment (iParent) : (-1)
+Compartment (dCm) : (6.53703e-11)
+Compartment (dEm) : (-0.06)
+Compartment (dInitVm) : (-0.06)
+Compartment (dInject) : (2e-10)
+Compartment (dRa) : (4.57336e+06)
+Compartment (dRm) : (4.58924e+08)
+Compartment (mc.iType) : (1)
+Compartment (iParent) : (0)
+Compartment (dCm) : (6.53703e-11)
+Compartment (dEm) : (-0.06)
+Compartment (dInitVm) : (-0.06)
+Compartment (dInject) : (0)
+Compartment (dRa) : (4.57336e+06)
+Compartment (dRm) : (4.58924e+08)
+MinimumDegree (iEntries) : (2)
+MinimumDegree (piChildren[0]) : (1)
+MinimumDegree (piChildren[0][0]) : (1)
+MinimumDegree (piChildren[1]) : (0)
+MinimumDegree (piForward[0]) : (1)
+MinimumDegree (piForward[1]) : (0)
+MinimumDegree (piBackward[0]) : (1)
+MinimumDegree (piBackward[1]) : (0)
+Tables (iTabulatedGateCount) : (4)
+Tabulated gate 0, interval (dStart) : (-0.1)
+Tabulated gate 0, interval (dEnd) : (0.05)
+Tabulated gate 0, interval (dStep) : (5e-05)
+Tabulated gate 0, interpolation (iShape) : (0)
+Tabulated gate 0, (iEntries) : (3000)
+Tabulated gate 1, interval (dStart) : (-0.1)
+Tabulated gate 1, interval (dEnd) : (0.05)
+Tabulated gate 1, interval (dStep) : (5e-05)
+Tabulated gate 1, interpolation (iShape) : (0)
+Tabulated gate 1, (iEntries) : (3000)
+Tabulated gate 2, interval (dStart) : (-0.1)
+Tabulated gate 2, interval (dEnd) : (0.05)
+Tabulated gate 2, interval (dStep) : (5e-05)
+Tabulated gate 2, interpolation (iShape) : (0)
+Tabulated gate 2, (iEntries) : (3000)
+Tabulated gate 3, interval (dStart) : (0)
+Tabulated gate 3, interval (dEnd) : (1000)
+Tabulated gate 3, interval (dStep) : (0.333333)
+Tabulated gate 3, interpolation (iShape) : (0)
+Tabulated gate 3, (iEntries) : (3000)
+Compartment operations
+-----
+00000 :: FORWARD_ELIMINATION    0
+00001 :: FINISH
+00002 :: BACKWARD_SUBSTITUTION    2
+00003 :: FINISH_ROW
+00004 :: FINISH
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -1.30741e-10 0 382437 1.08446
+00001 :: EXPONENTIALDECAY 2.9705e+08 0 1.00188
+			 (0) (nil) (nil) (nil)							 0
+00002 :: INITIALIZECHANNEL 0.08 1.0895e-07
+00003 :: LOADVOLTAGETABLE
+00004 :: CONCEPTGATE 0 2 (nil)							 0.0141937
+00005 :: CONCEPTGATE 1 1 (nil)							 0.973086
+00006 :: UPDATECOMPARTMENTCURRENT
+00007 :: REGISTERCHANNELCURRENT
+00008 :: FLUXPOOL							 0
+00009 :: INITIALIZECHANNEL -0.075 1.0895e-07
+00010 :: LOADVOLTAGETABLE
+00011 :: CONCEPTGATE 2 1 (nil)							 0.0106418
+00012 :: CONCEPTGATE 3 -1 (0)							 0
+00013 :: UPDATECOMPARTMENTCURRENT
+00014 :: COMPARTMENT							 -1.30741e-10 2e-10 382437 1.08446
+00015 :: FINISH
+VM Diagonals (pdDiagonals[0]) : (1.08446)
+VM Diagonals (pdDiagonals[1]) : (1.08446)
+VM Axial Resistances (pdAxres[0]) : (-0.0836226)
+VM Axial Resistances (pdAxres[1]) : (-0.0836226)
+VM Axial Resistances (pdAxres[2]) : (-0.0836226)
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Axial Resistances (pdResults[2]) : (0)
+VM Axial Resistances (pdResults[3]) : (0)
+VM Membrane Potentials (pdVms[0]) : (-0.06)
+VM Membrane Potentials (pdVms[1]) : (-0.06)
+',
+						   timeout => 10,
+						  },
+						  {
+						   description => 'Does the simulation produce the correct output, traub91_asym_simple2.ndf ?',
+						   numerical_compare => 'arithmetic rounding differences',
+						   read => {
+							    application_output_file => "$::config->{core_directory}/output/cell.out",
+							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/traub91_asym_simple2.txt",
+# 							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/simplecell1-1-5e-10nA.txt",
+							   },
+						   wait => 1,
+						  },
+						 ],
+				comment => 'This test was derived from one of Dave Beeman\'s tutorial scripts',
+				description => "running the converted model with SSP to see if the conversion was done correctly",
+				preparation => {
+						description => "Create the output/ directory",
+						preparer =>
+						sub
+						{
+						    `mkdir output`;
+						},
+					       },
+				reparation => {
+					       description => "Remove the generated output files in the output/ directory",
+					       reparer =>
+					       sub
+					       {
+ 						   `cp "$::config->{core_directory}/output/cell.out" "$::config->{core_directory}/output/traub91_asym_simple2.out"`;
+#  						   `rm "$::config->{core_directory}/output/cell.out"`;
+						   `rmdir output`;
+					       },
+					      },
 			       },
 			       {
 				arguments => [

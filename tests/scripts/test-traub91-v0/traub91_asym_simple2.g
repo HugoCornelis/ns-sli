@@ -152,5 +152,9 @@ end
 //check
 reset
 
+setfield /neurospaces_integrator heccer_dump_selection { HECCER_DUMP_ALL_EXTENDED }
+
+call /neurospaces_integrator NSINTEGRATOR_DUMP
+
 step 3000
 
