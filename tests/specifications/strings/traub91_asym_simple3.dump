@@ -6043,7 +6043,7 @@ Tabulated gate 0, B (iEntry 2998) : (1539.27)
 Tabulated gate 0, B (iEntry 2999) : (1539.48)
 Tabulated gate 1, interval (dStart) : (-0.1)
 Tabulated gate 1, interval (dEnd) : (0.05)
-Tabulated gate 1, interval (dStep) : (49)
+Tabulated gate 1, interval (dStep) : (5e-05)
 Tabulated gate 1, interpolation (iShape) : (0)
 Tabulated gate 1, (iEntries) : (3000)
 Tabulated gate 1, A (iEntry 0) : (5)
@@ -12048,7 +12048,7 @@ Tabulated gate 1, B (iEntry 2998) : (5)
 Tabulated gate 1, B (iEntry 2999) : (5)
 Tabulated gate 2, interval (dStart) : (0)
 Tabulated gate 2, interval (dEnd) : (1000)
-Tabulated gate 2, interval (dStep) : (50)
+Tabulated gate 2, interval (dStep) : (0.333333)
 Tabulated gate 2, interpolation (iShape) : (0)
 Tabulated gate 2, (iEntries) : (3000)
 Tabulated gate 2, A (iEntry 0) : (0)
@@ -18066,7 +18066,7 @@ Mechanism operations
 00002 :: INITIALIZECHANNEL 0.08 1.0895e-07
 00003 :: LOADVOLTAGETABLE
 00004 :: CONCEPTGATE 0 2 (nil)							 0.0141937
-00005 :: CONCEPTGATE 1 1 (nil)							 1
+00005 :: CONCEPTGATE 1 1 (nil)							 0.973087
 00006 :: UPDATECOMPARTMENTCURRENT
 00007 :: REGISTERCHANNELCURRENT
 00008 :: FLUXPOOL							 0
