@@ -457,7 +457,7 @@ VM Membrane Potentials (pdVms[1]) : (-0.06)
 						   numerical_compare => 'arithmetic rounding differences',
 						   read => {
 							    application_output_file => "$::config->{core_directory}/output/cell.out",
-							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/traub91_asym_simple2.txt",
+							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/traub91_asym_simple2.ssp",
 # 							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/simplecell1-1-5e-10nA.txt",
 							   },
 						   wait => 1,
@@ -1469,9 +1469,9 @@ Tabulated gate 3, interval (dEnd) : (0.05)
 Tabulated gate 3, interval (dStep) : (5e-05)
 Tabulated gate 3, interpolation (iShape) : (0)
 Tabulated gate 3, (iEntries) : (3000)
-Tabulated gate 4, interval (dStart) : (4e-05)
-Tabulated gate 4, interval (dEnd) : (0.3)
-Tabulated gate 4, interval (dStep) : (9.99867e-05)
+Tabulated gate 4, interval (dStart) : (0)
+Tabulated gate 4, interval (dEnd) : (1000)
+Tabulated gate 4, interval (dStep) : (0.333333)
 Tabulated gate 4, interpolation (iShape) : (0)
 Tabulated gate 4, (iEntries) : (3000)
 Tabulated gate 5, interval (dStart) : (-0.1)
@@ -2072,7 +2072,7 @@ VM Membrane Potentials (pdVms[18]) : (-0.06)
 						   description => 'Does the simulation produce the correct output ?',
 						   read => {
 							    application_output_file => "$::config->{core_directory}/output/cell.out",
-							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/traub91_asym.txt",
+							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/traub91_asym.ssp",
 # 							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/simplecell1-1-5e-10nA.txt",
 							   },
 						   wait => 1,
