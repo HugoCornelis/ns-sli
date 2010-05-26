@@ -195,7 +195,7 @@ void DisplayHeader()
 
 
     // $Format: "    static char *pcVersion=\"${package}-${label}\";"$
-    static char *pcVersion="ns-sli-userdocs-6";
+    static char *pcVersion="ns-sli-alpha";
 
 
 printf("==========================================================================\n");

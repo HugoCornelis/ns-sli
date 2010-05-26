@@ -20,9 +20,9 @@ my $test
 					
 						  {
 						   # $Format: "description => \"Does the version information match with ${package}-${label} ?\","$
-description => "Does the version information match with ns-sli-userdocs-6 ?",
+description => "Does the version information match with ns-sli-alpha ?",
 						   # $Format: "read => \"${package}-${label}\","$
-read => "ns-sli-userdocs-6",
+read => "ns-sli-alpha",
 						  },
 						  {
 						   description => "Is the interactive major run-time version information correct?",
@@ -33,7 +33,7 @@ read => "ns-sli-userdocs-6",
 						  {
 						   description => "Is the interactive minor run-time version information correct?",
 						   # $Format: "read => \"${package}-${label}\","$
-read => "ns-sli-userdocs-6",
+read => "ns-sli-alpha",
 						   write => "echo {version minor}",
 						  },
 						 ],
