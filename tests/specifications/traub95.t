@@ -64,6 +64,11 @@ my $test
 						   timeout => 15,
 						  },
 						  {
+						   description => "Can we save the model as an NDF file -- library ?",
+						   read => 'genesis',
+						   write => 'call model_container NEUROSPACES_COMMAND "export library ndf /tmp/traub95cell1.ndf /cell/**"',
+						  },
+						  {
 						   description => "Can we quit the simulator such that output is flushed ?",
 						   wait => 1,
 						   write => 'quit',
@@ -95,6 +100,61 @@ my $test
 					       {
  						   `rm "$::config->{core_directory}/output/traub95_Vm.out"`;
 # 						   `rmdir output`;
+					       },
+					      },
+			       },
+			       {
+				arguments => [
+					      '--time',
+					      '0.5',
+					      '--time-step',
+					      '0.00002',
+					      '--cell',
+					      '/tmp/traub95cell1.ndf',
+					      '--model-name',
+					      'cell',
+					      '--output-fields',
+					      "/cell/soma->Vm",
+					      '--optimize',
+# 					      '--verbose',
+# 					      '--dump',
+					     ],
+				command => '/usr/local/bin/ssp',
+				command_tests => [
+						  {
+						   description => 'Can we compile the converted model description from SSP, traub95cell1.ndf ?',
+						   disabled => "this test was not implemented",
+						   read => 'Done',
+						   timeout => 30,
+						  },
+						  {
+						   description => 'Does the simulation produce the correct output (2)?',
+# 						   numerical_compare => "arithmetic rounding differences",
+						   read => {
+							    application_output_file => "$::config->{core_directory}/output/cell.out",
+							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/traub95_Vm.out.ssp",
+# 							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/simplecell1-1-5e-10nA.txt",
+							   },
+						   wait => 20,
+						  },
+						 ],
+				comment => 'This test was derived from one of Dave Beeman\'s tutorial scripts',
+				description => "running the converted model with SSP to see if the conversion was done correctly",
+				preparation => {
+						description => "Create the output/ directory",
+						preparer =>
+						sub
+						{
+						    `mkdir output`;
+						},
+					       },
+				reparation => {
+					       description => "Remove the generated output files in the output/ directory",
+					       reparer =>
+					       sub
+					       {
+# 						   `rm "$::config->{core_directory}/output/cell.out"`;
+						   `rmdir output`;
 					       },
 					      },
 			       },
