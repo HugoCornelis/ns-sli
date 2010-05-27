@@ -278,7 +278,7 @@ esac
 
 # determine the test library to install
 
-TEST_SPECIFICATION_FILES=`(/bin/echo -n "tests/introduction.html " && find tests/specifications -name "*.t" && find tests/specifications/strings -name "*.txt" && find tests/scripts -name "*.g" && find tests/scripts -name "*.p" && find tests/specifications/strings -name "*.g2" && find tests/specifications/strings -name "*.g3" ) | perl -pe 's(^| )( \\$(top_srcdir)/)g' | perl -pe 's/\n/ /g' `
+TEST_SPECIFICATION_FILES=`(/bin/echo -n "tests/introduction.html " && find tests/specifications -name "*.t" && find tests/specifications/strings -type f ) | perl -pe 's(^| )( \\$(top_srcdir)/)g' | perl -pe 's/\n/ /g' `
 AC_SUBST(TEST_SPECIFICATION_FILES)
 
 
