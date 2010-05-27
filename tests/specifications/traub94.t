@@ -84,6 +84,7 @@ my $test
 						  },
 						  {
 						   description => 'Does the simulation produce the correct output (1)?',
+						   numerical_compare => 'small arithmetic rounding differences on the automated tester machine',
 						   read => {
 							    application_output_file => "$::config->{core_directory}/output/cell.out",
 							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/traub94_Vm.out.soma.ssp",
@@ -189,6 +190,7 @@ my $test
 						  },
 						  {
 						   description => 'Does the simulation produce the correct output (2)?',
+						   numerical_compare => 'small arithmetic rounding differences on the automated tester machine',
 						   read => {
 							    application_output_file => "$::config->{core_directory}/output/cell.out",
 							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/traub94_Vm.out.ssp",

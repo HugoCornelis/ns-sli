@@ -2070,6 +2070,7 @@ VM Membrane Potentials (pdVms[18]) : (-0.06)
 						  },
 						  {
 						   description => 'Does the simulation produce the correct output ?',
+						   numerical_compare => 'small arithmetic rounding differences on the automated tester machine',
 						   read => {
 							    application_output_file => "$::config->{core_directory}/output/cell.out",
 							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/traub91_asym.ssp",
