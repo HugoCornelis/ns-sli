@@ -28,6 +28,8 @@ Group: 			Science
 Vendor: 		Hugo Cornelis <hugo.cornelis@gmail.com>
 Packager: 		Mando Rodriguez <mandorodriguez@gmail.com>
 URL:			http://www.neurospaces.org
+AutoReqProv:		no
+
 
 %description
  GENESIS 3 is backward compatible with GENESIS Release 2.3 for all functionality of Tutorial 9--The Purkinje Tutorial. In doing this, backward compatibility supports the major functionalities of the GENESIS Script Language Interpreter.  Importantly, backward compatibility is provided to enable GENESIS 2 scripts to be used in association with the reconfigured GENESIS. It is not designed to extend a pre-existing GENESIS 2 script with new functionality provided by GENESIS 3. Although this may be possible is some cases, the results are not currently guaranteed. Contact GENESIS Support if you require further details.
