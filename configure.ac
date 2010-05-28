@@ -125,7 +125,7 @@ case "$host_os" in
     AC_SUBST(SWIGLDLINKSFORPERL)
 
 
-    PYTHONLIB_EXTENSION='dylib'
+    PYTHONLIB_EXTENSION='so'
     AC_SUBST(PYHONLIB_EXTENSION)
 
 	# Mando: can you check why there are three dots in the include directive and explain here in a comment, it is a mystery to me.  This line comes from heccer's configure.ac

@@ -9,18 +9,18 @@ nsdir = $(top_builddir)/src/neurospaces
 olfdir = $(top_builddir)/src/olf
 
 EXTRA_DIST = \
-	libsh \
-	startup
+	$(srcdir)/libsh \
+	$(srcdir)/startup
 
 AM_CLAGS=-DPLAINTERM
 
 BUILT_SOURCES = \
-	loadlib.c \
-	liblist
+	$(srcdir)/loadlib.c \
+	$(srcdir)/liblist
 
 CLEANFILES = \
-	loadlib.c \
-	liblist
+	$(srcdir)/loadlib.c \
+	$(srcdir)/liblist
 
 bin_PROGRAMS = ns-sli 
 
@@ -28,7 +28,7 @@ bin_PROGRAMS = ns-sli
 ns_sli_INCLUDES = -I$(utildir) -I$(shelldir) -I$(simdir) -I$(scriptdir) -I$(olfdir) -I(nsdir) -I${prefix}/neurospaces/instrumentor
 
 ns_sli_SOURCES = \
-	loadlib.c 
+	$(srcdir)/loadlib.c 
 
 ns_sli_LDADD = \
 	$(shelldir)/shell_lib.o \
@@ -60,12 +60,14 @@ liblist: Makefile
 	@echo neurospaces nsintegrator ascfile olf hsolve | tr ' ' '\012' >> liblist
 
 loadlib.c: liblist
-	$(srcdir)/libsh < liblist > loadlib.c
+	$(srcdir)/libsh < $(srcdir)/liblist > $(srcdir)/loadlib.c
 
 
 install-data-local: 
 	echo "*** Installing startup scripts to $(ns_slidir)"
-	cp -rf startup $(ns_slidir)
+	cp -rf $(top_builddir)/src/startup $(ns_slidir)
+	cp -rf $(top_builddir)/tests/Scripts $(ns_slidir)/tests
 
 uninstall-local:
 	rm -rf $(ns_slistartupdir)
+	rm -rf $(ns_slidir)
