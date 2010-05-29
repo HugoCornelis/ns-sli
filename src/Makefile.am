@@ -65,8 +65,9 @@ loadlib.c: liblist
 
 install-data-local: 
 	echo "*** Installing startup scripts to $(ns_slidir)"
-	cp -rf $(top_builddir)/src/startup $(ns_slidir)
-	cp -rf $(top_builddir)/tests/scripts $(ns_slidir)/tests
+	cp -rf $(top_srcdir)/src/startup $(ns_slidir)
+	mkdir $(ns_slidir)tests/
+	cp -rf $(top_srcdir)/tests/scripts $(ns_slidir)tests/scripts
 
 uninstall-local:
 	rm -rf $(ns_slistartupdir)
