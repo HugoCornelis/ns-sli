@@ -400,7 +400,9 @@ char *getenv();
 	** just look it up in current directory
 	*/
 	fp = OpenScriptFile(name,mode);
-    } else {
+    }
+/*     else */
+    {
 	/*
 	** follow the paths in order trying to find the file
 	*/
