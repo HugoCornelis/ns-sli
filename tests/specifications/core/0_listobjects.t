@@ -21,7 +21,7 @@ my $test
 						   description =>  "Add a field to an object in genesis.",
 						   read => 'AVAILABLE OBJECTS:
 asc_file            hsolve              neurospaces         neutral             
-nsintegrator',
+nsintegrator        pulsegen',
 						   write => 'listobjects',
 						  },
 						
