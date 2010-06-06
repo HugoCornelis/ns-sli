@@ -17,6 +17,7 @@
 #include "neurospaces/components/channel.h"
 #include "neurospaces/components/equationexponential.h"
 #include "neurospaces/components/pool.h"
+#include "neurospaces/components/pulsegen.h"
 #include "neurospaces/components/segment.h"
 #include "neurospaces/function.h"
 #include "neurospaces/symbols.h"  
@@ -160,9 +161,8 @@ int NSCreate( char* name,  char* pcParent, char* pcType){
 
    else if (!strcmp("pulsegen",pcType)){
 
-     // This is temporary until I finish the model container object.
 
-     phsleChild = (struct symtab_HSolveListElement *)CellCalloc();
+     //phsleChild = (struct symtab_HSolveListElement *)PulseGenCalloc();
      
      iResult = NSINTEGRATOR_PULSEGEN;
 

@@ -2,6 +2,8 @@
 .deb$
 .dsc$
 \.log$
+a.out
+a.out.dSYM
 Makefile$
 Makefile\.in$
 \.tab$
@@ -39,6 +41,7 @@ Makefile\.in$
 ^src/neurospaces/tmp_hsolve_struct.h$
 ^src/neurospaces/tmp_neurospaces_struct\.h
 ^src/neurospaces/tmp_nsintegrator_struct\.h
+^src/neurospaces/tmp_pulsegen_struct\.h
 ^src/ns-sli
 ^src/nsgenesis
 ^src/olf/tmp_olf_struct\.h

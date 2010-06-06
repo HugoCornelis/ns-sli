@@ -39,7 +39,11 @@ BUILT_SOURCES = \
 	nsintegrator_d@.c \
 	nsintegrator_g@.c \
 	nsintegrator_g@.h \
-	nsintegrator_l@.c
+	nsintegrator_l@.c \
+	pulsegen_d@.c \
+	pulsegen_g@.c \
+	pulsegen_g@.h \
+	pulsegen_l@.c
 
 CLEANFILES = \
 	ascfile_d@.c \
@@ -58,17 +62,20 @@ CLEANFILES = \
 	nsintegrator_g@.c \
 	nsintegrator_g@.h \
 	nsintegrator_l@.c \
+	pulsegen_d@.c \
+	pulsegen_g@.c \
+	pulsegen_g@.h \
+	pulsegen_l@.c \
 	tmp_ascfile_struct.h \
 	tmp_hsolve_struct.h \
 	tmp_neurospaces_struct.h \
-	tmp_nsintegrator_struct.h
-
+	tmp_nsintegrator_struct.h \
+	tmp_pulsegen_struct.h
 
 
 ascfile_d@.c:
 	$(CPP) ascfile_struct.h -I../script -I../util -I../sim -I../shell -I/usr/local/neurospaces/instrumentor -I/usr/local/heccer -DPRE_PROTO_TRAVERSAL > tmp_ascfile_struct.h
 	$(makestructs) tmp_ascfile_struct.h ascfile -I nsintegrator.h -NI -o ascfile_d@.c
-
 
 ascfile_g@.c:
 	$(c2genesis) ascfilelib.g nsintegrator.h ascfile
@@ -80,7 +87,6 @@ ascfile_l@.c:
 hsolve_d@.c:
 	$(CPP) hsolve_struct.h -I../script -I../util -I../sim -I../shell -I/usr/local/neurospaces/instrumentor -I/usr/local/heccer -DPRE_PROTO_TRAVERSAL > tmp_hsolve_struct.h
 	$(makestructs) tmp_hsolve_struct.h hsolve -I nsintegrator.h -NI -o hsolve_d@.c
-
 
 hsolve_g@.c:
 	$(c2genesis) hsolvelib.g nsintegrator.h hsolve
@@ -103,9 +109,6 @@ neurospaces_l@.c:
 	$(makelib) neurospaces -o neurospaces_l@.c
 
 
-
-
-
 nsintegrator_d@.c:
 	$(CPP) nsintegrator_struct.h -I../script -I../util -I../sim -I../shell -I/usr/local/neurospaces/instrumentor -DPRE_PROTO_TRAVERSAL > tmp_nsintegrator_struct.h
 	$(makestructs) tmp_nsintegrator_struct.h nsintegrator -I nsintegrator.h -NI -o nsintegrator_d@.c
@@ -114,7 +117,6 @@ nsintegrator_d@.c:
 nsintegrator_g@.c:
 	$(c2genesis) nsintegratorlib.g nsintegrator.h nsintegrator
 
-
 nsintegrator_g@.h: 
 	$(c2genesis) nsintegratorlib.g nsintegrator.h nsintegrator
 
@@ -122,6 +124,15 @@ nsintegrator_l@.c:
 	$(makelib) nsintegrator -o nsintegrator_l@.c
 
 
+pulsegen_d@.c:
+	$(CPP) pulsegen_struct.h -I../script -I../util -I../sim -I../shell -I/usr/local/neurospaces/instrumentor -I/usr/local/heccer -DPRE_PROTO_TRAVERSAL > tmp_pulsegen_struct.h
+	$(makestructs) tmp_pulsegen_struct.h pulsegen -I nsintegrator.h -NI -o pulsegen_d@.c
+
+pulsegen_g@.c:
+	$(c2genesis) pulsegenlib.g nsintegrator.h pulsegen
+
+pulsegen_l@.c:
+	$(makelib) pulsegen -o pulsegen_l@.c
 
 
 
@@ -174,6 +185,7 @@ libneurospaces_a_SOURCES = \
 	nslistcommands.c \
 	nsmove.c \
 	nsmsg.c \
+	nspulsegen.c \
 	nsreset.c \
 	nssetelement.c \
 	nssetfield.c \
@@ -181,7 +193,12 @@ libneurospaces_a_SOURCES = \
 	nsshowfield.c \
 	nstabcreate.c \
 	nstabfill.c \
-	nstweak.c
+	nstweak.c \
+	pulsegenactor.c \
+	pulsegen_d@.c \
+	pulsegen_g@.c \
+	pulsegen_g@.h \
+	pulsegen_l@.c
 
 libneurospaces_a_DEPENDENCIES = \
 	ascfile_d@.c \
@@ -199,7 +216,11 @@ libneurospaces_a_DEPENDENCIES = \
 	nsintegrator_d@.c \
 	nsintegrator_g@.c \
 	nsintegrator_g@.h \
-	nsintegrator_l@.c
+	nsintegrator_l@.c \
+	pulsegen_d@.c \
+	pulsegen_g@.c \
+	pulsegen_g@.h \
+	pulsegen_l@.c
 
 dist-hook: $(libneurospaces_a_DEPENDENCIES)
 
