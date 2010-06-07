@@ -479,6 +479,14 @@ struct ParameterMapper * mapParameter(char *pcField){
 	{	    "z",	"z",	SLI_PARAMETER_NUMBER,	},
 	{	    "thresh",	"THRESHOLD",	SLI_PARAMETER_NUMBER,	},
 	{	    "abs_refract",	"REFRACTORY",	SLI_PARAMETER_NUMBER,	},
+	{	    "level1",	"LEVEL1",	SLI_PARAMETER_NUMBER,	},
+	{	    "width1",	"WIDTH1",	SLI_PARAMETER_NUMBER,	},
+	{	    "delay1",	"DELAY1",	SLI_PARAMETER_NUMBER,	},
+	{	    "level2",	"LEVEL2",	SLI_PARAMETER_NUMBER,	},
+	{	    "width2",	"WIDTH2",	SLI_PARAMETER_NUMBER,	},
+	{	    "delay2",	"DELAY2",	SLI_PARAMETER_NUMBER,	},
+	{	    "baselevel",	"BASELEVEL",	SLI_PARAMETER_NUMBER,	},
+	{	    "trig_mode",	"TRIGMODE",	SLI_PARAMETER_NUMBER,	},
 	{	    NULL,	NULL,	0,	},
     };
 
