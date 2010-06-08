@@ -837,9 +837,7 @@ int NSProcessMessages(struct neurospaces_integrator *pnsintegrator)
 
       if (!strcmp(ppioMsg[i]->pcMsgName, "SAVE"))
       {
-	  //- are not processed overhere, so continue
-
-	  // \todo useful comment above ... where again were they processed?
+	  //- These are processed in SetupIOMessages in nsreset.c, so continue
 
 	  continue;
       }
