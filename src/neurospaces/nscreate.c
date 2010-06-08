@@ -88,7 +88,7 @@ int NSCreate( char* name,  char* pcParent, char* pcType){
        "channelC3", NSINTEGRATOR_SYNCHAN,
        "spikegen", NSINTEGRATOR_SPIKEGEN,
        "asc_file", NSINTEGRATOR_ASCFILE,
-       "pulsegen", NSINTEGRATOR_PULSEGEN,
+       (char *)-1, NSINTEGRATOR_PULSEGEN,
        "hsolve", NSINTEGRATOR_PULSEGEN,
        (char *)-1, NSINTEGRATOR_NEUTRAL,
        NULL, -1,
@@ -162,7 +162,7 @@ int NSCreate( char* name,  char* pcParent, char* pcType){
    else if (!strcmp("pulsegen",pcType)){
 
 
-     //phsleChild = (struct symtab_HSolveListElement *)PulseGenCalloc();
+     phsleChild = (struct symtab_HSolveListElement *)PulseGenCalloc();
      
      iResult = NSINTEGRATOR_PULSEGEN;
 

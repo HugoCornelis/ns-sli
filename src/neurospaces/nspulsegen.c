@@ -69,7 +69,13 @@ int NSPulseGenReset(struct pulsegen_type *ppgt)
       return -1;
     }
 
+    //- Set the output
+    if(!PulseGenAddVariable(ppgt->ppg,(void*)&(ppgt->output)))
+    {
 
+      fprintf(stdout,"Error: Could not set output for pulsegen %s\n",ppgt->name);
+
+    }
 
   }
 
