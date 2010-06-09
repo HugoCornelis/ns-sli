@@ -34,6 +34,9 @@ struct pulsegen_type {
 
   struct simobj_PulseGen *ppg;
  
+  double *pdOutput;
+
+
 };
 
 

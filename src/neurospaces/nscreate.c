@@ -35,6 +35,7 @@
 //-- prototypes for setting up a basic channel object --
 static struct symtab_HSolveListElement * NernstCalloc();
 static struct symtab_HSolveListElement * SynChannelCalloc();
+static struct symtab_HSolveListElement * NSPulseGenCalloc();
 
 //--------------------------------------------------------------------
 /*!
@@ -162,7 +163,7 @@ int NSCreate( char* name,  char* pcParent, char* pcType){
    else if (!strcmp("pulsegen",pcType)){
 
 
-     phsleChild = (struct symtab_HSolveListElement *)PulseGenCalloc();
+     phsleChild = (struct symtab_HSolveListElement *)NSPulseGenCalloc();
      
      iResult = NSINTEGRATOR_PULSEGEN;
 
@@ -245,9 +246,6 @@ int NSCreate( char* name,  char* pcParent, char* pcType){
    return iResult;
 
 }
-
-
-
 
 
 
@@ -447,5 +445,27 @@ static struct symtab_HSolveListElement * NernstCalloc()
 
   BioComponentChangeParameter((struct symtab_BioComponent *)phsle,ppar);
   return phsle;
+
+}
+
+
+//---------------------------------------------------------------------
+/*!
+ *  \fn static struct symtab_HSolveListElement * NSPulseGenCalloc()
+ *  \return A pointer to a newly allocated channel object.
+ */
+//---------------------------------------------------------------------
+static struct symtab_HSolveListElement * NSPulseGenCalloc()
+{
+
+  struct symtab_HSolveListElement *phslePulse = (struct symtab_HSolveListElement *)PulseGenCalloc();
+
+  struct symtab_Parameters  *pparTop = newParameter("0",SETPARA_HERE);
+
+  ParameterSetName(pparTop,strdup("output"));
+
+  BioComponentChangeParameter((struct symtab_BioComponent *)phslePulse,pparTop);
+  
+  return phslePulse;
 
 }
