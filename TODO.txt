@@ -1,5 +1,8 @@
 -*- outline -*-
 
+* SymbolRecalcAllSerials()
+Move this to the implementation of 'reset'
+
 * Add support for wildcards
 ** addmsg {cellpath}/climb_presyn4 {cellpath}/br3[0-8]/climb ACTIVATION z
 ** same for // setfield /output/# flush 1 leave_open 0
