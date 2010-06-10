@@ -216,7 +216,7 @@ static int RegisterHeccerName(char *pcName)
   }
 
   return 1;
-  
+   
 
 }
 

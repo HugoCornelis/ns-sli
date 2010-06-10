@@ -67,12 +67,20 @@ int NSSetField(struct symtab_HSolveListElement *phsle,
 	       struct PidinStack *ppist,
 	       char *pcPathname, char *pcField, char *pcValue);
 
+
+//-- Defines for determining parameter types --
 #define SETPARA_GENESIS2 2
 #define SETPARA_NUM 3
 #define SETPARA_STRING 4
 #define SETPARA_FIELD 5
-
 #define SETPARA_HERE 6
+//---------------------------------------------
+
+
+//-- Defines for determining solver types --
+#define SOLVER_HECCER 1 
+#define SOLVER_PULSEGEN 2
+//------------------------------------------
 
 
 #define MAX_HECCERS 100
@@ -192,7 +200,7 @@ struct ioMsg
 
 /*!
  * \struct SolverInstance
- *
+ * \todo probably need to change this to a union.
  * a solver instance with the options used to instantiate it.
  */
 
@@ -201,6 +209,8 @@ struct SolverInstance
     int iOptions;
 
     struct Heccer *pheccer;
+    
+    struct simobj_PulseGen *ppg;
 };
 
 
