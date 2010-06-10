@@ -200,7 +200,7 @@ struct ioMsg
 
 /*!
  * \struct SolverInstance
- * \todo probably need to change this to a union.
+ * \todo Technically this is now a HeccerInstance
  * a solver instance with the options used to instantiate it.
  */
 
@@ -210,7 +210,6 @@ struct SolverInstance
 
     struct Heccer *pheccer;
     
-    struct simobj_PulseGen *ppg;
 };
 
 
@@ -241,6 +240,9 @@ struct SolverRegistration
     union
     {
 	struct SolverInstance si;
+
+        struct simobj_PulseGen *ppg;
+
     }
 	uSolver;
 };
