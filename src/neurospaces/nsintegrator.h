@@ -458,7 +458,9 @@ int NSShowField(int argc,char **argv);
 int PrintHeccerVariable(char *pcName,char *pcParameter,int iAll);
 
 //- Defined in nspulsegen.c --
-//
+int NSPulseGenReset(struct pulsegen_type *ppgt);
+int RegisterPulseGenName(char *pcName);
+int AttemptPulseGenName(char *pcName);
 
 //- -- Defined in sim_main.c --
 int sli_main(int argc, char **argv, char **envp, struct Neurospaces *pneuro);

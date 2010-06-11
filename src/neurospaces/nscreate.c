@@ -164,6 +164,8 @@ int NSCreate( char* name,  char* pcParent, char* pcType){
 
 
      phsleChild = (struct symtab_HSolveListElement *)NSPulseGenCalloc();
+
+     //AttemptPulseGenName(name,SOLVER_PULSEGEN);
      
      iResult = NSINTEGRATOR_PULSEGEN;
 
@@ -453,6 +455,8 @@ static struct symtab_HSolveListElement * NernstCalloc()
 /*!
  *  \fn static struct symtab_HSolveListElement * NSPulseGenCalloc()
  *  \return A pointer to a newly allocated channel object.
+ *
+ *  
  */
 //---------------------------------------------------------------------
 static struct symtab_HSolveListElement * NSPulseGenCalloc()

@@ -196,7 +196,7 @@ static int RegisterHeccerName(char *pcName)
 	  = NULL;
 
       pnsintegrator->psr[pnsintegrator->iModelRegistrations].iType
-	  = 1;
+	  = SOLVER_HECCER;
 
       //! Hardcoded check for any name prefixed with "/library"
       //! if so when we disable it.
