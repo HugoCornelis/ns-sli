@@ -105,7 +105,7 @@ int NSCreate( char* name,  char* pcParent, char* pcType){
 
      char *pcHeccerName = getRootedPathname(pcParent);
 
-     AttemptHeccerName(pcHeccerName);
+     AttemptSolverName(pcHeccerName,SOLVER_HECCER);
 
      free(pcHeccerName);
    }
@@ -165,7 +165,7 @@ int NSCreate( char* name,  char* pcParent, char* pcType){
 
      phsleChild = (struct symtab_HSolveListElement *)NSPulseGenCalloc();
 
-     //AttemptPulseGenName(name,SOLVER_PULSEGEN);
+     AttemptSolverName(name,SOLVER_PULSEGEN);
      
      iResult = NSINTEGRATOR_PULSEGEN;
 
@@ -178,7 +178,7 @@ int NSCreate( char* name,  char* pcParent, char* pcType){
 
        char *pcHeccerName = getRootedPathname(pcParent);
 
-       AttemptHeccerName(pcHeccerName);
+       AttemptSolverName(pcHeccerName,SOLVER_HECCER);
 
        free(pcHeccerName);
    }

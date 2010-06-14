@@ -75,7 +75,7 @@ int NSReset(){
     return -1;
 
 
-  if (!TranslateHeccerNames(pnsintegrator))
+  if (!TranslateSolverNames(pnsintegrator))
   {
       return -1;
   }
@@ -98,7 +98,7 @@ int NSReset(){
       // in any simple scripts seems, but only the first entry in the array.
       // \todo that is a mystery.
 
-      if (pnsintegrator->psr[i].uSolver.si.pheccer)
+      if (pnsintegrator->psr[i].iType == SOLVER_HECCER && pnsintegrator->psr[i].uSolver.si.pheccer)
       {
 	  SetupIOMessages(ppioMsg, iIoMsgs, pnsintegrator->psr[i].uSolver.si.pheccer);
       }

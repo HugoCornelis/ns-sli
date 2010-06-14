@@ -370,11 +370,11 @@ int NSFilterCreate(char *pcType);
 int NSGenesisInitialize();
 
 
-//i -- Defined in heccercreate.c --
-int AttemptHeccerName(char *pcName);
+//i -- Defined in solvercreate.c --
+int AttemptSolverName(char *pcName, int iType);
 int SetSolverOptions(char *pcName, int iOptions);
-int DisableHeccerName(char *pcName);
-int TranslateHeccerNames(struct neurospaces_integrator *pnsintegrator);
+int DisableSolverName(char *pcName, int iType);
+int TranslateSolverNames(struct neurospaces_integrator *pnsintegrator);
 int InitHeccerObject(struct SolverRegistration *psr);
 struct Heccer *LookupHeccerObject(char *pcContext);
 
@@ -459,8 +459,7 @@ int PrintHeccerVariable(char *pcName,char *pcParameter,int iAll);
 
 //- Defined in nspulsegen.c --
 int NSPulseGenReset(struct pulsegen_type *ppgt);
-int RegisterPulseGenName(char *pcName);
-int AttemptPulseGenName(char *pcName);
+int InitPulseGenObject(struct SolverRegistration *psr);
 
 //- -- Defined in sim_main.c --
 int sli_main(int argc, char **argv, char **envp, struct Neurospaces *pneuro);

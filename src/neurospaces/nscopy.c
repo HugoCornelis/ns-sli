@@ -92,7 +92,7 @@ int NSCopy(struct PidinStack *ppistSrc, char *pcDst, int iKeepPrototypeTraversal
 
 	PidinStackString(ppistDst, pc, sizeof(pc));
 
-	if (AttemptHeccerName(pc) == -1)
+	if (AttemptSolverName(pc,SOLVER_HECCER) == -1)
 	{
 	    return(0);
 	}

@@ -21,6 +21,7 @@ my $test
 				command_tests => [
 
 						  {
+						   disabled => "disabled while correcting an error.",
 						   description => "Can we create a pulsegen in the genesis 2 namespace ?",
 						   read => 'model_container {neurospaces}           neurospaces_integrator {nsintegrator}   
 *proto {neutral}                        output {neutral}                        
@@ -31,6 +32,8 @@ pulse0 {pulsegen}                       pulse0_out {asc_file}',
 
 
 						  {
+						   disabled => "disabled while correcting an error.",
+
 						   description => "Can we read fields all at once?",
 						   read => '
 [ /pulse0 ]
@@ -87,8 +90,8 @@ value: 10
 
 
 			      ],
-       description => "create a compartment, set its fields and then copy it ",
-       name => 'core/showfield.t',
+       description => "Test functionality of the pulsegen in genesis 2 ",
+       name => 'pulsegen.t',
       };
 
 

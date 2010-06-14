@@ -905,10 +905,29 @@ int NSProcessMessages(struct neurospaces_integrator *pnsintegrator)
 	    // chacking catch it below.
 	    //
 	    if(iWorkingHeccerIndex != -1)
+	    {
+
+	      if(pnsintegrator->psr[iWorkingHeccerIndex].iType == SOLVER_HECCER)
+	      {
+
 		ppioMsg[i]->pdValue
 		    = HeccerAddressVariable(pnsintegrator->psr[iWorkingHeccerIndex].uSolver.si.pheccer, 
 					    ppioMsg[i]->iTarget, 
 					    ppioMsg[i]->pcMsgName);
+	      }
+	      else if(pnsintegrator->psr[iWorkingHeccerIndex].iType == SOLVER_PULSEGEN)
+	      {
+
+		
+		struct simobj_PulseGen *ppg = pnsintegrator->psr[iWorkingHeccerIndex].uSolver.ppg;
+
+		ppioMsg[i]->pdValue = ppg->pdPulseOut;
+	
+
+	      }
+
+	    }
+
 	}
 
 	if (ppioMsg[i]->pdValue)

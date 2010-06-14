@@ -24,11 +24,11 @@ extern double			clock_value[NCLOCKS];
 //------------------------------------------------------------------
 
 
-static int RegisterHeccerName(char *pcName);
+static int RegisterSolverName(char *pcName);
 
 //------------------------------------------------------------------
 /*!
- *  \fn int AttemptHeccerName(char *pcName)
+ *  \fn int AttemptSolverName(char *pcName)
  *
  *  \return -1 on error, 1 on success, 0 for no operation.
  *
@@ -79,7 +79,7 @@ int AttemptHeccerName(char *pcName)
 
     //- no heccer with that name, so register a new one
 
-    return(RegisterHeccerName(pcName));
+    return(RegisterSolverName(pcName));
 }
 
 
@@ -114,7 +114,14 @@ int SetSolverOptions(char *pcName, int iOptions)
 
     if (i < pnsintegrator->iModelRegistrations)
     {
+      //- Only heccer solvers have options to set. 
+
+      if(pnsintegrator->psr[i].iType == SOLVER_HECCER)
+      {
+
 	pnsintegrator->psr[i].uSolver.si.iOptions |= iOptions;
+
+      }
 
 	return 1;
     }
@@ -160,7 +167,7 @@ int DisableHeccerName(char *pcName)
 
 //------------------------------------------------------------------
 /*!
- *  \fn int RegisterHeccerName(char *pcName)
+ *  \fn int RegisterSolverName(char *pcName)
  *
  *  \return -1 on error, 1 on success, 0 for no operation.
  *
@@ -169,7 +176,7 @@ int DisableHeccerName(char *pcName)
  */
 
 //------------------------------------------------------------------
-static int RegisterHeccerName(char *pcName)
+static int RegisterSolverName(char *pcName, int iType)
 {
   struct neurospaces_integrator *pnsintegrator = getNsintegrator();
 
@@ -177,7 +184,7 @@ static int RegisterHeccerName(char *pcName)
 
   if (pnsintegrator->iModelRegistrations >= MAX_HECCERS)
   {
-      fprintf(stdout, "Error: to many heccers in RegisterHeccerName() at %s.\n", pcName);
+      fprintf(stdout, "Error: to many solvers in RegisterSolverName() at %s.\n", pcName);
   }
   else
   {
@@ -192,11 +199,30 @@ static int RegisterHeccerName(char *pcName)
 	  pnsintegrator->psr[pnsintegrator->iModelRegistrations].pcName[strlen(pnsintegrator->psr[pnsintegrator->iModelRegistrations].pcName) - 1] = '\0';
       }
 
-      pnsintegrator->psr[pnsintegrator->iModelRegistrations].uSolver.si.pheccer
+      if(iType == SOLVER_HECCER)
+      {
+
+	pnsintegrator->psr[pnsintegrator->iModelRegistrations].uSolver.si.pheccer
 	  = NULL;
 
+      }
+      else if(iType == SOLVER_PULSEGEN)
+      {
+
+	pnsintegrator->psr[pnsintegrator->iModelRegistrations].uSolver.ppg
+	  = NULL;
+      }
+      else
+      {
+
+	fprintf(stderr,"Error: Invalid solver type for %s\n",pcName);
+
+	return -1;
+
+      }
+
       pnsintegrator->psr[pnsintegrator->iModelRegistrations].iType
-	  = SOLVER_HECCER;
+	  = iType;
 
       //! Hardcoded check for any name prefixed with "/library"
       //! if so when we disable it.
@@ -249,15 +275,35 @@ int TranslateHeccerNames(struct neurospaces_integrator *pnsintegrator)
 
     for (i = 0 ; i < pnsintegrator->iModelRegistrations ; i++)
     {
-	if (pnsintegrator->psr[i].iDisabled)
-	{
-	    continue;
-	}
+
+      if (pnsintegrator->psr[i].iDisabled)
+      {
+	continue;
+      }
+      
+      if( pnsintegrator->psr[i].iType == SOLVER_HECCER )
+      {
 
 	if (InitHeccerObject(&pnsintegrator->psr[i]) == -1)
 	{
 	    iResult = 0;
 	}
+
+      }
+      else if( pnsintegrator->psr[i].iType == SOLVER_PULSEGEN )
+      {
+
+	//- just to keep the logic consistent. 
+
+	if( InitPulseGenObject(&pnsintegrator->psr[i]) == -1 )
+	{
+
+	  iResult = 0;
+
+	}
+
+      }
+
     }
 
     //- return result
@@ -348,7 +394,7 @@ int LookupHeccerIndex(char *pcContext)
  *  \return -1 on error, 1 on success, 0 for no operation.
  *  \sa neurospaces_integrator
  *
- *  Creates a Heccer instace and stores is in the global Heccer
+ *  Creates a Heccer instace and stores it in the global Heccer
  *  array in pelnsintegrator.
  *
  */

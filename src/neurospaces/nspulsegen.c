@@ -28,122 +28,6 @@ extern double			clock_value[NCLOCKS];
 
 
 
-//------------------------------------------------------------------
-/*!
- *  \fn int AttemptSolverName(char *pcName)
- *
- *  \return -1 on error, 1 on success, 0 for no operation.
- *
- */
-
-//------------------------------------------------------------------
-int AttemptPulseGenName(char *pcName)
-{
-    struct neurospaces_integrator *pnsintegrator = getNsintegrator();
-
-    //- if this name is in the proto library
-
-    if (strncmp(pcName, "/proto", strlen("/proto")) == 0)
-    {
-	//- this is assumed to be disabled, so return success
-
-	return 0;
-    }
-
-    //- if a solver object with the same name exists.
-
-    int i;
-
-    for (i = 0 ; i < pnsintegrator->iModelRegistrations ; i++)
-    {
-	if (strncmp(pcName, pnsintegrator->psr[i].pcName, strlen(pnsintegrator->psr[i].pcName)) == 0)
-	{
-	    //- if so we don't register the name and exit with success.
-
-	    return 0;
-	}
-
-	if (strncmp(pnsintegrator->psr[i].pcName, pcName, strlen(pcName)) == 0)
-	{
-	    //- or we overwrite the existing entry with a name that
-	    //- catches more of the model
-
-	    free(pnsintegrator->psr[i].pcName);
-
-	    pnsintegrator->psr[i].pcName = strdup(pcName);
-
-	    return 0;
-	}
-    }
-
-    //- no heccer with that name, so register a new one
-
-    return(RegisterPulseGenName(pcName));
-}
-
-
-
-
-
-//------------------------------------------------------------------
-/*!
- *  \fn int RegisterPulseGenName(char *pcName)
- *
- *  \return -1 on error, 1 on success, 0 for no operation.
- *
- */
-
-//------------------------------------------------------------------
-int RegisterPulseGenName(char *pcName)
-{
-
-  struct neurospaces_integrator *pnsintegrator = getNsintegrator();
-
-  //- register the name of the heccer object
-
-  if (pnsintegrator->iModelRegistrations >= MAX_HECCERS)
-  {
-      fprintf(stdout, "Error: to many heccers in RegisterHeccerName() at %s.\n", pcName);
-  }
-  else
-  {
-
-      pnsintegrator->psr[pnsintegrator->iModelRegistrations].pcName
-	  = strdup(pcName);
-
-
-      if (pnsintegrator->psr[pnsintegrator->iModelRegistrations].pcName[strlen(pnsintegrator->psr[pnsintegrator->iModelRegistrations].pcName) - 1] == '/')
-      {
-	  pnsintegrator->psr[pnsintegrator->iModelRegistrations].pcName[strlen(pnsintegrator->psr[pnsintegrator->iModelRegistrations].pcName) - 1] = '\0';
-      }
-
-      pnsintegrator->psr[pnsintegrator->iModelRegistrations].uSolver.ppg
-	  = NULL;
-
-      pnsintegrator->psr[pnsintegrator->iModelRegistrations].iType
-	  = SOLVER_PULSEGEN;
-
-
-      //! Hardcoded check for any name prefixed with "/library"
-      //! if so when we disable it.
-
-      if (!strncmp("/library", pcName, strlen("/library")))
-      {
-	  pnsintegrator->psr[pnsintegrator->iModelRegistrations].iDisabled
-	      = 1;
-      }
-      else
-      {
-	  pnsintegrator->psr[pnsintegrator->iModelRegistrations].iDisabled
-	      = 0;
-      }
-
-      pnsintegrator->iModelRegistrations++;
-  }
-
-}
-
-
 
 
 //---------------------------------------------------------
@@ -202,3 +86,64 @@ int NSPulseGenReset(struct pulsegen_type *ppgt)
 }
 
 
+//------------------------------------------------------------------
+/*!
+ *  \fn int InitPulseGenObject()
+ *
+ *  \param pcContext A char array holding the name for the PulseGen to create.
+ *  \return -1 on error, 1 on success, 0 for no operation.
+ *  \sa neurospaces_integrator
+ *  \sa InitHeccerObject
+ *
+ *  Creates a PulseGen instace and stores it in the global solver
+ *  array in pelnsintegrator.
+ *
+ */
+//------------------------------------------------------------------
+int InitPulseGenObject(struct SolverRegistration *psr)
+{
+
+
+  if(!psr || psr->iDisabled)
+    return 0;
+
+  struct neurospaces_integrator *pnsintegrator = getNsintegrator();
+
+  //- The primary linking between the pulsegen object and the pulsegen solver
+  //- is made at the genesis 2 level. So we retrieve the genesis 2 object for 
+  //- this pulsegen, create a solver and link it "ppg" pointer. This is where it
+  //- is looked for in the PulseGenActor function.
+
+  if(!psr->pcName)
+    return -1;
+
+  struct pulsegen_type *ppgt = (struct pulsegen_type*)(GetElement(psr->pcName));
+
+  if(!ppgt)
+  {
+    fprintf(stdout,"Error: No pulsegen element named %s found, cannot attach a solver.\n");
+  }
+
+  
+  if(!ppgt->ppg)
+  {
+
+    ppgt->ppg = PulseGenNew(ppgt->name);
+
+    if(!ppgt->ppg)
+    {
+
+      fprintf(stdout,
+	      "Error: Could not create pulsegen object \" %s\".\n",
+	      ppgt->name);
+
+      return -1;
+
+    }
+
+
+  }
+
+  return 1;
+
+}

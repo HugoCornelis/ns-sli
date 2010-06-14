@@ -1596,7 +1596,7 @@ void do_read_cell(argc,argv)
 	/* setting the default compartment name */
 	strcpy(comptname,"/library/compartment");
 
-	AttemptHeccerName(optargv[2]);
+	AttemptSolverName(optargv[2],SOLVER_HECCER);
 
 	/* setting the default memb_factor */
 	MEMB_FACTOR = 1.0;
