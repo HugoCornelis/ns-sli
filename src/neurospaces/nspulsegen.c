@@ -82,6 +82,25 @@ int NSPulseGenReset(struct pulsegen_type *ppgt)
 
   }
 
+
+  //- This sets up the model containers output variable to sync with the output variable
+  //- in the genesis object. Some code is repeated here. 
+  if(!ppgt->pdOutput)
+  {
+	
+    struct PidinStack *ppist = PidinStackParse(ppgt->name);
+    
+    PidinStackUpdateCaches(ppist);
+
+    struct symtab_HSolveListElement *phsle = PidinStackLookupTopSymbol(ppist);
+
+    struct symtab_Parameters *ppar = SymbolFindParameter(phsle, ppist, "output");
+
+    ppgt->pdOutput = &(ppar->uValue.dNumber);
+
+  }
+
+
   return 1;
 }
 
@@ -121,7 +140,7 @@ int InitPulseGenObject(struct SolverRegistration *psr)
 
   if(!ppgt)
   {
-    fprintf(stdout,"Error: No pulsegen element named %s found, cannot attach a solver.\n");
+    fprintf(stdout,"Error: No pulsegen element named %s found, cannot attach a solver.\n",psr->pcName);
   }
 
   
@@ -141,6 +160,24 @@ int InitPulseGenObject(struct SolverRegistration *psr)
 
     }
 
+
+  }
+
+
+  //- Here we link the solvers output variable to the model containers 
+  //- output parameter.
+  if(!ppgt->pdOutput)
+  {
+	
+    struct PidinStack *ppist = PidinStackParse(ppgt->name);
+    
+    PidinStackUpdateCaches(ppist);
+	
+    struct symtab_HSolveListElement *phsle = PidinStackLookupTopSymbol(ppist);
+
+    struct symtab_Parameters *ppar = SymbolFindParameter(phsle, ppist, "output");
+
+    ppgt->pdOutput = &(ppar->uValue.dNumber);
 
   }
 
