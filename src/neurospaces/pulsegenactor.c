@@ -84,19 +84,21 @@ int PulseGenActor(struct pulsegen_type *pulsegen_type,
 
 	pulsegen_type->pdOutput = &(ppar->uValue.dNumber);
 
+	pulsegen_type->ppg->pdPulseOut = pulsegen_type->pdOutput;
+
       }
 
-      if(simulation_time > 0){
+      if(simulation_time > 0)
+      {
 	
 	iResult = PulseGenSingleStep(pulsegen_type->ppg, 
 					    simulation_time);
 
 	if(pulsegen_type->pdOutput)
 	{
-	  (*(pulsegen_type->pdOutput)) = pulsegen_type->output;
+	  pulsegen_type->output = (*(pulsegen_type->pdOutput));
 	}
 
-	//	fprintf(stdout,"%0.9g\n",pulsegen_type->output);
 
       }
 
@@ -107,8 +109,15 @@ int PulseGenActor(struct pulsegen_type *pulsegen_type,
     case RESET:
     {
 
+      if(!pulsegen_type)
+      {
+	//- There is duplicate functionality here and in InitPulseGenObject
+	//- This is just here in case the pointer to the pulsegen is null,
+	//- which is shouldn't be anymore, but was on occasion when going through
+	//- the implementation.
+	iResult = NSPulseGenReset(pulsegen_type);
 
-      iResult = NSPulseGenReset(pulsegen_type);
+      }
 
       break;
     }
@@ -125,11 +134,11 @@ int PulseGenActor(struct pulsegen_type *pulsegen_type,
 
 
 
-    }
+  }
 
     //- return result
 
-    return(iResult);
+  return(iResult);
 }
 
 

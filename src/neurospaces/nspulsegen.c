@@ -98,6 +98,8 @@ int NSPulseGenReset(struct pulsegen_type *ppgt)
 
     ppgt->pdOutput = &(ppar->uValue.dNumber);
 
+    ppgt->ppg->pdPulseOut = ppgt->pdOutput;
+
   }
 
 
@@ -161,6 +163,27 @@ int InitPulseGenObject(struct SolverRegistration *psr)
     }
 
 
+    if(!PulseGenSetFields(ppgt->ppg, 
+			  ppgt->level1, ppgt->width1, ppgt->delay1, 
+			  ppgt->level2, ppgt->width2, ppgt->delay2, 
+			  ppgt->baselevel, ppgt->trig_mode))
+    {
+      fprintf(stdout,
+	      "Error: Could not initialize pulsegen object \" %s\".\n",
+	      ppgt->name);
+      return -1;
+    }
+
+
+
+    //- Set the output
+    if(!PulseGenAddVariable(ppgt->ppg,(void*)&(ppgt->output)))
+    {
+
+      fprintf(stdout,"Error: Could not set output for pulsegen %s\n",ppgt->name);
+
+    }
+
   }
 
 
@@ -178,6 +201,8 @@ int InitPulseGenObject(struct SolverRegistration *psr)
     struct symtab_Parameters *ppar = SymbolFindParameter(phsle, ppist, "output");
 
     ppgt->pdOutput = &(ppar->uValue.dNumber);
+
+    ppgt->ppg->pdPulseOut = ppgt->pdOutput;
 
   }
 
