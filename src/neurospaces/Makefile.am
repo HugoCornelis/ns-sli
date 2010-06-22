@@ -4,7 +4,7 @@ scriptdir = $(top_builddir)/src/script
 utildir = $(top_builddir)/src/util
 olfdir = $(top_builddir)/src/olf
 
-c2genesisdir = $(top_builddir)/src/c2genesis
+c2genesisdir = $(top_builddir)occur/src/c2genesis
 c2genesis = $(c2genesisdir)/c2genesis
 makestructs = $(c2genesisdir)/makestructs
 makelib = $(c2genesisdir)/makelib
@@ -148,7 +148,8 @@ pkginclude_HEADERS = \
 	neurospacessetup.h \
 	neurospacessupport.h \
 	nsintegrator.h \
-	nsintegrator_struct.h
+	nsintegrator_struct.h \
+	pulsegen_struct.h
 
 
 libneurospaces_a_SOURCES = \
