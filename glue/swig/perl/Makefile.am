@@ -32,7 +32,7 @@ BUILT_SOURCES = \
 	swiggable_sli_wrap.c
 
 SwiggableSLI.pm swiggable_sli_wrap.c: $(swig_DATA)
-	swig -I/usr/local/neurospaces/instrumentor -I$(srcdir)/../../.. -I$(top_builddir) -perl5 -makedefault -module SwiggableSLI -o swiggable_sli_wrap.c $(srcdir)/sli.i
+	$(SWIG) -I/usr/local/neurospaces/instrumentor -I$(srcdir)/../../.. -I$(top_builddir) -perl5 -makedefault -module SwiggableSLI -o swiggable_sli_wrap.c $(srcdir)/sli.i
 
 #t the configuration should say if this depends on neurospaces or not
 

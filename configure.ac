@@ -23,9 +23,6 @@ AC_PROG_RANLIB
 AC_PROG_CPP
 
 
-
-AC_PATH_PROGS(PERL, perl perl5)
-
 AC_PATH_PROGS(DOXYGEN,doxygen,["NULL"])
 AC_PATH_PROGS(DOT,dot,["NULL"])
 AC_PATH_PROGS(SOURCE_HIGHLIGHT,source-highlight,["NULL"])
@@ -107,13 +104,54 @@ case "$host_os" in
     AC_MSG_RESULT([$AR $ARFLAGS])
 
 
+    dnl On the MAC we will only look for perl in the standard location for the Apple
+    dnl native perl. 
+    AC_CHECK_PROG(PERL, perl, NULL, [/usr/bin/perl],[/usr/local/bin/perl /opt/local/bin/perl])
+    AC_SUBST(PERL)
+
+    AC_MSG_CHECKING([Checking the perl installation])
+    case $PERL in
+      NULL*)
+        echo ""
+        echo "Error, the standard version of perl for Mac OSX is not found."
+        echo "Non standard versions of perl are known to cause problems."
+        AC_ERROR([Perl for Mac OSX is not found.])
+        ;;
+      *)
+        AC_MSG_RESULT([ $PERL ])
+        ;;
+    esac
+
+    # determine linker flags for perl embedding
+
+    PERL_CCOPTS=`$PERL -MExtUtils::Embed -e ccopts | $PERL -pe 's/\-arch\s\S+\s//g'`
+    AC_SUBST(PERL_CCOPTS)
+
+
+    AC_CHECK_PROG(SWIG, swig, NULL, [/usr/bin/swig],[/usr/local/bin/swig /opt/local/bin/swig])
+    AC_SUBST(SWIG)
+
+    AC_MSG_CHECKING([Checking for swig])
+    case $SWIG in
+      NULL*)
+        echo ""
+        echo "Error, the standard version of swig for Mac OSX is not found."
+        echo "Non standard versions of swig are known to cause problems."
+        AC_ERROR([Swig for Mac OSX is not found.])
+        ;;
+      *)
+        AC_MSG_RESULT([ $SWIG ])
+        ;;
+    esac
+
+
     SYSLIBLINKS=' -lncurses -lfl -lreadline -lm'
     AC_SUBST(SYSLIBLINKS)    
 
     PERLLIB_EXTENSION='dylib'
     AC_SUBST(PERLLIB_EXTENSION)
 
-    SWIGCOMPILELINKSFORPERL='-I$(srcdir)/../../.. 	-I$(top_builddir) 	-ffloat-store 	-I../../../src 	-include src/config.h 	-g 	-O0 	-dynamic `perl -MExtUtils::Embed -e ccopts | perl -pe 's/\-arch\s\S+\s//g'`'
+    SWIGCOMPILELINKSFORPERL='-I$(srcdir)/../../.. 	-I$(top_builddir) 	-ffloat-store 	-I../../../src 	-include src/config.h 	-g 	-O0 	-dynamic $(PERL_CCOPTS)'
     AC_SUBST(SWIGCOMPILELINKSFORPERL)
 
     SWIGCOMPILECOMMAND_PERL='gcc         $(SWIGCOMPILELINKSFORPERL)         -c swiggable_sli_wrap.c'
@@ -214,11 +252,22 @@ dnl     esac
     SYSLIBLINKS='-lfl -lreadline -lhistory -lm -lncurses'
     AC_SUBST(SYSLIBLINKS)
 
+    AC_CHECK_PROGS(PERL, perl5 perl)
+    AC_SUBST(PERL)
+
+    PERL_CCOPTS=`$PERL -MExtUtils::Embed -e ccopts`
+    AC_SUBST(PERL_CCOPTS)
+
+    dnl Need to have the compilation fail if swig and perl are not found at all.
+    AC_CHECK_PROGS(SWIG, swig)
+    AC_SUBST(SWIG)
+
+
     PERLLIB_EXTENSION='so'
     AC_SUBST(PERLLIB_EXTENSION)
 
 
-    SWIGCOMPILELINKSFORPERL='-I$(srcdir)/../../.. -I$(top_builddir) -ffloat-store -I../../../src -include src/config.h -g -O0 -fPIC `perl -MExtUtils::Embed -e ccopts`'
+    SWIGCOMPILELINKSFORPERL='-I$(srcdir)/../../.. -I$(top_builddir) -ffloat-store -I../../../src -include src/config.h -g -O0 -fPIC $(PERL_CCOPTS)'
     AC_SUBST(SWIGCOMPILELINKSFORPERL)
 
     SWIGCOMPILECOMMAND_PERL='gcc $(SWIGCOMPILELINKSFORPERL) -c swiggable_sli_wrap.c'
