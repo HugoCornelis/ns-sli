@@ -159,7 +159,7 @@ case "$host_os" in
 
  
 
-    SWIGLDLINKSFORPERL='-bundle -flat_namespace -undefined suppress  -L../../.. 	-lheccer -L../../../integrators  	-L/usr/local/lib/model-container 	-lneurospacesread 	-L/usr/local/lib/neurospaces/algorithms/symbol 	-lsymbol_algorithms 	-lncurses -lreadline $(shelldir)/../loadlib.o $(shelldir)/shell_lib.o	$(simdir)/libsim.a	$(shelldir)/libshell.a	$(utildir)/libutil.a	$(scriptdir)/libscript.a	$(olfdir)/libolf.a	$(nsdir)/libneurospaces.a	-L${libdir}/model-container -lneurospacesread	-L${libdir}/neurospaces/algorithms/symbol -lsymbol_algorithms	-L${libdir}/heccer -lheccer	-L${libdir}/heccer -lhneurospaces $(SYSLIBLINKS)'
+    SWIGLDLINKSFORPERL='-bundle -flat_namespace -undefined suppress  -L../../.. 	-lheccer -L../../../integrators  	-L/usr/local/lib/model-container 	-lneurospacesread  -lsymbol_algorithms 	-lncurses -lreadline $(shelldir)/../loadlib.o $(shelldir)/shell_lib.o	$(simdir)/libsim.a	$(shelldir)/libshell.a	$(utildir)/libutil.a	$(scriptdir)/libscript.a	$(olfdir)/libolf.a	$(nsdir)/libneurospaces.a	-L${libdir}/model-container -lneurospacesread	-L${libdir}/neurospaces/instrumentor/hierarchy/output/symbols/ -lsymbol_algorithms	-L${libdir}/heccer -lheccer	-L${libdir}/heccer -lhneurospaces $(SYSLIBLINKS)'
     AC_SUBST(SWIGLDLINKSFORPERL)
 
 
@@ -192,6 +192,14 @@ case "$host_os" in
           AC_SUBST(SWIGLINKCOMMAND_PYTHON)
        ;;
        *darwin10.3.0)
+           dnl this is also snow leopard
+          SWIGLINKCOMMAND_PERL='ld 	$(SWIGLDLINKSFORPERL) 	-o SwiggableSLI.$(PERLLIB_EXTENSION) swiggable_sli_wrap.o /usr/lib/bundle1.o'
+          AC_SUBST(SWIGLINKCOMMAND_PERL)
+
+	  SWIGLINKCOMMAND_PYTHON='ld 	$(SWIGLDLINKSFORPYTHON) 	-o _SwiggableSLI.$(PERLLIB_EXTENSION) swiggable_sli_wrap.o  /usr/lib/bundle1.o'
+          AC_SUBST(SWIGLINKCOMMAND_PYTHON)
+       ;;
+       *darwin10.4.0)
            dnl this is also snow leopard
           SWIGLINKCOMMAND_PERL='ld 	$(SWIGLDLINKSFORPERL) 	-o SwiggableSLI.$(PERLLIB_EXTENSION) swiggable_sli_wrap.o /usr/lib/bundle1.o'
           AC_SUBST(SWIGLINKCOMMAND_PERL)
@@ -274,7 +282,7 @@ dnl     esac
     AC_SUBST(SWIGCOMPILECOMMAND_PERL)
 
 
-    SWIGLDLINKSFORPERL='-g -shared swiggable_sli_wrap.o -L../../.. -lheccer -L../../../integrators -L/usr/local/lib/model-container -lneurospacesread -L/usr/local/lib/neurospaces/algorithms/symbol -lsymbol_algorithms -lncurses -lreadline -lhistory -fPIC	$(shelldir)/../loadlib.o $(shelldir)/shell_lib.o	$(simdir)/libsim.a	$(shelldir)/libshell.a	$(utildir)/libutil.a	$(scriptdir)/libscript.a	$(olfdir)/libolf.a	$(nsdir)/libneurospaces.a	-L${libdir}/model-container -lneurospacesread	-L${libdir}/neurospaces/algorithms/symbol -lsymbol_algorithms	-L${libdir}/heccer -lheccer	-L${libdir}/heccer -lhneurospaces	-fPIC $(SYSLIBLINKS)'
+    SWIGLDLINKSFORPERL='-g -shared swiggable_sli_wrap.o -L../../.. -lheccer -L../../../integrators -L/usr/local/lib/model-container -lneurospacesread -lsymbol_algorithms -lncurses -lreadline -lhistory -fPIC	$(shelldir)/../loadlib.o $(shelldir)/shell_lib.o	$(simdir)/libsim.a	$(shelldir)/libshell.a	$(utildir)/libutil.a	$(scriptdir)/libscript.a	$(olfdir)/libolf.a	$(nsdir)/libneurospaces.a	-L${libdir}/model-container -lneurospacesread	-L${libdir}/model-container/ -lsymbol_algorithms	-L${libdir}/heccer -lheccer	-L${libdir}/heccer -lhneurospaces	-fPIC $(SYSLIBLINKS)'
     AC_SUBST(SWIGLDLINKSFORPERL)
 
     SWIGLINKCOMMAND_PERL='gcc $(SWIGLDLINKSFORPERL) -o SwiggableSLI.$(PERLLIB_EXTENSION)'
@@ -290,7 +298,7 @@ dnl     esac
    SWIGCOMPILECOMMAND_PYTHON='gcc $(SWIGCOMPILELINKSFORPYTHON) -c swiggable_sli_wrap.c'
    AC_SUBST(SWIGCOMPILECOMMAND_PYTHON)
 
-    SWIGLDLINKSFORPYTHON='-g -shared swiggable_sli_wrap.o -L../../.. -lheccer -L../../../integrators -L/usr/local/lib/model-container -lneurospacesread -L/usr/local/lib/neurospaces/algorithms/symbol -lsymbol_algorithms -lncurses -lreadline -lhistory -fPIC -Xlinker -export-dynamic'
+    SWIGLDLINKSFORPYTHON='-g -shared swiggable_sli_wrap.o -L../../.. -lheccer -L../../../integrators -L/usr/local/lib/model-container -lneurospacesread -L${libdir}/model-container/ -lsymbol_algorithms -lncurses -lreadline -lhistory -fPIC -Xlinker -export-dynamic'
     AC_SUBST(SWIGLDLINKSFORPYTHON)
 
     SWIGLINKCOMMAND_PYTHON='gcc $(SWIGLDLINKSFORPYTHON) -o _SwiggableSLI.$(PYTHONLIB_EXTENSION)'
