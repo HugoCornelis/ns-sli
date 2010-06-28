@@ -188,7 +188,7 @@ case "$host_os" in
           SWIGLINKCOMMAND_PERL='ld 	$(SWIGLDLINKSFORPERL) 	-o SwiggableSLI.$(PERLLIB_EXTENSION) swiggable_sli_wrap.o   /usr/lib/bundle1.o'
           AC_SUBST(SWIGLINKCOMMAND_PERL)
 
-	  SWIGLINKCOMMAND_PYTHON='ld 	$(SWIGLDLINKSFORPYTHON) 	-o _SwiggableSLI.$(PERLLIB_EXTENSION)  swiggable_sli_wrap.o  /usr/lib/bundle1.o'
+	  SWIGLINKCOMMAND_PYTHON='ld 	$(SWIGLDLINKSFORPYTHON) 	-o _SwiggableSLI.$(PYTHONLIB_EXTENSION)  swiggable_sli_wrap.o  /usr/lib/bundle1.o'
           AC_SUBST(SWIGLINKCOMMAND_PYTHON)
        ;;
        *darwin10.3.0)
@@ -196,7 +196,7 @@ case "$host_os" in
           SWIGLINKCOMMAND_PERL='ld 	$(SWIGLDLINKSFORPERL) 	-o SwiggableSLI.$(PERLLIB_EXTENSION) swiggable_sli_wrap.o /usr/lib/bundle1.o'
           AC_SUBST(SWIGLINKCOMMAND_PERL)
 
-	  SWIGLINKCOMMAND_PYTHON='ld 	$(SWIGLDLINKSFORPYTHON) 	-o _SwiggableSLI.$(PERLLIB_EXTENSION) swiggable_sli_wrap.o  /usr/lib/bundle1.o'
+	  SWIGLINKCOMMAND_PYTHON='ld 	$(SWIGLDLINKSFORPYTHON) 	-o _SwiggableSLI.$(PYTHONLIB_EXTENSION) swiggable_sli_wrap.o  /usr/lib/bundle1.o'
           AC_SUBST(SWIGLINKCOMMAND_PYTHON)
        ;;
        *darwin10.4.0)
@@ -204,7 +204,7 @@ case "$host_os" in
           SWIGLINKCOMMAND_PERL='ld 	$(SWIGLDLINKSFORPERL) 	-o SwiggableSLI.$(PERLLIB_EXTENSION) swiggable_sli_wrap.o /usr/lib/bundle1.o'
           AC_SUBST(SWIGLINKCOMMAND_PERL)
 
-	  SWIGLINKCOMMAND_PYTHON='ld 	$(SWIGLDLINKSFORPYTHON) 	-o _SwiggableSLI.$(PERLLIB_EXTENSION) swiggable_sli_wrap.o  /usr/lib/bundle1.o'
+	  SWIGLINKCOMMAND_PYTHON='ld 	$(SWIGLDLINKSFORPYTHON) 	-o _SwiggableSLI.$(PYTHONLIB_EXTENSION) swiggable_sli_wrap.o  /usr/lib/bundle1.o'
           AC_SUBST(SWIGLINKCOMMAND_PYTHON)
        ;;
        *)
@@ -213,7 +213,7 @@ case "$host_os" in
           SWIGLINKCOMMAND_PERL='ld 	$(SWIGLDLINKSFORPERL) 	-o SwiggableSLI.$(PERLLIB_EXTENSION) 	swiggable_sli_wrap.o /usr/lib/bundle1.o'
           AC_SUBST(SWIGLINKCOMMAND_PERL)
 
-	  SWIGLINKCOMMAND_PYTHON='ld 	$(SWIGLDLINKSFORPYTHON) 	-o _SwiggableSLI.$(PERLLIB_EXTENSION) swiggable_sli_wrap.o /usr/lib/bundle1.o'
+	  SWIGLINKCOMMAND_PYTHON='ld 	$(SWIGLDLINKSFORPYTHON) 	-o _SwiggableSLI.$(PYTHONLIB_EXTENSION) swiggable_sli_wrap.o /usr/lib/bundle1.o'
           AC_SUBST(SWIGLINKCOMMAND_PYTHON)
        ;;
     esac

@@ -25,9 +25,8 @@ clean-local:
 	$(RM) -f $(top_builddir)/*.dsc
 	$(RM) -f $(top_builddir)/*.changes
 	$(RM) -f $(top_builddir)/*.deb
-	$(RM) -rf $(top_builddir)/RPM_BUILD
-	$(RM) -f $(top_builddir)/build_debian.log
-	$(RM) -f $(top_builddir)build_rpm.log
+	$(RM) -rf $(top_builddir)/*_BUILD
+	$(RM) -f $(top_builddir)/build_*.log
 	$(RM) -f $(top_builddir)/*.tar.gz
 
 show-release-labels:
@@ -80,3 +79,7 @@ pkg-deb: dist
 # Create an rpm package
 pkg-rpm: dist
 	nspkg-rpm $(PACKAGE) $(VERSION)
+
+pkg-osx: 
+	nspkg-osx 
+
