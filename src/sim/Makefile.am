@@ -3,7 +3,7 @@ scriptdir = $(top_builddir)/src/script
 utildir = $(top_builddir)/src/util
 pardir = $(top_builddir)/src/par
 nsdir = $(top_builddir)/src/neurospaces
-hierarchy = ${prefix}/neurospaces/instrumentor
+hierarchy = /usr/local/neurospaces/instrumentor
 
 c2genesisdir = $(top_builddir)/src/c2genesis
 c2genesis = $(c2genesisdir)/c2genesis
