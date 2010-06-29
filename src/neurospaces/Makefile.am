@@ -11,7 +11,7 @@ makelib = $(c2genesisdir)/makelib
 
 # \todo these variables are relative to builddir, should be relative to srcdir
 
-INCLUDES = -I$(utildir) -I$(shelldir) -I$(simdir) -I$(scriptdir) -I$(olfdir) -I${prefix}/neurospaces/instrumentor 
+INCLUDES = -I$(utildir) -I$(shelldir) -I$(simdir) -I$(scriptdir) -I$(olfdir) -I/usr/local/neurospaces/instrumentor -I/usr/local/heccer
 
 AM_CPPFLAGS = -DPRE_PROTO_TRAVERSAL
 

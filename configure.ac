@@ -339,6 +339,12 @@ TEST_SPECIFICATION_FILES=`(/bin/echo -n "tests/introduction.html " && find tests
 AC_SUBST(TEST_SPECIFICATION_FILES)
 
 
+STARTUP_FILES=`(find src/startup) |  perl -pe 's/startup\n//g'  | perl -pe 's/src\///g' | perl -pe 's/\n/ /g'`
+AC_SUBST(STARTUP_FILES)
+
+#  perl -pe 's(^| )( \\$(top_srcdir)/)g'
+
+
 AC_OUTPUT(Makefile \
 		glue/Makefile \
                 glue/swig/perl/Makefile \

@@ -4,6 +4,7 @@ SUBDIRS = \
 
 EXTRA_DIST = \
 	tests \
+	src/startup \
 	doxygen.cfg \
 	tests.config 
 
