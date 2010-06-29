@@ -359,62 +359,80 @@ char simrc_name[1024];
     //i
     //i The current order for checking which simrc-ns-sli to use
     //i is:
-    //i    first: /usr/local/ns-sli/startup/simrc-ns-sli
-    //i    second: Current executable directory. 
-    //i    third: home directory
+    //i    first: Current executable directory. 
+    //i    second: home directory
+    //i    third: /usr/local/ns-sli/startup/simrc-ns-sli
     //i
-    //i May possibly need to be reversed is users are going to add
-    //i their own paths. 
+    //i This is to allow a user without admin access to be able to
+    //i to customize their script locations in the simrc file without
+    //i the system installed default being picked up.
     pfile = NULL;
     if(use_simrc){
 
-        
-      /*
-       * First we try and find the .simrc file in a standard location
-       * on the machine with the genesis installation. 
-       */
-        pfile=fopen("/usr/local/ns-sli/startup/simrc-ns-sli","r");
-  
+ 
 
-    /*
-     * If the file isn't in the "standard" location then
-     * we look in the home directory and executable directory.
-     */
-        if(pfile == NULL) 
+      //-
+      //- Here we check for a simrc-ns-sli file in the executable directory
+      //- 
+      if (execdir != NULL)
+      {
+
+	sprintf(string, "%s/%s", execdir, simrc_name);
+	pfile=fopen(string,"r");
+
+        if(pfile)
+	{
+	  fprintf(stderr,"*** The simrc file was found in %s\n",execdir);
+	}
+      
+      }
+
+
+      //- If not in the executable directory we check in the home directory.
+      if(!pfile)
+      {
+
+	if ((home = getenv("HOME"))) 
 	{
 
-	  fprintf(stderr,"%s","*** The simrc file was not found in /usr/local/ns-sli/startup\n");
-	  fprintf(stderr,"%s","*** Searching elsewhere\n\n");
-
-	  if (execdir != NULL)
-	    sprintf(string, "%s/%s", execdir, simrc_name);
-	  else
-	    strcpy(string,simrc_name);
-
-	  if((pfile=fopen(string,"r")) == NULL){
-	    /*
-	    ** else try and find it in the home directory
-	    */
-	    if ((home = getenv("HOME"))) {
-	      sprintf(string,"%s/%s",home,simrc_name);
-	      pfile=fopen(string,"r");
-	    }
-	  }
+	  sprintf(string,"%s/%s",home,simrc_name);
+	  pfile=fopen(string,"r");
 
 	}
-	else
+
+        if(pfile)
 	{
-	  strcpy(string,"/usr/local/ns-sli/startup/simrc-ns-sli");
+	  fprintf(stderr,"*** The simrc file was found in %s\n",home);
+	}
+
+      }
+
+      //- Last we check for the system default simrc file, which has been
+      //- installed in a preset location.
+      if(!pfile)
+      {
+
+	pfile=fopen("/usr/local/ns-sli/startup/simrc-ns-sli","r");
+
+	sprintf(string, "%s","/usr/local/ns-sli/startup/simrc-ns-sli");
+
+	if(pfile)
+	{
 	  fprintf(stdout,"%s","*** simrc file was found in /usr/local/ns-sli/startup.\n");
 	}
 
-	if(pfile == NULL){
-	    fprintf(stderr, "Cannot find a simrc-ns-sli file in the execdir/working or\n");
-	    fprintf(stderr, "home directories.  Copy one from startup/.simrc-ns-sli\n");
-	    fprintf(stderr, "in the ns-sli installation directory and try\n");
-	    fprintf(stderr, "again or see the README in the same location.\n");
-	    return(1);
-	}
+      }
+  
+      //- if not found in any location we give an error. 
+      if(pfile == NULL)
+      {
+	fprintf(stderr, "Cannot find a simrc-ns-sli file in the execdir/working or\n");
+	fprintf(stderr, "home directories.  Copy one from startup/.simrc-ns-sli\n");
+	fprintf(stderr, "in the ns-sli installation directory and try\n");
+	fprintf(stderr, "again or see the README in the same location.\n");
+	return(1);
+      }
+
     }
 
     /* Moved down - Upi Feb 92 */

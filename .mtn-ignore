@@ -63,3 +63,4 @@ stamp-h1
 tar.gz$
 glue/swig/perl/SwiggableSLI.dylib$
 _Inline
+_BUILD$

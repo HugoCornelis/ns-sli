@@ -159,7 +159,7 @@ case "$host_os" in
 
  
 
-    SWIGLDLINKSFORPERL='-bundle -flat_namespace -undefined suppress  -L../../.. 	-lheccer -L../../../integrators  	-L/usr/local/lib/model-container 	-lneurospacesread  -lsymbol_algorithms 	-lncurses -lreadline $(shelldir)/../loadlib.o $(shelldir)/shell_lib.o	$(simdir)/libsim.a	$(shelldir)/libshell.a	$(utildir)/libutil.a	$(scriptdir)/libscript.a	$(olfdir)/libolf.a	$(nsdir)/libneurospaces.a	-L${libdir}/model-container -lneurospacesread	-L${libdir}/neurospaces/instrumentor/hierarchy/output/symbols/ -lsymbol_algorithms	-L${libdir}/heccer -lheccer	-L${libdir}/heccer -lhneurospaces $(SYSLIBLINKS)'
+    SWIGLDLINKSFORPERL='-bundle -flat_namespace -undefined suppress  -L../../.. 	-lheccer -L../../../integrators  	-L/usr/local/lib/model-container 	-lneurospacesread  -lsymbol_algorithms 	-lncurses -lreadline $(shelldir)/../loadlib.o $(shelldir)/shell_lib.o	$(simdir)/libsim.a	$(shelldir)/libshell.a	$(utildir)/libutil.a	$(scriptdir)/libscript.a	$(olfdir)/libolf.a	$(nsdir)/libneurospaces.a	-L$(libdir)/model-container -lneurospacesread	-L$(libdir)/model-container -lsymbol_algorithms  -lheccer  -L$(libdir)/heccer -lhneurospaces $(SYSLIBLINKS)'
     AC_SUBST(SWIGLDLINKSFORPERL)
 
 

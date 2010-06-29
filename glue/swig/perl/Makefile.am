@@ -6,6 +6,7 @@ shelldir = $(top_builddir)/src/shell
 simdir = $(top_builddir)/src/sim
 nsdir = $(top_builddir)/src/neurospaces
 olfdir = $(top_builddir)/src/olf
+libdir = /usr/local/lib
 
 
 #t the following rules are crap complete, would be good if a auto
