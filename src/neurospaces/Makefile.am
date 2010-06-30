@@ -21,7 +21,8 @@ EXTRA_DIST = \
 	ascfilelib.g \
 	hsolvelib.g \
 	neurospaceslib.g \
-	nsintegratorlib.g
+	nsintegratorlib.g \
+	pulsegenlib.g
 
 BUILT_SOURCES = \
 	ascfile_d@.c \
