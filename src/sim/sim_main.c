@@ -378,13 +378,23 @@ char simrc_name[1024];
       {
 
 	sprintf(string, "%s/%s", execdir, simrc_name);
-	pfile=fopen(string,"r");
 
-        if(pfile)
-	{
-	  fprintf(stderr,"*** The simrc file was found in %s\n",execdir);
-	}
-      
+      }
+      else
+      {
+
+	strcpy(string,simrc_name);
+
+      }
+
+
+      pfile=fopen(string,"r");
+
+      if(pfile)
+      {
+
+	fprintf(stderr,"*** The simrc file was found in the exec directory %s\n",string);
+
       }
 
 
