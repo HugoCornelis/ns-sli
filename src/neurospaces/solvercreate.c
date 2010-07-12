@@ -500,7 +500,7 @@ int InitHeccerObject(struct SolverRegistration *psr)
 
   //- construct the heccer
 
-  HeccerConstruct(pheccer, (void *)pneuro, psr->pcName,NULL);
+  HeccerConstruct(pheccer, (void *)pneuro, psr->pcName, NULL, NULL);
 
   //- compile the model
 

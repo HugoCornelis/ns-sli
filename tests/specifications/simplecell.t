@@ -18,7 +18,7 @@ my $test
 						   read => 'time = 0.500005 ; step = 100001',
 						  },
 						  {
-						   description => "Is the final somatic membrane potential correct ?",
+						   description => "Is the final somatic membrane potential correct (1)?",
 						   read => 'Final Vm =  -0.07105',
 						  },
 						  {
@@ -681,7 +681,7 @@ END PUBLIC_MODELS
 						   read => 'time = 0.500005 ; step = 100001',
 						  },
 						  {
-						   description => "Is the final somatic membrane potential correct ?",
+						   description => "Is the final somatic membrane potential correct (2)?",
 						   read => 'Final Vm =  -0.07105',
 						  },
 						  {
@@ -1637,7 +1637,7 @@ VM Membrane Potentials (pdVms[1]) : (-0.07105)
 						   read => 'time = 0.500005 ; step = 100001',
 						  },
 						  {
-						   description => "Is the final somatic membrane potential correct ?",
+						   description => "Is the final somatic membrane potential correct (3)?",
 						   read => 'Final Vm =  -0.07105',
 						  },
 						  {
@@ -2315,7 +2315,7 @@ END PUBLIC_MODELS
 						   read => 'time = 0.500005 ; step = 100001',
 						  },
 						  {
-						   description => "Is the final somatic membrane potential correct ?",
+						   description => "Is the final somatic membrane potential correct (4)?",
 						   read => 'Final Vm =  -0.07105',
 						  },
 						  {
@@ -3222,7 +3222,7 @@ END PUBLIC_MODELS
 						   read => 'time = 0.500005 ; step = 100001',
 						  },
 						  {
-						   description => "Is the final somatic membrane potential correct ?",
+						   description => "Is the final somatic membrane potential correct (5)?",
 						   read => 'Final Vm =  -0.07105',
 						  },
 						  {
