@@ -1,0 +1,337 @@
+tutorial3.notes - notes and example scripts for GENESIS 3 Tutorial 3
+"How to convert your GENESIS 2 simulations to GENESIS 3"
+
+Target audience:
+
+Imagine a graduate student in biology who has been using GENESIS 2 for
+a year or two.  For his thesis, he is planning on constructing a
+100,000 neuron model of visual cortex and its thalamic inputs that he
+thinks will be a far better and more realistic model than the Blue
+Brain project being done with NEURON.  We don't know if he will
+succeed, but want to provide the tools he will need.  He knows that
+GENESIS 3 is yet not ready for this, but he would like to get a start
+on converting some of his simpler G2 scripts to G3.
+
+Like me and many students that I have taught, he is results-oriented,
+impatient, and a little lazy.  He tends to plunge right into using a
+new piece of hardware or software, without reading more than a page or
+two of overview at the start of the manual.  If something doesn't
+work, then he tries to find the relevant section to help him solve the
+problem.  He knows that G3 uses an internal format called NDF, and
+assumes that he has no more need of understanding this representation
+than he does of the internal format of a MS Word document.  Maybe he
+will look at a NDF file someday when he needs to do some advanced
+debugging.  He is also vaguely aware of SSP, mainly because of the
+trouble he had installing all the non-standard Perl modules that it
+needs.  He thinks it is some kind of replacement for the G2 schedule.g
+file, which he has never had to pay much attention to.  He is willing
+to learn what he needs about SSP, but isn't sure what he needs to
+know.
+
+Here is his email.  How would you reply to him?
+
+Dear GENESIS developers,
+
+I have been trying to convert some of my GENESIS 2 scripts to G3, and
+have run into some problems that I hope you can help me with.  I have
+a script called simplecell.g that does the following five things:
+
+1.  creates a cell with a soma and a dend compartment
+2.  provides input to the cell
+3.  provides output of the results to a file
+4.  writes useful information to the gshell console, such as
+    start and end times of a run
+5.  Runs the simulation for a time "tmax".
+
+This script is nearly the same as the one used for testing G3.  Step
+2 presently provides constant current injection by setting the inject
+field of /cell/soma to a constant value.  Step 3 uses an asc_file object
+to write the soma Vm at specified intervals to a file in the current
+directory.
+
+I found Allan Coop's Tutorials 1 and 2 at genesis-sim.org to be very
+helpful in showing how to get this script to run in the gshell.  I was
+pleased to find that under GENESIS 2 compatibility mode, with the
+"sli_load" command, it did all five things, and acted just like
+GENESIS 2, although it seemed a little slow.
+
+By using "ndf_save" and "ndf_load" to run it in native G3 mode, I
+could get it to do step 1, but none of the others.  However, I could
+make it do something equivalent to steps 2, 3, and 5 by giving GENESIS
+ gshell commands to set the inject field, use a built-in file output
+command to send the output to /tmp/output, and to give a "run" command
+for the cell.
+
+Now, I have changed my input routine to provide synaptic input to the
+cell.  I wrote a short function that uses a neutral object and a
+spikegen object to send a steady train of spikes 10 msec apart to
+/cell/dend/Ex_channel.  How do I save and load this?  I know that
+there are probably gshell commands to implement this.  I can send you
+the function definition, but the final version of the G2 script will
+be a few hundred lines long and use several device class objects
+combined with neural simulation objects to provide an array of thalamic
+inputs.  I am sure that there must be a command to convert this to G3
+notation without hand-translating my scripts.
+
+I will also make some changes to the output routine to customize
+the format of the file with the float_format field and OUT_WRITE
+action to provide the header needed by some Matlab analysis programs.
+At some time in the future, when I work on my network analysis, I'll
+write a data gathering function that uses efield objects and some
+table objects to generate extracellular field potentials to write to
+a file for later analysis.
+
+Dave Beeman said that it may have something with SSP and ssp_save and
+ssp_load, so I looked up the documentation for SSP at
+http://genesis-sim.org/userdocs/ssp/ssp.html.  It seemed to be
+something for developers or very advanced users, and didn't say
+anything about these commands or how SSP would save or load the other
+four steps in my simulation.  I tried the built-in gshell help, but
+only got:
+
+genesis > help command ssp_save
+---
+description: save a model to an ssp file.
+synopsis: ssp_save <element_name> <filename>
+
+genesis > help command ssp_load
+---
+description: load an ssp file and reconstruct the model it describes.
+synopsis: ssp_load <modelname> <filename.ssp>
+
+I wish that there were a Tutorial 3 to explain how to save and load the
+other four parts of my simulation.  In the meantime, could you give me a   
+short list of the commands (and a sentence of explanation) to do this? I
+realize that some of these may not yet be implemented yet, and may not 
+even have names, but it would help to have an idea of what they might be,
+and a rough idea of when they will be ready for use. Perhaps some of the
+developers might like to see a timeline or TODO list for the sub-tasks
+involved in implementing them.  With a bit of effort, I was able to find
+the GENESIS 3 TODO list at genesis-sim.org, but didn't see anything in it
+that looked relevant to this.
+
+Thanks for your help.
+
+Sincerely,
+Clueless User
+
+-------------------
+The intial steps are:
+
+$ genesis-g3
+
+Welcome to the GENESIS 3 shell
+genesis > sli_load simplecell-3.2.g
+*** The simrc file was found in the exec directory
+/home/dbeeman/neurospaces_project/ns-sli/source/snapshots/0/.simrc-ns-sli
+
+changing clock [0] from 1 to 1e-05
+reading 'cell.p'....
+cell.p read: 2 compartments
+genesis > ndf_save /cell/** simplecell3.2.ndf
+genesis > quit
+
+14831 2010-07-13 15:47 simplecell3.2.ndf is by far larger than past
+attempts.
+
+$ genesis-g3
+Welcome to the GENESIS 3 shell
+genesis > ndf_load simplecell3.2.ndf
+genesis > runtime_parameter_add /cell/soma INJECT 0.5e-9
+genesis > output_add /cell/soma Vm
+genesis > output_filename simplecell3.2-ndf_Vm.out
+genesis > run /cell 0.5
+
+Analyze results:
+
+$ plotVm simplecell3.2-ndf_Vm.out Vm.out
+
+-------------------
+
+a simple example od make_input
+
+// This function provides input to "/cell" by in the form of a train of
+// spikes at 10 msec intervals to /cell/dend/Ex_channel.
+
+function make_input
+      float spikeinterval = 0.01
+      create neutral /spikesource
+      create spikegen /spikesource/spiker
+      addfield /spikesource on_state
+      setfield /spikesource on_state 1.0
+      // spiketrain will be off if on_state < 0.5
+      setfield /spikesource/spiker thresh 0.5 abs_refract {spikeinterval}
+      addmsg /spikesource /spikesource/spiker INPUT on_state
+      addmsg /spikesource/spiker /cell/dend/Ex_channel SPIKE
+end
+
+I would like functions corresponding to 5 steps:
+
+
+1.  make_cell - creates a cell with a soma and a dend compartment
+2.  make_input - provides input to the cell
+3.  make_output provides output of the results to a file
+4.  writes useful information to the gshell console, such as
+    start and end times of a run
+5.  Runs the simulation for a time "tmax".
+
+4. and 5. will be step_tmax
+
+function make_input
+    setfield {injectpath} inject {injcurrent}
+end
+
+function make_output
+    create asc_file /output/plot_out
+    setclock 1 {out_dt}
+    useclock /output/plot_out 1
+    addmsg {cellpath}/soma /output/plot_out SAVE Vm
+    setfield /output/plot_out filename {outfile}
+end
+
+function step_tmax
+    // Add any other commands here that you want to execute for each run
+    echo "START: "{getdate}
+    step {tmax} -time
+    echo "END: "{getdate}
+end
+
+make_cell // creates a cell with a soma and a dend compartment
+make_input // provides input to the cell
+
+if (file_out)
+   make_output // provides output of the results to a file
+end
+
+reset
+
+check
+reset
+
+if (batch)
+    step_tmax
+end
+
+-------------------------------------------------------------------------
+
+Seems good - now modify make_input as above
+
+genesis #2 > showfield /cell/dend/Ex_channel gmax
+
+[ /cell/dend/Ex_channel ]
+gmax                 = 5.000001524e-10
+
+need more
+genesis #3 > setfield /cell/dend/Ex_channel gmax 5.0e-9
+
+plotVm Vm.out
+Much more interesting.
+
+$ genesis-g3
+Welcome to the GENESIS 3 shell
+genesis > sli_run simplecell-spikes.g
+
+<simplecell-spikes.g> line 40
+... <simplecell-spikes.g> line 69
+** Error - setfield : cannot find field 'on_state' on '/spikesource'
+<simplecell-spikes.g> line 43
+... <simplecell-spikes.g> line 69
+** Error - addmsg : cannot find element '/spikesource/spiker'
+<simplecell-spikes.g> line 44
+... <simplecell-spikes.g> line 69
+** Error - addmsg : cannot find element '/spikesource/spiker'
+time = 0.000000 ; step = 0          
+time = 0.000000 ; step = 0          
+
+Hmmm .. it works with G2
+
+
+    39        addfield /spikesource on_state
+    40        setfield /spikesource on_state 1.0
+    41        // spiketrain will be off if on_state < 0.5
+    42        setfield /spikesource/spiker thresh 0.5 abs_refract {spikeinterval}
+    43        addmsg /spikesource /spikesource/spiker INPUT on_state
+    44        addmsg /spikesource/spiker /cell/dend/Ex_channel SPIKE
+
+sli_run doesn't support addfield?
+
+I'll start by using the x field instead of adding on_state
+
+    34  function make_input
+    35  //    setfield {injectpath} inject {injcurrent}
+    36        float spikeinterval = 0.01
+    37        create neutral /spikesource
+    38        create spikegen /spikesource/spiker
+    39        setfield /spikesource x 1.0
+    40        // spiketrain will be off if x < 0.5
+    41 setfield /spikesource/spiker thresh 0.5 abs_refract {spikeinterval}
+    42        addmsg /spikesource /spikesource/spiker INPUT x
+    43        addmsg /spikesource/spiker /cell/dend/Ex_channel SPIKE
+    44        // could set weight of synapse to 10; instead increase gmax
+    45        setfield /cell/dend/Ex_channel gmax 5.0e-9
+    46	end
+
+<simplecell-spikes.g> line 42
+... <simplecell-spikes.g> line 68
+** Error - addmsg : cannot find element '/spikesource/spiker'
+<simplecell-spikes.g> line 43
+... <simplecell-spikes.g> line 68
+** Error - addmsg : cannot find element '/spikesource/spiker'
+
+No, this isn't it.  I'll go back to the original and email Hugo.
+
+-----------------------------------------------------------------------
+
+Summary:
+
+I have two scripts my-simplecell.g and simplecell-spikes.g, of the
+type described in the email by "Clueless User".  I can send them,
+but here is a description of the problem:
+
+my-simplecell.g is just a reorganized version of the simplecell script
+that defines and uses functions
+
+  make_cell - creates a cell with soma anddend compartment (with readcell)
+  make_input - provides input to the cell
+  make_output - provides output of the results to a file with asc_file
+  step_tmax -  echoes information to the gshell, such as
+      start and end times of a run, and runs the simulation for a
+      time "tmax".
+
+make_input does the usual setfield of /cell/soma inject.
+
+my-simplecell.g runs without problems in the gshell with sli_run,
+and with ndf_load (if I provide injection and output).
+
+simplecell-spikes.g replaces make_input with:
+
+function make_input
+//    setfield {injectpath} inject {injcurrent}
+      float spikeinterval = 0.01
+      create neutral /spikesource
+      create spikegen /spikesource/spiker
+      setfield /spikesource x 1.0
+      // spiketrain will be off if x < 0.5
+      setfield /spikesource/spiker thresh 0.5 abs_refract {spikeinterval}
+      addmsg /spikesource /spikesource/spiker INPUT x
+      addmsg /spikesource/spiker /cell/dend/Ex_channel SPIKE
+      // could set weight of synapse to 10; instead increase gmax
+      setfield /cell/dend/Ex_channel gmax 5.0e-9
+end
+
+With GENESIS 2, this delivers a series of spikes 10 msec apart to
+/cell/dend/Ex_channel.  In the gshel with sli_run it gives the error:
+
+<simplecell-spikes.g> line 42
+... <simplecell-spikes.g> line 68
+** Error - addmsg : cannot find element '/spikesource/spiker'
+<simplecell-spikes.g> line 43
+... <simplecell-spikes.g> line 68
+** Error - addmsg : cannot find element '/spikesource/spiker'
+
+Where lines 42 and 43 are the lines with addmsg to/from /spikesource/spiker
+It has no problems with the setfield /spikesource/spiker in line 41.
+
+Can you see any reason why ns-sli can't handle this?
+
+------------------------------------------------------------------
