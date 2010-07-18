@@ -98,10 +98,12 @@ setfield /output/plot_out filename {filename} leave_open 1
 reset
 
 // do current injection experiment
+echo "START: "{getdate}
 step 0.10 -time
 hstr={findsolvefield {cellpath} {cellpath}/soma inject}
 setfield {cellpath} {hstr} {inject*1.e-9}
 step 0.3 -time
 setfield {cellpath} {hstr} 0.0
 step 0.1 -time
+echo "END: "{getdate}
 quit
