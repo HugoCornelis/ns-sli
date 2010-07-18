@@ -60,7 +60,7 @@ make_Purkinje_spines
 
 /* create the model and set up the run cell mode */
 // read cell date from .p file and make hsolve element
-readcell Purk2M9s.p {cellpath} -hsolve
+readcell  tests/scripts/PurkM9_model/Purk2M9s.p {cellpath} -hsolve
 
 /* make climbing fiber presynaptic elements */
 create neutral {cellpath}/climb_presyn1

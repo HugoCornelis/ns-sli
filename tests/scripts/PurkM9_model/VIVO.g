@@ -60,37 +60,34 @@ make_Purkinje_spines
 readcell  tests/scripts/PurkM9_model/Purk2M9s.p {cellpath} -hsolve
 
 /* Set the clocks */
+echo "setting simulation clocks to " {dt}
 for (i = 0; i <= 7; i = i + 1)
     setclock {i} {dt}
 end
 setclock 8 1.0e-4
 setclock 9 1
 
-/* Create the output element */
-create asc_file /output/plot_out
-useclock /output/plot_out 9
+// /* Create the output element */
+// create asc_file /output/plot_out
+// useclock /output/plot_out 9
 
 // setup the hines solver
 ce {cellpath}
 /* chanmode 3 is most efficient, calcmode 0 is needed for backward 
 ** compatibility (this version M9 of the Purkinje cell model only!)
 */
-setfield comptmode 1 chanmode 3  calcmode 0
+setfield chanmode 4  calcmode 0
 call . SETUP
 setmethod 11
 
-/* Initialize output */
-/* Output voltage from soma */
-hstr={findsolvefield {cellpath} {cellpath}/soma Vm}
-addmsg {cellpath} /output/plot_out SAVE {hstr}
-setfield /output/plot_out filename {filename} initialize 1 append 1 leave_open 1
+// /* Initialize output */
+// /* Output voltage from soma */
+// hstr={findsolvefield {cellpath} {cellpath}/soma Vm}
+// addmsg {cellpath} /output/plot_out SAVE {hstr}
+// setfield /output/plot_out filename {filename} initialize 1 append 1 leave_open 1
 
 reset
 echo "START: "{getdate}
-useclock /output/plot_out 9 /* disable output */
-t = {rand 0.170 0.200}
-step {t} -time		/* initial equilibration */
-useclock /output/plot_out 8 /* enable output */
-step 2.0 -time
+step 0.5 -time
 echo "END: "{getdate}
 quit

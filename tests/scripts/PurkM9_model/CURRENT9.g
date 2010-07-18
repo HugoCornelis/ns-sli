@@ -49,14 +49,15 @@ readcell tests/scripts/PurkM9_model/Purk2M9.p {cellpath} -hsolve
 call /model_container NEUROSPACES_QUERY
 
 /* Set the clocks */
+echo "setting simulation clocks to " {dt}
 for (i = 0; i <= 8; i = i + 1)
     setclock {i} {dt}
 end
 setclock 9 1.0e-4
 
-/* Create the output element */
-create asc_file /output/plot_out
-useclock /output/plot_out 9
+// /* Create the output element */
+// create asc_file /output/plot_out
+// useclock /output/plot_out 9
 
 // setup the hines solver
 ce {cellpath}
@@ -69,17 +70,17 @@ setmethod 11
 
 /* Initialize output */
 /* Output voltage as in Fig. 11 */
-hstr={findsolvefield {cellpath} {cellpath}/soma Vm}
-addmsg {cellpath} /output/plot_out SAVE {hstr}
-hstr={findsolvefield {cellpath} {cellpath}/main[4] Vm}
-addmsg {cellpath} /output/plot_out SAVE {hstr}
-hstr={findsolvefield {cellpath} {cellpath}/br1[10] Vm}
-addmsg {cellpath} /output/plot_out SAVE {hstr}
-hstr={findsolvefield {cellpath} {cellpath}/b3s44[20] Vm}
-addmsg {cellpath} /output/plot_out SAVE {hstr}
+// hstr={findsolvefield {cellpath} {cellpath}/soma Vm}
+// addmsg {cellpath} /output/plot_out SAVE {hstr}
+// hstr={findsolvefield {cellpath} {cellpath}/main[4] Vm}
+// addmsg {cellpath} /output/plot_out SAVE {hstr}
+// hstr={findsolvefield {cellpath} {cellpath}/br1[10] Vm}
+// addmsg {cellpath} /output/plot_out SAVE {hstr}
+// hstr={findsolvefield {cellpath} {cellpath}/b3s44[20] Vm}
+// addmsg {cellpath} /output/plot_out SAVE {hstr}
 /* Output [Ca] as in Fig. 4D */
-hstr={findsolvefield {cellpath} {cellpath}/b3s44[20]/Ca_pool Ca}
-addmsg {cellpath} /output/plot_out SAVE {hstr}
+// hstr={findsolvefield {cellpath} {cellpath}/b3s44[20]/Ca_pool Ca}
+// addmsg {cellpath} /output/plot_out SAVE {hstr}
 /* Output currents as in Fig. 4D: requires chanmode 4 */
 // hstr={findsolvefield {cellpath} {cellpath}/b3s44[20]/CaP Ik}
 // addmsg {cellpath} /output/plot_out SAVE {hstr}
@@ -93,7 +94,7 @@ addmsg {cellpath} /output/plot_out SAVE {hstr}
 // addmsg {cellpath} /output/plot_out SAVE {hstr}
 // setfield /output/plot_out filename {filename} initialize 1 append 1 leave_open 1
 // setfield /output/plot_out filename {filename} append 1 leave_open 1
-setfield /output/plot_out filename {filename} leave_open 1
+// setfield /output/plot_out filename {filename} leave_open 1
 
 reset
 

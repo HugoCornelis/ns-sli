@@ -77,7 +77,7 @@ setclock 9 1
 
 /* create the model and set up the run cell mode */
 // read cell date from .p file and create hsolve element
-readcell Purk2M9sA.p {cellpath} -hsolve
+readcell  tests/scripts/PurkM9_model/Purk2M9sA.p {cellpath} -hsolve
 
 //make synchronous input
 create neutral {cellpath}/par_presyn
