@@ -28,6 +28,8 @@ int AscFileActor(struct ascfile_type *pascfile_type,
 
   struct ascfile_type *pasc = pascfile_type;
   
+  struct OutputGenerator *pog = NULL;
+
   //- set default result : ok
   int iResult = 1;
 
@@ -61,14 +63,22 @@ int AscFileActor(struct ascfile_type *pascfile_type,
 
     case PROCESS:
     {
-    
+	   
       //ActivationStep();
       if(simulation_time > 0){
-	
-	iResult = OutputGeneratorTimedStep(pascfile_type->pog, 
+
+	//-
+	//- This variable assignment was added to remove an annoying memory alignment
+	//- bug in Mac OSX.
+	if(!pog)
+	{
+	  pog = pascfile_type->pog;
+	}
+
+	iResult = OutputGeneratorTimedStep(pog, 
 					    simulation_time);
 	if(pascfile_type->flush)
-	   OutputGeneratorFlush(pascfile_type->pog);
+	   OutputGeneratorFlush(pog);
 
       }
 

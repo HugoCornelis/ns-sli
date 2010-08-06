@@ -18,7 +18,7 @@ my $test
 				command => 'src/ns-sli',
 				command_tests => [
 						  {
-						   comment => "Also tests the cell reader *add_spines option",
+						   comment => "Also tests the cell reader *add_spines option. \nNote: Tests fails on Mac OSX due to an IO lock. However when manually run this test case works fine.",
 						   description => 'Can we run an original GENESIS 2 script that loads a passive version of the purkinje cell (1) ?',
 						   numerical_compare => 'tiny differences expected at the end of the file',
 						   read => {
@@ -37,7 +37,7 @@ my $test
 				command => 'src/ns-sli',
 				command_tests => [
 						  {
-						   comment => "Also tests the cell reader *add_spines option",
+						   comment => "Also tests the cell reader *add_spines option \nNote: Tests fails on Mac OSX due to an IO lock. However when manually run this test case works fine.",
 						   description => 'Can we run an original GENESIS 2 script that loads a passive version of the purkinje cell (2) ?',
 						   numerical_compare => 'tiny differences expected at the end of the file',
 						   read => {
