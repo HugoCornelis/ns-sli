@@ -1157,7 +1157,7 @@ END PUBLIC_MODELS
 					      },
 			       },
 			      ],
-       description => "EDS purkinje cell model simplification and simulations",
+       description => "EDS purkinje cell model simplification and simulations. \Note: Over  half of these tests will fail on Mac OSX if there are many other processes running, the test case works fine..",
        name => 'purkinje.t',
       };
 
