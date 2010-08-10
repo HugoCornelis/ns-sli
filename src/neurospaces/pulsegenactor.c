@@ -9,7 +9,8 @@
 //-------------------------------------------------------------
 #include "nsintegrator.h"
 #include "pulsegen_g@.h"
-#include "heccer/pulsegen.h"
+
+#include <experiment/pulsegen.h>
 
 extern double simulation_time;
 

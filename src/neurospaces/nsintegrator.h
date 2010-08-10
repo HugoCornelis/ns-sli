@@ -16,12 +16,14 @@
  */
 //-------------------------------------------------------------------
 
-#include "heccer/heccer.h"
-#include "heccer/output.h"
-#include "heccer/pulsegen.h"
-#include "heccer/neurospaces/heccer.h"
-#include "neurospaces_ext.h"
-#include "neurospaces/symboltable.h"
+#include <experiment/output.h>
+#include <experiment/pulsegen.h>
+
+#include <heccer/heccer.h>
+#include <heccer/neurospaces/heccer.h>
+
+#include <neurospaces_ext.h>
+#include <neurospaces/symboltable.h>
 
 // Object includes.
 #include "ascfile_struct.h"
