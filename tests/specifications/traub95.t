@@ -129,7 +129,7 @@ my $test
 						  },
 						  {
 						   description => 'Does the simulation produce the correct output (2)?',
-# 						   numerical_compare => "arithmetic rounding differences",
+						   numerical_compare => "arithmetic rounding differences",
 						   read => {
 							    application_output_file => "$::config->{core_directory}/output/cell.out",
 							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/traub95_Vm.out.ssp",
