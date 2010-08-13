@@ -128,6 +128,10 @@ my $test
 						   timeout => 30,
 						  },
 						  {
+# 						   comparator => {
+# 								  description => "sensitivity of this model leads to huge differences close to spikes",
+# 								  code => 'signal_trace_voltage',
+# 								 },
 						   description => 'Does the simulation produce the correct output (2)?',
 						   numerical_compare => "arithmetic rounding differences",
 						   read => {
