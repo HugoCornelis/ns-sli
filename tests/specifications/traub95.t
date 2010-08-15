@@ -122,17 +122,11 @@ my $test
 				command => '/usr/local/bin/ssp',
 				command_tests => [
 						  {
-						   description => 'Can we compile the converted model description from SSP, traub95cell1.ndf ?',
-						   disabled => "this test was not implemented",
-						   read => 'Done',
-						   timeout => 30,
-						  },
-						  {
 # 						   comparator => {
 # 								  description => "sensitivity of this model leads to huge differences close to spikes",
 # 								  code => 'signal_trace_voltage',
 # 								 },
-						   description => 'Does the simulation produce the correct output (2)?',
+						   description => 'Does the converted model description produce the correct output when run from SSP, traub95cell1.ndf ?',
 						   numerical_compare => "arithmetic rounding differences",
 						   read => {
 							    application_output_file => "$::config->{core_directory}/output/cell.out",

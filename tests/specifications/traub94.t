@@ -77,13 +77,7 @@ my $test
 				command => '/usr/local/bin/ssp',
 				command_tests => [
 						  {
-						   description => 'Can we compile the converted model description from SSP, traub94cell1-soma.ndf ?',
-						   disabled => "this test was not implemented",
-						   read => 'not implemented',
-						   timeout => 10,
-						  },
-						  {
-						   description => 'Does the simulation produce the correct output (1)?',
+						   description => 'Does the converted model description produce the correct output when run from SSP, traub94cell1-soma.ndf ?',
 						   numerical_compare => 'small arithmetic rounding differences on the automated tester machine',
 						   read => {
 							    application_output_file => "$::config->{core_directory}/output/cell.out",
@@ -183,13 +177,7 @@ my $test
 				command => '/usr/local/bin/ssp',
 				command_tests => [
 						  {
-						   description => 'Can we compile the converted model description from SSP, traub94cell1.ndf ?',
-						   disabled => "this test was not implemented",
-						   read => 'Done',
-						   timeout => 30,
-						  },
-						  {
-						   description => 'Does the simulation produce the correct output (2)?',
+						   description => 'Does the converted model description produce the correct output when run from SSP, traub94cell1.ndf ?',
 						   numerical_compare => 'small arithmetic rounding differences on the automated tester machine',
 						   read => {
 							    application_output_file => "$::config->{core_directory}/output/cell.out",
