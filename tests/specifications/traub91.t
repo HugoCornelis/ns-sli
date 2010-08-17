@@ -63,6 +63,7 @@ new_len*new_dia =  1057.5
 						   description => "Do we see the dumped model from heccer, traub91_asym_simple3 ?",
 						   read => (join '', `cat "$::config->{core_directory}/tests/specifications/strings/traub91_asym_simple3.dump"`),
 						   timeout => 20,
+						   mac_report => 'This test fails with a TIMEOUT. Whenrun manaually it if confirmed to work. Tried increasing the T.O value but did not appear to have an effect.',
 						  },
 						  {
 						   description => "Does the script run a simulation (3) ?",
@@ -305,6 +306,7 @@ VM Membrane Potentials (pdVms[1]) : (-0.06)
 						   description => "Do we see the dumped model from heccer, traub91_asym_simple2 ?",
 						   read => (join '', `cat "$::config->{core_directory}/tests/specifications/strings/traub91_asym_simple2.dump"`),
 						   timeout => 20,
+						   mac_report => 'This test fails with a TIMEOUT. Whenrun manaually it if confirmed to work.',
 						  },
 						  {
 						   description => "Does the script run a simulation (2) ?",
