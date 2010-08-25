@@ -1564,7 +1564,7 @@ END PUBLIC_MODELS
 						   write => 'setfield /neurospaces_integrator heccer_dump_selection { HECCER_DUMP_VM_COMPARTMENT_MATRIX + HECCER_DUMP_VM_COMPARTMENT_DATA + HECCER_DUMP_VM_COMPARTMENT_OPERATIONS + HECCER_DUMP_VM_CHANNEL_POOL_FLUXES + HECCER_DUMP_VM_MECHANISM_DATA + HECCER_DUMP_VM_MECHANISM_OPERATIONS + HECCER_DUMP_VM_SUMMARY }',
 						  },
 						  {
-						   description => "Can we dump the model from heccer ?",
+						   description => "Can we dump the model from heccer (1)?",
 						   read => 'Heccer (pcName) : (/cell)
 Heccer (iStatus) : (20)
 Heccer (iErrorCount) : (0)
@@ -1603,11 +1603,10 @@ Mechanism operations
 00011 :: CONCEPTGATE 1 1 (nil)							 0.356333
 00012 :: UPDATECOMPARTMENTCURRENT
 00013 :: INITIALIZECHANNEL -0.082 1.01788e-06
-00014 :: LOADVOLTAGETABLE
-00015 :: CONCEPTGATE 2 4 (nil)							 0.466239
-00016 :: UPDATECOMPARTMENTCURRENT
-00017 :: EVENTGENERATE (dVm) 0 0.01 2147483647							 0.003515 0
-00018 :: FINISH
+00014 :: CONCEPTGATE 2 4 (nil)							 0.466239
+00015 :: UPDATECOMPARTMENTCURRENT
+00016 :: EVENTGENERATE (dVm) 0 0.01 2147483647							 0.003515 0
+00017 :: FINISH
 VM Diagonals (pdDiagonals[0]) : (1.04242)
 VM Diagonals (pdDiagonals[1]) : (1.01001)
 VM Axial Resistances (pdAxres[0]) : (-0.00925926)
@@ -3260,7 +3259,7 @@ END PUBLIC_MODELS
 						   write => 'set_nsintegrator_verbose_level 2',
 						  },
 						  {
-						   description => "Can we dump the model from heccer ?",
+						   description => "Can we dump the model from heccer (2)?",
 						   read => 'Heccer (pcName) : (/cell)
 Heccer (iStatus) : (20)
 Heccer (iErrorCount) : (0)
@@ -3299,11 +3298,10 @@ Mechanism operations
 00011 :: CONCEPTGATE 1 1 (nil)							 0.356333
 00012 :: UPDATECOMPARTMENTCURRENT
 00013 :: INITIALIZECHANNEL -0.082 1.01788e-06
-00014 :: LOADVOLTAGETABLE
-00015 :: CONCEPTGATE 2 4 (nil)							 0.466239
-00016 :: UPDATECOMPARTMENTCURRENT
-00017 :: EVENTGENERATE (dVm) 0 0.01 2147483647							 0.003515 0
-00018 :: FINISH
+00014 :: CONCEPTGATE 2 4 (nil)							 0.466239
+00015 :: UPDATECOMPARTMENTCURRENT
+00016 :: EVENTGENERATE (dVm) 0 0.01 2147483647							 0.003515 0
+00017 :: FINISH
 VM Diagonals (pdDiagonals[0]) : (1.04242)
 VM Diagonals (pdDiagonals[1]) : (1.01001)
 VM Axial Resistances (pdAxres[0]) : (-0.00925926)
@@ -4061,11 +4059,10 @@ Mechanism operations
 00011 :: CONCEPTGATE 1 1 (nil)							 0.597868
 00012 :: UPDATECOMPARTMENTCURRENT
 00013 :: INITIALIZECHANNEL -0.082 1.01788e-06
-00014 :: LOADVOLTAGETABLE
-00015 :: CONCEPTGATE 2 4 (nil)							 0.316911
-00016 :: UPDATECOMPARTMENTCURRENT
-00017 :: EVENTGENERATE (dVm) 0 0.01 2147483647							 -1 0
-00018 :: FINISH
+00014 :: CONCEPTGATE 2 4 (nil)							 0.316911
+00015 :: UPDATECOMPARTMENTCURRENT
+00016 :: EVENTGENERATE (dVm) 0 0.01 2147483647							 -1 0
+00017 :: FINISH
 VM Diagonals (pdDiagonals[0]) : (1.04242)
 VM Diagonals (pdDiagonals[1]) : (1.01001)
 VM Axial Resistances (pdAxres[0]) : (-0.00925927)
