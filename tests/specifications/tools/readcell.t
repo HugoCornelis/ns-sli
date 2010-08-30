@@ -23,6 +23,8 @@ my $test
 						   description => "Can we enter the querymachine ?",
 						   wait => 1,
 						   write => 'call model_container NEUROSPACES_QUERY',
+						   read => 'done!',
+						   timeout => 5,
 						  },
 						  {
 						   description => "Are the soma coordinates correct ?",
