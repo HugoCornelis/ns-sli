@@ -60,6 +60,12 @@ new_len*new_dia =  1057.5
 				command => 'src/ns-sli',
 				command_tests => [
 						  {
+						   description => "Can we see the ns-sli prompt ?",
+						   read => 'Warning: Heccer object /cell exists, resetting it instead.
+.',
+						   timeout => 5,
+						  },
+						  {
 						   description => "Do we see the dumped model from heccer, traub91_asym_simple3 ?",
 						   read => (join '', `cat "$::config->{core_directory}/tests/specifications/strings/traub91_asym_simple3.dump"`),
 						   timeout => 20,
@@ -305,7 +311,7 @@ VM Membrane Potentials (pdVms[1]) : (-0.06)
 						  {
 						   description => "Do we see the dumped model from heccer, traub91_asym_simple2 ?",
 						   read => (join '', `cat "$::config->{core_directory}/tests/specifications/strings/traub91_asym_simple2.dump"`),
-						   timeout => 20,
+						   timeout => 40,
 						   mac_report => 'This test fails with a TIMEOUT. When run manaually it is confirmed to work. Problem occurs due to the prompt output of the ns-sli is caught by the testers seen output as with the previous test.',						  },
 						  {
 						   description => "Does the script run a simulation (2) ?",
