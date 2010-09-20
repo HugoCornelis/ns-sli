@@ -288,9 +288,9 @@ VM Membrane Potentials (pdVms[0]) : (-0.068)
 				 command => '/usr/local/bin/ssp',
 				 command_tests => [
 						   {
-						    description => 'Can we compile the converted model description from SSP ?',
+						    description => 'Can we compile the converted model description from SSP (1)?',
 						    read => '
-Heccer (pcName) : (unnamed test)
+Heccer (pcName) : (/n)
 Heccer (iStatus) : (20)
 Heccer (iErrorCount) : (0)
 Heccer Options (iOptions) : (0)
@@ -889,8 +889,8 @@ VM Membrane Potentials (pdVms[0]) : (-0.068)
 				 command => '/usr/local/bin/ssp',
 				 command_tests => [
 						   {
-						    description => 'Can we compile the converted model description from SSP ?',
-						    read => 'Heccer (pcName) : (unnamed test)
+						    description => 'Can we compile the converted model description from SSP (2)?',
+						    read => 'Heccer (pcName) : (/n)
 Heccer (iStatus) : (20)
 Heccer (iErrorCount) : (0)
 Heccer Options (iOptions) : (0)

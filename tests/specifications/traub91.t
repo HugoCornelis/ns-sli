@@ -179,7 +179,7 @@ VM Membrane Potentials (pdVms[1]) : (0.0684792)
 				command_tests => [
 						  {
 						   description => 'Can we compile the converted model description from SSP, traub91_asym_simple3.ndf ?',
-						   read => 'Heccer (pcName) : (unnamed test)
+						   read => 'Heccer (pcName) : (/cell)
 Heccer (iStatus) : (20)
 Heccer (iErrorCount) : (0)
 Heccer Options (iOptions) : (0)
@@ -361,7 +361,7 @@ VM Membrane Potentials (pdVms[1]) : (-0.06)
 				command_tests => [
 						  {
 						   description => 'Can we compile the converted model description from SSP, traub91_asym_simple2.ndf ?',
-						   read => 'Heccer (pcName) : (unnamed test)
+						   read => 'Heccer (pcName) : (/cell)
 Heccer (iStatus) : (20)
 Heccer (iErrorCount) : (0)
 Heccer Options (iOptions) : (0)
@@ -1185,7 +1185,7 @@ VM Membrane Potentials (pdVms[18]) : (-0.0659918)
 						  {
 						   description => 'Can we compile the converted model description from SSP, traub91.ndf ?',
 						   read => '
-Heccer (pcName) : (unnamed test)
+Heccer (pcName) : (/cell)
 Heccer (iStatus) : (20)
 Heccer (iErrorCount) : (0)
 Heccer Options (iOptions) : (0)

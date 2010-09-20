@@ -3982,8 +3982,8 @@ END PUBLIC_MODELS
 				command => '/usr/local/bin/ssp',
 				command_tests => [
 						  {
-						   description => 'Can we run the converted file from SSP -- library ?',
-						   read => 'Heccer (pcName) : (unnamed test)
+						   description => 'Can we run the converted file from SSP -- library (1)?',
+						   read => 'Heccer (pcName) : (/cell)
 Heccer (iStatus) : (20)
 Heccer (iErrorCount) : (0)
 Heccer Options (iOptions) : (0)
@@ -4098,7 +4098,7 @@ VM Membrane Potentials (pdVms[1]) : (-0.07)
 				command => '/usr/local/bin/ssp',
 				command_tests => [
 						  {
-						   description => 'Can we run the converted file from SSP -- library ?',
+						   description => 'Can we run the converted file from SSP -- library (2)?',
 						   read => {
 							    application_output_file => "$::config->{core_directory}/output/cell.out",
 							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/simplecell1-ssp.txt",
