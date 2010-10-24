@@ -184,7 +184,12 @@ int iInModelContainer;
     int		size;
 
     //hack-------------------------------------------------------------------
-    
+
+    if (parent == RootElement())
+    {
+	pcParent = "/";
+    }
+
     if(iInModelContainer==1)
     {
 

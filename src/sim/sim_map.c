@@ -182,7 +182,7 @@ int		status;
 	    if ((ptr = strchr(name,'['))) {
 		*ptr = '\0';
 	    }
-	    parent = Create("neutral",name,new_parent,NULL,index);
+	    parent = Create("neutral", name, new_parent, new_parent->name, NULL, index, 1);
 	} else {
 	    Error();
 	    printf("could not create element %s\n",name);
