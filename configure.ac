@@ -240,7 +240,7 @@ dnl     AC_MSG_CHECKING([checking for 64 bit])
 dnl     case "$host_os" in:
 dnl       *64*)
 dnl          AC_MSG_RESULT([yes])
-dnl          CFLAGS="-fPIC"
+dnl          AM_CFLAGS="-fPIC"
 dnl          ;;
 dnl 	 *)
 dnl 	 AC_MSG_RESULT([no])
@@ -324,7 +324,7 @@ case "$host_cpu" in
 	  dnl this need fPIC set globally for all compiled objects
 	  dnl for swig to work.
 	  AC_MSG_RESULT([AMD 64 based CPU])
- 	  CFLAGS="-fPIC"
+ 	  AM_CFLAGS="-fPIC"
 	;;
 	*)
 	  AC_MSG_RESULT([Unknown CPU type])
