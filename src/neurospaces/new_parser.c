@@ -1117,7 +1117,7 @@ add_channel(char *name,char *parent)
 	    }
 	    else
 	    {
-		fprintf(stderr, "*** Warning: channel %s has no G_MAX defined\n", name);
+		fprintf(stderr, "*** Warning: during readcell: channel %s has no Gbar / gmax defined\n", name);
 	    }
 	}
 
