@@ -23,6 +23,8 @@ addaction	NEUROSPACES_COMMAND	20005
 // addfunc solverelement solver_element_info char*
 
 
+addfunc		volumeconnect		do_volumeconnect
+
 
 /*************************************************************************
 **                         NeuroSpaces objects                         **
