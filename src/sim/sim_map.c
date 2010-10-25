@@ -71,11 +71,11 @@ static char rcsid[] = "$Id: sim_map.c,v 1.3 2005/07/01 10:03:09 svitak Exp $";
  *
 */
 
+#include <neurospaces/algorithmset.h>
+
 #include <stdio.h>
 #include "shell_func_ext.h"
 #include "sim_ext.h"
-
-#include "neurospaces/algorithmset.h"
 
 #include "nsintegrator.h"
 

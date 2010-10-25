@@ -232,7 +232,7 @@ int NSCreate( char* name,  char* pcParent, char* pcType){
    
    if( !phsleParent ){ 
 
-      fprintf(stderr,"Error:Symbol parent path (%s) not found\n",pcParent); 
+      fprintf(stderr,"Error:Symbol parent path (%s) not found\n",pcParent);
       return -1; 
    
    } 

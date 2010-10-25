@@ -159,6 +159,7 @@ libneurospaces_a_SOURCES = \
 	ascfile_g@.h \
 	ascfile_l@.c \
 	ascfileactor.c \
+	connect.c \
 	filters.c \
 	hsolve_d@.c \
 	hsolve_g@.c \
@@ -195,11 +196,11 @@ libneurospaces_a_SOURCES = \
 	nstabcreate.c \
 	nstabfill.c \
 	nstweak.c \
-	pulsegenactor.c \
 	pulsegen_d@.c \
 	pulsegen_g@.c \
 	pulsegen_g@.h \
 	pulsegen_l@.c \
+	pulsegenactor.c \
 	solvercreate.c 
 
 
