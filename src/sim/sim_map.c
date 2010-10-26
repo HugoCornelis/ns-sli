@@ -338,7 +338,7 @@ int CreateMap(char *parentname, char *srcname, int composite, int nx, int ny, do
 
 	//- call algorithm on current symbol
 
-	struct PidinStack *ppistTmp = pneuro->pacRootContext->pist;
+	struct PidinStack pistTmp = pneuro->pacRootContext->pist;
 
 	pneuro->pacRootContext->pist = *ppistParent;
 
@@ -352,7 +352,7 @@ int CreateMap(char *parentname, char *srcname, int composite, int nx, int ny, do
 
 	SymbolRecalcAllSerials(NULL, NULL);
 
-	pneuro->pacRootContext->pist = *ppistTmp;
+	pneuro->pacRootContext->pist = pistTmp;
 
 	PidinStackFree(ppistParent);
     }
