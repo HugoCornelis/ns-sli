@@ -338,7 +338,7 @@ int CreateMap(char *parentname, char *srcname, int composite, int nx, int ny, do
 
 	//- call algorithm on current symbol
 
-	struct PidinStack *ppistTmp = ppistParent;
+	struct PidinStack *ppistTmp = pneuro->pacRootContext->pist;
 
 	pneuro->pacRootContext->pist = *ppistParent;
 
