@@ -17,6 +17,7 @@
 #include "neurospaces/components/channel.h"
 #include "neurospaces/components/equationexponential.h"
 #include "neurospaces/components/pool.h"
+#include "neurospaces/components/projection.h"
 #include "neurospaces/components/pulsegen.h"
 #include "neurospaces/components/segment.h"
 #include "neurospaces/function.h"
@@ -79,19 +80,20 @@ int NSCreate( char* name,  char* pcParent, char* pcType){
 
    struct g2_g3_element_mapper pggem[] =
    {
-       "compartment", NSINTEGRATOR_COMPARTMENT,
-       "symcompartment", NSINTEGRATOR_COMPARTMENT,
-       "tabchannel", NSINTEGRATOR_TABCHANNEL,
        "Ca_concen", NSINTEGRATOR_POOL,
-       "nernst",  NSINTEGRATOR_NERNST,
-       "synchan", NSINTEGRATOR_SYNCHAN,
+       "asc_file", NSINTEGRATOR_ASCFILE,
        "channelC2", NSINTEGRATOR_SYNCHAN,
        "channelC3", NSINTEGRATOR_SYNCHAN,
+       "compartment", NSINTEGRATOR_COMPARTMENT,
+       "hsolve", NSINTEGRATOR_NEUTRAL,
+       "nernst",  NSINTEGRATOR_NERNST,
+       "projection", NSINTEGRATOR_NEUTRAL,
        "spikegen", NSINTEGRATOR_SPIKEGEN,
-       "asc_file", NSINTEGRATOR_ASCFILE,
-       (char *)-1, NSINTEGRATOR_PULSEGEN,
-       "hsolve", NSINTEGRATOR_PULSEGEN,
+       "symcompartment", NSINTEGRATOR_COMPARTMENT,
+       "synchan", NSINTEGRATOR_SYNCHAN,
+       "tabchannel", NSINTEGRATOR_TABCHANNEL,
        (char *)-1, NSINTEGRATOR_NEUTRAL,
+       (char *)-1, NSINTEGRATOR_PULSEGEN,
        NULL, -1,
    };
 
@@ -169,6 +171,12 @@ int NSCreate( char* name,  char* pcParent, char* pcType){
      
      iResult = NSINTEGRATOR_PULSEGEN;
 
+   }
+   else if (!strcmp("projection", pcType))
+   {
+       phsleChild = (struct symtab_HSolveListElement *)ProjectionCalloc();
+
+       iResult = NSINTEGRATOR_NEUTRAL;
    }
    else if (strcmp("hsolve", pcType) == 0)
    {

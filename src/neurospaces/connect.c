@@ -626,61 +626,94 @@ int VolumeConnect(source_path, src_region, nsrc_regions,
 /*   FreeElementList(dstlist); */
 /*   FreeElementList(srclist); */
 
-    //- determine the target instance name
-
-    char pcInstanceTemplate[1000];
-
-    char srcname[100] = "something here that is not used";
-
-    char *pcInstanceName = strrchr(srcname, '/');
-
-    if (pcInstanceName)
+    if (nsrc_regions > 1
+	|| ndst_regions > 1)
     {
-	pcInstanceName++;
-    }
-    else
-    {
-	pcInstanceName = srcname;
+	fprintf(stdout, "warning: more than one nsrc_regions or ndst_regions, only using the first one\n");
     }
 
-    sprintf(pcInstanceTemplate, "%s[%%i]", pcInstanceName);
+    if (nsrc_regions < 1
+	|| ndst_regions < 1)
+    {
+	fprintf(stderr, "error: need at least one nsrc_regions and one ndst_regions\n");
+
+	return(0);
+    }
+
+/*     //- determine the target instance name */
+
+/*     char pcInstanceTemplate[1000]; */
+
+/*     char srcname[100] = "projection"; */
+
+/*     char *pcInstanceName = strrchr(srcname, '/'); */
+
+/*     if (pcInstanceName) */
+/*     { */
+/* 	pcInstanceName++; */
+/*     } */
+/*     else */
+/*     { */
+/* 	pcInstanceName = srcname; */
+/*     } */
+
+/*     sprintf(pcInstanceTemplate, "%s[%%i]", pcInstanceName); */
+
+    static int iVolumeInstances = 0;
+
+    if (iVolumeInstances == 0)
+    {
+	/*
+	** set up the projections element on the root
+	*/
+
+	Create("neutral", "projections", RootElement(), "/", NULL, 0, 1);
+    }
+
+    iVolumeInstances++;
+
+    char pcVolumeInstances[100];
+
+    sprintf(pcVolumeInstances, "VolumeConnect_Instance_%i", iVolumeInstances);
+
+    NSCreate(pcVolumeInstances, "/projections", "projection");
 
     char *pcProjectionName;
     double dRandomSeed;
-    double dProbability;
-    char *pcPre;
-    char *pcPost;
+    double dProbability = pconnect;
+    char *pcPre = source_path;
+    char *pcPost = dest_path;
+
+    char *pcSourceType = src_region[0].shape == CONNECTION_MASK_BOX_SHAPE ? "box" : "ellipse";
+
+    double dSourceX1 = src_region[0].x1;
+    double dSourceY1 = src_region[0].y1;
+    double dSourceZ1 = src_region[0].z1;
 			   
-    char *pcSourceType;
-			   
-    double dSourceX1;
-    double dSourceY1;
-    double dSourceZ1;
-			   
-    double dSourceX2;
-    double dSourceY2;
-    double dSourceZ2;
-			   
-    char *pcDestionationType;
-			   
-    double dTargetX1;
-    double dTargetY1;
-    double dTargetZ1;
-	 		   
-    double dTargetX2;
-    double dTargetY2;
-    double dTargetZ2;
-			   
-    double dWeight;
-    
-    char *pcDelayType;
-    
-    double dFixedDelay;
-    double dVelocity;
+    double dSourceX2 = src_region[0].x2;
+    double dSourceY2 = src_region[0].y2;
+    double dSourceZ2 = src_region[0].z2;
+
+    char *pcDestionationType = dst_region[0].shape == CONNECTION_MASK_BOX_SHAPE ? "box" : "ellipse";
+
+    double dTargetX1 = dst_region[0].x1;
+    double dTargetY1 = dst_region[0].y1;
+    double dTargetZ1 = dst_region[0].z1;
+
+    double dTargetX2 = dst_region[0].x1;
+    double dTargetY2 = dst_region[0].y1;
+    double dTargetZ2 = dst_region[0].z1;
+
+    double dWeight = 0.0;
+
+    char *pcDelayType = "FIXED";
+
+    double dFixedDelay = 0.0;
+    double dVelocity = 0.0;
 
     struct symtab_ParContainer *pparc
 	= ParContainerNewFromList
-	  (ParameterNewFromString("INSTANCE_NAME", pcInstanceTemplate),
+	  (/* ParameterNewFromString("INSTANCE_NAME", pcInstanceTemplate), */
 	   ParameterNewFromString("PROJECTION_NAME", pcProjectionName),
 	   ParameterNewFromNumber("RANDOMSEED", dRandomSeed),
 	   ParameterNewFromNumber("PROBABILITY", dProbability),
@@ -741,14 +774,6 @@ int VolumeConnect(source_path, src_region, nsrc_regions,
     {
 	AlgorithmSymbolSetAlgorithmInstance(palgs, palgi);
 
-	static int iVolumeInstances = 0;
-
-	iVolumeInstances++;
-
-	char pcVolumeInstances[100];
-
-	sprintf(pcVolumeInstances, "VolumeConnect_Instance_%i", iVolumeInstances);
-
 	char *parentname = pcVolumeInstances;
 
 	struct PidinStack *ppistParent = getRootedContext(parentname);
@@ -779,13 +804,31 @@ int VolumeConnect(source_path, src_region, nsrc_regions,
 	    return(0);
 	}
 
-	ParserContextSetActual(pneuro->pacRootContext, phsleParent);
+	//- projections are create on the root that fakes to be a network
+
+	struct PidinStack *ppistRoot = PidinStackCalloc();
+
+	if (!ppistRoot)
+	{
+	    Error();
+
+	    fprintf(stdout, "cannot allocate a root context needed for creation of network connections\n");
+
+	    return(0);
+	}
+
+	PidinStackSetRooted(ppistRoot);
+
+	struct symtab_HSolveListElement *phsleRoot
+	    = PidinStackLookupTopSymbol(ppistRoot);
+
+	ParserContextSetActual(pneuro->pacRootContext, phsleRoot);
 
 	//- call algorithm on current symbol
 
-	struct PidinStack *ppistTmp = ppistParent;
+	struct PidinStack pistTmp = pneuro->pacRootContext->pist;
 
-	pneuro->pacRootContext->pist = *ppistParent;
+	pneuro->pacRootContext->pist = *ppistRoot;
 
 	ParserAlgorithmHandle
 	    (pneuro->pacRootContext,
@@ -797,7 +840,7 @@ int VolumeConnect(source_path, src_region, nsrc_regions,
 
 	SymbolRecalcAllSerials(NULL, NULL);
 
-	pneuro->pacRootContext->pist = *ppistTmp;
+	pneuro->pacRootContext->pist = pistTmp;
 
 	PidinStackFree(ppistParent);
     }
