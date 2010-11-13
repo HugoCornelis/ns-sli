@@ -14,24 +14,24 @@ my $test
 				command => 'src/ns-sli',
 				command_tests => [
 						  {
-						   description => "Does the script run the simulation ?",
+						   description => "Does the script run the simulation (1)?",
 						   read => 'time = 0.250050 ; step = 5001',
-						   timeout => 10,
+						   timeout => 15,
 						  },
 						  {
-						   description => "Can we quit the simulator ?",
+						   description => "Can we quit the simulator (1)?",
 						   wait => 1,
 						   write => "quit",
 						  },
 						  {
-						   description => "Can we find the output of the first compartment ?",
+						   description => "Can we find the output of the first compartment (1)?",
 						   read => {
 							    application_output_file => "/tmp/axon3.out0",
 							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/rallpacks/axon3.out0",
 							   },
 						  },
 						  {
-						   description => "Can we find the output of the last compartment ?",
+						   description => "Can we find the output of the last compartment (1)?",
 						   read => {
 							    application_output_file => "/tmp/axon3.outx",
 							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/rallpacks/axon3.outx",
@@ -48,23 +48,23 @@ my $test
 				command => 'src/ns-sli',
 				command_tests => [
 						  {
-						   description => "Does the script run the simulation ?",
+						   description => "Does the script run the simulation (2)?",
 						   read => 'time = 0.250050 ; step = 5001',
 						   timeout => 10,
 						  },
 						  {
-						   description => "Can we quit the simulator ?",
+						   description => "Can we quit the simulator (2)?",
 						   write => "quit",
 						  },
 						  {
-						   description => "Can we find the output of the first compartment ?",
+						   description => "Can we find the output of the first compartment (2)?",
 						   read => {
 							    application_output_file => "/tmp/axon.out0",
 							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/rallpacks/axon.out0.g2",
 							   },
 						  },
 						  {
-						   description => "Can we find the output of the last compartment ?",
+						   description => "Can we find the output of the last compartment (2)?",
 						   read => {
 							    application_output_file => "/tmp/axon.outx",
 							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/rallpacks/axon.outx.g2",
