@@ -678,7 +678,10 @@ int VolumeConnect(source_path, src_region, nsrc_regions,
 
     NSCreate(pcVolumeInstances, "/projections", "projection");
 
-    char *pcProjectionName;
+    char pcProjection[100];
+
+    sprintf(pcProjection, "/projections/%s", pcVolumeInstances);
+
     double dRandomSeed;
     double dProbability = pconnect;
     char *pcPre = source_path;
@@ -711,39 +714,39 @@ int VolumeConnect(source_path, src_region, nsrc_regions,
     double dFixedDelay = 0.0;
     double dVelocity = 0.0;
 
-    struct symtab_ParContainer *pparc
+    struct symtab_ParContainer *pparcAlgorithm
 	= ParContainerNewFromList
 	  (/* ParameterNewFromString("INSTANCE_NAME", pcInstanceTemplate), */
-	   ParameterNewFromString("PROJECTION_NAME", pcProjectionName),
+	   ParameterNewFromString("PROJECTION_NAME", pcProjection),
 	   ParameterNewFromNumber("RANDOMSEED", dRandomSeed),
 	   ParameterNewFromNumber("PROBABILITY", dProbability),
-	   ParameterNewFromString("PRE", pcPre),
-	   ParameterNewFromString("POST", pcPost),
-			   	   
+	   ParameterNewFromString("PRE_CONTEXT", pcPre),
+	   ParameterNewFromString("POST_CONTEXT", pcPost),
+
 	   ParameterNewFromString("SOURCE_TYPE", pcSourceType),
-			   	   
+
 	   ParameterNewFromNumber("SOURCE_X1", dSourceX1),
 	   ParameterNewFromNumber("SOURCE_Y1", dSourceY1),
 	   ParameterNewFromNumber("SOURCE_Z1", dSourceZ1),
-			   	   
+
 	   ParameterNewFromNumber("SOURCE_X2", dSourceX2),
 	   ParameterNewFromNumber("SOURCE_Y2", dSourceY2),
 	   ParameterNewFromNumber("SOURCE_Z2", dSourceZ2),
-			   	   
+
 	   ParameterNewFromString("DESTINATION_TYPE", pcDestionationType),
-			   	   
+
 	   ParameterNewFromNumber("DESTINATION_X1", dTargetX1),
 	   ParameterNewFromNumber("DESTINATION_Y1", dTargetY1),
 	   ParameterNewFromNumber("DESTINATION_Z1", dTargetZ1),
-	 		   	   
+
 	   ParameterNewFromNumber("DESTINATION_X2", dTargetX2),
 	   ParameterNewFromNumber("DESTINATION_Y2", dTargetY2),
 	   ParameterNewFromNumber("DESTINATION_Z2", dTargetZ2),
-			   	   
+
 	   ParameterNewFromNumber("WEIGHT", dWeight),
-    				   
+
 	   ParameterNewFromString("DELAY_TYPE", pcDelayType),
-    				   
+
 	   ParameterNewFromNumber("FIXED_DELAY", dFixedDelay),
 	   ParameterNewFromNumber("VELOCITY", dVelocity),
 	   NULL);
@@ -753,7 +756,7 @@ int VolumeConnect(source_path, src_region, nsrc_regions,
 
     //t pparc is lost, memory leak
 
-    AlgorithmSymbolAssignParameters(palgs, pparc->ppars);
+    AlgorithmSymbolAssignParameters(palgs, pparcAlgorithm->ppars);
 
     struct neurospaces_integrator *pnsintegrator
 	= getNsintegrator();
@@ -767,42 +770,50 @@ int VolumeConnect(source_path, src_region, nsrc_regions,
 	   "ProjectionVolume",
 	   "VolumeConnect()",
 	   NULL,
-	   pparc->ppars,
+	   pparcAlgorithm->ppars,
 	   palgs);
 
     if (palgi)
     {
 	AlgorithmSymbolSetAlgorithmInstance(palgs, palgi);
 
-	char *parentname = pcVolumeInstances;
+	struct PidinStack *ppistProjection = getRootedContext(pcProjection);
 
-	struct PidinStack *ppistParent = getRootedContext(parentname);
+	struct symtab_HSolveListElement *phsleProjection
+	    = PidinStackLookupTopSymbol(ppistProjection);
 
-	struct symtab_HSolveListElement *phsleParent
-	    = PidinStackLookupTopSymbol(ppistParent);
-
-	if (!phsleParent)
+	if (!phsleProjection)
 	{
 	    char *argv[10];
 
 	    argv[0] = "VolumeConnect()";
 	    argv[1] = "neutral";
-	    argv[2] = parentname;
+	    argv[2] = pcProjection;
 	    argv[3] = NULL;
 
 	    do_create(3, argv);
 
-	    phsleParent = PidinStackLookupTopSymbol(ppistParent);
+	    phsleProjection = PidinStackLookupTopSymbol(ppistProjection);
 	}
 
-	if (!phsleParent)
+	if (!phsleProjection)
 	{
 	    Error();
 
-	    printf("could not find element '%s' after trying to create it\n", parentname);
+	    printf("could not find element '%s' after trying to create it\n", pcProjection);
 
 	    return(0);
 	}
+
+	struct symtab_ParContainer *pparcProjection
+	    = ParContainerNewFromList
+	      (ParameterNewFromString("SOURCE", "/"),
+	       ParameterNewFromString("TARGET", "/"),
+	       NULL);
+
+	//t pparc is lost, memory leak
+
+	SymbolAssignParameters(phsleProjection, pparcProjection->ppars);
 
 	//- projections are create on the root that fakes to be a network
 
@@ -842,7 +853,7 @@ int VolumeConnect(source_path, src_region, nsrc_regions,
 
 	pneuro->pacRootContext->pist = pistTmp;
 
-	PidinStackFree(ppistParent);
+	PidinStackFree(ppistProjection);
     }
 
     /*

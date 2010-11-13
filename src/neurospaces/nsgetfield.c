@@ -35,14 +35,14 @@ char* NSGetField(char *pcPathname,char *pcField)
 
   // First we check for the variable in heccer
 
-  char *pcHeccerVar = GetHeccerVariable(pcPathname,pcField);
+  char *pcHeccerVar = GetHeccerVariable(pcPathname, pcField);
 
-  if(pcHeccerVar)
+  if (pcHeccerVar)
   {
       free(pcPathname);
       free(pcField);
     
-      return (pcHeccerVar);
+      return(pcHeccerVar);
   }
 
 
@@ -65,7 +65,21 @@ char* NSGetField(char *pcPathname,char *pcField)
 
   char *pcMappedPar = mapParameterString(pcField);
 
-  double dValue = SymbolParameterResolveValue(phsle,ppist,pcMappedPar);
+  if (strcmp(pcMappedPar, "nsynapses") == 0)
+  {
+      // \todo this should come from ppist
+
+      extern struct Neurospaces *pneuroGlobal;
+
+      struct ProjectionQuery *ppq = NeurospacesGetProjectionQuery(pneuroGlobal);
+
+      if (!ppq)
+      {
+	  QueryMachineHandle(pneuroGlobal, "pqsetall c");
+      }
+  }
+
+  double dValue = SymbolParameterResolveValue(phsle, ppist, pcMappedPar);
   
 
   if(dValue == DBL_MAX)
@@ -111,7 +125,7 @@ char * GetHeccerVariable(char *pcName,char *pcField)
 
   if (i == -1)
   {
-      fprintf(stdout, "%s", "Warning: No heccer found for %s->%s.\n\n", pcName, pcField);
+      fprintf(stdout, "Warning: No heccer found for %s->%s.\n\n", pcName, pcField);
 
       return NULL;
   }

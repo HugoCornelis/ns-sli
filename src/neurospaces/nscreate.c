@@ -27,7 +27,6 @@
 #include "neurospaces/idin.h"
 
 
-//t includes from our nsgenesis library
 #include "neurospaces/nsintegrator.h"
 
 
