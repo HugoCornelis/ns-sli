@@ -42,15 +42,6 @@ int AttemptSolverName(char *pcName, int iType)
 {
     struct neurospaces_integrator *pnsintegrator = getNsintegrator();
 
-    //- if this name is in the proto library
-
-    if (strncmp(pcName, "/proto", strlen("/proto")) == 0)
-    {
-	//- this is assumed to be disabled, so return success
-
-	return 0;
-    }
-
     //- if a heccer object with the same name exists.
 
     int i;
@@ -185,72 +176,66 @@ int DisableSolverName(char *pcName, int iType)
 //------------------------------------------------------------------
 static int RegisterSolverName(char *pcName, int iType)
 {
-  struct neurospaces_integrator *pnsintegrator = getNsintegrator();
+    struct neurospaces_integrator *pnsintegrator = getNsintegrator();
 
-  //- register the name of the heccer object
+    //- if it is possible to register more solver objects
 
-  if (pnsintegrator->iModelRegistrations >= MAX_HECCERS)
-  {
-      fprintf(stdout, "Error: to many solvers in RegisterSolverName() at %s.\n", pcName);
-  }
-  else
-  {
-      pnsintegrator->psr[pnsintegrator->iModelRegistrations].pcName
-	  = strdup(pcName);
+    if (pnsintegrator->iModelRegistrations < MAX_HECCERS)
+    {
+	//- register the name of the solver object
 
-      // \note this should may be done inside the function
-      // GetParentComponent() called above?
+	pnsintegrator->psr[pnsintegrator->iModelRegistrations].pcName = strdup(pcName);
 
-      if (pnsintegrator->psr[pnsintegrator->iModelRegistrations].pcName[strlen(pnsintegrator->psr[pnsintegrator->iModelRegistrations].pcName) - 1] == '/')
-      {
-	  pnsintegrator->psr[pnsintegrator->iModelRegistrations].pcName[strlen(pnsintegrator->psr[pnsintegrator->iModelRegistrations].pcName) - 1] = '\0';
-      }
+	//- correct the name if it ends with a '/'
 
-      if(iType == SOLVER_HECCER)
-      {
+	if (pnsintegrator->psr[pnsintegrator->iModelRegistrations].pcName[strlen(pnsintegrator->psr[pnsintegrator->iModelRegistrations].pcName) - 1] == '/')
+	{
+	    pnsintegrator->psr[pnsintegrator->iModelRegistrations].pcName[strlen(pnsintegrator->psr[pnsintegrator->iModelRegistrations].pcName) - 1] = '\0';
+	}
 
-	pnsintegrator->psr[pnsintegrator->iModelRegistrations].uSolver.si.pheccer
-	  = NULL;
+	//- erase previous solver info and register the solver type
 
-      }
-      else if(iType == SOLVER_PULSEGEN)
-      {
+	if (iType == SOLVER_HECCER)
+	{
+	    pnsintegrator->psr[pnsintegrator->iModelRegistrations].uSolver.si.pheccer = NULL;
+	}
+	else if (iType == SOLVER_PULSEGEN)
+	{
+	    pnsintegrator->psr[pnsintegrator->iModelRegistrations].uSolver.ppg = NULL;
+	}
+	else
+	{
+	    fprintf(stderr, "Error: Invalid solver type for %s\n", pcName);
 
-	pnsintegrator->psr[pnsintegrator->iModelRegistrations].uSolver.ppg
-	  = NULL;
-      }
-      else
-      {
+	    return -1;
+	}
 
-	fprintf(stderr,"Error: Invalid solver type for %s\n",pcName);
+	pnsintegrator->psr[pnsintegrator->iModelRegistrations].iType = iType;
 
-	return -1;
+	//- names prefixed with /library or /proto are always disabled
 
-      }
+	if (strncmp("/library", pcName, strlen("/library")) == 0
+	    || strncmp("/proto", pcName, strlen("/proto")) == 0)
+	{
+	    pnsintegrator->psr[pnsintegrator->iModelRegistrations].iDisabled = 1;
+	}
+	else
+	{
+	    //- other names are always enabled
 
-      pnsintegrator->psr[pnsintegrator->iModelRegistrations].iType
-	  = iType;
+	    pnsintegrator->psr[pnsintegrator->iModelRegistrations].iDisabled = 0;
+	}
 
-      //! Hardcoded check for any name prefixed with "/library"
-      //! if so when we disable it.
+	//- increment the number of solver registrations
 
-      if (!strncmp("/library", pcName, strlen("/library")))
-      {
-	  pnsintegrator->psr[pnsintegrator->iModelRegistrations].iDisabled
-	      = 1;
-      }
-      else
-      {
-	  pnsintegrator->psr[pnsintegrator->iModelRegistrations].iDisabled
-	      = 0;
-      }
+	pnsintegrator->iModelRegistrations++;
+    }
+    else
+    {
+	fprintf(stdout, "Error: to many solvers in RegisterSolverName() at %s.\n", pcName);
+    }
 
-      pnsintegrator->iModelRegistrations++;
-  }
-
-  return 1;
-   
-
+    return 1;
 }
 
 
