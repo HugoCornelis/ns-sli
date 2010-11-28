@@ -364,15 +364,19 @@ struct neurospaces_integrator {
 
 
 
-//i -- Defined in filters.c --
+//- -- Defined in nscall.c --
+int NSCall(int argc, char **argv);
+
+
+//- -- Defined in filters.c --
 int NSFilterCreate(char *pcType);
 
 
-//i -- Defined in nsintegrator.c --
+//- -- Defined in nsintegrator.c --
 int NSGenesisInitialize();
 
 
-//i -- Defined in solvercreate.c --
+//- -- Defined in solvercreate.c --
 int AttemptSolverName(char *pcName, int iType);
 int SetSolverOptions(char *pcName, int iOptions);
 int DisableSolverName(char *pcName, int iType);
@@ -381,11 +385,11 @@ int InitHeccerObject(struct SolverRegistration *psr);
 struct Heccer *LookupHeccerObject(char *pcContext);
 
 
-//i -- Defined in heccerreset.c --
+//- -- Defined in heccerreset.c --
 void singleHeccerStatus(struct Heccer *pheccer);
 
 
-//i -- Defined in nssymboltable.c --
+//- -- Defined in nssymboltable.c --
 int NeurospacesAddSymbol(char *pcname,int type);
 struct neurospaces_symbol * NeurospacesGetSymbol(char *pcname);
 
@@ -462,6 +466,12 @@ int PrintHeccerVariable(char *pcName,char *pcParameter,int iAll);
 //- Defined in nspulsegen.c --
 int NSPulseGenReset(struct pulsegen_type *ppgt);
 int InitPulseGenObject(struct SolverRegistration *psr);
+
+//- Defined in nstabcreate.c --
+int NSTabCreate(int argc, char **argv);
+
+//- Defined in nstabfill.c --
+int NSTabFill(int argc, char **argv);
 
 //- -- Defined in sim_main.c --
 int sli_main(int argc, char **argv, char **envp, struct Neurospaces *pneuro);

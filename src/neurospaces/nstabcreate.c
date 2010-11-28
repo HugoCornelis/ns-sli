@@ -31,6 +31,15 @@
 //------------------------------------------------------------------
 int NSTabCreate(int argc, char **argv)
 {
+    if (argc < 4)
+    {
+	Error();
+
+	printf("usage : %s field xdivs xmin xmax\n", "tabcreate");
+
+	return(0);
+    }
+
     char *pcName = argv[1];
     char *pcField = argv[3];
 
@@ -145,6 +154,8 @@ int NSTabCreate(int argc, char **argv)
 	    pheccerOptions->ho.dIntervalEnd = dXmax;
 	}
 
+	OK();
+
 	return 1;
     } 
 
@@ -176,11 +187,16 @@ int NSTabCreate(int argc, char **argv)
 	    pheccerOptions->ho.dConcentrationGateEnd = dXmax;
 	}
 
+	OK();
+
 	return 1;
     } 
     else
     {
-	printf("field '%s' not known\n",pcField);
+	Error();
+
+	printf("field '%s' not known\n", pcField);
+
 	return(0);
     }
 }

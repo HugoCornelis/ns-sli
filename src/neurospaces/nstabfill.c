@@ -20,13 +20,36 @@
 
 /*!
  *  \fn int NSTabFill(char *pcName, char *pcField, char *pcNumTabEntries)
- *  \param pcName String to a tabchannel name to create.
- *  \param pcField The field (X,Y,or Z) to modify for the table.
- *  \param pcNumTabEntries The number of table entries to create.
+ *  \param argc argument count, see tabfill manual.
+ *  \param argv argument vector, see tabfill manual.
  *  \return 0 on error, 1 on success.
  */
-int NSTabFill(char *pcName, char *pcField, char *pcNumTabEntries)
+int NSTabFill(int argc, char **argv)
 {
+    if (argc != 6) 
+    {
+	Error();
+
+	printf("usage : %s field xdivs fill_mode\n","tabfill");
+
+	return(0);
+    }
+
+    if (strcmp("0", argv[5]))
+    {
+	Error();
+
+	printf("Invalid fill_mode, must be '0'\n");
+
+	return 0;
+    }
+
+    char *pcName = argv[1];
+
+    char *pcField =  argv[3];
+
+    char *pcNumTabEntries = argv[4];
+
   struct PidinStack * ppistA = getGateContext(pcName,pcField,"A");
 
   struct PidinStack * ppistB = getGateContext(pcName,pcField,"B");
@@ -38,7 +61,9 @@ int NSTabFill(char *pcName, char *pcField, char *pcNumTabEntries)
   if(!phsleA || !phsleB)
   {
       Error();
+
       printf("TABFILL Error: cannot find gate kinetic elements of %s\n", pcName);
+
       return 0;
   }
 
@@ -160,6 +185,8 @@ int NSTabFill(char *pcName, char *pcField, char *pcNumTabEntries)
 
   PidinStackFree(ppistA);
   PidinStackFree(ppistB);
+
+  OK();
 
   return 1;
 

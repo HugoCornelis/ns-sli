@@ -82,11 +82,11 @@ int NSmsg(char *pcSrcpath, char *pcDstpath, char *pcTypename, char *pcField){
     {
 	if (strcmp(pcTypename, pggmm[i].pcG2) == 0)
 	{
-	    if ((int)pggmm[i].MsgProcess == 0)
+	    if (pggmm[i].MsgProcess == NULL)
 	    {
 	    }
 
-	    if ((int)pggmm[i].MsgProcess == 1)
+	    if (pggmm[i].MsgProcess == (int (*)(char *pcSource, char *pcDestination, char *pcField, char *pcMessage))1)
 	    {
 		return 1;
 	    }

@@ -52,6 +52,12 @@ int		i,j;
 short	method;
 GenesisObject	*new_obj,*old_obj;
 
+    if (1)
+    {
+	printf("*** Warning: the setmethod command is deprecated in G-3\n");
+	return;
+    }
+
     initopt(argc, argv, "[path] method");
     if (G_getopt(argc, argv) != 0 || optargc > 3)
       {

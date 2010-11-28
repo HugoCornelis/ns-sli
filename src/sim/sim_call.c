@@ -143,21 +143,10 @@ int	i;
 	return NULL;
       }
 
-
-    //hack -------------------------------------------------------
-    if (nsCallCheck(optargv[2]))
+    if (NSCall(argc, argv))
     {
-	// \todo replace nsCallCheck() and NSCall() with only one
-	// function call to avoid duplication of the action names
-	// known to the neurospaces integrator.
-
-      NSCall(argc,argv);
-      
-      return NULL;
-
-
+	return NULL;
     }
-    //hack -------------------------------------------------------
 
     if((action = GetAction(optargv[2])) == NULL){
       Error();

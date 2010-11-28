@@ -21,118 +21,77 @@
 
 
 
-
-
-
-//--------------------------------------------------------------------
-/*!
- *  \fn int NSCall(int argc, char **argv)
- *  \param argc Number of strings contained in argv
- *  \param argv An aray of strings to be parsed into calls.
- *  \return 0 on error, 1 on success.
- *  \sa NSTabCreate
- *  \sa NSTabFill
- *
- *  Function parses out GENESIS calls and delegates them to functions
- *  for certain GENESIS features.
- *  
-*/
-//--------------------------------------------------------------------
-int NSCall(int argc, char **argv){
-
-
-
-  if(!strcmp(argv[2],"TABCREATE"))
-  {
-
-    if (argc < 4) {
-      printf("usage : %s field xdivs xmin xmax\n","tabcreate");
-      return(0);
-    }
-
-
-
-    if( NSTabCreate(argc,argv) == 0 ){
-
-      Error();
-      printf("%s : Error performing Tabcreation in model-container on '%s'.\n",
-	     argv[0],argv[2]);
-      return 0;
-    }
-
-    OK();
-    return 1;
-
-
-  }//=end TABCREATE case
-  else if(!strcmp(argv[2],"TABFILL"))
-  {
-
-    if (argc != 6) 
-    {
-      printf("usage : %s field xdivs fill_mode\n","tabfill");
-      return(0);
-    }
-
-    if(strcmp("0",argv[5]))
-    {
-      printf("Invalid fill_mode, must be '0'\n");
-      return 0;
-      
-    }
-
-
-
-    if(NSTabFill(argv[1], argv[3], argv[4]))
-    {
-      OK();
-      return ;
-    }
-    else
-
-      printf("Error filling table for %s %s\n",argv[1],argv[3]);
-      return 0;
-
-  }
-
-
-
-
-}
-
-
-
-
-
-
 //-------------------------------------------------------------
 /*!
- *  \fn int nsCallCheck(char *pcCall)
- *  \param pcCall string with the argument for the call parameter.
- *  \sa NSCall
+ *  \fn int NSCall(char *pcAction, int argc, char **argv)
+ *  \param argc argument count.
+ *  \param argv argument vector.
  *
- *  Function is simply a check to see if the sli has parsed out 
- *  a parameter for a tabulated operation.
+ *  Execute an G-2 action on an element.
  */
 //--------------------------------------------------------------
-int nsCallCheck(char *pcCall){
-  
-  char *NeurospacesCalls[] = {
-    "TABCREATE",
-    "TABFILL",
-    "TABSAVE",
-    NULL,
-  };
 
+int NSCall(int argc, char **argv)
+{
+    // define known element actions and their implementation
 
-  int i;
-  for(i=0;NeurospacesCalls[i] != NULL; i++){
+    struct g2_g3_action_mapper
+    {
+	char *pcAction;
 
-    if(!strcmp(pcCall,NeurospacesCalls[i]))
-      return 1;
+	int (*ActionProcess)(int argc, char **argv);
+    };	
 
-  }
+    struct g2_g3_action_mapper pggam[] =
+	{
+	    "TABCREATE", NSTabCreate,
+	    "TABFILL", NSTabFill,
+	    "TABSAVE", (int (*)(int argc, char **argv))1,
 
-  return 0;
+	    "SETUP", (int (*)(int argc, char **argv))1,
+	    "DUPLICATE", (int (*)(int argc, char **argv))1,
 
+	    NULL, NULL,
+	};
+
+    //- extract the action name from the argument vector
+
+    char *pcAction = argv[2];
+
+    //- loop over all known element actions
+
+    int i;
+
+    for (i = 0 ; pggam[i].pcAction != NULL; i++)
+    {
+	//- if the action names match
+
+	if (strcmp(pcAction, pggam[i].pcAction) == 0)
+	{
+	    // shared code from the message mapper
+
+	    if (pggam[i].ActionProcess == NULL)
+	    {
+	    }
+
+	    //- if there is no implementation
+
+	    if (pggam[i].ActionProcess == (int (*)(int argc, char **argv))1)
+	    {
+		//- return that the action has been processed here
+
+		return 1;
+	    }
+
+	    //- call the implementation function of this action
+
+	    return pggam[i].ActionProcess(argc, argv);
+	}
+    }
+
+    //- the action is assumed to be in old G-2 code
+
+    return 0;
 }
+
+
