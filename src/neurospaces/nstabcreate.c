@@ -113,7 +113,7 @@ int NSTabCreate(int argc, char **argv)
     struct nsintegrator_type *pelnsintegrator
 	= (struct nsintegrator_type *)GetElement("/neurospaces_integrator");
 
-    struct Heccer *pheccerOptions = 
+    struct simobj_Heccer *pheccerOptions = 
 	pelnsintegrator->pnsintegrator->pheccerOptions;
 
     if( pheccerOptions->ho.iIntervalEntries != HECCER_INTERVAL_DEFAULT_ENTRIES )

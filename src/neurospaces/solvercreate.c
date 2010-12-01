@@ -306,8 +306,8 @@ int TranslateSolverNames(struct neurospaces_integrator *pnsintegrator)
 
 //------------------------------------------------------------------
 /*!
- *  \fn struct Heccer *LookupHeccerObject(char* pcContext)
- *  \return struct Heccer * Heccer with the given name, NULL for failure.
+ *  \fn struct simobj_Heccer *LookupHeccerObject(char* pcContext)
+ *  \return struct simobj_Heccer * Heccer with the given name, NULL for failure.
  *  \param pcContext name of the Heccer to search.
  *  \sa neurospaces_integrator
  *
@@ -318,7 +318,7 @@ int TranslateSolverNames(struct neurospaces_integrator *pnsintegrator)
  */
 //------------------------------------------------------------------
 
-struct Heccer *LookupHeccerObject(char *pcContext)
+struct simobj_Heccer *LookupHeccerObject(char *pcContext)
 {
     struct neurospaces_integrator *pnsintegrator = getNsintegrator();
     int i;
@@ -442,7 +442,7 @@ int InitHeccerObject(struct SolverRegistration *psr)
   //i
 
   {
-/*       struct Heccer *pheccer = LookupHeccerObject(psr->pcName); */
+/*       struct simobj_Heccer *pheccer = LookupHeccerObject(psr->pcName); */
 
       if (psr->uSolver.si.pheccer)
       {
@@ -458,7 +458,7 @@ int InitHeccerObject(struct SolverRegistration *psr)
 
 
 
-  struct Heccer *pheccer = HeccerNew(psr->pcName, NULL, NULL, NULL);
+  struct simobj_Heccer *pheccer = HeccerNew(psr->pcName, NULL, NULL, NULL);
 
   if(!pheccer){
     fprintf(stderr, "Error allocating Heccer for Context %s\n", psr->pcName);

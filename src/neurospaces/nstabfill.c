@@ -111,7 +111,7 @@ int NSTabFill(int argc, char **argv)
   struct nsintegrator_type *pelnsintegrator 
        = (struct nsintegrator_type *)GetElement("/neurospaces_integrator"); 
 
-  struct Heccer *pheccerOptions =  
+  struct simobj_Heccer *pheccerOptions =  
        pelnsintegrator->pnsintegrator->pheccerOptions; 
 
   int iSourceSize = pheccerOptions->ho.iSmallTableSize;

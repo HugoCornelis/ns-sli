@@ -228,7 +228,7 @@ int NSSetField(struct symtab_HSolveListElement *phsle,
 	{
 	    //- lookup the heccer object using the pathname before findsolvefield correction
 
-	    struct Heccer *pheccer = LookupHeccerObject(pcOriginal);
+	    struct simobj_Heccer *pheccer = LookupHeccerObject(pcOriginal);
 
 	    //- if there is a heccer for this variable
 

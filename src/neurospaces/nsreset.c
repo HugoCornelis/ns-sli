@@ -29,21 +29,21 @@ extern double			clock_value[NCLOCKS];
 
 //-------------------------------------------------------------------
 /*!
- *   \fn static void singleHeccerReset(struct Heccer *pheccer)
+ *   \fn static void singleHeccerReset(struct simobj_Heccer *pheccer)
  *   \param pheccer A pointer to a Heccer struct.
  *   
  *   Performs a RESET on a single Heccer instant passed via parameter
  *   "pheccer."
  */
 //-------------------------------------------------------------------
-void singleHeccerReset(struct Heccer *pheccer);
+void singleHeccerReset(struct simobj_Heccer *pheccer);
 static int SetupIOMessages( struct ioMsg **ppioMsg, int iIoMsgs,
 			    struct SolverRegistration *psr);
 
 
 //--------------------------------------------------------------------
 /*!
- *   \fn static void singleHeccerStatus(struct Heccer *pheccer)
+ *   \fn static void singleHeccerStatus(struct simobj_Heccer *pheccer)
  *   \param pheccer A pointer to a Heccer struct.
  *
  *   Prints out all of the status info in a heccer struct.
@@ -86,7 +86,7 @@ int NSReset(){
   //-
 
   struct ioMsg **ppioMsg = pnsintegrator->ppioMsg;
-/*   struct Heccer **ppheccer = pnsintegrator->ppheccer;  */
+/*   struct simobj_Heccer **ppheccer = pnsintegrator->ppheccer;  */
   int iIoMsgs = pnsintegrator->iIoMsgs;
   int iHeccers = pnsintegrator->iModelRegistrations;
 
@@ -258,7 +258,7 @@ static int SetupIOMessages( struct ioMsg **ppioMsg, int iIoMsgs,
 
 
 /* static int SetupIOMessages( struct ioMsg **ppioMsg, int iIoMsgs, */
-/* 			  struct Heccer *pheccer) */
+/* 			  struct simobj_Heccer *pheccer) */
 /* { */
 /*   int i; */
 
@@ -341,7 +341,7 @@ static int SetupIOMessages( struct ioMsg **ppioMsg, int iIoMsgs,
 
 
 
-void singleHeccerReset(struct Heccer *pheccer){
+void singleHeccerReset(struct simobj_Heccer *pheccer){
 
   if(!pheccer)
     return;
@@ -356,7 +356,7 @@ void singleHeccerReset(struct Heccer *pheccer){
 
 
 
-void singleHeccerStatus(struct Heccer * pheccer){
+void singleHeccerStatus(struct simobj_Heccer * pheccer){
 
   if(!pheccer)
     return;

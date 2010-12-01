@@ -180,7 +180,7 @@ int NSGenesisInitialize(struct Neurospaces *pneuro){
    //- Create a global heccer with default options.
    //- 
 
-   struct Heccer *pheccer = HeccerNew("Options_Only",NULL,NULL,NULL);
+   struct simobj_Heccer *pheccer = HeccerNew("Options_Only",NULL,NULL,NULL);
 
    if(!pheccer){
 

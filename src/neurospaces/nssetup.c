@@ -161,7 +161,7 @@ int NSSetupAlpha( char *pcName, char *pcField, char **pcArgs,
     struct nsintegrator_type *pelnsintegrator
       = (struct nsintegrator_type *)GetElement("/neurospaces_integrator");
 
-    struct Heccer *pheccerOptions = 
+    struct simobj_Heccer *pheccerOptions = 
       pelnsintegrator->pnsintegrator->pheccerOptions;
 
     
@@ -282,7 +282,7 @@ int NSSetupAlpha( char *pcName, char *pcField, char **pcArgs,
     struct nsintegrator_type *pelnsintegrator
       = (struct nsintegrator_type *)GetElement("/neurospaces_integrator");
 
-    struct Heccer *pheccerOptions = 
+    struct simobj_Heccer *pheccerOptions = 
       pelnsintegrator->pnsintegrator->pheccerOptions;
 
     
@@ -408,7 +408,7 @@ int NSSetupAlpha( char *pcName, char *pcField, char **pcArgs,
     struct nsintegrator_type *pelnsintegrator
       = (struct nsintegrator_type *)GetElement("/neurospaces_integrator");
 
-    struct Heccer *pheccerOptions = 
+    struct simobj_Heccer *pheccerOptions = 
       pelnsintegrator->pnsintegrator->pheccerOptions;
 
     

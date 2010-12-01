@@ -210,7 +210,7 @@ struct SolverInstance
 {
     int iOptions;
 
-    struct Heccer *pheccer;
+    struct simobj_Heccer *pheccer;
     
 };
 
@@ -304,7 +304,7 @@ struct neurospaces_integrator {
    *  A pointer to a Heccer representation in the GENESIS SLI.
    */
   //struct neurospaces_type *pelHeccer; 
-  struct Heccer *pheccerOptions;
+  struct simobj_Heccer *pheccerOptions;
 
 
 
@@ -325,7 +325,7 @@ struct neurospaces_integrator {
   /*!
    *   This is an array of Heccer structs.
    */
-/*   struct Heccer **ppheccer;  */
+/*   struct simobj_Heccer **ppheccer;  */
    
 
 
@@ -382,11 +382,11 @@ int SetSolverOptions(char *pcName, int iOptions);
 int DisableSolverName(char *pcName, int iType);
 int TranslateSolverNames(struct neurospaces_integrator *pnsintegrator);
 int InitHeccerObject(struct SolverRegistration *psr);
-struct Heccer *LookupHeccerObject(char *pcContext);
+struct simobj_Heccer *LookupHeccerObject(char *pcContext);
 
 
 //- -- Defined in heccerreset.c --
-void singleHeccerStatus(struct Heccer *pheccer);
+void singleHeccerStatus(struct simobj_Heccer *pheccer);
 
 
 //- -- Defined in nssymboltable.c --
