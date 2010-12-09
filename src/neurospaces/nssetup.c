@@ -102,16 +102,16 @@ int NSSetupAlpha( char *pcName, char *pcField, char **pcArgs,
     //-    HH_AB_Tau - is at index 4
     //-
 
-    double dMult = - strtod(pcArgs[1], (char **)NULL);
-    char pcMult[100];
-    sprintf(pcMult, "%g", dMult);
+/*     double dMult = - strtod(pcArgs[1], (char **)NULL); */
+/*     char pcMult[100]; */
+/*     sprintf(pcMult, "%g", dMult); */
 
-    setParameter(ppistForward, phsleForward,"HH_AB_Scale",pcArgs[0],SETPARA_NUM);
-    setParameter(ppistForward, phsleForward,"HH_AB_Mult",pcMult,SETPARA_NUM);
-    setParameter(ppistForward, phsleForward,"HH_AB_Factor_Flag","-1.0",SETPARA_NUM);
-    setParameter(ppistForward, phsleForward,"HH_AB_Add",pcArgs[2],SETPARA_NUM);
-    setParameter(ppistForward, phsleForward,"HH_AB_Offset_E",pcArgs[3],SETPARA_NUM);
-    setParameter(ppistForward, phsleForward,"HH_AB_Tau",pcArgs[4],SETPARA_NUM);
+    setParameter(ppistForward, phsleForward, "HH_AB_Scale", pcArgs[0], SETPARA_NUM);
+    setParameter(ppistForward, phsleForward, "HH_AB_Mult", /* pcMult */pcArgs[1], SETPARA_NUM);
+    setParameter(ppistForward, phsleForward, "HH_AB_Factor_Flag", "-1.0", SETPARA_NUM);
+    setParameter(ppistForward, phsleForward, "HH_AB_Add", pcArgs[2], SETPARA_NUM);
+    setParameter(ppistForward, phsleForward, "HH_AB_Offset_E", pcArgs[3], SETPARA_NUM);
+    setParameter(ppistForward, phsleForward, "HH_AB_Tau", pcArgs[4], SETPARA_NUM);
 
     PidinStackFree(ppistForward);
 
@@ -139,16 +139,16 @@ int NSSetupAlpha( char *pcName, char *pcField, char **pcArgs,
     //-    HH_AB_Tau - is at index 9
     //-
 
-    double dMult2 = - strtod(pcArgs[6], (char **)NULL);
-    char pcMult2[100];
-    sprintf(pcMult2, "%g", dMult2);
+/*     double dMult2 = - strtod(pcArgs[6], (char **)NULL); */
+/*     char pcMult2[100]; */
+/*     sprintf(pcMult2, "%g", dMult2); */
 
-    setParameter(ppistBackward, phsleBackward,"HH_AB_Scale",pcArgs[5],SETPARA_NUM);
-    setParameter(ppistBackward, phsleBackward,"HH_AB_Mult",pcMult2,SETPARA_NUM);
-    setParameter(ppistBackward, phsleBackward,"HH_AB_Factor_Flag","-1.0",SETPARA_NUM);
-    setParameter(ppistBackward, phsleBackward,"HH_AB_Add",pcArgs[7],SETPARA_NUM);
-    setParameter(ppistBackward, phsleBackward,"HH_AB_Offset_E",pcArgs[8],SETPARA_NUM);
-    setParameter(ppistBackward, phsleBackward,"HH_AB_Tau",pcArgs[9],SETPARA_NUM);
+    setParameter(ppistBackward, phsleBackward, "HH_AB_Scale", pcArgs[5], SETPARA_NUM);
+    setParameter(ppistBackward, phsleBackward, "HH_AB_Mult", /* pcMult2 */pcArgs[6], SETPARA_NUM);
+    setParameter(ppistBackward, phsleBackward, "HH_AB_Factor_Flag", "-1.0", SETPARA_NUM);
+    setParameter(ppistBackward, phsleBackward, "HH_AB_Add", pcArgs[7], SETPARA_NUM);
+    setParameter(ppistBackward, phsleBackward, "HH_AB_Offset_E", pcArgs[8], SETPARA_NUM);
+    setParameter(ppistBackward, phsleBackward, "HH_AB_Tau", pcArgs[9], SETPARA_NUM);
 
     PidinStackFree(ppistBackward);
 
@@ -220,16 +220,16 @@ int NSSetupAlpha( char *pcName, char *pcField, char **pcArgs,
     //-    HH_AB_Tau - is at index 4
     //-
 
-    double dMult = - strtod(pcArgs[1], (char **)NULL);
-    char pcMult[100];
-    sprintf(pcMult, "%g", dMult);
+/*     double dMult = - strtod(pcArgs[1], (char **)NULL); */
+/*     char pcMult[100]; */
+/*     sprintf(pcMult, "%g", dMult); */
 
-    setParameter(ppistForward, phsleForward,"HH_AB_Scale",pcArgs[0],SETPARA_NUM);
-    setParameter(ppistForward, phsleForward,"HH_AB_Mult",pcMult,SETPARA_NUM);
-    setParameter(ppistForward, phsleForward,"HH_AB_Factor_Flag","-1.0",SETPARA_NUM);
-    setParameter(ppistForward, phsleForward,"HH_AB_Add",pcArgs[2],SETPARA_NUM);
-    setParameter(ppistForward, phsleForward,"HH_AB_Offset_E",pcArgs[3],SETPARA_NUM);
-    setParameter(ppistForward, phsleForward,"HH_AB_Tau",pcArgs[4],SETPARA_NUM);
+    setParameter(ppistForward, phsleForward, "HH_AB_Scale", pcArgs[0], SETPARA_NUM);
+    setParameter(ppistForward, phsleForward, "HH_AB_Mult", /* pcMult */pcArgs[1], SETPARA_NUM);
+    setParameter(ppistForward, phsleForward, "HH_AB_Factor_Flag", "-1.0", SETPARA_NUM);
+    setParameter(ppistForward, phsleForward, "HH_AB_Add", pcArgs[2], SETPARA_NUM);
+    setParameter(ppistForward, phsleForward, "HH_AB_Offset_E", pcArgs[3], SETPARA_NUM);
+    setParameter(ppistForward, phsleForward, "HH_AB_Tau", pcArgs[4], SETPARA_NUM);
 
     PidinStackFree(ppistForward);
 
@@ -260,16 +260,16 @@ int NSSetupAlpha( char *pcName, char *pcField, char **pcArgs,
     //-    HH_AB_Tau - is at index 9
     //-
 
-    double dMult2 = - strtod(pcArgs[6], (char **)NULL);
-    char pcMult2[100];
-    sprintf(pcMult2, "%g", dMult2);
+/*     double dMult2 = - strtod(pcArgs[6], (char **)NULL); */
+/*     char pcMult2[100]; */
+/*     sprintf(pcMult2, "%g", dMult2); */
 
-    setParameter(ppistBackward, phsleBackward,"HH_AB_Scale",pcArgs[5],SETPARA_NUM);
-    setParameter(ppistBackward, phsleBackward,"HH_AB_Mult",pcMult2,SETPARA_NUM);
-    setParameter(ppistBackward, phsleBackward,"HH_AB_Factor_Flag","-1.0",SETPARA_NUM);
-    setParameter(ppistBackward, phsleBackward,"HH_AB_Add",pcArgs[7],SETPARA_NUM);
-    setParameter(ppistBackward, phsleBackward,"HH_AB_Offset_E",pcArgs[8],SETPARA_NUM);
-    setParameter(ppistBackward, phsleBackward,"HH_AB_Tau",pcArgs[9],SETPARA_NUM);
+    setParameter(ppistBackward, phsleBackward, "HH_AB_Scale", pcArgs[5], SETPARA_NUM);
+    setParameter(ppistBackward, phsleBackward, "HH_AB_Mult", /* pcMult2 */pcArgs[6], SETPARA_NUM);
+    setParameter(ppistBackward, phsleBackward, "HH_AB_Factor_Flag", "-1.0", SETPARA_NUM);
+    setParameter(ppistBackward, phsleBackward, "HH_AB_Add", pcArgs[7], SETPARA_NUM);
+    setParameter(ppistBackward, phsleBackward, "HH_AB_Offset_E", pcArgs[8],SETPARA_NUM);
+    setParameter(ppistBackward, phsleBackward, "HH_AB_Tau", pcArgs[9], SETPARA_NUM);
 
     PidinStackFree(ppistBackward);
 

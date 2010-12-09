@@ -461,7 +461,7 @@ PRIVATE_MODELS
       PARAMETER ( HH_AB_Offset_E = 0.005 ),
       PARAMETER ( HH_AB_Add = 0 ),
       PARAMETER ( HH_AB_Factor_Flag = -1 ),
-      PARAMETER ( HH_AB_Mult = -0 ),
+      PARAMETER ( HH_AB_Mult = 0 ),
       PARAMETER ( HH_AB_Scale = 35000 ),
     END PARAMETERS
   END GATE_KINETIC
@@ -473,7 +473,7 @@ PRIVATE_MODELS
       PARAMETER ( HH_AB_Offset_E = 0.065 ),
       PARAMETER ( HH_AB_Add = 0 ),
       PARAMETER ( HH_AB_Factor_Flag = -1 ),
-      PARAMETER ( HH_AB_Mult = -0 ),
+      PARAMETER ( HH_AB_Mult = 0 ),
       PARAMETER ( HH_AB_Scale = 7000 ),
     END PARAMETERS
   END GATE_KINETIC
@@ -497,7 +497,7 @@ PRIVATE_MODELS
       PARAMETER ( HH_AB_Offset_E = 0.08 ),
       PARAMETER ( HH_AB_Add = 1 ),
       PARAMETER ( HH_AB_Factor_Flag = -1 ),
-      PARAMETER ( HH_AB_Mult = -0 ),
+      PARAMETER ( HH_AB_Mult = 0 ),
       PARAMETER ( HH_AB_Scale = 225 ),
     END PARAMETERS
   END GATE_KINETIC
@@ -509,7 +509,7 @@ PRIVATE_MODELS
       PARAMETER ( HH_AB_Offset_E = -0.003 ),
       PARAMETER ( HH_AB_Add = 0 ),
       PARAMETER ( HH_AB_Factor_Flag = -1 ),
-      PARAMETER ( HH_AB_Mult = -0 ),
+      PARAMETER ( HH_AB_Mult = 0 ),
       PARAMETER ( HH_AB_Scale = 7500 ),
     END PARAMETERS
   END GATE_KINETIC
@@ -629,7 +629,7 @@ PRIVATE_MODELS
       PARAMETER ( HH_AB_Offset_E = 0.005 ),
       PARAMETER ( HH_AB_Add = 0 ),
       PARAMETER ( HH_AB_Factor_Flag = -1 ),
-      PARAMETER ( HH_AB_Mult = -0 ),
+      PARAMETER ( HH_AB_Mult = 0 ),
       PARAMETER ( HH_AB_Scale = 35000 ),
     END PARAMETERS
   END GATE_KINETIC
@@ -641,7 +641,7 @@ PRIVATE_MODELS
       PARAMETER ( HH_AB_Offset_E = 0.065 ),
       PARAMETER ( HH_AB_Add = 0 ),
       PARAMETER ( HH_AB_Factor_Flag = -1 ),
-      PARAMETER ( HH_AB_Mult = -0 ),
+      PARAMETER ( HH_AB_Mult = 0 ),
       PARAMETER ( HH_AB_Scale = 7000 ),
     END PARAMETERS
   END GATE_KINETIC
@@ -665,7 +665,7 @@ PRIVATE_MODELS
       PARAMETER ( HH_AB_Offset_E = 0.08 ),
       PARAMETER ( HH_AB_Add = 1 ),
       PARAMETER ( HH_AB_Factor_Flag = -1 ),
-      PARAMETER ( HH_AB_Mult = -0 ),
+      PARAMETER ( HH_AB_Mult = 0 ),
       PARAMETER ( HH_AB_Scale = 225 ),
     END PARAMETERS
   END GATE_KINETIC
@@ -677,7 +677,7 @@ PRIVATE_MODELS
       PARAMETER ( HH_AB_Offset_E = -0.003 ),
       PARAMETER ( HH_AB_Add = 0 ),
       PARAMETER ( HH_AB_Factor_Flag = -1 ),
-      PARAMETER ( HH_AB_Mult = -0 ),
+      PARAMETER ( HH_AB_Mult = 0 ),
       PARAMETER ( HH_AB_Scale = 7500 ),
     END PARAMETERS
   END GATE_KINETIC
