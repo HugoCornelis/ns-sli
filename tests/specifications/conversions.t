@@ -457,24 +457,24 @@ PRIVATE_MODELS
   END CHILD
   GATE_KINETIC "A_9_9"
     PARAMETERS
-      PARAMETER ( HH_AB_Tau = -0.01 ),
+      PARAMETER ( HH_AB_Div_E = -0.01 ),
       PARAMETER ( HH_AB_Offset_E = 0.005 ),
-      PARAMETER ( HH_AB_Add = 0 ),
+      PARAMETER ( HH_AB_Add_Den = 0 ),
       PARAMETER ( HH_AB_Factor_Flag = -1 ),
       PARAMETER ( HH_AB_Mult = 0 ),
-      PARAMETER ( HH_AB_Scale = 35000 ),
+      PARAMETER ( HH_AB_Add_Num = 35000 ),
     END PARAMETERS
   END GATE_KINETIC
   CHILD "A_9_9" "A_inserted_9"
   END CHILD
   GATE_KINETIC "B_10_10"
     PARAMETERS
-      PARAMETER ( HH_AB_Tau = 0.02 ),
+      PARAMETER ( HH_AB_Div_E = 0.02 ),
       PARAMETER ( HH_AB_Offset_E = 0.065 ),
-      PARAMETER ( HH_AB_Add = 0 ),
+      PARAMETER ( HH_AB_Add_Den = 0 ),
       PARAMETER ( HH_AB_Factor_Flag = -1 ),
       PARAMETER ( HH_AB_Mult = 0 ),
-      PARAMETER ( HH_AB_Scale = 7000 ),
+      PARAMETER ( HH_AB_Add_Num = 7000 ),
     END PARAMETERS
   END GATE_KINETIC
   CHILD "B_10_10" "B_inserted_10"
@@ -493,24 +493,24 @@ PRIVATE_MODELS
   END CHILD
   GATE_KINETIC "A_12_12"
     PARAMETERS
-      PARAMETER ( HH_AB_Tau = 0.01 ),
+      PARAMETER ( HH_AB_Div_E = 0.01 ),
       PARAMETER ( HH_AB_Offset_E = 0.08 ),
-      PARAMETER ( HH_AB_Add = 1 ),
+      PARAMETER ( HH_AB_Add_Den = 1 ),
       PARAMETER ( HH_AB_Factor_Flag = -1 ),
       PARAMETER ( HH_AB_Mult = 0 ),
-      PARAMETER ( HH_AB_Scale = 225 ),
+      PARAMETER ( HH_AB_Add_Num = 225 ),
     END PARAMETERS
   END GATE_KINETIC
   CHILD "A_12_12" "A_inserted_12"
   END CHILD
   GATE_KINETIC "B_13_13"
     PARAMETERS
-      PARAMETER ( HH_AB_Tau = -0.018 ),
+      PARAMETER ( HH_AB_Div_E = -0.018 ),
       PARAMETER ( HH_AB_Offset_E = -0.003 ),
-      PARAMETER ( HH_AB_Add = 0 ),
+      PARAMETER ( HH_AB_Add_Den = 0 ),
       PARAMETER ( HH_AB_Factor_Flag = -1 ),
       PARAMETER ( HH_AB_Mult = 0 ),
-      PARAMETER ( HH_AB_Scale = 7500 ),
+      PARAMETER ( HH_AB_Add_Num = 7500 ),
     END PARAMETERS
   END GATE_KINETIC
   CHILD "B_13_13" "B_inserted_13"
@@ -625,24 +625,24 @@ PRIVATE_MODELS
   END CHILD
   GATE_KINETIC "A_9_9"
     PARAMETERS
-      PARAMETER ( HH_AB_Tau = -0.01 ),
+      PARAMETER ( HH_AB_Div_E = -0.01 ),
       PARAMETER ( HH_AB_Offset_E = 0.005 ),
-      PARAMETER ( HH_AB_Add = 0 ),
+      PARAMETER ( HH_AB_Add_Den = 0 ),
       PARAMETER ( HH_AB_Factor_Flag = -1 ),
       PARAMETER ( HH_AB_Mult = 0 ),
-      PARAMETER ( HH_AB_Scale = 35000 ),
+      PARAMETER ( HH_AB_Add_Num = 35000 ),
     END PARAMETERS
   END GATE_KINETIC
   CHILD "A_9_9" "A_inserted_9"
   END CHILD
   GATE_KINETIC "B_10_10"
     PARAMETERS
-      PARAMETER ( HH_AB_Tau = 0.02 ),
+      PARAMETER ( HH_AB_Div_E = 0.02 ),
       PARAMETER ( HH_AB_Offset_E = 0.065 ),
-      PARAMETER ( HH_AB_Add = 0 ),
+      PARAMETER ( HH_AB_Add_Den = 0 ),
       PARAMETER ( HH_AB_Factor_Flag = -1 ),
       PARAMETER ( HH_AB_Mult = 0 ),
-      PARAMETER ( HH_AB_Scale = 7000 ),
+      PARAMETER ( HH_AB_Add_Num = 7000 ),
     END PARAMETERS
   END GATE_KINETIC
   CHILD "B_10_10" "B_inserted_10"
@@ -661,24 +661,24 @@ PRIVATE_MODELS
   END CHILD
   GATE_KINETIC "A_12_12"
     PARAMETERS
-      PARAMETER ( HH_AB_Tau = 0.01 ),
+      PARAMETER ( HH_AB_Div_E = 0.01 ),
       PARAMETER ( HH_AB_Offset_E = 0.08 ),
-      PARAMETER ( HH_AB_Add = 1 ),
+      PARAMETER ( HH_AB_Add_Den = 1 ),
       PARAMETER ( HH_AB_Factor_Flag = -1 ),
       PARAMETER ( HH_AB_Mult = 0 ),
-      PARAMETER ( HH_AB_Scale = 225 ),
+      PARAMETER ( HH_AB_Add_Num = 225 ),
     END PARAMETERS
   END GATE_KINETIC
   CHILD "A_12_12" "A_inserted_12"
   END CHILD
   GATE_KINETIC "B_13_13"
     PARAMETERS
-      PARAMETER ( HH_AB_Tau = -0.018 ),
+      PARAMETER ( HH_AB_Div_E = -0.018 ),
       PARAMETER ( HH_AB_Offset_E = -0.003 ),
-      PARAMETER ( HH_AB_Add = 0 ),
+      PARAMETER ( HH_AB_Add_Den = 0 ),
       PARAMETER ( HH_AB_Factor_Flag = -1 ),
       PARAMETER ( HH_AB_Mult = 0 ),
-      PARAMETER ( HH_AB_Scale = 7500 ),
+      PARAMETER ( HH_AB_Add_Num = 7500 ),
     END PARAMETERS
   END GATE_KINETIC
   CHILD "B_13_13" "B_inserted_13"
