@@ -49,7 +49,7 @@ int NSCall(int argc, char **argv)
 	    "TABSAVE", (int (*)(int argc, char **argv))1,
 
 	    "SETUP", (int (*)(int argc, char **argv))1,
-	    "DUPLICATE", (int (*)(int argc, char **argv))1,
+	    "DUPLICATE", NSSolverDuplicate,
 
 	    NULL, NULL,
 	};

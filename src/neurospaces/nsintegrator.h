@@ -445,7 +445,7 @@ int NSMove(struct PidinStack *ppistSrc, char *pcDst, char *pcName, int iIndex);
 //-- Defined in hsolveactor.c --
 char * do_findsolvefield();
 int undo_findsolvefield(char **ppcElement, char **ppcField);
-
+int NSSolverDuplicate(int argc, char **argv);
 
 //- -- Defined in nscall.c --
 

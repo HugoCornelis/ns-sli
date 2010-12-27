@@ -11,6 +11,7 @@
 //-------------------------------------------------------------
 
 #include <string.h>
+#include <strings.h>
 
 #include "nsintegrator.h"
 #include "hsolve_g@.h"
@@ -41,6 +42,75 @@ int HSolveActor(struct hsolve_type *phsolve_type,
     //- return result
 
     return(iResult);
+}
+
+
+int NSSolverDuplicate(int argc, char **argv)
+{
+    if (argc != 5)
+    {
+	Error();
+
+	printf("usage : %s <target> <target-path>\n", "DUPLICATE");
+
+	return(0);
+    }
+
+    char *pcAction = argv[2];
+    char *pcTarget = argv[3];
+    char *pcTargetPath = argv[4];
+
+    if (pcTargetPath[0] != '.'
+	|| pcTargetPath[1] != '.')
+    {
+	Error();
+
+	printf("The %s action only supports target paths that are prefixed with '..'\n", pcAction);
+
+	return(0);
+    }
+
+    if (pcTarget[0] != '/')
+    {
+	Error();
+
+	printf("The %s action only supports target element names that are prefixed with '/'\n", pcAction);
+
+	return(0);
+    }
+
+    //- convert name to reference to parent element
+
+    char pcParent[1000];
+
+    strcpy(pcParent, pcTarget);
+
+    char *pcSlash = rindex(pcParent, '/');
+
+    *pcSlash = '\0';
+
+    //- create the solver
+
+    int iCreated = NSCreate(pcTarget, pcParent, "hsolve");
+
+    if (iCreated != NSINTEGRATOR_NEUTRAL)
+    {
+	Error();
+
+	printf("The %s action failed to create solver %s\n", pcAction, pcTarget);
+
+	return(0);
+    }
+
+    SymbolRecalcAllSerials(NULL, NULL);    
+
+    //- share operations with the source solver
+
+    //- copy operands from the source solver
+
+    OK();
+
+    return 1;
 }
 
 
