@@ -91,7 +91,7 @@ int NSSolverDuplicate(int argc, char **argv)
 
     //- create the solver
 
-    int iCreated = NSCreate(pcTarget, pcParent, "hsolve");
+    int iCreated = NSCreate(&pcSlash[1], pcParent, "hsolve");
 
     if (iCreated != NSINTEGRATOR_NEUTRAL)
     {
