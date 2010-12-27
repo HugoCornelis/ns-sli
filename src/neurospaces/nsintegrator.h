@@ -85,7 +85,7 @@ int NSSetField(struct symtab_HSolveListElement *phsle,
 //------------------------------------------
 
 
-#define MAX_HECCERS 100
+#define MAX_HECCERS 10000
 #define MAX_ASCFILES 200
 
 
