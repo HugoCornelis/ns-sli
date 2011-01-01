@@ -784,7 +784,7 @@ static int StoreMsg(char *pcSrcpath,
 
    piom->pcTargetSymbol = strdup(pcDstpath);
 
-   piom->pcSourceField = strdup(pcField);
+   piom->pcSourceField = mapParameterString(pcField);
 
    piom->pcSourceSymbol = strdup(pcSrcpath);
 
