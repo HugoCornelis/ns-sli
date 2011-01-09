@@ -1,0 +1,601 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.5: http://docutils.sourceforge.net/" />
+<title>RSnet2</title>
+<style type="text/css">
+
+/*
+:Author: David Goodger (goodger@python.org)
+:Id: $Id: html4css1.css 5196 2007-06-03 20:25:28Z wiemann $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+
+See http://docutils.sf.net/docs/howto/html-stylesheets.html for how to
+customize this style sheet.
+*/
+
+/* used to remove borders from tables and images */
+.borderless, table.borderless td, table.borderless th {
+  border: 0 }
+
+table.borderless td, table.borderless th {
+  /* Override padding for "table.docutils td" with "! important".
+     The right padding separates the table cells. */
+  padding: 0 0.5em 0 0 ! important }
+
+.first {
+  /* Override more specific margin styles with "! important". */
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em ;
+  border: medium outset ;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin: 0 0 0.5em 1em ;
+  border: medium outset ;
+  padding: 1em ;
+  background-color: #ffffee ;
+  width: 40% ;
+  float: right ;
+  clear: right }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left {
+  clear: left }
+
+img.align-right {
+  clear: right }
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font-family: serif ;
+  font-size: 100% }
+
+pre.literal-block, pre.doctest-block {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid 1px gray;
+  margin-left: 1px }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-left: solid 1px black;
+  margin-left: 1px }
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+ul.auto-toc {
+  list-style-type: none }
+
+</style>
+</head>
+<body>
+<div class="document" id="rsnet2">
+<h1 class="title">RSnet2</h1>
+
+<div class="section" id="the-rsnet-network-example">
+<h1>The RSnet network example</h1>
+<p>RSnet is a demonstration of a simple network, consisting of a square grid
+of simplified neocortical regular spiking pyramidal cells, each one coupled
+with excitory synaptic connections to its four nearest neighbors.  A brief
+current injection pulse to the soma of a specified cell (typically in the
+center or lower left corner) starts a propagating wave of excitation.</p>
+<p>The original GENESIS 2 script 'RSnet.g' was used as an example in the
+GENESIS Modeling Tutorial section &quot;Creating large networks with GENESIS&quot;
+(<a class="reference external" href="http://www.genesis-sim.org/GENESIS/UGTD/Tutorials/genprog/net-tut.html">http://www.genesis-sim.org/GENESIS/UGTD/Tutorials/genprog/net-tut.html</a>).</p>
+<p>This short tutorial describes the use of 'planarconnect' and related commands
+to build a network from prototype cells, by analyzing the 'RSnet.g'
+script.  It should be consulted for background on the RSnet2 scripts.</p>
+<p>The simulation script was designed to be easily modified to allow one to
+use other cell models, implement other patterns of connectivity, or to
+augment with a population of inhibitory interneurons and the several other
+types of connections in a cortical network.  It has since been further
+extended to more biologically interesting networks with both excitatory and
+inhibitory connections, such as the Vogels and Abbott (2005) model GENESIS
+implementation with Hodgkin-Huxley dynamics. This was used as a benchmark
+for neural simulators in the review by Brette et al. (2007).  This model
+may be found at
+<a class="reference external" href="http://www.genesis-sim.org/GENESIS/UGTD/Tutorials/networks/Vogels-Abbott_net/index.html">http://www.genesis-sim.org/GENESIS/UGTD/Tutorials/networks/Vogels-Abbott_net/index.html</a></p>
+</div>
+<div class="section" id="the-rsnet2-series-of-scripts">
+<h1>The RSnet2 series of scripts</h1>
+<p>Although the RSnet model is too simple to be of serious scientific interest
+without the extensions described above, it illustrates the same GENESIS
+objects and commands that are used in much more detailed cortical models.
+With no competing inhibition, the general behavior of the model can easily
+be understood, and the correct behavior recognized from an analysis of the
+output.</p>
+<p>The RSnet2 scripts are reorganized and more modular versions of RSnet.g.
+Unless otherwise noted, they are identical to each other, except for the
+values of some flags that are used to determine which features to enable.
+This allows, for example, 'RSnet2-G3.g' to run in batch mode with no
+graphics, using only the most basic G2 functions needed to run the network
+model and output the results with an 'asc_file' object.  The other change
+that was made from the original version was to replace the use of
+'planarconnect' with the more general three-dimensional command
+'volumeconnect', and 'planarweight' and 'planardelay' by 'volumeweight' and
+'volumedelay'.</p>
+<p>The main scripts are:</p>
+<p><em>RSnet2-G2.g</em> - This has the definitions:</p>
+<pre class="literal-block">
+str RUNID = &quot;0000&quot;        // default ID string for output file names
+
+int graphics = 1 // display control panel, graphs, optionally net view
+int batch = 0           // if (batch)run with default parameters
+int netview_output = 1  // Record network output (soma Vm) to a file
+int binary_file = 1     // if 0, use asc_file to produce ascii output
+                        // else use disk_out to produce binary FMT1 file
+int EPSC_output = 0 // output summed EPS currents to file (not implemented)
+int connect_network = 1        // Set to 0 for debugging with unconnected cells
+
+int netview = 1 // show network activity view (slower, but pretty)
+int hflag = 0    // use hsolve if hflag = 1
+int hsolve_chanmode = 0 // Only applies if hflag = 1
+int G3_hacks = 0 // Special treatment for things that G3 can't yet do
+                 // Also needed for G2 with hsolve
+// At present, this is the only stimulus option
+str input_model = &quot;pulsed_inject&quot; // pulsed current injection to soma
+</pre>
+<p>RSnet2-G2.g uses the included file RSnet2-graphics.g to provide a GUI for
+control of the simulation and visualization of the spreading network
+activation, using the XODUS 'xview' object.  XODUS dialog boxes (labeled
+textfields) on the control panel invoke script functions for setting many
+of the cell, network, and injection parameters.  A different &quot;run ID&quot;
+string may be specified in order to save results from different runs.  All
+versions of the this script create a summary file with a name of the form
+'run_summary_&lt;RUNID&gt;.txt'.  RSnet2-G2.g records the soma Vm of each cell in
+a binary file created by the 'disk_out' object. The output file has a name
+of the form 'Ex_net_Vm_&lt;RUNID&gt;.dat', and can be used for post-run analysis
+by the script 'replay_RSnet2.g' described below.</p>
+<p>The results of running this simulation with default parameters are
+included in the directory with the scripts as 'run_summary_0000-def.txt'
+and 'Ex_net_Vm_0000-def.dat'.</p>
+<p><em>RSnet2-h4.g</em> - These definitions are different from RSnet2-G2.g:</p>
+<pre class="literal-block">
+str RUNID = &quot;0000h4&quot;      // default ID string for output file names
+
+int netview = 0 // show network activity view (slower, but pretty)
+int hflag = 1    // use hsolve if hflag = 1
+int hsolve_chanmode = 4 // Only applies if hflag = 1
+int G3_hacks = 1 // Special treatment for things that G3 can't yet do
+               // Also needed for G2 and hsolve
+</pre>
+<p>This illustrates the creation of a network with cells that have been taken
+over by the hsolver in chanmode 4.  Because the xview display cannot
+operate with the higher chanmodes, the netview display is disabled.
+'G3_hacks' is used because INJECT messages from a pulsegen to a compartment
+do not work in <em>GENESIS 2</em> in the higher chanmodes.  This is not required
+in chanmode 1, which also allows the netview.  The default simulation
+produces a file 'Ex_net_Vm_0000h4.dat', that when analyzed with
+'replay_RSnet2.g', produces results that are qualitatively similar,
+but not exactly the same as RSnet2-G2.g.  For example, compare
+the two contour plots <a class="reference external" href="figures/freqplot-0000-def.png">freqplot-0000-def.png</a> and <a class="reference external" href="figures/freqplot-0000h4.png">freqplot-0000h4.png</a></p>
+<p><em>RSnet2-G3.g</em> - These definitions are different from RSnet2-G2.g:</p>
+<pre class="literal-block">
+int graphics = 0 // display control panel, graphs, optionally net view
+int batch = 1           // if (batch)run with default parameters
+int binary_file = 0     // if 0, use asc_file to produce ascii output
+                      // else use disk_out to produce binary FMT1 file
+int netview = 0 // show network activity view (slower, but pretty)
+int G3_hacks = 1 // Special treatment for things that G3 can't yet do
+               // Also needed for G2 and hsolve
+</pre>
+<p>Here, the default simulation (RUNID = &quot;0000&quot;) is run for the default
+time tmax = 0.5 sec.  There are no graphics, and the output file is
+a plain text file created by 'asc_file' with a column for each cell
+and a line for each output time step.</p>
+<p>The use of 'G3_hacks' replaces the pulsegen with a short sequence of steps
+with constant injection, followed by the the remainder of the run with no
+injection.  It also replaces the uses of single commands having wildcard
+paths by loops over all cells, because ns-sli cannot currently use this
+wildcard notation.  For example, the 'volumeweight' and 'volumedelay'
+commands are replaced by with loops over all cells and all synapses, in
+order to set the synapse weight and delay.</p>
+<p>It is difficult to compare the results with those of RSnet2-G2.g because
+the 'disk_in' object used in 'replay_RSnet2.g' cannot properly read
+ascii files with more than 16 columns.  This is discussed further below.</p>
+<p><em>RSnet2-STDP.g</em> - This has an additional flag:</p>
+<pre class="literal-block">
+use_stdp = 1 // Use spike timing dependent plasticity in Ex_ex connections
+</pre>
+<p>and script commands to implement spike timing dependent changes in synaptic
+weights.  Its use and requirements are explained in more detail below.</p>
+</div>
+<div class="section" id="post-run-analysis-scripts">
+<h1>Post-run analysis scripts</h1>
+<p>The GENESIS 2 script 'replay_RSnet2.g' is unlikely to be translated into
+GENESIS 3.  It requires XODUS graphics to run, and uses a variety of
+GENESIS 2 device class objects and options of the 'table' object with four
+different clocks in order to collect statistics for analysis and comparison
+of network behavior.  It is offered here for these reasons:</p>
+<pre class="literal-block">
+1. At present, it is the only way to analyze the network output and
+   generate the files needed by the G3Plot package.
+
+2. It may be used as a prototype for python-based G3 graphical
+   and analysis tools, and can eventually be replaced by python code.
+
+3. It presents a challenge for G3 implementation, and the question
+   of whether this sort of analysis tool should be scriptable in G3,
+   or scripted separately in python.  The answer is not obvious.
+</pre>
+<p>It should be noted that the type of analysis to be performed depends
+strongly on the type of network that is being modeled.  This makes it
+very difficult, if not impossible, to design a general-purpose spike
+analysis tool.  Some degree of scripting will be required to generate
+comparable tools to 'replay_RSnet2.g', whether it be with G3 objects
+in a GENESIS script, or with provided python libraries of objects
+that can be &quot;glued&quot; together with <em>simple</em> python scripts by the user.</p>
+</div>
+<div class="section" id="running-replay-rsnet2-g">
+<h1>Running replay_RSnet2.g</h1>
+<p>After starting the simulation with GENESIS 2, enter the RUNID in the top
+dialog if it is other than the default &quot;0000&quot; and click &quot;RUN&quot;.  As it runs
+and generates the voltage plots and netview display, it will generate the
+file &quot;spike_freq_&lt;RUNID&gt;.txt&quot;.  This contains a line for each increment of
+time (determined by the frequency histogram bin width) and a column for
+each row in the network that gives the average firing rate of cells in that
+row during that time interval.  After exiting GENESIS, the command:</p>
+<pre class="literal-block">
+rowrateplot.py spike_freq_0000.txt
+</pre>
+<p>will generate a contour plot showing how the average frequency of cells
+on each row changes with time.  The resulting plot is shown in
+<a class="reference external" href="figures/freqplot-0000-def.png">freqplot-0000-def.png</a>. It shows the progressive increase in
+firing rate of each row as the wave of excitation spreads.</p>
+<p>Optionally, clicking &quot;Write spike times to file&quot; after the end of the run
+will generate a file &quot;spike_times_&lt;RUNID&gt;.txt&quot;, with the data that can be
+used to generate a raster plot for the (approximately) middle cell on each
+row, with the row number on the y-axis.  This may be used with:</p>
+<pre class="literal-block">
+rasterplot.py spike_times_0000.txt
+</pre>
+<p>to produce the plot seen in <a class="reference external" href="figures/rasterplot-0000-def.png">rasterplot-0000-def.png</a></p>
+<p>Here, the x-axis shows the time of spike events for the (approximately)
+middle cell on each row, with the row number on the y-axis.  This also
+provides evidence of the expanding wave of excitation.</p>
+<p>Clicking on &quot;Display Bins&quot; in the firing rate distribution form will
+show a histogram of the firing rates of all the cells.</p>
+<p>The &quot;freq_form&quot; displays the average firing rate of cells in the network
+vs. time.  It grows with time, as the propagating wave hits more cells.
+The &quot;Row number&quot; dialog below the allows one to specify averages over cells
+in a single row 1-32.  The default &quot;0&quot; means all rows, and should be used
+when creating the output files.  The &quot;Bin width&quot; dialog is useful for
+adjusting the optimum size bins for the firing frequency vs. time
+calculations.  After changing one of these parameters, it is necessary
+to do a RESET and RUN to generate the new data.</p>
+</div>
+<div class="section" id="notes-on-spike-rate-analysis">
+<h1>Notes on spike rate analysis</h1>
+<p>The connections in RSnet2 have a radial symmetry, connecting to nearest
+neighbors, and the activation from the injected cell spreads out radially.
+The script functions defined in 'replay_RSnet2.g' and the included file
+'analysis_funcs-RSnet2.g' are based on those used to analyze a model under
+development (ACnet2) of the thalamic input layer of primary auditory
+cortex.  In this case, input from the thalamus is to a row of cells in
+the network, and it was of interest to generate tables of the average
+firing frequency of cells lying along each row at specified time intervals.
+This is the analyis performed by 'replay_RSnet2.g', and it makes some sense
+when the the stimulated cell is a bottom row cell, because it shows the
+vertical propagation of the activation.  This is the data saved to
+'spike_freq_0000-def.txt' and is the format expected by the G3Plot
+tool 'rowrateplot.py' to create the contour plot.</p>
+<p>However, it would be better to for 'replay_RSnet2.g' to group the cells by
+rings around the point of injection, rather than by rows, and have a more
+general version of 'rowrateplot.py'.  The latter should not be difficult,
+but the GENESIS 2 (and XODUS) script programming required to make this
+change in the calculation of the data to go in the spike frequency file is
+large, and not worth the effort.  Other networks and groupings of cells
+would require other modifications of old SLI syntax script functions.</p>
+<p>This is the challenge for G3:</p>
+<p>Make simple user-scriptable or GUI-configurable tools to allow one to
+perform this sort of post-run analysis.  This type of analysis is not the
+kind of thing that is easily done by a novice with Matlab - Matlab is more
+suited to the display aspect, which can be handled by Matplotlib and other
+Python tools.</p>
+</div>
+<div class="section" id="analyzing-asc-file-network-output">
+<h1>Analyzing asc_file network output</h1>
+<p>The script 'RSnet2-G3.g' creates a plain text file for the netview
+output of cell membrane potentials.   The script 'replay_RSnet2-asc.g'
+shows how such a file can be read with 'disk_in' with plain text file
+format.  It runs without errors, but produces incorrect results.  This
+is because the GENESIS 2 implementation of 'disk_in' restricts the input file
+to having no more than 16 columns per line.  As there is a column for
+every cell, and 'disk_in' reads a new line every time step, only the
+first 16 cells of the 1024 cell network are read.  This problem should be
+addressed in the G3 implementation of 'disk_in'.</p>
+</div>
+<div class="section" id="other-files-included-here">
+<h1>Other files included here</h1>
+<p><em>RScell.p</em> - cell parameter file describing 'RScell' used in the network</p>
+<p><em>protodefs.g</em> - definitions and commands to create prototype elements</p>
+<p><em>DPchans.g</em> - functions to create the channels used in RScell</p>
+<p><em>Sample output files</em> - from running and replaying the default 'RUNID 0000'
+simulation:</p>
+<pre class="literal-block">
+run_summary_0000-def.txt - summary file with most important parameters
+Ex_net_Vm_0000-def.dat   - binary (FMT1) file with network soma Vm
+spike_freq_0000-def.txt  - binned frequency(time, row) for rowrateplot.py
+spike_times_0000-def.txt - spike times of middle cell on each row
+</pre>
+<p><em>figures/</em> - directory with the images saved from rowrateplot.py and
+rasterplot.py</p>
+</div>
+<div class="section" id="notes-on-stdp">
+<h1>Notes on STDP</h1>
+<p>The script RSnet2-STDP.g is an illustration of an implementation of
+spike timing dependent changes in the excitatory connection weights,
+using the 'stdpSynchan' object instead of the 'synchan'. This requires
+a recompilation of GENESIS using a patch to GENESIS 2.3.  The stdpSynchan
+was developed by Jeremy Edgerton, and is available for download with
+example scripts and documentation at <a class="reference external" href="http://genesis-sim.org/libraries">http://genesis-sim.org/libraries</a>.</p>
+<p>'RSnet2-STDP.g' requires the additional files:</p>
+<dl class="docutils">
+<dt>'RScell_stdp.p' - a version of RScell.p that uses stdpAMPA for the</dt>
+<dd>excitatory 'stdpSynchan' , instead of Ex_channel for a 'synchan'.</dd>
+<dt>'stdp_functions4.g' - a variation on the 'stdp_functions.g' script</dt>
+<dd>that is provided with the stdpSynchan package.  It defines functions
+that are used to set up the 'stdpSynchan' tables that determine
+the plasticity function to be used, and other functions for setting
+up the channel.</dd>
+</dl>
+<p>At intervals during the simulation run, the script prints out the
+changing weight values between cells on the left edge of the network
+and those immediately above them.</p>
+<p>A run with the default parameters produces output files for RUNID
+&quot;0000stdp&quot;.  When these are analyzed with 'replay_RSnet2.g' and the
+resulting files are plotted with 'rasterplot.py' and 'rowrateplot.py',
+the rasterplot, shown in <a class="reference external" href="figures/rasterplot-0000stdp.png">rasterplot-0000stdp.png</a>
+shows increasing frequency of firing and then many skipped firings
+on the lower rows, in comparison with <a class="reference external" href="figures/rasterplot-0000-def.png">rasterplot-0000-def.png</a>
+which shows very regular firing, with no missed spikes, once the wave
+hits a cell.</p>
+<p>Likewise, the rowrateplot contour plot 'freqplot-0000stdp.png'</p>
+<img alt="figures/freqplot-0000stdp.png" src="figures/freqplot-0000stdp.png" />
+<p>shows very irregular patches with high rates of firing, compared to
+freqplot-0000-def.png.</p>
+<img alt="figures/freqplot-0000-def.png" src="figures/freqplot-0000-def.png" />
+<p>This burst firing behavior can also be seen in the netview display during
+the replay.</p>
+</div>
+<div class="section" id="figures">
+<h1>Figures</h1>
+<p>All figures referenced above are in the 'figures/' subdirectory.</p>
+<p><strong>Note on the ReStructured Text markup used in README.txt</strong></p>
+<p>The lines beginning with '..' are targets for hyperlinks to the image
+files for the figures.  These will not appear in the HTML file, but:</p>
+<pre class="literal-block">
+rasterplot-0000-def.png_
+</pre>
+<p>will show up as a hyperlink to the figure, with no trailing underscore in
+the name.  The indentation used for blocks of preformatted (literal
+monospaced) text that follow a double colon is necessary for identifying
+the extent of the block.</p>
+<p>The figures in the previous section that are included directly use
+a target specification where they occur, e.g.:</p>
+<pre class="literal-block">
+Likewise, the rowrateplot contour plot 'freqplot-0000stdp.png'
+
+.. image:: figures/freqplot-0000stdp.png
+</pre>
+<p>Dave Beeman</p>
+<p>Thu Oct 14 17:21:12 MDT 2010</p>
+</div>
+</div>
+</body>
+</html>

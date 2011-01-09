@@ -1,0 +1,11 @@
+Script: RSnet2.g  RUNID: 0000  date: Mon Oct 18 16:32:37 2010
+tmax: 0.5  dt: 5e-05  out_dt: 0.0001  netview_dt: 0.0002
+EPSC_output: 0  netview_output: 1
+NX: 32  NY: 32
+SEP_X: 0.001  SEP_Y: 0.001
+bg Ex freq: 0  gmax: 1.5e-09
+Injection: 1e-09  Delay: 0  Width: 0.05  Interval: 1  To cell: 0
+hflag: 0  hsolve chanmode: 0  binary output file: 1  use G3 hacks: 0
+initial syn_weight: 10  gmax: 1.5e-09
+---------------------------------------------------------------
+Notes:
