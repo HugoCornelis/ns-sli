@@ -323,6 +323,7 @@ VM Membrane Potentials (pdVms[1]) : (-0.06)
 						   mac_report => 'This test fails with a TIMEOUT. When run manaually it is confirmed to work. Problem occurs due to the prompt output of the ns-sli is caught by the testers seen output as with the previous test.',
 						   read => (join '', `cat "$::config->{core_directory}/tests/specifications/strings/traub91_asym_simple2.dump"`),
 						   timeout => 40,
+						  },
 						  {
 						   description => "Does the script run a simulation (2) ?",
 						   read => 'time = 0.150000 ; step = 3000',
