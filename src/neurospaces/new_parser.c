@@ -1117,6 +1117,14 @@ add_channel(char *name,char *parent)
 	    }
 	    else
 	    {
+/* 		//- multiply the conductance to SI units */
+
+/* 		dG *= 1e9; */
+
+/* 		//- insert as new parameter */
+
+/* 		BioComponentSetParameterDouble((struct symtab_BioComponent *)phsleDest, "G_MAX", dG); */
+
 		fprintf(stderr, "*** Warning: during readcell: channel %s has no Gbar / gmax defined\n", name);
 	    }
 	}

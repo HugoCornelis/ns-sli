@@ -19,6 +19,7 @@ set args tests/scripts/test-traub91-v0/traub91_asym_simple2.g
 # set args tests/scripts/rallpack3-simple.g
 set args tests/scripts/test-RSnet2/RSnet2-G3.g
 set args tests/scripts/test-RSnet2/RSnet2-G3-nohole.g
+set args tests/scripts/heccer/springmass1.g
 # cd ..
 file src/ns-sli
 break parsererror
