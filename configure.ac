@@ -15,6 +15,56 @@ AC_CONFIG_HEADER(src/config.h)
 AM_INIT_AUTOMAKE(ns-sli, 0.0.0-alpha)
 
 
+AC_MSG_CHECKING(whether we build universal binaries.)
+AC_ARG_WITH(universal,
+[AS_HELP_STRING([--with-universal],
+              [Build universal binaries on Mac OS X.])],
+[ case "$val" in
+  no)
+
+    AC_MSG_RESULT(no)
+    OSX_UNIVERSAL="no"
+
+    ;;
+  *)
+
+    AC_MSG_RESULT(yes)
+    OSX_UNIVERSAL="yes"
+
+    CFLAGS="$CFLAGS -arch x86_64 -arch i386 -arch ppc"
+    AC_SUBST(CFLAGS)
+
+    ;;
+  esac ],
+  AC_MSG_RESULT(no)
+  OSX_UNIVERSAL="no"
+)
+AC_SUBST(OSX_UNIVERSAL)
+
+dnl -----------------------------------------------------
+dnl Set flags for specific cpus
+dnl -----------------------------------------------------
+AC_MSG_CHECKING([checking CPU])
+case "$host_cpu" in
+
+	i[[3456]]86|pentium)
+	  AC_MSG_RESULT([Intel based CPU])
+	;;
+	x86?64*)
+	  dnl
+	  dnl The test machine sorts an AMD 64 bit cpu
+	  dnl this need fPIC set globally for all compiled objects
+	  dnl for swig to work.
+	  AC_MSG_RESULT([AMD 64 based CPU])
+ 	  CFLAGS="$CFLAGS -fPIC"
+	;;
+	*)
+	  AC_MSG_RESULT([Unknown CPU type])
+	;;
+esac
+
+
+
 # Checks for programs.
 AC_PROG_CC
 AC_PROG_YACC
@@ -123,9 +173,23 @@ case "$host_os" in
     esac
 
     # determine linker flags for perl embedding
+    if test "$OSX_UNIVERSAL" == "yes"; then
 
-    PERL_CCOPTS=`$PERL -MExtUtils::Embed -e ccopts | $PERL -pe 's/\-arch\s\S+\s//g'`
-    AC_SUBST(PERL_CCOPTS)
+      PERL_CCOPTS=`$PERL -MExtUtils::Embed -e ccopts`
+      
+      PERL_LDADD=`$PERL -MExtUtils::Embed -e ldopts`
+
+      PERL_LDFLAGS=`$PERL -MExtUtils::Embed -e ldopts | perl -pe 's/\-arch\s\S+\s//g'`
+
+    else
+
+      PERL_CCOPTS=`$PERL -MExtUtils::Embed -e ccopts | perl -pe 's/\-arch\s\S+\s//g'`
+    
+      PERL_LDADD=`$PERL -MExtUtils::Embed -e ldopts | perl -pe 's/\-arch\s\S+\s//g'`
+
+      PERL_LDFLAGS=`$PERL -MExtUtils::Embed -e ldopts | perl -pe 's/\-arch\s\S+\s//g'`
+
+    fi
 
 
     AC_CHECK_PROG(SWIG, swig, NULL, [/usr/bin/swig],[/usr/local/bin/swig /opt/local/bin/swig])
@@ -151,7 +215,7 @@ case "$host_os" in
     PERLLIB_EXTENSION='dylib'
     AC_SUBST(PERLLIB_EXTENSION)
 
-    SWIGCOMPILELINKSFORPERL='-I$(srcdir)/../../.. 	-I$(top_builddir) 	-ffloat-store 	-I../../../src 	-include src/config.h 	-g 	-O0 	-dynamic $(PERL_CCOPTS)'
+    SWIGCOMPILELINKSFORPERL='-I$(top_builddir) -ffloat-store 	-I$(top_builddir)/src 	-include src/config.h 	-g 	-O0 	-dynamic $(PERL_CCOPTS)'
     AC_SUBST(SWIGCOMPILELINKSFORPERL)
 
     SWIGCOMPILECOMMAND_PERL='gcc         $(SWIGCOMPILELINKSFORPERL)         -c swiggable_sli_wrap.c'
@@ -159,7 +223,7 @@ case "$host_os" in
 
  
 
-    SWIGLDLINKSFORPERL='-bundle -flat_namespace -undefined suppress  -L../../.. 	-lexperiment -lheccer -L../../../integrators  	-L/usr/local/lib/model-container 	-lneurospacesread  -lsymbol_algorithms 	-lncurses -lreadline $(shelldir)/../loadlib.o $(shelldir)/shell_lib.o	$(simdir)/libsim.a	$(shelldir)/libshell.a	$(utildir)/libutil.a	$(scriptdir)/libscript.a	$(olfdir)/libolf.a	$(nsdir)/libneurospaces.a	-L$(libdir)/model-container -lneurospacesread	-L$(libdir)/model-container -lsymbol_algorithms  -lexperiment -lheccer  -L$(libdir)/heccer -lhneurospaces $(SYSLIBLINKS)'
+    SWIGLDLINKSFORPERL='-bundle -flat_namespace -undefined suppress  -L$(top_builddir) 	-lexperiment -lheccer -L../../../integrators  	-L/usr/local/lib/model-container 	-lneurospacesread  -lsymbol_algorithms  $(shelldir)/../loadlib.o $(shelldir)/shell_lib.o	$(simdir)/libsim.a	$(shelldir)/libshell.a	$(utildir)/libutil.a	$(scriptdir)/libscript.a	$(olfdir)/libolf.a	$(nsdir)/libneurospaces.a	-L$(libdir)/model-container -lneurospacesread	-L$(libdir)/model-container -lsymbol_algorithms  -lexperiment -lheccer  -L$(libdir)/heccer -lhneurospaces $(SYSLIBLINKS)'
     AC_SUBST(SWIGLDLINKSFORPERL)
 
 
@@ -275,14 +339,14 @@ dnl     esac
     AC_SUBST(PERLLIB_EXTENSION)
 
 
-    SWIGCOMPILELINKSFORPERL='-I$(srcdir)/../../.. -I$(top_builddir) -ffloat-store -I../../../src -include src/config.h -g -O0 -fPIC $(PERL_CCOPTS)'
+    SWIGCOMPILELINKSFORPERL='-I$(top_builddir) -I$(top_builddir) -ffloat-store -I$(top_builddir)/src -include src/config.h -g -O0 -fPIC $(PERL_CCOPTS)'
     AC_SUBST(SWIGCOMPILELINKSFORPERL)
 
     SWIGCOMPILECOMMAND_PERL='gcc $(SWIGCOMPILELINKSFORPERL) -c swiggable_sli_wrap.c'
     AC_SUBST(SWIGCOMPILECOMMAND_PERL)
 
 
-    SWIGLDLINKSFORPERL='-g -shared swiggable_sli_wrap.o -L../../.. -lexperiment -lheccer -L../../../integrators -L/usr/local/lib/model-container -lneurospacesread -lsymbol_algorithms -lncurses -lreadline -lhistory -fPIC	$(shelldir)/../loadlib.o $(shelldir)/shell_lib.o	$(simdir)/libsim.a	$(shelldir)/libshell.a	$(utildir)/libutil.a	$(scriptdir)/libscript.a	$(olfdir)/libolf.a	$(nsdir)/libneurospaces.a	-L${libdir}/model-container -lneurospacesread	-L${libdir}/model-container/ -lsymbol_algorithms	-lexperiment -L${libdir}/heccer -lheccer	-L${libdir}/heccer -lhneurospaces	-fPIC $(SYSLIBLINKS)'
+    SWIGLDLINKSFORPERL='-g -shared swiggable_sli_wrap.o -L$(top_builddir) -lexperiment -lheccer -L$(top_builddir)/integrators -L/usr/local/lib/model-container -lneurospacesread -lsymbol_algorithms -lncurses -lreadline -lhistory -fPIC	$(shelldir)/../loadlib.o $(shelldir)/shell_lib.o	$(simdir)/libsim.a	$(shelldir)/libshell.a	$(utildir)/libutil.a	$(scriptdir)/libscript.a	$(olfdir)/libolf.a	$(nsdir)/libneurospaces.a	-L${libdir}/model-container -lneurospacesread	-L${libdir}/model-container/ -lsymbol_algorithms	-lexperiment -L${libdir}/heccer -lheccer	-L${libdir}/heccer -lhneurospaces	-fPIC $(SYSLIBLINKS)'
     AC_SUBST(SWIGLDLINKSFORPERL)
 
     SWIGLINKCOMMAND_PERL='gcc $(SWIGLDLINKSFORPERL) -o SwiggableSLI.$(PERLLIB_EXTENSION)'
@@ -292,13 +356,13 @@ dnl     esac
     PYTHONLIB_EXTENSION='so'
     AC_SUBST(PYTHONLIB_EXTENSION)
 
-    SWIGCOMPILELINKSFORPYTHON='-g -DPRE_PROTO_TRAVERSAL -I$(PYTHON_HEADERS) -I$(builddir)../../.. -I$(srcdir)/../../.. -I$(builddir)../../../hierarchy/output/symbols -I$(srcdir)/../../../hierarchy/output/symbols/ -fPIC -Xlinker -export-dynamic'
+    SWIGCOMPILELINKSFORPYTHON='-g -DPRE_PROTO_TRAVERSAL -I$(PYTHON_HEADERS) -I$(top_builddir) -I$(top_builddir)/hierarchy/output/symbols -I$(top_builddir)/hierarchy/output/symbols/ -fPIC -Xlinker -export-dynamic'
     AC_SUBST(SWIGCOMPILELINKSFORPYTHON)
 
    SWIGCOMPILECOMMAND_PYTHON='gcc $(SWIGCOMPILELINKSFORPYTHON) -c swiggable_sli_wrap.c'
    AC_SUBST(SWIGCOMPILECOMMAND_PYTHON)
 
-    SWIGLDLINKSFORPYTHON='-g -shared swiggable_sli_wrap.o -L../../.. -lexperiment -lheccer -L../../../integrators -L/usr/local/lib/model-container -lneurospacesread -L${libdir}/model-container/ -lsymbol_algorithms -lncurses -lreadline -lhistory -fPIC -Xlinker -export-dynamic'
+    SWIGLDLINKSFORPYTHON='-g -shared swiggable_sli_wrap.o -L$(top_builddir) -lexperiment -lheccer -L$(top_builddir)/integrators -L/usr/local/lib/model-container -lneurospacesread -L${libdir}/model-container/ -lsymbol_algorithms -lncurses -lreadline -lhistory -fPIC -Xlinker -export-dynamic'
     AC_SUBST(SWIGLDLINKSFORPYTHON)
 
     SWIGLINKCOMMAND_PYTHON='gcc $(SWIGLDLINKSFORPYTHON) -o _SwiggableSLI.$(PYTHONLIB_EXTENSION)'
@@ -308,28 +372,6 @@ dnl     esac
   ;;
 esac
 
-
-dnl -----------------------------------------------------
-dnl Set flags for specific cpus
-dnl -----------------------------------------------------
-AC_MSG_CHECKING([checking CPU])
-case "$host_cpu" in
-
-	i[[3456]]86|pentium)
-	  AC_MSG_RESULT([Intel based CPU])
-	;;
-	x86?64*)
-	  dnl
-	  dnl The test machine sorts an AMD 64 bit cpu
-	  dnl this need fPIC set globally for all compiled objects
-	  dnl for swig to work.
-	  AC_MSG_RESULT([AMD 64 based CPU])
- 	  CFLAGS="$CFLAGS -fPIC"
-	;;
-	*)
-	  AC_MSG_RESULT([Unknown CPU type])
-	;;
-esac
 
 
 
