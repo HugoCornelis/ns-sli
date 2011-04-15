@@ -414,7 +414,7 @@ extern int             SaveSimulation();
 extern int             PositionElement();
 extern void            quitCallback();
 extern void            QuitStage1();
-extern float           ran1();
+extern float           rand1();
 extern float           ran3();
 extern int             FreeRegionMask();
 extern int             GetRegionDefinition();

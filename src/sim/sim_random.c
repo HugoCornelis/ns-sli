@@ -70,7 +70,7 @@ static char rcsid[] = "$Id: sim_random.c,v 1.2 2005/06/27 19:01:08 svitak Exp $"
 #define IA3 4561
 #define IC3 51349
 
-float ran1(idum)
+float rand1(idum)
      time_t idum;
 {
   static long ix1,ix2,ix3;
@@ -96,7 +96,7 @@ float ran1(idum)
   ix2=(IA2*ix2+IC2) % M2;
   ix3=(IA3*ix3+IC3) % M3;
   j=1 + ((97*ix3)/M3);
-  if (j>97||j<1) printf("RAN1: This cannot happen.\n");
+  if (j>97||j<1) printf("RAND1: This cannot happen.\n");
   temp=r[j];
   r[j]=(ix1+ix2*RM2)*RM1;
   return temp;
@@ -203,7 +203,7 @@ float G_RNG()
 	  {
 
 	  case G_RNG_NR:
-	    return ran1(0);
+	    return rand1(0);
 
 #ifdef INCSPRNG
 	  case G_RNG_SPRNG:
@@ -224,7 +224,7 @@ void G_SEEDRNG(seed)
 time_t	seed;
 
 {
-	ran1(-seed);
+	rand1(-seed);
 #ifdef INCSPRNG
 	init_sprng((int)seed, SPRNG_DEFAULT);
 #endif

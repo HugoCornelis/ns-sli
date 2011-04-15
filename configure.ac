@@ -221,9 +221,16 @@ case "$host_os" in
     SWIGCOMPILECOMMAND_PERL='gcc         $(SWIGCOMPILELINKSFORPERL)         -c swiggable_sli_wrap.c'
     AC_SUBST(SWIGCOMPILECOMMAND_PERL)
 
- 
+    if test "$OSX_UNIVERSAL" == "yes"; then 
 
-    SWIGLDLINKSFORPERL='-bundle -flat_namespace -undefined suppress  -L$(top_builddir) 	-lexperiment -lheccer -L../../../integrators  	-L/usr/local/lib/model-container 	-lneurospacesread  -lsymbol_algorithms  $(shelldir)/../loadlib.o $(shelldir)/shell_lib.o	$(simdir)/libsim.a	$(shelldir)/libshell.a	$(utildir)/libutil.a	$(scriptdir)/libscript.a	$(olfdir)/libolf.a	$(nsdir)/libneurospaces.a	-L$(libdir)/model-container -lneurospacesread	-L$(libdir)/model-container -lsymbol_algorithms  -lexperiment -lheccer  -L$(libdir)/heccer -lhneurospaces $(SYSLIBLINKS)'
+      SWIGLDLINKSFORPERL='-a -dynamic -undefined suppress -flat_namespace -L$(top_builddir) -lexperiment -lheccer -L/usr/local/lib/model-container 	-lneurospacesread  -lsymbol_algorithms  $(shelldir)/../loadlib.o $(simdir)/libsim.a $(shelldir)/libshell.a	$(utildir)/libutil.a	$(scriptdir)/libscript.a	$(olfdir)/libolf.a	$(nsdir)/libneurospaces.a	-L$(libdir)/model-container -lneurospacesread	-L$(libdir)/model-container -lsymbol_algorithms  -lexperiment  -L$(libdir)/heccer -lheccer -lhneurospaces $(SYSLIBLINKS)'
+
+    else
+
+      SWIGLDLINKSFORPERL='-bundle -flat_namespace -undefined suppress  -L$(top_builddir) 	-lexperiment -lheccer -L../../../integrators  	-L/usr/local/lib/model-container 	-lneurospacesread  -lsymbol_algorithms  $(shelldir)/../loadlib.o $(shelldir)/shell_lib.o	$(simdir)/libsim.a	$(shelldir)/libshell.a	$(utildir)/libutil.a	$(scriptdir)/libscript.a	$(olfdir)/libolf.a	$(nsdir)/libneurospaces.a	-L$(libdir)/model-container -lneurospacesread	-L$(libdir)/model-container -lsymbol_algorithms  -lexperiment  -L$(libdir)/heccer -lheccer -lhneurospaces $(SYSLIBLINKS)'
+
+    fi
+
     AC_SUBST(SWIGLDLINKSFORPERL)
 
 
@@ -247,31 +254,28 @@ case "$host_os" in
 
     dnl Here the SWIG linking is set. 
     case "$host_os" in
-       *darwin10.2.0)
-           dnl this is snow leopard
-          SWIGLINKCOMMAND_PERL='ld 	$(SWIGLDLINKSFORPERL) 	-o SwiggableSLI.$(PERLLIB_EXTENSION) swiggable_sli_wrap.o   /usr/lib/bundle1.o'
+
+       darwin10*)
+
+
+          if test "$OSX_UNIVERSAL" == "yes"; then
+  
+            SWIGLINKCOMMAND_PERL='$(AR) $(SWIGLDLINKSFORPERL) -o SwiggableSLI.$(PERLLIB_EXTENSION) swiggable_sli_wrap.o'
+          
+          else
+
+            SWIGLINKCOMMAND_PERL='ld $(SWIGLDLINKSFORPERL) -o SwiggableSLI.$(PERLLIB_EXTENSION) swiggable_sli_wrap.o   /usr/lib/bundle1.o'
+
+          fi
+
           AC_SUBST(SWIGLINKCOMMAND_PERL)
 
-	  SWIGLINKCOMMAND_PYTHON='ld 	$(SWIGLDLINKSFORPYTHON) 	-o _SwiggableSLI.$(PYTHONLIB_EXTENSION)  swiggable_sli_wrap.o  /usr/lib/bundle1.o'
+	  SWIGLINKCOMMAND_PYTHON='ld 	$(SWIGLDLINKSFORPYTHON) -o _SwiggableSLI.$(PYTHONLIB_EXTENSION)  swiggable_sli_wrap.o  /usr/lib/bundle1.o'
           AC_SUBST(SWIGLINKCOMMAND_PYTHON)
-       ;;
-       *darwin10.3.0)
-           dnl this is also snow leopard
-          SWIGLINKCOMMAND_PERL='ld 	$(SWIGLDLINKSFORPERL) 	-o SwiggableSLI.$(PERLLIB_EXTENSION) swiggable_sli_wrap.o /usr/lib/bundle1.o'
-          AC_SUBST(SWIGLINKCOMMAND_PERL)
 
-	  SWIGLINKCOMMAND_PYTHON='ld 	$(SWIGLDLINKSFORPYTHON) 	-o _SwiggableSLI.$(PYTHONLIB_EXTENSION) swiggable_sli_wrap.o  /usr/lib/bundle1.o'
-          AC_SUBST(SWIGLINKCOMMAND_PYTHON)
-       ;;
-       *darwin10.4.0)
-           dnl this is also snow leopard
-          SWIGLINKCOMMAND_PERL='ld 	$(SWIGLDLINKSFORPERL) 	-o SwiggableSLI.$(PERLLIB_EXTENSION) swiggable_sli_wrap.o /usr/lib/bundle1.o'
-          AC_SUBST(SWIGLINKCOMMAND_PERL)
-
-	  SWIGLINKCOMMAND_PYTHON='ld 	$(SWIGLDLINKSFORPYTHON) 	-o _SwiggableSLI.$(PYTHONLIB_EXTENSION) swiggable_sli_wrap.o  /usr/lib/bundle1.o'
-          AC_SUBST(SWIGLINKCOMMAND_PYTHON)
        ;;
        *)
+
 	  dnl All other mac versions. 
           dnl note: Leopard is i386-apple-darwin9.8.0
           SWIGLINKCOMMAND_PERL='ld 	$(SWIGLDLINKSFORPERL) 	-o SwiggableSLI.$(PERLLIB_EXTENSION) 	swiggable_sli_wrap.o /usr/lib/bundle1.o'
@@ -279,6 +283,7 @@ case "$host_os" in
 
 	  SWIGLINKCOMMAND_PYTHON='ld 	$(SWIGLDLINKSFORPYTHON) 	-o _SwiggableSLI.$(PYTHONLIB_EXTENSION) swiggable_sli_wrap.o /usr/lib/bundle1.o'
           AC_SUBST(SWIGLINKCOMMAND_PYTHON)
+
        ;;
     esac
 
@@ -291,28 +296,6 @@ case "$host_os" in
 
 
   *) #default settings (Linux 2.6)
-
-    dnl {{{
-
-
-
-    dnl -------------------------------------------
-    dnl A check for 64 bit to set appropriate flags.
-    dnl (can also put in other host_os specifics if needed)
-    dnl -------------------------------------------
-dnl     AC_MSG_CHECKING([checking for 64 bit])
-dnl     case "$host_os" in:
-dnl       *64*)
-dnl          AC_MSG_RESULT([yes])
-dnl          CFLAGS="$CFLAGS -fPIC"
-dnl          ;;
-dnl 	 *)
-dnl 	 AC_MSG_RESULT([no])
-dnl          ;;
-dnl     esac
-    dnl -------------------------------------------
-
-
 
     AR=ar
     ARFLAGS='cru'
