@@ -41,7 +41,7 @@ ns_sli_LDADD = \
 	$(nsdir)/libneurospaces.a \
 	-L$(libdir)/model-container -lneurospacesread \
 	-L$(libdir)/model-container -lsymbol_algorithms \
-	-L$(libdir)/experiment -lexperiment \
+	-L$(libdir) -lexperiment \
 	-L$(libdir)/heccer -lheccer \
 	-L$(libdir)/heccer -lhneurospaces \
 	$(SYSLIBLINKS)
