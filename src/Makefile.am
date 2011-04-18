@@ -28,7 +28,10 @@ bin_PROGRAMS = ns-sli
 
 ns_sli_INCLUDES = -I$(utildir) -I$(shelldir) -I$(simdir) -I$(scriptdir) -I$(olfdir) -I$(nsdir) -I/usr/local/neurospaces/instrumentor -I/usr/local/heccer 
 
+INCLUDES = -I$(utildir) -I$(shelldir) -I$(simdir) -I$(scriptdir) -I$(olfdir) -I$(nsdir) -I/usr/local/neurospaces/instrumentor -I/usr/local/heccer 
+
 ns_sli_SOURCES = \
+	$(srcdir)/main.c \
 	$(srcdir)/loadlib.c 
 
 ns_sli_LDADD = \

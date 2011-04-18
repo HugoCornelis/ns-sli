@@ -644,9 +644,4 @@ char simrc_name[1024];
 }
 
 
-int main(int argc, char **argv, char **envp)
-{
-    return(sli_main(argc, argv, envp, NULL));
-}
-
 
