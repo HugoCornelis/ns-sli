@@ -459,6 +459,7 @@ struct ParameterMapper * mapParameter(char *pcField){
 	{	    "inject",	"INJECT",	SLI_PARAMETER_NUMBER,	},
 	{	    "Em",	"ELEAK",	SLI_PARAMETER_NUMBER,	},
 	{	    "Ek",	"Erev",	SLI_PARAMETER_NUMBER,	},
+	{	    "frequency",	"FREQUENCY",	SLI_PARAMETER_NUMBER,	},
 	{	    "Gbar",	"G_MAX",	SLI_PARAMETER_SCALED_TO_COMPARTMENT_SURFACE | SLI_PARAMETER_NUMBER,	},
 	{	    "gmax",	"G_MAX",	SLI_PARAMETER_SCALED_TO_COMPARTMENT_SURFACE | SLI_PARAMETER_NUMBER,	},
 	{	    "Xpower",	"POWER",	SLI_PARAMETER_NUMBER,	},

@@ -11,11 +11,13 @@
 int batch = 1        // if (batch) then run a default simulation
 int graphics = 0     // display control panel, graphs
 int file_out = 1     // write output to a file
+int hflag = 1       // GENESIS 2 - use hsolve if hflag = 1
+int hsolve_chanmode = 3    // hsolve mode for GENESIS 2
 
 str cellfile = "tests/scripts/simplecells/cell.p"
 str cellpath = "/cell"
 str injectpath = "/cell/soma"
-str outfile = "output/simplecell_randact_Vm.out"
+str outfile = "simplecell_randact_Vm.out"
 
 float injcurrent = 0.0
 float syn_freq = 400.0       // default frequency field of synpath
@@ -85,7 +87,17 @@ if (file_out)
    make_output // provides output of the results to a file
 end
 
-check
+if (hflag)
+    create hsolve {cellpath}/solver
+    setfield {cellpath}/solver path "/cell/##[][TYPE=compartment]"
+    setmethod 11
+    setfield {cellpath}/solver chanmode {hsolve_chanmode}
+    call {cellpath}/solver SETUP
+    reset
+    echo "Using hsolve"
+end
+
+//check
 reset
 
 if (batch)
