@@ -31,6 +31,24 @@ my $test
 							   },
 						  },
 						 ],
+				description => "G-2 frequency field backward compatibility",
+				preparation => {
+						description => "Create the output/ directory",
+						preparer =>
+						sub
+						{
+						    `mkdir output`;
+						},
+					       },
+				reparation => {
+					       description => "Remove the generated output files in the output/ directory",
+					       reparer =>
+					       sub
+					       {
+						   `rm "$::config->{core_directory}/output/simplecell_randact_Vm.out"`;
+						   `rmdir output`;
+					       },
+					      },
 			       },
 			      ],
        description => "variations of one of the simplest tutorial scripts",
