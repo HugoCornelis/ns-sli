@@ -1,0 +1,110 @@
+//genesis  -  simplecell.g
+/*======================================================================
+  A sample script to create a neuron containing channels taken from
+  hh_tchan.g in the neurokit prototypes library.  SI units are used.
+
+  October 2009 - enhanced to run under GENESIS 3
+
+  ======================================================================*/
+
+gctrace 1
+gftrace 1
+
+/* Some Booleans indicating the type of calculations or output */
+int batch = 1        // if (batch) then run a default simulation
+int graphics = 0     // display control panel, graphs
+int file_out = 1     // write output to a file
+
+str cellfile = "tests/scripts/simplecells/cell.p"
+str cellpath = "/cell"
+str injectpath = "/cell/soma"
+str outfile = "simplecell_pulsed_Vm.out"
+
+float tmax = 0.5		// simulation time in sec
+float dt = 0.00002		// 20 microsec time step
+setclock  0  {dt}		// set the simulation clock
+float out_dt = 0.0001   // 0.1 msec interval
+
+/*  This version of the script applies an injection pulse
+    that is delayed by 'pulse_delay', without the use of a pulsegen
+*/
+
+float injcurrent = 0.3e-9
+
+// Default values of pulse train parameters
+float pulse_delay = 0.05
+float pulse_width = 0.40
+float pulse_interval = {tmax}  // Provide a single pulse during the run
+
+// Create a library of prototype elements to be used by the cell reader
+include protodefs
+
+/* Auxillary Function definitions */
+
+function set_inject(value)
+    str value
+    setfield {injectpath} inject {value}
+    injcurrent = {value}
+end
+
+function make_cell
+    readcell {cellfile} {cellpath}
+end
+
+function make_input
+    setfield {injectpath} inject {injcurrent}
+end
+
+function make_output
+    create asc_file /output/plot_out
+    setclock 1 {out_dt}
+    useclock /output/plot_out 1
+    addmsg {cellpath}/soma /output/plot_out SAVE Vm
+    setfield /output/plot_out filename {outfile}
+end
+
+function step_tmax
+    // Add any other commands here that you want to execute for each run
+    setfield {injectpath} inject 0.0
+    step {pulse_delay} -time    // This will do at least one step
+    setfield {injectpath} inject {injcurrent}
+    step {pulse_width} -time
+    setfield {injectpath} inject 0.0
+    step {tmax - pulse_width - pulse_delay} -time // remainder of time
+end
+
+//===============================
+//         Main Script
+//===============================
+
+make_cell // creates a cell with a soma and a dend compartment
+make_input // provides input to the cell
+
+step_tmax
+
+if (graphics)
+   // include any graphics functions
+   include graphics
+   // make the control panel
+   make_control
+   // make the graph to display soma Vm and pass messages to the graph
+   make_Vmgraph
+   addmsg /cell/soma /data/voltage PLOT Vm *volts *red
+   setfield /control/Injection value {injcurrent}
+   set_inject {injcurrent}  // set initial injection
+   colorize
+end
+
+if (file_out)
+   make_output // provides output of the results to a file
+end
+
+check
+reset
+
+if (batch)
+    step_tmax
+end
+
+//quit
+
