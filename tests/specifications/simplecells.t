@@ -24,7 +24,7 @@ my $test
 						  {
 						   comment => 'relatively large deviations from the G-2 generated output file on line 239, using the G-3 generating output file',
 						   description => "Is the generated output file correct ?",
-# 						   numerical_compare => 'small differences on the automated tester machine',
+						   numerical_compare => 'small differences on the automated tester machine',
 						   read => {
 							    application_output_file => "output/simplecell_randact_Vm.out",
 							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/simplecell_randact_Vm.out.g3",
