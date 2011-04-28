@@ -18,7 +18,7 @@ int file_out = 1     // write output to a file
 str cellfile = "tests/scripts/simplecells/cell.p"
 str cellpath = "/cell"
 str injectpath = "/cell/soma"
-str outfile = "simplecell_pulsed_Vm.out"
+str outfile = "output/simplecell_pulsed_Vm.out.g3"
 
 float tmax = 0.5		// simulation time in sec
 float dt = 0.00002		// 20 microsec time step
@@ -80,20 +80,18 @@ end
 make_cell // creates a cell with a soma and a dend compartment
 make_input // provides input to the cell
 
-step_tmax
-
-if (graphics)
-   // include any graphics functions
-   include graphics
-   // make the control panel
-   make_control
-   // make the graph to display soma Vm and pass messages to the graph
-   make_Vmgraph
-   addmsg /cell/soma /data/voltage PLOT Vm *volts *red
-   setfield /control/Injection value {injcurrent}
-   set_inject {injcurrent}  // set initial injection
-   colorize
-end
+// if (graphics)
+//    // include any graphics functions
+//    include graphics
+//    // make the control panel
+//    make_control
+//    // make the graph to display soma Vm and pass messages to the graph
+//    make_Vmgraph
+//    addmsg /cell/soma /data/voltage PLOT Vm *volts *red
+//    setfield /control/Injection value {injcurrent}
+//    set_inject {injcurrent}  // set initial injection
+//    colorize
+// end
 
 if (file_out)
    make_output // provides output of the results to a file
@@ -106,5 +104,5 @@ if (batch)
     step_tmax
 end
 
-//quit
+quit
 
