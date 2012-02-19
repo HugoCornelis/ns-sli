@@ -298,7 +298,6 @@ int CreateMap(char *parentname, char *srcname, int composite, int nx, int ny, do
 	  (pneuro->pacRootContext,
 	   "Grid3D",
 	   "CreateMap()",
-	   NULL,
 	   pparc->ppars,
 	   palgs);
 
@@ -347,8 +346,7 @@ int CreateMap(char *parentname, char *srcname, int composite, int nx, int ny, do
 	     ParserContextGetActual(pneuro->pacRootContext),
 	     palgs->dealgs.palgi,
 	     "Grid3D",
-	     "CreateMap()",
-	     NULL);
+	     "CreateMap()");
 
 	SymbolRecalcAllSerials(NULL, NULL);
 

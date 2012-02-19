@@ -769,7 +769,6 @@ int VolumeConnect(source_path, src_region, nsrc_regions,
 	  (pneuro->pacRootContext,
 	   "ProjectionVolume",
 	   "VolumeConnect()",
-	   NULL,
 	   pparcAlgorithm->ppars,
 	   palgs);
 
@@ -846,8 +845,7 @@ int VolumeConnect(source_path, src_region, nsrc_regions,
 	     ParserContextGetActual(pneuro->pacRootContext),
 	     palgs->dealgs.palgi,
 	     "ProjectionVolume",
-	     "VolumeConnect()",
-	     NULL);
+	     "VolumeConnect()");
 
 	SymbolRecalcAllSerials(NULL, NULL);
 

@@ -1773,9 +1773,7 @@ void do_read_cell(argc,argv)
 		 ParserContextGetActual(pneuro->pacRootContext),
 		 palgsActive->dealgs.palgi,
 		 "Spines",
-		 "do_read_cell()",
-		 NULL);
-
+		 "do_read_cell()");
 
 	    SymbolRecalcAllSerials(NULL, NULL);
 
@@ -2045,7 +2043,6 @@ void read_script(line,lineno,flags)
 			      (pneuro->pacRootContext,
 			       "Spines",
 			       "do_read_cell()",
-			       NULL,
 			       pparc->ppars,
 			       palgs);
 
