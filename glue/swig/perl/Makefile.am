@@ -20,7 +20,7 @@ swigdir = $(prefix)/glue/swig
 
 #t use $(swigdir) here
 
-perldir = $(prefix)/glue/swig/perl
+perldir = @PMDIR@
 
 swig_DATA = sli.i
 
