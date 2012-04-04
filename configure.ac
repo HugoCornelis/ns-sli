@@ -15,64 +15,6 @@ AC_CONFIG_HEADER(src/config.h)
 AM_INIT_AUTOMAKE(ns-sli, 0.0.0-alpha)
 
 
-# see https://metacpan.org/source/ASPIERS/Stow-v2.1.2/configure.ac
-
-dnl Check for perl on our system.
-dnl Call to AC_SUBST(PERL) is implicit
-AC_PATH_PROGS([PERL], [perl] [perl5], [false])
-if test "x$PERL" = xfalse
-then
-  AC_MSG_ERROR([Perl not found; check your \$PATH.])
-fi
- 
-# N.B. ${var#pattern} will not work with some shells, such as
-# Solaris 10's /bin/sh :-(
-#
-#   http://www.gnu.org/software/autoconf/manual/autoconf.html#Portable-Shell
-#
-#   eval `$PERL -V:siteprefix -V:installsitelib`
-#   pmdir_relative_path="${installsitelib#$siteprefix/}"
-#
-# This will work:
-#
-#   pmdir_relative_path=`echo "${installsitelib}" | sed -e "s!^$siteprefix/!!"`
-#
-# but this is cleaner:
-pmdir_relative_path=`\
-  $PERL -MConfig \
-        -wle '($_ = $Config{installsitelib})
-              =~ s!^\Q$Config{siteprefix}/!!; \
-              print'`
- 
-AC_ARG_WITH(
-    [pmdir],
-    AS_HELP_STRING(
-      [--with-pmdir=DIR],
-      [Install Perl modules in DIR]),
-    [PMDIR=${withval}],
-    [PMDIR='${prefix}'/"$pmdir_relative_path"])
-AC_CONFIG_COMMANDS_POST([[
-  eval pmdir="$PMDIR"
-  cat <<EOF
- 
-# Perl modules will be installed to $PMDIR
-EOF
-  if [ "$pmdir" != "$PMDIR" ]; then
-    cat <<EOF
-# which will expand to
-#
-#   $pmdir
-#
-# unless you override the value of prefix at make-time.
-EOF
-    echo
-  fi
-]])
-AC_SUBST([PMDIR])
-
-
-
-
 AC_MSG_CHECKING(whether we build universal binaries.)
 AC_ARG_WITH(universal,
 [AS_HELP_STRING([--with-universal],
@@ -230,6 +172,27 @@ case "$host_os" in
         ;;
     esac
 
+
+    #-- Here we determine the install path for perl modules --
+    AC_MSG_CHECKING([Checking the perl module installation path])	
+    pmdir_relative_path=`\
+      $PERL -MConfig \
+        -wle '($_ = $Config{installsitelib})
+              =~ s!^\Q$Config{siteprefix}/!!; \
+              print'`
+ 
+    AC_ARG_WITH(
+      [pmdir],
+    AS_HELP_STRING(
+      [--with-pmdir=DIR],
+      [Install Perl modules in DIR]),
+      [PMDIR=${withval}],
+      [PMDIR="$pmdir_relative_path"])
+
+    AC_SUBST([PMDIR])
+    AC_MSG_RESULT([ $PMDIR ])
+    # --- End perl module directory selection --------------
+
     # determine linker flags for perl embedding
     if test "$OSX_UNIVERSAL" == "yes"; then
 
@@ -367,6 +330,28 @@ case "$host_os" in
 
     AC_CHECK_PROGS(PERL, perl5 perl)
     AC_SUBST(PERL)
+
+
+    #-- Here we determine the install path for perl modules --
+    AC_MSG_CHECKING([Checking the perl module installation path])	
+    pmdir_relative_path=`\
+      $PERL -MConfig \
+        -wle '($_ = $Config{installsitelib})
+              =~ s!^\Q$Config{siteprefix}/!!; \
+              print'`
+ 
+    AC_ARG_WITH(
+      [pmdir],
+    AS_HELP_STRING(
+      [--with-pmdir=DIR],
+      [Install Perl modules in DIR]),
+      [PMDIR=${withval}],
+      [PMDIR='${prefix}'/"$pmdir_relative_path"])
+
+    AC_SUBST([PMDIR])
+    AC_MSG_RESULT([ $PMDIR ])
+    # --- End perl module directory selection --------------
+
 
     PERL_CCOPTS=`$PERL -MExtUtils::Embed -e ccopts`
     AC_SUBST(PERL_CCOPTS)
