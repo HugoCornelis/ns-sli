@@ -31,7 +31,8 @@ AC_ARG_WITH(universal,
     AC_MSG_RESULT(yes)
     OSX_UNIVERSAL="yes"
 
-    CFLAGS="$CFLAGS -arch x86_64 -arch i386 -arch ppc"
+#    CFLAGS="$CFLAGS -arch x86_64 -arch i386 -arch ppc"
+    CFLAGS="-g -O0 -arch x86_64 -arch i386 -arch ppc"
     AC_SUBST(CFLAGS)
 
     ;;
