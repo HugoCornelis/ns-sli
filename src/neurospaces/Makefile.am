@@ -15,7 +15,9 @@ INCLUDES = -I$(utildir) -I$(shelldir) -I$(simdir) -I$(scriptdir) -I$(olfdir) -I/
 
 AM_CPPFLAGS = -DPRE_PROTO_TRAVERSAL
 
-pkgdata_LIBRARIES = libneurospaces.a
+nssli_pkgincludedir = $(pkgincludedir)
+
+nssli_pkginclude_LIBRARIES = libneurospaces.a
 
 EXTRA_DIST = \
 	ascfilelib.g \
@@ -139,7 +141,7 @@ pulsegen_l@.c:
 
 
 
-pkgdata_HEADERS = \
+nssli_pkginclude_HEADERS = \
 	ascfile_struct.h \
 	hsolve_struct.h \
 	neurospaces_defs.h \
