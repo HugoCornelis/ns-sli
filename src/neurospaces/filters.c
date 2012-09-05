@@ -19,6 +19,7 @@ static char *ppcCreate[] = {
     "channelC3",
     "compartment",
     "hsolve",
+    "leakage",
     "nernst",
     "neutral",
     "pulsegen",

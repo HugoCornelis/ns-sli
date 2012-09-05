@@ -190,36 +190,26 @@ int iInModelContainer;
 	pcParent = "/";
     }
 
-    if(iInModelContainer==1)
+    if (iInModelContainer==1)
     {
-
 	int iModelContainerResult = NSCreate(name,pcParent,object_name);
 
-      if(iModelContainerResult == -1){
-
-	return NULL;
-
-       }
-
-
-	if(iModelContainerResult == NSINTEGRATOR_COMPARTMENT ||
-	   iModelContainerResult == NSINTEGRATOR_TABCHANNEL ||
-	   iModelContainerResult == NSINTEGRATOR_POOL ||
-	   iModelContainerResult == NSINTEGRATOR_NERNST ||
-	   iModelContainerResult == NSINTEGRATOR_SYNCHAN ||
-	   iModelContainerResult == NSINTEGRATOR_SPIKEGEN){
-
-	  return (Element*)-1;
-
+	if (iModelContainerResult == -1)
+	{
+	    return NULL;
 	}
 
-	
+	if (iModelContainerResult == NSINTEGRATOR_COMPARTMENT
+	    || iModelContainerResult == NSINTEGRATOR_TABCHANNEL
+	    || iModelContainerResult == NSINTEGRATOR_POOL
+	    || iModelContainerResult == NSINTEGRATOR_NERNST
+	    || iModelContainerResult == NSINTEGRATOR_SYNCHAN
+	    || iModelContainerResult == NSINTEGRATOR_LEAKAGE
+	    || iModelContainerResult == NSINTEGRATOR_SPIKEGEN)
+	{
+	    return (Element*)-1;
+	}
     }
-
-    
-
-    //hack------------------------------------------------------------------
-
 
     /*
     ** find the object type in the object table
