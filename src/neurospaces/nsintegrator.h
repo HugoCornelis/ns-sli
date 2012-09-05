@@ -49,6 +49,8 @@
 /* #define NSINTEGRATOR_ASCOUT 80 */
 #define NSINTEGRATOR_SPIKEGEN 90
 #define NSINTEGRATOR_PULSEGEN 100
+#define NSINTEGRATOR_LEAKAGE 110
+
 
 //!
 //! Used in nsetfield.c

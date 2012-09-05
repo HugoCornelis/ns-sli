@@ -91,38 +91,44 @@ int NSCreate( char* name,  char* pcParent, char* pcType){
        "symcompartment", NSINTEGRATOR_COMPARTMENT,
        "synchan", NSINTEGRATOR_SYNCHAN,
        "tabchannel", NSINTEGRATOR_TABCHANNEL,
-       (char *)-1, NSINTEGRATOR_NEUTRAL,
+       "leakage", NSINTEGRATOR_LEAKAGE,
+      (char *)-1, NSINTEGRATOR_NEUTRAL,
        (char *)-1, NSINTEGRATOR_PULSEGEN,
        NULL, -1,
    };
 
 
-   if(strcmp("compartment",pcType) == 0
-      || strcmp("symcompartment", pcType) == 0)
+   if (strcmp("compartment", pcType) == 0
+       || strcmp("symcompartment", pcType) == 0)
    {
-     phsleChild = (struct symtab_HSolveListElement *)SegmentCalloc();
+       phsleChild = (struct symtab_HSolveListElement *)SegmentCalloc();
 
-     iResult = NSINTEGRATOR_COMPARTMENT;
+       iResult = NSINTEGRATOR_COMPARTMENT;
 
-     char *pcHeccerName = getRootedPathname(pcParent);
+       char *pcHeccerName = getRootedPathname(pcParent);
 
-     AttemptSolverName(pcHeccerName,SOLVER_HECCER);
+       AttemptSolverName(pcHeccerName,SOLVER_HECCER);
 
-     free(pcHeccerName);
+       free(pcHeccerName);
    }
-   else if(!strcmp("tabchannel",pcType)){
+   else if (!strcmp("tabchannel", pcType))
+   {
+       phsleChild = (struct symtab_HSolveListElement *)ChannelCalloc();
 
-     phsleChild = (struct symtab_HSolveListElement *)ChannelCalloc();
-
-     iResult = NSINTEGRATOR_TABCHANNEL;
+       iResult = NSINTEGRATOR_TABCHANNEL;
    }
-   else if(!strcmp("Ca_concen",pcType)){
+   else if (!strcmp("leakage", pcType))
+   {
+       phsleChild = (struct symtab_HSolveListElement *)MembraneLeakCalloc();
 
-     //! create a calcium pool
-     phsleChild = (struct symtab_HSolveListElement *)PoolCalloc();
+       iResult = NSINTEGRATOR_LEAKAGE;
+   }
+   else if (!strcmp("Ca_concen", pcType))
+   {
+       //! create a calcium pool
+       phsleChild = (struct symtab_HSolveListElement *)PoolCalloc();
 
-     iResult = NSINTEGRATOR_POOL;
-     
+       iResult = NSINTEGRATOR_POOL;
    }
    else if(!strcmp("nernst",pcType)){
 
