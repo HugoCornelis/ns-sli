@@ -630,7 +630,7 @@ void do_list_objects()
     {
 	int i;
 
-	printf("\nknown G-2 objects and their associated G-3 implementation:\n");
+	printf("\n---\nknown G-2 objects and their associated G-3 implementation:\n");
 
 	for (i = 0; pggem[i].pcG2; i++)
 	{

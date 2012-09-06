@@ -19,7 +19,9 @@ my $test
 				command_tests => [
 						  {
 						   description =>  "Add a field to an object in genesis.",
-						   read => 'known G-2 objects and their associated G-3 implementation:
+						   read => '
+---
+known G-2 objects and their associated G-3 implementation:
   Ca_concen: NSINTEGRATOR_POOL (40)
   asc_file: NSINTEGRATOR_ASCFILE (70)
   channelC2: NSINTEGRATOR_SYNCHAN (60)
