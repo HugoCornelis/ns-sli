@@ -22,21 +22,21 @@ my $test
 						   read => '
 ---
 known G-2 objects and their associated G-3 implementation:
-  Ca_concen: NSINTEGRATOR_POOL (40)
-  asc_file: NSINTEGRATOR_ASCFILE (70)
-  channelC2: NSINTEGRATOR_SYNCHAN (60)
-  channelC3: NSINTEGRATOR_SYNCHAN (60)
-  compartment: NSINTEGRATOR_COMPARTMENT (10)
-  hsolve: NSINTEGRATOR_NEUTRAL (20)
-  nernst: NSINTEGRATOR_NERNST (50)
-  projection: NSINTEGRATOR_NEUTRAL (20)
-  spikegen: NSINTEGRATOR_SPIKEGEN (90)
-  symcompartment: NSINTEGRATOR_COMPARTMENT (10)
-  synchan: NSINTEGRATOR_SYNCHAN (60)
-  tabchannel: NSINTEGRATOR_TABCHANNEL (30)
-  leakage: NSINTEGRATOR_LEAKAGE (110)
-  -1: NSINTEGRATOR_NEUTRAL (20)
-  -1: NSINTEGRATOR_PULSEGEN (100)
+  Ca_concen: maps to the NDF POOL token (internal values: NSINTEGRATOR_POOL, 40)
+  asc_file: does not require NDF representation (internal values: NSINTEGRATOR_ASCFILE, 70)
+  channelC2: maps to the NDF CHANNEL token with an exponential equation (internal values: NSINTEGRATOR_SYNCHAN, 60)
+  channelC3: maps to the NDF CHANNEL token with an exponential equation (internal values: NSINTEGRATOR_SYNCHAN, 60)
+  compartment: maps to the NDF SEGMENT token (internal values: NSINTEGRATOR_COMPARTMENT, 10)
+  hsolve: does not require NDF representation (internal values: NSINTEGRATOR_NEUTRAL, 20)
+  nernst: maps to an NDF GROUP with specific parameters (internal values: NSINTEGRATOR_NERNST, 50)
+  projection: this mapping is currently incomplete (internal values: NSINTEGRATOR_NEUTRAL, 20)
+  spikegen: maps to an NDF SPIKEGEN token (internal values: NSINTEGRATOR_SPIKEGEN, 90)
+  symcompartment: maps to the NDF SEGMENT token (internal values: NSINTEGRATOR_COMPARTMENT, 10)
+  synchan: maps to the NDF CHANNEL token with an exponential equation (internal values: NSINTEGRATOR_SYNCHAN, 60)
+  tabchannel: maps to the NDF CHANNEL token (internal values: NSINTEGRATOR_TABCHANNEL, 30)
+  leakage: maps to the NDF MEMBRANE_LEAKAGE token (internal values: NSINTEGRATOR_LEAKAGE, 110)
+  -1: incomplete implementation (internal values: NSINTEGRATOR_NEUTRAL, 20)
+  -1: incomplete implementation (internal values: NSINTEGRATOR_PULSEGEN, 100)
 ',
 						   read_old => 'AVAILABLE OBJECTS:
 asc_file            hsolve              neurospaces         neutral             

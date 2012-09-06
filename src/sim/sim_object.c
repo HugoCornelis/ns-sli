@@ -634,7 +634,7 @@ void do_list_objects()
 
 	for (i = 0; pggem[i].pcG2; i++)
 	{
-	    printf("  %s: %s (%i)\n", pggem[i].pcG2 == (char *) -1 ? "-1" : pggem[i].pcG2, pggem[i].pcG3, pggem[i].iG3);
+	    printf("  %s: %s (internal values: %s, %i)\n", pggem[i].pcG2 == (char *) -1 ? "-1" : pggem[i].pcG2, pggem[i].pcDescription, pggem[i].pcG3, pggem[i].iG3);
 	}
 
 	printf("\n\n");

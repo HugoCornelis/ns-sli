@@ -32,22 +32,22 @@
 
 struct g2_g3_element_mapper pggem[] =
 {
-    "Ca_concen", "NSINTEGRATOR_POOL", NSINTEGRATOR_POOL,
-    "asc_file", "NSINTEGRATOR_ASCFILE", NSINTEGRATOR_ASCFILE,
-    "channelC2", "NSINTEGRATOR_SYNCHAN", NSINTEGRATOR_SYNCHAN,
-    "channelC3", "NSINTEGRATOR_SYNCHAN", NSINTEGRATOR_SYNCHAN,
-    "compartment", "NSINTEGRATOR_COMPARTMENT", NSINTEGRATOR_COMPARTMENT,
-    "hsolve", "NSINTEGRATOR_NEUTRAL", NSINTEGRATOR_NEUTRAL,
-    "nernst",  "NSINTEGRATOR_NERNST", NSINTEGRATOR_NERNST,
-    "projection", "NSINTEGRATOR_NEUTRAL", NSINTEGRATOR_NEUTRAL,
-    "spikegen", "NSINTEGRATOR_SPIKEGEN", NSINTEGRATOR_SPIKEGEN,
-    "symcompartment", "NSINTEGRATOR_COMPARTMENT", NSINTEGRATOR_COMPARTMENT,
-    "synchan", "NSINTEGRATOR_SYNCHAN", NSINTEGRATOR_SYNCHAN,
-    "tabchannel", "NSINTEGRATOR_TABCHANNEL", NSINTEGRATOR_TABCHANNEL,
-    "leakage", "NSINTEGRATOR_LEAKAGE", NSINTEGRATOR_LEAKAGE,
-    (char *)-1, "NSINTEGRATOR_NEUTRAL", NSINTEGRATOR_NEUTRAL,
-    (char *)-1, "NSINTEGRATOR_PULSEGEN", NSINTEGRATOR_PULSEGEN,
-    NULL, NULL, -1,
+    "Ca_concen", "maps to the NDF POOL token", "NSINTEGRATOR_POOL", NSINTEGRATOR_POOL,
+    "asc_file", "does not require NDF representation", "NSINTEGRATOR_ASCFILE", NSINTEGRATOR_ASCFILE,
+    "channelC2", "maps to the NDF CHANNEL token with an exponential equation", "NSINTEGRATOR_SYNCHAN", NSINTEGRATOR_SYNCHAN,
+    "channelC3", "maps to the NDF CHANNEL token with an exponential equation", "NSINTEGRATOR_SYNCHAN", NSINTEGRATOR_SYNCHAN,
+    "compartment", "maps to the NDF SEGMENT token", "NSINTEGRATOR_COMPARTMENT", NSINTEGRATOR_COMPARTMENT,
+    "hsolve", "does not require NDF representation", "NSINTEGRATOR_NEUTRAL", NSINTEGRATOR_NEUTRAL,
+    "nernst",  "maps to an NDF GROUP with specific parameters", "NSINTEGRATOR_NERNST", NSINTEGRATOR_NERNST,
+    "projection", "this mapping is currently incomplete", "NSINTEGRATOR_NEUTRAL", NSINTEGRATOR_NEUTRAL,
+    "spikegen", "maps to an NDF SPIKEGEN token", "NSINTEGRATOR_SPIKEGEN", NSINTEGRATOR_SPIKEGEN,
+    "symcompartment", "maps to the NDF SEGMENT token", "NSINTEGRATOR_COMPARTMENT", NSINTEGRATOR_COMPARTMENT,
+    "synchan", "maps to the NDF CHANNEL token with an exponential equation", "NSINTEGRATOR_SYNCHAN", NSINTEGRATOR_SYNCHAN,
+    "tabchannel", "maps to the NDF CHANNEL token", "NSINTEGRATOR_TABCHANNEL", NSINTEGRATOR_TABCHANNEL,
+    "leakage",  "maps to the NDF MEMBRANE_LEAKAGE token", "NSINTEGRATOR_LEAKAGE", NSINTEGRATOR_LEAKAGE,
+    (char *)-1, "incomplete implementation", "NSINTEGRATOR_NEUTRAL", NSINTEGRATOR_NEUTRAL,
+    (char *)-1, "incomplete implementation", "NSINTEGRATOR_PULSEGEN", NSINTEGRATOR_PULSEGEN,
+    NULL, NULL, NULL, -1,
 };
 
 
