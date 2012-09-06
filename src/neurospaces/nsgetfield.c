@@ -33,77 +33,123 @@ char* NSGetField(char *pcPathname,char *pcField)
 	pcField = strdup(pcField);
     }
 
-  // First we check for the variable in heccer
+    // First we check for the variable in heccer
 
-  char *pcHeccerVar = GetHeccerVariable(pcPathname, pcField);
+    char *pcHeccerVar = GetHeccerVariable(pcPathname, pcField);
 
-  if (pcHeccerVar)
-  {
-      free(pcPathname);
-      free(pcField);
+    if (pcHeccerVar)
+    {
+	free(pcPathname);
+	free(pcField);
     
-      return(pcHeccerVar);
-  }
+	return(pcHeccerVar);
+    }
 
+    // if it's not in heccer then we proceed to check the model
+    // container.
 
-  // if it's not in heccer then we proceed to check the model
-  // container.
+    struct PidinStack *ppist = PidinStackParse(pcPathname);
 
-  struct PidinStack *ppist = PidinStackParse(pcPathname);
+    struct symtab_HSolveListElement *phsle = PidinStackLookupTopSymbol(ppist);
 
-  struct symtab_HSolveListElement *phsle = PidinStackLookupTopSymbol(ppist);
+    if (!phsle)
+    {
+	//- in this case it's not in the model container.
 
-  if(!phsle)
-  {
-      //- in this case it's not in the model container.
+	free(pcPathname);
+	free(pcField);
 
-      free(pcPathname);
-      free(pcField);
+	return (char*) -1;
+    }
 
-      return (char*)-1;
-  }
+    char *pcMappedPar = mapParameterString(pcField);
 
-  char *pcMappedPar = mapParameterString(pcField);
+    if (strcmp(pcMappedPar, "nsynapses") == 0)
+    {
+	// \todo this should come from ppist
 
-  if (strcmp(pcMappedPar, "nsynapses") == 0)
-  {
-      // \todo this should come from ppist
+	extern struct Neurospaces *pneuroGlobal;
 
-      extern struct Neurospaces *pneuroGlobal;
+	struct ProjectionQuery *ppq = NeurospacesGetProjectionQuery(pneuroGlobal);
 
-      struct ProjectionQuery *ppq = NeurospacesGetProjectionQuery(pneuroGlobal);
+	if (!ppq)
+	{
+	    QueryMachineHandle(pneuroGlobal, "pqsetall c");
+	}
+    }
 
-      if (!ppq)
-      {
-	  QueryMachineHandle(pneuroGlobal, "pqsetall c");
-      }
-  }
+    //- lookup parameter
 
-  double dValue = SymbolParameterResolveValue(phsle, ppist, pcMappedPar);
-  
+    char pcValue[1000] = "";
 
-  if(dValue == DBL_MAX)
-  {
-      Error();
-      printf("could not get the value for field '%s->%s'\n", pcPathname, pcField);
+    struct symtab_Parameters *ppar
+	= SymbolFindParameter(phsle, ppist, pcMappedPar);
 
-      free(pcPathname);
-      free(pcField);
+    if (ppar)
+    {
+	//- for numeric indirect parameter values
 
-      return(NULL);  
-  }
+	if (ParameterIsNumber(ppar)
+	    || ParameterIsFunction(ppar)
+	    || ParameterIsField(ppar))
+	{
+	    //- resolve parameter value
 
+	    double dValue = ParameterResolveValue(ppar, ppist);
 
-  char pc[100];
+	    if (dValue == DBL_MAX)
+	    {
+		Error();
 
-  sprintf(pc,"%g",dValue);
+		printf("could not get the value for field '%s->%s', unresolvable value\n", pcPathname, pcField);
 
+		free(pcPathname);
+		free(pcField);
 
-  free(pcPathname);
-  free(pcField);
+		return(NULL);  
+	    }
 
-  return(CopyString(pc));
+	    sprintf(pcValue, "%g", dValue);
+	}
 
+	//- for string parameter values
+
+	else if (ParameterIsString(ppar))
+	{
+	    strcpy(pcValue, ParameterGetString(ppar));
+	}
+
+	//- otherwise
+
+	else if (ParameterIsSymbolic(ppar))
+	{
+	    Error();
+
+	    printf("could not get the value for field '%s->%s', its value is a symbolic reference\n", pcPathname, pcField);
+
+	    free(pcPathname);
+	    free(pcField);
+
+	    return(NULL);  
+	}
+	else if (ParameterIsAttribute(ppar))
+	{
+	    Error();
+
+	    printf("could not get the value for field '%s->%s', its value is an attribute\n", pcPathname, pcField);
+
+	    free(pcPathname);
+	    free(pcField);
+
+	    return(NULL);  
+	}
+
+    }
+
+    free(pcPathname);
+    free(pcField);
+
+    return(CopyString(pcValue));
 }
 
 
