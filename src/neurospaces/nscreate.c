@@ -30,6 +30,26 @@
 #include "neurospaces/nsintegrator.h"
 
 
+struct g2_g3_element_mapper pggem[] =
+{
+    "Ca_concen", "NSINTEGRATOR_POOL", NSINTEGRATOR_POOL,
+    "asc_file", "NSINTEGRATOR_ASCFILE", NSINTEGRATOR_ASCFILE,
+    "channelC2", "NSINTEGRATOR_SYNCHAN", NSINTEGRATOR_SYNCHAN,
+    "channelC3", "NSINTEGRATOR_SYNCHAN", NSINTEGRATOR_SYNCHAN,
+    "compartment", "NSINTEGRATOR_COMPARTMENT", NSINTEGRATOR_COMPARTMENT,
+    "hsolve", "NSINTEGRATOR_NEUTRAL", NSINTEGRATOR_NEUTRAL,
+    "nernst",  "NSINTEGRATOR_NERNST", NSINTEGRATOR_NERNST,
+    "projection", "NSINTEGRATOR_NEUTRAL", NSINTEGRATOR_NEUTRAL,
+    "spikegen", "NSINTEGRATOR_SPIKEGEN", NSINTEGRATOR_SPIKEGEN,
+    "symcompartment", "NSINTEGRATOR_COMPARTMENT", NSINTEGRATOR_COMPARTMENT,
+    "synchan", "NSINTEGRATOR_SYNCHAN", NSINTEGRATOR_SYNCHAN,
+    "tabchannel", "NSINTEGRATOR_TABCHANNEL", NSINTEGRATOR_TABCHANNEL,
+    "leakage", "NSINTEGRATOR_LEAKAGE", NSINTEGRATOR_LEAKAGE,
+    (char *)-1, "NSINTEGRATOR_NEUTRAL", NSINTEGRATOR_NEUTRAL,
+    (char *)-1, "NSINTEGRATOR_PULSEGEN", NSINTEGRATOR_PULSEGEN,
+    NULL, NULL, -1,
+};
+
 
 
 //-- prototypes for setting up a basic channel object --
@@ -69,34 +89,6 @@ int NSCreate( char* name,  char* pcParent, char* pcType){
 
        return 1;
      }
-
-
-   struct g2_g3_element_mapper
-   {
-       char *pcG2;
-       int iG3;
-   };
-
-   struct g2_g3_element_mapper pggem[] =
-   {
-       "Ca_concen", NSINTEGRATOR_POOL,
-       "asc_file", NSINTEGRATOR_ASCFILE,
-       "channelC2", NSINTEGRATOR_SYNCHAN,
-       "channelC3", NSINTEGRATOR_SYNCHAN,
-       "compartment", NSINTEGRATOR_COMPARTMENT,
-       "hsolve", NSINTEGRATOR_NEUTRAL,
-       "nernst",  NSINTEGRATOR_NERNST,
-       "projection", NSINTEGRATOR_NEUTRAL,
-       "spikegen", NSINTEGRATOR_SPIKEGEN,
-       "symcompartment", NSINTEGRATOR_COMPARTMENT,
-       "synchan", NSINTEGRATOR_SYNCHAN,
-       "tabchannel", NSINTEGRATOR_TABCHANNEL,
-       "leakage", NSINTEGRATOR_LEAKAGE,
-      (char *)-1, NSINTEGRATOR_NEUTRAL,
-       (char *)-1, NSINTEGRATOR_PULSEGEN,
-       NULL, -1,
-   };
-
 
    if (strcmp("compartment", pcType) == 0
        || strcmp("symcompartment", pcType) == 0)

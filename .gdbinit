@@ -26,7 +26,7 @@ file src/ns-sli
 break parsererror
 echo .gdbinit: Done .gdbinit\n
 
-# set args
+set args
 # file ./neurospacesparse
 # directory ~/neurospaces_project/model-container/ 
 # directory ~/neurospaces_project/model-container/neurospaces/

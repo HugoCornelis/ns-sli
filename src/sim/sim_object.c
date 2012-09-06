@@ -72,6 +72,9 @@ static char rcsid[] = "$Id: sim_object.c,v 1.3 2005/06/29 17:15:35 svitak Exp $"
 #include "sim_ext.h"
 #include "hash.h"
 
+#include "neurospaces/nsintegrator.h"
+
+
 HASH *object_hash_table;
 
 /*
@@ -579,46 +582,65 @@ Element*	defaults;
 
 void do_list_objects()
 {
-extern HASH *object_hash_table;
-char 	*name;
-int	cnt=0;
-int 	i;
-char	**namelist;
-extern int Strcmp();
+    extern HASH *object_hash_table;
+    char 	*name;
+    int	cnt=0;
+    int 	i;
+    char	**namelist;
+    extern int Strcmp();
 
-    /*
-    ** count the objects
-    */
-    for(i=0;i<object_hash_table->size;i++){
-	if ((name = object_hash_table->entry[i].key)) {
-	    cnt++;
+    int iOld = 0;
+
+    if (iOld)
+    {
+	/*
+	** count the objects
+	*/
+	for(i=0;i<object_hash_table->size;i++){
+	    if ((name = object_hash_table->entry[i].key)) {
+		cnt++;
+	    }
 	}
-    }
-    if(cnt <1) return;
-    /*
-    ** make the list
-    */
-    namelist = (char **)malloc(sizeof(char *)*cnt);
-    cnt = 0;
-    for(i=0;i<object_hash_table->size;i++){
-	if ((name = object_hash_table->entry[i].key)) {
-	    namelist[cnt++] = name;
+	if(cnt <1) return;
+	/*
+	** make the list
+	*/
+	namelist = (char **)malloc(sizeof(char *)*cnt);
+	cnt = 0;
+	for(i=0;i<object_hash_table->size;i++){
+	    if ((name = object_hash_table->entry[i].key)) {
+		namelist[cnt++] = name;
+	    }
 	}
-    }
-    /*
-    ** sort the list
-    */
-    qsort(namelist,cnt,sizeof(char *),Strcmp);
-    printf("\nAVAILABLE OBJECTS:\n");
-    for(i=0;i<cnt;i++){
-	printf("%-20s",namelist[i]);
-	if(((i+1)%4) == 0){
-	    printf("\n");
+	/*
+	** sort the list
+	*/
+	qsort(namelist,cnt,sizeof(char *),Strcmp);
+	printf("\nAVAILABLE OBJECTS:\n");
+	for(i=0;i<cnt;i++){
+	    printf("%-20s",namelist[i]);
+	    if(((i+1)%4) == 0){
+		printf("\n");
+	    }
 	}
+	printf("\n\n");
+	free(namelist);
     }
-    printf("\n\n");
-    free(namelist);
+    else
+    {
+	int i;
+
+	printf("\nknown G-2 objects and their associated G-3 implementation:\n");
+
+	for (i = 0; pggem[i].pcG2; i++)
+	{
+	    printf("  %s: %s (%i)\n", pggem[i].pcG2 == (char *) -1 ? "-1" : pggem[i].pcG2, pggem[i].pcG3, pggem[i].iG3);
+	}
+
+	printf("\n\n");
+    }
 }
+
 
 void do_show_object(argc,argv)
 int	argc;

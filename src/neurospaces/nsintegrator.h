@@ -104,6 +104,17 @@ int NSSetField(struct symtab_HSolveListElement *phsle,
  *
  */
 
+struct g2_g3_element_mapper
+{
+    char *pcG2;
+    char *pcG3;
+    int iG3;
+};
+
+
+extern struct g2_g3_element_mapper pggem[];
+
+
 struct ParameterMapper
 {
     /*!
