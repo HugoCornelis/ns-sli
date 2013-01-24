@@ -31,6 +31,7 @@ my $test
 							   },
 						  },
 						 ],
+				comment => "This test is only run when Heccer is configured to use the ran1 random number generator.",
 				description => "G-2 frequency field backward compatibility",
 				disabled => ((join '', `cat /usr/local/include/heccer/config.h`) =~ m/define RANDOM.*ran1/
 					     ? ""
@@ -77,6 +78,7 @@ my $test
 							   },
 						  },
 						 ],
+				comment => "This test is only run when Heccer is configured not to use the ran1 random number generator.",
 				description => "G-2 frequency field backward compatibility",
 				disabled => ((join '', `cat /usr/local/include/heccer/config.h`) =~ m/define RANDOM.*ran1/
 					     ? "ran1 is defined as rng in heccer config (this test required the use of another rng)"
