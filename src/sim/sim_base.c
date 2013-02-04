@@ -285,13 +285,13 @@ extern void AddCommandCallback();
 
 	if (NSGenesisInitialize(pneuro) < 0 )
 	{ 
-	    fprintf(stderr, "Error initializing Neurospaces model container.\n"); 
+	    fprintf(stderr, "Error initializing the Neurospaces model container.\n"); 
 
 	    return;
 	}
 	else
 	{
-	    fprintf(stdout, "Neurospaces model container initialized.\n");
+	    fprintf(stdout, "The Neurospaces model container initialized.\n");
 	}
     }
 
