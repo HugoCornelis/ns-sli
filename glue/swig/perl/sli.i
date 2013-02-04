@@ -205,26 +205,23 @@ int RunInterpreter(int iSomething)
 
 int ListObjects()
 {
-
-  do_list_objects();
-
+    do_list_objects();
 }
+
 
 int ListCommands()
 {
+    char *argv[2];
 
+    argv[0] = "listcommands";
 
-  char *argv[2];
-
-  argv[0] = "listcommands";
-
-  ShowFuncNames(1,argv);
-
+    ShowFuncNames(1,argv);
 }
+
 
 int PrintCommandList()
 {
-  NSListCommands();
+    NSListCommands();
 }
 
 
