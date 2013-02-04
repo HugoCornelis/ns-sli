@@ -272,25 +272,27 @@ extern void AddCommandCallback();
     }
 
     {
-      /********************************************************************
-       * This initializes our Neurospaces model container 
-       * for use with GENESIS.
-       ********************************************************************/
+	/**
+	 *
+	 * This initializes the Neurospaces model container for use
+	 * with GENESIS-2.
+	 *
+	 **/
 
-       LIBRARY_neurospaces(); 
+	LIBRARY_neurospaces(); 
 
-       LIBRARY_nsintegrator(); 
+	LIBRARY_nsintegrator(); 
 
-       if( NSGenesisInitialize(pneuro) < 0 ){ 
+	if (NSGenesisInitialize(pneuro) < 0 )
+	{ 
+	    fprintf(stderr, "Error initializing Neurospaces model container.\n"); 
 
-	   fprintf(stderr,"Error initializing Neurospaces model container.\n"); 
-	   return;
-       } 
-       else 
-	   fprintf(stdout,"Neurospaces model container initialized.\n");
-      /**********************************************************************/
-
-
+	    return;
+	}
+	else
+	{
+	    fprintf(stdout, "Neurospaces model container initialized.\n");
+	}
     }
 
     StartupElements();
