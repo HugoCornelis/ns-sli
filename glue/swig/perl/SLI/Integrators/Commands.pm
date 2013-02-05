@@ -28,7 +28,6 @@ our $g3_commands
       ];
 
 
-
 sub sli_listcommands
 {
     SLI::sli_list_commands();
