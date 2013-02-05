@@ -31,11 +31,8 @@ our $g3_commands
 
 sub sli_listcommands
 {
-
-  SLI::sli_list_commands();
-
+    SLI::sli_list_commands();
 }
-
 
 
 sub sli_listcommands_help
@@ -50,9 +47,8 @@ sub sli_listcommands_help
 
 sub sli_listobjects
 {
-  SLI::sli_list_objects();
+    SLI::sli_list_objects();
 }
-
 
 
 sub sli_listobjects_help
@@ -63,7 +59,6 @@ sub sli_listobjects_help
 
     return "*** Ok";
 }
-
 
 
 sub sli_load
@@ -91,13 +86,11 @@ sub sli_load_help
 }
 
 
-
 sub sli_printcommandlist
 {
-
-  SLI::sli_print_command_list();
-
+    SLI::sli_print_command_list();
 }
+
 
 sub sli_printcommandlist_help
 {
