@@ -83,7 +83,7 @@ int IncludeG2Model(char *pcMorphologyDirectory, char *pcScript, void *pvNeurospa
 {
     //- the modeling service is neurospaces
 
-    struct Neurospaces *pneuro = (struct Neurospaces *)pvNeurospaces;
+    struct Neurospaces *pneuro = (struct Neurospaces *) pvNeurospaces;
 
     char *argv[20];
 
@@ -149,7 +149,7 @@ int RunG2Model(char *pcMorphologyDirectory, char *pcScript, void *pvNeurospaces,
 {
     //- the modeling service is neurospaces
 
-    struct Neurospaces *pneuro = (struct Neurospaces *)pvNeurospaces;
+    struct Neurospaces *pneuro = (struct Neurospaces *) pvNeurospaces;
 
     char *argv[20];
 
@@ -215,7 +215,7 @@ int ListCommands()
 
     argv[0] = "listcommands";
 
-    ShowFuncNames(1,argv);
+    ShowFuncNames(1, argv);
 }
 
 
