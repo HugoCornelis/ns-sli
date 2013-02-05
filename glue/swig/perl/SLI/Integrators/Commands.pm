@@ -77,7 +77,7 @@ sub sli_load
 
 sub sli_load_help
 {
-    print "description: load and extract models from a GENESIS 2 .g file.\n";
+    print "description: load and extract models from a GENESIS-2 .g file.\n";
 
     print "synopsis: sli_load <filename.g>\n";
 
@@ -93,7 +93,7 @@ sub sli_printcommandlist
 
 sub sli_printcommandlist_help
 {
-    print "description: outputs a list of available GENESIS 2 command into a YAML structure.\n";
+    print "description: outputs a list of available GENESIS-2 command into a YAML structure.\n";
 
     print "synopsis: sli_printcommandlist";
 
@@ -118,7 +118,7 @@ sub sli_run
 
 sub sli_run_help
 {
-    print "description: load and run a GENESIS 2 .g file.\n";
+    print "description: load and run a GENESIS-2 .g file.\n";
 
     print "synopsis: sli_run <filename>\n";
 
@@ -143,7 +143,7 @@ sub sli_script
 
 sub sli_script_help
 {
-    print "description: load and run a GENESIS 2 .g add-on.\n";
+    print "description: load and run a GENESIS-2 .g add-on.\n";
 
     print "synopsis: sli_script <filename>\n";
 
