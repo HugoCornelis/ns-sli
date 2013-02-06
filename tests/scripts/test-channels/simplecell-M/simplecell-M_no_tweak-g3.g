@@ -12,10 +12,10 @@ int batch = 1        // if (batch) then run a default simulation
 int graphics = 0     // display control panel, graphs
 int file_out = 1     // write output to a file
 
-str cellfile = "cell-M.p"
+str cellfile = "tests/scripts/test-channels/simplecell-M/cell-M.p"
 str cellpath = "/cell"
 str injectpath = "/cell/soma"
-str outfile = "simplecell-M_no-tweak_Vm.out"
+str outfile = "output/simplecell-M_no-tweak_Vm.out"
 
 float injcurrent = 0.5e-9
 
