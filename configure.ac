@@ -404,7 +404,7 @@ esac
 
 # determine the test library to install
 
-TEST_SPECIFICATION_FILES=`(/bin/echo -n "tests/introduction.html " && find tests/specifications -name "*.t" && find tests/specifications/strings -name "*.txt" && find tests/scripts -name "*.g" && find tests/scripts -name "*.p" && find tests/specifications/strings -name "*.g2" && find tests/specifications/strings -name "*.g3" && find tests/specifications/strings -name "*.ssp" && find tests/specifications/strings -name "*-double" ) | perl -pe 's(^| )( \\$(top_srcdir)/)g' | perl -pe 's/\n/ /g' `
+TEST_SPECIFICATION_FILES=`(find tests -iname "*.t" -o -iname "*.txt" -o -iname "*.g" -o -iname "*.p" -o -iname "*.g2" -o -iname "*.g3" -o -iname "*.ndf" -o -iname "*.out" -o -iname "*.html" -o -iname "*.rst" -o -iname "*.ssp" -o -iname "*-double" ) | perl -pe 's(^| )( \\$(top_srcdir)/)g' | perl -pe 's/\n/ /g' `
 AC_SUBST(TEST_SPECIFICATION_FILES)
 
 
