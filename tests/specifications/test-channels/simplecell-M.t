@@ -97,12 +97,10 @@ my $test
 					       },
 					      },
 			       },
-
-
 			      ],
        description => "Addition of a muscarinic current to the 'simplecell' model, implementation of the solution to an exercise in the GENESIS Modeling Tutorial section \"Building a cell the easy way\"",
        overview => `cat "$::config->{core_directory}/tests/scripts/test-channels/simplecell-M/README.rst"`,
-       name => 'simplecells.t',
+       name => 'simplecell-M.t',
       };
 
 
