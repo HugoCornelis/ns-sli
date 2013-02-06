@@ -35,7 +35,7 @@ sli_run results, with a 6 msec difference in position of the last spike.
 The GENESIS 2 version with hsolve chanmode 3 causes errors due to a GENESIS
 2 hsolve restriction that requires all gate tables to have the same size.
 Neither 'sli_load' nor 'sli_run' give any errors associated with the
-'tweaktau' command.
+'tweaktau' command -- but tweaktau is not used here, correct -- Hugo.
 
 When 'ndf_load' and 'run' are used to run the saved NDF file, there is a
 single initial peak and no further firing.  Further studies in the
