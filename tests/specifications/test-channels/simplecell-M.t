@@ -28,10 +28,10 @@ my $test
 						  },
 						  {
 						   description => "Is the generated output file correct ?",
-						   numerical_compare => 'small differences on the automated tester machine',
+						   numerical_compare => 'small differences expected on some machines',
 						   read => {
 							    application_output_file => "output/simplecell-M_Vm.out",
-							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/simplecell-M_Vm.out",
+							    expected_output_file => "$::config->{core_directory}/tests/scripts/test-channels/simplecell-M/simplecell-M-sli_run_Vm.out",
 							   },
 						  },
 						 ],
@@ -72,6 +72,7 @@ my $test
 						  },
 						  {
 						   description => "Is the generated output file correct ?",
+						   numerical_compare => 'small differences expected on some machines',
 						   read => {
 							    application_output_file => "output/simplecell-M_no-tweak_Vm.out",
 							    expected_output_file => "$::config->{core_directory}/tests/scripts/test-channels/simplecell-M/simplecell-M_no_tweak-sli_run_Vm.out",
