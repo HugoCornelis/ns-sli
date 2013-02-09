@@ -214,19 +214,31 @@ case "$host_os" in
     fi
 
 
-    AC_CHECK_PROG(SWIG, swig, NULL, [/usr/bin/swig],[/usr/local/bin/swig /opt/local/bin/swig])
-    AC_SUBST(SWIG)
+dnl Commenting out stuff that doesn't work
+dnl     AC_CHECK_PROG(SWIG, swig, NULL, [/usr/bin/swig],[/usr/local/bin/swig /opt/local/bin/swig])
+dnl     AC_SUBST(SWIG)
 
-    AC_MSG_CHECKING([Checking for swig])
+dnl     AC_MSG_CHECKING([Checking for swig])
+dnl     case $SWIG in
+dnl       NULL*)
+dnl         echo ""
+dnl         echo "Error, the standard version of swig for Mac OSX is not found."
+dnl         echo "Non standard versions of swig are known to cause problems."
+dnl         AC_ERROR([Swig for Mac OSX is not found.])
+dnl         ;;
+dnl       *)
+dnl         AC_MSG_RESULT([ $SWIG ])
+dnl         ;;
+dnl     esac
+
+    AC_CHECK_PROGS(SWIG, swig, [NULL], [/usr/bin /usr/local/bin])
+
     case $SWIG in
       NULL*)
         echo ""
         echo "Error, the standard version of swig for Mac OSX is not found."
         echo "Non standard versions of swig are known to cause problems."
         AC_ERROR([Swig for Mac OSX is not found.])
-        ;;
-      *)
-        AC_MSG_RESULT([ $SWIG ])
         ;;
     esac
 
