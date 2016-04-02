@@ -73,6 +73,17 @@ AC_PROG_LEX
 AC_PROG_RANLIB
 AC_PROG_CPP
 
+case "$host_os" in
+  darwin*)
+    LDFLSLI=-ll
+    AC_SUBST(LDFLSLI)
+  ;;
+  *)   
+    LDFLSLI=-lfl
+    AC_SUBST(LDFLSLI)
+  ;;
+esac
+
 
 AC_PATH_PROGS(DOXYGEN,doxygen,["NULL"])
 AC_PATH_PROGS(DOT,dot,["NULL"])

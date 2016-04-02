@@ -52,7 +52,7 @@ c2genesis_LDADD = \
 	$(noinst_LIBRARIES) \
 	$(utildir)/libutil.a \
 	$(scriptdir)/libscript.a \
-	-lfl \
+	@LDFLSLI@ \
 	-lncurses \
 	-lm
 
