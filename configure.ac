@@ -254,7 +254,7 @@ dnl     esac
     esac
 
 
-    SYSLIBLINKS=' -lncurses -lfl -lreadline -lm'
+    SYSLIBLINKS=' -lncurses -ll -lreadline -lm'
     AC_SUBST(SYSLIBLINKS)    
 
     PERLLIB_EXTENSION='dylib'
