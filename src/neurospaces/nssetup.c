@@ -25,8 +25,11 @@
  *  \param iArgc An integer which indicates the number of strings in pcArgs
  *  \return 0 on error, 1 on success.
  *
- *  Performs the GENESIS command 'setupalpha' and delegates values 
- *  from the GENESIS SLI to the neurospaces model-container.
+ *  This function implements the GENESIS command 'setupalpha' and
+ *  delegates values from the GENESIS SLI to the Neurospaces
+ *  model-container.
+ *
+ * 
  *
  */
 //------------------------------------------------------------------

@@ -144,7 +144,7 @@ char ** GetFuncNames()
 
   if(nfuncs < 1)
   { 
-    return;
+      return(NULL);
   }
    
   ppcNameList = (char **)malloc((nfuncs + 1)*sizeof(char *));
